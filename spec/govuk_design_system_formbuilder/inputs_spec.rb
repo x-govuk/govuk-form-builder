@@ -16,8 +16,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
   let(:parsed_subject) { Nokogiri.parse(subject) }
 
   describe 'govuk_text_field' do
+    let(:attribute) { :name }
     let(:label) { 'Full name' }
-    subject { builder.govuk_text_field(:name, label: label) }
+    subject { builder.govuk_text_field(attribute, label: label) }
 
     specify 'output should be form group containing a label and input' do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
@@ -30,6 +31,16 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       input_name = parsed_subject.at_css('input')['name']
       label_for = parsed_subject.at_css('label')['for']
       expect(input_name).to eql(label_for)
+    end
+
+    context 'when no label is provided' do
+      subject { builder.govuk_text_field(attribute) }
+
+      specify 'output should contain a label with the capitalised attribute name' do
+        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
+          expect(fg).to have_tag('label', text: attribute.capitalize)
+        end
+      end
     end
 
     context 'when a hint is provided' do
@@ -64,6 +75,56 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       specify 'output should have no empty aria-describedby attribute' do
         expect(parsed_subject.at_css('input')['aria-describedby']).not_to be_present
+      end
+    end
+
+    context 'label styling' do
+      context 'font size overrides' do
+        {
+          'large'   => 'govuk-!-font-size-48',
+          'medium'  => 'govuk-!-font-size-36',
+          'small'   => 'govuk-!-font-size-27',
+          'regular' => nil
+        }.each do |size_name, size_class|
+          context "#{size_name} labels" do
+            let(:size_name) { size_name }
+            let(:size_class) { size_class }
+            subject { builder.govuk_text_field(:name, label_size: size_name) }
+
+            if size_class.present?
+              specify "should have extra class '#{size_class}'" do
+                expect(extract_classes(parsed_subject, 'label')).to include(size_class)
+              end
+            else
+              specify 'should have no extra size classes' do
+                expect(extract_classes(parsed_subject, 'label')).to eql(%w(govuk-label))
+              end
+            end
+          end
+        end
+      end
+
+      context 'font weight overrides' do
+        {
+          'bold'    => 'govuk-!-font-weight-bold',
+          'regular' => nil
+        }.each do |weight_name, weight_class|
+          context "#{weight_name} labels" do
+            let(:weight_name) { weight_name }
+            let(:weight_class) { weight_class }
+            subject { builder.govuk_text_field(:name, label_weight: weight_name) }
+
+            if weight_class.present?
+              specify "should have extra class '#{weight_class}'" do
+                expect(extract_classes(parsed_subject, 'label')).to include(weight_class)
+              end
+            else
+              specify 'should have no extra weight classes' do
+                expect(extract_classes(parsed_subject, 'label')).to eql(%w(govuk-label))
+              end
+            end
+          end
+        end
       end
     end
   end
