@@ -1,6 +1,7 @@
 require 'rspec-html-matchers'
 require 'action_view'
 require 'active_model'
+require 'pry'
 require './spec/html_helper'
 
 require './lib/govuk_design_system_formbuilder'
