@@ -1,23 +1,28 @@
 module GOVUKDesignSystemFormBuilder
   module Labels
-  private
-    def govuk_label(attribute_name, text, label_weight:, label_size:)
+    def govuk_label(attribute_name, label_options)
       tag.label(
-        text || attribute_name.capitalize,
+        label_options.dig(:text) || attribute_name.capitalize,
         class: %w(govuk-label)
-          .push(label_size(label_size))
-          .push(label_weight(label_weight))
+          .push(label_size(label_options.dig(:size)))
+          .push(label_weight(label_options.dig(:weight)))
           .compact,
         for: attribute_identifier(attribute_name)
       )
     end
 
-    def govuk_hint(attribute_name, text)
+    def govuk_hint(attribute_name, hint_options)
       tag.span(
-        text,
+        hint_options.dig(:text),
         class: 'govuk-hint',
         id: hint_id(attribute_name)
       )
+    end
+
+  private
+
+    def govuk_label_defaults
+      { weight: 'regular', size: 'regular' }
     end
 
     def label_size(size)
@@ -38,6 +43,10 @@ module GOVUKDesignSystemFormBuilder
       else
         fail 'weight must be bold or regular'
       end
+    end
+
+    def govuk_hint_defaults
+      {}
     end
   end
 end

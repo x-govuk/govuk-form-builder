@@ -1,41 +1,43 @@
 module GOVUKDesignSystemFormBuilder
   module Inputs
-    def govuk_text_field(attribute_name, field_type: 'text', label: nil, hint: nil, width: 'full', label_weight: 'regular', label_size: 'regular')
+    def govuk_text_field(attribute_name, field_type: 'text', label: {}, hint: {}, width: 'full')
       govuk_generic_text_field(
         attribute_name,
         field_type: field_type,
-        label: label,
-        hint: hint,
-        width: width,
-        label_weight: label_weight,
-        label_size: label_size
+        label: govuk_label_options(label),
+        hint: govuk_hint_options(hint),
+        width: width
       )
     end
 
-    def govuk_tel_field(attribute_name, field_type: 'tel', label: nil, hint: nil, width: 'full', label_weight: 'regular', label_size: 'regular')
+    def govuk_tel_field(attribute_name, field_type: 'tel', label: {}, hint: {}, width: 'full')
       govuk_generic_text_field(
         attribute_name,
         field_type: field_type,
-        label: label,
-        hint: hint,
-        width: width,
-        label_weight: label_weight,
-        label_size: label_size
+        label: govuk_label_options(label),
+        hint: govuk_hint_options(hint),
+        width: width
       )
+    end
+
+    def govuk_label_options(opts = {})
+      govuk_label_defaults.merge(opts)
+    end
+
+    def govuk_hint_options(opts = {})
+      if opts&.any?
+        govuk_hint_defaults.merge(opts)
+      else
+        {}
+      end
     end
 
   private
 
-    def govuk_generic_text_field(attribute_name, field_type:, label: nil, hint: nil, width:, label_weight:, label_size:)
+    def govuk_generic_text_field(attribute_name, field_type:, label: nil, hint: nil, width:)
       content_tag('div', class: 'govuk-form-group') do
         safe_join([
-
-          govuk_label(
-            attribute_name,
-            label,
-            label_weight: label_weight,
-            label_size: label_size
-          ),
+          govuk_label(attribute_name, label),
 
           hint.presence && govuk_hint(attribute_name, hint),
 

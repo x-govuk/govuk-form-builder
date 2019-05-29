@@ -6,10 +6,10 @@ shared_examples 'a regular input' do |field_type|
   let(:parsed_subject) { Nokogiri.parse(subject) }
 
   let(:attribute) { :name }
-  let(:label) { 'Full name' }
+  let(:label_text) { 'Full name' }
   let(:method) { "govuk_#{field_type}_field".to_sym }
 
-  subject { builder.send(method, :name, { label: label }) }
+  subject { builder.send(method, :name, label: { text: label_text }) }
 
   specify "output should have the correct type of #{field_type}" do
     input_type = parsed_subject.at_css('input')['type']
@@ -18,7 +18,7 @@ shared_examples 'a regular input' do |field_type|
 
   specify 'output should be form group containing a label and input' do
     expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-      expect(fg).to have_tag('label', text: label)
+      expect(fg).to have_tag('label', text: label_text)
       expect(fg).to have_tag('input')
     end
   end
@@ -30,7 +30,7 @@ shared_examples 'a regular input' do |field_type|
   end
 
   context 'when no label is provided' do
-    subject { builder.govuk_text_field(attribute) }
+    subject { builder.send(method, attribute) }
 
     specify 'output should contain a label with the capitalised attribute name' do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
@@ -41,7 +41,7 @@ shared_examples 'a regular input' do |field_type|
 
   context 'when a hint is provided' do
     let(:hint) { "You'll find it on your passport" }
-    subject { builder.send(method, :name, { hint: hint }) }
+    subject { builder.send(method, :name, { hint: { text: hint } }) }
 
     specify 'output should contain a hint' do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
@@ -63,7 +63,7 @@ shared_examples 'a regular input' do |field_type|
   end
 
   context 'when a hint is not provided' do
-    subject { builder.send(method, :name, { hint: nil }) }
+    subject { builder.send(method, :name, hint: nil) }
 
     specify 'output should have no empty aria-describedby attribute' do
       expect(parsed_subject.at_css('span.govuk-hint')).not_to be_present
@@ -85,8 +85,7 @@ shared_examples 'a regular input' do |field_type|
         context "#{size_name} labels" do
           let(:size_name) { size_name }
           let(:size_class) { size_class }
-          subject { builder.send(method, :name, { label_size: size_name }) }
-
+          subject { builder.send(method, :name, label: { size: size_name }) }
 
           if size_class.present?
             specify "should have extra class '#{size_class}'" do
@@ -109,7 +108,7 @@ shared_examples 'a regular input' do |field_type|
         context "#{weight_name} labels" do
           let(:weight_name) { weight_name }
           let(:weight_class) { weight_class }
-          subject { builder.send(method, :name, { label_weight: weight_name }) }
+          subject { builder.send(method, :name, label: { weight: weight_name }) }
 
           if weight_class.present?
             specify "should have extra class '#{weight_class}'" do
