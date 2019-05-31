@@ -74,6 +74,23 @@ shared_examples 'a regular input' do |field_type|
     end
   end
 
+  context 'when the element has errors' do
+    subject { builder.send(method, :name, hint: nil) }
+    before { object.valid? }
+    let(:message) { object.errors.messages[:name].join }
+
+    specify 'should have error class' do
+      expect(parsed_subject.at_css('.govuk-form-group')['class']).to include('govuk-form-group--error')
+    end
+
+    specify 'error message should be present' do
+      expect(parsed_subject.at_css('.govuk-error-message').text).to include(message)
+    end
+
+    # need to ensure event-name-error is appened to aria-describedby
+    specify 'the error message should be associated with the input'
+  end
+
   context 'label styling' do
     context 'font size overrides' do
       {

@@ -23,14 +23,16 @@ module GOVUKDesignSystemFormBuilder
   private
 
     def govuk_generic_text_field(attribute_name, field_type:, label: nil, hint: nil, width:)
-      hint_element  = Hint.new(self, object_name, attribute_name, hint)
-      label_element = Label.new(self, object_name, attribute_name, label)
+      hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
+      label_element = Elements::Label.new(self, object_name, attribute_name, label)
+      error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
 
-      content_tag('div', class: 'govuk-form-group') do
+      Containers::FormGroup.new(self, object_name, attribute_name).html do
         safe_join([
 
           label_element.html,
           hint_element.html,
+          error_element.html,
 
           tag.input(
             class: 'govuk-input',
