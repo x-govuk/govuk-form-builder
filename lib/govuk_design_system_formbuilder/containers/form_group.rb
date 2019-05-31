@@ -2,9 +2,7 @@ module GOVUKDesignSystemFormBuilder
   module Containers
     class FormGroup < GOVUKDesignSystemFormBuilder::Base
       def initialize(builder, object_name, attribute_name, &block)
-        @builder = builder
-        @object_name = object_name
-        @attribute_name = attribute_name
+        super(builder, object_name, attribute_name)
       end
 
       def html

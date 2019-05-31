@@ -2,9 +2,7 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     class Input < GOVUKDesignSystemFormBuilder::Base
       def initialize(builder, object_name, attribute_name, options = {})
-        @builder = builder
-        @object_name = object_name
-        @attribute_name = attribute_name
+        super(builder, object_name, attribute_name)
 
         default_options.merge(options).tap do |o|
           @field_type = o.dig(:field_type)

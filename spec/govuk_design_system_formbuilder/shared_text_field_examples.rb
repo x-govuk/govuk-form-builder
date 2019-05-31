@@ -74,7 +74,7 @@ shared_examples 'a regular input' do |field_type|
     end
   end
 
-  context 'when the element has errors' do
+  context 'when the attribute has errors' do
     subject { builder.send(method, :name, hint: nil) }
     before { object.valid? }
     let(:message) { object.errors.messages[:name].join }
@@ -90,6 +90,20 @@ shared_examples 'a regular input' do |field_type|
     specify 'the error message should be associated with the input' do
       error_id = parsed_subject.at_css('span.govuk-error-message')['id']
       expect(parsed_subject.at_css('input')['aria-describedby'].split).to include(error_id)
+    end
+  end
+
+  context 'when the attribute has no errors' do
+    specify 'should not have error class' do
+      expect(parsed_subject.at_css('.govuk-form-group')['class']).not_to include('govuk-form-group--error')
+    end
+
+    specify 'error message should not be present' do
+      expect(parsed_subject.at_css('.govuk-error-message')).to be_nil
+    end
+
+    specify 'the error message should be associated with the input' do
+      expect(parsed_subject.at_css('input')['aria-describedby']).to be_empty
     end
   end
 

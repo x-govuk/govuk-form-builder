@@ -4,9 +4,7 @@ module GOVUKDesignSystemFormBuilder
       attr_accessor :html
 
       def initialize(builder, object_name, attribute_name, options = {})
-        @builder = builder
-        @object_name = object_name
-        @attribute_name = attribute_name
+        super(builder, object_name, attribute_name)
 
         default_options.merge(options).tap do |o|
           @text   = o&.dig(:text) || @attribute_name.capitalize

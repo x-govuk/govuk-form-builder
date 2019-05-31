@@ -1,5 +1,11 @@
 module GOVUKDesignSystemFormBuilder
   class Base
+    def initialize(builder, object_name, attribute_name)
+      @builder = builder
+      @object_name = object_name
+      @attribute_name = attribute_name
+    end
+
     def html
       fail 'should be overridden'
     end
