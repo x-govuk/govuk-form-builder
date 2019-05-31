@@ -4,8 +4,8 @@ module GOVUKDesignSystemFormBuilder
       govuk_generic_text_field(
         attribute_name,
         field_type: field_type,
-        label: govuk_label_options(label),
-        hint: govuk_hint_options(hint),
+        label: label,
+        hint: hint,
         width: width
       )
     end
@@ -14,39 +14,30 @@ module GOVUKDesignSystemFormBuilder
       govuk_generic_text_field(
         attribute_name,
         field_type: field_type,
-        label: govuk_label_options(label),
-        hint: govuk_hint_options(hint),
+        label: label,
+        hint: hint,
         width: width
       )
-    end
-
-    def govuk_label_options(opts = {})
-      govuk_label_defaults.merge(opts)
-    end
-
-    def govuk_hint_options(opts = {})
-      if opts&.any?
-        govuk_hint_defaults.merge(opts)
-      else
-        {}
-      end
     end
 
   private
 
     def govuk_generic_text_field(attribute_name, field_type:, label: nil, hint: nil, width:)
+      hint_element  = Hint.new(self, object_name, attribute_name, hint)
+      label_element = Label.new(self, object_name, attribute_name, label)
+
       content_tag('div', class: 'govuk-form-group') do
         safe_join([
-          govuk_label(attribute_name, label),
 
-          hint.presence && govuk_hint(attribute_name, hint),
+          label_element.html,
+          hint_element.html,
 
           tag.input(
             class: 'govuk-input',
             type: field_type,
-            name: attribute_identifier(attribute_name),
+            name: label_element.attribute_identifier,
             aria: {
-              describedby: hint.presence && hint_id(attribute_name)
+              describedby: hint_element.hint_id
             }
           )
         ])
