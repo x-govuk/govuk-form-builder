@@ -11,7 +11,7 @@ module GOVUKDesignSystemFormBuilder
     end
 
     def error_id
-      return nil unless @text.present?
+      return nil unless has_errors?
 
       [@object_name, @attribute_name, 'error'].join('-')
     end

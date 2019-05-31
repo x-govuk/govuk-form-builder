@@ -26,23 +26,16 @@ module GOVUKDesignSystemFormBuilder
       hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
       label_element = Elements::Label.new(self, object_name, attribute_name, label)
       error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
+      input_element = Elements::Input.new(
+        self,
+        object_name,
+        attribute_name,
+        aria_described_by: [hint_element.hint_id, error_element.error_id].compact.join(' '),
+        field_type: field_type
+      )
 
       Containers::FormGroup.new(self, object_name, attribute_name).html do
-        safe_join([
-
-          label_element.html,
-          hint_element.html,
-          error_element.html,
-
-          tag.input(
-            class: 'govuk-input',
-            type: field_type,
-            name: label_element.attribute_identifier,
-            aria: {
-              describedby: hint_element.hint_id
-            }
-          )
-        ])
+        safe_join([label_element, hint_element, error_element, input_element].map(&:html))
       end
     end
   end

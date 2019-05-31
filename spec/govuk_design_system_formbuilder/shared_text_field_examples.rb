@@ -87,8 +87,10 @@ shared_examples 'a regular input' do |field_type|
       expect(parsed_subject.at_css('.govuk-error-message').text).to include(message)
     end
 
-    # need to ensure event-name-error is appened to aria-describedby
-    specify 'the error message should be associated with the input'
+    specify 'the error message should be associated with the input' do
+      error_id = parsed_subject.at_css('span.govuk-error-message')['id']
+      expect(parsed_subject.at_css('input')['aria-describedby'].split).to include(error_id)
+    end
   end
 
   context 'label styling' do
