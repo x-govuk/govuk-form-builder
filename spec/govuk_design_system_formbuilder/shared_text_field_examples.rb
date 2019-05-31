@@ -1,8 +1,8 @@
 shared_examples 'a regular input' do |field_type|
   let(:helper) { TestHelper.new }
   let(:object) { Person.new }
-  let(:object_name) {:person}
-  let(:builder) { described_class.new(object_name, object, helper, {})}
+  let(:object_name) { :person }
+  let(:builder) { described_class.new(object_name, object, helper, {}) }
   let(:parsed_subject) { Nokogiri.parse(subject) }
 
   let(:attribute) { :name }
@@ -41,7 +41,7 @@ shared_examples 'a regular input' do |field_type|
 
   context 'when a hint is provided' do
     let(:hint) { "You'll find it on your passport" }
-    subject { builder.send(method, :name, { hint: { text: hint } }) }
+    subject { builder.send(method, :name, hint: { text: hint }) }
 
     specify 'output should contain a hint' do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|

@@ -1,8 +1,6 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class Label < GOVUKDesignSystemFormBuilder::Base
-      attr_accessor :html
-
       def initialize(builder, object_name, attribute_name, options = {})
         super(builder, object_name, attribute_name)
 
