@@ -20,6 +20,36 @@ module GOVUKDesignSystemFormBuilder
       )
     end
 
+    def govuk_email_field(attribute_name, field_type: 'email', label: {}, hint: {}, width: 'full')
+      govuk_generic_text_field(
+        attribute_name,
+        field_type: field_type,
+        label: label,
+        hint: hint,
+        width: width
+      )
+    end
+
+    def govuk_url_field(attribute_name, field_type: 'url', label: {}, hint: {}, width: 'full')
+      govuk_generic_text_field(
+        attribute_name,
+        field_type: field_type,
+        label: label,
+        hint: hint,
+        width: width
+      )
+    end
+
+    def govuk_number_field(attribute_name, field_type: 'number', label: {}, hint: {}, width: 'full')
+      govuk_generic_text_field(
+        attribute_name,
+        field_type: field_type,
+        label: label,
+        hint: hint,
+        width: width
+      )
+    end
+
   private
 
     def govuk_generic_text_field(attribute_name, field_type:, label: nil, hint: nil, width:)

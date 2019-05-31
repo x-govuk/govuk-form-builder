@@ -18,4 +18,16 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
   describe '#govuk_tel_field' do
     it_behaves_like 'a regular input', 'tel'
   end
+
+  describe '#govuk_email_field' do
+    it_behaves_like 'a regular input', 'email'
+  end
+
+  describe '#govuk_url_field' do
+    it_behaves_like 'a regular input', 'url'
+  end
+
+  describe '#govuk_number_field' do
+    it_behaves_like 'a regular input', 'number'
+  end
 end
