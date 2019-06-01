@@ -63,5 +63,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
     end
+
+    specify 'should have a hint'
+    specify 'should have the correct name attr'
+    specify 'should insert block content between label (or hint) and select element'
   end
 end
