@@ -1,23 +1,23 @@
 module GOVUKDesignSystemFormBuilder
   module Inputs
     def govuk_text_field(attribute_name, **args)
-      govuk_generic_text_field(attribute_name, field_type: 'text', **parse_standard_options(args))
+      govuk_generic_text_field(attribute_name, 'text', **parse_standard_options(args))
     end
 
     def govuk_tel_field(attribute_name, **args)
-      govuk_generic_text_field(attribute_name, field_type: 'tel', **parse_standard_options(args))
+      govuk_generic_text_field(attribute_name, 'tel', **parse_standard_options(args))
     end
 
     def govuk_email_field(attribute_name, **args)
-      govuk_generic_text_field(attribute_name, field_type: 'email', **parse_standard_options(args))
+      govuk_generic_text_field(attribute_name, 'email', **parse_standard_options(args))
     end
 
     def govuk_url_field(attribute_name, **args)
-      govuk_generic_text_field(attribute_name, field_type: 'url', **parse_standard_options(args))
+      govuk_generic_text_field(attribute_name, 'url', **parse_standard_options(args))
     end
 
     def govuk_number_field(attribute_name, **args)
-      govuk_generic_text_field(attribute_name, field_type: 'number', **parse_standard_options(args))
+      govuk_generic_text_field(attribute_name, 'number', **parse_standard_options(args))
     end
 
     def govuk_collection_select(attribute_name, collection, value_method, text_method, **args, &block)
@@ -39,7 +39,7 @@ module GOVUKDesignSystemFormBuilder
       { label: {}, hint: {}, width: nil }.merge(args)
     end
 
-    def govuk_generic_text_field(attribute_name, field_type:, label: nil, hint: nil, width:)
+    def govuk_generic_text_field(attribute_name, field_type, label: nil, hint: nil, width:)
       hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
       label_element = Elements::Label.new(self, object_name, attribute_name, label)
       error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
