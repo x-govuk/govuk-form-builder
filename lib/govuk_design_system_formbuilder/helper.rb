@@ -1,57 +1,27 @@
 module GOVUKDesignSystemFormBuilder
   module Inputs
-    def govuk_text_field(attribute_name, field_type: 'text', label: {}, hint: {}, width: 'full')
-      govuk_generic_text_field(
-        attribute_name,
-        field_type: field_type,
-        label: label,
-        hint: hint,
-        width: width
-      )
+    def govuk_text_field(attribute_name, **args)
+      govuk_generic_text_field(attribute_name, field_type: 'text', **parse_standard_options(args))
     end
 
-    def govuk_tel_field(attribute_name, field_type: 'tel', label: {}, hint: {}, width: 'full')
-      govuk_generic_text_field(
-        attribute_name,
-        field_type: field_type,
-        label: label,
-        hint: hint,
-        width: width
-      )
+    def govuk_tel_field(attribute_name, **args)
+      govuk_generic_text_field(attribute_name, field_type: 'tel', **parse_standard_options(args))
     end
 
-    def govuk_email_field(attribute_name, field_type: 'email', label: {}, hint: {}, width: 'full')
-      govuk_generic_text_field(
-        attribute_name,
-        field_type: field_type,
-        label: label,
-        hint: hint,
-        width: width
-      )
+    def govuk_email_field(attribute_name, **args)
+      govuk_generic_text_field(attribute_name, field_type: 'email', **parse_standard_options(args))
     end
 
-    def govuk_url_field(attribute_name, field_type: 'url', label: {}, hint: {}, width: 'full')
-      govuk_generic_text_field(
-        attribute_name,
-        field_type: field_type,
-        label: label,
-        hint: hint,
-        width: width
-      )
+    def govuk_url_field(attribute_name, **args)
+      govuk_generic_text_field(attribute_name, field_type: 'url', **parse_standard_options(args))
     end
 
-    def govuk_number_field(attribute_name, field_type: 'number', label: {}, hint: {}, width: 'full')
-      govuk_generic_text_field(
-        attribute_name,
-        field_type: field_type,
-        label: label,
-        hint: hint,
-        width: width
-      )
+    def govuk_number_field(attribute_name, **args)
+      govuk_generic_text_field(attribute_name, field_type: 'number', **parse_standard_options(args))
     end
 
     def govuk_collection_select(attribute_name, collection, value_method, text_method, **args, &block)
-      options = { label: {} }.merge(args)
+      options = parse_standard_options(args)
       Containers::FormGroup.new(self, object_name, attribute_name).html do
         safe_join([
           Elements::Label.new(self, object_name, attribute_name, options[:label]).html,
@@ -64,6 +34,10 @@ module GOVUKDesignSystemFormBuilder
     end
 
   private
+
+    def parse_standard_options(args)
+      { label: {}, hint: {}, width: nil }.merge(args)
+    end
 
     def govuk_generic_text_field(attribute_name, field_type:, label: nil, hint: nil, width:)
       hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
