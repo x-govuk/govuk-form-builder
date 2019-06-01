@@ -22,11 +22,18 @@ module GOVUKDesignSystemFormBuilder
 
     def govuk_collection_select(attribute_name, collection, value_method, text_method, **args, &block)
       options = parse_standard_options(args)
+
+      label_element = Elements::Label.new(self, object_name, attribute_name, options[:label])
+      hint_element  = Elements::Hint.new(self, object_name, attribute_name, options[:hint])
+
       Containers::FormGroup.new(self, object_name, attribute_name).html do
         safe_join([
-          Elements::Label.new(self, object_name, attribute_name, options[:label]).html,
+          label_element.html,
+          hint_element.html,
 
-          content_tag(:select, class: 'govuk-select') do
+          (yield if block_given?),
+
+          Elements::Select.new(self, object_name, attribute_name, aria_described_by: hint_element.hint_id).html do
             safe_join(collection.map { |i| tag.option(i.send(text_method), value: i.send(value_method)) })
           end
         ])
@@ -36,10 +43,10 @@ module GOVUKDesignSystemFormBuilder
   private
 
     def parse_standard_options(args)
-      { label: {}, hint: {}, width: nil }.merge(args)
+      { label: {}, hint: {} }.merge(args)
     end
 
-    def govuk_generic_text_field(attribute_name, field_type, label: nil, hint: nil, width:)
+    def govuk_generic_text_field(attribute_name, field_type, label: nil, hint: nil, width: nil)
       hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
       label_element = Elements::Label.new(self, object_name, attribute_name, label)
       error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
