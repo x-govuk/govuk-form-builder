@@ -50,12 +50,26 @@ module GOVUKDesignSystemFormBuilder
       )
     end
 
+    def govuk_collection_select(attribute_name, collection, value_method, text_method, **args, &block)
+      options = { label: {} }.merge(args)
+      Containers::FormGroup.new(self, object_name, attribute_name).html do
+        safe_join([
+          Elements::Label.new(self, object_name, attribute_name, options[:label]).html,
+
+          content_tag(:select, class: 'govuk-select') do
+            safe_join(collection.map { |i| tag.option(i.send(text_method), value: i.send(value_method)) })
+          end
+        ])
+      end
+    end
+
   private
 
     def govuk_generic_text_field(attribute_name, field_type:, label: nil, hint: nil, width:)
       hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
       label_element = Elements::Label.new(self, object_name, attribute_name, label)
       error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
+
       input_element = Elements::Input.new(
         self,
         object_name,

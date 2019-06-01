@@ -1,10 +1,4 @@
 shared_examples 'a regular input' do |field_type|
-  let(:helper) { TestHelper.new }
-  let(:object) { Person.new }
-  let(:object_name) { :person }
-  let(:builder) { described_class.new(object_name, object, helper, {}) }
-  let(:parsed_subject) { Nokogiri.parse(subject) }
-
   let(:attribute) { :name }
   let(:label_text) { 'Full name' }
   let(:method) { "govuk_#{field_type}_field".to_sym }
