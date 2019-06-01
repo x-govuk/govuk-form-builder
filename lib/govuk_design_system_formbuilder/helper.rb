@@ -49,7 +49,8 @@ module GOVUKDesignSystemFormBuilder
         object_name,
         attribute_name,
         aria_described_by: [hint_element.hint_id, error_element.error_id].compact.join(' '),
-        field_type: field_type
+        field_type: field_type,
+        width: width
       )
 
       Containers::FormGroup.new(self, object_name, attribute_name).html do

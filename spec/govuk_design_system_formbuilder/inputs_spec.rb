@@ -50,7 +50,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     specify 'select box should contain the correct options' do
       colours.each do |colour|
-        expect(subject).to have_tag('select > option', text: colour.name, with: { value: colour.id } )
+        expect(subject).to have_tag('select > option', text: colour.name, with: { value: colour.id })
       end
     end
 
