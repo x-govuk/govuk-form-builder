@@ -80,7 +80,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
 
-      specify 'output should also contain the label and input elements' do
+      specify 'output should also contain the label and select elements' do
         expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
           %w(label select).each { |element| expect(fg).to have_tag(element) }
         end
@@ -92,6 +92,25 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         expect(select_aria_describedby).to eql(hint_id)
       end
     end
+
+    context 'extra attributes' do
+      let(:extra_args) do
+        {
+          required: { provided: true, output: 'required' },
+          autofocus: { provided: true, output: 'autofocus' }
+        }
+      end
+
+      subject { builder.send(method, attribute, colours, :id, :name, html_options: extract_args(extra_args, :provided)) }
+
+      specify 'input tag should have the extra attributes' do
+        input_tag = parsed_subject.at_css('select')
+        extract_args(extra_args, :output).each do |key, val|
+          expect(input_tag[key]).to eql(val)
+        end
+      end
+    end
+
 
     context 'when passed a block' do
       let(:block_h1) { 'The quick brown fox' }

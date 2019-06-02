@@ -20,22 +20,34 @@ module GOVUKDesignSystemFormBuilder
       govuk_generic_text_field(attribute_name, 'number', **parse_standard_options(args))
     end
 
-    def govuk_collection_select(attribute_name, collection, value_method, text_method, **args)
-      options = parse_standard_options(args)
-
-      label_element = Elements::Label.new(self, object_name, attribute_name, options[:label])
-      hint_element  = Elements::Hint.new(self, object_name, attribute_name, options[:hint])
+    # FIXME #govuk_collection_select args differ from Rails' #collection_select args in that
+    # options: and :html_options are keyword arguments. Leaving them as regular args with
+    # defaults and following them with keyword args (hint and label) doesn't seem to work
+    def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, html_options: {}, hint: {}, label: {})
+      label_element = Elements::Label.new(self, object_name, attribute_name, label)
+      hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
+      error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
 
       Containers::FormGroup.new(self, object_name, attribute_name).html do
         safe_join([
           label_element.html,
           hint_element.html,
+          error_element.html,
 
           (yield if block_given?),
 
-          Elements::Select.new(self, object_name, attribute_name, aria_described_by: hint_element.hint_id).html do
-            safe_join(collection.map { |i| tag.option(i.send(text_method), value: i.send(value_method)) })
-          end
+          collection_select(
+            attribute_name,
+            collection,
+            value_method,
+            text_method,
+            options,
+            html_options.merge(
+              aria: {
+                describedby: classes_to_str([hint_element.hint_id, error_element.error_id])
+              }
+            )
+          )
         ])
       end
     end
@@ -59,13 +71,21 @@ module GOVUKDesignSystemFormBuilder
         **args.merge(
           type: field_type,
           aria: {
-            describedby: [hint_element.hint_id, error_element.error_id].compact.join(' ')
+            describedby: classes_to_str([hint_element.hint_id, error_element.error_id])
           }
         )
       )
 
       Containers::FormGroup.new(self, object_name, attribute_name).html do
         safe_join([label_element, hint_element, error_element, input_element].map(&:html))
+      end
+    end
+
+    def classes_to_str(classes)
+      if classes.any? && str = classes.compact.join(' ')
+        str
+      else
+        nil
       end
     end
   end

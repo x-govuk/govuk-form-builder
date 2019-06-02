@@ -97,7 +97,7 @@ shared_examples 'a regular input' do |field_type|
     end
 
     specify 'the error message should be associated with the input' do
-      expect(parsed_subject.at_css('input')['aria-describedby']).to be_empty
+      expect(parsed_subject.at_css('input')['aria-describedby']).to be_nil
     end
   end
 
