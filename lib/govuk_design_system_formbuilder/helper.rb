@@ -1,23 +1,23 @@
 module GOVUKDesignSystemFormBuilder
   module Inputs
     def govuk_text_field(attribute_name, **args)
-      govuk_generic_text_field(attribute_name, 'text', **parse_standard_options(args))
+      govuk_generic_text_field(attribute_name, 'text', hint: {}, label: {}, **args)
     end
 
     def govuk_tel_field(attribute_name, **args)
-      govuk_generic_text_field(attribute_name, 'tel', **parse_standard_options(args))
+      govuk_generic_text_field(attribute_name, 'tel', hint: {}, label: {}, **args)
     end
 
     def govuk_email_field(attribute_name, **args)
-      govuk_generic_text_field(attribute_name, 'email', **parse_standard_options(args))
+      govuk_generic_text_field(attribute_name, 'email', hint: {}, label: {}, **args)
     end
 
     def govuk_url_field(attribute_name, **args)
-      govuk_generic_text_field(attribute_name, 'url', **parse_standard_options(args))
+      govuk_generic_text_field(attribute_name, 'url', hint: {}, label: {}, **args)
     end
 
     def govuk_number_field(attribute_name, **args)
-      govuk_generic_text_field(attribute_name, 'number', **parse_standard_options(args))
+      govuk_generic_text_field(attribute_name, 'number', hint: {}, label: {}, **args)
     end
 
     # FIXME #govuk_collection_select args differ from Rails' #collection_select args in that
@@ -53,10 +53,6 @@ module GOVUKDesignSystemFormBuilder
     end
 
   private
-
-    def parse_standard_options(args)
-      { label: {}, hint: {} }.merge(args)
-    end
 
     def govuk_generic_text_field(attribute_name, field_type, label: nil, hint: nil, width: nil, **args)
       hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
