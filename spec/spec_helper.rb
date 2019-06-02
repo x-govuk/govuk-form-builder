@@ -3,6 +3,7 @@ require 'action_view'
 require 'active_model'
 require 'pry'
 require './spec/html_helper'
+require './spec/utility'
 
 require './lib/govuk_design_system_formbuilder'
 

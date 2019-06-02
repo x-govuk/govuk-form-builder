@@ -1,7 +1,7 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class Select < GOVUKDesignSystemFormBuilder::Base
-      def initialize(builder, object_name, attribute_name, **args, &block)
+      def initialize(builder, object_name, attribute_name, **args)
         super(builder, object_name, attribute_name)
 
         @aria_described_by = args.dig(:aria_described_by)
@@ -14,10 +14,9 @@ module GOVUKDesignSystemFormBuilder
           name: attribute_identifier,
           aria: { describedby: @aria_described_by }
         ) do
-          yield
+          yield if block_given?
         end
       end
     end
   end
 end
-

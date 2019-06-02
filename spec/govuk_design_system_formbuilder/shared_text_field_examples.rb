@@ -87,7 +87,7 @@ shared_examples 'a regular input' do |field_type|
     end
   end
 
-  context 'when the attribute has no errors' do
+  context 'when the field has no errors' do
     specify 'should not have error class' do
       expect(parsed_subject.at_css('.govuk-form-group')['class']).not_to include('govuk-form-group--error')
     end
@@ -98,6 +98,33 @@ shared_examples 'a regular input' do |field_type|
 
     specify 'the error message should be associated with the input' do
       expect(parsed_subject.at_css('input')['aria-describedby']).to be_empty
+    end
+  end
+
+  context 'extra attributes' do
+    let(:regular_args) { { label: { text: 'What should we call you?' } } }
+
+    let(:extra_args) do
+      {
+        required: { provided: true, output: 'required' },
+        autocomplete: { provided: false, output: 'false' },
+        placeholder: { provided: 'Seymour Skinner', output: 'Seymour Skinner' }
+      }
+    end
+
+    subject do
+      builder.send(
+        method,
+        :name,
+        **regular_args.merge(extract_args(extra_args, :provided))
+      )
+    end
+
+    specify 'input tag should have the extra attributes' do
+      input_tag = parsed_subject.at_css('input')
+      extract_args(extra_args, :output).each do |key, val|
+        expect(input_tag[key]).to eql(val)
+      end
     end
   end
 
