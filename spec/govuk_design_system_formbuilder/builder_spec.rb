@@ -1,15 +1,5 @@
 require_relative 'shared_text_field_examples'
 
-class TestHelper < ActionView::Base; end
-
-class Person
-  include ActiveModel::Model
-
-  attr_accessor(:name, :born_on, :born_at, :gender, :over_18, :favourite_colour)
-
-  validates :name, presence: true
-end
-
 describe GOVUKDesignSystemFormBuilder::FormBuilder do
   let(:helper) { TestHelper.new }
   let(:object) { Person.new }

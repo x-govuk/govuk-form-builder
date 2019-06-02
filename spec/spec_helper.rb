@@ -2,8 +2,8 @@ require 'rspec-html-matchers'
 require 'action_view'
 require 'active_model'
 require 'pry'
-require './spec/html_helper'
-require './spec/utility'
+
+Dir[File.join('./spec', 'support', '*.rb')].each { |file| require file }
 
 require './lib/govuk_design_system_formbuilder'
 

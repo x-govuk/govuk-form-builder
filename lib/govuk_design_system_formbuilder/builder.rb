@@ -1,5 +1,5 @@
 module GOVUKDesignSystemFormBuilder
-  module Inputs
+  module Builder
     def govuk_text_field(attribute_name, **args)
       govuk_generic_text_field(attribute_name, 'text', hint: {}, label: {}, **args)
     end
