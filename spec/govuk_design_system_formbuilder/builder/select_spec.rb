@@ -89,7 +89,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
-
     context 'when passed a block' do
       let(:block_h1) { 'The quick brown fox' }
       let(:block_h2) { 'Jumped over the' }

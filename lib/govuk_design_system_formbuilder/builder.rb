@@ -1,23 +1,23 @@
 module GOVUKDesignSystemFormBuilder
   module Builder
-    def govuk_text_field(attribute_name, **args)
-      govuk_generic_text_field(attribute_name, 'text', hint: {}, label: {}, **args)
+    def govuk_text_field(attribute_name, hint: {}, label: {}, **args)
+      govuk_generic_text_field(attribute_name, 'text', hint: hint, label: label, **args)
     end
 
-    def govuk_tel_field(attribute_name, **args)
-      govuk_generic_text_field(attribute_name, 'tel', hint: {}, label: {}, **args)
+    def govuk_tel_field(attribute_name, hint: {}, label: {}, **args)
+      govuk_generic_text_field(attribute_name, 'tel', hint: hint, label: label, **args)
     end
 
-    def govuk_email_field(attribute_name, **args)
-      govuk_generic_text_field(attribute_name, 'email', hint: {}, label: {}, **args)
+    def govuk_email_field(attribute_name, hint: {}, label: {}, **args)
+      govuk_generic_text_field(attribute_name, 'email', hint: hint, label: label, **args)
     end
 
-    def govuk_url_field(attribute_name, **args)
-      govuk_generic_text_field(attribute_name, 'url', hint: {}, label: {}, **args)
+    def govuk_url_field(attribute_name, hint: {}, label: {}, **args)
+      govuk_generic_text_field(attribute_name, 'url', hint: hint, label: label, **args)
     end
 
-    def govuk_number_field(attribute_name, **args)
-      govuk_generic_text_field(attribute_name, 'number', hint: {}, label: {}, **args)
+    def govuk_number_field(attribute_name, hint: {}, label: {}, **args)
+      govuk_generic_text_field(attribute_name, 'number', hint: hint, label: label, **args)
     end
 
     # FIXME #govuk_collection_select args differ from Rails' #collection_select args in that
