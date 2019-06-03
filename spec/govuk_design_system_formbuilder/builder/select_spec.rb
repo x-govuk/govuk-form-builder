@@ -1,17 +1,5 @@
-require_relative 'shared_text_field_examples'
-
 describe GOVUKDesignSystemFormBuilder::FormBuilder do
-  let(:helper) { TestHelper.new }
-  let(:object) { Person.new }
-  let(:object_name) { :person }
-  let(:builder) { described_class.new(object_name, object, helper, {}) }
-  let(:parsed_subject) { Nokogiri.parse(subject) }
-
-  describe('#govuk_text_field')   { it_behaves_like 'a regular input', 'text' }
-  describe('#govuk_tel_field')    { it_behaves_like 'a regular input', 'tel' }
-  describe('#govuk_email_field')  { it_behaves_like 'a regular input', 'email' }
-  describe('#govuk_url_field')    { it_behaves_like 'a regular input', 'url' }
-  describe('#govuk_number_field') { it_behaves_like 'a regular input', 'number' }
+  include_context 'setup builder'
 
   describe '#govuk_collection_select' do
     let(:attribute) { :favourite_colour }

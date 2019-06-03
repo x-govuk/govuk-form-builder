@@ -3,7 +3,7 @@ require 'action_view'
 require 'active_model'
 require 'pry'
 
-Dir[File.join('./spec', 'support', '*.rb')].each { |file| require file }
+Dir[File.join('./spec', 'support', '**', '*.rb')].each { |file| require file }
 
 require './lib/govuk_design_system_formbuilder'
 
