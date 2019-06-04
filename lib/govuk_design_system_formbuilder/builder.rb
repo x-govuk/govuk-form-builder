@@ -52,6 +52,18 @@ module GOVUKDesignSystemFormBuilder
       end
     end
 
+    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, options: {}, html_options: {}, hint: {}, legend: {})
+      hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
+      Containers::FormGroup.new(self, object_name, attribute_name).html do
+        safe_join([
+          hint_element.html,
+          Containers::Fieldset.new(self, object_name, attribute_name, legend: legend).html do
+            (yield if block_given?)
+          end
+        ])
+      end
+    end
+
   private
 
     def govuk_generic_text_field(attribute_name, field_type, label: nil, hint: nil, width: nil, **args)

@@ -1,10 +1,12 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class Label < GOVUKDesignSystemFormBuilder::Base
+      DEFAULTS = { weight: 'regular', size: 'regular' }.freeze
+
       def initialize(builder, object_name, attribute_name, **options)
         super(builder, object_name, attribute_name)
 
-        default_options.merge(options).tap do |o|
+        DEFAULTS.merge(options).tap do |o|
           @text   = o&.dig(:text) || @attribute_name.capitalize
           @size   = label_size(o&.dig(:size))
           @weight = label_weight(o&.dig(:weight))
@@ -22,10 +24,6 @@ module GOVUKDesignSystemFormBuilder
       end
 
     private
-
-      def default_options
-        { weight: 'regular', size: 'regular' }
-      end
 
       def label_size(size)
         case size
