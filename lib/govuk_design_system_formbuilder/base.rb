@@ -26,6 +26,10 @@ module GOVUKDesignSystemFormBuilder
       @builder.object.errors.messages.keys.include?(@attribute_name)
     end
 
+    def attribute_descriptor
+      [@object_name, @attribute_name, @value].compact.join('_')
+    end
+
     def attribute_identifier
       "%<object_name>s[%<attribute_name>s]" % {
         object_name: @object_name,

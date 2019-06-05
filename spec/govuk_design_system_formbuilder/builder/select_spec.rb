@@ -42,7 +42,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       specify 'the label should be associated with the input' do
-        input_name = parsed_subject.at_css('select')['name']
+        input_name = parsed_subject.at_css('select')['id']
         label_for = parsed_subject.at_css('label')['for']
         expect(input_name).to eql(label_for)
       end

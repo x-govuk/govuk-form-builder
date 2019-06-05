@@ -8,6 +8,7 @@ module GOVUKDesignSystemFormBuilder
 
         DEFAULTS.merge(options).tap do |o|
           @text   = o&.dig(:text) || @attribute_name.capitalize
+          @value  = o&.dig(:value)
           @size   = label_size(o&.dig(:size))
           @weight = label_weight(o&.dig(:weight))
         end
@@ -19,7 +20,7 @@ module GOVUKDesignSystemFormBuilder
         @builder.tag.label(
           @text,
           class: %w(govuk-label).push(@size, @weight).compact,
-          for: attribute_identifier
+          for: attribute_descriptor
         )
       end
 

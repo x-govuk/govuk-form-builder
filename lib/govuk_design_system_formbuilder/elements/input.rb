@@ -9,7 +9,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        @builder.tag.input(class: input_classes, name: attribute_identifier, **@extra_args)
+        @builder.tag.input(class: input_classes, name: attribute_descriptor, **@extra_args)
       end
 
     private

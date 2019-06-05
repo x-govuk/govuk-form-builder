@@ -7,8 +7,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     let(:method) { :govuk_collection_radio_buttons }
     let(:colours) do
       [
-        OpenStruct.new(id: 'red', name: 'Red'),
-        OpenStruct.new(id: 'blue', name: 'Blue'),
+        OpenStruct.new(id: 'red', name: 'Red', description: 'Roses are red'),
+        OpenStruct.new(id: 'blue', name: 'Blue', description: 'Violets are... purple?'),
         OpenStruct.new(id: 'green', name: 'Green'),
         OpenStruct.new(id: 'yellow', name: 'Yellow')
       ]
@@ -124,6 +124,68 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         expect(subject).to have_tag('h1', text: block_h1)
         expect(subject).to have_tag('h2', text: block_h2)
         expect(subject).to have_tag('p', text: block_p)
+      end
+    end
+
+    context 'radio buttons' do
+      subject { builder.send(method, attribute, colours, :id, :name) }
+
+      specify 'output should contain the correct number of radio buttons' do
+        expect(subject).to have_tag('input', count: colours.size, with: { type: 'radio' })
+        expect(subject).to have_tag('label', count: colours.size)
+      end
+
+      specify 'containing div should have attribute data-module="radios"'
+
+      specify 'radio buttons should be associated with corresponding labels' do
+        colours.each do |colour|
+          "person_favourite_colour_#{colour.id}".tap do |association|
+            expect(subject).to have_tag('input', with: { id: association })
+            expect(subject).to have_tag('label', with: { for: association })
+          end
+        end
+      end
+
+      specify 'radio buttons should have the correct id' do
+        colours.each do |colour|
+          "person_favourite_colour_#{colour.id}".tap do |association|
+            expect(subject).to have_tag('input', with: { id: association })
+          end
+        end
+      end
+
+      specify 'radio buttons should have the correct id' do
+        parsed_subject.css('input').each do |input|
+          expect(input['name']).to eql('person[favourite_colour]')
+        end
+      end
+
+      context 'when hint_method attribute is present' do
+        let(:colours_with_descriptions) { colours.select { |c| c.description.present? } }
+        let(:colours_without_descriptions) { colours.reject { |c| c.description.present? } }
+
+        subject { builder.send(method, attribute, colours, :id, :name, :description) }
+
+        specify 'the radio buttons with hints should contain hint text' do
+          expect(subject).to have_tag('span', count: colours_with_descriptions.size, with: { class: 'govuk-hint govuk-radios__hint' })
+        end
+
+        specify 'the hint should be associated with the correct radio button' do
+          colours_with_descriptions.each do |cwd|
+            "person-favourite_colour-#{cwd.id}-hint".tap do |association|
+              expect(subject).to have_tag('input', with: { "aria-describedby" => association })
+              expect(subject).to have_tag('span', with: { class: 'govuk-hint', id: association })
+            end
+          end
+        end
+
+        specify 'radio buttons without hints shouldn not have aria-describedby attributes' do
+          colours_without_descriptions.each do |cwd|
+            "person-favourite_colour-#{cwd.id}-hint".tap do |association|
+              expect(subject).not_to have_tag('input', with: { "aria-describedby" => association })
+            end
+          end
+        end
       end
     end
   end
