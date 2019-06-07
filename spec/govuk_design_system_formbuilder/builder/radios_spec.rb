@@ -135,7 +135,11 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         expect(subject).to have_tag('label', count: colours.size)
       end
 
-      specify 'containing div should have attribute data-module="radios"'
+      specify 'containing div should have attribute data-module="radios"' do
+        expect(subject).to have_tag('div', with: { 'data-module' => 'radios' }) do |dm|
+          expect(dm).to have_tag('input', count: colours.size, with: { type: 'radio' })
+        end
+      end
 
       specify 'radio buttons should be associated with corresponding labels' do
         colours.each do |colour|
