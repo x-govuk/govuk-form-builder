@@ -13,7 +13,7 @@ module GOVUKDesignSystemFormBuilder
     def hint_id
       return nil unless @text.present?
 
-      [@object_name, @attribute_name, 'hint'].join('-')
+      @hint_id || [@object_name, @attribute_name, 'hint'].join('-')
     end
 
     def error_id

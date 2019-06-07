@@ -21,8 +21,8 @@ module GOVUKDesignSystemFormBuilder
                 aria: { describedby: hint_id }
               ),
               Elements::Label.new(@builder, @object_name, @attribute_name, text: @text, value: @value).html,
-              @hint.present? && @builder.tag.span(@hint, id: hint_id, class: radio_hint_classes)
-            ]
+              Elements::Hint.new(@builder, @object_name, @attribute_name, id: hint_id, class: radio_hint_classes, text: @hint).html,
+            ].compact
           )
         end
       end

@@ -4,12 +4,20 @@ module GOVUKDesignSystemFormBuilder
       def initialize(builder, object_name, attribute_name, options = {})
         super(builder, object_name, attribute_name)
         @text = options&.dig(:text)
+        @extra_classes = options&.dig(:class)
+        @hint_id = options&.dig(:id)
       end
 
       def html
         return nil unless @text.present?
 
-        @builder.tag.span(@text, class: 'govuk-hint', id: hint_id)
+        @builder.tag.span(@text, class: hint_classes, id: hint_id)
+      end
+
+    private
+
+      def hint_classes
+        %w(govuk-hint).push(@extra_classes)
       end
     end
   end
