@@ -1,6 +1,29 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
-    class Radio < GOVUKDesignSystemFormBuilder::Base
+    class FieldsetRadio < GOVUKDesignSystemFormBuilder::Base
+      def initialize(builder, object_name, attribute_name, value, label: {}, hint: {})
+        super(builder, object_name, attribute_name)
+        @value = value
+      end
+
+      def html
+        @builder.content_tag('div', class: 'govuk-radios__item') do
+          @builder.safe_join(
+            [
+              @builder.tag.input(
+                name: attribute_identifier,
+                type: 'radio',
+                value: @value,
+                id: attribute_descriptor,
+                aria: { describedby: hint_id }
+              ),
+            ]
+          )
+        end
+      end
+    end
+
+    class CollectionRadio < GOVUKDesignSystemFormBuilder::Base
       def initialize(builder, object_name, attribute_name, item, value_method, text_method, hint_method, **args)
         super(builder, object_name, attribute_name)
         @item = item

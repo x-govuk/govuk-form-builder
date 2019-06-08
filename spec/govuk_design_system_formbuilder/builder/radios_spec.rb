@@ -1,9 +1,9 @@
 describe GOVUKDesignSystemFormBuilder::FormBuilder do
   include_context 'setup builder'
+  let(:attribute) { :favourite_colour }
+  let(:label_text) { 'Cherished shade' }
 
   describe '#govuk_collection_select' do
-    let(:attribute) { :favourite_colour }
-    let(:label_text) { 'Cherished shade' }
     let(:method) { :govuk_collection_radio_buttons }
     let(:colours) do
       [
@@ -196,5 +196,77 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
     end
+  end
+
+  describe '#govuk_radio_buttons_fieldset' do
+    let(:method) { :govuk_radio_buttons_fieldset }
+
+    context 'when no block is supplied' do
+      subject { builder.send(method, attribute) }
+      specify { expect { subject }.to raise_error(LocalJumpError, /no block given/) }
+    end
+
+    context 'when a block is supplied' do
+      let(:block_h1) { 'The quick brown fox' }
+      let(:block_h2) { 'Jumped over the' }
+      let(:block_p) { 'Lazy dog.' }
+
+      subject do
+        builder.send(method, attribute) do
+          builder.safe_join([
+            builder.tag.h1(block_h1),
+            builder.tag.h2(block_h2),
+            builder.tag.p(block_p)
+          ])
+        end
+      end
+
+      specify 'output should contain the contents of the block' do
+        expect(subject).to have_tag('h1', text: block_h1)
+        expect(subject).to have_tag('h2', text: block_h2)
+        expect(subject).to have_tag('p', text: block_p)
+      end
+    end
+
+    context 'when a block containing radio buttons is supplied' do
+
+      let(:red_label) { 'Rosso' }
+      let(:green_label) { 'Verde' }
+
+      subject do
+        builder.send(method, attribute) do
+          builder.safe_join([
+            builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label }),
+            builder.govuk_radio_button(:favourite_colour, :green, label: { text: green_label })
+          ])
+        end
+      end
+
+      specify 'output should be a form group containing a form group and fieldset' do
+        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
+          expect(fg).to have_tag('div', with: { class: 'govuk-fieldset'})
+        end
+      end
+
+      specify 'output should contain radio buttons' do
+        expect(subject).to have_tag('div', with: { class: 'govuk-radios' }) do
+        end
+      end
+    end
+  end
+
+  describe '#govuk_radio_button' do
+    let(:method) { :govuk_radio_button }
+    let(:value) { 'red' }
+
+    subject { builder.send(method, attribute, value) }
+
+    specify 'output should contain a radio item group with a radio input' do
+      expect(subject).to have_tag('div', with: { class: 'govuk-radios__item' }) do |ri|
+        expect(ri).to have_tag('input', with: { type: 'radio', value: value })
+      end
+    end
+
+    specify 'should conditionally reveal the block contents'
   end
 end

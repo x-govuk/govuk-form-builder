@@ -55,24 +55,49 @@ module GOVUKDesignSystemFormBuilder
     def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, options: {}, html_options: {}, hint: {}, legend: {})
       hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
       Containers::FormGroup.new(self, object_name, attribute_name).html do
+        safe_join(
+          [
+            hint_element.html,
+            Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: hint_element.hint_id).html do
+              safe_join(
+                [
+                  (yield if block_given?),
+                  content_tag('div', class: 'govuk-radios', data: { module: "radios" }) do
+                    safe_join(
+                      collection.map do |item|
+                        Elements::CollectionRadio.new(self, object_name, attribute_name, item, value_method, text_method, hint_method).html
+                      end
+                    )
+                  end
+                ].compact
+              )
+            end
+          ]
+        )
+      end
+    end
+
+    def govuk_radio_buttons_fieldset(attribute_name, options: {}, html_options: {}, hint: {}, legend: {}, &block)
+      hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
+      Containers::FormGroup.new(self, object_name, attribute_name).html do
         safe_join([
           hint_element.html,
-          Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: hint_element.hint_id).html do
+          content_tag('div', class: 'govuk-radios', data: { module: "radios" }) do
             safe_join(
               [
-                (yield if block_given?),
-                content_tag('div', class: 'govuk-radios', data: { module: "radios" }) do
-                  safe_join(
-                    collection.map do |item|
-                      Elements::Radio.new(self, object_name, attribute_name, item, value_method, text_method, hint_method).html
-                    end
-                  )
+                Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: hint_element.hint_id).html do
+                  yield
                 end
               ].compact
             )
           end
         ])
       end
+    end
+
+    # only intended for use inside a #govuk_radio_buttons_fieldset
+    def govuk_radio_button(attribute_name, value, hint: {}, label: {})
+      Elements::FieldsetRadio.new(self, object_name, attribute_name, value).html
     end
 
   private
