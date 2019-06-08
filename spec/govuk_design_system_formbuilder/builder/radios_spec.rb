@@ -196,6 +196,28 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
     end
+
+    context 'layout direction' do
+      context 'when inline is specified in the options' do
+        subject do
+          builder.send(method, attribute, colours, :id, :name, :description, options: { inline: true })
+        end
+
+        specify "should have the additional class 'govuk-radios--inline'" do
+          expect(subject).to have_tag('div', with: { class: %w(govuk-radios govuk-radios--inline) })
+        end
+      end
+
+      context 'when inline is not specified in the options' do
+        subject do
+          builder.send(method, attribute, colours, :id, :name, :description, options: { inline: false })
+        end
+
+        specify "should not have the additional class 'govuk-radios--inline'" do
+          expect(parsed_subject.at_css('.govuk-radios')['class']).to eql('govuk-radios')
+        end
+      end
+    end
   end
 
   describe '#govuk_radio_buttons_fieldset' do
@@ -250,6 +272,32 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       specify 'output should contain radio buttons' do
         expect(subject).to have_tag('div', with: { class: 'govuk-radios' }) do
+        end
+      end
+
+      context 'layout direction' do
+        context 'when inline is specified in the options' do
+          subject do
+            builder.send(method, attribute, options: { inline: true }) do
+              builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label })
+            end
+          end
+
+          specify "should have the additional class 'govuk-radios--inline'" do
+            expect(subject).to have_tag('div', with: { class: %w(govuk-radios govuk-radios--inline) })
+          end
+        end
+
+        context 'when inline is not specified in the options' do
+          subject do
+            builder.send(method, attribute, options: { inline: false }) do
+              builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label })
+            end
+          end
+
+          specify "should not have the additional class 'govuk-radios--inline'" do
+            expect(parsed_subject.at_css('.govuk-radios')['class']).to eql('govuk-radios')
+          end
         end
       end
     end

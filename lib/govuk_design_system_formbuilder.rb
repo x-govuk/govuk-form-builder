@@ -8,6 +8,7 @@ require 'govuk_design_system_formbuilder/elements/radio'
 require 'govuk_design_system_formbuilder/elements/error_message'
 require 'govuk_design_system_formbuilder/containers/form_group'
 require 'govuk_design_system_formbuilder/containers/fieldset'
+require 'govuk_design_system_formbuilder/containers/radios'
 
 module GOVUKDesignSystemFormBuilder
   class FormBuilder < ActionView::Helpers::FormBuilder

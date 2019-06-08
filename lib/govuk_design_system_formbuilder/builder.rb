@@ -52,7 +52,7 @@ module GOVUKDesignSystemFormBuilder
       end
     end
 
-    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, options: {}, html_options: {}, hint: {}, legend: {})
+    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, options: { inline: false }, html_options: {}, hint: {}, legend: {})
       hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
       Containers::FormGroup.new(self, object_name, attribute_name).html do
         safe_join(
@@ -62,7 +62,7 @@ module GOVUKDesignSystemFormBuilder
               safe_join(
                 [
                   (yield if block_given?),
-                  content_tag('div', class: 'govuk-radios', data: { module: "radios" }) do
+                  Containers::Radios.new(self, inline: options.dig(:inline)).html do
                     safe_join(
                       collection.map do |item|
                         Elements::CollectionRadio.new(self, object_name, attribute_name, item, value_method, text_method, hint_method).html
@@ -77,12 +77,12 @@ module GOVUKDesignSystemFormBuilder
       end
     end
 
-    def govuk_radio_buttons_fieldset(attribute_name, options: {}, html_options: {}, hint: {}, legend: {}, &block)
+    def govuk_radio_buttons_fieldset(attribute_name, options: { inline: false }, html_options: {}, hint: {}, legend: {}, &block)
       hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
       Containers::FormGroup.new(self, object_name, attribute_name).html do
         safe_join([
           hint_element.html,
-          content_tag('div', class: 'govuk-radios', data: { module: "radios" }) do
+          Containers::Radios.new(self, inline: options.dig(:inline)).html do
             safe_join(
               [
                 Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: hint_element.hint_id).html do
