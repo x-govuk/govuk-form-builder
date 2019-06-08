@@ -57,7 +57,7 @@ module GOVUKDesignSystemFormBuilder
       Containers::FormGroup.new(self, object_name, attribute_name).html do
         safe_join([
           hint_element.html,
-          Containers::Fieldset.new(self, object_name, attribute_name, legend: legend).html do
+          Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: hint_element.hint_id).html do
             safe_join(
               [
                 (yield if block_given?),

@@ -103,7 +103,11 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         expect(subject).to have_tag('div', with: { class: 'govuk-fieldset' })
       end
 
-      specify 'the hint should be associated with the fieldset'
+      specify 'the hint should be associated with the fieldset' do
+        expect(parsed_subject.at_css('.govuk-fieldset')['aria-describedby'].split).to include(
+          parsed_subject.at_css('.govuk-form-group > .govuk-hint')['id']
+        )
+      end
     end
 
     context 'when passed a block' do

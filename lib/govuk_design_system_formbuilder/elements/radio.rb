@@ -32,7 +32,7 @@ module GOVUKDesignSystemFormBuilder
       def hint_id
         return nil unless @hint.present?
 
-        [@object_name, @attribute_name, @value, 'hint'].join('-')
+        [@object_name, @attribute_name, @value, 'hint'].join('-').parameterize
       end
 
       def radio_hint_classes
