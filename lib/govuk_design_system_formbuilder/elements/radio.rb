@@ -8,16 +8,11 @@ module GOVUKDesignSystemFormBuilder
 
       def html
         @builder.content_tag('div', class: 'govuk-radios__item') do
-          @builder.safe_join(
-            [
-              @builder.tag.input(
-                name: attribute_identifier,
-                type: 'radio',
-                value: @value,
-                id: attribute_descriptor,
-                aria: { describedby: hint_id }
-              ),
-            ]
+          @builder.radio_button(
+            @attribute_name,
+            @value,
+            id: attribute_descriptor,
+            aria: { describedby: hint_id }
           )
         end
       end
@@ -36,10 +31,9 @@ module GOVUKDesignSystemFormBuilder
         @builder.content_tag('div', class: 'govuk-radios__item') do
           @builder.safe_join(
             [
-              @builder.tag.input(
-                name: attribute_identifier,
-                type: 'radio',
-                value: @value,
+              @builder.radio_button(
+                @attribute_name,
+                @value,
                 id: attribute_descriptor,
                 aria: { describedby: hint_id }
               ),
