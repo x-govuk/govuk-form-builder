@@ -2,13 +2,17 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
   include_context 'setup builder'
   let(:attribute) { :favourite_colour }
   let(:label_text) { 'Cherished shade' }
+  let(:red_label) { 'Rosso' }
+  let(:green_label) { 'Verde' }
+  let(:red_hint) { 'Roses are red' }
+  let(:blue_hint) { 'Violets are... purple?' }
 
   describe '#govuk_collection_select' do
     let(:method) { :govuk_collection_radio_buttons }
     let(:colours) do
       [
-        OpenStruct.new(id: 'red', name: 'Red', description: 'Roses are red'),
-        OpenStruct.new(id: 'blue', name: 'Blue', description: 'Violets are... purple?'),
+        OpenStruct.new(id: 'red', name: 'Red', description: red_hint),
+        OpenStruct.new(id: 'blue', name: 'Blue', description: blue_hint),
         OpenStruct.new(id: 'green', name: 'Green'),
         OpenStruct.new(id: 'yellow', name: 'Yellow')
       ]
@@ -251,10 +255,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     context 'when a block containing radio buttons is supplied' do
-
-      let(:red_label) { 'Rosso' }
-      let(:green_label) { 'Verde' }
-
       subject do
         builder.send(method, attribute) do
           builder.safe_join([
@@ -312,6 +312,51 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     specify 'output should contain a radio item group with a radio input' do
       expect(subject).to have_tag('div', with: { class: 'govuk-radios__item' }) do |ri|
         expect(ri).to have_tag('input', with: { type: 'radio', value: value })
+      end
+    end
+
+    context 'label' do
+      context 'when a label is provided' do
+        context 'with default options' do
+          subject do
+            builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label })
+          end
+
+          specify 'should contain a label with the correct text' do
+            expect(subject).to have_tag('label', text: red_label)
+          end
+        end
+
+        context 'with additional options' do
+          subject do
+            builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label, weight: 'bold', size: 'large' })
+          end
+          specify 'should allow label to be configured' do
+            expect(subject).to have_tag('label', text: red_label, with: {
+              class: 'govuk-label govuk-\!-font-size-48 govuk-\!-font-weight-bold'
+            })
+          end
+        end
+      end
+
+      context 'when no label is provided' do
+        subject do
+          builder.govuk_radio_button(:favourite_colour, :red)
+        end
+
+        specify 'should contain a label with the correct text' do
+          expect(subject).to have_tag('label', text: 'Favourite_colour')
+        end
+      end
+    end
+
+    context 'when a hint is provided' do
+      subject do
+        builder.govuk_radio_button(:favourite_colour, :red, hint: red_hint)
+      end
+
+      specify 'should contain a label with the correct text' do
+        expect(subject).to have_tag('span', text: red_hint, with: { class: 'govuk-hint' })
       end
     end
 

@@ -97,7 +97,7 @@ module GOVUKDesignSystemFormBuilder
 
     # only intended for use inside a #govuk_radio_buttons_fieldset
     def govuk_radio_button(attribute_name, value, hint: {}, label: {})
-      Elements::FieldsetRadio.new(self, object_name, attribute_name, value).html
+      Elements::FieldsetRadio.new(self, object_name, attribute_name, value, hint: hint, label: label).html
     end
 
   private

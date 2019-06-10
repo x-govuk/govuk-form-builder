@@ -7,8 +7,8 @@ module GOVUKDesignSystemFormBuilder
         super(builder, object_name, attribute_name)
 
         DEFAULTS.merge(options).tap do |o|
-          @text   = o&.dig(:text) || @attribute_name.capitalize
-          @value  = o&.dig(:value)
+          @text   = label_text(o&.dig(:text))
+          @value  = o&.dig(:value) # used by attribute_descriptor
           @size   = label_size(o&.dig(:size))
           @weight = label_weight(o&.dig(:weight))
         end
@@ -25,6 +25,10 @@ module GOVUKDesignSystemFormBuilder
       end
 
     private
+
+      def label_text(option_text)
+        [option_text, @value, @attribute_name.capitalize].compact.first
+      end
 
       def label_size(size)
         case size

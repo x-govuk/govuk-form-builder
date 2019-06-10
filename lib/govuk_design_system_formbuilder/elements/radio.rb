@@ -1,25 +1,47 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
+    module HintHelpers
+      def hint_id
+        return nil unless @hint.present?
+
+        [@object_name, @attribute_name, @value, 'hint'].join('-').parameterize
+      end
+
+      def radio_hint_classes
+        %w(govuk-hint govuk-radios__hint)
+      end
+    end
+
     class FieldsetRadio < GOVUKDesignSystemFormBuilder::Base
-      def initialize(builder, object_name, attribute_name, value, label: {}, hint: {})
+      include HintHelpers
+
+      def initialize(builder, object_name, attribute_name, value, label:, hint:)
         super(builder, object_name, attribute_name)
         @value = value
+        @label = label
+        @hint  = hint
       end
 
       def html
         @builder.content_tag('div', class: 'govuk-radios__item') do
-          @builder.radio_button(
-            @attribute_name,
-            @value,
-            id: attribute_descriptor,
-            aria: { describedby: hint_id }
-          )
+          @builder.safe_join([
+            @builder.radio_button(
+              @attribute_name,
+              @value,
+              id: attribute_descriptor,
+              aria: { describedby: hint_id }
+            ),
+            Elements::Label.new(@builder, @object_name, @attribute_name, @label).html,
+            Elements::Hint.new(@builder, @object_name, @attribute_name, id: hint_id, class: radio_hint_classes, text: @hint).html,
+          ])
         end
       end
     end
 
     class CollectionRadio < GOVUKDesignSystemFormBuilder::Base
-      def initialize(builder, object_name, attribute_name, item, value_method, text_method, hint_method, **args)
+      include HintHelpers
+
+      def initialize(builder, object_name, attribute_name, item, value_method, text_method, hint_method)
         super(builder, object_name, attribute_name)
         @item = item
         @value = item.send(value_method)
@@ -42,18 +64,6 @@ module GOVUKDesignSystemFormBuilder
             ].compact
           )
         end
-      end
-
-    private
-
-      def hint_id
-        return nil unless @hint.present?
-
-        [@object_name, @attribute_name, @value, 'hint'].join('-').parameterize
-      end
-
-      def radio_hint_classes
-        %w(govuk-hint govuk-radios__hint)
       end
     end
   end
