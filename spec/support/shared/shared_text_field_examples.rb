@@ -1,7 +1,7 @@
-shared_examples 'a regular input' do |field_type|
+shared_examples 'a regular input' do |method_identifier, field_type|
   let(:attribute) { :name }
   let(:label_text) { 'Full name' }
-  let(:method) { "govuk_#{field_type}_field".to_sym }
+  let(:method) { "govuk_#{method_identifier}_field".to_sym }
 
   subject { builder.send(method, :name, label: { text: label_text }) }
 

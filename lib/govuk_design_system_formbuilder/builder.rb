@@ -1,23 +1,23 @@
 module GOVUKDesignSystemFormBuilder
   module Builder
     def govuk_text_field(attribute_name, hint: {}, label: {}, **args)
-      govuk_generic_text_field(attribute_name, 'text', hint: hint, label: label, **args)
+      govuk_generic_text_field(attribute_name, :text_field, hint: hint, label: label, **args)
     end
 
-    def govuk_tel_field(attribute_name, hint: {}, label: {}, **args)
-      govuk_generic_text_field(attribute_name, 'tel', hint: hint, label: label, **args)
+    def govuk_phone_field(attribute_name, hint: {}, label: {}, **args)
+      govuk_generic_text_field(attribute_name, :phone_field, hint: hint, label: label, **args)
     end
 
     def govuk_email_field(attribute_name, hint: {}, label: {}, **args)
-      govuk_generic_text_field(attribute_name, 'email', hint: hint, label: label, **args)
+      govuk_generic_text_field(attribute_name, :email_field, hint: hint, label: label, **args)
     end
 
     def govuk_url_field(attribute_name, hint: {}, label: {}, **args)
-      govuk_generic_text_field(attribute_name, 'url', hint: hint, label: label, **args)
+      govuk_generic_text_field(attribute_name, :url_field, hint: hint, label: label, **args)
     end
 
     def govuk_number_field(attribute_name, hint: {}, label: {}, **args)
-      govuk_generic_text_field(attribute_name, 'number', hint: hint, label: label, **args)
+      govuk_generic_text_field(attribute_name, :number_field, hint: hint, label: label, **args)
     end
 
     # FIXME #govuk_collection_select args differ from Rails' #collection_select args in that
@@ -102,23 +102,14 @@ module GOVUKDesignSystemFormBuilder
 
   private
 
-    def govuk_generic_text_field(attribute_name, field_type, label: nil, hint: nil, width: nil, **args)
+    def govuk_generic_text_field(attribute_name, builder_method, label: nil, hint: nil, width: nil, **args)
       hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
       label_element = Elements::Label.new(self, object_name, attribute_name, label)
       error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
-
-      input_element = Elements::Input.new(
-        self,
-        object_name,
-        attribute_name,
-        width: width,
-        **args.merge(
-          type: field_type,
-          aria: {
-            describedby: classes_to_str([hint_element.hint_id, error_element.error_id])
-          }
-        )
-      )
+      input_element = Elements::Input.new(self, object_name, attribute_name, width: width, **args.merge(
+        builder_method: builder_method,
+        aria: { describedby: classes_to_str([hint_element.hint_id, error_element.error_id]) }
+      ))
 
       Containers::FormGroup.new(self, object_name, attribute_name).html do
         safe_join([label_element, hint_element, error_element, input_element].map(&:html))

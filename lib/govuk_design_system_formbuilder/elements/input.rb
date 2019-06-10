@@ -6,10 +6,11 @@ module GOVUKDesignSystemFormBuilder
 
         @extra_args = args.dup
         @width = @extra_args.delete(:width)
+        @builder_method = @extra_args.delete(:builder_method)
       end
 
       def html
-        @builder.tag.input(class: input_classes, name: attribute_descriptor, **@extra_args)
+        @builder.send(@builder_method, @attribute_name, class: input_classes, name: attribute_descriptor, **@extra_args)
       end
 
     private
