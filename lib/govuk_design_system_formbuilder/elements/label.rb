@@ -1,26 +1,23 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class Label < GOVUKDesignSystemFormBuilder::Base
-      DEFAULTS = { weight: 'regular', size: 'regular' }.freeze
-
-      def initialize(builder, object_name, attribute_name, **options)
+      def initialize(builder, object_name, attribute_name, text: nil, value: nil, size: 'regular', weight: 'regular')
         super(builder, object_name, attribute_name)
 
-        DEFAULTS.merge(options).tap do |o|
-          @text   = label_text(o&.dig(:text))
-          @value  = o&.dig(:value) # used by attribute_descriptor
-          @size   = label_size(o&.dig(:size))
-          @weight = label_weight(o&.dig(:weight))
-        end
+        @text         = label_text(text)
+        @value        = value # used by attribute_descriptor
+        @size_class   = label_size_class(size)
+        @weight_class = label_weight_class(weight)
       end
 
       def html
         return nil unless @text.present?
 
-        @builder.tag.label(
+        @builder.label(
+          @attribute_name,
           @text,
-          class: %w(govuk-label).push(@size, @weight).compact,
-          for: attribute_descriptor
+          value: @value,
+          class: %w(govuk-label).push(@size_class, @weight_class).compact
         )
       end
 
@@ -30,7 +27,7 @@ module GOVUKDesignSystemFormBuilder
         [option_text, @value, @attribute_name.capitalize].compact.first
       end
 
-      def label_size(size)
+      def label_size_class(size)
         case size
         when 'large'   then "govuk-!-font-size-48"
         when 'medium'  then "govuk-!-font-size-36"
@@ -41,7 +38,7 @@ module GOVUKDesignSystemFormBuilder
         end
       end
 
-      def label_weight(weight)
+      def label_weight_class(weight)
         case weight
         when 'bold'    then "govuk-!-font-weight-bold"
         when 'regular' then nil

@@ -50,9 +50,9 @@ shared_examples 'a regular input' do |method_identifier, field_type|
     end
 
     specify 'the hint should be associated with the input' do
-      input_aria_describedby = parsed_subject.at_css('input')['aria-describedby']
+      input_aria_describedby = parsed_subject.at_css('input')['aria-describedby'].split
       hint_id = parsed_subject.at_css('span.govuk-hint')['id']
-      expect(input_aria_describedby).to eql(hint_id)
+      expect(input_aria_describedby).to include(hint_id)
     end
   end
 
@@ -70,7 +70,9 @@ shared_examples 'a regular input' do |method_identifier, field_type|
 
   context 'when the attribute has errors' do
     subject { builder.send(method, :name, hint: nil) }
+    let(:object) { Person.new(name: nil) }
     before { object.valid? }
+
     let(:message) { object.errors.messages[:name].join }
 
     specify 'should have error class' do
@@ -88,6 +90,8 @@ shared_examples 'a regular input' do |method_identifier, field_type|
   end
 
   context 'when the field has no errors' do
+
+    let(:object) { Person.new(name: 'Joey') }
     specify 'should not have error class' do
       expect(parsed_subject.at_css('.govuk-form-group')['class']).not_to include('govuk-form-group--error')
     end
