@@ -382,7 +382,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       specify 'conditional_id contains the object, attribute and value name' do
         expect(
-          id = parsed_subject.at_css('input', type: 'radio')['data-aria-controls']
+          parsed_subject.at_css('input', type: 'radio')['data-aria-controls']
         ).to eql('person-favourite_colour-red-conditional')
       end
     end
