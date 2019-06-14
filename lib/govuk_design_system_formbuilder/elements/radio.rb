@@ -22,31 +22,44 @@ module GOVUKDesignSystemFormBuilder
         @hint  = hint
       end
 
-      def html
-        con_id = block_given? && conditional_id
+      def html(&block)
+        @conditional_content, @conditional_id = process(block)
+
         @builder.content_tag('div', class: 'govuk-radios__item') do
-          @builder.safe_join([
-            @builder.radio_button(
-              @attribute_name,
-              @value,
-              id: attribute_descriptor,
-              aria: {
-                describedby: hint_id
-              },
-              data: {
-                'aria-controls' => con_id
-              }
-            ),
-            Elements::Label.new(@builder, @object_name, @attribute_name, @label).html,
-            Elements::Hint.new(@builder, @object_name, @attribute_name, id: hint_id, class: radio_hint_classes, text: @hint).html,
-            @builder.content_tag('div', class: conditional_classes, id: con_id) do
-              (yield if block_given?)
-            end
-          ])
+          @builder.safe_join(
+            [
+              input,
+              Elements::Label.new(@builder, @object_name, @attribute_name, @label).html,
+              Elements::Hint.new(@builder, @object_name, @attribute_name, id: hint_id, class: radio_hint_classes, text: @hint).html,
+              conditional_content
+            ]
+          )
         end
       end
 
     private
+
+      def input
+        @builder.radio_button(
+          @attribute_name,
+          @value,
+          id: attribute_descriptor,
+          aria: { describedby: hint_id },
+          data: { 'aria-controls' => @conditional_id }
+        )
+      end
+
+      def conditional_content
+        return nil unless @conditional_content.present?
+
+        @builder.content_tag('div', class: conditional_classes, id: @conditional_id) do
+          @conditional_content
+        end
+      end
+
+      def process(block)
+        return content = block.call, (content && conditional_id)
+      end
 
       def conditional_classes
         %w(govuk-radios__conditional govuk-radios__conditional--hidden)
