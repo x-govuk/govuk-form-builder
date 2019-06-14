@@ -77,7 +77,7 @@ module GOVUKDesignSystemFormBuilder
       end
     end
 
-    def govuk_radio_buttons_fieldset(attribute_name, options: { inline: false }, html_options: {}, hint: {}, legend: {}, &block)
+    def govuk_radio_buttons_fieldset(attribute_name, options: { inline: false }, html_options: {}, hint: {}, legend: {})
       hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
       Containers::FormGroup.new(self, object_name, attribute_name).html do
         safe_join([
