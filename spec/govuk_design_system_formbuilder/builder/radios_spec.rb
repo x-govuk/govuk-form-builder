@@ -360,6 +360,31 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
-    specify 'should conditionally reveal the block contents'
+    context 'conditionally revealing content' do
+      subject do
+        builder.govuk_radio_button(:favourite_colour, :red) do |rb|
+          builder.govuk_text_field(:favourite_colour_reason)
+        end
+      end
+
+      specify 'should include content provided in the block in a conditional div' do
+        expect(subject).to have_tag('div', with: { class: 'govuk-radios__conditional govuk-radios__conditional--hidden' }) do |cd|
+          expect(cd).to have_tag('label', with: { class: 'govuk-label' }, text: 'Favourite_colour_reason')
+          expect(cd).to have_tag('input', with: { type: 'text' })
+        end
+      end
+
+      specify "the data-aria-controls attribute should match the conditional block's id" do
+        input_data_aria_controls = parsed_subject.at_css('input', type: 'radio')['data-aria-controls']
+        conditional_id = parsed_subject.at_css('div.govuk-radios__conditional')['id']
+        expect(input_data_aria_controls).to eql(conditional_id)
+      end
+
+      specify 'conditional_id contains the object, attribute and value name' do
+        expect(
+          id = parsed_subject.at_css('input', type: 'radio')['data-aria-controls']
+        ).to eql('person-favourite_colour-red-conditional')
+      end
+    end
   end
 end

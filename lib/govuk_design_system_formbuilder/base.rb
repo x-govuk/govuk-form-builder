@@ -22,6 +22,10 @@ module GOVUKDesignSystemFormBuilder
       [@object_name, @attribute_name, 'error'].join('-')
     end
 
+    def conditional_id
+      [@object_name, @attribute_name, @value, 'conditional'].join('-')
+    end
+
     def has_errors?
       @builder.object.invalid? &&
         @builder.object.errors.messages.keys.include?(@attribute_name)

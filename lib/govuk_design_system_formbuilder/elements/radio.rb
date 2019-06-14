@@ -23,18 +23,33 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
+        con_id = block_given? && conditional_id
         @builder.content_tag('div', class: 'govuk-radios__item') do
           @builder.safe_join([
             @builder.radio_button(
               @attribute_name,
               @value,
               id: attribute_descriptor,
-              aria: { describedby: hint_id }
+              aria: {
+                describedby: hint_id
+              },
+              data: {
+                'aria-controls' => con_id
+              }
             ),
             Elements::Label.new(@builder, @object_name, @attribute_name, @label).html,
             Elements::Hint.new(@builder, @object_name, @attribute_name, id: hint_id, class: radio_hint_classes, text: @hint).html,
+            @builder.content_tag('div', class: conditional_classes, id: con_id) do
+              (yield if block_given?)
+            end
           ])
         end
+      end
+
+    private
+
+      def conditional_classes
+        %w(govuk-radios__conditional govuk-radios__conditional--hidden)
       end
     end
 
