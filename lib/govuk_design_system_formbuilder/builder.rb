@@ -65,7 +65,7 @@ module GOVUKDesignSystemFormBuilder
                   Containers::Radios.new(self, inline: options.dig(:inline)).html do
                     safe_join(
                       collection.map do |item|
-                        Elements::CollectionRadio.new(self, object_name, attribute_name, item, value_method, text_method, hint_method).html
+                        Elements::RadioButton::CollectionRadio.new(self, object_name, attribute_name, item, value_method, text_method, hint_method).html
                       end
                     )
                   end
@@ -79,17 +79,14 @@ module GOVUKDesignSystemFormBuilder
 
     def govuk_radio_buttons_fieldset(attribute_name, options: { inline: false }, html_options: {}, hint: {}, legend: {})
       hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
+
       Containers::FormGroup.new(self, object_name, attribute_name).html do
         safe_join([
           hint_element.html,
           Containers::Radios.new(self, inline: options.dig(:inline)).html do
-            safe_join(
-              [
-                Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: hint_element.hint_id).html do
-                  yield
-                end
-              ].compact
-            )
+            Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: hint_element.hint_id).html do
+              yield
+            end
           end
         ])
       end
@@ -97,7 +94,7 @@ module GOVUKDesignSystemFormBuilder
 
     # only intended for use inside a #govuk_radio_buttons_fieldset
     def govuk_radio_button(attribute_name, value, hint: {}, label: {})
-      Elements::FieldsetRadio.new(self, object_name, attribute_name, value, hint: hint, label: label).html do
+      Elements::RadioButton::FieldsetRadio.new(self, object_name, attribute_name, value, hint: hint, label: label).html do
         (yield if block_given?)
       end
     end
