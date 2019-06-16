@@ -99,6 +99,23 @@ module GOVUKDesignSystemFormBuilder
       end
     end
 
+    def govuk_collection_check_boxes(attribute_name, collection, value_method, text_method, hint_method = nil, html_options: {}, hint: {}, legend: {})
+      hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
+      Containers::FormGroup.new(self, object_name, attribute_name).html do
+        safe_join(
+          [
+            hint_element.html,
+            (yield if block_given?),
+            Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: hint_element.hint_id).html do
+              collection_check_boxes(attribute_name, collection, value_method, text_method) do |cb|
+                Elements::CheckBox::CollectionCheckBox.new(self, cb, value_method, text_method, hint_method).html
+              end
+            end
+          ]
+        )
+      end
+    end
+
   private
 
     def govuk_generic_text_field(attribute_name, builder_method, label: nil, hint: nil, width: nil, **args)

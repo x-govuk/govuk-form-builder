@@ -7,7 +7,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
   let(:red_hint) { 'Roses are red' }
   let(:blue_hint) { 'Violets are... purple?' }
 
-  describe '#govuk_collection_select' do
+  describe '#govuk_collection_radio_buttons' do
     let(:method) { :govuk_collection_radio_buttons }
     let(:colours) do
       [
@@ -22,7 +22,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     specify 'output should be a form group containing a form group and fieldset' do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-        expect(fg).to have_tag('div.govuk-fieldset')
+        expect(fg).to have_tag('div', with: { class: 'govuk-fieldset' })
       end
     end
 
