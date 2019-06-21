@@ -2,20 +2,22 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     module CheckBox
       class CollectionCheckBox < GOVUKDesignSystemFormBuilder::Base
-        def initialize(builder, checkbox, hint_method = nil)
+        def initialize(builder, attribute, checkbox, hint_method = nil)
           @builder  = builder
+          @attribute = attribute
           @checkbox = checkbox
           @item     = checkbox.object
           @hint     = @item.send(hint_method) if hint_method.present?
         end
 
         def html
+          hint = Hint.new(@builder, @attribute, @checkbox, @hint)
           @builder.content_tag('div', class: 'govuk-checkboxes__item') do
             @builder.safe_join(
               [
-                @checkbox.check_box(class: "govuk-checkboxes_input"),
+                @checkbox.check_box(class: "govuk-checkboxes_input", aria: { describedby: hint.id }),
                 Label.new(@checkbox).html,
-                Hint.new(@builder, @hint).html
+                hint.html
               ]
             )
           end

@@ -143,27 +143,55 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           end
         end
 
-        specify 'labels should be correctly associated with inputs'
-        specify 'labels should have the correct classes'
+        specify 'labels should be correctly associated with inputs' do
+          parsed_subject.css('.govuk-checkboxes__item').each do |item|
+            input_id = item.at_css('input').attribute('id').value
+            label_target = item.at_css('label').attribute('for').value
+
+            expect(input_id).to eql(label_target)
+          end
+        end
+
+        specify 'labels should have the correct classes' do
+          expect(subject).to have_tag('label', with: { class: 'govuk-label' }, count: projects.size)
+        end
       end
 
       context 'hints' do
+        let(:projects_with_descriptions) { projects.select { |p| p.description.present? } }
         context 'when a hint method is provided' do
           subject { builder.send(method, attribute, projects, :id, :name, :description) }
 
           specify 'hints should contain the correct content' do
             projects.map(&:description).compact.each do |hint_text|
-              expect(subject).to have_tag('span', text: hint_text, with: { class: 'govuk-hint govuk-checkboxes__hint' })
+              expect(subject).to have_tag('span', text: hint_text, with: { class: %w(govuk-hint govuk-checkboxes__hint) })
             end
           end
 
-          specify 'the hint tag should not be present if the value is empty'
-          specify 'hints should be correctly associated with inputs'
-          specify 'hints should have the correct classes'
+          specify 'hints should be correctly associated with inputs' do
+            parsed_subject.css('.govuk-checkboxes__item').each do |item|
+              next unless described_by = item.at_css('input').attribute('aria-describedby')
+
+              input_described_by = described_by.value
+              hint_id = item.at_css('.govuk-hint').attribute('id').value
+
+              expect(hint_id).to eql(input_described_by)
+            end
+          end
+
+          specify 'only items with descriptions should have hints' do
+            expect(subject).to have_tag('span', with: { class: 'govuk-hint' }, count: projects_with_descriptions.size)
+          end
+
+          specify 'hints should have the correct classes' do
+            expect(subject).to have_tag('span', with: { class: %w(govuk-hint govuk-checkboxes__hint) })
+          end
         end
 
         context 'when no hint method is provided' do
-          specify 'the hint tag should never be present'
+          specify 'the hint tag should never be present' do
+            expect(subject).not_to have_tag('span', with: { class: 'govuk-hint' })
+          end
         end
       end
     end

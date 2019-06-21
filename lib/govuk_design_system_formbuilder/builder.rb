@@ -108,7 +108,7 @@ module GOVUKDesignSystemFormBuilder
             (yield if block_given?),
             Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: hint_element.hint_id).html do
               collection_check_boxes(attribute_name, collection, value_method, text_method) do |check_box|
-                Elements::CheckBox::CollectionCheckBox.new(self, check_box, hint_method).html
+                Elements::CheckBox::CollectionCheckBox.new(self, attribute_name, check_box, hint_method).html
               end
             end
           ]
