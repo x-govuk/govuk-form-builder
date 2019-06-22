@@ -77,14 +77,14 @@ module GOVUKDesignSystemFormBuilder
       end
     end
 
-    def govuk_radio_buttons_fieldset(attribute_name, options: { inline: false }, html_options: {}, hint: {}, legend: {})
+    def govuk_radio_buttons_fieldset(attribute_name, options: { inline: false }, hint: {}, legend: {})
       hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
 
       Containers::FormGroup.new(self, object_name, attribute_name).html do
         safe_join([
           hint_element.html,
-          Containers::Radios.new(self, inline: options.dig(:inline)).html do
-            Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: hint_element.hint_id).html do
+          Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: hint_element.hint_id).html do
+            Containers::Radios.new(self, inline: options.dig(:inline)).html do
               yield
             end
           end
@@ -113,6 +113,28 @@ module GOVUKDesignSystemFormBuilder
             end
           ]
         )
+      end
+    end
+
+    def govuk_check_boxes_fieldset(attribute_name, html_options: {}, hint: {}, legend: {})
+      hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
+
+      Containers::FormGroup.new(self, object_name, attribute_name).html do
+        safe_join([
+          hint_element.html,
+          Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: hint_element.hint_id).html do
+            Containers::CheckBoxes.new(self).html do
+              yield
+            end
+          end
+        ])
+      end
+    end
+
+    # only intended for use inside a #govuk_check_boxs_fieldset
+    def govuk_check_box(attribute_name, value, hint: {}, label: {})
+      Elements::CheckBox::FieldsetCheckBox.new(self, object_name, attribute_name, value, hint: hint, label: label).html do
+        (yield if block_given?)
       end
     end
 

@@ -196,4 +196,73 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
   end
+
+  describe '#govuk_check_boxes_fieldset' do
+    let(:attribute) { :projects }
+    let(:method) { :govuk_check_boxes_fieldset }
+
+
+    context 'when not supplied with a block' do
+      subject { builder.send(method, attribute) }
+
+      specify 'should fail with an appropriate error' do
+        expect { subject }.to raise_error(LocalJumpError, /no block given/)
+      end
+    end
+
+    context 'when supplied with a block containing regular content' do
+      let(:block_h1) { 'The quick brown fox' }
+      let(:block_h2) { 'Jumped over the' }
+      let(:block_p) { 'Lazy dog.' }
+
+      subject do
+        builder.send(method, attribute) do
+          builder.safe_join([
+            builder.tag.h1(block_h1),
+            builder.tag.h2(block_h2),
+            builder.tag.p(block_p)
+          ])
+        end
+      end
+
+      specify 'output should be a form group containing a form group and fieldset' do
+        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
+          expect(fg).to have_tag('div', with: { class: 'govuk-fieldset' }) do |fs|
+            expect(fs).to have_tag('div', with: { class: 'govuk-checkboxes', 'data-module' => 'checkboxes' })
+          end
+        end
+      end
+
+      specify 'should include block content' do
+        expect(subject).to have_tag('h1', text: block_h1)
+        expect(subject).to have_tag('h2', text: block_h2)
+        expect(subject).to have_tag('p', text: block_p)
+      end
+    end
+
+    context 'when supplied with a block containing checkboxes' do
+      subject do
+        builder.send(method, attribute) do
+          builder.safe_join([
+            projects.map do |p|
+              builder.govuk_check_box(attribute, p.name)
+            end
+          ])
+        end
+      end
+
+      specify 'output should contain the supplied checkboxes' do
+        expect(subject).to have_tag('input', with: { type: 'checkbox' }, count: projects.size)
+      end
+
+      specify 'checkboxes should have the correct classes'
+      specify 'checkboxes should be have the correct label contents'
+      specify 'checkboxes labels should be associated with the corresponding input'
+
+      context 'hints' do
+        specify 'when a hint is supplied it should be present'
+        specify 'the hint should be associated with the input'
+      end
+    end
+  end
 end
