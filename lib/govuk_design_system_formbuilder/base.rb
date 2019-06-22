@@ -32,7 +32,7 @@ module GOVUKDesignSystemFormBuilder
     end
 
     def attribute_descriptor
-      [@object_name, @attribute_name, @value].compact.join('_')
+      [@object_name, @attribute_name, @value].compact.join('_').parameterize
     end
 
     def attribute_identifier

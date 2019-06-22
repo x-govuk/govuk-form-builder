@@ -6,6 +6,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
   let(:project_z) { Project.new(id: 3, name: 'Project Z', description: nil) }
 
   let(:projects) { [project_x, project_y, project_z] }
+  let(:projects_with_descriptions) { projects.select { |p| p.description.present? } }
 
   describe '#govuk_collection_check_boxes' do
     let(:attribute) { :projects }
@@ -158,7 +159,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       context 'hints' do
-        let(:projects_with_descriptions) { projects.select { |p| p.description.present? } }
         context 'when a hint method is provided' do
           subject { builder.send(method, attribute, projects, :id, :name, :description) }
 
@@ -255,13 +255,65 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         expect(subject).to have_tag('input', with: { type: 'checkbox' }, count: projects.size)
       end
 
-      specify 'checkboxes should have the correct classes'
-      specify 'checkboxes should be have the correct label contents'
-      specify 'checkboxes labels should be associated with the corresponding input'
+      # https://api.rubyonrails.org/v5.2.3/classes/ActionView/Helpers/FormBuilder.html#method-i-check_box
+      specify 'output should contain corresponding hidden fields' do
+        expect(subject).to have_tag('input', with: { type: 'hidden' }, count: projects.size)
+      end
+
+      specify 'checkboxes should have the correct classes' do
+        expect(
+          parsed_subject
+            .css("input[type='checkbox']")
+            .map { |element| element['class'] }
+        ).to all(eql('govuk-checkbox'))
+      end
+
+      specify 'checkboxes should be have the correct label contents' do
+        projects.each do |project|
+          expect(subject).to have_tag('label', text: project.name, with: { class: 'govuk-label' })
+        end
+      end
+
+      specify 'checkboxes labels should be associated with the corresponding input' do
+        parsed_subject.css('.govuk-checkboxes__item').each do |item|
+          input_id = item.at_css("input[type='checkbox']").attribute('id').value
+          label_target = item.at_css('label').attribute('for').value
+
+          expect(input_id).to eql(label_target)
+        end
+      end
 
       context 'hints' do
-        specify 'when a hint is supplied it should be present'
-        specify 'the hint should be associated with the input'
+        subject do
+          builder.send(method, attribute) do
+            builder.safe_join([
+              projects.map do |p|
+                builder.govuk_check_box(attribute, p.name, hint: p.description)
+              end
+            ])
+          end
+        end
+
+        specify 'when a hint is supplied it should be present' do
+          expect(subject).to have_tag('span', with: { class: 'govuk-hint' }, count: projects_with_descriptions.size)
+        end
+
+        specify 'the hint should be associated with the input' do
+          parsed_subject.css('.govuk-checkboxes__item').each do |item|
+            next unless described_by = item.at_css("input[type='checkbox']").attribute('aria-describedby')
+
+            input_described_by = described_by.value
+            hint_id = item.at_css('.govuk-hint').attribute('id').value
+
+            expect(hint_id).to eql(input_described_by)
+          end
+        end
+
+        specify 'hints should contain the correct text' do
+          projects.map(&:description).compact.each do |description|
+            expect(subject).to have_tag('span', with: { class: 'govuk-hint' }, text: description)
+          end
+        end
       end
     end
   end

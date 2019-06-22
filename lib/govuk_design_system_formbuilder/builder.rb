@@ -131,7 +131,7 @@ module GOVUKDesignSystemFormBuilder
       end
     end
 
-    # only intended for use inside a #govuk_check_boxs_fieldset
+    # only intended for use inside a #govuk_check_boxes_fieldset
     def govuk_check_box(attribute_name, value, hint: {}, label: {})
       Elements::CheckBox::FieldsetCheckBox.new(self, object_name, attribute_name, value, hint: hint, label: label).html do
         (yield if block_given?)

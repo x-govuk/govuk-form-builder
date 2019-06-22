@@ -16,7 +16,15 @@ module GOVUKDesignSystemFormBuilder
             @builder.safe_join(
               [
                 input,
-                Elements::Label.new(@builder, @object_name, @attribute_name, @label).html,
+                Elements::Label.new(
+                  @builder,
+                  @object_name,
+                  @attribute_name,
+                  **@label.merge(
+                    value: @value.parameterize,
+                    text: @value
+                  )
+                ).html,
                 Elements::Hint.new(@builder, @object_name, @attribute_name, id: hint_id, class: check_box_hint_classes, text: @hint).html,
                 conditional_content
               ]
@@ -30,6 +38,7 @@ module GOVUKDesignSystemFormBuilder
           @builder.check_box(
             @attribute_name,
             id: attribute_descriptor,
+            class: check_box_classes,
             aria: { describedby: hint_id },
             data: { 'aria-controls' => @conditional_id }
           )
@@ -55,6 +64,10 @@ module GOVUKDesignSystemFormBuilder
           return nil unless @hint.present?
 
           [@object_name, @attribute_name, @value, 'hint'].join('-').parameterize
+        end
+
+        def check_box_classes
+          %w(govuk-checkbox)
         end
 
         def check_box_hint_classes
