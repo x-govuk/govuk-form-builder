@@ -137,8 +137,8 @@ module GOVUKDesignSystemFormBuilder
       end
     end
 
-    def govuk_submit(text)
-      Elements::Submit.new(self, text).html
+    def govuk_submit(text = 'Continue', warning: false, secondary: false, prevent_double_click: true)
+      Elements::Submit.new(self, text, warning: warning, secondary: secondary, prevent_double_click: prevent_double_click).html
     end
 
   private
