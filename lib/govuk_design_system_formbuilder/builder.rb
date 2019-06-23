@@ -137,6 +137,10 @@ module GOVUKDesignSystemFormBuilder
       end
     end
 
+    def govuk_submit(text)
+      Elements::Submit.new(self, text).html
+    end
+
   private
 
     def govuk_generic_text_field(attribute_name, builder_method, label: nil, hint: nil, width: nil, **args)
