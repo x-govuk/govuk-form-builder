@@ -143,6 +143,12 @@ module GOVUKDesignSystemFormBuilder
       end
     end
 
+    def govuk_date_field(attribute_name, hint: {}, legend: {})
+      Elements::Date.new(self, object_name, attribute_name, hint: hint, legend: legend).html do
+        (yield if block_given?)
+      end
+    end
+
   private
 
     def govuk_generic_text_field(attribute_name, builder_method, label: nil, hint: nil, width: nil, **args)
