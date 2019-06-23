@@ -316,5 +316,55 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
     end
+
+    context 'conditionally revealing content' do
+      let(:data_aria_controls) { parsed_subject.at_css("input[type='checkbox']").attribute('data-aria-controls') }
+
+      context 'when a block is given' do
+        subject do
+          builder.send(method, attribute) do
+            builder.safe_join([
+              builder.govuk_check_box(attribute, project_x.name) do
+                builder.govuk_text_field(:project_responsibilities)
+              end
+            ])
+          end
+        end
+
+        specify 'should include content provided in the block in a conditional div' do
+          expect(subject).to have_tag('div', with: { class: 'govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden' }) do |cd|
+            expect(cd).to have_tag('label', with: { class: 'govuk-label' }, text: 'Project_responsibilities')
+            expect(cd).to have_tag('input', with: { type: 'text' })
+          end
+        end
+
+        specify "the data-aria-controls attribute should match the conditional block's id" do
+          conditional_id = parsed_subject.at_css('div.govuk-checkboxes__conditional')['id']
+          expect(data_aria_controls.value).to eql(conditional_id)
+        end
+
+        specify 'conditional_id contains the object, attribute and value name' do
+          expect(data_aria_controls.value).to eql('person-projects-project-x-conditional')
+        end
+      end
+
+      context 'when no block is given' do
+        subject do
+          builder.send(method, attribute) do
+            builder.safe_join([
+              builder.govuk_check_box(attribute, project_x.name)
+            ])
+          end
+        end
+
+        specify "the data-aria-controls attribute should be blank" do
+          expect(data_aria_controls).to be_nil
+        end
+
+        specify "the conditional container should not be present" do
+          expect(subject).not_to have_tag('.govuk-checkboxes__conditional')
+        end
+      end
+    end
   end
 end
