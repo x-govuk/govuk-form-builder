@@ -1,7 +1,7 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
-    module CheckBox
-      class FieldsetCheckBox < Radio
+    module Radios
+      class FieldsetRadio < Radio
         def initialize(builder, object_name, attribute_name, value, label:, hint:)
           super(builder, object_name, attribute_name)
           @value = value
@@ -12,20 +12,12 @@ module GOVUKDesignSystemFormBuilder
         def html(&block)
           @conditional_content, @conditional_id = process(block)
 
-          @builder.content_tag('div', class: 'govuk-checkboxes__item') do
+          @builder.content_tag('div', class: 'govuk-radios__item') do
             @builder.safe_join(
               [
                 input,
-                Elements::Label.new(
-                  @builder,
-                  @object_name,
-                  @attribute_name,
-                  **@label.merge(
-                    value: @value.parameterize,
-                    text: @value
-                  )
-                ).html,
-                Elements::Hint.new(@builder, @object_name, @attribute_name, id: hint_id, class: check_box_hint_classes, text: @hint).html,
+                Elements::Label.new(@builder, @object_name, @attribute_name, @label).html,
+                Elements::Hint.new(@builder, @object_name, @attribute_name, id: hint_id, class: radio_hint_classes, text: @hint).html,
                 conditional_content
               ]
             )
@@ -35,10 +27,10 @@ module GOVUKDesignSystemFormBuilder
       private
 
         def input
-          @builder.check_box(
+          @builder.radio_button(
             @attribute_name,
+            @value,
             id: attribute_descriptor,
-            class: check_box_classes,
             aria: { describedby: hint_id },
             data: { 'aria-controls' => @conditional_id }
           )
@@ -57,21 +49,7 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def conditional_classes
-          %w(govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden)
-        end
-
-        def hint_id
-          return nil unless @hint.present?
-
-          [@object_name, @attribute_name, @value, 'hint'].join('-').parameterize
-        end
-
-        def check_box_classes
-          %w(govuk-checkbox)
-        end
-
-        def check_box_hint_classes
-          %w(govuk-hint govuk-checkboxes__hint)
+          %w(govuk-radios__conditional govuk-radios__conditional--hidden)
         end
       end
     end

@@ -1,6 +1,6 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
-    module RadioButton
+    module Radios
       class CollectionRadio < Radio
         def initialize(builder, object_name, attribute_name, item, value_method, text_method, hint_method)
           super(builder, object_name, attribute_name)

@@ -288,7 +288,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           builder.send(method, attribute) do
             builder.safe_join([
               projects.map do |p|
-                builder.govuk_check_box(attribute, p.name, hint: p.description)
+                builder.govuk_check_box(attribute, p.name, hint: { text: p.description })
               end
             ])
           end

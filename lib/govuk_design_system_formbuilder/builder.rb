@@ -65,7 +65,7 @@ module GOVUKDesignSystemFormBuilder
                   Containers::Radios.new(self, inline: options.dig(:inline)).html do
                     safe_join(
                       collection.map do |item|
-                        Elements::RadioButton::CollectionRadio.new(self, object_name, attribute_name, item, value_method, text_method, hint_method).html
+                        Elements::Radios::CollectionRadio.new(self, object_name, attribute_name, item, value_method, text_method, hint_method).html
                       end
                     )
                   end
@@ -94,7 +94,7 @@ module GOVUKDesignSystemFormBuilder
 
     # only intended for use inside a #govuk_radio_buttons_fieldset
     def govuk_radio_button(attribute_name, value, hint: {}, label: {})
-      Elements::RadioButton::FieldsetRadio.new(self, object_name, attribute_name, value, hint: hint, label: label).html do
+      Elements::Radios::FieldsetRadio.new(self, object_name, attribute_name, value, hint: hint, label: label).html do
         (yield if block_given?)
       end
     end
@@ -108,7 +108,7 @@ module GOVUKDesignSystemFormBuilder
             (yield if block_given?),
             Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: hint_element.hint_id).html do
               collection_check_boxes(attribute_name, collection, value_method, text_method) do |check_box|
-                Elements::CheckBox::CollectionCheckBox.new(self, attribute_name, check_box, hint_method).html
+                Elements::CheckBoxes::CollectionCheckBox.new(self, attribute_name, check_box, hint_method).html
               end
             end
           ]
@@ -132,7 +132,7 @@ module GOVUKDesignSystemFormBuilder
     end
 
     def govuk_check_box(attribute_name, value, hint: {}, label: {})
-      Elements::CheckBox::FieldsetCheckBox.new(self, object_name, attribute_name, value, hint: hint, label: label).html do
+      Elements::CheckBox.new(self, object_name, attribute_name, value, hint: hint, label: label).html do
         (yield if block_given?)
       end
     end

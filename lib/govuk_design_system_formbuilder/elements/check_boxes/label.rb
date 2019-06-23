@@ -1,6 +1,6 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
-    module CheckBox
+    module CheckBoxes
       class Label
         def initialize(builder)
           @builder = builder

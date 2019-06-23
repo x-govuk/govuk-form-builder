@@ -1,6 +1,6 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
-    module CheckBox
+    module CheckBoxes
       class CollectionCheckBox < GOVUKDesignSystemFormBuilder::Base
         def initialize(builder, attribute, checkbox, hint_method = nil)
           @builder  = builder

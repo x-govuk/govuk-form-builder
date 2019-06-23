@@ -1,6 +1,6 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
-    module CheckBox
+    module CheckBoxes
       class Hint
         def initialize(builder, attribute, checkbox, text)
           @builder = builder
