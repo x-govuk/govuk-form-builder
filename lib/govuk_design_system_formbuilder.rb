@@ -22,7 +22,7 @@ require 'govuk_design_system_formbuilder/containers/check_boxes'
 
 module GOVUKDesignSystemFormBuilder
   class FormBuilder < ActionView::Helpers::FormBuilder
-    delegate :content_tag, :tag, :safe_join, :safe_concat, :capture, to: :@template
+    delegate :content_tag, :tag, :safe_join, :safe_concat, :capture, :link_to, to: :@template
 
     include GOVUKDesignSystemFormBuilder::Builder
   end

@@ -138,7 +138,9 @@ module GOVUKDesignSystemFormBuilder
     end
 
     def govuk_submit(text = 'Continue', warning: false, secondary: false, prevent_double_click: true)
-      Elements::Submit.new(self, text, warning: warning, secondary: secondary, prevent_double_click: prevent_double_click).html
+      Elements::Submit.new(self, text, warning: warning, secondary: secondary, prevent_double_click: prevent_double_click).html do
+        (yield if block_given?)
+      end
     end
 
   private
