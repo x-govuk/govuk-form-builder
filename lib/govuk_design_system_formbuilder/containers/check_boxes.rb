@@ -1,6 +1,6 @@
 module GOVUKDesignSystemFormBuilder
   module Containers
-    class CheckBoxes < GOVUKDesignSystemFormBuilder::Base
+    class CheckBoxes < Base
       def initialize(builder)
         @builder = builder
       end

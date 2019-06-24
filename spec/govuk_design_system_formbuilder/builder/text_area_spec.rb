@@ -3,6 +3,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
   let(:method) { :govuk_text_area }
   let(:attribute) { :cv }
+  let(:label_text) { 'A brief list of your achievements' }
+  let(:hint_text) { 'Keep it to a page, nobody will read it anyway' }
 
   subject { builder.send(method, attribute) }
 
@@ -12,42 +14,125 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
   end
 
+  specify 'should have the correct classes' do
+    expect(subject).to have_tag('textarea', with: { class: 'govuk-textarea' })
+  end
+
   describe 'errors' do
     context 'when the attribute has errors' do
-      specify 'an error message should be displayed'
-      specify 'the textarea element should have the correct error classes'
+      let(:object) { Person.new(cv: 'a' * 50) } # max length is 30
+
+      specify 'an error message should be displayed' do
+        expect(subject).to have_tag('span', with: { class: 'govuk-error-message' }, text: /too long/)
+      end
+
+      specify 'the textarea element should have the correct error classes' do
+        expect(subject).to have_tag('textarea', with: { class: 'govuk-textarea--error' })
+      end
     end
 
     context 'when the attribute has no errors' do
-      specify 'no error messages should be displayed'
+      specify 'no error messages should be displayed' do
+        expect(subject).not_to have_tag('span', with: { class: 'govuk-error-message' })
+      end
     end
   end
 
   describe 'label' do
     context 'when a label is provided' do
-      specify 'the label should be included'
+      subject { builder.send(method, attribute, label: { text: label_text }) }
+
+      specify 'the label should be included' do
+        expect(subject).to have_tag('label', with: { class: 'govuk-label' }, text: label_text)
+      end
     end
 
     context 'when no label is provided' do
-      specify 'the label should have the default value'
+      specify 'the label should have the default value' do
+        expect(subject).to have_tag('label', with: { class: 'govuk-label' }, text: attribute.capitalize)
+      end
     end
   end
 
   describe 'hint' do
     context 'when a hint is provided' do
-      specify 'the hint should be included'
+      subject { builder.send(method, attribute, hint: { text: hint_text }) }
+
+      specify 'the hint should be included' do
+        expect(subject).to have_tag('span', with: { class: 'govuk-hint' }, text: hint_text)
+      end
     end
 
     context 'when no hint is provided' do
-      specify 'no hint should be included'
+      specify 'no hint should be included' do
+        expect(subject).not_to have_tag('span', with: { class: 'govuk-hint' })
+      end
     end
   end
 
   describe 'limits' do
-    context 'max rows'
-    context 'max chars'
-    context 'max chars and max rows' do
-      specify 'should raise an error'
+    context 'max words' do
+      let(:max_words) { 20 }
+      subject { builder.send(method, attribute, max_words: max_words) }
+
+      specify 'should wrap the form group inside a character count tag' do
+        expect(subject).to have_tag(
+          'div',
+          with: {
+            class: 'govuk-character-count',
+            'data-module' => 'character-count',
+            'data-maxwords' => max_words
+          }
+        )
+      end
+
+      specify 'should add js-character-count class to the textarea' do
+        expect(subject).to have_tag('textarea', with: { class: 'js-character-count' })
+      end
+
+      specify 'should add a character count message' do
+        expect(subject).to have_tag(
+          'span',
+          with: { class: 'govuk-character-count__message' },
+          text: "You can enter up to #{max_words} words"
+        )
+      end
+    end
+
+    context 'max chars' do
+      let(:max_chars) { 35 }
+      subject { builder.send(method, attribute, max_chars: max_chars) }
+
+      specify 'should wrap the form group inside a character count tag' do
+        expect(subject).to have_tag(
+          'div',
+          with: {
+            class: 'govuk-character-count',
+            'data-module' => 'character-count',
+            'data-maxlength' => max_chars
+          }
+        )
+      end
+
+      specify 'should add js-character-count class to the textarea' do
+        expect(subject).to have_tag('textarea', with: { class: 'js-character-count' })
+      end
+
+      specify 'should add a character count message' do
+        expect(subject).to have_tag(
+          'span',
+          with: { class: 'govuk-character-count__message' },
+          text: "You can enter up to #{max_chars} characters"
+        )
+      end
+    end
+
+    context 'max chars and max words' do
+      subject { builder.send(method, attribute, max_chars: 5, max_words: 5) }
+
+      specify 'should raise an error' do
+        expect { subject }.to raise_error(ArgumentError, 'limit can be words or chars')
+      end
     end
   end
 

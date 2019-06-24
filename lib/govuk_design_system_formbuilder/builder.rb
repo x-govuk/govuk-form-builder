@@ -20,7 +20,7 @@ module GOVUKDesignSystemFormBuilder
       govuk_generic_text_field(attribute_name, :number_field, hint: hint, label: label, **args)
     end
 
-    def govuk_text_area(attribute_name, hint: {}, label: {}, max_words: nil, max_chars: nil, rows: nil, **args)
+    def govuk_text_area(attribute_name, hint: {}, label: {}, max_words: nil, max_chars: nil, rows: 5, **args)
       Elements::TextArea.new(self, object_name, attribute_name, hint: hint, label: label, max_words: max_words, max_chars: max_chars, rows: rows, **args).html
     end
 

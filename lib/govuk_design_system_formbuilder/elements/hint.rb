@@ -17,7 +17,7 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def hint_classes
-        %w(govuk-hint).push(@extra_classes)
+        %w(govuk-hint).push(@extra_classes).compact
       end
     end
   end
