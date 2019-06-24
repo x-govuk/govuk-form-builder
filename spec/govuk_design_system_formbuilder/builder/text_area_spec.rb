@@ -136,6 +136,23 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
   end
 
+  context 'rows' do
+    context 'defaults' do
+      specify 'should default to 5' do
+        expect(subject).to have_tag('textarea', with: { rows: 5 })
+      end
+    end
+
+    context 'overriding' do
+      let(:rows) { 8 }
+      subject { builder.send(method, attribute, rows: rows) }
+
+      specify 'should have the overriden number of rows' do
+        expect(subject).to have_tag('textarea', with: { rows: rows })
+      end
+    end
+  end
+
   describe 'extra arguments' do
   end
 end

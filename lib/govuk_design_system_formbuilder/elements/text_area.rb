@@ -8,6 +8,7 @@ module GOVUKDesignSystemFormBuilder
         @extra_args = extra_args
         @max_words  = max_words
         @max_chars  = max_chars
+        @rows       = rows
       end
 
       def html
@@ -25,7 +26,7 @@ module GOVUKDesignSystemFormBuilder
                 @builder.text_area(
                   @attribute_name,
                   class: govuk_textarea_classes,
-                  **@extra_args
+                  **@extra_args.merge(rows: @rows)
                 ),
                 character_count_info
               ]
