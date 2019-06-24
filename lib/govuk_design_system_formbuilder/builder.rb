@@ -20,6 +20,10 @@ module GOVUKDesignSystemFormBuilder
       govuk_generic_text_field(attribute_name, :number_field, hint: hint, label: label, **args)
     end
 
+    def govuk_text_area(attribute_name, hint: {}, label: {}, max_words: nil, max_chars: nil, rows: nil, **args)
+      Elements::TextArea.new(self, object_name, attribute_name, hint: hint, label: label, max_words: max_words, max_chars: max_chars, rows: rows, **args).html
+    end
+
     # FIXME #govuk_collection_select args differ from Rails' #collection_select args in that
     # options: and :html_options are keyword arguments. Leaving them as regular args with
     # defaults and following them with keyword args (hint and label) doesn't seem to work
@@ -151,6 +155,7 @@ module GOVUKDesignSystemFormBuilder
 
   private
 
+    # FIXME move most of this to Input
     def govuk_generic_text_field(attribute_name, builder_method, label: nil, hint: nil, width: nil, **args)
       hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
       label_element = Elements::Label.new(self, object_name, attribute_name, label)

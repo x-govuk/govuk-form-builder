@@ -15,6 +15,7 @@ require 'govuk_design_system_formbuilder/elements/check_boxes/label'
 require 'govuk_design_system_formbuilder/elements/check_boxes/hint'
 require 'govuk_design_system_formbuilder/elements/error_message'
 require 'govuk_design_system_formbuilder/elements/submit'
+require 'govuk_design_system_formbuilder/elements/text_area'
 
 require 'govuk_design_system_formbuilder/containers/form_group'
 require 'govuk_design_system_formbuilder/containers/fieldset'
