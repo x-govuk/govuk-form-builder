@@ -1,7 +1,7 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class Date < GOVUKDesignSystemFormBuilder::Base
-      SEGMENTS = {day: '3i', month: '2i', year: '1i'}
+      SEGMENTS = { day: '3i', month: '2i', year: '1i' }
 
       def initialize(builder, object_name, attribute_name, legend:, hint:)
         super(builder, object_name, attribute_name)
@@ -23,6 +23,7 @@ module GOVUKDesignSystemFormBuilder
                     [
                       date_input_group(:day, min: 1, max: 31),
                       date_input_group(:month, min: 1, max: 12),
+                      # FIXME there must be more sensible defaults than this!
                       date_input_group(:year, min: 1900, max: 2100, width: 4)
                     ]
                   )
