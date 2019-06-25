@@ -148,5 +148,35 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         })
       end
     end
+
+    context 'block' do
+      let(:paragraph) { 'A descriptive paragraph all about dates' }
+      subject do
+        builder.send(method, attribute, legend: { text: legend_text }, hint: { text: hint_text }) do
+          builder.tag.p(paragraph, class: 'block-content')
+        end
+      end
+
+      specify 'should add the block content in addition to the other elements' do
+        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
+          expect(fg).to have_tag('input', count: 3)
+          expect(fg).to have_tag('legend', text: legend_text)
+          expect(fg).to have_tag('span', with: { class: 'govuk-hint' }, text: hint_text)
+
+          expect(fg).to have_tag('p', paragraph)
+        end
+      end
+
+      # the block content (p) shold be between the hint (span) and the input container (div)
+      let(:hint_span_selector) { 'span.govuk-hint' }
+      let(:block_paragraph_selector) { 'p.block-content' }
+      let(:govuk_date_selector) { 'div.govuk-date-input' }
+
+      specify 'the block content should be between the hint and the date inputs' do
+        expect(
+          parsed_subject.css([hint_span_selector, block_paragraph_selector, govuk_date_selector].join(',')).map(&:name)
+        ).to eql(%w(span p div))
+      end
+    end
   end
 end

@@ -3,7 +3,7 @@ module GOVUKDesignSystemFormBuilder
     class Date < GOVUKDesignSystemFormBuilder::Base
       SEGMENTS = { day: '3i', month: '2i', year: '1i' }
 
-      def initialize(builder, object_name, attribute_name, legend:, hint:)
+      def initialize(builder, object_name, attribute_name, legend:, hint:, &block)
         super(builder, object_name, attribute_name)
         @legend = legend
         @hint = hint
