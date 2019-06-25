@@ -16,7 +16,7 @@ module GOVUKDesignSystemFormBuilder
             @builder.safe_join(
               [
                 input,
-                Elements::Label.new(@builder, @object_name, @attribute_name, @label).html,
+                Elements::Label.new(@builder, @object_name, @attribute_name, @label.merge(radio: true, value: @value)).html,
                 Elements::Hint.new(@builder, @object_name, @attribute_name, id: hint_id, class: radio_hint_classes, text: @hint).html,
                 conditional_content
               ]
@@ -32,7 +32,8 @@ module GOVUKDesignSystemFormBuilder
             @value,
             id: attribute_descriptor,
             aria: { describedby: hint_id },
-            data: { 'aria-controls' => @conditional_id }
+            data: { 'aria-controls' => @conditional_id },
+            class: %w(govuk-radios__input)
           )
         end
 

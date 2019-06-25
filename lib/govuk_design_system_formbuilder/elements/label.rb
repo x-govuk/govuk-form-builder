@@ -1,13 +1,14 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class Label < GOVUKDesignSystemFormBuilder::Base
-      def initialize(builder, object_name, attribute_name, text: nil, value: nil, size: 'regular', weight: 'regular')
+      def initialize(builder, object_name, attribute_name, text: nil, value: nil, size: 'regular', weight: 'regular', radio: false)
         super(builder, object_name, attribute_name)
 
         @text         = label_text(text)
         @value        = value # used by attribute_descriptor
         @size_class   = label_size_class(size)
         @weight_class = label_weight_class(weight)
+        @radio_class  = radio_class(radio)
       end
 
       def html
@@ -17,7 +18,7 @@ module GOVUKDesignSystemFormBuilder
           @attribute_name,
           @text,
           value: @value,
-          class: %w(govuk-label).push(@size_class, @weight_class).compact
+          class: %w(govuk-label).push(@size_class, @weight_class, @radio_class).compact
         )
       end
 
@@ -25,6 +26,10 @@ module GOVUKDesignSystemFormBuilder
 
       def label_text(option_text)
         [option_text, @value, @attribute_name.capitalize].compact.first
+      end
+
+      def radio_class(radio)
+        radio ? 'govuk-radios__label' : nil
       end
 
       def label_size_class(size)

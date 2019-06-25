@@ -2,6 +2,8 @@ module GOVUKDesignSystemFormBuilder
   module Containers
     class Fieldset < GOVUKDesignSystemFormBuilder::Base
       LEGEND_DEFAULTS = { text: nil, tag: 'h1', size: 'xl' }.freeze
+
+      # FIXME standardise sizes with labels
       LEGEND_SIZES = %w(xl l m s)
 
       def initialize(builder, object_name, attribute_name, legend: {}, described_by: nil)

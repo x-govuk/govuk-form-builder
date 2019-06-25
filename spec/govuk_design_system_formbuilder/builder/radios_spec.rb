@@ -129,14 +129,22 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       specify 'should include block content' do
-        expect(subject).to have_tag('h1', text: block_h1)
-        expect(subject).to have_tag('h2', text: block_h2)
-        expect(subject).to have_tag('p', text: block_p)
+        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
+          expect(fg).to have_tag('div', with: { class: 'govuk-fieldset' }) do |fs|
+            expect(fs).to have_tag('h1', text: block_h1)
+            expect(fs).to have_tag('h2', text: block_h2)
+            expect(fs).to have_tag('p', text: block_p)
+          end
+        end
       end
     end
 
     context 'radio buttons' do
       subject { builder.send(method, attribute, colours, :id, :name) }
+
+      specify 'radio buttons should have the correct classes' do
+        expect(subject).to have_tag('input', with: { class: %w(govuk-radios__input) })
+      end
 
       specify 'output should contain the correct number of radio buttons' do
         expect(subject).to have_tag('input', count: colours.size, with: { type: 'radio' })
@@ -343,6 +351,20 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     context 'label' do
       context 'when a label is provided' do
+        context 'association with the input' do
+          let(:colour) { :red }
+          let(:identifier) { "person_favourite_colour_#{colour}" }
+
+          subject do
+            builder.govuk_radio_button(:favourite_colour, colour)
+          end
+
+          specify 'should contain a label with the correct text' do
+            expect(subject).to have_tag('input', with: { id: identifier })
+            expect(subject).to have_tag('label', with: { for: identifier })
+          end
+        end
+
         context 'with default options' do
           subject do
             builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label })
