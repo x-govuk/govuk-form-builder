@@ -106,6 +106,10 @@ module GOVUKDesignSystemFormBuilder
       end
     end
 
+    def govuk_radio_divider(text = 'or')
+      tag.div(text, class: %w(govuk-radios__divider))
+    end
+
     def govuk_collection_check_boxes(attribute_name, collection, value_method, text_method, hint_method = nil, html_options: {}, hint: {}, legend: {})
       hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
       Containers::FormGroup.new(self, object_name, attribute_name).html do

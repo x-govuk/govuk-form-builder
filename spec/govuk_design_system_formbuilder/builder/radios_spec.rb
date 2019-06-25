@@ -271,7 +271,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       specify 'output should contain radio buttons' do
-        expect(subject).to have_tag('div', with: { class: 'govuk-radios' }) do
+        expect(subject).to have_tag('div', with: { class: 'govuk-radios' }) do |gr|
+          expect(subject).to have_tag('input', with: { type: 'radio' }, count: 2)
         end
       end
 
@@ -297,6 +298,31 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
           specify "should not have the additional class 'govuk-radios--inline'" do
             expect(parsed_subject.at_css('.govuk-radios')['class']).to eql('govuk-radios')
+          end
+        end
+      end
+
+      context 'dividers' do
+        subject do
+          builder.send(method, attribute) do
+            builder.govuk_radio_divider
+          end
+        end
+
+        specify "should output a divider with default 'or' text" do
+          expect(subject).to have_tag('div', text: 'or', with: { class: %w(govuk-radios__divider) })
+        end
+
+        context 'when divider text overridden' do
+          let(:other_text) { 'alternatively' }
+          subject do
+            builder.send(method, attribute) do
+              builder.govuk_radio_divider(other_text)
+            end
+          end
+
+          specify "should output a divider with default 'or' text" do
+            expect(subject).to have_tag('div', text: other_text, with: { class: %w(govuk-radios__divider) })
           end
         end
       end
