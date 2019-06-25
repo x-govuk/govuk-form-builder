@@ -43,7 +43,10 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def input_classes
-        %w(govuk-input).push(width_classes).compact
+        %w(govuk-input).tap do |classes|
+          classes.push(width_classes)
+          classes.push('govuk-input--error') if has_errors?
+        end
       end
 
       def width_classes
