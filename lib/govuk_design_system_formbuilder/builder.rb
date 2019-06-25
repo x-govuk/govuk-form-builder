@@ -1,23 +1,23 @@
 module GOVUKDesignSystemFormBuilder
   module Builder
     def govuk_text_field(attribute_name, hint: {}, label: {}, **args)
-      govuk_generic_text_field(attribute_name, :text_field, hint: hint, label: label, **args)
+      Elements::Input.new(self, object_name, attribute_name, attribute_type: :text, hint: hint, label: label, **args).html
     end
 
     def govuk_phone_field(attribute_name, hint: {}, label: {}, **args)
-      govuk_generic_text_field(attribute_name, :phone_field, hint: hint, label: label, **args)
+      Elements::Input.new(self, object_name, attribute_name, attribute_type: :phone, hint: hint, label: label, **args).html
     end
 
     def govuk_email_field(attribute_name, hint: {}, label: {}, **args)
-      govuk_generic_text_field(attribute_name, :email_field, hint: hint, label: label, **args)
+      Elements::Input.new(self, object_name, attribute_name, attribute_type: :email, hint: hint, label: label, **args).html
     end
 
     def govuk_url_field(attribute_name, hint: {}, label: {}, **args)
-      govuk_generic_text_field(attribute_name, :url_field, hint: hint, label: label, **args)
+      Elements::Input.new(self, object_name, attribute_name, attribute_type: :url, hint: hint, label: label, **args).html
     end
 
     def govuk_number_field(attribute_name, hint: {}, label: {}, **args)
-      govuk_generic_text_field(attribute_name, :number_field, hint: hint, label: label, **args)
+      Elements::Input.new(self, object_name, attribute_name, attribute_type: :number, hint: hint, label: label, **args).html
     end
 
     def govuk_text_area(attribute_name, hint: {}, label: {}, max_words: nil, max_chars: nil, rows: 5, **args)
@@ -155,21 +155,7 @@ module GOVUKDesignSystemFormBuilder
 
   private
 
-    # FIXME move most of this to Input
-    def govuk_generic_text_field(attribute_name, builder_method, label: nil, hint: nil, width: nil, **args)
-      hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
-      label_element = Elements::Label.new(self, object_name, attribute_name, label)
-      error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
-      input_element = Elements::Input.new(self, object_name, attribute_name, width: width, **args.merge(
-        builder_method: builder_method,
-        aria: { describedby: classes_to_str([hint_element.hint_id, error_element.error_id]) }
-      ))
-
-      Containers::FormGroup.new(self, object_name, attribute_name).html do
-        safe_join([label_element, hint_element, error_element, input_element].map(&:html))
-      end
-    end
-
+    # TODO this is duplicated in Base, remove from here
     def classes_to_str(classes)
       if classes.any? && str = classes.compact.join(' ')
         str
