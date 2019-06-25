@@ -27,7 +27,12 @@ module GOVUKDesignSystemFormBuilder
                 @attribute_name,
                 class: input_classes,
                 name: attribute_descriptor,
-                aria: { describedby: classes_to_str([hint_element.hint_id, error_element.error_id]) },
+                aria: {
+                  describedby: [
+                    hint_element.hint_id,
+                    error_element.error_id
+                  ].compact.join(' ').presence
+                },
                 **@extra_args
               )
             ]

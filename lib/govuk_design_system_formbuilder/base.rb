@@ -41,13 +41,5 @@ module GOVUKDesignSystemFormBuilder
         attribute_name: @attribute_name
       }
     end
-
-    def classes_to_str(classes)
-      if classes.any? && str = classes.compact.join(' ')
-        str
-      else
-        nil
-      end
-    end
   end
 end

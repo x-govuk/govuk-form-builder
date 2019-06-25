@@ -48,7 +48,10 @@ module GOVUKDesignSystemFormBuilder
             options,
             html_options.merge(
               aria: {
-                describedby: classes_to_str([hint_element.hint_id, error_element.error_id])
+                describedby: [
+                  hint_element.hint_id,
+                  error_element.error_id
+                ].compact.join(' ').presence
               }
             )
           )
@@ -150,17 +153,6 @@ module GOVUKDesignSystemFormBuilder
     def govuk_date_field(attribute_name, hint: {}, legend: {})
       Elements::Date.new(self, object_name, attribute_name, hint: hint, legend: legend).html do
         (yield if block_given?)
-      end
-    end
-
-  private
-
-    # TODO this is duplicated in Base, remove from here
-    def classes_to_str(classes)
-      if classes.any? && str = classes.compact.join(' ')
-        str
-      else
-        nil
       end
     end
   end
