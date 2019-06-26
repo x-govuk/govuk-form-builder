@@ -178,5 +178,13 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         ).to eql(%w(span p div))
       end
     end
+
+    context 'dates of birth' do
+      context 'auto-completion attributes' do
+        specify "day field should have autocomplete attribute with value 'bday-day'"
+        specify "month field should have autocomplete attribute with value 'bday-month'"
+        specify "year field should have autocomplete attribute with value 'bday-year'"
+      end
+    end
   end
 end
