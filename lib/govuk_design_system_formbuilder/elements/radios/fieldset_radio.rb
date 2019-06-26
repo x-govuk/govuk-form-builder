@@ -7,19 +7,17 @@ module GOVUKDesignSystemFormBuilder
           @value = value
           @label = label
           @hint  = hint
-          @block = block
+          @conditional_content, @conditional_id = wrap_conditional(block) if block_given?
         end
 
         def html
-          @conditional_content, @conditional_id = process(@block)
-
           @builder.content_tag('div', class: 'govuk-radios__item') do
             @builder.safe_join(
               [
                 input,
                 Elements::Label.new(@builder, @object_name, @attribute_name, @label.merge(radio: true, value: @value)).html,
                 Elements::Hint.new(@builder, @object_name, @attribute_name, id: hint_id, class: radio_hint_classes, text: @hint).html,
-                conditional_content
+                @conditional_content
               ]
             )
           end
@@ -38,16 +36,11 @@ module GOVUKDesignSystemFormBuilder
           )
         end
 
-        def conditional_content
-          return nil unless @conditional_content.present?
-
-          @builder.content_tag('div', class: conditional_classes, id: @conditional_id) do
-            @conditional_content
+        def wrap_conditional(block)
+          conditional = @builder.content_tag('div', class: conditional_classes, id: conditional_id) do
+            @builder.capture { block.call }
           end
-        end
-
-        def process(block)
-          return content = block&.call, (content && conditional_id)
+          return conditional, conditional_id
         end
 
         def conditional_classes

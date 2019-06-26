@@ -7,6 +7,7 @@ module GOVUKDesignSystemFormBuilder
         super(builder, object_name, attribute_name)
         @legend = legend
         @hint = hint
+        @block_content = @builder.capture { block.call } if block_given?
       end
 
       def html
@@ -17,7 +18,7 @@ module GOVUKDesignSystemFormBuilder
             @builder.safe_join(
               [
                 hint_element.html,
-                (yield if block_given?),
+                @block_content,
                 @builder.content_tag('div', class: 'govuk-date-input') do
                   @builder.safe_join(
                     [
