@@ -26,7 +26,6 @@ module GOVUKDesignSystemFormBuilder
                 @builder_method,
                 @attribute_name,
                 class: input_classes,
-                name: attribute_descriptor,
                 aria: {
                   describedby: [
                     hint_element.hint_id,

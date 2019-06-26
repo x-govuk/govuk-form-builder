@@ -18,7 +18,7 @@ shared_examples 'a regular input' do |method_identifier, field_type|
   end
 
   specify 'the label should be associated with the input' do
-    input_name = parsed_subject.at_css('input')['name']
+    input_name = parsed_subject.at_css('input')['id']
     label_for = parsed_subject.at_css('label')['for']
     expect(input_name).to eql(label_for)
   end
