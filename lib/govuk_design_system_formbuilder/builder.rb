@@ -100,10 +100,8 @@ module GOVUKDesignSystemFormBuilder
     end
 
     # only intended for use inside a #govuk_radio_buttons_fieldset
-    def govuk_radio_button(attribute_name, value, hint: {}, label: {})
-      Elements::Radios::FieldsetRadio.new(self, object_name, attribute_name, value, hint: hint, label: label).html do
-        (yield if block_given?)
-      end
+    def govuk_radio_button(attribute_name, value, hint: {}, label: {}, &block)
+      Elements::Radios::FieldsetRadio.new(self, object_name, attribute_name, value, hint: hint, label: label, &block).html
     end
 
     def govuk_radio_divider(text = 'or')

@@ -2,15 +2,16 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     module Radios
       class FieldsetRadio < Radio
-        def initialize(builder, object_name, attribute_name, value, label:, hint:)
+        def initialize(builder, object_name, attribute_name, value, label:, hint:, &block)
           super(builder, object_name, attribute_name)
           @value = value
           @label = label
           @hint  = hint
+          @block = block
         end
 
-        def html(&block)
-          @conditional_content, @conditional_id = process(block)
+        def html
+          @conditional_content, @conditional_id = process(@block)
 
           @builder.content_tag('div', class: 'govuk-radios__item') do
             @builder.safe_join(
@@ -46,7 +47,7 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def process(block)
-          return content = block.call, (content && conditional_id)
+          return content = block&.call, (content && conditional_id)
         end
 
         def conditional_classes
