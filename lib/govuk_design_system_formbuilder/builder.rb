@@ -125,27 +125,6 @@ module GOVUKDesignSystemFormBuilder
       end
     end
 
-    def govuk_check_boxes_fieldset(attribute_name, html_options: {}, hint: {}, legend: {})
-      hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
-
-      Containers::FormGroup.new(self, object_name, attribute_name).html do
-        safe_join([
-          hint_element.html,
-          Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: hint_element.hint_id).html do
-            Containers::CheckBoxes.new(self).html do
-              yield
-            end
-          end
-        ])
-      end
-    end
-
-    def govuk_check_box(attribute_name, value, hint: {}, label: {})
-      Elements::CheckBox.new(self, object_name, attribute_name, value, hint: hint, label: label).html do
-        (yield if block_given?)
-      end
-    end
-
     def govuk_submit(text = 'Continue', warning: false, secondary: false, prevent_double_click: true)
       Elements::Submit.new(self, text, warning: warning, secondary: secondary, prevent_double_click: prevent_double_click).html do
         (yield if block_given?)
