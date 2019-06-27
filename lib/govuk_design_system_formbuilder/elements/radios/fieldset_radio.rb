@@ -36,13 +36,6 @@ module GOVUKDesignSystemFormBuilder
           )
         end
 
-        def wrap_conditional(block)
-          conditional = @builder.content_tag('div', class: conditional_classes, id: conditional_id) do
-            @builder.capture { block.call }
-          end
-          return conditional, conditional_id
-        end
-
         def conditional_classes
           %w(govuk-radios__conditional govuk-radios__conditional--hidden)
         end
