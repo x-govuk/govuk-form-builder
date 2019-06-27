@@ -15,7 +15,7 @@ module GOVUKDesignSystemFormBuilder
           @builder.content_tag('div', class: 'govuk-checkboxes__item') do
             @builder.safe_join(
               [
-                @checkbox.check_box(class: "govuk-checkboxes_input", aria: { describedby: hint.id }),
+                @checkbox.check_box(class: "govuk-checkboxes__input", aria: { describedby: hint.id }),
                 Label.new(@checkbox).html,
                 hint.html
               ]
