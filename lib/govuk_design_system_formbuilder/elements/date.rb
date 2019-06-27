@@ -3,10 +3,11 @@ module GOVUKDesignSystemFormBuilder
     class Date < GOVUKDesignSystemFormBuilder::Base
       SEGMENTS = { day: '3i', month: '2i', year: '1i' }
 
-      def initialize(builder, object_name, attribute_name, legend:, hint:, &block)
+      def initialize(builder, object_name, attribute_name, legend:, hint:, date_of_birth: false, &block)
         super(builder, object_name, attribute_name)
         @legend = legend
         @hint = hint
+        @date_of_birth = date_of_birth
         @block_content = @builder.capture { block.call } if block_given?
       end
 
@@ -58,7 +59,8 @@ module GOVUKDesignSystemFormBuilder
                   min: min,
                   max: max,
                   step: 1,
-                  value: value
+                  value: value,
+                  autocomplete: date_of_birth_autocomplete_value(segment)
                 )
               ]
             )
@@ -84,6 +86,12 @@ module GOVUKDesignSystemFormBuilder
           attribute_name: @attribute_name,
           segment: SEGMENTS.fetch(segment)
         }
+      end
+
+      def date_of_birth_autocomplete_value(segment)
+        return nil unless @date_of_birth
+
+        { day: 'bday-day', month: 'bday-month', year: 'bday-year' }.fetch(segment)
       end
     end
   end

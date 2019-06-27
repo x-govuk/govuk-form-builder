@@ -131,8 +131,8 @@ module GOVUKDesignSystemFormBuilder
       end
     end
 
-    def govuk_date_field(attribute_name, hint: {}, legend: {}, &block)
-      Elements::Date.new(self, object_name, attribute_name, hint: hint, legend: legend, &block).html
+    def govuk_date_field(attribute_name, hint: {}, legend: {}, date_of_birth: false, &block)
+      Elements::Date.new(self, object_name, attribute_name, hint: hint, legend: legend, date_of_birth: date_of_birth, &block).html
     end
   end
 end
