@@ -19,7 +19,7 @@ module GOVUKDesignSystemFormBuilder
     def error_id
       return nil unless has_errors?
 
-      [@object_name, @attribute_name, 'error'].join('-').parameterize
+      [@object_name, @attribute_name, 'error'].compact.join('-').parameterize
     end
 
     def conditional_id

@@ -155,11 +155,15 @@ module GOVUKDesignSystemFormBuilder
 
     def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, options: { inline: false }, html_options: {}, hint_text: nil, legend: {})
       hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint_text)
+      error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
+
       Containers::FormGroup.new(self, object_name, attribute_name).html do
         safe_join(
           [
             hint_element.html,
-            Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: hint_element.hint_id).html do
+            error_element.html,
+
+            Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
               safe_join(
                 [
                   (yield if block_given?),

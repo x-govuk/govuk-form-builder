@@ -65,9 +65,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       specify 'the hint should be associated with the input' do
-        select_aria_describedby = parsed_subject.at_css('select')['aria-describedby']
+        select_aria_describedby = parsed_subject.at_css('select')['aria-describedby'].split
         hint_id = parsed_subject.at_css('span.govuk-hint')['id']
-        expect(select_aria_describedby).to eql(hint_id)
+        expect(select_aria_describedby).to include(hint_id)
       end
     end
 

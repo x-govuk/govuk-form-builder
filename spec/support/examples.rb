@@ -5,6 +5,7 @@ class Person
   attr_accessor(:cv)
 
   validates :name, presence: true
+  validates :favourite_colour, presence: true
   validates :cv, length: { maximum: 30 }
 end
 
