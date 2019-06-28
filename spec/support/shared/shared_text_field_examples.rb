@@ -35,7 +35,7 @@ shared_examples 'a regular input' do |method_identifier, field_type|
 
   context 'when a hint is provided' do
     let(:hint) { "You'll find it on your passport" }
-    subject { builder.send(method, :name, hint: { text: hint }) }
+    subject { builder.send(method, :name, hint_text: hint) }
 
     specify 'output should contain a hint' do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|

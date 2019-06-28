@@ -50,7 +50,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     context 'when a hint is provided' do
       let(:hint) { 'The colour of your favourite handkerchief' }
-      subject { builder.send(method, attribute, colours, :id, :name, hint: { text: hint }) }
+      subject { builder.send(method, attribute, colours, :id, :name, hint_text: hint) }
 
       specify 'output should contain a hint' do
         expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|

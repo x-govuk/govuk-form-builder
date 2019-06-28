@@ -1,10 +1,10 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class TextArea < Base
-      def initialize(builder, object_name, attribute_name, hint:, label:, rows:, max_words:, max_chars:, **extra_args)
+      def initialize(builder, object_name, attribute_name, hint_text:, label:, rows:, max_words:, max_chars:, **extra_args)
         super(builder, object_name, attribute_name)
         @label      = label
-        @hint       = hint
+        @hint_text  = hint_text
         @extra_args = extra_args
         @max_words  = max_words
         @max_chars  = max_chars
@@ -12,7 +12,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        hint_element  = Elements::Hint.new(@builder, @object_name, @attribute_name, @hint)
+        hint_element  = Elements::Hint.new(@builder, @object_name, @attribute_name, @hint_text)
         label_element = Elements::Label.new(@builder, @object_name, @attribute_name, @label)
         error_element = Elements::ErrorMessage.new(@builder, @object_name, @attribute_name)
 

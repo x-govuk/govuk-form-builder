@@ -3,16 +3,16 @@ module GOVUKDesignSystemFormBuilder
     class Date < GOVUKDesignSystemFormBuilder::Base
       SEGMENTS = { day: '3i', month: '2i', year: '1i' }
 
-      def initialize(builder, object_name, attribute_name, legend:, hint:, date_of_birth: false, &block)
+      def initialize(builder, object_name, attribute_name, legend:, hint_text:, date_of_birth: false, &block)
         super(builder, object_name, attribute_name)
         @legend = legend
-        @hint = hint
+        @hint_text = hint_text
         @date_of_birth = date_of_birth
         @block_content = @builder.capture { block.call }.html_safe if block_given?
       end
 
       def html
-        hint_element  = Elements::Hint.new(@builder, @object_name, @attribute_name, @hint)
+        hint_element  = Elements::Hint.new(@builder, @object_name, @attribute_name, @hint_text)
 
         Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
           Containers::Fieldset.new(@builder, @object_name, @attribute_name, legend: @legend, described_by: hint_element.hint_id).html do

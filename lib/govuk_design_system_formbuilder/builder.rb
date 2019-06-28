@@ -13,11 +13,11 @@ module GOVUKDesignSystemFormBuilder
     # @example A required full name field with a placeholder
     #   = govuk_text_field :name,
     #     label: { text: 'Full name' },
-    #     hint: { text: 'It says it on your birth certificate' },
+    #     hint_text: 'It says it on your birth certificate',
     #     required: true,
     #     placeholder: 'Ralph Wiggum'
-    def govuk_text_field(attribute_name, hint: {}, label: {}, **args)
-      Elements::Input.new(self, object_name, attribute_name, attribute_type: :text, hint: hint, label: label, **args).html
+    def govuk_text_field(attribute_name, hint_text: nil, label: {}, **args)
+      Elements::Input.new(self, object_name, attribute_name, attribute_type: :text, hint_text: hint_text, label: label, **args).html
     end
 
     # Generates a input of type `tel`
@@ -32,11 +32,11 @@ module GOVUKDesignSystemFormBuilder
     # @example A required phone number field with a placeholder
     #   = govuk_phone_field :phone_number,
     #     label: { text: 'UK telephone number' },
-    #     hint: { text: 'Include the dialling code' },
+    #     hint_text: 'Include the dialling code',
     #     required: true,
     #     placeholder: '0123 456 789'
-    def govuk_phone_field(attribute_name, hint: {}, label: {}, **args)
-      Elements::Input.new(self, object_name, attribute_name, attribute_type: :phone, hint: hint, label: label, **args).html
+    def govuk_phone_field(attribute_name, hint_text: nil, label: {}, **args)
+      Elements::Input.new(self, object_name, attribute_name, attribute_type: :phone, hint_text: hint_text, label: label, **args).html
     end
 
     # Generates a input of type `email`
@@ -52,8 +52,8 @@ module GOVUKDesignSystemFormBuilder
     #   = govuk_email_field :email_address,
     #     label: { text: 'Enter your email address' },
     #     placeholder: 'ralph.wiggum@springfield.edu'
-    def govuk_email_field(attribute_name, hint: {}, label: {}, **args)
-      Elements::Input.new(self, object_name, attribute_name, attribute_type: :email, hint: hint, label: label, **args).html
+    def govuk_email_field(attribute_name, hint_text: nil, label: {}, **args)
+      Elements::Input.new(self, object_name, attribute_name, attribute_type: :email, hint_text: hint_text, label: label, **args).html
     end
 
     # Generates a input of type `url`
@@ -70,8 +70,8 @@ module GOVUKDesignSystemFormBuilder
     #     label: { text: 'Enter your favourite website' },
     #     placeholder: 'https://www.gov.uk',
     #     autocomplete: 'url'
-    def govuk_url_field(attribute_name, hint: {}, label: {}, **args)
-      Elements::Input.new(self, object_name, attribute_name, attribute_type: :url, hint: hint, label: label, **args).html
+    def govuk_url_field(attribute_name, hint_text: nil, label: {}, **args)
+      Elements::Input.new(self, object_name, attribute_name, attribute_type: :url, hint_text: hint_text, label: label, **args).html
     end
 
     # Generates a input of type `number`
@@ -90,8 +90,8 @@ module GOVUKDesignSystemFormBuilder
     #     min: 80,
     #     max: 150,
     #     step: 5
-    def govuk_number_field(attribute_name, hint: {}, label: {}, **args)
-      Elements::Input.new(self, object_name, attribute_name, attribute_type: :number, hint: hint, label: label, **args).html
+    def govuk_number_field(attribute_name, hint_text: nil, label: {}, **args)
+      Elements::Input.new(self, object_name, attribute_name, attribute_type: :number, hint_text: hint_text, label: label, **args).html
     end
 
 
@@ -114,16 +114,16 @@ module GOVUKDesignSystemFormBuilder
     #     label: { text: 'Tell us about your work history' },
     #     rows: 8,
     #     max_words: 300
-    def govuk_text_area(attribute_name, hint: {}, label: {}, max_words: nil, max_chars: nil, rows: 5, **args)
-      Elements::TextArea.new(self, object_name, attribute_name, hint: hint, label: label, max_words: max_words, max_chars: max_chars, rows: rows, **args).html
+    def govuk_text_area(attribute_name, hint_text: nil, label: {}, max_words: nil, max_chars: nil, rows: 5, **args)
+      Elements::TextArea.new(self, object_name, attribute_name, hint_text: hint_text, label: label, max_words: max_words, max_chars: max_chars, rows: rows, **args).html
     end
 
     # FIXME #govuk_collection_select args differ from Rails' #collection_select args in that
     # options: and :html_options are keyword arguments. Leaving them as regular args with
     # defaults and following them with keyword args (hint and label) doesn't seem to work
-    def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, html_options: {}, hint: {}, label: {})
+    def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, html_options: {}, hint_text: nil, label: {})
       label_element = Elements::Label.new(self, object_name, attribute_name, label)
-      hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
+      hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint_text)
       error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
 
       Containers::FormGroup.new(self, object_name, attribute_name).html do
@@ -153,8 +153,8 @@ module GOVUKDesignSystemFormBuilder
       end
     end
 
-    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, options: { inline: false }, html_options: {}, hint: {}, legend: {})
-      hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
+    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, options: { inline: false }, html_options: {}, hint_text: nil, legend: {})
+      hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint_text)
       Containers::FormGroup.new(self, object_name, attribute_name).html do
         safe_join(
           [
@@ -178,8 +178,8 @@ module GOVUKDesignSystemFormBuilder
       end
     end
 
-    def govuk_radio_buttons_fieldset(attribute_name, options: { inline: false }, hint: {}, legend: {})
-      hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
+    def govuk_radio_buttons_fieldset(attribute_name, options: { inline: false }, hint_text: nil, legend: {})
+      hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint_text)
 
       Containers::FormGroup.new(self, object_name, attribute_name).html do
         safe_join([
@@ -194,16 +194,16 @@ module GOVUKDesignSystemFormBuilder
     end
 
     # only intended for use inside a #govuk_radio_buttons_fieldset
-    def govuk_radio_button(attribute_name, value, hint: {}, label: {}, &block)
-      Elements::Radios::FieldsetRadio.new(self, object_name, attribute_name, value, hint: hint, label: label, &block).html
+    def govuk_radio_button(attribute_name, value, hint_text: nil, label: {}, &block)
+      Elements::Radios::FieldsetRadio.new(self, object_name, attribute_name, value, hint_text: hint_text, label: label, &block).html
     end
 
     def govuk_radio_divider(text = 'or')
       tag.div(text, class: %w(govuk-radios__divider))
     end
 
-    def govuk_collection_check_boxes(attribute_name, collection, value_method, text_method, hint_method = nil, html_options: {}, hint: {}, legend: {})
-      hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
+    def govuk_collection_check_boxes(attribute_name, collection, value_method, text_method, hint_method = nil, html_options: {}, hint_text: nil, legend: {})
+      hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint_text)
       Containers::FormGroup.new(self, object_name, attribute_name).html do
         Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: hint_element.hint_id).html do
           safe_join(
@@ -223,8 +223,8 @@ module GOVUKDesignSystemFormBuilder
       Elements::Submit.new(self, text, warning: warning, secondary: secondary, prevent_double_click: prevent_double_click, &block).html
     end
 
-    def govuk_date_field(attribute_name, hint: {}, legend: {}, date_of_birth: false, &block)
-      Elements::Date.new(self, object_name, attribute_name, hint: hint, legend: legend, date_of_birth: date_of_birth, &block).html
+    def govuk_date_field(attribute_name, hint_text: nil, legend: {}, date_of_birth: false, &block)
+      Elements::Date.new(self, object_name, attribute_name, hint_text: hint_text, legend: legend, date_of_birth: date_of_birth, &block).html
     end
   end
 end

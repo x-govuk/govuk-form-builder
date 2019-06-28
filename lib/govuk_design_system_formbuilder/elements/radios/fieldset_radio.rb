@@ -1,12 +1,12 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     module Radios
-      class FieldsetRadio < Radio
-        def initialize(builder, object_name, attribute_name, value, label:, hint:, &block)
+      class FieldsetRadio < Base
+        def initialize(builder, object_name, attribute_name, value, label:, hint_text:, &block)
           super(builder, object_name, attribute_name)
           @value = value
           @label = label
-          @hint  = hint
+          @hint_text  = hint_text
           @conditional_content, @conditional_id = wrap_conditional(block) if block_given?
         end
 
@@ -15,8 +15,8 @@ module GOVUKDesignSystemFormBuilder
             @builder.safe_join(
               [
                 input,
-                Elements::Label.new(@builder, @object_name, @attribute_name, @label.merge(radio: true, value: @value)).html,
-                Elements::Hint.new(@builder, @object_name, @attribute_name, id: hint_id, class: radio_hint_classes, text: @hint).html,
+                Elements::Label.new(@builder, @object_name, @attribute_name, radio: true, value: @value, **@label).html,
+                Elements::Hint.new(@builder, @object_name, @attribute_name, @hint_text, radio: true).html,
                 @conditional_content
               ]
             )

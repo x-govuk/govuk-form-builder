@@ -101,7 +101,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     context 'hint' do
       context 'when a hint is supplied' do
-        subject { builder.send(method, attribute, hint: { text: hint_text }) }
+        subject { builder.send(method, attribute, hint_text: hint_text) }
         specify 'hint should be present' do
           expect(subject).to have_tag('span', text: hint_text, with: { class: %w(govuk-hint) })
         end
@@ -152,7 +152,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     context 'block' do
       let(:paragraph) { 'A descriptive paragraph all about dates' }
       subject do
-        builder.send(method, attribute, legend: { text: legend_text }, hint: { text: hint_text }) do
+        builder.send(method, attribute, legend: { text: legend_text }, hint_text: hint_text) do
           builder.tag.p(paragraph, class: 'block-content')
         end
       end

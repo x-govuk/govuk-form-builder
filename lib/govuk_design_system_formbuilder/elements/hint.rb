@@ -1,23 +1,32 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class Hint < GOVUKDesignSystemFormBuilder::Base
-      def initialize(builder, object_name, attribute_name, options = {})
+      def initialize(builder, object_name, attribute_name, text, value = nil, radio: false, checkbox: false)
         super(builder, object_name, attribute_name)
-        @text = options&.dig(:text)
-        @extra_classes = options&.dig(:class)
-        @hint_id = options&.dig(:id)
+        @value = value
+        @hint_text  = text
+        @radio_class = radio_class(radio)
+        @checkbox_class = checkbox_class(checkbox)
       end
 
       def html
-        return nil unless @text.present?
+        return nil unless @hint_text.present?
 
-        @builder.tag.span(@text, class: hint_classes, id: hint_id)
+        @builder.tag.span(@hint_text, class: hint_classes, id: hint_id)
       end
 
     private
 
       def hint_classes
-        %w(govuk-hint).push(@extra_classes).compact
+        %w(govuk-hint).push(@radio_class, @checkbox_class).compact
+      end
+
+      def radio_class(radio)
+        radio ? 'govuk-radios__hint' : nil
+      end
+
+      def checkbox_class(checkbox)
+        checkbox ? 'govuk-checkboxes__hint' : nil
       end
     end
   end

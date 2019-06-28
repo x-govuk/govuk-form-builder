@@ -11,9 +11,9 @@ module GOVUKDesignSystemFormBuilder
     end
 
     def hint_id
-      return nil unless @text.present?
+      return nil unless @hint_text.present?
 
-      @hint_id || [@object_name, @attribute_name, 'hint'].join('-').parameterize
+      [@object_name, @attribute_name, @value, 'hint'].compact.join('-').parameterize
     end
 
     def error_id
@@ -23,7 +23,7 @@ module GOVUKDesignSystemFormBuilder
     end
 
     def conditional_id
-      [@object_name, @attribute_name, @value, 'conditional'].join('-').parameterize
+      [@object_name, @attribute_name, @value, 'conditional'].compact.join('-').parameterize
     end
 
     def has_errors?

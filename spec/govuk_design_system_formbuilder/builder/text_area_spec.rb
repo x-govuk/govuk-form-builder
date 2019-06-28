@@ -56,7 +56,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
   describe 'hint' do
     context 'when a hint is provided' do
-      subject { builder.send(method, attribute, hint: { text: hint_text }) }
+      subject { builder.send(method, attribute, hint_text: hint_text) }
 
       specify 'the hint should be included' do
         expect(subject).to have_tag('span', with: { class: 'govuk-hint' }, text: hint_text)

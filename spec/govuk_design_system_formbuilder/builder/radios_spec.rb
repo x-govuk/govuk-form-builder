@@ -95,7 +95,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     context 'when a hint is provided' do
       let(:hint) { 'The colour of your favourite handkerchief' }
-      subject { builder.send(method, attribute, colours, :id, :name, hint: { text: hint }) }
+      subject { builder.send(method, attribute, colours, :id, :name, hint_text: hint) }
 
       specify 'output should contain a hint' do
         expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
@@ -400,7 +400,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     context 'when a hint is provided' do
       subject do
-        builder.govuk_radio_button(:favourite_colour, :red, hint: red_hint)
+        builder.govuk_radio_button(:favourite_colour, :red, hint_text: red_hint)
       end
 
       specify 'should contain a label with the correct text' do
