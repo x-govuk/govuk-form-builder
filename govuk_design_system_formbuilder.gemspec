@@ -22,5 +22,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'govuk-lint', "~> 0"
 
   s.add_development_dependency "pry", "~> 0.12.2"
-  s.add_development_dependency "pry-byebug", "~> 3.7.0"
+  s.add_development_dependency "pry-byebug", "~> 3.7", ">= 3.7.0"
 end
