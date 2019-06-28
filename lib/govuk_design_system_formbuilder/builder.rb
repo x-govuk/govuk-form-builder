@@ -1,25 +1,119 @@
 module GOVUKDesignSystemFormBuilder
   module Builder
+
+    # Generates a input of type `text`
+    #
+    # @param attribute_name [Symbol] The name of the attribute
+    # @param [Hash] label configures the associated label
+    # @option label text [String] the label text
+    # @option label size [String] the size of the label font, can be +large+, +medium+, +regular+ or +small+
+    # @option label weight [String] the weight of the label font, can be +bold+ or +regular+
+    # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    #
+    # @example A required full name field with a placeholder
+    #   = govuk_text_field :name,
+    #     label: { text: 'Full name' },
+    #     hint: { text: 'It says it on your birth certificate' },
+    #     required: true,
+    #     placeholder: 'Ralph Wiggum'
     def govuk_text_field(attribute_name, hint: {}, label: {}, **args)
       Elements::Input.new(self, object_name, attribute_name, attribute_type: :text, hint: hint, label: label, **args).html
     end
 
+    # Generates a input of type `tel`
+    #
+    # @param attribute_name [Symbol] The name of the attribute
+    # @param [Hash] label configures the associated label
+    # @option label text [String] the label text
+    # @option label size [String] the size of the label font, can be +large+, +medium+, +regular+ or +small+
+    # @option label weight [String] the weight of the label font, can be +bold+ or +regular+
+    # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    #
+    # @example A required phone number field with a placeholder
+    #   = govuk_phone_field :phone_number,
+    #     label: { text: 'UK telephone number' },
+    #     hint: { text: 'Include the dialling code' },
+    #     required: true,
+    #     placeholder: '0123 456 789'
     def govuk_phone_field(attribute_name, hint: {}, label: {}, **args)
       Elements::Input.new(self, object_name, attribute_name, attribute_type: :phone, hint: hint, label: label, **args).html
     end
 
+    # Generates a input of type `email`
+    #
+    # @param attribute_name [Symbol] The name of the attribute
+    # @param [Hash] label configures the associated label
+    # @option label text [String] the label text
+    # @option label size [String] the size of the label font, can be +large+, +medium+, +regular+ or +small+
+    # @option label weight [String] the weight of the label font, can be +bold+ or +regular+
+    # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    #
+    # @example An email address field with a placeholder
+    #   = govuk_email_field :email_address,
+    #     label: { text: 'Enter your email address' },
+    #     placeholder: 'ralph.wiggum@springfield.edu'
     def govuk_email_field(attribute_name, hint: {}, label: {}, **args)
       Elements::Input.new(self, object_name, attribute_name, attribute_type: :email, hint: hint, label: label, **args).html
     end
 
+    # Generates a input of type `url`
+    #
+    # @param attribute_name [Symbol] The name of the attribute
+    # @param [Hash] label configures the associated label
+    # @option label text [String] the label text
+    # @option label size [String] the size of the label font, can be +large+, +medium+, +regular+ or +small+
+    # @option label weight [String] the weight of the label font, can be +bold+ or +regular+
+    # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    #
+    # @example A url field with autocomplete
+    #   = govuk_url_field :favourite_website,
+    #     label: { text: 'Enter your favourite website' },
+    #     placeholder: 'https://www.gov.uk',
+    #     autocomplete: 'url'
     def govuk_url_field(attribute_name, hint: {}, label: {}, **args)
       Elements::Input.new(self, object_name, attribute_name, attribute_type: :url, hint: hint, label: label, **args).html
     end
 
+    # Generates a input of type `number`
+    #
+    # @param attribute_name [Symbol] The name of the attribute
+    # @param [Hash] label configures the associated label
+    # @option label text [String] the label text
+    # @option label size [String] the size of the label font, can be +large+, +medium+, +regular+ or +small+
+    # @option label weight [String] the weight of the label font, can be +bold+ or +regular+
+    # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
+    #
+    # @example A number field with placeholder, min, max and step
+    #   = govuk_number_field :iq,
+    #     label: { text: 'What is your IQ?' },
+    #     placeholder: 100,
+    #     min: 80,
+    #     max: 150,
+    #     step: 5
     def govuk_number_field(attribute_name, hint: {}, label: {}, **args)
       Elements::Input.new(self, object_name, attribute_name, attribute_type: :number, hint: hint, label: label, **args).html
     end
 
+
+    # Generates a text area with label, hint offers the ability to add the GOV.UK character and word counting
+    # components automatically
+    #
+    # @param attribute_name [Symbol] The name of the attribute
+    # @param [Hash] label configures the associated label
+    # @option label text [String] the label text
+    # @option label size [String] the size of the label font, can be +large+, +medium+, +regular+ or +small+
+    # @option label weight [String] the weight of the label font, can be +bold+ or +regular+
+    # @param max_words [Integer] adds the GOV.UK max word count
+    # @param max_chars [Integer] adds the GOV.UK max characters count
+    # @option args [Hash] args additional arguments are applied as attributes to the +textarea+ element
+    # @see https://design-system.service.gov.uk/components/character-count GOV.UK character count component
+    # @note Setting +max_chars+ or +max_words+ will add a caption beneath the +textarea+ with a live count of words
+    #   or characters
+    # @example A number field with placeholder, min, max and step
+    #   = govuk_number_field :cv,
+    #     label: { text: 'Tell us about your work history' },
+    #     rows: 8,
+    #     max_words: 300
     def govuk_text_area(attribute_name, hint: {}, label: {}, max_words: nil, max_chars: nil, rows: 5, **args)
       Elements::TextArea.new(self, object_name, attribute_name, hint: hint, label: label, max_words: max_words, max_chars: max_chars, rows: rows, **args).html
     end
@@ -111,24 +205,22 @@ module GOVUKDesignSystemFormBuilder
     def govuk_collection_check_boxes(attribute_name, collection, value_method, text_method, hint_method = nil, html_options: {}, hint: {}, legend: {})
       hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint)
       Containers::FormGroup.new(self, object_name, attribute_name).html do
-        safe_join(
-          [
-            hint_element.html,
-            (yield if block_given?),
-            Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: hint_element.hint_id).html do
+        Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: hint_element.hint_id).html do
+          safe_join(
+            [
+              hint_element.html,
+              (yield if block_given?),
               collection_check_boxes(attribute_name, collection, value_method, text_method) do |check_box|
                 Elements::CheckBoxes::CollectionCheckBox.new(self, attribute_name, check_box, hint_method).html
               end
-            end
-          ]
-        )
+            ]
+          )
+        end
       end
     end
 
-    def govuk_submit(text = 'Continue', warning: false, secondary: false, prevent_double_click: true)
-      Elements::Submit.new(self, text, warning: warning, secondary: secondary, prevent_double_click: prevent_double_click).html do
-        (yield if block_given?)
-      end
+    def govuk_submit(text = 'Continue', warning: false, secondary: false, prevent_double_click: true, &block)
+      Elements::Submit.new(self, text, warning: warning, secondary: secondary, prevent_double_click: prevent_double_click, &block).html
     end
 
     def govuk_date_field(attribute_name, hint: {}, legend: {}, date_of_birth: false, &block)
