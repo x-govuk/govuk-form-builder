@@ -158,27 +158,23 @@ module GOVUKDesignSystemFormBuilder
       error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
 
       Containers::FormGroup.new(self, object_name, attribute_name).html do
-        safe_join(
-          [
-            hint_element.html,
-            error_element.html,
+        Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
+          safe_join(
+            [
+              hint_element.html,
+              error_element.html,
 
-            Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
-              safe_join(
-                [
-                  (yield if block_given?),
-                  Containers::Radios.new(self, inline: options.dig(:inline)).html do
-                    safe_join(
-                      collection.map do |item|
-                        Elements::Radios::CollectionRadio.new(self, object_name, attribute_name, item, value_method, text_method, hint_method).html
-                      end
-                    )
+              (yield if block_given?),
+              Containers::Radios.new(self, inline: options.dig(:inline)).html do
+                safe_join(
+                  collection.map do |item|
+                    Elements::Radios::CollectionRadio.new(self, object_name, attribute_name, item, value_method, text_method, hint_method).html
                   end
-                ].compact
-              )
-            end
-          ]
-        )
+                )
+              end
+            ].compact
+          )
+        end
       end
     end
 
@@ -187,15 +183,15 @@ module GOVUKDesignSystemFormBuilder
       error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
 
       Containers::FormGroup.new(self, object_name, attribute_name).html do
-        safe_join([
-          hint_element.html,
-          error_element.html,
-          Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
+        Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
+          safe_join([
+            hint_element.html,
+            error_element.html,
             Containers::Radios.new(self, inline: options.dig(:inline)).html do
               yield
             end
-          end
-        ])
+          ])
+        end
       end
     end
 
@@ -210,11 +206,14 @@ module GOVUKDesignSystemFormBuilder
 
     def govuk_collection_check_boxes(attribute_name, collection, value_method, text_method, hint_method = nil, html_options: {}, hint_text: nil, legend: {})
       hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint_text)
+      error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
+
       Containers::FormGroup.new(self, object_name, attribute_name).html do
-        Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: hint_element.hint_id).html do
+        Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
           safe_join(
             [
               hint_element.html,
+              error_element.html,
               (yield if block_given?),
               collection_check_boxes(attribute_name, collection, value_method, text_method) do |check_box|
                 Elements::CheckBoxes::CollectionCheckBox.new(self, attribute_name, check_box, hint_method).html

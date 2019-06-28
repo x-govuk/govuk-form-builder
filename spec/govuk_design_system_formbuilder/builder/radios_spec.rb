@@ -109,7 +109,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       specify 'the hint should be associated with the fieldset' do
         expect(parsed_subject.at_css('.govuk-fieldset')['aria-describedby'].split).to include(
-          parsed_subject.at_css('.govuk-form-group > .govuk-hint')['id']
+          parsed_subject.at_css('.govuk-fieldset > .govuk-hint')['id']
         )
       end
     end
@@ -124,6 +124,12 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
         specify 'should have error message' do
           expect(subject).to have_tag('span', with: { class: 'govuk-error-message' }, text: /can't be blank/)
+        end
+
+        specify 'the error message should be associated with the fieldset' do
+          expect(parsed_subject.at_css('.govuk-fieldset')['aria-describedby'].split).to include(
+            parsed_subject.at_css('.govuk-fieldset > .govuk-error-message')['id']
+          )
         end
       end
     end
@@ -359,6 +365,12 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
           specify 'should have error message' do
             expect(subject).to have_tag('span', with: { class: 'govuk-error-message' }, text: /can't be blank/)
+          end
+
+          specify 'the error message should be associated with the fieldset' do
+            expect(parsed_subject.at_css('.govuk-fieldset')['aria-describedby'].split).to include(
+              parsed_subject.at_css('.govuk-fieldset > .govuk-error-message')['id']
+            )
           end
         end
       end

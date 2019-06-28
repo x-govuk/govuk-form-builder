@@ -108,6 +108,26 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
+    context 'errors' do
+      context 'when the attribute has errors' do
+        before { object.valid? }
+
+        specify 'form group should have error class' do
+          expect(subject).to have_tag('div', with: { class: 'govuk-form-group--error' })
+        end
+
+        specify 'should have error message' do
+          expect(subject).to have_tag('span', with: { class: 'govuk-error-message' }, text: /can't be blank/)
+        end
+
+        specify 'the error message should be associated with the fieldset' do
+          expect(parsed_subject.at_css('.govuk-fieldset')['aria-describedby'].split).to include(
+            parsed_subject.at_css('.govuk-fieldset > .govuk-error-message')['id']
+          )
+        end
+      end
+    end
+
     context 'when passed a block' do
       let(:block_h1) { 'The quick brown fox' }
       let(:block_h2) { 'Jumped over the' }

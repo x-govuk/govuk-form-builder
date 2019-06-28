@@ -6,6 +6,7 @@ class Person
 
   validates :name, presence: true
   validates :favourite_colour, presence: true
+  validates :projects, presence: true
   validates :cv, length: { maximum: 30 }
 end
 
