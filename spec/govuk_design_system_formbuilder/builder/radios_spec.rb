@@ -348,6 +348,20 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           end
         end
       end
+
+      context 'errors' do
+        context 'when the attribute has errors' do
+          before { object.valid? }
+
+          specify 'form group should have error class' do
+            expect(subject).to have_tag('div', with: { class: 'govuk-form-group--error' })
+          end
+
+          specify 'should have error message' do
+            expect(subject).to have_tag('span', with: { class: 'govuk-error-message' }, text: /can't be blank/)
+          end
+        end
+      end
     end
   end
 

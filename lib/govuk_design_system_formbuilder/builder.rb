@@ -184,11 +184,13 @@ module GOVUKDesignSystemFormBuilder
 
     def govuk_radio_buttons_fieldset(attribute_name, options: { inline: false }, hint_text: nil, legend: {})
       hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint_text)
+      error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
 
       Containers::FormGroup.new(self, object_name, attribute_name).html do
         safe_join([
           hint_element.html,
-          Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: hint_element.hint_id).html do
+          error_element.html,
+          Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
             Containers::Radios.new(self, inline: options.dig(:inline)).html do
               yield
             end
