@@ -103,7 +103,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       specify 'the hint should be associated with the fieldset' do
         expect(parsed_subject.at_css('.govuk-fieldset')['aria-describedby'].split).to include(
-          parsed_subject.at_css('.govuk-form-group > .govuk-hint')['id']
+          parsed_subject.at_css('.govuk-fieldset > .govuk-hint')['id']
         )
       end
     end

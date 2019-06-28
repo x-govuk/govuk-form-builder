@@ -8,7 +8,7 @@ module GOVUKDesignSystemFormBuilder
         @legend = legend
         @hint = hint
         @date_of_birth = date_of_birth
-        @block_content = @builder.capture { block.call } if block_given?
+        @block_content = @builder.capture { block.call }.html_safe if block_given?
       end
 
       def html
