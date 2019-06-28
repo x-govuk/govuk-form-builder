@@ -4,11 +4,13 @@ module GOVUKDesignSystemFormBuilder
     # Generates a input of type `text`
     #
     # @param attribute_name [Symbol] The name of the attribute
+    # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
     # @param [Hash] label configures the associated label
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +large+, +medium+, +regular+ or +small+
     # @option label weight [String] the weight of the label font, can be +bold+ or +regular+
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    # @return [ActiveSupport::SafeBuffer] HTML output
     #
     # @example A required full name field with a placeholder
     #   = govuk_text_field :name,
@@ -23,11 +25,13 @@ module GOVUKDesignSystemFormBuilder
     # Generates a input of type `tel`
     #
     # @param attribute_name [Symbol] The name of the attribute
+    # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
     # @param [Hash] label configures the associated label
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +large+, +medium+, +regular+ or +small+
     # @option label weight [String] the weight of the label font, can be +bold+ or +regular+
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    # @return [ActiveSupport::SafeBuffer] HTML output
     #
     # @example A required phone number field with a placeholder
     #   = govuk_phone_field :phone_number,
@@ -42,11 +46,13 @@ module GOVUKDesignSystemFormBuilder
     # Generates a input of type `email`
     #
     # @param attribute_name [Symbol] The name of the attribute
+    # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
     # @param [Hash] label configures the associated label
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +large+, +medium+, +regular+ or +small+
     # @option label weight [String] the weight of the label font, can be +bold+ or +regular+
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    # @return [ActiveSupport::SafeBuffer] HTML output
     #
     # @example An email address field with a placeholder
     #   = govuk_email_field :email_address,
@@ -59,11 +65,13 @@ module GOVUKDesignSystemFormBuilder
     # Generates a input of type `url`
     #
     # @param attribute_name [Symbol] The name of the attribute
+    # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
     # @param [Hash] label configures the associated label
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +large+, +medium+, +regular+ or +small+
     # @option label weight [String] the weight of the label font, can be +bold+ or +regular+
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    # @return [ActiveSupport::SafeBuffer] HTML output
     #
     # @example A url field with autocomplete
     #   = govuk_url_field :favourite_website,
@@ -77,11 +85,13 @@ module GOVUKDesignSystemFormBuilder
     # Generates a input of type `number`
     #
     # @param attribute_name [Symbol] The name of the attribute
+    # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
     # @param [Hash] label configures the associated label
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +large+, +medium+, +regular+ or +small+
     # @option label weight [String] the weight of the label font, can be +bold+ or +regular+
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
+    # @return [ActiveSupport::SafeBuffer] HTML output
     #
     # @example A number field with placeholder, min, max and step
     #   = govuk_number_field :iq,
@@ -95,10 +105,12 @@ module GOVUKDesignSystemFormBuilder
     end
 
 
-    # Generates a text area with label, hint offers the ability to add the GOV.UK character and word counting
-    # components automatically
+    # Generates a +textarea+ element with a label, optional hint. Also offers
+    # the ability to add the GOV.UK character and word counting components
+    # automatically
     #
     # @param attribute_name [Symbol] The name of the attribute
+    # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
     # @param [Hash] label configures the associated label
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +large+, +medium+, +regular+ or +small+
@@ -106,9 +118,11 @@ module GOVUKDesignSystemFormBuilder
     # @param max_words [Integer] adds the GOV.UK max word count
     # @param max_chars [Integer] adds the GOV.UK max characters count
     # @option args [Hash] args additional arguments are applied as attributes to the +textarea+ element
+    # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/character-count GOV.UK character count component
     # @note Setting +max_chars+ or +max_words+ will add a caption beneath the +textarea+ with a live count of words
     #   or characters
+    #
     # @example A number field with placeholder, min, max and step
     #   = govuk_number_field :cv,
     #     label: { text: 'Tell us about your work history' },
@@ -118,9 +132,16 @@ module GOVUKDesignSystemFormBuilder
       Elements::TextArea.new(self, object_name, attribute_name, hint_text: hint_text, label: label, max_words: max_words, max_chars: max_chars, rows: rows, **args).html
     end
 
-    # FIXME #govuk_collection_select args differ from Rails' #collection_select args in that
-    # options: and :html_options are keyword arguments. Leaving them as regular args with
-    # defaults and following them with keyword args (hint and label) doesn't seem to work
+    # Generates a +select+ element containing +option+ for each member in the provided collection
+    #
+    # @param attribute_name [Symbol] The name of the attribute
+    # @param collection [Enumerable<Object>] Options to be added to the +select+ element
+    # @param value_method [Symbol] The method called against each member of the collection to provide the value
+    # @param text_method [Symbol] The method called against each member of the collection to provide the text
+    # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
+    # @option label text [String] the label text
+    # @option label size [String] the size of the label font, can be +large+, +medium+, +regular+ or +small+
+    # @option label weight [String] the weight of the label font, can be +bold+ or +regular+
     def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, html_options: {}, hint_text: nil, label: {})
       label_element = Elements::Label.new(self, object_name, attribute_name, label)
       hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint_text)
