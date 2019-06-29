@@ -212,7 +212,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
         specify 'the hint should be associated with the correct radio button' do
           colours_with_descriptions.each do |cwd|
-            "person-favourite_colour-#{cwd.id}-hint".tap do |association|
+            "person-favourite-colour-#{cwd.id}-hint".tap do |association|
               expect(subject).to have_tag('input', with: { "aria-describedby" => association })
               expect(subject).to have_tag('span', with: { class: 'govuk-hint', id: association })
             end
@@ -472,7 +472,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         specify 'conditional_id contains the object, attribute and value name' do
           expect(
             parsed_subject.at_css("input[type='radio']")['data-aria-controls']
-          ).to eql('person-favourite_colour-red-conditional')
+          ).to eql('person-favourite-colour-red-conditional')
         end
       end
 

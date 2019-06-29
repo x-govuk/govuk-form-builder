@@ -13,26 +13,26 @@ module GOVUKDesignSystemFormBuilder
     def hint_id
       return nil unless @hint_text.present?
 
-      [@object_name, @attribute_name, @value, 'hint'].compact.join('-').parameterize
+      build_id('hint')
     end
 
     def error_id
       return nil unless has_errors?
 
-      [@object_name, @attribute_name, 'error'].compact.join('-').parameterize
+      build_id('error')
     end
 
     def conditional_id
-      [@object_name, @attribute_name, @value, 'conditional'].compact.join('-').parameterize
+      build_id('conditional')
+    end
+
+    def attribute_descriptor
+      build_id(nil, '_', '-')
     end
 
     def has_errors?
       @builder.object.invalid? &&
         @builder.object.errors.messages.keys.include?(@attribute_name)
-    end
-
-    def attribute_descriptor
-      [@object_name, @attribute_name, @value].compact.join('_').parameterize
     end
 
     def attribute_identifier
@@ -47,6 +47,16 @@ module GOVUKDesignSystemFormBuilder
         @builder.capture { block.call }
       end
       return conditional, conditional_id
+    end
+
+  private
+
+    def build_id(id_type, delimiter = '-', replace = '_')
+      [@object_name, @attribute_name, @value, id_type]
+        .compact
+        .join(delimiter)
+        .parameterize
+        .tr(replace, delimiter)
     end
   end
 end
