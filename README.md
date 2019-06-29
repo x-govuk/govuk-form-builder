@@ -47,6 +47,15 @@ Now we can get started! 🎉
 
   = f.govuk_number_field :age, label: { text: 'Age' }
 
+  = f.govuk_collection_select :department_id,
+    @departments,
+    :id,
+    :name,
+    :description,
+    label: { text: 'Which department do you work for?' },
+    hint_text: "If you don't know ask your manager" }
+
+
   = f.submit 'Away we go!'
 ```
 
