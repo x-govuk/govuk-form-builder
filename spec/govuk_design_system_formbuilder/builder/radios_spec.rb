@@ -232,7 +232,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     context 'layout direction' do
       context 'when inline is specified in the options' do
         subject do
-          builder.send(method, attribute, colours, :id, :name, :description, options: { inline: true })
+          builder.send(method, attribute, colours, :id, :name, :description, inline: true)
         end
 
         specify "should have the additional class 'govuk-radios--inline'" do
@@ -242,7 +242,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       context 'when inline is not specified in the options' do
         subject do
-          builder.send(method, attribute, colours, :id, :name, :description, options: { inline: false })
+          builder.send(method, attribute, colours, :id, :name, :description, inline: false)
         end
 
         specify "should not have the additional class 'govuk-radios--inline'" do
@@ -307,7 +307,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       context 'layout direction' do
         context 'when inline is specified in the options' do
           subject do
-            builder.send(method, attribute, options: { inline: true }) do
+            builder.send(method, attribute, inline: true) do
               builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label })
             end
           end
@@ -319,7 +319,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
         context 'when inline is not specified in the options' do
           subject do
-            builder.send(method, attribute, options: { inline: false }) do
+            builder.send(method, attribute) do
               builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label })
             end
           end

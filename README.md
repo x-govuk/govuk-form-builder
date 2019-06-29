@@ -2,7 +2,7 @@
 
 ## What's included
 
-* 100% compatibility with the GOV.UK Design System
+* 100% compatibility with the [GOV.UK Design System](https://design-system.service.gov.uk/)
 * Full control of labels, hints, fieldsets and legends
 * No overwriting of Rails' default form helpers
 * Automatic ARIA associations between hints, errors and inputs
