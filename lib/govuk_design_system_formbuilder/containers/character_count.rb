@@ -1,11 +1,12 @@
 module GOVUKDesignSystemFormBuilder
   module Containers
     class CharacterCount < Base
-      def initialize(builder, max_words:, max_chars:)
+      def initialize(builder, max_words:, max_chars:, threshold:)
         @builder = builder
         fail ArgumentError, 'limit can be words or chars' if max_words && max_chars
         @max_words = max_words
         @max_chars = max_chars
+        @threshold = threshold
       end
 
       def html
@@ -14,7 +15,7 @@ module GOVUKDesignSystemFormBuilder
         @builder.content_tag(
           'div',
           class: 'govuk-character-count',
-          data: { module: 'character-count' }.merge(limit)
+          data: { module: 'character-count' }.merge(**limit, **threshold).compact
         ) do
           yield
         end
@@ -28,6 +29,10 @@ module GOVUKDesignSystemFormBuilder
         elsif @max_chars
           { maxlength: @max_chars }
         end
+      end
+
+      def threshold
+        { threshold: @threshold }
       end
 
       def limit?

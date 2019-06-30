@@ -134,6 +134,24 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         expect { subject }.to raise_error(ArgumentError, 'limit can be words or chars')
       end
     end
+
+    context 'thresholds' do
+      let(:threshold) { 60 }
+      let(:max_chars) { 35 }
+      subject { builder.send(method, attribute, max_chars: max_chars, threshold: threshold) }
+
+      specify 'should wrap the form group inside a character count tag with a threshold' do
+        expect(subject).to have_tag(
+          'div',
+          with: {
+            class: 'govuk-character-count',
+            'data-module' => 'character-count',
+            'data-maxlength' => max_chars,
+            'data-threshold' => threshold
+          }
+        )
+      end
+    end
   end
 
   context 'rows' do
