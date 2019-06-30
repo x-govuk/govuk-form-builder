@@ -420,5 +420,24 @@ module GOVUKDesignSystemFormBuilder
     def govuk_date_field(attribute_name, hint_text: nil, legend: {}, date_of_birth: false, &block)
       Elements::Date.new(self, object_name, attribute_name, hint_text: hint_text, legend: legend, date_of_birth: date_of_birth, &block).html
     end
+
+    # Generates a summary of errors in the form, each linking to the corresponding
+    # part of the form that contains the error
+    #
+    # @param title [String] the error summary heading
+    #
+    # @todo Currently the summary anchors link to the inline error messages themselves rather to
+    #   the accompanying input. More work is required to improve this and it needs to be
+    #   handled in a less-generic manner. For example, we can't link to a specific radio button
+    #   if one hasn't been chosen but we should link to a {#govuk_text_field} if one has been left
+    #   blank
+    #
+    # @example An error summary with a custom title
+    #   = f.govuk_error_summary 'Uh-oh, spaghettios'
+    #
+    # @see https://design-system.service.gov.uk/components/error-summary/ GOV.UK error summary
+    def govuk_error_summary(title = 'There is a problem')
+      Elements::ErrorSummary.new(self, object_name, title).html
+    end
   end
 end

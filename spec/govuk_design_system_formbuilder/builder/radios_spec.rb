@@ -123,7 +123,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
 
         specify 'should have error message' do
-          expect(subject).to have_tag('span', with: { class: 'govuk-error-message' }, text: /can't be blank/)
+          expect(subject).to have_tag('span', with: { class: 'govuk-error-message' }, text: /Choose a favourite colour/)
         end
 
         specify 'the error message should be associated with the fieldset' do
@@ -364,7 +364,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           end
 
           specify 'should have error message' do
-            expect(subject).to have_tag('span', with: { class: 'govuk-error-message' }, text: /can't be blank/)
+            expect(subject).to have_tag('span', with: { class: 'govuk-error-message' }, text: /Choose a favourite colour/)
           end
 
           specify 'the error message should be associated with the fieldset' do

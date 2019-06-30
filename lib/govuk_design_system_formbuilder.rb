@@ -12,6 +12,7 @@ require 'govuk_design_system_formbuilder/elements/check_boxes/collection_check_b
 require 'govuk_design_system_formbuilder/elements/check_boxes/label'
 require 'govuk_design_system_formbuilder/elements/check_boxes/hint'
 require 'govuk_design_system_formbuilder/elements/error_message'
+require 'govuk_design_system_formbuilder/elements/error_summary'
 require 'govuk_design_system_formbuilder/elements/submit'
 require 'govuk_design_system_formbuilder/elements/text_area'
 

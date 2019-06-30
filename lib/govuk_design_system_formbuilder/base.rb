@@ -46,13 +46,19 @@ module GOVUKDesignSystemFormBuilder
       conditional = @builder.content_tag('div', class: conditional_classes, id: conditional_id) do
         @builder.capture { block.call }
       end
+
       return conditional, conditional_id
     end
 
   private
 
-    def build_id(id_type, delimiter = '-', replace = '_')
-      [@object_name, @attribute_name, @value, id_type]
+    def build_id(id_type, delimiter = '-', replace = '_', override_attribute_name: nil)
+      [
+        @object_name,
+        (override_attribute_name || @attribute_name),
+        @value,
+        id_type
+      ]
         .compact
         .join(delimiter)
         .parameterize
