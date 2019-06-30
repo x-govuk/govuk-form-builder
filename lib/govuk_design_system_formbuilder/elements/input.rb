@@ -1,11 +1,11 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class Input < GOVUKDesignSystemFormBuilder::Base
-      def initialize(builder, object_name, attribute_name, attribute_type:, hint_text:, label:, **extra_args)
+      def initialize(builder, object_name, attribute_name, attribute_type:, hint_text:, label:, width:, **extra_args)
         super(builder, object_name, attribute_name)
 
-        @extra_args     = extra_args.dup
-        @width          = @extra_args.delete(:width)
+        @width          = width
+        @extra_args     = extra_args
         @builder_method = [attribute_type, 'field'].join('_')
         @label          = label
         @hint_text      = hint_text
