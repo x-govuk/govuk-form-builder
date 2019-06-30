@@ -48,7 +48,7 @@ module GOVUKDesignSystemFormBuilder
       def descriptors(described_by)
         return nil unless described_by.present?
 
-        Array.wrap(described_by).join(' ')
+        Array.wrap(described_by).reject(&:blank?).join(' ')
       end
     end
   end

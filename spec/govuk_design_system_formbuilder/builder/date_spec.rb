@@ -196,5 +196,25 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
     end
+
+    context 'errors' do
+      let(:object) { Person.new(born_on: Date.today.next_year(5)) }
+      subject { builder.send(method, attribute, date_of_birth: true) }
+      before { object.valid? }
+      let(:error_identifier) { 'person-born-on-error' }
+
+      specify 'the error message should be present' do
+        expect(subject).to have_tag('span', with: { class: 'govuk-error-message' }, text: /Your date of birth must be in the past/)
+      end
+
+      specify 'the error message should be associated with the fieldset' do
+        expect(subject).to have_tag('span', with: { id: error_identifier })
+        expect(subject).to have_tag('div', with: { class: 'govuk-fieldset', 'aria-describedby' => error_identifier })
+      end
+
+      specify 'the date inputs should have error classes' do
+        expect(subject).to have_tag('input', count: 3, with: { class: 'govuk-input--error' })
+      end
+    end
   end
 end

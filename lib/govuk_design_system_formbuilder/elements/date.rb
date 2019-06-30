@@ -13,12 +13,14 @@ module GOVUKDesignSystemFormBuilder
 
       def html
         hint_element  = Elements::Hint.new(@builder, @object_name, @attribute_name, @hint_text)
+        error_element = Elements::ErrorMessage.new(@builder, @object_name, @attribute_name)
 
         Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
-          Containers::Fieldset.new(@builder, @object_name, @attribute_name, legend: @legend, described_by: hint_element.hint_id).html do
+          Containers::Fieldset.new(@builder, @object_name, @attribute_name, legend: @legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
             @builder.safe_join(
               [
                 hint_element.html,
+                error_element.html,
                 @block_content,
                 @builder.content_tag('div', class: 'govuk-date-input') do
                   @builder.safe_join(
@@ -69,7 +71,10 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def date_input_classes(width)
-        %w(govuk-input govuk-date-input__input).push("govuk-input--width-#{width}")
+        %w(govuk-input govuk-date-input__input).tap do |classes|
+          classes.push("govuk-input--width-#{width}")
+          classes.push("govuk-input--error") if has_errors?
+        end
       end
 
       def date_input_label_classes
