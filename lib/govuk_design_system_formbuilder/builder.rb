@@ -318,6 +318,7 @@ module GOVUKDesignSystemFormBuilder
     # @param text [String] The divider text
     # @note This should only be used from within a {#govuk_radio_buttons_fieldset}
     # @see https://design-system.service.gov.uk/components/radios/#radio-items-with-a-text-divider GOV.UK Radios with a text divider
+    # @return [ActiveSupport::SafeBuffer] HTML output
     # @example A custom divider
     #   = govuk_radio_divider 'Alternatively'
     def govuk_radio_divider(text = 'or')
