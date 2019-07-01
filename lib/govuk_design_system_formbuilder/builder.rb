@@ -132,7 +132,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label weight [String] the weight of the label font, can be +bold+ or +regular+
     # @param max_words [Integer] adds the GOV.UK max word count
     # @param max_chars [Integer] adds the GOV.UK max characters count
-    # @param threshold [Integer] only show the {max_words} and {max_chars} warnings once a threshold (percentage) is reached
+    # @param threshold [Integer] only show the +max_words+ and +max_chars+ warnings once a threshold (percentage) is reached
     # @param rows [Integer] sets the initial number of rows
     # @option args [Hash] args additional arguments are applied as attributes to the +textarea+ element
     # @return [ActiveSupport::SafeBuffer] HTML output
