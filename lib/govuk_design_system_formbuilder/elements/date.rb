@@ -56,7 +56,7 @@ module GOVUKDesignSystemFormBuilder
                 @builder.tag.input(
                   id: date_attribute_descriptor(segment),
                   class: date_input_classes(width),
-                  for: date_attribute_identifier(segment),
+                  name: date_attribute_identifier(segment),
                   type: 'number',
                   min: min,
                   max: max,

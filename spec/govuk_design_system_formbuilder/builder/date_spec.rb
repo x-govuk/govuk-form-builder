@@ -9,10 +9,14 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     let(:legend_text) { 'When were you born?' }
     let(:hint_text) { 'It says it on your birth certificate' }
 
-    let(:day_identifier) { 'person_born_on_3i' }
-    let(:month_identifier) { 'person_born_on_2i' }
-    let(:year_identifier) { 'person_born_on_1i' }
+    let(:day_multiparam_attribute) { '3i' }
+    let(:month_multiparam_attribute) { '2i' }
+    let(:year_multiparam_attribute) { '1i' }
+    let(:multiparam_attributes) { [ day_multiparam_attribute, month_multiparam_attribute, year_multiparam_attribute ] }
 
+    let(:day_identifier) { "person_born_on_#{day_multiparam_attribute}" }
+    let(:month_identifier) { "person_born_on_#{month_multiparam_attribute}" }
+    let(:year_identifier) { "person_born_on_#{year_multiparam_attribute}" }
 
     subject { builder.send(method, attribute) }
 
@@ -33,6 +37,12 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           %w(Day Month Year).each do |label_text|
             expect(di).to have_tag('label', text: label_text)
           end
+        end
+      end
+
+      specify 'inputs should have the correct name' do
+        multiparam_attributes.each do |mpa|
+          expect(subject).to have_tag('input', with: { name: "#{object_name}[#{attribute}(#{mpa})]" })
         end
       end
 
