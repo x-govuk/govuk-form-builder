@@ -21,6 +21,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
   describe 'errors' do
     context 'when the attribute has errors' do
       let(:object) { Person.new(cv: 'a' * 50) } # max length is 30
+      before { object.valid? }
 
       specify 'an error message should be displayed' do
         expect(subject).to have_tag('span', with: { class: 'govuk-error-message' }, text: /too long/)

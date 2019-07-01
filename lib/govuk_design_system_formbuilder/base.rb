@@ -31,7 +31,7 @@ module GOVUKDesignSystemFormBuilder
     end
 
     def has_errors?
-      @builder.object.invalid? &&
+      @builder.object.errors.any? &&
         @builder.object.errors.messages.keys.include?(@attribute_name)
     end
 
