@@ -9,6 +9,7 @@
 * Most helpers take a block for arbitrary content
 * Additional params for programmatically adding hints to check box and radio
   button collections
+* No external dependencies
 
 ## Installation
 
@@ -55,8 +56,7 @@ Now we can get started! 🎉
     label: { text: 'Which department do you work for?' },
     hint_text: "If you don't know ask your manager" }
 
-
-  = f.submit 'Away we go!'
+  = f.govuk_submit 'Away we go!'
 ```
 
 ## Developing and running the tests
