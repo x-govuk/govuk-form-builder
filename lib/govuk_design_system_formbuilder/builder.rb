@@ -207,6 +207,7 @@ module GOVUKDesignSystemFormBuilder
     # @param inline [Boolean] controls whether the radio buttons are displayed inline or not
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
+    # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+, defaults to +h1+
     # @param block [Block] any HTML passed in is inserted inside the fieldset container,
     #   between the error and the radios container element
     # @return [ActiveSupport::SafeBuffer] HTML output
@@ -261,6 +262,7 @@ module GOVUKDesignSystemFormBuilder
     # @param inline [Boolean] controls whether the radio buttons are displayed inline or not
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
+    # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
     # @param block [Block] any HTML passed in will be injected into the fieldset
     #   element and should contain radio buttons and optionally a divider
     # @see https://design-system.service.gov.uk/components/radios/ GOV.UK Radios
@@ -299,6 +301,7 @@ module GOVUKDesignSystemFormBuilder
     # @param hint_text [String] the contents of the hint
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
+    # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
     # @see https://design-system.service.gov.uk/components/radios/ GOV.UK Radios
     # @param block [Block] Any supplied HTML will be wrapped in a conditional
     #   container and only revealed when the radio button is picked
@@ -336,6 +339,7 @@ module GOVUKDesignSystemFormBuilder
     # @param legend [Hash] options for configuring the hash
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
+    # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
     # @param block [Block] any HTML passed in will be injected into the fieldset, after the hint and before the checkboxes
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
@@ -411,6 +415,7 @@ module GOVUKDesignSystemFormBuilder
     # @param legend [Hash] options for configuring the hash
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
+    # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input group
     # @param date_of_birth [Boolean] if +true+ {https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete#Values birth date auto completion attributes}
     #   will be added to the inputs
