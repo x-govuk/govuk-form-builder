@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    govuk_design_system_formbuilder (0.7.4)
+    govuk_design_system_formbuilder (0.7.5)
       rails (~> 5.2, >= 5.2.3)
 
 GEM

@@ -177,6 +177,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
 
+      specify 'labels should have the correct classes' do
+        expect(subject).to have_tag('label', count: colours.size, with: { class: %w(govuk-label govuk-radios__label) })
+      end
+
       specify 'radio buttons should be associated with corresponding labels' do
         colours.each do |colour|
           "person_favourite_colour_#{colour.id}".tap do |association|
