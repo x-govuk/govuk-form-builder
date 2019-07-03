@@ -140,7 +140,7 @@ module GOVUKDesignSystemFormBuilder
     # @note Setting +max_chars+ or +max_words+ will add a caption beneath the +textarea+ with a live count of words
     #   or characters
     #
-    # @example A number field with placeholder, min, max and step
+    # @example A text area with a custom number of rows and a word limit
     #   = f.govuk_number_field :cv,
     #     label: { text: 'Tell us about your work history' },
     #     rows: 8,
