@@ -25,10 +25,9 @@ module GOVUKDesignSystemFormBuilder
                 @builder.content_tag('div', class: 'govuk-date-input') do
                   @builder.safe_join(
                     [
-                      date_input_group(:day, min: 1, max: 31),
-                      date_input_group(:month, min: 1, max: 12),
-                      # FIXME there must be more sensible defaults than this!
-                      date_input_group(:year, min: 1900, max: 2100, width: 4)
+                      date_input_group(:day),
+                      date_input_group(:month),
+                      date_input_group(:year, width: 4)
                     ]
                   )
                 end
@@ -40,7 +39,7 @@ module GOVUKDesignSystemFormBuilder
 
     private
 
-      def date_input_group(segment, min:, max:, width: 2)
+      def date_input_group(segment, width: 2)
         value = @builder.object.try(@attribute_name).try(segment)
 
         @builder.content_tag('div', class: %w(govuk-date-input__item)) do
@@ -57,10 +56,9 @@ module GOVUKDesignSystemFormBuilder
                   id: date_attribute_descriptor(segment),
                   class: date_input_classes(width),
                   name: date_attribute_identifier(segment),
-                  type: 'number',
-                  min: min,
-                  max: max,
-                  step: 1,
+                  type: 'text',
+                  pattern: '[0-9]*',
+                  inputmode: 'numeric',
                   value: value,
                   autocomplete: date_of_birth_autocomplete_value(segment)
                 )

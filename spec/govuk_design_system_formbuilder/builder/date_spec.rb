@@ -24,7 +24,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
         expect(fg).to have_tag('div', with: { class: 'govuk-fieldset'}) do |fs|
           expect(fs).to have_tag('div', with: { class: 'govuk-date-input' }) do |di|
-            expect(di).to have_tag('input', with: { type: 'number' }, count: 3)
+            expect(di).to have_tag('input', with: { type: 'text' }, count: 3)
             expect(di).to have_tag('label', count: 3)
           end
         end
@@ -46,17 +46,13 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
 
-      context 'min and max' do
-        specify 'day should allow values of 1-31' do
-          expect(subject).to have_tag('input', with: { id: day_identifier, min: 1, max: 31 })
+      context 'attributes' do
+        specify 'inputs should have a pattern that restricts entries to numbers' do
+          expect(subject).to have_tag('input', with: { pattern: '[0-9]*' })
         end
 
-        specify 'month should allow values of 1-12' do
-          expect(subject).to have_tag('input', with: { id: month_identifier, min: 1, max: 12 })
-        end
-
-        specify 'year should allow values of 1900-2100' do
-          expect(subject).to have_tag('input', with: { id: year_identifier, min: 1900, max: 2100 })
+        specify 'inputs should have an inputmode of numeric' do
+          expect(subject).to have_tag('input', with: { inputmode: 'numeric' })
         end
       end
     end

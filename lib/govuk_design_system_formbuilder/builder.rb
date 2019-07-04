@@ -405,7 +405,7 @@ module GOVUKDesignSystemFormBuilder
       Elements::Submit.new(self, text, warning: warning, secondary: secondary, prevent_double_click: prevent_double_click, &block).html
     end
 
-    # Generates three number inputs for the +day+, +month+ and +year+ components of a date
+    # Generates three inputs for the +day+, +month+ and +year+ components of a date
     #
     # @note When using this input be aware that Rails's multiparam time and date handling falls foul
     #   of {https://bugs.ruby-lang.org/issues/5988 this} bug, so incorrect dates like +2019-09-31+ will
@@ -420,6 +420,8 @@ module GOVUKDesignSystemFormBuilder
     # @param date_of_birth [Boolean] if +true+ {https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete#Values birth date auto completion attributes}
     #   will be added to the inputs
     # @return [ActiveSupport::SafeBuffer] HTML output
+    #
+    # @see https://github.com/alphagov/govuk-frontend/issues/1449 GOV.UK date input element attributes, using text instead of number
     #
     # @example A regular date input with a legend and hint
     #   = f.govuk_date_field :starts_on,
