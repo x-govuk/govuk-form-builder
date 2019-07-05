@@ -32,7 +32,7 @@ module GOVUKDesignSystemFormBuilder
 
     def has_errors?
       @builder.object.errors.any? &&
-        @builder.object.errors.messages.keys.include?(@attribute_name)
+        @builder.object.errors.messages.dig(@attribute_name).present?
     end
 
     def attribute_identifier

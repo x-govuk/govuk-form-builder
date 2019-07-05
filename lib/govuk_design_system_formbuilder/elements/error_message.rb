@@ -1,9 +1,8 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class ErrorMessage < GOVUKDesignSystemFormBuilder::Base
-      def initialize(builder, object_name, attribute_name, options = {})
+      def initialize(builder, object_name, attribute_name)
         super(builder, object_name, attribute_name)
-        @options = default_options.merge(options)
       end
 
       def html
@@ -18,13 +17,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def message
-        @builder.object.errors.messages[@attribute_name]
-      end
-
-    private
-
-      def default_options
-        {}
+        @builder.object.errors.messages.dig(@attribute_name)
       end
     end
   end
