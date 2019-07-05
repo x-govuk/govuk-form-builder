@@ -22,7 +22,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     specify 'should output a form group with fieldset, date group and 3 inputs and labels' do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-        expect(fg).to have_tag('div', with: { class: 'govuk-fieldset'}) do |fs|
+        expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset'}) do |fs|
           expect(fs).to have_tag('div', with: { class: 'govuk-date-input' }) do |di|
             expect(di).to have_tag('input', with: { type: 'text' }, count: 3)
             expect(di).to have_tag('label', count: 3)
@@ -90,7 +90,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       context 'when a legend is supplied' do
         subject { builder.send(method, attribute, legend: { text: legend_text }) }
         specify 'legend tag should be present and have the correct contents' do
-          expect(subject).to have_tag('div', with: { class: 'govuk-fieldset' }) do |fs|
+          expect(subject).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
             expect(fs).to have_tag('legend', with: { class: 'govuk-fieldset__legend' }) do |legend|
               expect(legend).to have_tag('h1', text: legend_text, with: { class: 'govuk-fieldset__heading' })
             end
@@ -215,7 +215,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       specify 'the error message should be associated with the fieldset' do
         expect(subject).to have_tag('span', with: { id: error_identifier })
-        expect(subject).to have_tag('div', with: { class: 'govuk-fieldset', 'aria-describedby' => error_identifier })
+        expect(subject).to have_tag('fieldset', with: { class: 'govuk-fieldset', 'aria-describedby' => error_identifier })
       end
 
       specify 'the date inputs should have error classes' do

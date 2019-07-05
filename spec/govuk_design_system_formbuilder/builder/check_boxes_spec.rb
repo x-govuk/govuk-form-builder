@@ -16,7 +16,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     specify 'output should be a form group containing a form group and fieldset' do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-        expect(fg).to have_tag('div', with: { class: 'govuk-fieldset' })
+        expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' })
       end
     end
 
@@ -29,7 +29,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
           specify 'should contain a fieldset header containing the supplied text' do
             expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-              expect(fg).to have_tag('div', with: { class: 'govuk-fieldset' }) do |fs|
+              expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
                 expect(fs).to have_tag('h1', text: text, with: { class: 'govuk-fieldset__heading' })
               end
             end
@@ -41,7 +41,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
           specify 'output should not contain a header' do
             expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-              expect(fg).to have_tag('div', with: { class: 'govuk-fieldset' }) do |fs|
+              expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
                 expect(fs).not_to have_tag('h1')
               end
             end
@@ -54,7 +54,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
           specify 'output fieldset should contain the specified tag' do
             expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-              expect(fg).to have_tag('div', with: { class: 'govuk-fieldset' }) do |fs|
+              expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
                 expect(fs).to have_tag(tag, text: text)
               end
             end
@@ -68,7 +68,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
             specify 'output fieldset should contain the specified tag' do
               expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-                expect(fg).to have_tag('div', with: { class: 'govuk-fieldset' }) do |fs|
+                expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
                   expect(fs).to have_tag('h1', text: text, class: "govuk-fieldset__legend--#{size}")
                 end
               end
@@ -98,7 +98,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       specify 'output should also contain the fieldset' do
-        expect(subject).to have_tag('div', with: { class: 'govuk-fieldset' })
+        expect(subject).to have_tag('fieldset', with: { class: 'govuk-fieldset' })
       end
 
       specify 'the hint should be associated with the fieldset' do

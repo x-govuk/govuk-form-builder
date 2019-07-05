@@ -13,7 +13,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        @builder.content_tag('div', class: fieldset_classes, aria: { describedby: @described_by }) do
+        @builder.content_tag('fieldset', class: fieldset_classes, aria: { describedby: @described_by }) do
           @builder.safe_join([
             build_legend,
             yield
@@ -38,6 +38,7 @@ module GOVUKDesignSystemFormBuilder
       def legend_classes
         size = @legend.dig(:size)
         fail "invalid size #{size}, must be #{LEGEND_SIZES.join(', ')}" unless size.in?(LEGEND_SIZES)
+
         "govuk-fieldset__legend govuk-fieldset__legend--#{size}"
       end
 
