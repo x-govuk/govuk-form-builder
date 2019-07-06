@@ -208,8 +208,6 @@ module GOVUKDesignSystemFormBuilder
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+, defaults to +h1+
-    # @param block [Block] any HTML passed in is inserted inside the fieldset container,
-    #   between the error and the radios container element
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
     # @example A collection of radio buttons for favourite colours
@@ -263,8 +261,6 @@ module GOVUKDesignSystemFormBuilder
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
-    # @param block [Block] any HTML passed in will be injected into the fieldset
-    #   element and should contain radio buttons and optionally a divider
     # @see https://design-system.service.gov.uk/components/radios/ GOV.UK Radios
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
