@@ -6,8 +6,8 @@ module GOVUKDesignSystemFormBuilder
       # FIXME standardise sizes with labels
       LEGEND_SIZES = %w(xl l m s).freeze
 
-      def initialize(builder, object_name, attribute_name, legend: {}, described_by: nil)
-        super(builder, object_name, attribute_name)
+      def initialize(builder, legend: {}, described_by: nil)
+        @builder = builder
         @legend = LEGEND_DEFAULTS.merge(legend)
         @described_by = descriptors(described_by)
       end

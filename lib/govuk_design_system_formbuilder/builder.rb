@@ -232,7 +232,7 @@ module GOVUKDesignSystemFormBuilder
       error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
 
       Containers::FormGroup.new(self, object_name, attribute_name).html do
-        Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
+        Containers::Fieldset.new(self, legend: legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
           safe_join(
             [
               hint_element.html,
@@ -281,7 +281,7 @@ module GOVUKDesignSystemFormBuilder
       error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
 
       Containers::FormGroup.new(self, object_name, attribute_name).html do
-        Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
+        Containers::Fieldset.new(self, legend: legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
           safe_join([
             hint_element.html,
             error_element.html,
@@ -362,7 +362,7 @@ module GOVUKDesignSystemFormBuilder
       error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
 
       Containers::FormGroup.new(self, object_name, attribute_name).html do
-        Containers::Fieldset.new(self, object_name, attribute_name, legend: legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
+        Containers::Fieldset.new(self, legend: legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
           safe_join(
             [
               hint_element.html,
@@ -447,6 +447,10 @@ module GOVUKDesignSystemFormBuilder
     # @see https://design-system.service.gov.uk/components/error-summary/ GOV.UK error summary
     def govuk_error_summary(title = 'There is a problem')
       Elements::ErrorSummary.new(self, object_name, title).html
+    end
+
+    def govuk_fieldset(legend: {})
+      Containers::Fieldset.new(self)
     end
   end
 end
