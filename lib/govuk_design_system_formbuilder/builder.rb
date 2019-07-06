@@ -449,8 +449,23 @@ module GOVUKDesignSystemFormBuilder
       Elements::ErrorSummary.new(self, object_name, title).html
     end
 
-    def govuk_fieldset(legend: {})
-      Containers::Fieldset.new(self)
+    # Generates a fieldset containing the contents of the block
+    #
+    # @param legend [Hash] options for configuring the hash
+    # @option legend text [String] the fieldset legend's text content
+    # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
+    # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
+    #
+    # @example A fieldset containing address fields
+    #   = f.govuk_fieldset legend: { text: 'Address' }
+    #     = f.govuk_text_field :street
+    #     = f.govuk_text_field :town
+    #     = f.govuk_text_field :city
+    #
+    # @see https://design-system.service.gov.uk/components/fieldset/ GOV.UK fieldset
+    # @return [ActiveSupport::SafeBuffer] HTML output
+    def govuk_fieldset(legend: { text: 'Fieldset heading' }, &block)
+      Containers::Fieldset.new(self, legend: legend).html(&block)
     end
   end
 end
