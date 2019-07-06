@@ -1,7 +1,7 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class Date < GOVUKDesignSystemFormBuilder::Base
-      SEGMENTS = { day: '3i', month: '2i', year: '1i' }
+      SEGMENTS = { day: '3i', month: '2i', year: '1i' }.freeze
 
       def initialize(builder, object_name, attribute_name, legend:, hint_text:, date_of_birth: false, &block)
         super(builder, object_name, attribute_name)

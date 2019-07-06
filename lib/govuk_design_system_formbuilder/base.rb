@@ -43,11 +43,9 @@ module GOVUKDesignSystemFormBuilder
     end
 
     def wrap_conditional(block)
-      conditional = @builder.content_tag('div', class: conditional_classes, id: conditional_id) do
+      @builder.content_tag('div', class: conditional_classes, id: conditional_id) do
         @builder.capture { block.call }
       end
-
-      return conditional, conditional_id
     end
 
   private

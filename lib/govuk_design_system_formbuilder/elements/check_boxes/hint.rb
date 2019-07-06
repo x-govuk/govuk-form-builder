@@ -3,10 +3,10 @@ module GOVUKDesignSystemFormBuilder
     module CheckBoxes
       class Hint
         def initialize(builder, attribute, checkbox, text)
-          @builder = builder
+          @builder   = builder
           @attribute = attribute
-          @checkbox = checkbox
-          @text    = text
+          @checkbox  = checkbox
+          @text      = text
         end
 
         def html

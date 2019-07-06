@@ -298,12 +298,12 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       specify 'output should be a form group containing a form group and fieldset' do
         expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-          expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset'})
+          expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' })
         end
       end
 
       specify 'output should contain radio buttons' do
-        expect(subject).to have_tag('div', with: { class: 'govuk-radios' }) do |gr|
+        expect(subject).to have_tag('div', with: { class: 'govuk-radios' }) do
           expect(subject).to have_tag('input', with: { type: 'radio' }, count: 2)
         end
       end
@@ -455,7 +455,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     context 'conditionally revealing content' do
       context 'when a block is given' do
         subject do
-          builder.govuk_radio_button(:favourite_colour, :red) do |rb|
+          builder.govuk_radio_button(:favourite_colour, :red) do
             builder.govuk_text_field(:favourite_colour_reason)
           end
         end

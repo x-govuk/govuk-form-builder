@@ -10,7 +10,7 @@ module GOVUKDesignSystemFormBuilder
           @builder.label(class: label_classes)
         end
 
-        private
+      private
 
         def label_classes
           %w(govuk-label govuk-checkboxes__label)

@@ -4,7 +4,7 @@ module GOVUKDesignSystemFormBuilder
       LEGEND_DEFAULTS = { text: nil, tag: 'h1', size: 'xl' }.freeze
 
       # FIXME standardise sizes with labels
-      LEGEND_SIZES = %w(xl l m s)
+      LEGEND_SIZES = %w(xl l m s).freeze
 
       def initialize(builder, object_name, attribute_name, legend: {}, described_by: nil)
         super(builder, object_name, attribute_name)

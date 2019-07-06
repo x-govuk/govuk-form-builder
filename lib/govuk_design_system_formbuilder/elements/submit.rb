@@ -2,14 +2,14 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     class Submit < GOVUKDesignSystemFormBuilder::Base
       def initialize(builder, text, warning:, secondary:, prevent_double_click:, &block)
+        fail ArgumentError, 'buttons can be warning or secondary' if warning && secondary
+
         @builder              = builder
         @text                 = text
         @prevent_double_click = prevent_double_click
-
-        fail ArgumentError, 'buttons can be warning or secondary' if (warning && secondary)
-        @warning = warning
-        @secondary = secondary
-        @block_content = @builder.capture { block.call } if block_given?
+        @warning              = warning
+        @secondary            = secondary
+        @block_content        = @builder.capture { block.call } if block_given?
       end
 
       def html
@@ -20,6 +20,7 @@ module GOVUKDesignSystemFormBuilder
           ])
         end
       end
+
     private
 
       def submit_button_classes(content_present)

@@ -3,7 +3,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
   describe '#submit' do
     let(:method) { :govuk_submit }
-    let(:text) { 'Create '}
+    let(:text) { 'Create' }
     subject { builder.send(method, text) }
 
     specify 'output should be a form group containing a submit input' do

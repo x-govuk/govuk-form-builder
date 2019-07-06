@@ -145,7 +145,7 @@ module GOVUKDesignSystemFormBuilder
     #     label: { text: 'Tell us about your work history' },
     #     rows: 8,
     #     max_words: 300
-    def govuk_text_area(attribute_name, hint_text: nil, label: {}, max_words: nil, max_chars: nil, rows: 5, threshold: nil,  **args)
+    def govuk_text_area(attribute_name, hint_text: nil, label: {}, max_words: nil, max_chars: nil, rows: 5, threshold: nil, **args)
       Elements::TextArea.new(self, object_name, attribute_name, hint_text: hint_text, label: label, max_words: max_words, max_chars: max_chars, rows: rows, threshold: threshold, **args).html
     end
 
@@ -160,7 +160,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +large+, +medium+, +regular+ or +small+
     # @option label weight [String] the weight of the label font, can be +bold+ or +regular+
     # @return [ActiveSupport::SafeBuffer] HTML output
-    def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, html_options: {}, hint_text: nil, label: {}, &block)
+    def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, html_options: { class: 'govuk-select' }, hint_text: nil, label: {})
       label_element = Elements::Label.new(self, object_name, attribute_name, label)
       hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint_text)
       error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
@@ -227,7 +227,7 @@ module GOVUKDesignSystemFormBuilder
     #    legend: { text: 'Pick your favourite colour', size: 'm' },
     #    hint_text: 'If you cannot find the exact match choose something close',
     #    inline: false
-    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: { text: nil, size: 'm' }, inline: false, &block)
+    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: { text: nil, size: 'm' }, inline: false)
       hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint_text)
       error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
 
@@ -276,7 +276,7 @@ module GOVUKDesignSystemFormBuilder
     #    = f.govuk_radio_divider
     #    = f.govuk_radio_button :favourite_colour, :yellow, label: { text: 'Yellow' }
     #
-    def govuk_radio_buttons_fieldset(attribute_name, inline: false, hint_text: nil, legend: {}, &block)
+    def govuk_radio_buttons_fieldset(attribute_name, inline: false, hint_text: nil, legend: {})
       hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint_text)
       error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
 
@@ -292,7 +292,6 @@ module GOVUKDesignSystemFormBuilder
         end
       end
     end
-
 
     # Generates a radio button
     #

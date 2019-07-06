@@ -1,4 +1,4 @@
-$:.push File.expand_path("../lib", __FILE__)
+$:.push File.expand_path('lib', __dir__)
 
 require "govuk_design_system_formbuilder/version"
 
@@ -16,11 +16,10 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 5.2", ">= 5.2.3"
 
-  s.add_development_dependency "sqlite3", "~> 0"
-  s.add_development_dependency "rspec-rails", "~> 3.8"
-  s.add_development_dependency 'rspec-html-matchers', "~> 0"
-  s.add_development_dependency 'govuk-lint', "~> 0"
-
+  s.add_development_dependency "govuk-lint", "~> 0"
   s.add_development_dependency "pry", "~> 0.12.2"
   s.add_development_dependency "pry-byebug", "~> 3.7", ">= 3.7.0"
+  s.add_development_dependency "rspec-html-matchers", "~> 0"
+  s.add_development_dependency "rspec-rails", "~> 3.8"
+  s.add_development_dependency "sqlite3", "~> 0"
 end

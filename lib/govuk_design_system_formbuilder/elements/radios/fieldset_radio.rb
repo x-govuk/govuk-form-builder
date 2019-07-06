@@ -4,10 +4,15 @@ module GOVUKDesignSystemFormBuilder
       class FieldsetRadio < Base
         def initialize(builder, object_name, attribute_name, value, label:, hint_text:, &block)
           super(builder, object_name, attribute_name)
-          @value = value
-          @label = label
-          @hint_text  = hint_text
-          @conditional_content, @conditional_id = wrap_conditional(block) if block_given?
+
+          @value     = value
+          @label     = label
+          @hint_text = hint_text
+
+          if block_given?
+            @conditional_content = wrap_conditional(block)
+            @conditional_id      = conditional_id
+          end
         end
 
         def html

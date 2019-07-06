@@ -41,14 +41,14 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         subject! { builder.send(method) }
 
         specify 'the error message list should contain the correct messages' do
-          object.errors.messages.each do |attribute, msg|
+          object.errors.messages.each do |_attribute, msg|
             expect(subject).to have_tag('li', text: msg.join) do
             end
           end
         end
 
         specify 'the error message list should contain the correct messages' do
-          object.errors.messages.each do |attribute, msg|
+          object.errors.messages.each do |attribute, _msg|
             expect(subject).to have_tag('a', with: {
               href: "#person-#{underscores_to_dashes(attribute)}-error"
             })
@@ -71,4 +71,3 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
   end
 end
-

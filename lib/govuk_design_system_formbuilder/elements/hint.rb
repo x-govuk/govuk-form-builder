@@ -3,9 +3,10 @@ module GOVUKDesignSystemFormBuilder
     class Hint < GOVUKDesignSystemFormBuilder::Base
       def initialize(builder, object_name, attribute_name, text, value = nil, radio: false, checkbox: false)
         super(builder, object_name, attribute_name)
-        @value = value
-        @hint_text  = text
-        @radio_class = radio_class(radio)
+
+        @value          = value
+        @hint_text      = text
+        @radio_class    = radio_class(radio)
         @checkbox_class = checkbox_class(checkbox)
       end
 

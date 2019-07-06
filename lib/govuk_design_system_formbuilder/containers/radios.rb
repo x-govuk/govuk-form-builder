@@ -11,6 +11,7 @@ module GOVUKDesignSystemFormBuilder
           yield
         end
       end
+
     private
 
       def radios_classes

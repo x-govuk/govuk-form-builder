@@ -190,7 +190,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
           specify 'hints should be correctly associated with inputs' do
             parsed_subject.css('.govuk-checkboxes__item').each do |item|
-              next unless described_by = item.at_css('input').attribute('aria-describedby')
+              next unless (described_by = item.at_css('input').attribute('aria-describedby'))
 
               input_described_by = described_by.value
               hint_id = item.at_css('.govuk-hint').attribute('id').value

@@ -12,7 +12,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     let(:day_multiparam_attribute) { '3i' }
     let(:month_multiparam_attribute) { '2i' }
     let(:year_multiparam_attribute) { '1i' }
-    let(:multiparam_attributes) { [ day_multiparam_attribute, month_multiparam_attribute, year_multiparam_attribute ] }
+    let(:multiparam_attributes) { [day_multiparam_attribute, month_multiparam_attribute, year_multiparam_attribute] }
 
     let(:day_identifier) { "person_born_on_#{day_multiparam_attribute}" }
     let(:month_identifier) { "person_born_on_#{month_multiparam_attribute}" }
@@ -22,7 +22,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     specify 'should output a form group with fieldset, date group and 3 inputs and labels' do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-        expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset'}) do |fs|
+        expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
           expect(fs).to have_tag('div', with: { class: 'govuk-date-input' }) do |di|
             expect(di).to have_tag('input', with: { type: 'text' }, count: 3)
             expect(di).to have_tag('label', count: 3)
