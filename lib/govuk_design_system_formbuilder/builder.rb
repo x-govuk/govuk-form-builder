@@ -387,6 +387,9 @@ module GOVUKDesignSystemFormBuilder
     #   should probably be supported too
     # @param prevent_double_click [Boolean] adds JavaScript to safeguard the
     #   form from being submitted more than once
+    # @param validate [Boolean] adds the formnovalidate to the submit button when true, this disables all
+    #   client-side validation provided by the browser. This is to provide a more consistent and accessible user
+    #   experience
     # @param block [Block] Any supplied HTML will be inserted immediately after
     #   the submit button. It is intended for other buttons directly related to
     #   the form's operation, such as 'Cancel' or 'Safe draft'
