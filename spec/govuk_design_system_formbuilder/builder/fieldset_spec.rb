@@ -43,5 +43,32 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       it { expect { subject }.to raise_error(LocalJumpError, /no block given/) }
     end
+
+    context 'aria-describedby' do
+      context 'when an array of nil values is supplied' do
+        subject do
+          builder.send(method, described_by: [nil, nil]) do
+            builder.govuk_text_field(:name)
+          end
+        end
+
+        specify 'the aria-describedby attribute should be absent' do
+          expect(parsed_subject.at_css('fieldset').attributes).not_to include('aria-describedby')
+        end
+      end
+
+      context 'when an array of element ids is supplied' do
+        let(:element_id) { 'a-really-bad-error' }
+        subject do
+          builder.send(method, described_by: [element_id, nil]) do
+            builder.govuk_text_field(:name)
+          end
+        end
+
+        specify 'the aria-describedby attribute should contain the supplied element ids' do
+          expect(subject).to have_tag('fieldset', with: { 'aria-describedby' => element_id })
+        end
+      end
+    end
   end
 end
