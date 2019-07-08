@@ -396,8 +396,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_submit "Proceed", prevent_double_click: true do
     #     = link_to 'Cancel', some_other_path, class: 'govuk-button__secondary'
     #
-    def govuk_submit(text = 'Continue', warning: false, secondary: false, prevent_double_click: true, &block)
-      Elements::Submit.new(self, text, warning: warning, secondary: secondary, prevent_double_click: prevent_double_click, &block).html
+    def govuk_submit(text = 'Continue', warning: false, secondary: false, prevent_double_click: true, validate: false, &block)
+      Elements::Submit.new(self, text, warning: warning, secondary: secondary, prevent_double_click: prevent_double_click, validate: validate, &block).html
     end
 
     # Generates three inputs for the +day+, +month+ and +year+ components of a date

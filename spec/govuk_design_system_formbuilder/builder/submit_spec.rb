@@ -79,5 +79,31 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         expect(subject).to have_tag('input', with: { class: 'govuk-\!-margin-right-1' })
       end
     end
+
+    describe 'preventing client-side validation' do
+      context 'should be novalidate by default' do
+        subject { builder.send(method) }
+
+        specify 'should have attribute novalidate' do
+          expect(subject).to have_tag('input', with: { type: 'submit', novalidate: 'novalidate' })
+        end
+      end
+
+      context 'when validate is false' do
+        subject { builder.send(method, validate: false) }
+
+        specify 'should have attribute novalidate' do
+          expect(subject).to have_tag('input', with: { type: 'submit', novalidate: 'novalidate' })
+        end
+      end
+
+      context 'when validate is true' do
+        subject { builder.send(method, validate: true) }
+
+        specify 'should have attribute novalidate' do
+          expect(parsed_subject.at_css('input').attributes.keys).not_to include('novalidate')
+        end
+      end
+    end
   end
 end
