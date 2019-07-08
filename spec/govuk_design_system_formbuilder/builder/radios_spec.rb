@@ -469,11 +469,11 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
         context 'with additional options' do
           subject do
-            builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label, weight: 'bold', size: 'large' })
+            builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label, size: 'l' })
           end
           specify 'should allow label to be configured' do
             expect(subject).to have_tag('label', text: red_label, with: {
-              class: 'govuk-label govuk-\!-font-size-48 govuk-\!-font-weight-bold'
+              class: 'govuk-label govuk-label--l'
             })
           end
         end

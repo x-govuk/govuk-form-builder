@@ -1,13 +1,12 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class Label < GOVUKDesignSystemFormBuilder::Base
-      def initialize(builder, object_name, attribute_name, text: nil, value: nil, size: 'regular', weight: 'regular', radio: false, checkbox: false)
+      def initialize(builder, object_name, attribute_name, text: nil, value: nil, size: nil, radio: false, checkbox: false)
         super(builder, object_name, attribute_name)
 
         @text           = label_text(text)
         @value          = value # used by attribute_descriptor
         @size_class     = label_size_class(size)
-        @weight_class   = label_weight_class(weight)
         @radio_class    = radio_class(radio)
         @checkbox_class = checkbox_class(checkbox)
       end
@@ -39,21 +38,13 @@ module GOVUKDesignSystemFormBuilder
 
       def label_size_class(size)
         case size
-        when 'large'   then "govuk-!-font-size-48"
-        when 'medium'  then "govuk-!-font-size-36"
-        when 'small'   then "govuk-!-font-size-27"
-        when 'regular' then nil
+        when 'xl'      then "govuk-label--xl"
+        when 'l'       then "govuk-label--l"
+        when 'm'       then "govuk-label--m"
+        when 's'       then "govuk-label--s"
+        when nil       then nil
         else
-          fail 'size must be either large, medium, small or regular'
-        end
-      end
-
-      def label_weight_class(weight)
-        case weight
-        when 'bold'    then "govuk-!-font-weight-bold"
-        when 'regular' then nil
-        else
-          fail 'weight must be bold or regular'
+          fail "size must be either 'xl', 'l', 'm', 's' or nil"
         end
       end
     end

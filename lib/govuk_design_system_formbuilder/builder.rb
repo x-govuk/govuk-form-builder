@@ -8,8 +8,7 @@ module GOVUKDesignSystemFormBuilder
     #   or +one-quarter+, +one-third+, +one-half+, +two-thirds+ or +full+ width of the container
     # @param [Hash] label configures the associated label
     # @option label text [String] the label text
-    # @option label size [String] the size of the label font, can be +large+, +medium+, +regular+ or +small+
-    # @option label weight [String] the weight of the label font, can be +bold+ or +regular+
+    # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -32,8 +31,7 @@ module GOVUKDesignSystemFormBuilder
     #   or +one-quarter+, +one-third+, +one-half+, +two-thirds+ or +full+ width of the container
     # @param [Hash] label configures the associated label
     # @option label text [String] the label text
-    # @option label size [String] the size of the label font, can be +large+, +medium+, +regular+ or +small+
-    # @option label weight [String] the weight of the label font, can be +bold+ or +regular+
+    # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -57,8 +55,7 @@ module GOVUKDesignSystemFormBuilder
     #   or +one-quarter+, +one-third+, +one-half+, +two-thirds+ or +full+ width of the container
     # @param [Hash] label configures the associated label
     # @option label text [String] the label text
-    # @option label size [String] the size of the label font, can be +large+, +medium+, +regular+ or +small+
-    # @option label weight [String] the weight of the label font, can be +bold+ or +regular+
+    # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -80,8 +77,7 @@ module GOVUKDesignSystemFormBuilder
     #   or +one-quarter+, +one-third+, +one-half+, +two-thirds+ or +full+ width of the container
     # @param [Hash] label configures the associated label
     # @option label text [String] the label text
-    # @option label size [String] the size of the label font, can be +large+, +medium+, +regular+ or +small+
-    # @option label weight [String] the weight of the label font, can be +bold+ or +regular+
+    # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -103,8 +99,7 @@ module GOVUKDesignSystemFormBuilder
     #   or +one-quarter+, +one-third+, +one-half+, +two-thirds+ or +full+ width of the container
     # @param [Hash] label configures the associated label
     # @option label text [String] the label text
-    # @option label size [String] the size of the label font, can be +large+, +medium+, +regular+ or +small+
-    # @option label weight [String] the weight of the label font, can be +bold+ or +regular+
+    # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -128,8 +123,7 @@ module GOVUKDesignSystemFormBuilder
     # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
     # @param [Hash] label configures the associated label
     # @option label text [String] the label text
-    # @option label size [String] the size of the label font, can be +large+, +medium+, +regular+ or +small+
-    # @option label weight [String] the weight of the label font, can be +bold+ or +regular+
+    # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @param max_words [Integer] adds the GOV.UK max word count
     # @param max_chars [Integer] adds the GOV.UK max characters count
     # @param threshold [Integer] only show the +max_words+ and +max_chars+ warnings once a threshold (percentage) is reached
@@ -157,8 +151,7 @@ module GOVUKDesignSystemFormBuilder
     # @param text_method [Symbol] The method called against each member of the collection to provide the text
     # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
     # @option label text [String] the label text
-    # @option label size [String] the size of the label font, can be +large+, +medium+, +regular+ or +small+
-    # @option label weight [String] the weight of the label font, can be +bold+ or +regular+
+    # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @return [ActiveSupport::SafeBuffer] HTML output
     def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, html_options: { class: 'govuk-select' }, hint_text: nil, label: {})
       label_element = Elements::Label.new(self, object_name, attribute_name, label)

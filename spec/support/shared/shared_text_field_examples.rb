@@ -168,10 +168,11 @@ shared_examples 'a regular input' do |method_identifier, field_type|
   context 'label styling' do
     context 'font size overrides' do
       {
-        'large'   => 'govuk-!-font-size-48',
-        'medium'  => 'govuk-!-font-size-36',
-        'small'   => 'govuk-!-font-size-27',
-        'regular' => nil
+        'xl' => 'govuk-label--xl',
+        'l'  => 'govuk-label--l',
+        'm'  => 'govuk-label--m',
+        's'  => 'govuk-label--s',
+        nil  => nil
       }.each do |size_name, size_class|
         context "#{size_name} labels" do
           let(:size_name) { size_name }
@@ -184,29 +185,6 @@ shared_examples 'a regular input' do |method_identifier, field_type|
             end
           else
             specify 'should have no extra size classes' do
-              expect(extract_classes(parsed_subject, 'label')).to eql(%w(govuk-label))
-            end
-          end
-        end
-      end
-    end
-
-    context 'font weight overrides' do
-      {
-        'bold'    => 'govuk-!-font-weight-bold',
-        'regular' => nil
-      }.each do |weight_name, weight_class|
-        context "#{weight_name} labels" do
-          let(:weight_name) { weight_name }
-          let(:weight_class) { weight_class }
-          subject { builder.send(method, :name, label: { weight: weight_name }) }
-
-          if weight_class.present?
-            specify "should have extra class '#{weight_class}'" do
-              expect(extract_classes(parsed_subject, 'label')).to include(weight_class)
-            end
-          else
-            specify 'should have no extra weight classes' do
               expect(extract_classes(parsed_subject, 'label')).to eql(%w(govuk-label))
             end
           end
