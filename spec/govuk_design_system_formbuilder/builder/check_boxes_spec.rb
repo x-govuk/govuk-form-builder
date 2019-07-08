@@ -97,8 +97,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
 
-      specify 'output should also contain the fieldset' do
-        expect(subject).to have_tag('fieldset', with: { class: 'govuk-fieldset' })
+      specify 'output should also contain the fieldset and radios container' do
+        expect(subject).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
+          expect(fs).to have_tag('div', with: { class: 'govuk-checkboxes' })
+        end
       end
 
       specify 'the hint should be associated with the fieldset' do
@@ -155,6 +157,24 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       specify 'output should contain the correct number of check boxes' do
         expect(subject).to have_tag('input', count: projects.size, with: { type: 'checkbox' })
         expect(subject).to have_tag('label', count: projects.size)
+      end
+
+      context 'check box size' do
+        context 'when small is specified in the options' do
+          subject { builder.send(method, attribute, projects, :id, :name, small: true) }
+
+          specify "should have the additional class 'govuk-checkboxes--small'" do
+            expect(subject).to have_tag('div', with: { class: %w(govuk-checkboxes govuk-checkboxes--small) })
+          end
+        end
+
+        context 'when small is not specified in the options' do
+          subject { builder.send(method, attribute, projects, :id, :name) }
+
+          specify "should not have the additional class 'govuk-checkboxes--small'" do
+            expect(parsed_subject.at_css('.govuk-checkboxes')['class']).to eql('govuk-checkboxes')
+          end
+        end
       end
 
       context 'labels' do

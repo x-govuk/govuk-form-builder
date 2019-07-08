@@ -205,6 +205,7 @@ module GOVUKDesignSystemFormBuilder
     # @param hint_text [String] The content of the fieldset hint. No hint will be injected if left +nil+
     # @param legend [Hash] options for configuring the hash
     # @param inline [Boolean] controls whether the radio buttons are displayed inline or not
+    # @param small [Boolean] controls whether small radio buttons are used instead of regular-sized ones
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+, defaults to +h1+
@@ -225,7 +226,7 @@ module GOVUKDesignSystemFormBuilder
     #    legend: { text: 'Pick your favourite colour', size: 'm' },
     #    hint_text: 'If you cannot find the exact match choose something close',
     #    inline: false
-    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: { text: nil, size: 'm' }, inline: false)
+    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: { text: nil, size: 'm' }, inline: false, small: false)
       hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint_text)
       error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
 
@@ -237,7 +238,7 @@ module GOVUKDesignSystemFormBuilder
               error_element.html,
 
               (yield if block_given?),
-              Containers::Radios.new(self, inline: inline).html do
+              Containers::Radios.new(self, inline: inline, small: small).html do
                 safe_join(
                   collection.map do |item|
                     Elements::Radios::CollectionRadio.new(self, object_name, attribute_name, item, value_method, text_method, hint_method).html
@@ -258,6 +259,7 @@ module GOVUKDesignSystemFormBuilder
     # @param hint_text [String] The content of the fieldset hint. No hint will be injected if left +nil+
     # @param legend [Hash] options for configuring the hash
     # @param inline [Boolean] controls whether the radio buttons are displayed inline or not
+    # @param small [Boolean] controls whether small radio buttons are used instead of regular-sized ones
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
@@ -272,7 +274,7 @@ module GOVUKDesignSystemFormBuilder
     #    = f.govuk_radio_divider
     #    = f.govuk_radio_button :favourite_colour, :yellow, label: { text: 'Yellow' }
     #
-    def govuk_radio_buttons_fieldset(attribute_name, inline: false, hint_text: nil, legend: {})
+    def govuk_radio_buttons_fieldset(attribute_name, hint_text: nil, legend: {}, inline: false, small: false)
       hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint_text)
       error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
 
@@ -281,7 +283,7 @@ module GOVUKDesignSystemFormBuilder
           safe_join([
             hint_element.html,
             error_element.html,
-            Containers::Radios.new(self, inline: inline).html do
+            Containers::Radios.new(self, inline: inline, small: small).html do
               yield
             end
           ])
@@ -331,6 +333,7 @@ module GOVUKDesignSystemFormBuilder
     # @param text_method [Symbol] The method called against each member of the collection to provide the text
     # @param hint_method [Symbol] The method called against each member of the collection to provide the hint text
     # @param hint_text [String] The content of the fieldset hint. No hint will be injected if left +nil+
+    # @param small [Boolean] controls whether small check boxes are used instead of regular-sized ones
     # @param legend [Hash] options for configuring the hash
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
@@ -353,7 +356,7 @@ module GOVUKDesignSystemFormBuilder
     #    legend: { text: 'What do you want in your sandwich?', size: 'm' },
     #    hint_text: "If it isn't listed here, tough luck",
     #    inline: false
-    def govuk_collection_check_boxes(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: {}, &block)
+    def govuk_collection_check_boxes(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: {}, small: false, &block)
       hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint_text)
       error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
 
@@ -364,8 +367,10 @@ module GOVUKDesignSystemFormBuilder
               hint_element.html,
               error_element.html,
               (block.call if block_given?),
-              collection_check_boxes(attribute_name, collection, value_method, text_method) do |check_box|
-                Elements::CheckBoxes::CollectionCheckBox.new(self, attribute_name, check_box, hint_method).html
+              Containers::CheckBoxes.new(self, small: small).html do
+                collection_check_boxes(attribute_name, collection, value_method, text_method) do |check_box|
+                  Elements::CheckBoxes::CollectionCheckBox.new(self, attribute_name, check_box, hint_method).html
+                end
               end
             ]
           )

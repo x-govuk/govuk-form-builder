@@ -1,9 +1,10 @@
 module GOVUKDesignSystemFormBuilder
   module Containers
     class Radios < GOVUKDesignSystemFormBuilder::Base
-      def initialize(builder, inline:)
+      def initialize(builder, inline:, small:)
         @builder = builder
-        @inline = inline
+        @inline  = inline
+        @small   = small
       end
 
       def html
@@ -17,6 +18,7 @@ module GOVUKDesignSystemFormBuilder
       def radios_classes
         %w(govuk-radios).tap do |c|
           c.push('govuk-radios--inline') if @inline
+          c.push('govuk-radios--small')  if @small
         end
       end
     end
