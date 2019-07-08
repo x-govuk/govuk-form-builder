@@ -1,7 +1,6 @@
 require 'rspec-html-matchers'
 require 'action_view'
 require 'active_model'
-require 'active_support/core_ext'
 require 'pry'
 
 Dir[File.join('./spec', 'support', '**', '*.rb')].each { |file| require file }

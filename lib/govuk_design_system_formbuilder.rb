@@ -28,24 +28,4 @@ module GOVUKDesignSystemFormBuilder
 
     include GOVUKDesignSystemFormBuilder::Builder
   end
-
-  # Defaulting to +novalidate: true+ to prevent forms from providing their
-  # built-in validation which in many cases isn't very accessible
-  #
-  # https://github.com/alphagov/govuk-design-system/issues/941
-  module ActionView::Helpers
-    def form_for(record, options = {}, &block)
-      super(record, novalidate_opts.deep_merge(options), &block)
-    end
-
-    def form_with(model: nil, scope: nil, url: nil, format: nil, **options)
-      super(model: model, scope: scope, url: url, format: format, **novalidate_opts.deep_merge(options))
-    end
-
-  private
-
-    def novalidate_opts
-      { html: { novalidate: true } }
-    end
-  end
 end
