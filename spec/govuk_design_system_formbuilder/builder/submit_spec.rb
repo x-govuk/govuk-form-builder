@@ -84,24 +84,24 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       context 'should be novalidate by default' do
         subject { builder.send(method) }
 
-        specify 'should have attribute novalidate' do
-          expect(subject).to have_tag('input', with: { type: 'submit', novalidate: 'novalidate' })
+        specify 'should have attribute formnovalidate' do
+          expect(subject).to have_tag('input', with: { type: 'submit', formnovalidate: 'formnovalidate' })
         end
       end
 
       context 'when validate is false' do
         subject { builder.send(method, validate: false) }
 
-        specify 'should have attribute novalidate' do
-          expect(subject).to have_tag('input', with: { type: 'submit', novalidate: 'novalidate' })
+        specify 'should have attribute formnovalidate' do
+          expect(subject).to have_tag('input', with: { type: 'submit', formnovalidate: 'formnovalidate' })
         end
       end
 
       context 'when validate is true' do
         subject { builder.send(method, validate: true) }
 
-        specify 'should have attribute novalidate' do
-          expect(parsed_subject.at_css('input').attributes.keys).not_to include('novalidate')
+        specify 'should have attribute formnovalidate' do
+          expect(parsed_subject.at_css('input').attributes.keys).not_to include('formnovalidate')
         end
       end
     end

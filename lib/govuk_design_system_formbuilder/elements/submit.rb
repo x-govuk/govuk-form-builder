@@ -38,7 +38,7 @@ module GOVUKDesignSystemFormBuilder
       def extra_args
         {}.tap do |ea|
           ea[:data] = { 'prevent-double-click' => @prevent_double_click } if @prevent_double_click
-          ea[:novalidate] = !@validate
+          ea[:formnovalidate] = !@validate
         end
       end
     end
