@@ -1,7 +1,7 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class Label < GOVUKDesignSystemFormBuilder::Base
-      def initialize(builder, object_name, attribute_name, text: nil, value: nil, size: nil, radio: false, checkbox: false)
+      def initialize(builder, object_name, attribute_name, text: nil, value: nil, size: nil, radio: false, checkbox: false, tag: nil)
         super(builder, object_name, attribute_name)
 
         @text           = label_text(text)
@@ -9,11 +9,22 @@ module GOVUKDesignSystemFormBuilder
         @size_class     = label_size_class(size)
         @radio_class    = radio_class(radio)
         @checkbox_class = checkbox_class(checkbox)
+        @tag            = tag
       end
 
       def html
         return nil unless @text.present?
 
+        if @tag.present?
+          @builder.content_tag(@tag, class: 'govuk-label-wrapper') { build_label }
+        else
+          build_label
+        end
+      end
+
+    private
+
+      def build_label
         @builder.label(
           @attribute_name,
           @text,
@@ -21,8 +32,6 @@ module GOVUKDesignSystemFormBuilder
           class: %w(govuk-label).push(@size_class, @weight_class, @radio_class, @checkbox_class).compact
         )
       end
-
-    private
 
       def label_text(option_text)
         [option_text, @value, @attribute_name.capitalize].compact.first

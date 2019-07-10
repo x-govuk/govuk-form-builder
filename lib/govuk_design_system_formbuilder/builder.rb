@@ -9,6 +9,7 @@ module GOVUKDesignSystemFormBuilder
     # @param [Hash] label configures the associated label
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
+    # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -32,6 +33,7 @@ module GOVUKDesignSystemFormBuilder
     # @param [Hash] label configures the associated label
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
+    # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -56,6 +58,7 @@ module GOVUKDesignSystemFormBuilder
     # @param [Hash] label configures the associated label
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
+    # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -78,6 +81,7 @@ module GOVUKDesignSystemFormBuilder
     # @param [Hash] label configures the associated label
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
+    # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -100,6 +104,7 @@ module GOVUKDesignSystemFormBuilder
     # @param [Hash] label configures the associated label
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
+    # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -124,6 +129,7 @@ module GOVUKDesignSystemFormBuilder
     # @param [Hash] label configures the associated label
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
+    # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @param max_words [Integer] adds the GOV.UK max word count
     # @param max_chars [Integer] adds the GOV.UK max characters count
     # @param threshold [Integer] only show the +max_words+ and +max_chars+ warnings once a threshold (percentage) is reached
@@ -152,6 +158,7 @@ module GOVUKDesignSystemFormBuilder
     # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
+    # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @return [ActiveSupport::SafeBuffer] HTML output
     def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, html_options: { class: 'govuk-select' }, hint_text: nil, label: {})
       label_element = Elements::Label.new(self, object_name, attribute_name, label)

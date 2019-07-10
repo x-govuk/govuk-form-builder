@@ -46,6 +46,17 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         label_for = parsed_subject.at_css('label')['for']
         expect(input_name).to eql(label_for)
       end
+
+      context 'when the label is supplied with a wrapping tag' do
+        let(:wrapping_tag) { 'h2' }
+        subject { builder.send(method, attribute, colours, :id, :name, label: { text: label_text, tag: wrapping_tag }) }
+
+        specify 'the label should be wrapped in by the wrapping tag' do
+          expect(subject).to have_tag(wrapping_tag, with: { class: %w(govuk-label-wrapper) }) do |wt|
+            expect(wt).to have_tag('label', text: label_text)
+          end
+        end
+      end
     end
 
     context 'when a hint is provided' do
