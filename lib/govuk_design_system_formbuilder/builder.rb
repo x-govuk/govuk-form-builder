@@ -203,7 +203,7 @@ module GOVUKDesignSystemFormBuilder
     # @param text_method [Symbol] The method called against each member of the collection to provide the text
     # @param hint_method [Symbol] The method called against each member of the collection to provide the hint text
     # @param hint_text [String] The content of the fieldset hint. No hint will be injected if left +nil+
-    # @param legend [Hash] options for configuring the hash
+    # @param legend [Hash] options for configuring the legend
     # @param inline [Boolean] controls whether the radio buttons are displayed inline or not
     # @param small [Boolean] controls whether small radio buttons are used instead of regular-sized ones
     # @option legend text [String] the fieldset legend's text content
@@ -257,7 +257,7 @@ module GOVUKDesignSystemFormBuilder
     #
     # @param attribute_name [Symbol] The name of the attribute
     # @param hint_text [String] The content of the fieldset hint. No hint will be injected if left +nil+
-    # @param legend [Hash] options for configuring the hash
+    # @param legend [Hash] options for configuring the legend
     # @param inline [Boolean] controls whether the radio buttons are displayed inline or not
     # @param small [Boolean] controls whether small radio buttons are used instead of regular-sized ones
     # @option legend text [String] the fieldset legend's text content
@@ -334,7 +334,7 @@ module GOVUKDesignSystemFormBuilder
     # @param hint_method [Symbol] The method called against each member of the collection to provide the hint text
     # @param hint_text [String] The content of the fieldset hint. No hint will be injected if left +nil+
     # @param small [Boolean] controls whether small check boxes are used instead of regular-sized ones
-    # @param legend [Hash] options for configuring the hash
+    # @param legend [Hash] options for configuring the legend
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
@@ -415,7 +415,7 @@ module GOVUKDesignSystemFormBuilder
     #   be 'rounded' up to +2019-10-01+.
     # @param attribute_name [Symbol] The name of the attribute
     # @param hint_text [String] the contents of the hint
-    # @param legend [Hash] options for configuring the hash
+    # @param legend [Hash] options for configuring the legend
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
@@ -455,7 +455,7 @@ module GOVUKDesignSystemFormBuilder
 
     # Generates a fieldset containing the contents of the block
     #
-    # @param legend [Hash] options for configuring the hash
+    # @param legend [Hash] options for configuring the legend
     # @param described_by [Array<String>] the ids of the elements that describe this fieldset, usually hints and errors
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
