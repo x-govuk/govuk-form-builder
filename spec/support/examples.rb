@@ -3,6 +3,7 @@ class Person
   attr_accessor(:name, :born_on, :gender, :over_18, :favourite_colour, :favourite_colour_reason)
   attr_accessor(:projects, :project_responsibilities)
   attr_accessor(:cv)
+  attr_accessor(:photo)
 
   validates :name, presence: { message: 'Enter a name' }
   validates :favourite_colour, presence: { message: 'Choose a favourite colour' }
@@ -10,6 +11,7 @@ class Person
   validates :cv, length: { maximum: 30 }
 
   validate :born_on_must_be_in_the_past, if: -> { born_on.present? }
+  validate :photo_must_be_jpeg, if: -> { photo.present? }
 
   def self.valid_example
     new(
@@ -25,6 +27,10 @@ private
 
   def born_on_must_be_in_the_past
     errors.add(:born_on, 'Your date of birth must be in the past') unless born_on < Date.today
+  end
+
+  def photo_must_be_jpeg
+    errors.add(:photo, 'Must be a JPEG') unless photo.end_with?('.jpeg')
   end
 end
 

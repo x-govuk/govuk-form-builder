@@ -472,5 +472,27 @@ module GOVUKDesignSystemFormBuilder
     def govuk_fieldset(legend: { text: 'Fieldset heading' }, described_by: nil, &block)
       Containers::Fieldset.new(self, legend: legend, described_by: described_by).html(&block)
     end
+
+    # Generates an input of type +file+
+    #
+    # @param attribute_name [Symbol] The name of the attribute
+    # @option label text [String] the label text
+    # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
+    # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
+    # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
+    # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    #
+    # @example A photo upload field with file type specifier
+    #   = f.govuk_file_field :photo, label: { text: 'Upload your photo' }, accept: 'image/*'
+    #
+    # @see https://design-system.service.gov.uk/components/file-upload/ GOV.UK file upload
+    # @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file MDN documentation for file upload
+    #
+    # @note Remember to set +multipart: true+ when creating a form with file
+    #   uploads, {https://guides.rubyonrails.org/form_helpers.html#uploading-files see
+    #   the Rails documentation} for more information
+    def govuk_file_field(attribute_name, label: {}, hint_text: nil, **args)
+      Elements::File.new(self, object_name, attribute_name, label: label, hint_text: hint_text, **args).html
+    end
   end
 end
