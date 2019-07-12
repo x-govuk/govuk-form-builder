@@ -11,7 +11,7 @@ module GOVUKDesignSystemFormBuilder
     end
 
     def hint_id
-      return nil unless @hint_text.present?
+      return nil if @hint_text.blank?
 
       build_id('hint')
     end

@@ -45,7 +45,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def descriptors(described_by)
-        return nil unless described_by.present?
+        return nil if described_by.blank?
 
         described_by.compact.join(' ').presence
       end
