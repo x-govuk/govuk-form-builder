@@ -203,7 +203,7 @@ module GOVUKDesignSystemFormBuilder
     # @param text_method [Symbol] The method called against each member of the collection to provide the text
     # @param hint_method [Symbol] The method called against each member of the collection to provide the hint text
     # @param hint_text [String] The content of the fieldset hint. No hint will be injected if left +nil+
-    # @param legend [Hash] options for configuring the hash
+    # @param legend [Hash] options for configuring the legend
     # @param inline [Boolean] controls whether the radio buttons are displayed inline or not
     # @param small [Boolean] controls whether small radio buttons are used instead of regular-sized ones
     # @option legend text [String] the fieldset legend's text content
@@ -257,7 +257,7 @@ module GOVUKDesignSystemFormBuilder
     #
     # @param attribute_name [Symbol] The name of the attribute
     # @param hint_text [String] The content of the fieldset hint. No hint will be injected if left +nil+
-    # @param legend [Hash] options for configuring the hash
+    # @param legend [Hash] options for configuring the legend
     # @param inline [Boolean] controls whether the radio buttons are displayed inline or not
     # @param small [Boolean] controls whether small radio buttons are used instead of regular-sized ones
     # @option legend text [String] the fieldset legend's text content
@@ -334,7 +334,7 @@ module GOVUKDesignSystemFormBuilder
     # @param hint_method [Symbol] The method called against each member of the collection to provide the hint text
     # @param hint_text [String] The content of the fieldset hint. No hint will be injected if left +nil+
     # @param small [Boolean] controls whether small check boxes are used instead of regular-sized ones
-    # @param legend [Hash] options for configuring the hash
+    # @param legend [Hash] options for configuring the legend
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
@@ -415,7 +415,7 @@ module GOVUKDesignSystemFormBuilder
     #   be 'rounded' up to +2019-10-01+.
     # @param attribute_name [Symbol] The name of the attribute
     # @param hint_text [String] the contents of the hint
-    # @param legend [Hash] options for configuring the hash
+    # @param legend [Hash] options for configuring the legend
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
@@ -455,7 +455,7 @@ module GOVUKDesignSystemFormBuilder
 
     # Generates a fieldset containing the contents of the block
     #
-    # @param legend [Hash] options for configuring the hash
+    # @param legend [Hash] options for configuring the legend
     # @param described_by [Array<String>] the ids of the elements that describe this fieldset, usually hints and errors
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
@@ -471,6 +471,28 @@ module GOVUKDesignSystemFormBuilder
     # @return [ActiveSupport::SafeBuffer] HTML output
     def govuk_fieldset(legend: { text: 'Fieldset heading' }, described_by: nil, &block)
       Containers::Fieldset.new(self, legend: legend, described_by: described_by).html(&block)
+    end
+
+    # Generates an input of type +file+
+    #
+    # @param attribute_name [Symbol] The name of the attribute
+    # @option label text [String] the label text
+    # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
+    # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
+    # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
+    # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    #
+    # @example A photo upload field with file type specifier
+    #   = f.govuk_file_field :photo, label: { text: 'Upload your photo' }, accept: 'image/*'
+    #
+    # @see https://design-system.service.gov.uk/components/file-upload/ GOV.UK file upload
+    # @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file MDN documentation for file upload
+    #
+    # @note Remember to set +multipart: true+ when creating a form with file
+    #   uploads, {https://guides.rubyonrails.org/form_helpers.html#uploading-files see
+    #   the Rails documentation} for more information
+    def govuk_file_field(attribute_name, label: {}, hint_text: nil, **args)
+      Elements::File.new(self, object_name, attribute_name, label: label, hint_text: hint_text, **args).html
     end
   end
 end
