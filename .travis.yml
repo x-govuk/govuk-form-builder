@@ -4,5 +4,5 @@ rvm:
   - 2.6.1
 
 script:
-  - bundle exec govuk-lint-ruby
+  - bundle exec govuk-lint-ruby lib spec
   - bundle exec rspec -fd
