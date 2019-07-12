@@ -1,5 +1,7 @@
 # GOV.UK Design System Form Builder for Rails
 
+[![Build Status](https://travis-ci.com/DFE-Digital/govuk_design_system_formbuilder.svg?branch=master)](https://travis-ci.com/DFE-Digital/govuk_design_system_formbuilder)
+
 This gem provides a easy-to-use form builder that generates forms that are
 fully-compliant with the [GOV.UK Design System](https://design-system.service.gov.uk/),
 minimising the amount of markup you need to write.
