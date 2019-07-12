@@ -13,7 +13,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        return nil unless @text.present?
+        return nil if @text.blank?
 
         if @tag.present?
           @builder.content_tag(@tag, class: 'govuk-label-wrapper') { build_label }

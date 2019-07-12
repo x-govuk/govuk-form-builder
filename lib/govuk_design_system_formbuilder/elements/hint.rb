@@ -11,7 +11,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        return nil unless @hint_text.present?
+        return nil if @hint_text.blank?
 
         @builder.tag.span(@hint_text, class: hint_classes, id: hint_id)
       end
