@@ -49,7 +49,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def width_classes
-        return unless @width.present?
+        return if @width.blank?
 
         case @width
           # fixed (character) widths
