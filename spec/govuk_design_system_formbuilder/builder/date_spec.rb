@@ -18,7 +18,21 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     let(:month_identifier) { "person_born_on_#{month_multiparam_attribute}" }
     let(:year_identifier) { "person_born_on_#{year_multiparam_attribute}" }
 
-    subject { builder.send(method, attribute) }
+    let(:args) { [method, attribute] }
+    subject { builder.send(*args) }
+
+    let(:field_type) { 'input' }
+    let(:aria_described_by_target) { 'fieldset' }
+
+    it_behaves_like 'a field that supports hints'
+
+    it_behaves_like 'a field that supports errors' do
+      let(:object) { Person.new(born_on: Date.today.next_year(5)) }
+
+      let(:error_message) { /Your date of birth must be in the past/ }
+      let(:error_class) { 'govuk-input--error' }
+      let(:error_identifier) { 'person-born-on-error' }
+    end
 
     specify 'should output a form group with fieldset, date group and 3 inputs and labels' do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
@@ -88,7 +102,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     context 'legend' do
       context 'when a legend is supplied' do
-        subject { builder.send(method, attribute, legend: { text: legend_text }) }
+        subject { builder.send(*args.push(legend: { text: legend_text })) }
         specify 'legend tag should be present and have the correct contents' do
           expect(subject).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
             expect(fs).to have_tag('legend', with: { class: 'govuk-fieldset__legend' }) do |legend|
@@ -105,21 +119,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
-    context 'hint' do
-      context 'when a hint is supplied' do
-        subject { builder.send(method, attribute, hint_text: hint_text) }
-        specify 'hint should be present' do
-          expect(subject).to have_tag('span', text: hint_text, with: { class: %w(govuk-hint) })
-        end
-      end
-
-      context 'when no hint is supplied' do
-        specify 'hint should not be present' do
-          expect(subject).not_to have_tag('span', with: { class: %w(govuk-hint) })
-        end
-      end
-    end
-
     context 'default values' do
       let(:birth_day) { 3 }
       let(:birth_month) { 2 }
@@ -130,8 +129,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           born_on: Date.new(birth_year, birth_month, birth_day)
         )
       end
-
-      subject { builder.send(method, attribute) }
 
       specify 'should set the day value correctly' do
         expect(subject).to have_tag('input', with: {
@@ -158,7 +155,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     context 'block' do
       let(:paragraph) { 'A descriptive paragraph all about dates' }
       subject do
-        builder.send(method, attribute, legend: { text: legend_text }, hint_text: hint_text) do
+        builder.send(*args.push(legend: { text: legend_text }, hint_text: hint_text)) do
           builder.tag.p(paragraph, class: 'block-content')
         end
       end
@@ -186,7 +183,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     context 'dates of birth' do
-      subject { builder.send(method, attribute, date_of_birth: true) }
+      subject { builder.send(*args.push(date_of_birth: true)) }
 
       context 'auto-completion attributes' do
         specify "day field should have autocomplete attribute with value 'bday-day'" do
@@ -200,26 +197,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         specify "year field should have autocomplete attribute with value 'bday-year'" do
           expect(subject).to have_tag('input', with: { autocomplete: 'bday-year' })
         end
-      end
-    end
-
-    context 'errors' do
-      let(:object) { Person.new(born_on: Date.today.next_year(5)) }
-      subject { builder.send(method, attribute, date_of_birth: true) }
-      before { object.valid? }
-      let(:error_identifier) { 'person-born-on-error' }
-
-      specify 'the error message should be present' do
-        expect(subject).to have_tag('span', with: { class: 'govuk-error-message' }, text: /Your date of birth must be in the past/)
-      end
-
-      specify 'the error message should be associated with the fieldset' do
-        expect(subject).to have_tag('span', with: { id: error_identifier })
-        expect(subject).to have_tag('fieldset', with: { class: 'govuk-fieldset', 'aria-describedby' => error_identifier })
-      end
-
-      specify 'the date inputs should have error classes' do
-        expect(subject).to have_tag('input', count: 3, with: { class: 'govuk-input--error' })
       end
     end
   end

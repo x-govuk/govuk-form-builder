@@ -1,9 +1,10 @@
 shared_examples 'a regular input' do |method_identifier, field_type|
   let(:attribute) { :name }
   let(:label_text) { 'Full name' }
+  let(:hint_text) { 'It says it on your passport' }
   let(:method) { "govuk_#{method_identifier}_field".to_sym }
-
-  subject { builder.send(method, :name, label: { text: label_text }) }
+  let(:args) { [method, :name] }
+  subject { builder.send(*args.push(label: { text: label_text })) }
 
   specify "output should have the correct type of #{field_type}" do
     input_type = parsed_subject.at_css('input')['type']
@@ -17,68 +18,13 @@ shared_examples 'a regular input' do |method_identifier, field_type|
     end
   end
 
-  context 'label' do
-    specify 'the label should be associated with the input' do
-      input_name = parsed_subject.at_css('input')['id']
-      label_for = parsed_subject.at_css('label')['for']
-      expect(input_name).to eql(label_for)
-    end
-
-    context 'when no label is provided' do
-      subject { builder.send(method, attribute) }
-
-      specify 'output should contain a label with the capitalised attribute name' do
-        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-          expect(fg).to have_tag('label', text: attribute.capitalize)
-        end
-      end
-    end
-
-    context 'when the label is supplied with a wrapping tag' do
-      let(:wrapping_tag) { 'h2' }
-      subject { builder.send(method, attribute, label: { text: label_text, tag: wrapping_tag }) }
-
-      specify 'the label should be wrapped in by the wrapping tag' do
-        expect(subject).to have_tag(wrapping_tag, with: { class: %w(govuk-label-wrapper) }) do |wt|
-          expect(wt).to have_tag('label', text: label_text)
-        end
-      end
-    end
+  it_behaves_like 'a field that supports labels' do
+    let(:field_type) { 'input' }
   end
 
-  context 'when a hint is provided' do
-    let(:hint) { "You'll find it on your passport" }
-    subject { builder.send(method, :name, hint_text: hint) }
-
-    specify 'output should contain a hint' do
-      expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-        expect(fg).to have_tag('span', text: hint, with: { class: 'govuk-hint' })
-      end
-    end
-
-    specify 'output should also contain the label and input elements' do
-      expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-        %w(label input).each { |element| expect(fg).to have_tag(element) }
-      end
-    end
-
-    specify 'the hint should be associated with the input' do
-      input_aria_describedby = parsed_subject.at_css('input')['aria-describedby'].split
-      hint_id = parsed_subject.at_css('span.govuk-hint')['id']
-      expect(input_aria_describedby).to include(hint_id)
-    end
-  end
-
-  context 'when a hint is not provided' do
-    subject { builder.send(method, :name, hint: nil) }
-
-    specify 'output should have no empty aria-describedby attribute' do
-      expect(parsed_subject.at_css('span.govuk-hint')).not_to be_present
-    end
-
-    specify 'output should have no empty aria-describedby attribute' do
-      expect(parsed_subject.at_css('input')['aria-describedby']).not_to be_present
-    end
+  it_behaves_like 'a field that supports hints' do
+    let(:field_type) { 'input' }
+    let(:aria_described_by_target) { 'input' }
   end
 
   context 'errors' do
@@ -135,11 +81,7 @@ shared_examples 'a regular input' do |method_identifier, field_type|
     end
 
     subject do
-      builder.send(
-        method,
-        :name,
-        **regular_args.merge(extract_args(extra_args, :provided))
-      )
+      builder.send(*args, **regular_args.merge(extract_args(extra_args, :provided)))
     end
 
     specify 'input tag should have the extra attributes' do
@@ -173,34 +115,6 @@ shared_examples 'a regular input' do |method_identifier, field_type|
 
         specify "should have the correct class of #{width_class}" do
           expect(parsed_subject.at_css('input')['class']).to include(width_class)
-        end
-      end
-    end
-  end
-
-  context 'label styling' do
-    context 'font size overrides' do
-      {
-        'xl' => 'govuk-label--xl',
-        'l'  => 'govuk-label--l',
-        'm'  => 'govuk-label--m',
-        's'  => 'govuk-label--s',
-        nil  => nil
-      }.each do |size_name, size_class|
-        context "#{size_name} labels" do
-          let(:size_name) { size_name }
-          let(:size_class) { size_class }
-          subject { builder.send(method, :name, label: { size: size_name }) }
-
-          if size_class.present?
-            specify "should have extra class '#{size_class}'" do
-              expect(extract_classes(parsed_subject, 'label')).to include(size_class)
-            end
-          else
-            specify 'should have no extra size classes' do
-              expect(extract_classes(parsed_subject, 'label')).to eql(%w(govuk-label))
-            end
-          end
         end
       end
     end
