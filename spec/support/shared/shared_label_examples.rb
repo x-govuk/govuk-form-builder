@@ -25,13 +25,16 @@ shared_examples 'a field that supports labels' do
 
     context 'label styling' do
       context 'font size overrides' do
-        {
+        label_sizes = {
           'xl' => 'govuk-label--xl',
           'l'  => 'govuk-label--l',
           'm'  => 'govuk-label--m',
           's'  => 'govuk-label--s',
           nil  => nil
-        }.each do |size_name, size_class|
+        }
+        let(:label_sizes) { label_sizes }
+
+        label_sizes.each do |size_name, size_class|
           context "#{size_name} labels" do
             let(:size_name) { size_name }
             let(:size_class) { size_class }
@@ -43,7 +46,7 @@ shared_examples 'a field that supports labels' do
               end
             else
               specify 'should have no extra size classes' do
-                expect(extract_classes(parsed_subject, 'label')).to eql(%w(govuk-label))
+                expect(extract_classes(parsed_subject, 'label') & label_sizes.values).to be_empty
               end
             end
           end
