@@ -100,25 +100,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
-    context 'legend' do
-      context 'when a legend is supplied' do
-        subject { builder.send(*args.push(legend: { text: legend_text })) }
-        specify 'legend tag should be present and have the correct contents' do
-          expect(subject).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
-            expect(fs).to have_tag('legend', with: { class: 'govuk-fieldset__legend' }) do |legend|
-              expect(legend).to have_tag('h1', text: legend_text, with: { class: 'govuk-fieldset__heading' })
-            end
-          end
-        end
-      end
-
-      context 'when no legend is supplied' do
-        specify 'legend tag should not be present' do
-          expect(subject).not_to have_tag('legend')
-        end
-      end
-    end
-
     context 'default values' do
       let(:birth_day) { 3 }
       let(:birth_month) { 2 }
@@ -170,7 +151,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
 
-      # the block content (p) shold be between the hint (span) and the input container (div)
+      # the block content (p) should be between the hint (span) and the input container (div)
       let(:hint_span_selector) { 'span.govuk-hint' }
       let(:block_paragraph_selector) { 'p.block-content' }
       let(:govuk_date_selector) { 'div.govuk-date-input' }

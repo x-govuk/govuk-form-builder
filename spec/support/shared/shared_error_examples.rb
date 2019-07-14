@@ -7,10 +7,12 @@ shared_examples 'a field that supports errors' do
     end
 
     specify 'the field element should have the correct error classes' do
-      expect(subject).to have_tag(field_type, with: { class: error_class })
+      if error_class.present?
+        expect(subject).to have_tag(field_type, with: { class: error_class })
+      end
     end
 
-    specify 'the error message should be associated with the field element' do
+    specify 'the error message should be associated with the correct element' do
       expect(subject).to have_tag(aria_described_by_target, with: { 'aria-describedby' => error_identifier })
       expect(subject).to have_tag('span', with: {
         class: 'govuk-error-message',
