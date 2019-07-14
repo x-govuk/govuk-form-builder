@@ -34,6 +34,28 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:error_identifier) { 'person-born-on-error' }
     end
 
+    it_behaves_like 'a field that accepts arbitrary blocks of HTML' do
+      # the block content (p) should be between the hint (span) and the input container (div)
+      context 'ordering' do
+        let(:hint_span_selector) { 'span.govuk-hint' }
+        let(:block_paragraph_selector) { 'p.block-content' }
+        let(:govuk_date_selector) { 'div.govuk-date-input' }
+
+        let(:paragraph) { 'A descriptive paragraph all about dates' }
+        subject do
+          builder.send(*args.push(legend: { text: legend_text }, hint_text: hint_text)) do
+            builder.tag.p(paragraph, class: 'block-content')
+          end
+        end
+
+        specify 'the block content should be between the hint and the date inputs' do
+          expect(
+            parsed_subject.css([hint_span_selector, block_paragraph_selector, govuk_date_selector].join(',')).map(&:name)
+          ).to eql(%w(span p div))
+        end
+      end
+    end
+
     specify 'should output a form group with fieldset, date group and 3 inputs and labels' do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
         expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
@@ -60,7 +82,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
 
-      context 'attributes' do
+      context 'input attributes' do
         specify 'inputs should have a pattern that restricts entries to numbers' do
           expect(subject).to have_tag('input', with: { pattern: '[0-9]*' })
         end
@@ -69,34 +91,34 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           expect(subject).to have_tag('input', with: { inputmode: 'numeric' })
         end
       end
-    end
 
-    specify 'inputs should have the correct classes' do
-      expect(subject).to have_tag(
-        'input',
-        count: 3,
-        with: { class: %w(govuk-input govuk-date-input__input) }
-      )
-    end
+      specify 'labels should be associated with inputs' do
+        [day_identifier, month_identifier, year_identifier].each do |identifier|
+          expect(subject).to have_tag('label', with: { for: identifier }, count: 1)
+          expect(subject).to have_tag('input', with: { id: identifier }, count: 1)
+        end
+      end
 
-    specify 'inputs should have the width class' do
-      expect(subject).to have_tag(
-        'input',
-        count: 2,
-        with: { class: %w(govuk-input--width-2) }
-      )
+      specify 'inputs should have the correct classes' do
+        expect(subject).to have_tag(
+          'input',
+          count: 3,
+          with: { class: %w(govuk-input govuk-date-input__input) }
+        )
+      end
 
-      expect(subject).to have_tag(
-        'input',
-        count: 1,
-        with: { class: %w(govuk-input--width-4) }
-      )
-    end
+      specify 'inputs should have the width class' do
+        expect(subject).to have_tag(
+          'input',
+          count: 2,
+          with: { class: %w(govuk-input--width-2) }
+        )
 
-    specify 'labels should be associated with inputs' do
-      [day_identifier, month_identifier, year_identifier].each do |identifier|
-        expect(subject).to have_tag('label', with: { for: identifier }, count: 1)
-        expect(subject).to have_tag('input', with: { id: identifier }, count: 1)
+        expect(subject).to have_tag(
+          'input',
+          count: 1,
+          with: { class: %w(govuk-input--width-4) }
+        )
       end
     end
 
@@ -133,40 +155,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
-    context 'block' do
-      let(:paragraph) { 'A descriptive paragraph all about dates' }
-      subject do
-        builder.send(*args.push(legend: { text: legend_text }, hint_text: hint_text)) do
-          builder.tag.p(paragraph, class: 'block-content')
-        end
-      end
-
-      specify 'should add the block content in addition to the other elements' do
-        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-          expect(fg).to have_tag('input', count: 3)
-          expect(fg).to have_tag('legend', text: legend_text)
-          expect(fg).to have_tag('span', with: { class: 'govuk-hint' }, text: hint_text)
-
-          expect(fg).to have_tag('p', paragraph)
-        end
-      end
-
-      # the block content (p) should be between the hint (span) and the input container (div)
-      let(:hint_span_selector) { 'span.govuk-hint' }
-      let(:block_paragraph_selector) { 'p.block-content' }
-      let(:govuk_date_selector) { 'div.govuk-date-input' }
-
-      specify 'the block content should be between the hint and the date inputs' do
-        expect(
-          parsed_subject.css([hint_span_selector, block_paragraph_selector, govuk_date_selector].join(',')).map(&:name)
-        ).to eql(%w(span p div))
-      end
-    end
-
-    context 'dates of birth' do
-      subject { builder.send(*args.push(date_of_birth: true)) }
-
-      context 'auto-completion attributes' do
+    context 'auto-completion' do
+      context 'date of birth' do
+        subject { builder.send(*args.push(date_of_birth: true)) }
         specify "day field should have autocomplete attribute with value 'bday-day'" do
           expect(subject).to have_tag('input', with: { autocomplete: 'bday-day' })
         end
