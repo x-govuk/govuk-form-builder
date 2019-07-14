@@ -47,23 +47,37 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     it_behaves_like 'a field that accepts arbitrary blocks of HTML'
 
     context 'radio buttons' do
-      specify 'radio buttons should have the correct classes' do
-        expect(subject).to have_tag('input', with: { class: %w(govuk-radios__input) })
+      specify 'each radio button should have the correct classes' do
+        expect(subject).to have_tag('input', with: { class: %w(govuk-radios__input) }, count: colours.size)
       end
 
-      specify 'output should contain the correct number of radio buttons' do
+      specify 'each label should have the correct classes' do
+        expect(subject).to have_tag('label', count: colours.size, with: { class: %w(govuk-label govuk-radios__label) })
+      end
+
+      specify 'there should be the correct number' do
         expect(subject).to have_tag('input', count: colours.size, with: { type: 'radio' })
         expect(subject).to have_tag('label', count: colours.size)
       end
 
-      specify 'containing div should have attribute data-module="radios"' do
+      specify 'radio buttons should be surrounded by a radios module' do
         expect(subject).to have_tag('div', with: { 'data-module' => 'radios' }) do |dm|
           expect(dm).to have_tag('input', count: colours.size, with: { type: 'radio' })
         end
       end
 
-      specify 'labels should have the correct classes' do
-        expect(subject).to have_tag('label', count: colours.size, with: { class: %w(govuk-label govuk-radios__label) })
+      specify 'each radio button should have the correct id' do
+        colours.each do |colour|
+          "person_favourite_colour_#{colour.id}".tap do |association|
+            expect(subject).to have_tag('input', with: { id: association })
+          end
+        end
+      end
+
+      specify 'radio buttons should have the correct name' do
+        parsed_subject.css('input').each do |input|
+          expect(input['name']).to eql('person[favourite_colour]')
+        end
       end
 
       specify 'radio buttons should be associated with corresponding labels' do
@@ -75,21 +89,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
 
-      specify 'radio buttons should have the correct id' do
-        colours.each do |colour|
-          "person_favourite_colour_#{colour.id}".tap do |association|
-            expect(subject).to have_tag('input', with: { id: association })
-          end
-        end
-      end
-
-      specify 'radio buttons should have the correct id' do
-        parsed_subject.css('input').each do |input|
-          expect(input['name']).to eql('person[favourite_colour]')
-        end
-      end
-
-      context 'when hint_method attribute is present' do
+      context 'radio button hints' do
         let(:colours_with_descriptions) { colours.select { |c| c.description.present? } }
         let(:colours_without_descriptions) { colours.reject { |c| c.description.present? } }
 
@@ -116,48 +116,48 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           end
         end
       end
-    end
 
-    context 'layout direction' do
-      context 'when inline is specified in the options' do
-        subject do
-          builder.send(method, attribute, colours, :id, :name, :description, inline: true)
+      context 'layout direction' do
+        context 'when inline is specified in the options' do
+          subject do
+            builder.send(method, attribute, colours, :id, :name, :description, inline: true)
+          end
+
+          specify "should have the additional class 'govuk-radios--inline'" do
+            expect(subject).to have_tag('div', with: { class: %w(govuk-radios govuk-radios--inline) })
+          end
         end
 
-        specify "should have the additional class 'govuk-radios--inline'" do
-          expect(subject).to have_tag('div', with: { class: %w(govuk-radios govuk-radios--inline) })
-        end
-      end
+        context 'when inline is not specified in the options' do
+          subject do
+            builder.send(method, attribute, colours, :id, :name, :description, inline: false)
+          end
 
-      context 'when inline is not specified in the options' do
-        subject do
-          builder.send(method, attribute, colours, :id, :name, :description, inline: false)
-        end
-
-        specify "should not have the additional class 'govuk-radios--inline'" do
-          expect(parsed_subject.at_css('.govuk-radios')['class']).to eql('govuk-radios')
-        end
-      end
-    end
-
-    context 'radio button size' do
-      context 'when small is specified in the options' do
-        subject do
-          builder.send(method, attribute, colours, :id, :name, :description, small: true)
-        end
-
-        specify "should have the additional class 'govuk-radios--small'" do
-          expect(subject).to have_tag('div', with: { class: %w(govuk-radios govuk-radios--small) })
+          specify "should not have the additional class 'govuk-radios--inline'" do
+            expect(parsed_subject.at_css('.govuk-radios')['class']).to eql('govuk-radios')
+          end
         end
       end
 
-      context 'when small is not specified in the options' do
-        subject do
-          builder.send(method, attribute, colours, :id, :name, :description, small: false)
+      context 'radio button size' do
+        context 'when small is specified in the options' do
+          subject do
+            builder.send(method, attribute, colours, :id, :name, :description, small: true)
+          end
+
+          specify "should have the additional class 'govuk-radios--small'" do
+            expect(subject).to have_tag('div', with: { class: %w(govuk-radios govuk-radios--small) })
+          end
         end
 
-        specify "should not have the additional class 'govuk-radios--small'" do
-          expect(parsed_subject.at_css('.govuk-radios')['class']).to eql('govuk-radios')
+        context 'when small is not specified in the options' do
+          subject do
+            builder.send(method, attribute, colours, :id, :name, :description, small: false)
+          end
+
+          specify "should not have the additional class 'govuk-radios--small'" do
+            expect(parsed_subject.at_css('.govuk-radios')['class']).to eql('govuk-radios')
+          end
         end
       end
     end
@@ -197,7 +197,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       specify 'output should contain radio buttons' do
-        expect(subject).to have_tag('div', with: { class: 'govuk-radios' }) do
+        expect(subject).to have_tag('div', with: { class: 'govuk-radios', 'data-module' => 'radios' }) do
           expect(subject).to have_tag('input', with: { type: 'radio' }, count: 2)
         end
       end
@@ -222,7 +222,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             end
           end
 
-          specify "should not have the additional class 'govuk-radios--inline'" do
+          specify "should have no additional classes" do
             expect(parsed_subject.at_css('.govuk-radios')['class']).to eql('govuk-radios')
           end
         end
@@ -261,7 +261,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           end
         end
 
-        specify "should output a divider with default 'or' text" do
+        specify "should output a 'or' divider by default" do
           expect(subject).to have_tag('div', text: 'or', with: { class: %w(govuk-radios__divider) })
         end
 
@@ -273,7 +273,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             end
           end
 
-          specify "should output a divider with default 'or' text" do
+          specify "should output a divider containing the supplied text" do
             expect(subject).to have_tag('div', text: other_text, with: { class: %w(govuk-radios__divider) })
           end
         end
@@ -304,8 +304,12 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         builder.govuk_radio_button(:favourite_colour, :red, hint_text: red_hint)
       end
 
-      specify 'should contain a label with the correct text' do
-        expect(subject).to have_tag('span', text: red_hint, with: { class: %w(govuk-hint govuk-radios__hint) })
+      specify 'should contain a hint with the correct text' do
+        expect(subject).to have_tag('span', text: red_hint)
+      end
+
+      specify 'the hint should have the correct classes' do
+        expect(subject).to have_tag('span', with: { class: %w(govuk-hint govuk-radios__hint) })
       end
     end
 
