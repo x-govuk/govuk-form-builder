@@ -35,7 +35,7 @@ shared_examples 'a field that supports labels' do
         let(:label_sizes) { label_sizes }
 
         label_sizes.each do |size_name, size_class|
-          context "#{size_name} labels" do
+          context "#{size_name || 'no'} param" do
             let(:size_name) { size_name }
             let(:size_class) { size_class }
             subject { builder.send(*args.push(label: { size: size_name })) }
@@ -50,6 +50,12 @@ shared_examples 'a field that supports labels' do
               end
             end
           end
+        end
+
+        context 'when an invalid size is supplied' do
+          let(:size) { 'extra-medium' }
+          subject { builder.send(*args.push(label: { size: size })) }
+          specify { expect { subject }.to raise_error("invalid size '#{size}', must be xl, l, m, s or nil") }
         end
       end
     end
