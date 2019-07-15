@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.com/DFE-Digital/govuk_design_system_formbuilder.svg?branch=master)](https://travis-ci.com/DFE-Digital/govuk_design_system_formbuilder)
 [![Maintainability](https://api.codeclimate.com/v1/badges/fde73b5dc9476197281b/maintainability)](https://codeclimate.com/github/DFE-Digital/govuk_design_system_formbuilder/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/fde73b5dc9476197281b/test_coverage)](https://codeclimate.com/github/DFE-Digital/govuk_design_system_formbuilder/test_coverage)
 
 This gem provides a easy-to-use form builder that generates forms that are
 fully-compliant with the [GOV.UK Design System](https://design-system.service.gov.uk/),
