@@ -16,7 +16,12 @@ module GOVUKDesignSystemFormBuilder
       def html
         @builder.content_tag('div', class: %w(govuk-form-group)) do
           @builder.safe_join([
-            @builder.submit(@text, class: submit_button_classes(@block_content.present?), **extra_args),
+            @builder.submit(@text, class: %w(govuk-button).push(
+              warning_class,
+              secondary_class,
+              padding_class(@block_content.present?)
+            ),
+            **extra_args),
             @block_content
           ])
         end
@@ -24,22 +29,25 @@ module GOVUKDesignSystemFormBuilder
 
     private
 
-      def submit_button_classes(content_present)
-        %w(govuk-button).tap do |classes|
-          classes.push('govuk-button--warning') if @warning
-          classes.push('govuk-button--secondary') if @secondary
+      def warning_class
+        'govuk-button--warning' if @warning
+      end
 
-          # NOTE only this input will receive a right margin, block
-          # contents must be addressed individually
-          classes.push('govuk-!-margin-right-1') if content_present
-        end
+      def secondary_class
+        'govuk-button--secondary' if @secondary
+      end
+
+      def padding_class(content_present)
+        'govuk-!-margin-right-1' if content_present
       end
 
       def extra_args
-        {}.tap do |ea|
-          ea[:data] = { 'prevent-double-click' => @prevent_double_click } if @prevent_double_click
-          ea[:formnovalidate] = !@validate
-        end
+        {
+          formnovalidate: !@validate,
+          data: {
+            'prevent-double-click' => @prevent_double_click
+          }.select { |_k, v| v }
+        }
       end
     end
   end
