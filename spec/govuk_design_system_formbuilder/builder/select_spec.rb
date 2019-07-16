@@ -4,6 +4,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
   describe '#govuk_collection_select' do
     let(:attribute) { :favourite_colour }
     let(:label_text) { 'Cherished shade' }
+    let(:hint_text) { 'The colour of your favourite handkerchief' }
     let(:method) { :govuk_collection_select }
     let(:colours) do
       [
@@ -13,8 +14,23 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         OpenStruct.new(id: 'yellow', name: 'Yellow')
       ]
     end
+    let(:args) { [method, attribute, colours, :id, :name] }
+    subject { builder.send(*args) }
 
-    subject { builder.send(method, attribute, colours, :id, :name) }
+    let(:field_type) { 'select' }
+    let(:aria_described_by_target) { 'select' }
+
+    it_behaves_like 'a field that supports labels'
+
+    it_behaves_like 'a field that supports hints'
+
+    it_behaves_like 'a field that supports errors' do
+      let(:error_message) { /Choose a favourite colour/ }
+      let(:error_identifier) { 'person-favourite-colour-error' }
+      let(:error_class) { nil }
+    end
+
+    it_behaves_like 'a field that accepts arbitrary blocks of HTML'
 
     specify 'output should be a form group containing a label and select box' do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
@@ -32,56 +48,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
-    context 'labelling' do
-      subject { builder.send(method, attribute, colours, :id, :name, label: { text: label_text }) }
-
-      specify 'the select box should be labelled correctly' do
-        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-          expect(fg).to have_tag('label', text: label_text)
-        end
-      end
-
-      specify 'the label should be associated with the input' do
-        input_name = parsed_subject.at_css('select')['id']
-        label_for = parsed_subject.at_css('label')['for']
-        expect(input_name).to eql(label_for)
-      end
-
-      context 'when the label is supplied with a wrapping tag' do
-        let(:wrapping_tag) { 'h2' }
-        subject { builder.send(method, attribute, colours, :id, :name, label: { text: label_text, tag: wrapping_tag }) }
-
-        specify 'the label should be wrapped in by the wrapping tag' do
-          expect(subject).to have_tag(wrapping_tag, with: { class: %w(govuk-label-wrapper) }) do |wt|
-            expect(wt).to have_tag('label', text: label_text)
-          end
-        end
-      end
-    end
-
-    context 'when a hint is provided' do
-      let(:hint) { 'The colour of your favourite handkerchief' }
-      subject { builder.send(method, attribute, colours, :id, :name, hint_text: hint) }
-
-      specify 'output should contain a hint' do
-        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-          expect(fg).to have_tag('span', text: hint, with: { class: 'govuk-hint' })
-        end
-      end
-
-      specify 'output should also contain the label and select elements' do
-        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-          %w(label select).each { |element| expect(fg).to have_tag(element) }
-        end
-      end
-
-      specify 'the hint should be associated with the input' do
-        select_aria_describedby = parsed_subject.at_css('select')['aria-describedby'].split
-        hint_id = parsed_subject.at_css('span.govuk-hint')['id']
-        expect(select_aria_describedby).to include(hint_id)
-      end
-    end
-
     context 'extra attributes' do
       let(:extra_args) do
         {
@@ -90,34 +56,13 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         }
       end
 
-      subject { builder.send(method, attribute, colours, :id, :name, html_options: extract_args(extra_args, :provided)) }
+      subject { builder.send(*args.push(html_options: extract_args(extra_args, :provided))) }
 
-      specify 'input tag should have the extra attributes' do
-        input_tag = parsed_subject.at_css('select')
+      specify 'select tag should have the extra attributes' do
+        select_tag = parsed_subject.at_css('select')
         extract_args(extra_args, :output).each do |key, val|
-          expect(input_tag[key]).to eql(val)
+          expect(select_tag[key]).to eql(val)
         end
-      end
-    end
-
-    context 'when passed a block' do
-      let(:block_h1) { 'The quick brown fox' }
-      let(:block_h2) { 'Jumped over the' }
-      let(:block_p) { 'Lazy dog.' }
-      subject do
-        builder.send(method, attribute, colours, :id, :name) do
-          builder.safe_join([
-            builder.tag.h1(block_h1),
-            builder.tag.h2(block_h2),
-            builder.tag.p(block_p)
-          ])
-        end
-      end
-
-      specify 'should include block content' do
-        expect(subject).to have_tag('h1', text: block_h1)
-        expect(subject).to have_tag('h2', text: block_h2)
-        expect(subject).to have_tag('p', text: block_p)
       end
     end
   end

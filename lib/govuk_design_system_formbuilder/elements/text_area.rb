@@ -27,6 +27,12 @@ module GOVUKDesignSystemFormBuilder
                 @builder.text_area(
                   @attribute_name,
                   class: govuk_textarea_classes,
+                  aria: {
+                    describedby: [
+                      hint_element.hint_id,
+                      error_element.error_id
+                    ].compact.join(' ').presence
+                  },
                   **@extra_args.merge(rows: @rows)
                 ),
                 character_count_info

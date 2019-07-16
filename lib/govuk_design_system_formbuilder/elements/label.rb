@@ -53,7 +53,7 @@ module GOVUKDesignSystemFormBuilder
         when 's'       then "govuk-label--s"
         when nil       then nil
         else
-          fail "size must be either 'xl', 'l', 'm', 's' or nil"
+          fail "invalid size '#{size}', must be xl, l, m, s or nil"
         end
       end
     end

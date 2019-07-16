@@ -1,4 +1,7 @@
 describe GOVUKDesignSystemFormBuilder::FormBuilder do
+  let(:field_type) { 'input' }
+  let(:aria_described_by_target) { 'fieldset' }
+
   include_context 'setup builder'
   let(:attribute) { :favourite_colour }
   let(:label_text) { 'Cherished shade' }
@@ -18,7 +21,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       ]
     end
 
-    subject { builder.send(method, attribute, colours, :id, :name) }
+    let(:args) { [method, attribute, colours, :id, :name] }
+    subject { builder.send(*args) }
 
     specify 'output should be a form group containing a form group and fieldset' do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
@@ -26,159 +30,54 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
-    context 'fieldset options' do
-      context 'legend' do
-        let(:text) { 'Pick your favourite colour' }
-
-        context 'when supplied with custom text' do
-          subject { builder.send(method, attribute, colours, :id, :name, legend: { text: text }) }
-
-          specify 'should contain a fieldset header containing the supplied text' do
-            expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-              expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
-                expect(fs).to have_tag('h1', text: text, with: { class: 'govuk-fieldset__heading' })
-              end
-            end
-          end
-        end
-
-        context 'when no text is supplied' do
-          subject { builder.send(method, attribute, colours, :id, :name, legend: { text: nil }) }
-
-          specify 'output should not contain a header' do
-            expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-              expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
-                expect(fs).not_to have_tag('h1')
-              end
-            end
-          end
-        end
-
-        context 'when supplied with a custom tag' do
-          let(:tag) { 'h4' }
-          subject { builder.send(method, attribute, colours, :id, :name, legend: { text: text, tag: tag }) }
-
-          specify 'output fieldset should contain the specified tag' do
-            expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-              expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
-                expect(fs).to have_tag(tag, text: text)
-              end
-            end
-          end
-        end
-
-        context 'when supplied with a custom size' do
-          context 'with a valid size' do
-            let(:size) { 'm' }
-            subject { builder.send(method, attribute, colours, :id, :name, legend: { text: text, size: size }) }
-
-            specify 'output fieldset should contain the specified tag' do
-              expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-                expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
-                  expect(fs).to have_tag('h1', text: text, class: "govuk-fieldset__legend--#{size}")
-                end
-              end
-            end
-          end
-
-          context 'with an invalid size' do
-            let(:size) { 'miniscule' }
-            subject { builder.send(method, attribute, colours, :id, :name, legend: { text: text, size: size }) }
-
-            specify 'should raise an appropriate error' do
-              expect { subject }.to raise_error(/invalid size #{size}/)
-            end
-          end
-        end
-      end
+    it_behaves_like 'a field that supports a fieldset with legend' do
+      let(:legend_text) { 'Pick your favourite colour' }
     end
 
-    context 'when a hint is provided' do
-      let(:hint) { 'The colour of your favourite handkerchief' }
-      subject { builder.send(method, attribute, colours, :id, :name, hint_text: hint) }
-
-      specify 'output should contain a hint' do
-        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-          expect(fg).to have_tag('span', text: hint, with: { class: 'govuk-hint' })
-        end
-      end
-
-      specify 'output should also contain the fieldset' do
-        expect(subject).to have_tag('fieldset', with: { class: 'govuk-fieldset' })
-      end
-
-      specify 'the hint should be associated with the fieldset' do
-        expect(parsed_subject.at_css('.govuk-fieldset')['aria-describedby'].split).to include(
-          parsed_subject.at_css('.govuk-fieldset > .govuk-hint')['id']
-        )
-      end
+    it_behaves_like 'a field that supports hints' do
+      let(:hint_text) { 'The colour of your favourite handkerchief' }
     end
 
-    context 'errors' do
-      context 'when the attribute has errors' do
-        before { object.valid? }
-
-        specify 'form group should have error class' do
-          expect(subject).to have_tag('div', with: { class: 'govuk-form-group--error' })
-        end
-
-        specify 'should have error message' do
-          expect(subject).to have_tag('span', with: { class: 'govuk-error-message' }, text: /Choose a favourite colour/)
-        end
-
-        specify 'the error message should be associated with the fieldset' do
-          expect(parsed_subject.at_css('.govuk-fieldset')['aria-describedby'].split).to include(
-            parsed_subject.at_css('.govuk-fieldset > .govuk-error-message')['id']
-          )
-        end
-      end
+    it_behaves_like 'a field that supports errors' do
+      let(:error_message) { /Choose a favourite colour/ }
+      let(:error_class) { nil }
+      let(:error_identifier) { 'person-favourite-colour-error' }
     end
 
-    context 'when passed a block' do
-      let(:block_h1) { 'The quick brown fox' }
-      let(:block_h2) { 'Jumped over the' }
-      let(:block_p) { 'Lazy dog.' }
-      subject do
-        builder.send(method, attribute, colours, :id, :name) do
-          builder.safe_join([
-            builder.tag.h1(block_h1),
-            builder.tag.h2(block_h2),
-            builder.tag.p(block_p)
-          ])
-        end
-      end
-
-      specify 'should include block content' do
-        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-          expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
-            expect(fs).to have_tag('h1', text: block_h1)
-            expect(fs).to have_tag('h2', text: block_h2)
-            expect(fs).to have_tag('p', text: block_p)
-          end
-        end
-      end
-    end
+    it_behaves_like 'a field that accepts arbitrary blocks of HTML'
 
     context 'radio buttons' do
-      subject { builder.send(method, attribute, colours, :id, :name) }
-
-      specify 'radio buttons should have the correct classes' do
-        expect(subject).to have_tag('input', with: { class: %w(govuk-radios__input) })
+      specify 'each radio button should have the correct classes' do
+        expect(subject).to have_tag('input', with: { class: %w(govuk-radios__input) }, count: colours.size)
       end
 
-      specify 'output should contain the correct number of radio buttons' do
+      specify 'each label should have the correct classes' do
+        expect(subject).to have_tag('label', count: colours.size, with: { class: %w(govuk-label govuk-radios__label) })
+      end
+
+      specify 'there should be the correct number' do
         expect(subject).to have_tag('input', count: colours.size, with: { type: 'radio' })
         expect(subject).to have_tag('label', count: colours.size)
       end
 
-      specify 'containing div should have attribute data-module="radios"' do
+      specify 'radio buttons should be surrounded by a radios module' do
         expect(subject).to have_tag('div', with: { 'data-module' => 'radios' }) do |dm|
           expect(dm).to have_tag('input', count: colours.size, with: { type: 'radio' })
         end
       end
 
-      specify 'labels should have the correct classes' do
-        expect(subject).to have_tag('label', count: colours.size, with: { class: %w(govuk-label govuk-radios__label) })
+      specify 'each radio button should have the correct id' do
+        colours.each do |colour|
+          "person_favourite_colour_#{colour.id}".tap do |association|
+            expect(subject).to have_tag('input', with: { id: association })
+          end
+        end
+      end
+
+      specify 'radio buttons should have the correct name' do
+        parsed_subject.css('input').each do |input|
+          expect(input['name']).to eql('person[favourite_colour]')
+        end
       end
 
       specify 'radio buttons should be associated with corresponding labels' do
@@ -190,25 +89,11 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
 
-      specify 'radio buttons should have the correct id' do
-        colours.each do |colour|
-          "person_favourite_colour_#{colour.id}".tap do |association|
-            expect(subject).to have_tag('input', with: { id: association })
-          end
-        end
-      end
-
-      specify 'radio buttons should have the correct id' do
-        parsed_subject.css('input').each do |input|
-          expect(input['name']).to eql('person[favourite_colour]')
-        end
-      end
-
-      context 'when hint_method attribute is present' do
+      context 'radio button hints' do
         let(:colours_with_descriptions) { colours.select { |c| c.description.present? } }
         let(:colours_without_descriptions) { colours.reject { |c| c.description.present? } }
 
-        subject { builder.send(method, attribute, colours, :id, :name, :description) }
+        subject { builder.send(*args.push(:description)) }
 
         specify 'the radio buttons with hints should contain hint text' do
           expect(subject).to have_tag('span', count: colours_with_descriptions.size, with: { class: 'govuk-hint govuk-radios__hint' })
@@ -231,111 +116,11 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           end
         end
       end
-    end
-
-    context 'layout direction' do
-      context 'when inline is specified in the options' do
-        subject do
-          builder.send(method, attribute, colours, :id, :name, :description, inline: true)
-        end
-
-        specify "should have the additional class 'govuk-radios--inline'" do
-          expect(subject).to have_tag('div', with: { class: %w(govuk-radios govuk-radios--inline) })
-        end
-      end
-
-      context 'when inline is not specified in the options' do
-        subject do
-          builder.send(method, attribute, colours, :id, :name, :description, inline: false)
-        end
-
-        specify "should not have the additional class 'govuk-radios--inline'" do
-          expect(parsed_subject.at_css('.govuk-radios')['class']).to eql('govuk-radios')
-        end
-      end
-    end
-
-    context 'radio button size' do
-      context 'when small is specified in the options' do
-        subject do
-          builder.send(method, attribute, colours, :id, :name, :description, small: true)
-        end
-
-        specify "should have the additional class 'govuk-radios--small'" do
-          expect(subject).to have_tag('div', with: { class: %w(govuk-radios govuk-radios--small) })
-        end
-      end
-
-      context 'when small is not specified in the options' do
-        subject do
-          builder.send(method, attribute, colours, :id, :name, :description, small: false)
-        end
-
-        specify "should not have the additional class 'govuk-radios--small'" do
-          expect(parsed_subject.at_css('.govuk-radios')['class']).to eql('govuk-radios')
-        end
-      end
-    end
-  end
-
-  describe '#govuk_radio_buttons_fieldset' do
-    let(:method) { :govuk_radio_buttons_fieldset }
-
-    context 'when no block is supplied' do
-      subject { builder.send(method, attribute) }
-      specify { expect { subject }.to raise_error(LocalJumpError, /no block given/) }
-    end
-
-    context 'when a block is supplied' do
-      let(:block_h1) { 'The quick brown fox' }
-      let(:block_h2) { 'Jumped over the' }
-      let(:block_p) { 'Lazy dog.' }
-
-      subject do
-        builder.send(method, attribute) do
-          builder.safe_join([
-            builder.tag.h1(block_h1),
-            builder.tag.h2(block_h2),
-            builder.tag.p(block_p)
-          ])
-        end
-      end
-
-      specify 'output should contain the contents of the block' do
-        expect(subject).to have_tag('h1', text: block_h1)
-        expect(subject).to have_tag('h2', text: block_h2)
-        expect(subject).to have_tag('p', text: block_p)
-      end
-    end
-
-    context 'when a block containing radio buttons is supplied' do
-      subject do
-        builder.send(method, attribute) do
-          builder.safe_join([
-            builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label }),
-            builder.govuk_radio_button(:favourite_colour, :green, label: { text: green_label })
-          ])
-        end
-      end
-
-      specify 'output should be a form group containing a form group and fieldset' do
-        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-          expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' })
-        end
-      end
-
-      specify 'output should contain radio buttons' do
-        expect(subject).to have_tag('div', with: { class: 'govuk-radios' }) do
-          expect(subject).to have_tag('input', with: { type: 'radio' }, count: 2)
-        end
-      end
 
       context 'layout direction' do
         context 'when inline is specified in the options' do
           subject do
-            builder.send(method, attribute, inline: true) do
-              builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label })
-            end
+            builder.send(method, attribute, colours, :id, :name, :description, inline: true)
           end
 
           specify "should have the additional class 'govuk-radios--inline'" do
@@ -345,9 +130,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
         context 'when inline is not specified in the options' do
           subject do
-            builder.send(method, attribute) do
-              builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label })
-            end
+            builder.send(method, attribute, colours, :id, :name, :description, inline: false)
           end
 
           specify "should not have the additional class 'govuk-radios--inline'" do
@@ -359,7 +142,96 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       context 'radio button size' do
         context 'when small is specified in the options' do
           subject do
-            builder.send(method, attribute, small: true) do
+            builder.send(method, attribute, colours, :id, :name, :description, small: true)
+          end
+
+          specify "should have the additional class 'govuk-radios--small'" do
+            expect(subject).to have_tag('div', with: { class: %w(govuk-radios govuk-radios--small) })
+          end
+        end
+
+        context 'when small is not specified in the options' do
+          subject do
+            builder.send(method, attribute, colours, :id, :name, :description, small: false)
+          end
+
+          specify "should not have the additional class 'govuk-radios--small'" do
+            expect(parsed_subject.at_css('.govuk-radios')['class']).to eql('govuk-radios')
+          end
+        end
+      end
+    end
+  end
+
+  describe '#govuk_radio_buttons_fieldset' do
+    let(:method) { :govuk_radio_buttons_fieldset }
+    let(:args) { [method, attribute] }
+
+    subject do
+      builder.send(*args) do
+        builder.safe_join([
+          builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label }),
+          builder.govuk_radio_button(:favourite_colour, :green, label: { text: green_label })
+        ])
+      end
+    end
+
+    context 'when no block is supplied' do
+      subject { builder.send(*args) }
+      specify { expect { subject }.to raise_error(LocalJumpError, /no block given/) }
+    end
+
+    it_behaves_like 'a field that accepts arbitrary blocks of HTML'
+
+    it_behaves_like 'a field that supports errors' do
+      let(:error_message) { /Choose a favourite colour/ }
+      let(:error_class) { nil }
+      let(:error_identifier) { 'person-favourite-colour-error' }
+    end
+
+    context 'when a block containing radio buttons is supplied' do
+      specify 'output should be a form group containing a form group and fieldset' do
+        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
+          expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' })
+        end
+      end
+
+      specify 'output should contain radio buttons' do
+        expect(subject).to have_tag('div', with: { class: 'govuk-radios', 'data-module' => 'radios' }) do
+          expect(subject).to have_tag('input', with: { type: 'radio' }, count: 2)
+        end
+      end
+
+      context 'layout direction' do
+        context 'when inline is specified in the options' do
+          subject do
+            builder.send(*args.push(inline: true)) do
+              builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label })
+            end
+          end
+
+          specify "should have the additional class 'govuk-radios--inline'" do
+            expect(subject).to have_tag('div', with: { class: %w(govuk-radios govuk-radios--inline) })
+          end
+        end
+
+        context 'when inline is not specified in the options' do
+          subject do
+            builder.send(*args) do
+              builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label })
+            end
+          end
+
+          specify "should have no additional classes" do
+            expect(parsed_subject.at_css('.govuk-radios')['class']).to eql('govuk-radios')
+          end
+        end
+      end
+
+      context 'radio button size' do
+        context 'when small is specified in the options' do
+          subject do
+            builder.send(*args.push(small: true)) do
               builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label })
             end
           end
@@ -371,7 +243,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
         context 'when small is not specified in the options' do
           subject do
-            builder.send(method, attribute) do
+            builder.send(*args) do
               builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label })
             end
           end
@@ -384,12 +256,12 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       context 'dividers' do
         subject do
-          builder.send(method, attribute) do
+          builder.send(*args) do
             builder.govuk_radio_divider
           end
         end
 
-        specify "should output a divider with default 'or' text" do
+        specify "should output a 'or' divider by default" do
           expect(subject).to have_tag('div', text: 'or', with: { class: %w(govuk-radios__divider) })
         end
 
@@ -401,28 +273,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             end
           end
 
-          specify "should output a divider with default 'or' text" do
+          specify "should output a divider containing the supplied text" do
             expect(subject).to have_tag('div', text: other_text, with: { class: %w(govuk-radios__divider) })
-          end
-        end
-      end
-
-      context 'errors' do
-        context 'when the attribute has errors' do
-          before { object.valid? }
-
-          specify 'form group should have error class' do
-            expect(subject).to have_tag('div', with: { class: 'govuk-form-group--error' })
-          end
-
-          specify 'should have error message' do
-            expect(subject).to have_tag('span', with: { class: 'govuk-error-message' }, text: /Choose a favourite colour/)
-          end
-
-          specify 'the error message should be associated with the fieldset' do
-            expect(parsed_subject.at_css('.govuk-fieldset')['aria-describedby'].split).to include(
-              parsed_subject.at_css('.govuk-fieldset > .govuk-error-message')['id']
-            )
           end
         end
       end
@@ -432,8 +284,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
   describe '#govuk_radio_button' do
     let(:method) { :govuk_radio_button }
     let(:value) { 'red' }
+    let(:args) { [method, attribute, value] }
 
-    subject { builder.send(method, attribute, value) }
+    subject { builder.send(*args) }
 
     specify 'output should contain a radio item group with a radio input' do
       expect(subject).to have_tag('div', with: { class: 'govuk-radios__item' }) do |ri|
@@ -441,62 +294,22 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
-    context 'label' do
-      context 'when a label is provided' do
-        context 'association with the input' do
-          let(:colour) { :red }
-          let(:identifier) { "person_favourite_colour_#{colour}" }
-
-          subject do
-            builder.govuk_radio_button(:favourite_colour, colour)
-          end
-
-          specify 'should contain a label with the correct text' do
-            expect(subject).to have_tag('input', with: { id: identifier })
-            expect(subject).to have_tag('label', with: { for: identifier })
-          end
-        end
-
-        context 'with default options' do
-          subject do
-            builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label })
-          end
-
-          specify 'should contain a label with the correct text' do
-            expect(subject).to have_tag('label', text: red_label)
-          end
-        end
-
-        context 'with additional options' do
-          subject do
-            builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label, size: 'l' })
-          end
-          specify 'should allow label to be configured' do
-            expect(subject).to have_tag('label', text: red_label, with: {
-              class: 'govuk-label govuk-label--l'
-            })
-          end
-        end
-      end
-
-      context 'when no label is provided' do
-        subject do
-          builder.govuk_radio_button(:favourite_colour, :red)
-        end
-
-        specify 'should contain a label with the correct text' do
-          expect(subject).to have_tag('label', text: 'Favourite_colour')
-        end
-      end
+    it_behaves_like 'a field that supports labels' do
+      let(:label_text) { 'Red' }
+      let(:field_type) { 'input' }
     end
 
-    context 'when a hint is provided' do
+    context 'radio button hints' do
       subject do
         builder.govuk_radio_button(:favourite_colour, :red, hint_text: red_hint)
       end
 
-      specify 'should contain a label with the correct text' do
-        expect(subject).to have_tag('span', text: red_hint, with: { class: 'govuk-hint' })
+      specify 'should contain a hint with the correct text' do
+        expect(subject).to have_tag('span', text: red_hint)
+      end
+
+      specify 'the hint should have the correct classes' do
+        expect(subject).to have_tag('span', with: { class: %w(govuk-hint govuk-radios__hint) })
       end
     end
 
