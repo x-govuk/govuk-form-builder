@@ -11,8 +11,11 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
   describe '#govuk_collection_check_boxes' do
     let(:attribute) { :projects }
     let(:method) { :govuk_collection_check_boxes }
+    let(:field_type) { 'input' }
+    let(:aria_described_by_target) { 'fieldset' }
 
-    subject { builder.send(method, attribute, projects, :id, :name) }
+    let(:args) { [method, attribute, projects, :id, :name] }
+    subject { builder.send(*args) }
 
     specify 'output should be a form group containing a form group and fieldset' do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
@@ -20,114 +23,18 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
-    context 'fieldset options' do
-      context 'legend' do
-        let(:text) { 'Which projects is this person assigned to?' }
-
-        context 'when supplied with custom text' do
-          subject { builder.send(method, attribute, projects, :id, :name, legend: { text: text }) }
-
-          specify 'should contain a fieldset header containing the supplied text' do
-            expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-              expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
-                expect(fs).to have_tag('h1', text: text, with: { class: 'govuk-fieldset__heading' })
-              end
-            end
-          end
-        end
-
-        context 'when no text is supplied' do
-          subject { builder.send(method, attribute, projects, :id, :name, legend: { text: nil }) }
-
-          specify 'output should not contain a header' do
-            expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-              expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
-                expect(fs).not_to have_tag('h1')
-              end
-            end
-          end
-        end
-
-        context 'when supplied with a custom tag' do
-          let(:tag) { 'h4' }
-          subject { builder.send(method, attribute, projects, :id, :name, legend: { text: text, tag: tag }) }
-
-          specify 'output fieldset should contain the specified tag' do
-            expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-              expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
-                expect(fs).to have_tag(tag, text: text)
-              end
-            end
-          end
-        end
-
-        context 'when supplied with a custom size' do
-          context 'with a valid size' do
-            let(:size) { 'm' }
-            subject { builder.send(method, attribute, projects, :id, :name, legend: { text: text, size: size }) }
-
-            specify 'output fieldset should contain the specified tag' do
-              expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-                expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
-                  expect(fs).to have_tag('h1', text: text, class: "govuk-fieldset__legend--#{size}")
-                end
-              end
-            end
-          end
-
-          context 'with an invalid size' do
-            let(:size) { 'miniscule' }
-            subject { builder.send(method, attribute, projects, :id, :name, legend: { text: text, size: size }) }
-
-            specify 'should raise an appropriate error' do
-              expect { subject }.to raise_error(/invalid size #{size}/)
-            end
-          end
-        end
-      end
+    it_behaves_like 'a field that supports a fieldset with legend' do
+      let(:legend_text) { 'Which projects is this person assigned to?' }
     end
 
-    context 'when a hint is provided' do
-      let(:hint) { 'The colour of your favourite handkerchief' }
-      subject { builder.send(method, attribute, projects, :id, :name, hint_text: hint) }
-
-      specify 'output should contain a hint' do
-        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-          expect(fg).to have_tag('span', text: hint, with: { class: 'govuk-hint' })
-        end
-      end
-
-      specify 'output should also contain the fieldset and radios container' do
-        expect(subject).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
-          expect(fs).to have_tag('div', with: { class: 'govuk-checkboxes' })
-        end
-      end
-
-      specify 'the hint should be associated with the fieldset' do
-        expect(parsed_subject.at_css('.govuk-fieldset')['aria-describedby'].split).to include(
-          parsed_subject.at_css('.govuk-fieldset > .govuk-hint')['id']
-        )
-      end
+    it_behaves_like 'a field that supports hints' do
+      let(:hint_text) { 'The colour of your favourite handkerchief' }
     end
 
-    context 'errors' do
-      context 'when the attribute has errors' do
-        before { object.valid? }
-
-        specify 'form group should have error class' do
-          expect(subject).to have_tag('div', with: { class: 'govuk-form-group--error' })
-        end
-
-        specify 'should have error message' do
-          expect(subject).to have_tag('span', with: { class: 'govuk-error-message' }, text: /Select at least one project/)
-        end
-
-        specify 'the error message should be associated with the fieldset' do
-          expect(parsed_subject.at_css('.govuk-fieldset')['aria-describedby'].split).to include(
-            parsed_subject.at_css('.govuk-fieldset > .govuk-error-message')['id']
-          )
-        end
-      end
+    it_behaves_like 'a field that supports errors' do
+      let(:error_message) { /Select at least one project/ }
+      let(:error_class) { nil }
+      let(:error_identifier) { 'person-projects-error' }
     end
 
     context 'when passed a block' do
@@ -135,7 +42,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:block_h2) { 'Jumped over the' }
       let(:block_p) { 'Lazy dog.' }
       subject do
-        builder.send(method, attribute, projects, :id, :name) do
+        builder.send(*args) do
           builder.safe_join([
             builder.tag.h1(block_h1),
             builder.tag.h2(block_h2),
@@ -152,8 +59,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     describe 'check boxes' do
-      subject { builder.send(method, attribute, projects, :id, :name) }
-
       specify 'output should contain the correct number of check boxes' do
         expect(subject).to have_tag('input', count: projects.size, with: { type: 'checkbox' })
         expect(subject).to have_tag('label', count: projects.size)
@@ -177,10 +82,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
 
-      context 'labels' do
+      context 'check box labels' do
         specify 'labels should contain the correct content' do
           projects.map(&:name).each do |label_text|
-            expect(subject).to have_tag('label', text: label_text, with: { class: 'govuk-label govuk-checkboxes__label' })
+            expect(subject).to have_tag('label', text: label_text, with: { class: %w(govuk-label govuk-checkboxes__label) })
           end
         end
 
@@ -198,9 +103,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
 
-      context 'hints' do
+      context 'check box hints' do
         context 'when a hint method is provided' do
-          subject { builder.send(method, attribute, projects, :id, :name, :description) }
+          subject { builder.send(*args.push(:description)) }
 
           specify 'hints should contain the correct content' do
             projects.map(&:description).compact.each do |hint_text|

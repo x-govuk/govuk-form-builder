@@ -35,9 +35,9 @@ module GOVUKDesignSystemFormBuilder
 
       def legend_classes
         size = @legend.dig(:size)
-        fail "invalid size #{size}, must be #{LEGEND_SIZES.join(', ')}" unless size.in?(LEGEND_SIZES)
+        fail "invalid size '#{size}', must be #{LEGEND_SIZES.join(', ')}" unless size.in?(LEGEND_SIZES)
 
-        "govuk-fieldset__legend govuk-fieldset__legend--#{size}"
+        ["govuk-fieldset__legend", "govuk-fieldset__legend--#{size}"]
       end
 
       def legend_heading_classes

@@ -5,8 +5,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
   let(:attribute) { :cv }
   let(:label_text) { 'A brief list of your achievements' }
   let(:hint_text) { 'Keep it to a page, nobody will read it anyway' }
-
-  subject { builder.send(method, attribute) }
+  let(:args) { [method, attribute] }
+  let(:field_type) { 'textarea' }
+  subject { builder.send(*args) }
 
   specify 'should output a form group containing a textarea' do
     expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
@@ -14,78 +15,29 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
   end
 
+  it_behaves_like 'a field that supports labels', 'textarea'
+
+  it_behaves_like 'a field that supports hints' do
+    let(:aria_described_by_target) { 'textarea' }
+  end
+
+  it_behaves_like 'a field that supports errors' do
+    let(:object) { Person.new(cv: 'a' * 50) } # max length is 30
+    let(:aria_described_by_target) { 'textarea' }
+
+    let(:error_message) { /too long/ }
+    let(:error_class) { 'govuk-textarea--error' }
+    let(:error_identifier) { 'person-cv-error' }
+  end
+
   specify 'should have the correct classes' do
     expect(subject).to have_tag('textarea', with: { class: 'govuk-textarea' })
-  end
-
-  describe 'errors' do
-    context 'when the attribute has errors' do
-      let(:object) { Person.new(cv: 'a' * 50) } # max length is 30
-      before { object.valid? }
-
-      specify 'an error message should be displayed' do
-        expect(subject).to have_tag('span', with: { class: 'govuk-error-message' }, text: /too long/)
-      end
-
-      specify 'the textarea element should have the correct error classes' do
-        expect(subject).to have_tag('textarea', with: { class: 'govuk-textarea--error' })
-      end
-    end
-
-    context 'when the attribute has no errors' do
-      specify 'no error messages should be displayed' do
-        expect(subject).not_to have_tag('span', with: { class: 'govuk-error-message' })
-      end
-    end
-  end
-
-  describe 'label' do
-    context 'when a label is provided' do
-      subject { builder.send(method, attribute, label: { text: label_text }) }
-
-      specify 'the label should be included' do
-        expect(subject).to have_tag('label', with: { class: 'govuk-label' }, text: label_text)
-      end
-    end
-
-    context 'when no label is provided' do
-      specify 'the label should have the default value' do
-        expect(subject).to have_tag('label', with: { class: 'govuk-label' }, text: attribute.capitalize)
-      end
-    end
-
-    context 'when the label is supplied with a wrapping tag' do
-      let(:wrapping_tag) { 'h2' }
-      subject { builder.send(method, attribute, label: { text: label_text, tag: wrapping_tag }) }
-
-      specify 'the label should be wrapped in by the wrapping tag' do
-        expect(subject).to have_tag(wrapping_tag, with: { class: %w(govuk-label-wrapper) }) do |wt|
-          expect(wt).to have_tag('label', text: label_text)
-        end
-      end
-    end
-  end
-
-  describe 'hint' do
-    context 'when a hint is provided' do
-      subject { builder.send(method, attribute, hint_text: hint_text) }
-
-      specify 'the hint should be included' do
-        expect(subject).to have_tag('span', with: { class: 'govuk-hint' }, text: hint_text)
-      end
-    end
-
-    context 'when no hint is provided' do
-      specify 'no hint should be included' do
-        expect(subject).not_to have_tag('span', with: { class: 'govuk-hint' })
-      end
-    end
   end
 
   describe 'limits' do
     context 'max words' do
       let(:max_words) { 20 }
-      subject { builder.send(method, attribute, max_words: max_words) }
+      subject { builder.send(*args.push(max_words: max_words)) }
 
       specify 'should wrap the form group inside a character count tag' do
         expect(subject).to have_tag(
@@ -113,7 +65,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     context 'max chars' do
       let(:max_chars) { 35 }
-      subject { builder.send(method, attribute, max_chars: max_chars) }
+      subject { builder.send(*args.push(max_chars: max_chars)) }
 
       specify 'should wrap the form group inside a character count tag' do
         expect(subject).to have_tag(
@@ -140,7 +92,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     context 'max chars and max words' do
-      subject { builder.send(method, attribute, max_chars: 5, max_words: 5) }
+      subject { builder.send(*args.push(max_chars: 5, max_words: 5)) }
 
       specify 'should raise an error' do
         expect { subject }.to raise_error(ArgumentError, 'limit can be words or chars')
@@ -150,7 +102,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     context 'thresholds' do
       let(:threshold) { 60 }
       let(:max_chars) { 35 }
-      subject { builder.send(method, attribute, max_chars: max_chars, threshold: threshold) }
+      subject { builder.send(*args.push(max_chars: max_chars, threshold: threshold)) }
 
       specify 'should wrap the form group inside a character count tag with a threshold' do
         expect(subject).to have_tag(
@@ -185,7 +137,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
   describe 'extra arguments' do
     let(:placeholder) { 'Once upon a time…' }
-    subject { builder.send(method, attribute, placeholder: placeholder, required: true) }
+    subject { builder.send(*args.push(placeholder: placeholder, required: true)) }
 
     specify 'should add the extra attributes to the textarea' do
       expect(subject).to have_tag(
