@@ -2,6 +2,9 @@ require 'rspec-html-matchers'
 require 'action_view'
 require 'active_model'
 require 'pry'
+require 'simplecov'
+
+SimpleCov.start
 
 Dir[File.join('./spec', 'support', '**', '*.rb')].each { |file| require file }
 
