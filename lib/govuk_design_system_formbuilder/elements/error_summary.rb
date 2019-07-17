@@ -32,9 +32,12 @@ module GOVUKDesignSystemFormBuilder
 
       def error_list_item(attribute, messages)
         @builder.content_tag('li') do
-          @builder.tag.a(
+          @builder.link_to(
             messages.join(', '),
-            href: ['#', error_id(attribute)].join
+            ['#', error_id(attribute)].join,
+            data: {
+              turbolinks: false
+            }
           )
         end
       end
