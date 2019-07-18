@@ -10,12 +10,12 @@ module GOVUKDesignSystemFormBuilder
       def html
         return nil unless object_has_errors?
 
-        @builder.content_tag('div', class: 'govuk-error-summary', **error_summary_attributes) do
+        @builder.content_tag('div', class: summary_class, **error_summary_attributes) do
           @builder.safe_join(
             [
-              @builder.tag.h2(@title, id: error_summary_title_id, class: 'govuk-error-summary__title'),
-              @builder.content_tag('div', class: 'govuk-error-summary__body') do
-                @builder.content_tag('ul', class: 'govuk-list govuk-error-summary__list') do
+              @builder.tag.h2(@title, id: error_summary_title_id, class: summary_class('title')),
+              @builder.content_tag('div', class: summary_class('body')) do
+                @builder.content_tag('ul', class: ['govuk-list', summary_class('list')]) do
                   @builder.safe_join(
                     @builder.object.errors.messages.map do |attribute, messages|
                       error_list_item(attribute, messages)
@@ -44,6 +44,14 @@ module GOVUKDesignSystemFormBuilder
 
       def same_page_link(target)
         '#'.concat(target)
+      end
+
+      def summary_class(part = nil)
+        if part
+          'govuk-error-summary'.concat('__', part)
+        else
+          'govuk-error-summary'
+        end
       end
 
       def error_id(attribute)
