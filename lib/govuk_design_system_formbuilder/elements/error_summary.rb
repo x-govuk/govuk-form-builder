@@ -34,12 +34,16 @@ module GOVUKDesignSystemFormBuilder
         @builder.content_tag('li') do
           @builder.link_to(
             messages.join(', '),
-            ['#', error_id(attribute)].join,
+            same_page_link(error_id(attribute)),
             data: {
               turbolinks: false
             }
           )
         end
+      end
+
+      def same_page_link(target)
+        '#'.concat(target)
       end
 
       def error_id(attribute)
