@@ -23,6 +23,7 @@ require 'govuk_design_system_formbuilder/elements/file'
 require 'govuk_design_system_formbuilder/containers/form_group'
 require 'govuk_design_system_formbuilder/containers/fieldset'
 require 'govuk_design_system_formbuilder/containers/radios'
+require 'govuk_design_system_formbuilder/containers/radio_buttons_fieldset'
 require 'govuk_design_system_formbuilder/containers/check_boxes'
 require 'govuk_design_system_formbuilder/containers/character_count'
 

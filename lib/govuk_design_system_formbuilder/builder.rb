@@ -225,21 +225,8 @@ module GOVUKDesignSystemFormBuilder
     #    = f.govuk_radio_divider
     #    = f.govuk_radio_button :favourite_colour, :yellow, label: { text: 'Yellow' }
     #
-    def govuk_radio_buttons_fieldset(attribute_name, hint_text: nil, legend: {}, inline: false, small: false)
-      hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint_text)
-      error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
-
-      Containers::FormGroup.new(self, object_name, attribute_name).html do
-        Containers::Fieldset.new(self, legend: legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
-          safe_join([
-            hint_element.html,
-            error_element.html,
-            Containers::Radios.new(self, inline: inline, small: small).html do
-              yield
-            end
-          ])
-        end
-      end
+    def govuk_radio_buttons_fieldset(attribute_name, hint_text: nil, legend: {}, inline: false, small: false, &block)
+      Containers::RadioButtonsFieldset.new(self, object_name, attribute_name, hint_text: hint_text, legend: legend, inline: inline, small: small, &block).html
     end
 
     # Generates a radio button
