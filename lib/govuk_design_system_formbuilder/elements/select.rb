@@ -34,6 +34,7 @@ module GOVUKDesignSystemFormBuilder
               @text_method,
               @options,
               @html_options.merge(
+                id: field_id,
                 class: select_classes,
                 aria: {
                   describedby: [
