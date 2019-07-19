@@ -10,6 +10,27 @@ module GOVUKDesignSystemFormBuilder
       fail 'should be overridden'
     end
 
+    # returns the id value used for the input
+    #
+    # @note field_id is overridden so that the error summary can link to the
+    #   correct element.
+    #
+    #   It's straightforward for inputs with a single element (like a textarea
+    #   or text input) but the GOV.UK Design System requires that the error
+    #   summary link to the first checkbox or radio in a list, so additional
+    #   logic is requred
+    #
+    # @return [String] the element's +id+
+    # @see https://design-system.service.gov.uk/components/error-summary/#linking-from-the-error-summary-to-each-answer
+    #   GOV.UK linking to elements from the error summary
+    def field_id
+      if has_errors?
+        build_id('field-error')
+      else
+        build_id('field')
+      end
+    end
+
     def hint_id
       return nil if @hint_text.blank?
 
@@ -24,10 +45,6 @@ module GOVUKDesignSystemFormBuilder
 
     def conditional_id
       build_id('conditional')
-    end
-
-    def attribute_descriptor
-      build_id(nil, '_', '-')
     end
 
     def has_errors?
