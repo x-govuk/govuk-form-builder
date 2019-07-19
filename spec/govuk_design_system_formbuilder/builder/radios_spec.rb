@@ -68,7 +68,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       specify 'each radio button should have the correct id' do
         colours.each do |colour|
-          "person_favourite_colour_#{colour.id}".tap do |association|
+          "person-favourite-colour-#{colour.id}-field".tap do |association|
             expect(subject).to have_tag('input', with: { id: association })
           end
         end
@@ -82,7 +82,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       specify 'radio buttons should be associated with corresponding labels' do
         colours.each do |colour|
-          "person_favourite_colour_#{colour.id}".tap do |association|
+          "person-favourite-colour-#{colour.id}-field".tap do |association|
             expect(subject).to have_tag('input', with: { id: association })
             expect(subject).to have_tag('label', with: { for: association })
           end

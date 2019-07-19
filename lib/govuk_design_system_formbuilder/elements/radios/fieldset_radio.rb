@@ -34,7 +34,7 @@ module GOVUKDesignSystemFormBuilder
           @builder.radio_button(
             @attribute_name,
             @value,
-            id: attribute_descriptor,
+            id: field_id,
             aria: { describedby: hint_id },
             data: { 'aria-controls' => @conditional_id },
             class: %w(govuk-radios__input)

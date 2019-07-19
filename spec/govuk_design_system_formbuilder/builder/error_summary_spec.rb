@@ -50,7 +50,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         specify 'the error message list should contain links to relevant errors' do
           object.errors.messages.each do |attribute, _msg|
             expect(subject).to have_tag('a', with: {
-              href: "#person-#{underscores_to_dashes(attribute)}-error",
+              href: "#person-#{underscores_to_dashes(attribute)}-field-error",
               'data-turbolinks' => false
             })
           end

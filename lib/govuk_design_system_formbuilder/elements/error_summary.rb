@@ -34,7 +34,7 @@ module GOVUKDesignSystemFormBuilder
         @builder.content_tag('li') do
           @builder.link_to(
             messages.join(', '),
-            same_page_link(error_id(attribute)),
+            same_page_link(field_id(attribute)),
             data: {
               turbolinks: false
             }
@@ -52,6 +52,10 @@ module GOVUKDesignSystemFormBuilder
         else
           'govuk-error-summary'
         end
+      end
+
+      def field_id(attribute)
+        build_id('field-error', override_attribute_name: attribute)
       end
 
       def error_id(attribute)
