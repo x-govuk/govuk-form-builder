@@ -25,9 +25,9 @@ module GOVUKDesignSystemFormBuilder
                 @builder.content_tag('div', class: 'govuk-date-input') do
                   @builder.safe_join(
                     [
-                      date_input_group(:day),
-                      date_input_group(:month),
-                      date_input_group(:year, width: 4)
+                      date_input_item(:day, link_errors: true),
+                      date_input_item(:month),
+                      date_input_item(:year, width: 4)
                     ]
                   )
                 end
@@ -39,7 +39,7 @@ module GOVUKDesignSystemFormBuilder
 
     private
 
-      def date_input_group(segment, width: 2)
+      def date_input_item(segment, width: 2, link_errors: false)
         value = @builder.object.try(@attribute_name).try(segment)
 
         @builder.content_tag('div', class: %w(govuk-date-input__item)) do
@@ -49,13 +49,13 @@ module GOVUKDesignSystemFormBuilder
                 @builder.tag.label(
                   segment.capitalize,
                   class: date_input_label_classes,
-                  for: date_attribute_descriptor(segment)
+                  for: date_attribute_id(segment, link_errors)
                 ),
 
                 @builder.tag.input(
-                  id: date_attribute_descriptor(segment),
+                  id: date_attribute_id(segment, link_errors),
                   class: date_input_classes(width),
-                  name: date_attribute_identifier(segment),
+                  name: date_attribute_name(segment),
                   type: 'text',
                   pattern: '[0-9]*',
                   inputmode: 'numeric',
@@ -79,11 +79,18 @@ module GOVUKDesignSystemFormBuilder
         %w(govuk-label govuk-date-input__label)
       end
 
-      def date_attribute_descriptor(segment)
-        [@object_name, @attribute_name, SEGMENTS.fetch(segment)].join("_")
+      # if the field has errors we want the govuk_error_summary to
+      # be able to link to the day field. Otherwise, generate IDs
+      # in the normal fashion
+      def date_attribute_id(segment, link_errors)
+        if has_errors? && link_errors
+          field_id
+        else
+          [@object_name, @attribute_name, SEGMENTS.fetch(segment)].join("_")
+        end
       end
 
-      def date_attribute_identifier(segment)
+      def date_attribute_name(segment)
         "%<object_name>s[%<attribute_name>s(%<segment>s)]" % {
           object_name: @object_name,
           attribute_name: @attribute_name,
