@@ -62,7 +62,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
-    context 'when the object has errors' do
+    context 'when the object has no errors' do
       let(:object) { Person.valid_example }
       subject { builder.send(method) }
 
