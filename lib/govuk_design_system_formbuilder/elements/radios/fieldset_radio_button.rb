@@ -1,7 +1,7 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     module Radios
-      class FieldsetRadio < Base
+      class FieldsetRadioButton < Base
         def initialize(builder, object_name, attribute_name, value, label:, hint_text:, &block)
           super(builder, object_name, attribute_name)
 

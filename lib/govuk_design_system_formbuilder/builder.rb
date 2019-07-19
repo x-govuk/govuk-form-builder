@@ -198,29 +198,8 @@ module GOVUKDesignSystemFormBuilder
     #    legend: { text: 'Pick your favourite colour', size: 'm' },
     #    hint_text: 'If you cannot find the exact match choose something close',
     #    inline: false
-    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: { text: nil, size: 'm' }, inline: false, small: false)
-      hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint_text)
-      error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
-
-      Containers::FormGroup.new(self, object_name, attribute_name).html do
-        Containers::Fieldset.new(self, legend: legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
-          safe_join(
-            [
-              hint_element.html,
-              error_element.html,
-
-              (yield if block_given?),
-              Containers::Radios.new(self, inline: inline, small: small).html do
-                safe_join(
-                  collection.map do |item|
-                    Elements::Radios::CollectionRadio.new(self, object_name, attribute_name, item, value_method, text_method, hint_method).html
-                  end
-                )
-              end
-            ].compact
-          )
-        end
-      end
+    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: { text: nil, size: 'm' }, inline: false, small: false, &block)
+      Elements::CollectionRadioButtons.new(self, object_name, attribute_name, collection, value_method, text_method, hint_method, hint_text: hint_text, legend: legend, inline: inline, small: small, &block).html
     end
 
     # Generates a radio button fieldset container and injects the supplied block contents
@@ -282,7 +261,7 @@ module GOVUKDesignSystemFormBuilder
     #    = f.govuk_radio_button :favourite_colour, :red, label: { text: 'Red' } do
     #
     def govuk_radio_button(attribute_name, value, hint_text: nil, label: {}, &block)
-      Elements::Radios::FieldsetRadio.new(self, object_name, attribute_name, value, hint_text: hint_text, label: label, &block).html
+      Elements::Radios::FieldsetRadioButton.new(self, object_name, attribute_name, value, hint_text: hint_text, label: label, &block).html
     end
 
     # Inserts a text divider into a list of radio buttons
