@@ -55,11 +55,11 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def field_id(attribute)
-        build_id('field-error', override_attribute_name: attribute)
+        build_id('field-error', attribute_name: attribute)
       end
 
       def error_id(attribute)
-        build_id('error', override_attribute_name: attribute)
+        build_id('error', attribute_name: attribute)
       end
 
       def error_summary_title_id

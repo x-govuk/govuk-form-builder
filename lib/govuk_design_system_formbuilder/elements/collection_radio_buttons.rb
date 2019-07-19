@@ -38,7 +38,7 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def build_collection
-        @collection.map do |item|
+        @collection.map.with_index do |item, i|
           Elements::Radios::CollectionRadioButton.new(
             @builder,
             @object_name,
@@ -46,7 +46,8 @@ module GOVUKDesignSystemFormBuilder
             item,
             @value_method,
             @text_method,
-            @hint_method
+            @hint_method,
+            link_errors: i.zero?
           ).html
         end
       end
