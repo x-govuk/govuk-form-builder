@@ -160,36 +160,8 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @return [ActiveSupport::SafeBuffer] HTML output
-    def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, html_options: { class: 'govuk-select' }, hint_text: nil, label: {})
-      label_element = Elements::Label.new(self, object_name, attribute_name, label)
-      hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint_text)
-      error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
-
-      Containers::FormGroup.new(self, object_name, attribute_name).html do
-        safe_join([
-          label_element.html,
-          hint_element.html,
-          error_element.html,
-
-          (yield if block_given?),
-
-          collection_select(
-            attribute_name,
-            collection,
-            value_method,
-            text_method,
-            options,
-            html_options.merge(
-              aria: {
-                describedby: [
-                  hint_element.hint_id,
-                  error_element.error_id
-                ].compact.join(' ').presence
-              }
-            )
-          )
-        ])
-      end
+    def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, html_options: {}, hint_text: nil, label: {}, &block)
+      Elements::Select.new(self, object_name, attribute_name, collection, value_method, text_method, hint_text: hint_text, label: label, options: options, html_options: html_options, &block).html
     end
 
     # Generates a radio button for each item in the supplied collection
