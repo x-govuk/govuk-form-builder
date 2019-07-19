@@ -308,25 +308,7 @@ module GOVUKDesignSystemFormBuilder
     #    hint_text: "If it isn't listed here, tough luck",
     #    inline: false
     def govuk_collection_check_boxes(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: {}, small: false, &block)
-      hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint_text)
-      error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
-
-      Containers::FormGroup.new(self, object_name, attribute_name).html do
-        Containers::Fieldset.new(self, legend: legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
-          safe_join(
-            [
-              hint_element.html,
-              error_element.html,
-              (block.call if block_given?),
-              Containers::CheckBoxes.new(self, small: small).html do
-                collection_check_boxes(attribute_name, collection, value_method, text_method) do |check_box|
-                  Elements::CheckBoxes::CollectionCheckBox.new(self, attribute_name, check_box, hint_method).html
-                end
-              end
-            ]
-          )
-        end
-      end
+      Elements::CollectionCheckBoxes.new(self, object_name, attribute_name, collection, value_method, text_method, hint_method, hint_text: hint_text, legend: legend, small: small, &block).html
     end
 
     # Generates a submit button, green by default
