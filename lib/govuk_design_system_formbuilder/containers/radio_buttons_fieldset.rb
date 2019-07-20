@@ -8,7 +8,7 @@ module GOVUKDesignSystemFormBuilder
         @small         = small
         @legend        = legend
         @hint_text     = hint_text
-        @block_content = @builder.capture { yield }
+        @block_content = @builder.capture { block.call }
       end
 
       def html

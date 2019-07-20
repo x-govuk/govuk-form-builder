@@ -178,7 +178,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     context 'when no block is supplied' do
       subject { builder.send(*args) }
-      specify { expect { subject }.to raise_error(LocalJumpError, /no block given/) }
+      specify { expect { subject }.to raise_error(NoMethodError, /undefined method.*call/) }
     end
 
     it_behaves_like 'a field that accepts arbitrary blocks of HTML'
