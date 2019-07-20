@@ -5,10 +5,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
   include_context 'setup builder'
   let(:attribute) { :favourite_colour }
   let(:label_text) { 'Cherished shade' }
-  let(:red_label) { 'Rosso' }
-  let(:green_label) { 'Verde' }
-  let(:red_hint) { 'Roses are red' }
-  let(:blue_hint) { 'Violets are... purple?' }
 
   describe '#govuk_collection_radio_buttons' do
     let(:method) { :govuk_collection_radio_buttons }
@@ -68,7 +64,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       specify 'each radio button should have the correct id' do
         colours.each do |colour|
-          "person_favourite_colour_#{colour.id}".tap do |association|
+          "person-favourite-colour-#{colour.id}-field".tap do |association|
             expect(subject).to have_tag('input', with: { id: association })
           end
         end
@@ -82,7 +78,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       specify 'radio buttons should be associated with corresponding labels' do
         colours.each do |colour|
-          "person_favourite_colour_#{colour.id}".tap do |association|
+          "person-favourite-colour-#{colour.id}-field".tap do |association|
             expect(subject).to have_tag('input', with: { id: association })
             expect(subject).to have_tag('label', with: { for: association })
           end
@@ -178,7 +174,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     context 'when no block is supplied' do
       subject { builder.send(*args) }
-      specify { expect { subject }.to raise_error(LocalJumpError, /no block given/) }
+      specify { expect { subject }.to raise_error(NoMethodError, /undefined method.*call/) }
     end
 
     it_behaves_like 'a field that accepts arbitrary blocks of HTML'

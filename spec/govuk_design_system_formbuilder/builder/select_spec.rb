@@ -6,14 +6,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     let(:label_text) { 'Cherished shade' }
     let(:hint_text) { 'The colour of your favourite handkerchief' }
     let(:method) { :govuk_collection_select }
-    let(:colours) do
-      [
-        OpenStruct.new(id: 'red', name: 'Red'),
-        OpenStruct.new(id: 'blue', name: 'Blue'),
-        OpenStruct.new(id: 'green', name: 'Green'),
-        OpenStruct.new(id: 'yellow', name: 'Yellow')
-      ]
-    end
     let(:args) { [method, attribute, colours, :id, :name] }
     subject { builder.send(*args) }
 

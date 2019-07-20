@@ -1,30 +1,22 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     module CheckBoxes
-      class Hint
-        def initialize(builder, attribute, checkbox, text)
-          @builder   = builder
-          @attribute = attribute
-          @checkbox  = checkbox
-          @text      = text
+      class Hint < GOVUKDesignSystemFormBuilder::Base
+        def initialize(builder, object_name, attribute_name, hint_text, value)
+          super(builder, object_name, attribute_name)
+
+          @value     = value
+          @hint_text = hint_text
         end
 
         def html
-          return nil if @text.blank?
+          return nil if @hint_text.blank?
 
-          @builder.tag.span(@text, class: hint_classes, id: id)
+          @builder.tag.span(@hint_text, class: hint_classes, id: id)
         end
 
         def id
-          return nil if @text.blank?
-
-          [
-            @attribute,
-            @checkbox.object.id,
-            'hint'
-          ]
-            .join('-')
-            .parameterize
+          hint_id
         end
 
       private
