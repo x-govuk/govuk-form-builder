@@ -22,7 +22,7 @@ module GOVUKDesignSystemFormBuilder
                 @builder.radio_button(
                   @attribute_name,
                   @value,
-                  id: field_id(include_value: @link_errors),
+                  id: field_id(link_errors: @link_errors),
                   aria: { describedby: hint_id },
                   class: %w(govuk-radios__input)
                 ),

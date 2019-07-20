@@ -57,26 +57,70 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
 
         describe 'linking to elements' do
-          describe 'text fields' do
-            specify 'the error message should link to the text field'
+          it_behaves_like 'an error summary linking directly to a form element', :govuk_text_field
+          it_behaves_like 'an error summary linking directly to a form element', :govuk_number_field
+          it_behaves_like 'an error summary linking directly to a form element', :govuk_phone_field
+          it_behaves_like 'an error summary linking directly to a form element', :govuk_url_field
+          it_behaves_like 'an error summary linking directly to a form element', :govuk_email_field
+          it_behaves_like 'an error summary linking directly to a form element', :govuk_file_field
+          it_behaves_like 'an error summary linking directly to a form element', :govuk_text_area, 'textarea'
 
-            # text, email, url, phone, number, textarea, select, file
+          describe 'collection select boxes' do
+            let(:object) { Person.new(favourite_colour: nil) }
+            let(:identifier) { 'person-favourite-colour-field-error' }
+            subject do
+              builder.capture do
+                builder.safe_join(
+                  [
+                    builder.govuk_error_summary,
+                    builder.govuk_collection_select(:favourite_colour, colours, :id, :name)
+                  ]
+                )
+              end
+            end
+
+            specify "the error message should link directly to the govuk_collection_select field" do
+              expect(subject).to have_tag('a', with: { href: "#" + identifier })
+              expect(subject).to have_tag('select', with: { id: identifier })
+            end
           end
 
           describe 'radio button collections' do
-            specify 'the error message should link to the first radio button'
+            let(:object) { Person.new(favourite_colour: nil) }
+            let(:identifier) { 'person-favourite-colour-field-error' }
+            subject do
+              builder.content_tag('div') do
+                builder.capture do
+                  builder.safe_join(
+                    [
+                      builder.govuk_error_summary,
+                      builder.govuk_collection_radio_buttons(:favourite_colour, colours, :id, :name)
+                    ]
+                  )
+                end
+              end
+            end
+
+            specify 'the error message should link to only one radio button' do
+              expect(subject).to have_tag('a', with: { href: "#" + identifier })
+              expect(subject).to have_tag('input', with: { type: 'radio', id: identifier }, count: 1)
+            end
+
+            specify 'the radio button linked to should be first' do
+              expect(parsed_subject.css('input').first).to eql(parsed_subject.at_css('#' + identifier))
+            end
           end
 
           describe 'radio button fieldsets' do
-            specify 'the error message should link to the first radio button'
+            specify 'the error message should link directly to the first radio button'
           end
 
           describe 'check box collections' do
-            specify 'the error message should link to the first check box'
+            specify 'the error message should link directly to the first check box'
           end
 
           describe 'date fields' do
-            specify 'the error message should link to the day field'
+            specify 'the error message should link directly to the day field'
           end
         end
 
