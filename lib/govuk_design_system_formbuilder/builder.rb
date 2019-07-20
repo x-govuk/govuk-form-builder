@@ -240,6 +240,8 @@ module GOVUKDesignSystemFormBuilder
     # @see https://design-system.service.gov.uk/components/radios/ GOV.UK Radios
     # @param block [Block] Any supplied HTML will be wrapped in a conditional
     #   container and only revealed when the radio button is picked
+    # @param link_errors [Boolean] controls whether this radio button should be linked to
+    #   from the error summary. <b>Should only be set to +true+ for the first radio button in a fieldset</b>
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
     # @example A collection of radio buttons for favourite colours with a divider
@@ -247,8 +249,8 @@ module GOVUKDesignSystemFormBuilder
     #  = f.govuk_collection_radio_buttons :favourite_colour, inline: false do
     #    = f.govuk_radio_button :favourite_colour, :red, label: { text: 'Red' } do
     #
-    def govuk_radio_button(attribute_name, value, hint_text: nil, label: {}, &block)
-      Elements::Radios::FieldsetRadioButton.new(self, object_name, attribute_name, value, hint_text: hint_text, label: label, &block).html
+    def govuk_radio_button(attribute_name, value, hint_text: nil, label: {}, link_errors: false, &block)
+      Elements::Radios::FieldsetRadioButton.new(self, object_name, attribute_name, value, hint_text: hint_text, label: label, link_errors: link_errors, &block).html
     end
 
     # Inserts a text divider into a list of radio buttons

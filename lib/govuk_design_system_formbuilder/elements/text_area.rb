@@ -26,7 +26,7 @@ module GOVUKDesignSystemFormBuilder
                 error_element.html,
                 @builder.text_area(
                   @attribute_name,
-                  id: field_id,
+                  id: field_id(link_errors: true),
                   class: govuk_textarea_classes,
                   aria: {
                     describedby: [

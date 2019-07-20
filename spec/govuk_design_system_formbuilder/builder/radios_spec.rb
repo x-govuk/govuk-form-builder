@@ -5,10 +5,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
   include_context 'setup builder'
   let(:attribute) { :favourite_colour }
   let(:label_text) { 'Cherished shade' }
-  let(:red_label) { 'Rosso' }
-  let(:green_label) { 'Verde' }
-  let(:red_hint) { 'Roses are red' }
-  let(:blue_hint) { 'Violets are... purple?' }
 
   describe '#govuk_collection_radio_buttons' do
     let(:method) { :govuk_collection_radio_buttons }

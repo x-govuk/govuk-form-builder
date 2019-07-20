@@ -1,13 +1,14 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     module CheckBoxes
-      class Label
-        def initialize(builder)
-          @builder = builder
+      class Label < GOVUKDesignSystemFormBuilder::Base
+        def initialize(builder, object_name, attribute_name, value)
+          super(builder, object_name, attribute_name)
+          @value = value
         end
 
         def html
-          @builder.label(class: label_classes)
+          @builder.label(for: field_id, class: label_classes)
         end
 
       private

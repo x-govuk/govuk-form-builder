@@ -41,7 +41,7 @@ module GOVUKDesignSystemFormBuilder
 
       def build_html_options(hint_element, error_element)
         @html_options.deep_merge(
-          id: field_id,
+          id: field_id(link_errors: true),
           class: select_classes,
           aria: {
             describedby: [

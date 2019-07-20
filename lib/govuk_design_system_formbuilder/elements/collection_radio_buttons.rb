@@ -47,7 +47,7 @@ module GOVUKDesignSystemFormBuilder
             @value_method,
             @text_method,
             @hint_method,
-            link_errors: i.zero?
+            link_errors: has_errors? && i.zero?
           ).html
         end
       end

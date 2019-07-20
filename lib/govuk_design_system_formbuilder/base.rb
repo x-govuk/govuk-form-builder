@@ -23,7 +23,7 @@ module GOVUKDesignSystemFormBuilder
     # @return [String] the element's +id+
     # @see https://design-system.service.gov.uk/components/error-summary/#linking-from-the-error-summary-to-each-answer
     #   GOV.UK linking to elements from the error summary
-    def field_id(link_errors: true)
+    def field_id(link_errors: false)
       if link_errors && has_errors?
         build_id('field-error', include_value: false)
       else

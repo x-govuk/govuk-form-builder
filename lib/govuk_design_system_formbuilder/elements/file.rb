@@ -22,7 +22,7 @@ module GOVUKDesignSystemFormBuilder
               error_element.html,
               @builder.file_field(
                 @attribute_name,
-                id: field_id,
+                id: field_id(link_errors: true),
                 class: file_classes,
                 aria: {
                   describedby: [

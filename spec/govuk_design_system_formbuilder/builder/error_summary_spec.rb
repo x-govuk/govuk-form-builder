@@ -112,15 +112,93 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           end
 
           describe 'radio button fieldsets' do
-            specify 'the error message should link directly to the first radio button'
+            let(:object) { Person.new(favourite_colour: nil) }
+            let(:identifier) { 'person-favourite-colour-field-error' }
+            subject do
+              builder.content_tag('div') do
+                builder.capture do
+                  builder.safe_join(
+                    [
+                      builder.govuk_error_summary,
+                      builder.govuk_radio_buttons_fieldset(:favourite_colour) do
+                        builder.safe_join(
+                          [
+                            builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label }, link_errors: true),
+                            builder.govuk_radio_button(:favourite_colour, :green, label: { text: green_label })
+                          ]
+                        )
+                      end
+                    ]
+                  )
+                end
+              end
+            end
+
+            specify 'the error message should link to only one radio button' do
+              expect(subject).to have_tag('a', with: { href: "#" + identifier })
+              expect(subject).to have_tag('input', with: { type: 'radio', id: identifier }, count: 1)
+            end
+
+            specify 'the radio button linked to should be first' do
+              expect(parsed_subject.css('input').first).to eql(parsed_subject.at_css('#' + identifier))
+            end
           end
 
           describe 'check box collections' do
-            specify 'the error message should link directly to the first check box'
+            let(:object) { Person.new(projects: nil) }
+            let(:identifier) { 'person-projects-field-error' }
+            subject do
+              builder.content_tag('div') do
+                builder.capture do
+                  builder.safe_join(
+                    [
+                      builder.govuk_error_summary,
+                      builder.govuk_collection_check_boxes(:projects, projects, :id, :name)
+                    ]
+                  )
+                end
+              end
+            end
+
+            specify 'the error message should link to only one check box' do
+              expect(subject).to have_tag('a', with: { href: "#" + identifier })
+              expect(subject).to have_tag('input', with: { type: 'checkbox', id: identifier }, count: 1)
+            end
+
+            specify 'the check box linked to should be first' do
+              expect(parsed_subject.css("input[type='checkbox']").first).to eql(parsed_subject.at_css('#' + identifier))
+            end
           end
 
           describe 'date fields' do
-            specify 'the error message should link directly to the day field'
+            let(:object) { Person.new(born_on: Date.today.next_year(5)) }
+            let(:identifier) { 'person-born-on-field-error' }
+            let(:day_field_name) { 'person[born_on(3i)]' }
+            subject do
+              builder.content_tag('div') do
+                builder.capture do
+                  builder.safe_join(
+                    [
+                      builder.govuk_error_summary,
+                      builder.govuk_date_field(:born_on)
+                    ]
+                  )
+                end
+              end
+            end
+
+            specify 'the error message should link to only one check box' do
+              expect(subject).to have_tag('a', with: { href: "#" + identifier })
+              expect(subject).to have_tag('input', with: { id: identifier }, count: 1)
+            end
+
+            specify 'the targetted input should be the first field' do
+              expect(parsed_subject.css("input").first).to eql(parsed_subject.at_css('#' + identifier))
+            end
+
+            specify 'the targetted input should be the day field' do
+              expect(parsed_subject.at_css('#' + identifier).attribute('name').value).to eql(day_field_name)
+            end
           end
         end
 
