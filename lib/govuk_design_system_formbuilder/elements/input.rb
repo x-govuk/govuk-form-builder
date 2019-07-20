@@ -25,6 +25,7 @@ module GOVUKDesignSystemFormBuilder
               @builder.send(
                 @builder_method,
                 @attribute_name,
+                id: field_id(link_errors: true),
                 class: input_classes,
                 aria: {
                   describedby: [

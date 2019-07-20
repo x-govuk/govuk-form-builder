@@ -5,7 +5,7 @@ module GOVUKDesignSystemFormBuilder
         super(builder, object_name, attribute_name)
 
         @text           = label_text(text)
-        @value          = value # used by attribute_descriptor
+        @value          = value # used by field_id
         @size_class     = label_size_class(size)
         @radio_class    = radio_class(radio)
         @checkbox_class = checkbox_class(checkbox)
@@ -29,6 +29,7 @@ module GOVUKDesignSystemFormBuilder
           @attribute_name,
           @text,
           value: @value,
+          for: field_id,
           class: %w(govuk-label).push(@size_class, @weight_class, @radio_class, @checkbox_class).compact
         )
       end

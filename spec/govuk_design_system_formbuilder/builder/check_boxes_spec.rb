@@ -1,13 +1,6 @@
 describe GOVUKDesignSystemFormBuilder::FormBuilder do
   include_context 'setup builder'
 
-  let(:project_x) { Project.new(id: 1, name: 'Project X', description: 'Xanthous, xylophone, xenon') }
-  let(:project_y) { Project.new(id: 2, name: 'Project Y', description: 'Yellow, yoga, yacht') }
-  let(:project_z) { Project.new(id: 3, name: 'Project Z', description: nil) }
-
-  let(:projects) { [project_x, project_y, project_z] }
-  let(:projects_with_descriptions) { projects.select { |p| p.description.present? } }
-
   describe '#govuk_collection_check_boxes' do
     let(:attribute) { :projects }
     let(:method) { :govuk_collection_check_boxes }

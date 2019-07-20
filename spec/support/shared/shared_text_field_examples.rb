@@ -18,55 +18,19 @@ shared_examples 'a regular input' do |method_identifier, field_type|
     end
   end
 
-  it_behaves_like 'a field that supports labels' do
-    let(:field_type) { 'input' }
-  end
+  let(:field_type) { 'input' }
+  let(:aria_described_by_target) { 'input' }
 
-  it_behaves_like 'a field that supports hints' do
-    let(:field_type) { 'input' }
-    let(:aria_described_by_target) { 'input' }
-  end
+  it_behaves_like 'a field that supports labels'
 
-  context 'errors' do
-    context 'when the attribute has errors' do
-      subject { builder.send(method, :name, hint: nil) }
-      let(:object) { Person.new(name: nil) }
-      before { object.valid? }
+  it_behaves_like 'a field that supports hints'
 
-      let(:message) { object.errors.messages[:name].join }
+  it_behaves_like 'a field that supports errors' do
+    let(:object) { Person.new(name: nil) }
 
-      specify 'form group should have error class' do
-        expect(subject).to have_tag('div', with: { class: %w(govuk-form-group govuk-form-group--error) })
-      end
-
-      specify 'input should have error class' do
-        expect(subject).to have_tag('input', with: { class: 'govuk-input--error' })
-      end
-
-      specify 'error message should be present' do
-        expect(parsed_subject.at_css('.govuk-error-message').text).to include(message)
-      end
-
-      specify 'the error message should be associated with the input' do
-        error_id = parsed_subject.at_css('span.govuk-error-message')['id']
-        expect(parsed_subject.at_css('input')['aria-describedby'].split).to include(error_id)
-      end
-    end
-
-    context 'when the field has no errors' do
-      let(:object) { Person.new(name: 'Joey') }
-      specify 'should not have error class' do
-        expect(parsed_subject.at_css('.govuk-form-group')['class']).not_to include('govuk-form-group--error')
-      end
-
-      specify 'error message should not be present' do
-        expect(parsed_subject.at_css('.govuk-error-message')).to be_nil
-      end
-
-      specify 'the error message should be associated with the input' do
-        expect(parsed_subject.at_css('input')['aria-describedby']).to be_nil
-      end
-    end
+    let(:error_message) { /Enter a name/ }
+    let(:error_class) { 'govuk-input--error' }
+    let(:error_identifier) { 'person-name-error' }
   end
 
   context 'extra attributes' do

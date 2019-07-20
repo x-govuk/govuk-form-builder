@@ -160,36 +160,8 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @return [ActiveSupport::SafeBuffer] HTML output
-    def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, html_options: { class: 'govuk-select' }, hint_text: nil, label: {})
-      label_element = Elements::Label.new(self, object_name, attribute_name, label)
-      hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint_text)
-      error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
-
-      Containers::FormGroup.new(self, object_name, attribute_name).html do
-        safe_join([
-          label_element.html,
-          hint_element.html,
-          error_element.html,
-
-          (yield if block_given?),
-
-          collection_select(
-            attribute_name,
-            collection,
-            value_method,
-            text_method,
-            options,
-            html_options.merge(
-              aria: {
-                describedby: [
-                  hint_element.hint_id,
-                  error_element.error_id
-                ].compact.join(' ').presence
-              }
-            )
-          )
-        ])
-      end
+    def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, html_options: {}, hint_text: nil, label: {}, &block)
+      Elements::Select.new(self, object_name, attribute_name, collection, value_method, text_method, hint_text: hint_text, label: label, options: options, html_options: html_options, &block).html
     end
 
     # Generates a radio button for each item in the supplied collection
@@ -226,29 +198,8 @@ module GOVUKDesignSystemFormBuilder
     #    legend: { text: 'Pick your favourite colour', size: 'm' },
     #    hint_text: 'If you cannot find the exact match choose something close',
     #    inline: false
-    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: { text: nil, size: 'm' }, inline: false, small: false)
-      hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint_text)
-      error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
-
-      Containers::FormGroup.new(self, object_name, attribute_name).html do
-        Containers::Fieldset.new(self, legend: legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
-          safe_join(
-            [
-              hint_element.html,
-              error_element.html,
-
-              (yield if block_given?),
-              Containers::Radios.new(self, inline: inline, small: small).html do
-                safe_join(
-                  collection.map do |item|
-                    Elements::Radios::CollectionRadio.new(self, object_name, attribute_name, item, value_method, text_method, hint_method).html
-                  end
-                )
-              end
-            ].compact
-          )
-        end
-      end
+    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: { text: nil, size: 'm' }, inline: false, small: false, &block)
+      Elements::CollectionRadioButtons.new(self, object_name, attribute_name, collection, value_method, text_method, hint_method, hint_text: hint_text, legend: legend, inline: inline, small: small, &block).html
     end
 
     # Generates a radio button fieldset container and injects the supplied block contents
@@ -274,21 +225,8 @@ module GOVUKDesignSystemFormBuilder
     #    = f.govuk_radio_divider
     #    = f.govuk_radio_button :favourite_colour, :yellow, label: { text: 'Yellow' }
     #
-    def govuk_radio_buttons_fieldset(attribute_name, hint_text: nil, legend: {}, inline: false, small: false)
-      hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint_text)
-      error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
-
-      Containers::FormGroup.new(self, object_name, attribute_name).html do
-        Containers::Fieldset.new(self, legend: legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
-          safe_join([
-            hint_element.html,
-            error_element.html,
-            Containers::Radios.new(self, inline: inline, small: small).html do
-              yield
-            end
-          ])
-        end
-      end
+    def govuk_radio_buttons_fieldset(attribute_name, hint_text: nil, legend: {}, inline: false, small: false, &block)
+      Containers::RadioButtonsFieldset.new(self, object_name, attribute_name, hint_text: hint_text, legend: legend, inline: inline, small: small, &block).html
     end
 
     # Generates a radio button
@@ -302,6 +240,8 @@ module GOVUKDesignSystemFormBuilder
     # @see https://design-system.service.gov.uk/components/radios/ GOV.UK Radios
     # @param block [Block] Any supplied HTML will be wrapped in a conditional
     #   container and only revealed when the radio button is picked
+    # @param link_errors [Boolean] controls whether this radio button should be linked to
+    #   from the error summary. <b>Should only be set to +true+ for the first radio button in a fieldset</b>
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
     # @example A collection of radio buttons for favourite colours with a divider
@@ -309,8 +249,8 @@ module GOVUKDesignSystemFormBuilder
     #  = f.govuk_collection_radio_buttons :favourite_colour, inline: false do
     #    = f.govuk_radio_button :favourite_colour, :red, label: { text: 'Red' } do
     #
-    def govuk_radio_button(attribute_name, value, hint_text: nil, label: {}, &block)
-      Elements::Radios::FieldsetRadio.new(self, object_name, attribute_name, value, hint_text: hint_text, label: label, &block).html
+    def govuk_radio_button(attribute_name, value, hint_text: nil, label: {}, link_errors: false, &block)
+      Elements::Radios::FieldsetRadioButton.new(self, object_name, attribute_name, value, hint_text: hint_text, label: label, link_errors: link_errors, &block).html
     end
 
     # Inserts a text divider into a list of radio buttons
@@ -357,25 +297,7 @@ module GOVUKDesignSystemFormBuilder
     #    hint_text: "If it isn't listed here, tough luck",
     #    inline: false
     def govuk_collection_check_boxes(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: {}, small: false, &block)
-      hint_element  = Elements::Hint.new(self, object_name, attribute_name, hint_text)
-      error_element = Elements::ErrorMessage.new(self, object_name, attribute_name)
-
-      Containers::FormGroup.new(self, object_name, attribute_name).html do
-        Containers::Fieldset.new(self, legend: legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
-          safe_join(
-            [
-              hint_element.html,
-              error_element.html,
-              (block.call if block_given?),
-              Containers::CheckBoxes.new(self, small: small).html do
-                collection_check_boxes(attribute_name, collection, value_method, text_method) do |check_box|
-                  Elements::CheckBoxes::CollectionCheckBox.new(self, attribute_name, check_box, hint_method).html
-                end
-              end
-            ]
-          )
-        end
-      end
+      Elements::CollectionCheckBoxes.new(self, object_name, attribute_name, collection, value_method, text_method, hint_method, hint_text: hint_text, legend: legend, small: small, &block).html
     end
 
     # Generates a submit button, green by default
