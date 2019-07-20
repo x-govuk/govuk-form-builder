@@ -56,6 +56,30 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           end
         end
 
+        describe 'linking to elements' do
+          describe 'text fields' do
+            specify 'the error message should link to the text field'
+
+            # text, email, url, phone, number, textarea, select, file
+          end
+
+          describe 'radio button collections' do
+            specify 'the error message should link to the first radio button'
+          end
+
+          describe 'radio button fieldsets' do
+            specify 'the error message should link to the first radio button'
+          end
+
+          describe 'check box collections' do
+            specify 'the error message should link to the first check box'
+          end
+
+          describe 'date fields' do
+            specify 'the error message should link to the day field'
+          end
+        end
+
         def underscores_to_dashes(val)
           val.to_s.tr('_', '-')
         end
