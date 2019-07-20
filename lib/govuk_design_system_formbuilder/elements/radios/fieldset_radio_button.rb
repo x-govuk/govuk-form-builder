@@ -2,12 +2,13 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     module Radios
       class FieldsetRadioButton < Base
-        def initialize(builder, object_name, attribute_name, value, label:, hint_text:, &block)
+        def initialize(builder, object_name, attribute_name, value, label:, hint_text:, link_errors:, &block)
           super(builder, object_name, attribute_name)
 
-          @value     = value
-          @label     = label
-          @hint_text = hint_text
+          @value       = value
+          @label       = label
+          @hint_text   = hint_text
+          @link_errors = has_errors? && link_errors
 
           if block_given?
             @conditional_content = wrap_conditional(block)
@@ -34,7 +35,7 @@ module GOVUKDesignSystemFormBuilder
           @builder.radio_button(
             @attribute_name,
             @value,
-            id: field_id,
+            id: field_id(link_errors: @link_errors),
             aria: { describedby: hint_id },
             data: { 'aria-controls' => @conditional_id },
             class: %w(govuk-radios__input)
