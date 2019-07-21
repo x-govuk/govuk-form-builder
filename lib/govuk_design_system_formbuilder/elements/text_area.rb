@@ -13,17 +13,11 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        hint_element  = Elements::Hint.new(@builder, @object_name, @attribute_name, @hint_text)
-        label_element = Elements::Label.new(@builder, @object_name, @attribute_name, @label)
-        error_element = Elements::ErrorMessage.new(@builder, @object_name, @attribute_name)
-
         Containers::CharacterCount.new(@builder, max_words: @max_words, max_chars: @max_chars, threshold: @threshold).html do
           Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
             @builder.safe_join(
               [
-                label_element.html,
-                hint_element.html,
-                error_element.html,
+                [label_element, hint_element, error_element].map(&:html),
                 @builder.text_area(
                   @attribute_name,
                   id: field_id(link_errors: true),
@@ -37,13 +31,25 @@ module GOVUKDesignSystemFormBuilder
                   **@extra_args.merge(rows: @rows)
                 ),
                 character_count_info
-              ]
+              ].flatten.compact
             )
           end
         end
       end
 
     private
+
+      def hint_element
+        @hint_element ||= Elements::Hint.new(@builder, @object_name, @attribute_name, @hint_text)
+      end
+
+      def label_element
+        @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, @label)
+      end
+
+      def error_element
+        @error_element ||= Elements::ErrorMessage.new(@builder, @object_name, @attribute_name)
+      end
 
       def govuk_textarea_classes
         %w(govuk-textarea).tap do |classes|
