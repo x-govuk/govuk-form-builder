@@ -56,30 +56,41 @@ shared_examples 'a regular input' do |method_identifier, field_type|
     end
   end
 
-  context 'custom widths' do
-    {
-      20               => 'govuk-input--width-20',
-      10               => 'govuk-input--width-10',
-      5                => 'govuk-input--width-5',
-      4                => 'govuk-input--width-4',
-      3                => 'govuk-input--width-3',
-      2                => 'govuk-input--width-2',
-      'full'           => 'govuk-!-width-full',
-      'three-quarters' => 'govuk-!-width-three-quarters',
-      'two-thirds'     => 'govuk-!-width-two-thirds',
-      'one-half'       => 'govuk-!-width-one-half',
-      'one-third'      => 'govuk-!-width-one-third',
-      'one-quarter'    => 'govuk-!-width-one-quarter'
+  describe 'width' do
+    context 'custom widths' do
+      {
+        20               => 'govuk-input--width-20',
+        10               => 'govuk-input--width-10',
+        5                => 'govuk-input--width-5',
+        4                => 'govuk-input--width-4',
+        3                => 'govuk-input--width-3',
+        2                => 'govuk-input--width-2',
+        'full'           => 'govuk-!-width-full',
+        'three-quarters' => 'govuk-!-width-three-quarters',
+        'two-thirds'     => 'govuk-!-width-two-thirds',
+        'one-half'       => 'govuk-!-width-one-half',
+        'one-third'      => 'govuk-!-width-one-third',
+        'one-quarter'    => 'govuk-!-width-one-quarter'
 
-    }.each do |identifier, width_class|
-      context "when the width is #{identifier}" do
-        let(:identifier) { identifier }
-        let(:width_class) { width_class }
-        subject { builder.send(method, :name, width: identifier) }
+      }.each do |identifier, width_class|
+        context "when the width is #{identifier}" do
+          let(:identifier) { identifier }
+          let(:width_class) { width_class }
+          subject { builder.send(method, :name, width: identifier) }
 
-        specify "should have the correct class of #{width_class}" do
-          expect(parsed_subject.at_css('input')['class']).to include(width_class)
+          specify "should have the correct class of #{width_class}" do
+            expect(parsed_subject.at_css('input')['class']).to include(width_class)
+          end
         end
+      end
+    end
+
+    context 'invalid widths' do
+      let(:invalid_width) { 'extra-medium' }
+      subject { builder.send(method, :name, width: invalid_width) }
+
+      specify 'invalid widths should fail' do
+        expect { subject }.to raise_error(ArgumentError, /invalid width/)
       end
     end
   end
