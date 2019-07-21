@@ -1,7 +1,7 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class Select < GOVUKDesignSystemFormBuilder::Base
-      def initialize(builder, object_name, attribute_name, collection, value_method, text_method, options: {}, html_options: {}, hint_text:, label:, &block)
+      def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, options: {}, html_options: {}, hint_text:, label:, &block)
         super(builder, object_name, attribute_name)
 
         @collection    = collection
