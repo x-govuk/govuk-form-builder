@@ -2,7 +2,7 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     module CheckBoxes
       class Collection < GOVUKDesignSystemFormBuilder::Base
-        def initialize(builder, object_name, attribute_name, collection, value_method, text_method, hint_method = nil, hint_text:, legend:, small:, &block)
+        def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint_method: nil, hint_text:, legend:, small:, &block)
           super(builder, object_name, attribute_name)
 
           @collection    = collection

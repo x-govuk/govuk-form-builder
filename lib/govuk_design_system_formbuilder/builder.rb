@@ -161,7 +161,19 @@ module GOVUKDesignSystemFormBuilder
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @return [ActiveSupport::SafeBuffer] HTML output
     def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, html_options: {}, hint_text: nil, label: {}, &block)
-      Elements::Select.new(self, object_name, attribute_name, collection, value_method, text_method, hint_text: hint_text, label: label, options: options, html_options: html_options, &block).html
+      Elements::Select.new(
+        self,
+        object_name,
+        attribute_name,
+        collection,
+        value_method: value_method,
+        text_method: text_method,
+        hint_text: hint_text,
+        label: label,
+        options: options,
+        html_options: html_options,
+        &block
+      ).html
     end
 
     # Generates a radio button for each item in the supplied collection
@@ -199,7 +211,20 @@ module GOVUKDesignSystemFormBuilder
     #    hint_text: 'If you cannot find the exact match choose something close',
     #    inline: false
     def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: { text: nil, size: 'm' }, inline: false, small: false, &block)
-      Elements::Radios::Collection.new(self, object_name, attribute_name, collection, value_method, text_method, hint_method, hint_text: hint_text, legend: legend, inline: inline, small: small, &block).html
+      Elements::Radios::Collection.new(
+        self,
+        object_name,
+        attribute_name,
+        collection,
+        value_method: value_method,
+        text_method: text_method,
+        hint_method: hint_method,
+        hint_text: hint_text,
+        legend: legend,
+        inline: inline,
+        small: small,
+        &block
+      ).html
     end
 
     # Generates a radio button fieldset container and injects the supplied block contents
@@ -297,7 +322,19 @@ module GOVUKDesignSystemFormBuilder
     #    hint_text: "If it isn't listed here, tough luck",
     #    inline: false
     def govuk_collection_check_boxes(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: {}, small: false, &block)
-      Elements::CheckBoxes::Collection.new(self, object_name, attribute_name, collection, value_method, text_method, hint_method, hint_text: hint_text, legend: legend, small: small, &block).html
+      Elements::CheckBoxes::Collection.new(
+        self,
+        object_name,
+        attribute_name,
+        collection,
+        value_method: value_method,
+        text_method: text_method,
+        hint_method: hint_method,
+        hint_text: hint_text,
+        legend: legend,
+        small: small,
+        &block
+      ).html
     end
 
     # Generates a submit button, green by default
