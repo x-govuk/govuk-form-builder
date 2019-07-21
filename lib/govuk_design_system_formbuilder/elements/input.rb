@@ -69,7 +69,7 @@ module GOVUKDesignSystemFormBuilder
         when 'one-third'      then 'govuk-!-width-one-third'
         when 'one-quarter'    then 'govuk-!-width-one-quarter'
 
-        else fail "invalid width #{@width}"
+        else fail(ArgumentError, "invalid width '#{@width}'")
         end
       end
     end
