@@ -6,7 +6,7 @@ module GOVUKDesignSystemFormBuilder
         #   error summary requires that the id of the first radio is linked-to from the corresponding
         #   error message. As when the summary is built what happens later in the form is unknown, we
         #   need to control this to ensure the link is generated correctly
-        def initialize(builder, object_name, attribute_name, item, value_method, text_method, hint_method, link_errors: false)
+        def initialize(builder, object_name, attribute_name, item, value_method:, text_method:, hint_method:, link_errors: false)
           super(builder, object_name, attribute_name)
           @item        = item
           @value       = item.send(value_method)
