@@ -45,9 +45,9 @@ module GOVUKDesignSystemFormBuilder
               @object_name,
               @attribute_name,
               item,
-              @value_method,
-              @text_method,
-              @hint_method,
+              value_method: @value_method,
+              text_method: @text_method,
+              hint_method: @hint_method,
               link_errors: has_errors? && i.zero?
             ).html
           end
