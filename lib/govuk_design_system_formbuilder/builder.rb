@@ -199,7 +199,7 @@ module GOVUKDesignSystemFormBuilder
     #    hint_text: 'If you cannot find the exact match choose something close',
     #    inline: false
     def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: { text: nil, size: 'm' }, inline: false, small: false, &block)
-      Elements::CollectionRadioButtons.new(self, object_name, attribute_name, collection, value_method, text_method, hint_method, hint_text: hint_text, legend: legend, inline: inline, small: small, &block).html
+      Elements::Radios::Collection.new(self, object_name, attribute_name, collection, value_method, text_method, hint_method, hint_text: hint_text, legend: legend, inline: inline, small: small, &block).html
     end
 
     # Generates a radio button fieldset container and injects the supplied block contents
@@ -297,7 +297,7 @@ module GOVUKDesignSystemFormBuilder
     #    hint_text: "If it isn't listed here, tough luck",
     #    inline: false
     def govuk_collection_check_boxes(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: {}, small: false, &block)
-      Elements::CollectionCheckBoxes.new(self, object_name, attribute_name, collection, value_method, text_method, hint_method, hint_text: hint_text, legend: legend, small: small, &block).html
+      Elements::CheckBoxes::Collection.new(self, object_name, attribute_name, collection, value_method, text_method, hint_method, hint_text: hint_text, legend: legend, small: small, &block).html
     end
 
     # Generates a submit button, green by default
