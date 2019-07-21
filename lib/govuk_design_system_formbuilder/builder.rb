@@ -337,6 +337,31 @@ module GOVUKDesignSystemFormBuilder
       ).html
     end
 
+    def govuk_check_boxes_fieldset(attribute_name, html_options: {}, legend: {}, hint_text: {}, small: false, &block)
+      Containers::CheckBoxesFieldset.new(
+        self,
+        object_name,
+        attribute_name,
+        hint_text: hint_text,
+        legend: legend,
+        small: small,
+        &block
+      ).html
+    end
+
+    def govuk_check_box(attribute_name, value, hint_text: nil, label: {}, link_errors: false, &block)
+      Elements::CheckBoxes::FieldsetCheckBox.new(
+        self,
+        object_name,
+        attribute_name,
+        value,
+        hint_text: hint_text,
+        label: label,
+        link_errors: link_errors,
+        &block
+      ).html
+    end
+
     # Generates a submit button, green by default
     #
     # @param text [String] the button text

@@ -16,13 +16,15 @@ require 'govuk_design_system_formbuilder/elements/radios/collection_radio_button
 require 'govuk_design_system_formbuilder/elements/radios/fieldset_radio_button'
 
 require 'govuk_design_system_formbuilder/elements/check_boxes/collection'
-require 'govuk_design_system_formbuilder/elements/check_boxes/check_box'
+require 'govuk_design_system_formbuilder/elements/check_boxes/collection_check_box'
+require 'govuk_design_system_formbuilder/elements/check_boxes/fieldset_check_box'
 require 'govuk_design_system_formbuilder/elements/check_boxes/label'
 require 'govuk_design_system_formbuilder/elements/check_boxes/hint'
 
 require 'govuk_design_system_formbuilder/elements/error_message'
 require 'govuk_design_system_formbuilder/elements/error_summary'
 
+require 'govuk_design_system_formbuilder/containers/check_boxes_fieldset'
 require 'govuk_design_system_formbuilder/containers/form_group'
 require 'govuk_design_system_formbuilder/containers/fieldset'
 require 'govuk_design_system_formbuilder/containers/radios'

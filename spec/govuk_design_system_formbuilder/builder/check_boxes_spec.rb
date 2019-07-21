@@ -21,7 +21,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     it_behaves_like 'a field that supports hints' do
-      let(:hint_text) { 'The colour of your favourite handkerchief' }
+      let(:hint_text) { 'The most agile project in the world!' }
     end
 
     it_behaves_like 'a field that supports errors' do
@@ -59,7 +59,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       context 'check box size' do
         context 'when small is specified in the options' do
-          subject { builder.send(method, attribute, projects, :id, :name, small: true) }
+          subject { builder.send(*args.push(small: true)) }
 
           specify "should have the additional class 'govuk-checkboxes--small'" do
             expect(subject).to have_tag('div', with: { class: %w(govuk-checkboxes govuk-checkboxes--small) })
@@ -130,6 +130,166 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           specify 'the hint tag should never be present' do
             expect(subject).not_to have_tag('span', with: { class: 'govuk-hint' })
           end
+        end
+      end
+    end
+  end
+
+  describe '#govuk_check_boxes_fieldset' do
+    let(:attribute) { :projects }
+    let(:method) { :govuk_check_boxes_fieldset }
+    let(:field_type) { 'input' }
+    let(:aria_described_by_target) { 'fieldset' }
+    let(:args) { [method, attribute] }
+
+    subject do
+      builder.send(*args) do
+        builder.safe_join(
+          projects.map do |p|
+            builder.govuk_check_box(attribute, p.id)
+          end
+        )
+      end
+    end
+
+    it_behaves_like 'a field that accepts arbitrary blocks of HTML'
+
+    it_behaves_like 'a field that supports errors' do
+      let(:error_message) { /Select at least one project/ }
+      let(:error_class) { nil }
+      let(:error_identifier) { 'person-projects-error' }
+    end
+
+    context 'when no block is supplied' do
+      subject { builder.send(*args) }
+      specify { expect { subject }.to raise_error(NoMethodError, /undefined method.*call/) }
+    end
+
+    context 'when a block containing check boxes is supplied' do
+      specify 'output should be a form group containing a form group and fieldset' do
+        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
+          expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' })
+        end
+      end
+
+      specify 'output should contain check boxes' do
+        expect(subject).to have_tag('div', with: { class: 'govuk-checkboxes', 'data-module' => 'checkboxes' }) do
+          expect(subject).to have_tag('input', with: { type: 'checkbox' }, count: 3)
+        end
+      end
+
+      context 'check box size' do
+        context 'when small is specified in the options' do
+          subject do
+            builder.govuk_check_boxes_fieldset(:projects, small: true) do
+              builder.safe_join(
+                projects.map do |p|
+                  builder.govuk_check_box(attribute, p.id)
+                end
+              )
+            end
+          end
+
+          specify "should have the additional class 'govuk-checkboxes--small'" do
+            expect(subject).to have_tag('div', with: { class: %w(govuk-checkboxes govuk-checkboxes--small) })
+          end
+        end
+
+        context 'when small is not specified in the options' do
+          subject do
+            builder.govuk_check_boxes_fieldset(:projects) do
+              builder.safe_join(
+                projects.map do |p|
+                  builder.govuk_check_box(attribute, p.id)
+                end
+              )
+            end
+          end
+
+          specify "should not have the additional class 'govuk-checkboxes--small'" do
+            expect(parsed_subject.at_css('.govuk-checkboxes')['class']).to eql('govuk-checkboxes')
+          end
+        end
+      end
+    end
+  end
+
+  describe '#govuk_check_box' do
+    let(:method) { :govuk_check_box }
+    let(:attribute) { :projects }
+    let(:value) { project_x.id }
+    let(:args) { [method, attribute, value] }
+
+    subject { builder.send(*args) }
+
+    specify 'output should contain a check box item group with a check box input' do
+      expect(subject).to have_tag('div', with: { class: 'govuk-checkboxes__item' }) do |ci|
+        expect(ci).to have_tag('input', with: { type: 'checkbox', value: value })
+      end
+    end
+
+    it_behaves_like 'a field that supports labels' do
+      let(:label_text) { 'Project X' }
+      # the reason we're specifying the type is that
+      # Rails injects a hidden input in addition to the
+      # checkbox
+      let(:field_type) { "input[type='checkbox']" }
+    end
+
+    context 'check box hints' do
+      let(:hint_text) { project_x.description }
+
+      subject do
+        builder.govuk_check_box(attribute, value, hint_text: hint_text)
+      end
+
+      specify 'should contain a hint with the correct text' do
+        expect(subject).to have_tag('span', text: hint_text)
+      end
+
+      specify 'the hint should have the correct classes' do
+        expect(subject).to have_tag('span', with: { class: %w(govuk-hint govuk-checkboxes__hint) })
+      end
+    end
+
+    context 'conditionally revealing content' do
+      context 'when a block is given' do
+        subject do
+          builder.send(*args) do
+            builder.govuk_text_field(:project_responsibilities)
+          end
+        end
+
+        specify 'should include content provided in the block in a conditional div' do
+          expect(subject).to have_tag('div', with: { class: 'govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden' }) do |cd|
+            expect(cd).to have_tag('label', with: { class: 'govuk-label' }, text: 'Project_responsibilities')
+            expect(cd).to have_tag('input', with: { type: 'text' })
+          end
+        end
+
+        specify "the data-aria-controls attribute should match the conditional block's id" do
+          input_data_aria_controls = parsed_subject.at_css("input[type='checkbox']")['data-aria-controls']
+          conditional_id = parsed_subject.at_css('div.govuk-checkboxes__conditional')['id']
+          expect(input_data_aria_controls).to eql(conditional_id)
+        end
+
+        specify 'conditional_id contains the object, attribute and value name' do
+          expect(
+            parsed_subject.at_css("input[type='checkbox']")['data-aria-controls']
+          ).to eql('person-projects-11-conditional')
+        end
+      end
+
+      context 'when no block is given' do
+        subject { builder.send(*args) }
+
+        specify "the data-aria-controls attribute should be blank" do
+          input_data_aria_controls = parsed_subject.at_css("input[type='checkbox']")['data-aria-controls']
+          expect(input_data_aria_controls).to be_nil
+        end
+
+        specify "the conditional container should not be present" do
+          expect(subject).not_to have_tag('.govuk-checkboxes__conditional')
         end
       end
     end
