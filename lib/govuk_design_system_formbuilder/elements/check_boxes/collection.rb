@@ -37,7 +37,7 @@ module GOVUKDesignSystemFormBuilder
 
       private
 
-        # Builds a collection of check {Elements::CheckBoxes::CollectionCheckBox}
+        # Builds a collection of check {Elements::CheckBoxes::CheckBox}
         # @return [ActiveSupport::SafeBuffer] HTML output
         #
         # @note The GOV.UK design system requires that error summary links should
@@ -56,9 +56,7 @@ module GOVUKDesignSystemFormBuilder
               check_box,
               @hint_method,
               link_errors: link_errors
-            )
-              .html
-              .tap { link_errors = false }
+            ).html.tap { link_errors = false }
           end
         end
       end
