@@ -52,13 +52,6 @@ module GOVUKDesignSystemFormBuilder
         @builder.object.errors.messages.dig(@attribute_name).present?
     end
 
-    def attribute_identifier
-      "%<object_name>s[%<attribute_name>s]" % {
-        object_name: @object_name,
-        attribute_name: @attribute_name
-      }
-    end
-
     def wrap_conditional(block)
       @builder.content_tag('div', class: conditional_classes, id: conditional_id) do
         @builder.capture { block.call }
