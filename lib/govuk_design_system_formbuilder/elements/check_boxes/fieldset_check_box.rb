@@ -5,10 +5,11 @@ module GOVUKDesignSystemFormBuilder
         def initialize(builder, object_name, attribute_name, value, label:, hint_text:, link_errors:, multiple:, &block)
           super(builder, object_name, attribute_name)
 
-          @value     = value
-          @label     = label
-          @hint_text = hint_text
-          @multiple  = multiple
+          @value       = value
+          @label       = label
+          @hint_text   = hint_text
+          @multiple    = multiple
+          @link_errors = link_errors
 
           if block_given?
             @conditional_content = wrap_conditional(block)
