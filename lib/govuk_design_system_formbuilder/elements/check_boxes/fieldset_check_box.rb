@@ -61,20 +61,12 @@ module GOVUKDesignSystemFormBuilder
           ).html
         end
 
-        def process(block)
-          return content = block.call, (content && conditional_id)
-        end
-
         def conditional_classes
           %w(govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden)
         end
 
         def check_box_classes
           %w(govuk-checkboxes__input)
-        end
-
-        def check_box_hint_classes
-          %w(govuk-hint govuk-checkboxes__hint)
         end
       end
     end
