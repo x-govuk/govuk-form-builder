@@ -239,6 +239,7 @@ module GOVUKDesignSystemFormBuilder
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
+    # @param block [Block] a block of HTML that will be used to populate the fieldset
     # @see https://design-system.service.gov.uk/components/radios/ GOV.UK Radios
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
@@ -333,6 +334,71 @@ module GOVUKDesignSystemFormBuilder
         hint_text: hint_text,
         legend: legend,
         small: small,
+        &block
+      ).html
+    end
+
+    # Generate a fieldset intended to conatain one or more {#govuk_check_box}
+    #
+    # @param attribute_name [Symbol] The name of the attribute
+    # @param hint_text [String] The content of the fieldset hint. No hint will be injected if left +nil+
+    # @param small [Boolean] controls whether small check boxes are used instead of regular-sized ones
+    # @param legend [Hash] options for configuring the legend
+    # @option legend text [String] the fieldset legend's text content
+    # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
+    # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
+    # @param block [Block] a block of HTML that will be used to populate the fieldset
+    # @return [ActiveSupport::SafeBuffer] HTML output
+    #
+    # @example A collection of check boxes for sandwich fillings
+    #
+    #  = f.govuk_check_boxes_fieldset :desired_filling,
+    #    = f.govuk_check_box :desired_filling, :cheese, label: { text: 'Cheese' }, link_errors: true
+    #    = f.govuk_check_box :desired_filling, :tomato, label: { text: 'Tomato' }
+    #
+    def govuk_check_boxes_fieldset(attribute_name, legend: {}, hint_text: {}, small: false, &block)
+      Containers::CheckBoxesFieldset.new(
+        self,
+        object_name,
+        attribute_name,
+        hint_text: hint_text,
+        legend: legend,
+        small: small,
+        &block
+      ).html
+    end
+
+    # Generates a single fieldset, intended for use within a {#govuk_check_boxes_fieldset}
+    #
+    # @param attribute_name [Symbol] The name of the attribute
+    # @param value [Boolean,String,Symbol,Integer] The value of the checkbox when it is checked
+    # @param hint_text [String] the contents of the hint
+    # @param link_errors [Boolean] controls whether this radio button should be linked to
+    # @option label text [String] the label text
+    # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
+    # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
+    # @param multiple [Boolean] controls whether the check box is part of a collection or represents a single attribute
+    # @param block [Block] any HTML passed in will form the contents of the fieldset
+    # @return [ActiveSupport::SafeBuffer] HTML output
+    #
+    # @example A single check box for terms and conditions
+    #   = f.govuk_check_box :terms_agreed,
+    #     true,
+    #     multiple: false,
+    #     link_errors: true,
+    #     label: { text: 'Do you agree with our terms and conditions?' },
+    #     hint_text: 'You will not be able to proceed unless you do'
+    #
+    def govuk_check_box(attribute_name, value, hint_text: nil, label: {}, link_errors: false, multiple: true, &block)
+      Elements::CheckBoxes::FieldsetCheckBox.new(
+        self,
+        object_name,
+        attribute_name,
+        value,
+        hint_text: hint_text,
+        label: label,
+        link_errors: link_errors,
+        multiple: multiple,
         &block
       ).html
     end
