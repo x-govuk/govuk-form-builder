@@ -293,6 +293,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     it_behaves_like 'a field that supports labels' do
       let(:label_text) { 'Red' }
       let(:field_type) { 'input' }
+
+      specify 'the label should have a radios label class' do
+        expect(subject).to have_tag('label', with: { class: 'govuk-radios__label' })
+      end
     end
 
     context 'radio button hints' do
