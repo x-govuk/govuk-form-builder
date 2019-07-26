@@ -170,6 +170,39 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             end
           end
 
+          describe 'check box fieldsets' do
+            let(:object) { Person.new }
+            let(:identifier) { 'person-projects-field-error' }
+            subject do
+              builder.content_tag('div') do
+                builder.capture do
+                  builder.safe_join(
+                    [
+                      builder.govuk_error_summary,
+                      builder.govuk_check_boxes_fieldset(:projects) do
+                        builder.safe_join(
+                          [
+                            builder.govuk_check_box(:projects, project_x.id, label: { text: project_x.name }, link_errors: true),
+                            builder.govuk_check_box(:projects, project_y.id, label: { text: project_y.name })
+                          ]
+                        )
+                      end
+                    ]
+                  )
+                end
+              end
+            end
+
+            specify 'the error message should link to only one check box' do
+              expect(subject).to have_tag('a', with: { href: "#" + identifier })
+              expect(subject).to have_tag('input', with: { type: 'checkbox', id: identifier }, count: 1)
+            end
+
+            specify 'the radio button linked to should be first' do
+              expect(parsed_subject.css('input').first).to eql(parsed_subject.at_css('#' + identifier))
+            end
+          end
+
           describe 'date fields' do
             let(:object) { Person.new(born_on: Date.today.next_year(5)) }
             let(:identifier) { 'person-born-on-field-error' }
