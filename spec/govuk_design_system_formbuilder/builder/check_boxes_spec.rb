@@ -234,6 +234,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       # Rails injects a hidden input in addition to the
       # checkbox
       let(:field_type) { "input[type='checkbox']" }
+
+      specify 'the label should have a check box label class' do
+        expect(subject).to have_tag('label', with: { class: 'govuk-checkboxes__label' })
+      end
     end
 
     context 'check box hints' do
@@ -249,6 +253,28 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       specify 'the hint should have the correct classes' do
         expect(subject).to have_tag('span', with: { class: %w(govuk-hint govuk-checkboxes__hint) })
+      end
+    end
+
+    context 'multiple' do
+      context 'default to multiple' do
+        specify 'check box name should allow multiple values' do
+          expect(subject).to have_tag('input', with: {
+            type: 'checkbox',
+            name: "#{object_name}[#{attribute}][]"
+          })
+        end
+      end
+
+      context 'overridden to false' do
+        subject { builder.send(*args.push(multiple: false)) }
+
+        specify 'check box name should allow a single value only' do
+          expect(subject).to have_tag('input', with: {
+            type: 'checkbox',
+            name: "#{object_name}[#{attribute}]"
+          })
+        end
       end
     end
 
@@ -276,7 +302,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         specify 'conditional_id contains the object, attribute and value name' do
           expect(
             parsed_subject.at_css("input[type='checkbox']")['data-aria-controls']
-          ).to eql('person-projects-11-conditional')
+          ).to eql("#{object_name}-#{attribute}-#{value}-conditional")
         end
       end
 

@@ -2,12 +2,13 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     module CheckBoxes
       class FieldsetCheckBox < GOVUKDesignSystemFormBuilder::Base
-        def initialize(builder, object_name, attribute_name, value, label:, hint_text:, link_errors:, &block)
+        def initialize(builder, object_name, attribute_name, value, label:, hint_text:, link_errors:, multiple:, &block)
           super(builder, object_name, attribute_name)
 
-          @value = value
-          @label = label
-          @hint_text  = hint_text
+          @value     = value
+          @label     = label
+          @hint_text = hint_text
+          @multiple  = multiple
 
           if block_given?
             @conditional_content = wrap_conditional(block)
@@ -29,10 +30,12 @@ module GOVUKDesignSystemFormBuilder
             {
               id: field_id(link_errors: @link_errors),
               class: check_box_classes,
+              multiple: @multiple,
               aria: { describedby: hint_id },
               data: { 'aria-controls' => @conditional_id }
             },
-            @value
+            @value,
+            false
           )
         end
 

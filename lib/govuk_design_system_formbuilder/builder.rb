@@ -349,7 +349,7 @@ module GOVUKDesignSystemFormBuilder
       ).html
     end
 
-    def govuk_check_box(attribute_name, value, hint_text: nil, label: {}, link_errors: false, &block)
+    def govuk_check_box(attribute_name, value, hint_text: nil, label: {}, link_errors: false, multiple: true, &block)
       Elements::CheckBoxes::FieldsetCheckBox.new(
         self,
         object_name,
@@ -358,6 +358,7 @@ module GOVUKDesignSystemFormBuilder
         hint_text: hint_text,
         label: label,
         link_errors: link_errors,
+        multiple: multiple,
         &block
       ).html
     end
