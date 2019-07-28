@@ -15,10 +15,6 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        label_element = Elements::Label.new(@builder, @object_name, @attribute_name, @label)
-        hint_element  = Elements::Hint.new(@builder, @object_name, @attribute_name, @hint_text)
-        error_element = Elements::ErrorMessage.new(@builder, @object_name, @attribute_name)
-
         Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
           @builder.safe_join([
             label_element.html,

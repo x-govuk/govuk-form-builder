@@ -10,6 +10,18 @@ module GOVUKDesignSystemFormBuilder
       fail 'should be overridden'
     end
 
+    def hint_element
+      @hint_element ||= Elements::Hint.new(@builder, @object_name, @attribute_name, @hint_text)
+    end
+
+    def error_element
+      @error_element ||= Elements::ErrorMessage.new(@builder, @object_name, @attribute_name)
+    end
+
+    def label_element
+      @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, @label)
+    end
+
     # returns the id value used for the input
     #
     # @note field_id is overridden so that the error summary can link to the

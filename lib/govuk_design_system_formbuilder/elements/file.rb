@@ -10,10 +10,6 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        hint_element  = Elements::Hint.new(@builder, @object_name, @attribute_name, @hint_text)
-        label_element = Elements::Label.new(@builder, @object_name, @attribute_name, @label)
-        error_element = Elements::ErrorMessage.new(@builder, @object_name, @attribute_name)
-
         Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
           @builder.safe_join(
             [
@@ -24,12 +20,7 @@ module GOVUKDesignSystemFormBuilder
                 @attribute_name,
                 id: field_id(link_errors: true),
                 class: file_classes,
-                aria: {
-                  describedby: [
-                    hint_element.hint_id,
-                    error_element.error_id
-                  ].compact.join(' ').presence
-                },
+                aria: { describedby: described_by(hint_element.hint_id, error_element.error_id) },
                 **@extra_args
               )
             ]
