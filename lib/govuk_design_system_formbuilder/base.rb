@@ -58,6 +58,10 @@ module GOVUKDesignSystemFormBuilder
       end
     end
 
+    def described_by(*ids)
+      ids.flatten.compact.join(' ').presence
+    end
+
   private
 
     # Builds the values used for HTML id attributes throughout the builder

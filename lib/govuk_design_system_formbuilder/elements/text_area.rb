@@ -22,12 +22,7 @@ module GOVUKDesignSystemFormBuilder
                   @attribute_name,
                   id: field_id(link_errors: true),
                   class: govuk_textarea_classes,
-                  aria: {
-                    describedby: [
-                      hint_element.hint_id,
-                      error_element.error_id
-                    ].compact.join(' ').presence
-                  },
+                  aria: { describedby: described_by(hint_element.hint_id, error_element.error_id) },
                   **@extra_args.merge(rows: @rows)
                 ),
                 character_count_info
