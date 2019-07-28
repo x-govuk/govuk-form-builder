@@ -9,10 +9,12 @@ module GOVUKDesignSystemFormBuilder
         return nil unless has_errors?
 
         @builder.content_tag('span', class: 'govuk-error-message', id: error_id) do
-          @builder.safe_join([
-            @builder.tag.span('Error: ', class: 'govuk-visually-hidden'),
-            message
-          ])
+          @builder.safe_join(
+            [
+              @builder.tag.span('Error: ', class: 'govuk-visually-hidden'),
+              message
+            ]
+          )
         end
       end
 

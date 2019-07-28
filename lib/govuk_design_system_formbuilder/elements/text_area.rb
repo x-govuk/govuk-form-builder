@@ -34,18 +34,6 @@ module GOVUKDesignSystemFormBuilder
 
     private
 
-      def hint_element
-        @hint_element ||= Elements::Hint.new(@builder, @object_name, @attribute_name, @hint_text)
-      end
-
-      def label_element
-        @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, @label)
-      end
-
-      def error_element
-        @error_element ||= Elements::ErrorMessage.new(@builder, @object_name, @attribute_name)
-      end
-
       def govuk_textarea_classes
         %w(govuk-textarea).tap do |classes|
           classes.push('govuk-textarea--error') if has_errors?

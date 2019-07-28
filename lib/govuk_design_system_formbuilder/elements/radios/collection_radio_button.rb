@@ -26,11 +26,21 @@ module GOVUKDesignSystemFormBuilder
                   aria: { describedby: hint_id },
                   class: %w(govuk-radios__input)
                 ),
-                Elements::Label.new(@builder, @object_name, @attribute_name, text: @text, value: @value, radio: true).html,
-                Elements::Hint.new(@builder, @object_name, @attribute_name, @hint_text, @value, radio: true).html,
-              ].compact
+                label_element.html,
+                hint_element.html
+              ]
             )
           end
+        end
+
+      private
+
+        def hint_element
+          @hint_element ||= Elements::Hint.new(@builder, @object_name, @attribute_name, @hint_text, @value, radio: true)
+        end
+
+        def label_element
+          @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, text: @text, value: @value, radio: true)
         end
       end
     end
