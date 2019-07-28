@@ -7,7 +7,7 @@ module GOVUKDesignSystemFormBuilder
       def initialize(builder, legend: {}, described_by: nil)
         @builder = builder
         @legend = LEGEND_DEFAULTS.merge(legend)
-        @described_by = descriptors(described_by)
+        @described_by = described_by(described_by)
       end
 
       def html
@@ -42,12 +42,6 @@ module GOVUKDesignSystemFormBuilder
 
       def legend_heading_classes
         %(govuk-fieldset__heading)
-      end
-
-      def descriptors(described_by)
-        return nil if described_by.blank?
-
-        described_by.compact.join(' ').presence
       end
     end
   end
