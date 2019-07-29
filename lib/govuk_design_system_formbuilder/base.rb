@@ -6,10 +6,6 @@ module GOVUKDesignSystemFormBuilder
       @attribute_name = attribute_name
     end
 
-    def html
-      fail 'should be overridden'
-    end
-
     def hint_element
       @hint_element ||= Elements::Hint.new(@builder, @object_name, @attribute_name, @hint_text)
     end
