@@ -22,12 +22,7 @@ module GOVUKDesignSystemFormBuilder
                   @attribute_name,
                   id: field_id(link_errors: true),
                   class: govuk_textarea_classes,
-                  aria: {
-                    describedby: [
-                      hint_element.hint_id,
-                      error_element.error_id
-                    ].compact.join(' ').presence
-                  },
+                  aria: { describedby: described_by(hint_element.hint_id, error_element.error_id) },
                   **@extra_args.merge(rows: @rows)
                 ),
                 character_count_info
@@ -38,18 +33,6 @@ module GOVUKDesignSystemFormBuilder
       end
 
     private
-
-      def hint_element
-        @hint_element ||= Elements::Hint.new(@builder, @object_name, @attribute_name, @hint_text)
-      end
-
-      def label_element
-        @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, @label)
-      end
-
-      def error_element
-        @error_element ||= Elements::ErrorMessage.new(@builder, @object_name, @attribute_name)
-      end
 
       def govuk_textarea_classes
         %w(govuk-textarea).tap do |classes|

@@ -12,9 +12,6 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        hint_element  = Elements::Hint.new(@builder, @object_name, @attribute_name, @hint_text)
-        error_element = Elements::ErrorMessage.new(@builder, @object_name, @attribute_name)
-
         Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
           Containers::Fieldset.new(@builder, legend: @legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
             @builder.safe_join(
