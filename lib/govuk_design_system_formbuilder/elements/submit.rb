@@ -46,7 +46,7 @@ module GOVUKDesignSystemFormBuilder
           formnovalidate: !@validate,
           data: {
             'prevent-double-click' => @prevent_double_click
-          }.select { |_k, v| v }
+          }.select { |_k, v| v.present? }
         }
       end
     end

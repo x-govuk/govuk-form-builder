@@ -6,8 +6,16 @@ module GOVUKDesignSystemFormBuilder
       @attribute_name = attribute_name
     end
 
-    def html
-      fail 'should be overridden'
+    def hint_element
+      @hint_element ||= Elements::Hint.new(@builder, @object_name, @attribute_name, @hint_text)
+    end
+
+    def error_element
+      @error_element ||= Elements::ErrorMessage.new(@builder, @object_name, @attribute_name)
+    end
+
+    def label_element
+      @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, @label)
     end
 
     # returns the id value used for the input
@@ -56,6 +64,10 @@ module GOVUKDesignSystemFormBuilder
       @builder.content_tag('div', class: conditional_classes, id: conditional_id) do
         @builder.capture { block.call }
       end
+    end
+
+    def described_by(*ids)
+      ids.flatten.compact.join(' ').presence
     end
 
   private

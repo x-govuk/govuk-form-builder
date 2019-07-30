@@ -21,8 +21,8 @@ module GOVUKDesignSystemFormBuilder
             @builder.safe_join(
               [
                 input,
-                Elements::Label.new(@builder, @object_name, @attribute_name, radio: true, value: @value, **@label).html,
-                Elements::Hint.new(@builder, @object_name, @attribute_name, @hint_text, radio: true).html,
+                label_element.html,
+                hint_element.html,
                 @conditional_content
               ]
             )
@@ -30,6 +30,14 @@ module GOVUKDesignSystemFormBuilder
         end
 
       private
+
+        def label_element
+          @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, radio: true, value: @value, **@label)
+        end
+
+        def hint_element
+          @hint_element ||= Elements::Hint.new(@builder, @object_name, @attribute_name, @hint_text, radio: true)
+        end
 
         def input
           @builder.radio_button(

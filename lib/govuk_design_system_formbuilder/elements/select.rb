@@ -15,10 +15,6 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        label_element = Elements::Label.new(@builder, @object_name, @attribute_name, @label)
-        hint_element  = Elements::Hint.new(@builder, @object_name, @attribute_name, @hint_text)
-        error_element = Elements::ErrorMessage.new(@builder, @object_name, @attribute_name)
-
         Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
           @builder.safe_join([
             label_element.html,
@@ -43,12 +39,7 @@ module GOVUKDesignSystemFormBuilder
         @html_options.deep_merge(
           id: field_id(link_errors: true),
           class: select_classes,
-          aria: {
-            describedby: [
-              hint_element.hint_id,
-              error_element.error_id
-            ].compact.join(' ').presence
-          }
+          aria: { describedby: described_by(hint_element.hint_id, error_element.error_id) }
         )
       end
 
