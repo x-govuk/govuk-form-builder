@@ -14,13 +14,15 @@ module GOVUKDesignSystemFormBuilder
       def html
         Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
           Containers::Fieldset.new(@builder, legend: @legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
-            @builder.safe_join([
-              hint_element.html,
-              error_element.html,
-              Containers::Radios.new(@builder, inline: @inline, small: @small).html do
-                @block_content
-              end
-            ])
+            @builder.safe_join(
+              [
+                hint_element.html,
+                error_element.html,
+                Containers::Radios.new(@builder, inline: @inline, small: @small).html do
+                  @block_content
+                end
+              ]
+            )
           end
         end
       end

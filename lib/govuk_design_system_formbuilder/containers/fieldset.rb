@@ -12,10 +12,7 @@ module GOVUKDesignSystemFormBuilder
 
       def html
         @builder.content_tag('fieldset', class: fieldset_classes, aria: { describedby: @described_by }) do
-          @builder.safe_join([
-            build_legend,
-            yield
-          ])
+          @builder.safe_join([build_legend, yield])
         end
       end
 
