@@ -36,11 +36,13 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:block_p) { 'Lazy dog.' }
       subject do
         builder.send(*args) do
-          builder.safe_join([
-            builder.tag.h1(block_h1),
-            builder.tag.h2(block_h2),
-            builder.tag.p(block_p)
-          ])
+          builder.safe_join(
+            [
+              builder.tag.h1(block_h1),
+              builder.tag.h2(block_h2),
+              builder.tag.p(block_p)
+            ]
+          )
         end
       end
 

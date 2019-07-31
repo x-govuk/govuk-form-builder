@@ -165,10 +165,12 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     subject do
       builder.send(*args) do
-        builder.safe_join([
-          builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label }),
-          builder.govuk_radio_button(:favourite_colour, :green, label: { text: green_label })
-        ])
+        builder.safe_join(
+          [
+            builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label }),
+            builder.govuk_radio_button(:favourite_colour, :green, label: { text: green_label })
+          ]
+        )
       end
     end
 
