@@ -15,7 +15,7 @@ module GOVUKDesignSystemFormBuilder
     end
 
     def label_element
-      @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, @label)
+      @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, **@label)
     end
 
     # returns the id value used for the input

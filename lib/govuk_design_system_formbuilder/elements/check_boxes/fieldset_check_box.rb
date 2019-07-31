@@ -19,7 +19,14 @@ module GOVUKDesignSystemFormBuilder
 
         def html
           @builder.content_tag('div', class: 'govuk-checkboxes__item') do
-            @builder.safe_join([input, label, hint, @conditional_content])
+            @builder.safe_join(
+              [
+                input,
+                label_element.html,
+                hint_element.html,
+                @conditional_content
+              ]
+            )
           end
         end
 
@@ -40,26 +47,12 @@ module GOVUKDesignSystemFormBuilder
           )
         end
 
-        def label
-          Elements::Label.new(
-            @builder,
-            @object_name,
-            @attribute_name,
-            value: @value,
-            checkbox: true,
-            **@label,
-          ).html
+        def label_element
+          @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, checkbox: true, value: @value, **@label)
         end
 
-        def hint
-          Elements::Hint.new(
-            @builder,
-            @object_name,
-            @attribute_name,
-            @hint_text,
-            @value,
-            checkbox: true
-          ).html
+        def hint_element
+          @hint_element ||= Elements::Hint.new(@builder, @object_name, @attribute_name, @hint_text, checkbox: true)
         end
 
         def conditional_classes
