@@ -14,13 +14,9 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def form_group_classes
-        %w(govuk-form-group).push(form_group_error_classes).compact
-      end
-
-      def form_group_error_classes
-        return nil unless has_errors?
-
-        'govuk-form-group--error'
+        %w(govuk-form-group).tap do |classes|
+          classes.push('govuk-form-group--error') if has_errors?
+        end
       end
     end
   end

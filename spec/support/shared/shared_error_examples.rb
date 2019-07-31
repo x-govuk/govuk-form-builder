@@ -6,6 +6,10 @@ shared_examples 'a field that supports errors' do
       expect(subject).to have_tag('span', with: { class: 'govuk-error-message' }, text: error_message)
     end
 
+    specify 'the form group should have the correct error classes' do
+      expect(subject).to have_tag('div', with: { class: 'govuk-form-group--error' })
+    end
+
     specify 'the field element should have the correct error classes' do
       if error_class.present?
         expect(subject).to have_tag(field_type, with: { class: error_class })
