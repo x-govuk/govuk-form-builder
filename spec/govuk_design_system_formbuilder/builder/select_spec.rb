@@ -1,5 +1,6 @@
 describe GOVUKDesignSystemFormBuilder::FormBuilder do
   include_context 'setup builder'
+  include_context 'setup examples'
 
   describe '#govuk_collection_select' do
     let(:attribute) { :favourite_colour }

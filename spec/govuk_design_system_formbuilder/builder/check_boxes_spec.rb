@@ -1,5 +1,6 @@
 describe GOVUKDesignSystemFormBuilder::FormBuilder do
   include_context 'setup builder'
+  include_context 'setup examples'
 
   describe '#govuk_collection_check_boxes' do
     let(:attribute) { :projects }

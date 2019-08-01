@@ -1,5 +1,7 @@
 describe GOVUKDesignSystemFormBuilder::FormBuilder do
   include_context 'setup builder'
+  include_context 'setup examples'
+
   let(:method) { :govuk_error_summary }
 
   describe '#govuk_error_summary' do
