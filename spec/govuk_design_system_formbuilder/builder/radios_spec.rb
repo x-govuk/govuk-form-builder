@@ -1,8 +1,9 @@
 describe GOVUKDesignSystemFormBuilder::FormBuilder do
+  include_context 'setup builder'
+  include_context 'setup examples'
+
   let(:field_type) { 'input' }
   let(:aria_described_by_target) { 'fieldset' }
-
-  include_context 'setup builder'
   let(:attribute) { :favourite_colour }
   let(:label_text) { 'Cherished shade' }
 
