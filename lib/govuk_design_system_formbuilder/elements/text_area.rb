@@ -37,7 +37,7 @@ module GOVUKDesignSystemFormBuilder
       def govuk_textarea_classes
         %w(govuk-textarea).tap do |classes|
           classes.push('govuk-textarea--error') if has_errors?
-          classes.push('js-character-count') if limit?
+          classes.push('govuk-js-character-count') if limit?
         end
       end
 
