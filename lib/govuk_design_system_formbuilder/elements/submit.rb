@@ -45,6 +45,7 @@ module GOVUKDesignSystemFormBuilder
         {
           formnovalidate: !@validate,
           data: {
+            module: 'govuk-button',
             'prevent-double-click' => @prevent_double_click
           }.select { |_k, v| v.present? }
         }
