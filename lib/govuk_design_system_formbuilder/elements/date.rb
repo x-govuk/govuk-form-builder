@@ -98,7 +98,7 @@ module GOVUKDesignSystemFormBuilder
       def date_of_birth_autocomplete_value(segment)
         return nil unless @date_of_birth
 
-        { day: 'bday-day', month: 'bday-month', year: 'bday-year' }.fetch(segment)
+        "bday bday-#{segment}"
       end
     end
   end

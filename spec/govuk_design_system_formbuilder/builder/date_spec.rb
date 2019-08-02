@@ -158,16 +158,16 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     context 'auto-completion' do
       context 'date of birth' do
         subject { builder.send(*args.push(date_of_birth: true)) }
-        specify "day field should have autocomplete attribute with value 'bday-day'" do
-          expect(subject).to have_tag('input', with: { autocomplete: 'bday-day' })
+        specify "day field should have autocomplete attribute with value 'bday bday-day'" do
+          expect(subject).to have_tag('input', with: { autocomplete: 'bday bday-day' })
         end
 
-        specify "month field should have autocomplete attribute with value 'bday-month'" do
-          expect(subject).to have_tag('input', with: { autocomplete: 'bday-month' })
+        specify "month field should have autocomplete attribute with value 'bday bday-month'" do
+          expect(subject).to have_tag('input', with: { autocomplete: 'bday bday-month' })
         end
 
-        specify "year field should have autocomplete attribute with value 'bday-year'" do
-          expect(subject).to have_tag('input', with: { autocomplete: 'bday-year' })
+        specify "year field should have autocomplete attribute with value 'bday bday-year'" do
+          expect(subject).to have_tag('input', with: { autocomplete: 'bday bday-year' })
         end
       end
     end
