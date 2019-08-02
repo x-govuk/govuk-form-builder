@@ -7,7 +7,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        @builder.content_tag('div', class: check_boxes_classes, data: { module: 'checkboxes' }) do
+        @builder.content_tag('div', class: check_boxes_classes, data: { module: 'govuk-checkboxes' }) do
           yield
         end
       end
