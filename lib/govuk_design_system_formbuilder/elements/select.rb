@@ -16,20 +16,22 @@ module GOVUKDesignSystemFormBuilder
 
       def html
         Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
-          @builder.safe_join([
-            label_element.html,
-            hint_element.html,
-            error_element.html,
-            @block_content,
-            @builder.collection_select(
-              @attribute_name,
-              @collection,
-              @value_method,
-              @text_method,
-              @options,
-              build_html_options(hint_element, error_element)
-            )
-          ])
+          @builder.safe_join(
+            [
+              label_element.html,
+              hint_element.html,
+              error_element.html,
+              @block_content,
+              @builder.collection_select(
+                @attribute_name,
+                @collection,
+                @value_method,
+                @text_method,
+                @options,
+                build_html_options(hint_element, error_element)
+              )
+            ]
+          )
         end
       end
 
