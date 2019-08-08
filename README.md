@@ -5,8 +5,11 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/fde73b5dc9476197281b/test_coverage)](https://codeclimate.com/github/DFE-Digital/govuk_design_system_formbuilder/test_coverage)
 
 This gem provides a easy-to-use form builder that generates forms that are
-fully-compliant with the [GOV.UK Design System](https://design-system.service.gov.uk/),
+fully-compliant with version 3 of the [GOV.UK Design System](https://design-system.service.gov.uk/),
 minimising the amount of markup you need to write.
+
+The latest version of this gem that supports GOV.UK Design System version 2 is
+[0.7.10](https://github.com/DFE-Digital/govuk_design_system_formbuilder/releases/tag/v0.7.10).
 
 In addition to the basic markup, the more-advanced functionality of the Design
 System is exposed via the API. Adding [JavaScript-enhanced word count
@@ -103,7 +106,7 @@ bundle
 Now, if everything was successful, run RSpec:
 
 ```sh
-rspec -fd
+bundle exec rspec -fd
 ```
 
 ## Contributing
