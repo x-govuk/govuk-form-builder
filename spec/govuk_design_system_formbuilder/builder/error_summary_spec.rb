@@ -33,18 +33,34 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         )
       end
 
-      specify 'the error summary should contain a list with all the errors included' do
-        expect(subject).to have_tag('ul', with: { class: %w(govuk-list govuk-error-summary__list) }) do
-          expect(subject).to have_tag('li', count: object.errors.count)
-        end
-      end
-
-      context 'error messages' do
+      describe 'error messages' do
         subject! { builder.send(method) }
 
+        context 'there are multiple errors each with one error message' do
+          let(:object) { Person.new(favourite_colour: nil, projects: []) }
+
+          specify 'the error summary should contain a list with one error message per field' do
+            expect(subject).to have_tag('ul', with: { class: %w(govuk-list govuk-error-summary__list) }) do
+              expect(subject).to have_tag('li', text: 'Choose a favourite colour')
+              expect(subject).to have_tag('li', text: 'Select at least one project')
+            end
+          end
+        end
+
+        context 'there are multiple errors and one has multiple error messages' do
+          let(:object) { Person.new(name: nil, favourite_colour: nil) }
+
+          specify 'the error summary should contain a list with one error message per field' do
+            expect(subject).to have_tag('ul', with: { class: %w(govuk-list govuk-error-summary__list) }) do
+              expect(subject).to have_tag('li', text: 'Choose a favourite colour')
+              expect(subject).to have_tag('li', text: 'Enter a name')
+            end
+          end
+        end
+
         specify 'the error message list should contain the correct messages' do
-          object.errors.messages.each do |_attribute, msg|
-            expect(subject).to have_tag('li', text: msg.join) do
+          object.errors.messages.each do |_attribute, message_list|
+            expect(subject).to have_tag('li', text: message_list.first) do
             end
           end
         end

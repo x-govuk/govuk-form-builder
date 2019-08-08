@@ -19,7 +19,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def message
-        @builder.object.errors.messages.dig(@attribute_name)
+        @builder.object.errors.messages[@attribute_name]&.first
       end
     end
   end

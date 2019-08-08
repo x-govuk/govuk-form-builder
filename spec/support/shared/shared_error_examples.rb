@@ -23,6 +23,26 @@ shared_examples 'a field that supports errors' do
         id: error_identifier
       })
     end
+
+    context 'when there is more than one error' do
+      let(:first_error) { "It is totally wrong" }
+      let(:second_error) { "Very wrong indeed" }
+      let(:error_messages) { [first_error, second_error] }
+
+      before do
+        allow(object.errors.messages).to(
+          receive(:[]).and_return(error_messages)
+        )
+      end
+
+      specify 'the first error should be included' do
+        expect(subject).to have_tag('span', text: Regexp.new(first_error))
+      end
+
+      specify 'the second error should not be included' do
+        expect(subject).not_to have_tag('span', text: Regexp.new(second_error))
+      end
+    end
   end
 
   context 'when the attribute has no errors' do
