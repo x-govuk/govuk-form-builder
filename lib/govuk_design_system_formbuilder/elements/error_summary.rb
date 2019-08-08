@@ -18,7 +18,7 @@ module GOVUKDesignSystemFormBuilder
                 @builder.content_tag('ul', class: ['govuk-list', summary_class('list')]) do
                   @builder.safe_join(
                     @builder.object.errors.messages.map do |attribute, messages|
-                      error_list_item(attribute, messages)
+                      error_list_item(attribute, messages.first)
                     end
                   )
                 end
@@ -30,10 +30,10 @@ module GOVUKDesignSystemFormBuilder
 
     private
 
-      def error_list_item(attribute, messages)
+      def error_list_item(attribute, message)
         @builder.content_tag('li') do
           @builder.link_to(
-            messages.join(', '),
+            message,
             same_page_link(field_id(attribute)),
             data: {
               turbolinks: false
