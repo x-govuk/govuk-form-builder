@@ -58,7 +58,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       specify 'radio buttons should be surrounded by a radios module' do
-        expect(subject).to have_tag('div', with: { 'data-module' => 'radios' }) do |dm|
+        expect(subject).to have_tag('div', with: { 'data-module' => 'govuk-radios' }) do |dm|
           expect(dm).to have_tag('input', count: colours.size, with: { type: 'radio' })
         end
       end
@@ -196,7 +196,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       specify 'output should contain radio buttons' do
-        expect(subject).to have_tag('div', with: { class: 'govuk-radios', 'data-module' => 'radios' }) do
+        expect(subject).to have_tag('div', with: { class: 'govuk-radios', 'data-module' => 'govuk-radios' }) do
           expect(subject).to have_tag('input', with: { type: 'radio' }, count: 2)
         end
       end

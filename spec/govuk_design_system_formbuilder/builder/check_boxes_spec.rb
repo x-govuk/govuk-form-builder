@@ -35,8 +35,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     describe 'check boxes' do
       specify 'output should contain the correct number of check boxes' do
-        expect(subject).to have_tag('input', count: projects.size, with: { type: 'checkbox' })
-        expect(subject).to have_tag('label', count: projects.size)
+        expect(subject).to have_tag('div', with: { 'data-module' => 'govuk-checkboxes' }) do |cb|
+          expect(cb).to have_tag('input', count: projects.size, with: { type: 'checkbox' })
+          expect(cb).to have_tag('label', count: projects.size)
+        end
       end
 
       context 'check box size' do
@@ -155,7 +157,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       specify 'output should contain check boxes' do
-        expect(subject).to have_tag('div', with: { class: 'govuk-checkboxes', 'data-module' => 'checkboxes' }) do
+        expect(subject).to have_tag('div', with: { class: 'govuk-checkboxes', 'data-module' => 'govuk-checkboxes' }) do
           expect(subject).to have_tag('input', with: { type: 'checkbox' }, count: 3)
         end
       end
