@@ -20,6 +20,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       expect(subject).to have_tag('input', with: { value: text })
     end
 
+    specify 'button should have the govuk-button data-module' do
+      expect(subject).to have_tag('input', with: { 'data-module' => 'govuk-button' })
+    end
+
     describe 'button styles and colours' do
       context 'warning' do
         subject { builder.send(method, 'Create', warning: true) }
