@@ -1,0 +1,27 @@
+@font-face {
+  font-family: FiraMono;
+  src: url(/assets/fonts/FiraMono-Regular.woff2) format("woff2"),
+       url(/assets/fonts/FiraMono-Regular.woff) format("woff");
+}
+
+figure {
+  margin: 2rem 0rem 0.5rem;
+  padding: 0;
+}
+
+.example-output {
+  border: 1px solid #b1b4b6;
+  padding: 1.5rem 2rem 1rem ;
+}
+
+pre {
+  overflow: auto;
+  border: 1px solid #b1b4b6;
+  padding: 2rem;
+}
+
+pre > code.highlight {
+  font-size: 1.2rem;
+  font-family: FiraMono, monospace;
+  word-wrap: normal;
+}
