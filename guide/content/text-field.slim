@@ -1,0 +1,82 @@
+h1.govuk-heading-l Text field
+
+p text fields are really exciting
+
+
+- f = builder
+
+
+figure
+  figcaption
+    h2.govuk-heading-s Generating a text input
+
+  pre.example-input
+    code.highlight.language-slim
+      | = #{text_field}
+
+  div.example-output
+    = eval(text_field)
+
+  pre.example-html
+    code.highlight.language-html
+      = format_html(eval(text_field))
+
+figure
+  figcaption
+    h2.govuk-heading-s Generating a text input with label
+
+  pre.example-input
+    code.highlight.language-slim
+      | = #{text_field_with_label}
+
+  div.example-output
+    = eval(text_field_with_label)
+
+  pre.example-html
+    code.highlight.language-html
+      = format_html(eval(text_field_with_label))
+
+figure
+  figcaption
+    h2.govuk-heading-s Generating a text input with hint text
+
+  pre.example-input
+    code.highlight.language-slim
+      | = #{text_field_with_hint}
+
+  div.example-output
+    = eval(text_field_with_hint)
+
+  pre.example-html
+    code.highlight.language-html
+      = format_html(eval(text_field_with_hint))
+
+figure
+  figcaption
+    h2.govuk-heading-s Generating a text input with custom attributes
+
+  pre.example-input
+    code.highlight.language-slim
+      | = #{text_field_with_attributes}
+
+  div.example-output
+    = eval(text_field_with_attributes)
+
+  pre.example-html
+    code.highlight.language-html
+      = format_html(eval(text_field_with_attributes))
+
+figure
+  figcaption
+    h2.govuk-heading-s Generating a text inputs with custom widths
+
+  pre.example-input
+    code.highlight.language-slim
+      | = #{text_field_with_custom_width}
+
+  div.example-output
+    = eval(text_field_with_custom_width)
+
+  pre.example-html
+    code.highlight.language-html
+      = format_html(eval(text_field_with_custom_width))

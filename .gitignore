@@ -3,3 +3,7 @@ doc/*
 *.gem
 *.yardoc
 coverage/*
+
+guide/tmp
+guide/output
+guide/*.log

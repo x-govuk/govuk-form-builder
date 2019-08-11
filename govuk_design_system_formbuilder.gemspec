@@ -23,4 +23,12 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec-rails", "~> 3.8"
   s.add_development_dependency "simplecov", "~> 0"
   s.add_development_dependency "sqlite3", "~> 0"
+
+  # Required for the guide
+  s.add_development_dependency "nanoc", "~> 4.11"
+  s.add_development_dependency "slim", "~> 4.0.1"
+  s.add_development_dependency "adsf", "~> 1.4.2"
+  s.add_development_dependency "adsf-live", "~> 1.4.2"
+  s.add_development_dependency "rouge", "~> 3.8.0"
+  s.add_development_dependency "htmlbeautifier", "~> 1.3.1"
 end
