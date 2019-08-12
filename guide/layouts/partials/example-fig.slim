@@ -1,0 +1,20 @@
+figure
+  figcaption
+    h2.govuk-heading-l= caption
+
+  h3.govuk-heading-s.example-subheading.input Input
+
+  pre.example-input
+    code.highlight.language-slim
+      | = #{code}
+
+  h3.govuk-heading-s.example-subheading.output HTML output
+
+  pre.example-html
+    code.highlight.language-html
+      = format_html(eval(code))
+
+  h3.govuk-heading-s.example-subheading.output Rendered output
+
+  div.example-output
+    = eval(code)

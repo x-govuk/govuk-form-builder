@@ -5,19 +5,25 @@
 }
 
 figure {
-  margin: 2rem 0rem 0.5rem;
-  padding: 0;
+  border-left: 5px solid #1d70b8 ;
+  padding-left: 1rem;
+  margin: 2.5rem 0rem 0.8rem;
+}
+
+h3.example-subheading {
+  margin: 1.5rem 0rem 0.5rem;
 }
 
 .example-output {
-  border: 1px solid #b1b4b6;
+  border: 1px solid #f3f2f1;
   padding: 1.5rem 2rem 1rem ;
+  margin: 14px 0rem;
 }
 
 pre {
   overflow: auto;
-  border: 1px solid #b1b4b6;
   padding: 2rem;
+  margin: 1rem 0rem;
 }
 
 pre > code.highlight {
