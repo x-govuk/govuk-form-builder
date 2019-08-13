@@ -5,7 +5,7 @@
 }
 
 figure {
-  border-left: 5px solid #1d70b8 ;
+  border-left: 5px solid #1d70b8;
   padding-left: 2rem;
   margin: 2.5rem 0rem 4rem;
 }
@@ -16,7 +16,7 @@ h3.example-subheading {
 
 .example-output {
   border: 1px solid #f3f2f1;
-  padding: 1.5rem 2rem 1rem ;
+  padding: 1.5rem 2rem 1rem;
   margin: 14px 0rem;
 }
 
@@ -30,4 +30,10 @@ pre > code.highlight {
   font-size: 1.2rem;
   font-family: FiraMono, monospace;
   word-wrap: normal;
+}
+
+p > code, li > code {
+  background-color: #fff0f6;
+  font-family: FiraMono, monospace;
+  padding: 0.2rem 0.4rem;
 }

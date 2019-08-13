@@ -11,3 +11,4 @@ use_helper Nanoc::Helpers::Rendering
 use_helper BuilderExamples
 use_helper Formatters
 use_helper Examples::TextInput
+use_helper Examples::Select

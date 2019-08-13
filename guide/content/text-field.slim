@@ -1,26 +1,58 @@
 h1.govuk-heading-xl Text field
 
+p.govuk-body-l
+  |
+    Text fields allow users to enter text that's no longer than a single line.
+
 p.govuk-body
   |
-    Text fields allow users to enter text that's no longer than
-    a single line.
+    In addition to <code>#text_field</code>, the form builder supports various
+    other methods that take the same parameters and produce a <em>similar</em>
+    output:
+
+  ul.govuk-list.govuk-list--bullet
+    li
+      code #number_field
+    li
+      code #phone_field
+    li
+      code #email_field
+    li
+      code #url_field
+
+p.govuk-body
+  |
+    When used, these fields will look and act the same on desktop but on mobile
+    the browser will present a different keyboard depending on the
+    <code>type</code> attribute.
+
+h3.govuk-heading-m Related information
+
+ul.govuk-list
+  li
+    a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode"
+      | https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode
+  li
+    a href="https://html.spec.whatwg.org/multipage/input.html#states-of-the-type-attribute"
+      | https://html.spec.whatwg.org/multipage/input.html#states-of-the-type-attribute
+
 
 == render('/partials/example-fig.*',
-  caption: "Generating a text input",
+  caption: "Generating a text input with no additional params",
   code: text_field)
 
 == render('/partials/example-fig.*',
-  caption: "Generating a text input with label",
+  caption: "Generating a text input with a label",
   code: text_field_with_label)
 
 == render('/partials/example-fig.*',
-  caption: "Generating a text input with hint text",
+  caption: "Generating a text input with some hint text",
   code: text_field_with_hint)
 
 == render('/partials/example-fig.*',
-  caption: "Generating a text input with extra attributes",
+  caption: "Generating a text input with some extra attributes",
   code: text_field_with_attributes)
 
 == render('/partials/example-fig.*',
-  caption: "Generating a text input with custom widths",
+  caption: "Generating a text input with a custom width",
   code: text_field_with_custom_width)
