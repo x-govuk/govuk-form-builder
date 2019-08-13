@@ -1,4 +1,19 @@
 class Person
   include ActiveModel::Model
-  attr_accessor(:name, :born_on, :gender, :over_18, :favourite_colour, :favourite_colour_reason)
+
+  # string fields
+  attr_accessor(
+    :name,
+    :first_name,
+    :last_name,
+    :job_title,
+    :postcode
+  )
+
+  # select fields
+  attr_accessor(
+    :department_id,
+    :old_department_id,
+    :new_department_id
+  )
 end
