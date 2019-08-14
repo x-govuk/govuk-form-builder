@@ -1,8 +1,14 @@
 module Formatters
-  def format_html(raw)
+  def render_slim(raw, **args)
+    beautify(Slim::Template.new { raw }.render(OpenStruct.new(args)))
+  end
+
+private
+
+  def beautify(html)
     HtmlBeautifier
       .beautify(
-        raw
+        html
           .gsub(">", ">\n")
           .gsub("\<\/", "\n\<\/")
           .strip
