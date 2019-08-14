@@ -13,7 +13,9 @@ class Person
   # select fields
   attr_accessor(
     :department_id,
+    :new_department_id,
     :old_department_id,
-    :new_department_id
+
+    :old_department_description
   )
 end
