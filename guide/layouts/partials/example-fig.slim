@@ -12,15 +12,15 @@ figure
   h3.govuk-heading-s.example-subheading.input Input
   pre.example-input
     code.highlight.language-slim
-      | = #{code}
+      | #{code}
 
   h3.govuk-heading-s.example-subheading.output HTML output
   pre.example-html
     code.highlight.language-html
       - if defined?(sample_data)
         - eval(sample_data)
-      = format_html(eval(code))
+      = render_slim(code, f: builder, departments: @departments)
 
   h3.govuk-heading-s.example-subheading.output Rendered output
   div.example-output
-    = eval(code)
+    == render_slim(code, f: builder, departments: @departments)
