@@ -1,6 +1,13 @@
 module Formatters
   def render_slim(raw, **args)
-    beautify(Slim::Template.new { raw }.render(OpenStruct.new(args)))
+
+    beautify(
+      CGI.unescapeHTML(
+        CGI.unescapeHTML(
+          Slim::Template.new { raw }.render(OpenStruct.new(args)).to_s
+        )
+      )
+    )
   end
 
 private
