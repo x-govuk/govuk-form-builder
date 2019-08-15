@@ -36,8 +36,8 @@ module Examples
           = f.govuk_radio_button :old_department_id, 'it', label: { text: 'Information Technology' }
           = f.govuk_radio_button :old_department_id, 'marketing', label: { text: 'Marketing' }
           = f.govuk_radio_divider
-          = f.govuk_radio_button :old_department_id, 'sales', label: { text: 'Sales' } do
-            = f.govuk_text_area :old_department_description
+          = f.govuk_radio_button :old_department_id, 'other', label: { text: 'Other' } do
+            = f.govuk_text_field :old_department_description
       SNIPPET
     end
   end

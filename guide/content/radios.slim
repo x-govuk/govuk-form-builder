@@ -1,5 +1,7 @@
 h1.govuk-heading-xl Radio buttons
 
+h2.govuk-heading-l From a collection
+
 == render('/partials/example-fig.*',
   caption: "Radio buttons collection with no additional params",
   code: radio_field,
@@ -10,7 +12,15 @@ h1.govuk-heading-xl Radio buttons
   code: radio_field_with_legend_and_hint,
   sample_data: departments_data)
 
+h2.govuk-heading-l Supplying a custom list of options
+
 == render('/partials/example-fig.*',
   caption: "Radio buttons collection with conditional content and a divider",
-  code: radio_field_with_conditional_content,
-  sample_data: departments_data)
+  code: radio_field_with_conditional_content) do
+
+  h4.govuk-heading-s Adding conditional content
+
+  p.govuk-body
+    |
+      To add content that is displayed when a radio button is selected simply
+      pass it in as a block
