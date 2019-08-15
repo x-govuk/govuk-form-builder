@@ -10,6 +10,16 @@ module Examples
       DATA
     end
 
+    def lunch_options
+      <<~DATA
+        @lunch_options = [
+          OpenStruct.new(id: 1, name: 'Salad', description: 'Lettuce, tomato and cucumber'),
+          OpenStruct.new(id: 2, name: 'Jacket potato', description: 'With cheese and baked beans')
+        ]
+      DATA
+    end
+
+
     def radio_field
       <<~SNIPPET
         = f.govuk_collection_radio_buttons :department_id,
@@ -27,6 +37,17 @@ module Examples
           :name,
           legend: { text: 'Which department do you work for?' },
           hint_text: 'There should be a sign near your desk'
+      SNIPPET
+    end
+
+    def radio_field_with_label_and_descriptions
+      <<~SNIPPET
+        = f.govuk_collection_radio_buttons :lunch_id,
+          lunch_options,
+          :id,
+          :name,
+          :description,
+          legend: { text: 'What would you like for lunch?' }
       SNIPPET
     end
 

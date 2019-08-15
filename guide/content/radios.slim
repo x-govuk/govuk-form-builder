@@ -12,7 +12,19 @@ h2.govuk-heading-l From a collection
   code: radio_field_with_legend_and_hint,
   sample_data: departments_data)
 
+== render('/partials/example-fig.*',
+  caption: "Radio buttons collection with descriptions",
+  code: radio_field_with_label_and_descriptions,
+  sample_data: lunch_options)
+
 h2.govuk-heading-l Supplying a custom list of options
+
+p.govuk-body
+  |
+    If your list of options is hard-coded or you want to add extra
+    customisation, like inserting a text divider, the
+    <code>#govuk_radio_button_fieldset</code> method offers additional
+    flexibility.
 
 == render('/partials/example-fig.*',
   caption: "Radio buttons collection with conditional content and a divider",

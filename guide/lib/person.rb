@@ -15,6 +15,7 @@ class Person
     :department_id,
     :new_department_id,
     :old_department_id,
+    :lunch_id,
 
     :old_department_description
   )

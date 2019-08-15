@@ -1,1 +1,27 @@
-h1 hi
+h1.govuk-heading-xl GOV.UK Form Builder Guide
+
+p.govuk-body-l
+  |
+    The GOV.UK Design System Form Builder is a gem intended
+    to make building Rails apps that comply with the
+    #{link_to('Design System', design_system_link).html_safe} easier.
+
+p.govuk-body
+  |
+    This guide provides a brief overview of how to use the builder
+    to create and customise common form elements. For more
+    in-depth documentation on how the builder <em>actually works</em>,
+    see the #{link_to('official documentation', documentation_link).html_safe}.
+
+p.govuk-body
+  == link_to('Contributions are welcome', github_link)
+  |.
+
+h2.govuk-heading-m Sections
+
+ul.govuk-list
+  li== link_to 'Text fields', '/text-field'
+  li== link_to 'Select boxes', '/select'
+  li== link_to 'Radio buttons', '/radios'
+  li== link_to 'Check boxes', '/checkboxes'
+  li== link_to 'Errors', '/errors'
