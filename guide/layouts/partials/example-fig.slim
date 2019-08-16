@@ -22,8 +22,8 @@ figure
     code.highlight.language-html
       - if defined?(sample_data)
         - eval(sample_data)
-      = format_slim(code, f: builder, departments: @departments, lunch_options: @lunch_options)
+      = format_slim(code, f: builder, departments: departments, lunch_options: lunch_options)
 
   h4.govuk-heading-s.example-subheading.output Rendered output
   div.example-output
-    == format_slim(code, f: builder, departments: @departments, lunch_options: @lunch_options)
+    == format_slim(code, f: builder, departments: departments, lunch_options: lunch_options)
