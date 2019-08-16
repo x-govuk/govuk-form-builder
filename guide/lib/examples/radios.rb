@@ -1,31 +1,5 @@
 module Examples
   module Radios
-    def departments_data
-      <<~DATA
-        @departments = [
-          OpenStruct.new(id: 1, name: 'Sales'),
-          OpenStruct.new(id: 2, name: 'Marketing'),
-          OpenStruct.new(id: 3, name: 'Finance')
-        ]
-      DATA
-    end
-
-    def lunch_options
-      <<~DATA
-        [
-          OpenStruct.new(
-            id: 1,
-            name: 'Salad', description: 'Lettuce, tomato and cucumber'
-          ),
-          OpenStruct.new(
-            id: 2,
-            name: 'Jacket potato', description: 'With cheese and baked beans'
-          )
-        ]
-      DATA
-    end
-
-
     def radio_field
       <<~SNIPPET
         = f.govuk_collection_radio_buttons :department_id,
