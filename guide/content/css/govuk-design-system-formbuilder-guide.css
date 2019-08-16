@@ -32,6 +32,10 @@ pre > code.highlight {
   word-wrap: normal;
 }
 
+pre.example-html > code.highlight {
+  font-size: 1rem;
+}
+
 p > code, li > code {
   background-color: #fff0f6;
   font-family: FiraMono, monospace;
