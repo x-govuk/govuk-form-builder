@@ -12,9 +12,15 @@ module Examples
 
     def lunch_options
       <<~DATA
-        @lunch_options = [
-          OpenStruct.new(id: 1, name: 'Salad', description: 'Lettuce, tomato and cucumber'),
-          OpenStruct.new(id: 2, name: 'Jacket potato', description: 'With cheese and baked beans')
+        [
+          OpenStruct.new(
+            id: 1,
+            name: 'Salad', description: 'Lettuce, tomato and cucumber'
+          ),
+          OpenStruct.new(
+            id: 2,
+            name: 'Jacket potato', description: 'With cheese and baked beans'
+          )
         ]
       DATA
     end
