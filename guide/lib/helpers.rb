@@ -14,6 +14,7 @@ use_helper Helpers::TextHelpers
 use_helper Examples::TextInput
 use_helper Examples::Select
 use_helper Examples::Radios
+use_helper Examples::Checkboxes
 use_helper Setup::FormBuilderObjects
 use_helper Setup::ExampleData
 

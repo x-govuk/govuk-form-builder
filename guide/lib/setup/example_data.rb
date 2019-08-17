@@ -16,7 +16,7 @@ module Setup
 
     def lunch_options_raw
       <<~DATA
-        @lunch_options = [
+        lunch_options = [
           OpenStruct.new(
             id: 1,
             name: 'Salad',
@@ -33,6 +33,10 @@ module Setup
 
     def lunch_options
       eval(lunch_options_raw)
+    end
+
+    def form_data
+      { departments: departments, lunch_options: lunch_options }
     end
   end
 end

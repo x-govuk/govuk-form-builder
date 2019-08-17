@@ -13,7 +13,7 @@
 
 compile '/index.slim' do
   filter :slim
-  layout '/default.*'
+  layout '/splash.*'
   write '/index.html'
 end
 
@@ -38,5 +38,4 @@ compile '/**/*' do
   write item.identifier.to_s
 end
 
-layout '/partials/example-fig.*', :slim
-layout '/**/*', :erb
+layout '/**/*', :slim
