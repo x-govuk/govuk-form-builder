@@ -1,38 +1,45 @@
+---
+title: Radio buttons
+---
 h1.govuk-heading-xl Radio buttons
 
-h2.govuk-heading-l From a collection
+section
 
-== render('/partials/example-fig.*',
-  caption: "Radio buttons collection with no additional params",
-  code: radio_field,
-  sample_data: departments_data_raw)
+  h2.govuk-heading-l From a collection
 
-== render('/partials/example-fig.*',
-  caption: "Radio buttons collection with legend and hint text",
-  code: radio_field_with_legend_and_hint,
-  sample_data: departments_data_raw)
+  == render('/partials/example-fig.*',
+    caption: "Radio buttons collection with no additional params",
+    code: radio_field,
+    sample_data: departments_data_raw)
 
-== render('/partials/example-fig.*',
-  caption: "Radio buttons collection with descriptions",
-  code: radio_field_with_label_and_descriptions,
-  sample_data: lunch_options_raw)
+  == render('/partials/example-fig.*',
+    caption: "Radio buttons collection with legend and hint text",
+    code: radio_field_with_legend_and_hint,
+    sample_data: departments_data_raw)
 
-h2.govuk-heading-l Supplying a custom list of options
+  == render('/partials/example-fig.*',
+    caption: "Radio buttons collection with descriptions",
+    code: radio_field_with_label_and_descriptions,
+    sample_data: lunch_options_raw)
 
-p.govuk-body
-  |
-    If your list of options is hard-coded or you want to add extra
-    customisation, like inserting a text divider, the
-    <code>#govuk_radio_button_fieldset</code> method offers additional
-    flexibility.
+section
 
-== render('/partials/example-fig.*',
-  caption: "Radio buttons collection with conditional content and a divider",
-  code: radio_field_with_conditional_content) do
-
-  h4.govuk-heading-s Adding conditional content
+  h2.govuk-heading-l Supplying a custom list of options
 
   p.govuk-body
     |
-      To add content that is displayed when a radio button is selected simply
-      pass it in as a block
+      If your list of options is hard-coded or you want to add extra
+      customisation, like inserting a text divider, the
+      <code>#govuk_radio_button_fieldset</code> method offers additional
+      flexibility.
+
+  == render('/partials/example-fig.*',
+    caption: "Radio buttons collection with conditional content and a divider",
+    code: radio_field_with_conditional_content) do
+
+    h4.govuk-heading-s Adding conditional content
+
+    p.govuk-body
+      |
+        To add content that is displayed when a radio button is selected simply
+        pass it in as a block

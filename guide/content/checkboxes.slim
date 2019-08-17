@@ -1,0 +1,23 @@
+---
+title: Check boxes
+---
+
+h1.govuk-heading-xl Check boxes
+
+section
+
+  h2.govuk-heading-l From a collection
+
+  == render('/partials/example-fig.*',
+    caption: "Check box collection with no additional params",
+    code: checkbox_field,
+    sample_data: departments_data_raw)
+
+  == render('/partials/example-fig.*',
+    caption: "Check box collection with hints",
+    code: checkbox_field_with_hints,
+    sample_data: lunch_options_raw)
+
+section
+
+  h2.govuk-heading-l Supplying a custom list of options

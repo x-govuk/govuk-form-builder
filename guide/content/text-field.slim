@@ -1,3 +1,7 @@
+---
+title: Text field
+---
+
 h1.govuk-heading-xl Text field
 
 p.govuk-body-l
@@ -37,12 +41,14 @@ ul.govuk-list
       | https://html.spec.whatwg.org/multipage/input.html#states-of-the-type-attribute
 
 
+h2.govuk-heading-l Examples
+
 == render('/partials/example-fig.*',
   caption: "Generating a text input with no additional params",
   code: text_field)
 
 == render('/partials/example-fig.*',
-  caption: "Generating a text input with a label",
+  caption: "Generating a text input with a custom label",
   code: text_field_with_label)
 
 == render('/partials/example-fig.*',

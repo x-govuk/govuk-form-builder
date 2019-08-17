@@ -6,7 +6,7 @@
 
 figure {
   border-left: 5px solid #1d70b8;
-  padding-left: 2rem;
+  padding: 0.5rem 1rem 0.5rem 2rem;
   margin: 2.5rem 0rem 4rem;
 }
 
@@ -17,7 +17,7 @@ h3.example-subheading {
 .example-output {
   border: 1px solid #f3f2f1;
   padding: 1.5rem 2rem 1rem;
-  margin: 14px 0rem;
+  margin-bottom: 2rem;
 }
 
 pre {

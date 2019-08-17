@@ -10,7 +10,7 @@ class Person
     :postcode
   )
 
-  # select fields
+  # select/radio fields
   attr_accessor(
     :department_id,
     :new_department_id,
@@ -18,5 +18,11 @@ class Person
     :lunch_id,
 
     :old_department_description
+  )
+
+  # checkbox fields
+  attr_accessor(
+    :lunch_ids,
+    :department_ids
   )
 end

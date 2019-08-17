@@ -8,20 +8,30 @@ p.govuk-body-l
 
 p.govuk-body
   |
-    This guide provides a brief overview of how to use the builder
-    to create and customise common form elements. For more
-    in-depth documentation on how the builder <em>actually works</em>,
-    see the #{link_to('official documentation', documentation_link).html_safe}.
+    This guide provides a brief overview of how to use install, configure and
+    use the builder and use it to create compliant forms, complete with all
+    the necessary usability and accessibility features.
 
-p.govuk-body
-  == link_to('Contributions are welcome', github_link)
-  |.
+.govuk-grid-row
 
-h2.govuk-heading-m Sections
+  .govuk-grid-column-one-third
+    ul.govuk-list
+      h2.govuk-heading-m Introduction
+      li== link_to 'Getting started', '#'
+      li== link_to 'Error handling', '#'
 
-ul.govuk-list
-  li== link_to 'Text fields', '/text-field'
-  li== link_to 'Select boxes', '/select'
-  li== link_to 'Radio buttons', '/radios'
-  li== link_to 'Check boxes', '/checkboxes'
-  li== link_to 'Errors', '/errors'
+  .govuk-grid-column-one-third
+    h2.govuk-heading-m Form elements
+
+    ul.govuk-list
+      li== link_to 'Text fields', '/text-field'
+      li== link_to 'Select boxes', '/select'
+      li== link_to 'Radio buttons', '/radios'
+      li== link_to 'Check boxes', '/checkboxes'
+
+  .govuk-grid-column-one-third
+    h2.govuk-heading-m Related links
+
+    ul.govuk-list
+      li== link_to 'Github', github_link
+      li== link_to 'Documentation', documentation_link
