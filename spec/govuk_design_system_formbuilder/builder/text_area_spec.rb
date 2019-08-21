@@ -44,7 +44,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           'div',
           with: {
             class: 'govuk-character-count',
-            'data-module' => 'character-count',
+            'data-module' => 'govuk-character-count',
             'data-maxwords' => max_words
           }
         )
@@ -72,7 +72,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           'div',
           with: {
             class: 'govuk-character-count',
-            'data-module' => 'character-count',
+            'data-module' => 'govuk-character-count',
             'data-maxlength' => max_chars
           }
         )
@@ -109,7 +109,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           'div',
           with: {
             class: 'govuk-character-count',
-            'data-module' => 'character-count',
+            'data-module' => 'govuk-character-count',
             'data-maxlength' => max_chars,
             'data-threshold' => threshold
           }
