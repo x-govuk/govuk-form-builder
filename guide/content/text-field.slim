@@ -16,13 +16,13 @@ p.govuk-body
 
   ul.govuk-list.govuk-list--bullet
     li
-      code #number_field
+      code #govuk_number_field
     li
-      code #phone_field
+      code #govuk_phone_field
     li
-      code #email_field
+      code #govuk_email_field
     li
-      code #url_field
+      code #govuk_url_field
 
 p.govuk-body
   |
@@ -43,22 +43,25 @@ ul.govuk-list
 
 h2.govuk-heading-l Examples
 
-== render('/partials/example-fig.*',
-  caption: "Generating a text input with no additional params",
-  code: text_field)
+section
+  h3.govuk-heading-m Regular text inputs
 
-== render('/partials/example-fig.*',
-  caption: "Generating a text input with a custom label",
-  code: text_field_with_label)
+  == render('/partials/example-fig.*',
+    caption: "Generating a text input with no additional params",
+    code: text_field)
 
-== render('/partials/example-fig.*',
-  caption: "Generating a text input with some hint text",
-  code: text_field_with_hint)
+  == render('/partials/example-fig.*',
+    caption: "Generating a text input with a custom label",
+    code: text_field_with_label)
 
-== render('/partials/example-fig.*',
-  caption: "Generating a text input with some extra attributes",
-  code: text_field_with_attributes)
+  == render('/partials/example-fig.*',
+    caption: "Generating a text input with some hint text",
+    code: text_field_with_hint)
 
-== render('/partials/example-fig.*',
-  caption: "Generating a text input with a custom width",
-  code: text_field_with_custom_width)
+  == render('/partials/example-fig.*',
+    caption: "Generating a text input with some extra attributes",
+    code: text_field_with_attributes)
+
+  == render('/partials/example-fig.*',
+    caption: "Generating a text input with a custom width",
+    code: text_field_with_custom_width)

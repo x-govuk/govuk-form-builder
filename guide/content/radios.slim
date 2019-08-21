@@ -1,11 +1,30 @@
 ---
 title: Radio buttons
 ---
+
 h1.govuk-heading-xl Radio buttons
+
+p.govuk-body-l
+  | Use the radios component when users can only select one option from a list.
+
+p.govuk-body
+  |
+    Radios are grouped together in a <code>fieldset</code> with a
+    <code>legend</code> that describes them, as shown in the examples on this
+    page.
+
+p.govuk-body
+  |
+    If you are asking just one question per page as recommended, you can set
+    the contents of the <code>legend</code> as the page heading. This is good
+    practice as it means that users of screen readers will only hear the
+    contents once.
+
+h2.govuk-heading-l Examples
 
 section
 
-  h2.govuk-heading-l From a collection
+  h3.govuk-heading-m From a collection
 
   == render('/partials/example-fig.*',
     caption: "Radio buttons collection with no additional params",
@@ -24,7 +43,7 @@ section
 
 section
 
-  h2.govuk-heading-l Supplying a custom list of options
+  h3.govuk-heading-m Supplying a custom list of options
 
   p.govuk-body
     |
@@ -43,3 +62,7 @@ section
       |
         To add content that is displayed when a radio button is selected simply
         pass it in as a block
+
+section
+
+  h3.govuk-heading-m 🚧 Setting the legend to be the heading

@@ -1,0 +1,37 @@
+---
+title: Text area
+---
+
+h1.govuk-heading-xl Text area
+
+p.govuk-body-l
+  |
+    Text fields allow users to enter text that's no longer than a single line.
+
+
+h3.govuk-heading-m Related information
+
+ul.govuk-list
+  li Blah
+  li Blah
+
+h2.govuk-heading-l Examples
+
+section
+  h3.govuk-heading-m Regular text inputs
+
+  == render('/partials/example-fig.*',
+    caption: "Generating a text input with no additional params",
+    code: text_area)
+
+  == render('/partials/example-fig.*',
+    caption: "Generating a text input with a label and hint",
+    code: text_area_with_label_and_hint)
+
+section
+  h3.govuk-heading-m Word and character counts
+
+  form
+    == render('/partials/example-fig.*',
+      caption: "Generating a text input with a label and hint",
+      code: text_area_with_max_words)
