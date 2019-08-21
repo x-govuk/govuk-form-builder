@@ -17,7 +17,7 @@ module GOVUKDesignSystemFormBuilder
         @builder.content_tag(
           'div',
           class: 'govuk-character-count',
-          data: { module: 'character-count' }.merge(**limit, **threshold).compact
+          data: { module: 'govuk-character-count' }.merge(**limit, **threshold).compact
         ) do
           yield
         end
