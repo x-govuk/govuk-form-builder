@@ -5,18 +5,42 @@ title: Select boxes
 h1.govuk-heading-xl Select field
 
 p.govuk-body-l
+  |
+    The select component allows users to choose an option from a long list.
 
-== render('/partials/example-fig.*',
-  caption: "Select field with no additional params",
-  code: select_field,
-  sample_data: departments_data_raw)
+p.govuk-body
+  |
+    The select component allows users to choose an option from a long list.
+    Before using the select component, try asking users questions which will
+    allow you to present them with fewer options.
 
-== render('/partials/example-fig.*',
-  caption: "Select field with a label",
-  code: select_field_with_label,
-  sample_data: departments_data_raw)
+p.govuk-body
+  |
+    Asking questions means you’re less likely to need to use the select
+    component, and can consider using a different solution, such as radios.
 
-== render('/partials/example-fig.*',
-  caption: "Select field with hint text",
-  code: select_field_with_hint_text,
-  sample_data: departments_data_raw)
+h3.govuk-heading-m Related information
+
+ul.govuk-list
+  li
+    a href="https://design-system.service.gov.uk/components/select/"
+      | GOV.UK select component
+
+h2.govuk-heading-l Examples
+
+section
+
+  == render('/partials/example-fig.*',
+    caption: "Select field with no additional params",
+    code: select_field,
+    sample_data: departments_data_raw)
+
+  == render('/partials/example-fig.*',
+    caption: "Select field with a label",
+    code: select_field_with_label,
+    sample_data: departments_data_raw)
+
+  == render('/partials/example-fig.*',
+    caption: "Select field with hint text",
+    code: select_field_with_hint_text,
+    sample_data: departments_data_raw)

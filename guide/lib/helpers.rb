@@ -10,8 +10,9 @@ require 'govuk_design_system_formbuilder'
 use_helper Nanoc::Helpers::Rendering
 use_helper Nanoc::Helpers::LinkTo
 use_helper Helpers::Formatters
-use_helper Helpers::TextHelpers
+use_helper Helpers::LinkHelpers
 use_helper Examples::TextInput
+use_helper Examples::TextArea
 use_helper Examples::Select
 use_helper Examples::Radios
 use_helper Examples::Checkboxes

@@ -23,6 +23,16 @@ class Person
   # checkbox fields
   attr_accessor(
     :lunch_ids,
-    :department_ids
+    :department_ids,
+    :project_x,
+    :project_y,
+    :project_y_role
+  )
+
+  # textarea fields
+  attr_accessor(
+    :responsibilities,
+    :job_description,
+    :cv
   )
 end
