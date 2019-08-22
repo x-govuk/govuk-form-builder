@@ -6,14 +6,19 @@ h1.govuk-heading-xl Text area
 
 p.govuk-body-l
   |
-    Text fields allow users to enter text that's no longer than a single line.
+    Text areas allow users to enter text that's longer than a single line.
+
+p.govuk-body
+  |
+    Users can find open-ended questions difficult to answer. It might be better
+    to break up one complex question into a series of simple ones.
 
 
 h3.govuk-heading-m Related information
 
 ul.govuk-list
-  li Blah
-  li Blah
+  li https://design-system.service.gov.uk/components/textarea/
+  li https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea
 
 h2.govuk-heading-l Examples
 
@@ -21,17 +26,21 @@ section
   h3.govuk-heading-m Regular text inputs
 
   == render('/partials/example-fig.*',
-    caption: "Generating a text input with no additional params",
+    caption: "Generating a text area with no additional params",
     code: text_area)
 
   == render('/partials/example-fig.*',
-    caption: "Generating a text input with a label and hint",
-    code: text_area_with_label_and_hint)
+    caption: "Generating a text area with a label, hint and nine rows",
+    code: text_area_with_label_and_hint_and_nine_rows)
 
 section
   h3.govuk-heading-m Word and character counts
 
+  p.govuk-body
+    |
+      When the value
+
   form
     == render('/partials/example-fig.*',
-      caption: "Generating a text input with a label and hint",
+      caption: "Generating a text area with a word limit and dynamic counter",
       code: text_area_with_max_words)
