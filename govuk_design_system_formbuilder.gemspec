@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.description = "A Rails form builder that generates form inputs adhering to the GOV.UK Design System"
   s.license     = "MIT"
 
-  s.files = Dir["{app,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  s.files = Dir["{app,lib}/**/*", "MIT-LICENSE", "README.md"]
 
   s.add_dependency "rails", "~> 5.2", ">= 5.2.3"
 
