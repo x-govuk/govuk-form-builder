@@ -4,11 +4,12 @@ module Examples
       "= f.govuk_text_area :responsibilities"
     end
 
-    def text_area_with_label_and_hint
+    def text_area_with_label_and_hint_and_nine_rows
       <<~SNIPPET
         = f.govuk_text_area :job_description,
           label: { text: 'Job description' },
-          hint_text: 'Describe your typical day'
+          hint_text: 'Describe your typical day',
+          rows: 9
       SNIPPET
     end
 
