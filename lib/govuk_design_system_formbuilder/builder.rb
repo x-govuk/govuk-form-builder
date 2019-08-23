@@ -217,7 +217,7 @@ module GOVUKDesignSystemFormBuilder
     #    legend: { text: 'Pick your favourite colour', size: 'm' },
     #    hint_text: 'If you cannot find the exact match choose something close',
     #    inline: false
-    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: { text: nil, size: 'm' }, inline: false, small: false, &block)
+    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: {}, inline: false, small: false, &block)
       Elements::Radios::Collection.new(
         self,
         object_name,

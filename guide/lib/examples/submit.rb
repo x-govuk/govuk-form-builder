@@ -19,7 +19,7 @@ module Examples
     def multiple_buttons
       <<~SNIPPET
         = f.govuk_submit 'Save and continue' do
-          a.govuk-button.govuk-button--secondary href='/documents'
+          a.govuk-button.govuk-button--secondary href='/#'
             ' Safe as draft
       SNIPPET
     end
