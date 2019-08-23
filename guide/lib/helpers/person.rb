@@ -24,15 +24,15 @@ class Person
   attr_accessor(
     :lunch_ids,
     :department_ids,
-    :project_x,
-    :project_y,
-    :project_y_role
+    :languages,
+    :other_language
   )
 
   # textarea fields
   attr_accessor(
     :responsibilities,
     :job_description,
-    :cv
+    :cv,
+    :education_history
   )
 end

@@ -29,8 +29,11 @@ section
 
   h3.govuk-heading-m From a collection
 
+  p.govuk-body
+
+
   == render('/partials/example-fig.*',
-    caption: "Check box collection with no additional params",
+    caption: "Generating collection of checkboxes",
     code: checkbox_field,
     sample_data: departments_data_raw)
 
@@ -41,4 +44,14 @@ section
 
 section
 
-  h3.govuk-heading-m 🚧 Supplying a custom list of options
+  h3.govuk-heading-m Supplying a custom list of options
+
+  == render('/partials/example-fig.*',
+    caption: "Check box collection with hints and a conditionally-revealed text field",
+    code: checkbox_field_with_custom_options) do
+
+    p.govuk-body
+      |
+        When more advanced functionality like conditional fields is required,
+        the <code>govuk_check_boxes_fieldset</code> helper is recommended
+

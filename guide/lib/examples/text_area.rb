@@ -20,5 +20,14 @@ module Examples
           max_words: 20
       SNIPPET
     end
+
+    def text_area_with_max_chars_and_threshold
+      <<~SNIPPET
+        = f.govuk_text_area :education_history,
+          label: { text: 'Education history' },
+          max_chars: 10,
+          threshold: 50
+      SNIPPET
+    end
   end
 end
