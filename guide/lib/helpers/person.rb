@@ -16,7 +16,6 @@ class Person
     :new_department_id,
     :old_department_id,
     :lunch_id,
-
     :old_department_description
   )
 
@@ -34,5 +33,10 @@ class Person
     :job_description,
     :cv,
     :education_history
+  )
+
+  # date fields
+  attr_accessor(
+    :date_of_birth
   )
 end
