@@ -16,6 +16,7 @@ use_helper Examples::TextArea
 use_helper Examples::Select
 use_helper Examples::Radios
 use_helper Examples::Checkboxes
+use_helper Examples::SubmitButton
 use_helper Setup::FormBuilderObjects
 use_helper Setup::ExampleData
 

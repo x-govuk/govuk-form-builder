@@ -19,7 +19,8 @@ figure
 
   h4.govuk-heading-s.example-subheading.output Rendered output
   div.example-output
-    == format_slim(code, f: builder, **form_data)
+    form
+      == format_slim(code, f: builder, **form_data)
 
   h4.govuk-heading-s.example-subheading.output HTML output
   pre.example-html

@@ -23,5 +23,10 @@ module Helpers
     def rubygems_link
       'https://rubygems.org/gems/govuk_design_system_formbuilder'
     end
+
+
+    def prevent_double_click_link
+      'https://design-system.service.gov.uk/components/button#stop-users-from-accidentally-sending-information-more-than-once'
+    end
   end
 end

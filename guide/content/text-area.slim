@@ -38,9 +38,17 @@ section
 
   p.govuk-body
     |
-      When the value
+      If a limit on the number of words or characters a user can enter is
+      required, the <code>max_chars</code> and <code>max_words</code>
+      parameters can be used. They provide feedback on how close the user is to
+      the limit and automatically show an error if it is exceeeded.
 
   form
     == render('/partials/example-fig.*',
-      caption: "Generating a text area with a word limit and dynamic counter",
+      caption: "Generating a text area with a word limit",
       code: text_area_with_max_words)
+
+  form
+    == render('/partials/example-fig.*',
+      caption: "Generating a text area with a character limit and threshold",
+      code: text_area_with_max_chars_and_threshold)
