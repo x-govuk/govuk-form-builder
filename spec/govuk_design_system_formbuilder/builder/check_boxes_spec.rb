@@ -208,7 +208,11 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     specify 'output should contain a check box item group with a check box input' do
       expect(subject).to have_tag('div', with: { class: 'govuk-checkboxes__item' }) do |ci|
-        expect(ci).to have_tag('input', with: { type: 'checkbox', value: value })
+        expect(ci).to have_tag('input', with: {
+          id: "person-projects-#{value}-field",
+          type: 'checkbox',
+          value: value
+        })
       end
     end
 
