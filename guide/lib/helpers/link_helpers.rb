@@ -28,5 +28,21 @@ module Helpers
     def prevent_double_click_link
       'https://design-system.service.gov.uk/components/button#stop-users-from-accidentally-sending-information-more-than-once'
     end
+
+    def dfe_rails_boilerplate_link
+      'https://github.com/DFE-Digital/govuk-rails-boilerplate'
+    end
+
+    def slim_link
+      'https://www.slim-lang.org'
+    end
+
+    def erb_link
+      'https://ruby-doc.org/stdlib-2.6.3/libdoc/erb/rdoc/ERB.html'
+    end
+
+    def haml_link
+      'http://haml.info'
+    end
   end
 end

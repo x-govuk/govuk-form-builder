@@ -1,0 +1,52 @@
+---
+title: Getting started
+---
+
+h1.govuk-heading-xl Getting started
+
+h2.govuk-heading-m Installation
+
+p.govuk-body
+  ' The form builder is suitable for use with any Rails application that
+    uses the GOV.UK Design System. If you're starting from scratch, the
+    easiest way to hit the ground running is to use the
+    #{link_to('DfE Rails Boilerplate', dfe_rails_boilerplate_link).html_safe}.
+
+p.govuk-body
+  ' Once your application is working, simply add the following line to your
+    Gemfile and run <code>bundle install</code>.
+
+pre
+  code.highlight.language-ruby
+    | gem 'govuk_design_system_formbuilder'
+
+p.govuk-body
+  ' Now we just need to tell Rails which form builder to use. We can do
+    this globally by amending the <code>ApplicationController</code>.
+
+pre.smaller
+  code.highlight.language-ruby
+    |
+      class ApplicationController < ActionController::Base
+        default_form_builder GOVUKDesignSystemFormBuilder::FormBuilder
+      end
+
+p.govuk-body
+  ' Alternatively, if you're not quite ready to make the full switch, you
+    can specify the form builder on a form-by-form basis.
+
+div.govuk-inset-text
+  ' Note that all examples in this guide are written with
+    #{link_to('Slim', slim_link).html_safe} but
+    the form builder works just as well with
+    #{link_to('ERB', erb_link).html_safe} or
+    #{link_to('Haml', haml_link).html_safe}.
+
+pre.smaller
+  code.highlight.language-slim
+    | = form_for @some_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f|
+        = f.govuk_text_field :name
+        = f.govuk_phone_field :telephone_number
+
+p.govuk-body
+  ' If you made it this far and everything's working, well done!

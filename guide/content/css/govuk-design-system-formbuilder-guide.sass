@@ -1,3 +1,5 @@
+@import 'colours'
+
 @font-face
   font-family: FiraMono
   src: url(/assets/fonts/FiraMono-Regular.woff2) format("woff2"), url(/assets/fonts/FiraMono-Regular.woff) format("woff")
@@ -8,7 +10,7 @@
   src: url(/assets/fonts/FiraMono-Bold.woff2) format("woff2"), url(/assets/fonts/FiraMono-Bold.woff) format("woff")
 
 figure
-  border-left: 5px solid #1d70b8
+  border-left: 5px solid $blue
   padding: 0.5rem 1rem 0.5rem 2rem
   margin: 2.5rem 0rem 4rem
 
@@ -16,24 +18,24 @@ figure
     margin: 1.5rem 0rem 0.5rem
 
   div.example-output
-    border: 1px solid #f3f2f1
+    border: 1px solid $light-grey
+    border-radius: 5px
     padding: 1.5rem 2rem 1rem
     margin-bottom: 2rem
 
-  pre
-    overflow: auto
-    padding: 2rem
-    margin: 1rem 0rem
+pre
+  overflow: auto
+  padding: 2rem
+  margin: 1rem 0rem
 
-    > code.highlight
-      font-size: 1.2rem
-      font-family: FiraMono, monospace
-      word-wrap: normal
+  > code.highlight
+    font-family: FiraMono, monospace
+    word-wrap: normal
 
-    &.example-html > code.highlight
-      font-size: 1rem
+  &.smaller > code.highlight
+    font-size: 85%
 
-p > code, li > code
+p > code, li > code, dt > code, dd > code
   background-color: #fff0f6
   font-family: FiraMono, monospace
   padding: 0.2rem 0.4rem

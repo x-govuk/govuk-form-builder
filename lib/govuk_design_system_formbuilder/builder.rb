@@ -21,7 +21,7 @@ module GOVUKDesignSystemFormBuilder
     #     hint_text: 'It says it on your birth certificate',
     #     required: true,
     #     placeholder: 'Ralph Wiggum'
-    def govuk_text_field(attribute_name, hint_text: nil, label: {}, width: 'full', **args)
+    def govuk_text_field(attribute_name, hint_text: nil, label: {}, width: nil, **args)
       Elements::Input.new(self, object_name, attribute_name, attribute_type: :text, hint_text: hint_text, label: label, width: width, **args).html
     end
 
@@ -47,7 +47,7 @@ module GOVUKDesignSystemFormBuilder
     #     hint_text: 'Include the dialling code',
     #     required: true,
     #     placeholder: '0123 456 789'
-    def govuk_phone_field(attribute_name, hint_text: nil, label: {}, width: 'full', **args)
+    def govuk_phone_field(attribute_name, hint_text: nil, label: {}, width: nil, **args)
       Elements::Input.new(self, object_name, attribute_name, attribute_type: :phone, hint_text: hint_text, label: label, width: width, **args).html
     end
 
@@ -71,7 +71,7 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_email_field :email_address,
     #     label: { text: 'Enter your email address' },
     #     placeholder: 'ralph.wiggum@springfield.edu'
-    def govuk_email_field(attribute_name, hint_text: nil, label: {}, width: 'full', **args)
+    def govuk_email_field(attribute_name, hint_text: nil, label: {}, width: nil, **args)
       Elements::Input.new(self, object_name, attribute_name, attribute_type: :email, hint_text: hint_text, label: label, width: width, **args).html
     end
 
@@ -95,7 +95,7 @@ module GOVUKDesignSystemFormBuilder
     #     label: { text: 'Enter your favourite website' },
     #     placeholder: 'https://www.gov.uk',
     #     autocomplete: 'url'
-    def govuk_url_field(attribute_name, hint_text: nil, label: {}, width: 'full', **args)
+    def govuk_url_field(attribute_name, hint_text: nil, label: {}, width: nil, **args)
       Elements::Input.new(self, object_name, attribute_name, attribute_type: :url, hint_text: hint_text, label: label, width: width, **args).html
     end
 
@@ -121,7 +121,7 @@ module GOVUKDesignSystemFormBuilder
     #     min: 80,
     #     max: 150,
     #     step: 5
-    def govuk_number_field(attribute_name, hint_text: nil, label: {}, width: 'full', **args)
+    def govuk_number_field(attribute_name, hint_text: nil, label: {}, width: nil, **args)
       Elements::Input.new(self, object_name, attribute_name, attribute_type: :number, hint_text: hint_text, label: label, width: width, **args).html
     end
 

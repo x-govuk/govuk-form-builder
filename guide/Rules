@@ -13,6 +13,7 @@ compile '/**/*.slim' do
   write item.identifier.without_ext + '/index.html'
 end
 
+ignore '/**/_*.sass'
 compile '/**/*.sass' do
   filter :sass, syntax: :sass
   write item.identifier.without_ext + '.css'
