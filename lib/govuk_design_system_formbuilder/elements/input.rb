@@ -34,16 +34,19 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def input_classes
-        %w(govuk-input).tap do |classes|
-          classes.push(width_classes)
-          classes.push('govuk-input--error') if has_errors?
-        end
+        %w(govuk-input).push(width_classes, error_classes).compact
+      end
+
+      def error_classes
+        ('govuk-input--error') if has_errors?
       end
 
       def width_classes
         return if @width.blank?
 
         case @width
+        when nil then nil
+
           # fixed (character) widths
         when 20 then 'govuk-input--width-20'
         when 10 then 'govuk-input--width-10'

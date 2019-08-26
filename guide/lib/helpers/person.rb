@@ -39,4 +39,12 @@ class Person
   attr_accessor(
     :date_of_birth
   )
+
+  # labels, hints and legends
+  attr_accessor(
+    :favourite_colour,
+    :favourite_shade_of_red,
+    :favourite_shade_of_blue,
+    :favourite_primary_colour
+  )
 end

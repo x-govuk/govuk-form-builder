@@ -35,8 +35,34 @@ module Setup
       eval(lunch_options_raw)
     end
 
+    def primary_colours_raw
+      <<~DATA
+        primary_colours = [
+          OpenStruct.new(
+            id: :cyan,
+            name: 'Cyan',
+            description: 'Greenish-blue'
+          ),
+          OpenStruct.new(
+            id: :magenta,
+            name: 'Magenta',
+            description: 'Purplish-red'
+          ),
+          OpenStruct.new(
+            id: :yellow,
+            name: 'Yellow',
+            description: 'Yellowy-yellow'
+          )
+        ]
+      DATA
+    end
+
+    def primary_colours
+      eval(primary_colours_raw)
+    end
+
     def form_data
-      { departments: departments, lunch_options: lunch_options }
+      { departments: departments, lunch_options: lunch_options, primary_colours: primary_colours }
     end
   end
 end
