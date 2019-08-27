@@ -47,4 +47,11 @@ class Person
     :favourite_shade_of_blue,
     :favourite_primary_colour
   )
+
+  # errors
+  attr_accessor(
+    :reference_number
+  )
+
+  validates :reference_number, presence: { message: 'Enter the reference number you received in your welcome pack' }
 end
