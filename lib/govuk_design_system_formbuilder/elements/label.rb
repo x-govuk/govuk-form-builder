@@ -29,7 +29,7 @@ module GOVUKDesignSystemFormBuilder
           @attribute_name,
           @text,
           value: @value,
-          for: field_id,
+          for: field_id(link_errors: true),
           class: %w(govuk-label).push(@size_class, @weight_class, @radio_class, @checkbox_class).compact
         )
       end
