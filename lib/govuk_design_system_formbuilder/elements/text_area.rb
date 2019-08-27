@@ -40,14 +40,6 @@ module GOVUKDesignSystemFormBuilder
         end
       end
 
-      def character_count_description
-        if @max_words
-          "#{@max_words} words"
-        elsif @max_chars
-          "#{@max_chars} characters"
-        end
-      end
-
       def limit?
         @max_words || @max_chars
       end
