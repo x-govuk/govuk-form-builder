@@ -18,4 +18,8 @@ shared_examples 'an error summary linking directly to a form element' do |method
     expect(subject).to have_tag('a', with: { href: "#" + identifier })
     expect(subject).to have_tag(element, with: { id: identifier })
   end
+
+  specify 'the label should be associated with the element' do
+    expect(subject).to have_tag('label', with: { for: identifier })
+  end
 end
