@@ -4,9 +4,31 @@ title: Error handling
 
 h1.govuk-heading-xl Error handling
 
+p.govuk-body
+  ' When a form is submitted and there is a problem, communicating that
+    problem in a clear and concise manner is incredibly important. The
+    form builder provides two ways to do this.
+
+p.govuk-body
+  ' Error messages are displayed immediately above the offending form control.
+    They should tell the user how to fix the problem.
+
+p.govuk-body
+  ' Additionally a summary of all of problems with the submission should be
+    displayed at the top of the page. Each error in the summary is a hyperlink
+    that when followed focusses on the problematic form control.
+
+p.govuk-body
+  ' This behaviour is provided by the form builder without any need for
+    extra configuration.
+
+h3.govuk-heading-m Related information
+
+ul.govuk-list
+  li https://design-system.service.gov.uk/components/error-message/
+  li https://design-system.service.gov.uk/components/error-summary/
 
 == render('/partials/example-fig.*',
   caption: "A text field with an error",
   code: text_field_with_errors,
   show_errors: true)
-
