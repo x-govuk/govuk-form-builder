@@ -24,8 +24,7 @@ module GOVUKDesignSystemFormBuilder
                   class: govuk_textarea_classes,
                   aria: { describedby: described_by(hint_element.hint_id, error_element.error_id) },
                   **@extra_args.merge(rows: @rows)
-                ),
-                character_count_info
+                )
               ].flatten.compact
             )
           end
@@ -39,16 +38,6 @@ module GOVUKDesignSystemFormBuilder
           classes.push('govuk-textarea--error') if has_errors?
           classes.push('govuk-js-character-count') if limit?
         end
-      end
-
-      def character_count_info
-        return nil unless limit?
-
-        @builder.tag.span(
-          "You can enter up to #{character_count_description}",
-          class: %w(govuk-hint govuk-character-count__message),
-          aria: { live: 'polite' }
-        )
       end
 
       def character_count_description
