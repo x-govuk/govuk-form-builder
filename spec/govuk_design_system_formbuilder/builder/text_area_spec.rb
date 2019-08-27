@@ -53,14 +53,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       specify 'should add govuk-js-character-count class to the textarea' do
         expect(subject).to have_tag('textarea', with: { class: 'govuk-js-character-count' })
       end
-
-      specify 'should add a character count message' do
-        expect(subject).to have_tag(
-          'span',
-          with: { class: 'govuk-character-count__message' },
-          text: "You can enter up to #{max_words} words"
-        )
-      end
     end
 
     context 'max chars' do
@@ -80,14 +72,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       specify 'should add govuk-js-character-count class to the textarea' do
         expect(subject).to have_tag('textarea', with: { class: 'govuk-js-character-count' })
-      end
-
-      specify 'should add a character count message' do
-        expect(subject).to have_tag(
-          'span',
-          with: { class: 'govuk-character-count__message' },
-          text: "You can enter up to #{max_chars} characters"
-        )
       end
     end
 
