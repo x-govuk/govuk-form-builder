@@ -16,5 +16,7 @@ nanoc-check-external:
 	${guide_dir} ${prefix} nanoc check ${nanoc_internal_checks} ${nanoc_external_checks}
 build:
 	${prefix} gem build govuk_design_system_formbuilder.gemspec
+build_guide:
+	${guide_dir} ${prefix} nanoc
 clean:
 	rm -rf guide/output/**/*

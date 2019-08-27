@@ -1,4 +1,3 @@
 [build]
-  base = "guide"
-  command = "nanoc"
+  command = "make build_guide"
   publish = "guide/output"
