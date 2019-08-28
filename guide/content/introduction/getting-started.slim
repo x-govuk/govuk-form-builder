@@ -24,7 +24,7 @@ p.govuk-body
   ' Now we just need to tell Rails which form builder to use. We can do
     this globally by amending the <code>ApplicationController</code>.
 
-pre.smaller
+pre
   code.highlight.language-ruby
     |
       class ApplicationController < ActionController::Base
@@ -42,7 +42,7 @@ div.govuk-inset-text
     #{link_to('ERB', erb_link).html_safe} or
     #{link_to('Haml', haml_link).html_safe}.
 
-pre.smaller
+pre
   code.highlight.language-slim
     | = form_for @some_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f|
         = f.govuk_text_field :name
