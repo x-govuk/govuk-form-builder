@@ -26,7 +26,7 @@ module Helpers
 
 
     def prevent_double_click_link
-      'https://design-system.service.gov.uk/components/button#stop-users-from-accidentally-sending-information-more-than-once'
+      'https://design-system.service.gov.uk/components/button/#stop-users-from-accidentally-sending-information-more-than-once'
     end
 
     def dfe_rails_boilerplate_link
@@ -34,7 +34,7 @@ module Helpers
     end
 
     def slim_link
-      'https://www.slim-lang.org'
+      'https://slim-lang.com'
     end
 
     def erb_link

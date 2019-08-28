@@ -19,28 +19,13 @@ p.govuk-body
     Asking questions means you’re less likely to need to use the select
     component, and can consider using a different solution, such as radios.
 
-h3.govuk-heading-m Related information
-
-ul.govuk-list
-  li
-    a href="https://design-system.service.gov.uk/components/select/"
-      | GOV.UK select component
+== render('/partials/related-info.*', links: select_info)
 
 h2.govuk-heading-l Examples
 
 section
 
   == render('/partials/example-fig.*',
-    caption: "Select field with no additional params",
-    code: select_field,
-    sample_data: departments_data_raw)
-
-  == render('/partials/example-fig.*',
-    caption: "Select field with a label",
-    code: select_field_with_label,
-    sample_data: departments_data_raw)
-
-  == render('/partials/example-fig.*',
-    caption: "Select field with hint text",
-    code: select_field_with_hint_text,
+    caption: "Select field with a label and hint",
+    code: select_field_with_label_and_hint_text,
     sample_data: departments_data_raw)
