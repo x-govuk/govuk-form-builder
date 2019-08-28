@@ -33,5 +33,12 @@ module Helpers
         'MDN submit element documentation' => 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/submit'
       }
     end
+
+    def radios_info
+      {
+        'GOV.UK design system radios component' => 'https://design-system.service.gov.uk/components/radios/',
+        'MDN radio documentation' => 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio'
+      }
+    end
   end
 end

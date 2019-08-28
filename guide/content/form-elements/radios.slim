@@ -5,31 +5,27 @@ title: Radio buttons
 h1.govuk-heading-xl Radio buttons
 
 p.govuk-body-l
-  | Use the radios component when users can only select one option from a list.
+  '
+    Radio buttons allow users to select a single option from a list.
 
 p.govuk-body
-  |
+  '
     Radios are grouped together in a <code>fieldset</code> with a
     <code>legend</code> that describes them, as shown in the examples on this
     page.
 
 p.govuk-body
-  |
+  '
     If you are asking just one question per page as recommended, you can set
     the contents of the <code>legend</code> as the page heading. This is good
     practice as it means that users of screen readers will only hear the
     contents once.
 
+== render('/partials/related-info.*', links: radios_info)
+
 h2.govuk-heading-l Examples
 
 section
-
-  h3.govuk-heading-m From a collection
-
-  == render('/partials/example-fig.*',
-    caption: "Radio buttons collection with no additional params",
-    code: radio_field,
-    sample_data: departments_data_raw)
 
   == render('/partials/example-fig.*',
     caption: "Radio buttons collection with legend and hint text",
@@ -39,18 +35,25 @@ section
   == render('/partials/example-fig.*',
     caption: "Radio buttons collection with descriptions",
     code: radio_field_with_label_and_descriptions,
-    sample_data: lunch_options_raw)
+    sample_data: lunch_options_raw) do
+
+    h4.govuk-heading-s Adding conditional content
+
+    p.govuk-body
+      '
+        Often radio buttons need a description to help the user pick the
+        correct option. In addition to Rails' collection form helper taking
+        arguments for the identifier and label text for radio buttons, an
+        extra argument can be passed for the description.
+
+    p.govuk-body
+      '
+        In this example, our source data has a <code>description</code> attribute
+        which we want to form the hint text. The attribute name will be called on
+        each option and if a description is present it will be displayed, if it is
+        null or empty no hint will be rendered.
 
 section
-
-  h3.govuk-heading-m Supplying a custom list of options
-
-  p.govuk-body
-    |
-      If your list of options is hard-coded or you want to add extra
-      customisation, like inserting a text divider, the
-      <code>#govuk_radio_button_fieldset</code> method offers additional
-      flexibility.
 
   == render('/partials/example-fig.*',
     caption: "Radio buttons collection with conditional content and a divider",
@@ -59,10 +62,13 @@ section
     h4.govuk-heading-s Adding conditional content
 
     p.govuk-body
-      |
-        To add content that is displayed when a radio button is selected simply
-        pass it in as a block
+      '
+        If your list of options is hard-coded or you want to add extra
+        customisation, like inserting a text divider, the
+        <code>#govuk_radio_button_fieldset</code> helper offers additional
+        flexibility.
 
-section
-
-  h3.govuk-heading-m 🚧 Setting the legend to be the heading
+    p.govuk-body
+      '
+        Any content passed into <code>#govuk_radio_button</code> as a block will
+        be revealed when the radio button is selected.
