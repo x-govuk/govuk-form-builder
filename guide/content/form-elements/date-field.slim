@@ -7,31 +7,23 @@ h1.govuk-heading-xl Date fields
 p.govuk-body-l
   |
     Date fields allow the user to enter the day, month and year
-    of an event
+    of an event.
 
 p.govuk-body
   |
-    By default
-    #{link_to('double click prevention', prevent_double_click_link).html_safe}
-      is enabled to make applications easier to use by people using slow internet
-      connections or suffering from motor impairments.
+    Three inputs for day, month and year respectively are used to
+    capture the dates rather than a date picker. This is because:
 
-h3.govuk-heading-m Related information
+ul.govuk-list.govuk-list--bullet
+  li some users find date inputs difficult to use
+  li often users will be expected to enter a date they know rather
+     than to <em>pick</em> a date
 
-ul.govuk-list
-  li
-    a href="https://design-system.service.gov.uk/components/button/"
-      | GOV.UK buttons
-
-  li
-    a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/submit"
-      | MDN article on submit inputs
+== render('/partials/related-info.*', links: date_info)
 
 h2.govuk-heading-l Examples
 
 section
-  h3.govuk-heading-m Date field
-
   == render('/partials/example-fig.*',
-    caption: "Date field with legend and hint",
+    caption: "Date field with legend and hint and birth date autocompletion",
     code: date_field)

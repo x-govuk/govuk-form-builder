@@ -9,3 +9,10 @@ prune:
 data_sources:
   - type: filesystem
     encoding: utf-8
+
+checks:
+  external_links:
+    exclude:
+      # ruby doc sometimes fails because the docs are built when the request is
+      # made which nano reports as failure (202)
+      - '^https?://www.rubydoc.info/'

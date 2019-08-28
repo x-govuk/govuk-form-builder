@@ -16,12 +16,7 @@ p.govuk-body
     li select multiple options from a list
     li toggle a single option on or off
 
-h3.govuk-heading-m Related information
-
-ul.govuk-list
-  li
-    a href="https://design-system.service.gov.uk/components/checkboxes/"
-      | GOV.UK checkbox component
+== render('/partials/related-info.*', links: checkbox_info)
 
 h2.govuk-heading-l Examples
 
@@ -30,7 +25,6 @@ section
   h3.govuk-heading-m From a collection
 
   p.govuk-body
-
 
   == render('/partials/example-fig.*',
     caption: "Generating collection of checkboxes",
