@@ -6,29 +6,34 @@ figure
       == yield
 
   - if defined?(sample_data)
-    h4.govuk-heading-s.example-subheading.data Data
+    section
+      h4.govuk-heading-s.example-subheading.data Data
 
+      pre.example-input
+        code.highlight.language-ruby
+          | #{sample_data}
+
+  section
+    h4.govuk-heading-s.example-subheading.input Input
     pre.example-input
-      code.highlight.language-ruby
-        | #{sample_data}
-
-  h4.govuk-heading-s.example-subheading.input Input
-  pre.example-input
-    code.highlight.language-slim
-      | #{code}
+      code.highlight.language-slim
+        | #{code}
 
 
-  - display_errors = defined?(show_errors) && show_errors
 
-  h4.govuk-heading-s.example-subheading.output Rendered output
-  div.example-output
-    form
-      == format_slim(code, f: builder(display_errors), **form_data)
+  section
+    - display_errors = defined?(show_errors) && show_errors
+
+    h4.govuk-heading-s.example-subheading.output Rendered output
+    div.example-output
+      form
+        == format_slim(code, f: builder(display_errors), **form_data)
 
   - unless defined?(hide_html_output) && hide_html_output
-    h4.govuk-heading-s.example-subheading.output HTML output
-    pre.example-html.smaller
-      code.highlight.language-html
-        - if defined?(sample_data)
-          - eval(sample_data)
-        = format_slim(code, f: builder(display_errors), **form_data)
+    section
+      h4.govuk-heading-s.example-subheading.output HTML output
+      pre.example-html.smaller
+        code.highlight.language-html
+          - if defined?(sample_data)
+            - eval(sample_data)
+          = format_slim(code, f: builder(display_errors), **form_data)
