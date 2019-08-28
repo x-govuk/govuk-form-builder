@@ -11,18 +11,84 @@ p.govuk-body-l
 p.govuk-body
   |
     In addition to <code>#text_field</code>, the form builder supports various
-    other methods that take the same parameters and produce a <em>similar</em>
-    output:
+    other methods that take the same parameters and produce inputs for particular
+    data types:
 
-  ul.govuk-list.govuk-list--bullet
-    li
-      code #govuk_number_field
-    li
-      code #govuk_phone_field
-    li
-      code #govuk_email_field
-    li
-      code #govuk_url_field
+  table.govuk-table
+    caption.govuk-table__caption Input types supported by the form builder
+
+    thead.govuk-table__head
+      tr.govuk-table__row
+        th.govuk-table__header Method
+        th.govuk-table__header Input type
+        th.govuk-table__header Documentation
+
+    tbody.govuk-table__body
+
+      tr.govuk-table__row
+        td.govuk-table__cell
+          code #govuk_number_field
+        td.govuk-table__cell
+          code number
+        td.govuk-table__cell
+          == link_to 'MDN', 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number'
+          span.govuk-visually-hidden
+            ' documentation for number inputs
+
+          ' ,
+
+          == link_to 'WHATWG', 'https://html.spec.whatwg.org/multipage/input.html#number-state-(type=number)'
+          span.govuk-visually-hidden
+            ' standard document for number inputs
+
+      tr.govuk-table__row
+        td.govuk-table__cell
+          code #govuk_phone_field
+        td.govuk-table__cell
+          code tel
+        td.govuk-table__cell
+          == link_to 'MDN', 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel'
+          span.govuk-visually-hidden
+            ' documentation for telephone inputs
+
+          ' ,
+
+          == link_to 'WHATWG', 'https://html.spec.whatwg.org/multipage/input.html#telephone-state-(type=tel)'
+          span.govuk-visually-hidden
+            ' standard document for telephone inputs
+
+      tr.govuk-table__row
+        td.govuk-table__cell
+          code #govuk_email_field
+        td.govuk-table__cell
+          code email
+        td.govuk-table__cell
+          == link_to 'MDN', 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email'
+          span.govuk-visually-hidden
+            ' documentation for email inputs
+
+          ' ,
+
+          == link_to 'WHATWG', 'https://html.spec.whatwg.org/multipage/input.html#e-mail-state-(type=email)'
+          span.govuk-visually-hidden
+            ' standard document for email inputs
+
+      tr.govuk-table__row
+        td.govuk-table__cell
+          code #govuk_url_field
+        td.govuk-table__cell
+          code url
+        td.govuk-table__cell
+          == link_to 'MDN', 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/url'
+          span.govuk-visually-hidden
+            ' documentation for URL inputs
+
+          ' ,
+
+          == link_to 'WHATWG', 'https://html.spec.whatwg.org/multipage/input.html#url-state-(type=url)'
+          span.govuk-visually-hidden
+            ' standard document for URL inputs
+
 
 p.govuk-body
   |
@@ -47,21 +113,29 @@ section
   h3.govuk-heading-m Regular text inputs
 
   == render('/partials/example-fig.*',
-    caption: "Generating a text input with no additional params",
-    code: text_field)
-
-  == render('/partials/example-fig.*',
-    caption: "Generating a text input with a custom label",
-    code: text_field_with_label)
-
-  == render('/partials/example-fig.*',
-    caption: "Generating a text input with some hint text",
-    code: text_field_with_hint)
+    caption: "Generating a text input with a custom label and hint",
+    code: text_field_with_label_and_hint)
 
   == render('/partials/example-fig.*',
     caption: "Generating a text input with some extra attributes",
-    code: text_field_with_attributes)
+    code: text_field_with_attributes) do
+
+    p.govuk-body
+      ' All values passed into the form helper that aren't among its
+        named parameters will be set as HTML attributes.
 
   == render('/partials/example-fig.*',
-    caption: "Generating a text input with a custom width",
-    code: text_field_with_custom_width)
+    caption: "Generating a text inputs with custom widths",
+    code: text_field_with_custom_width,
+    hide_html_output: true) do
+
+    p.govuk-body
+      ' By default, inputs will expand to fill their container. When
+        no <code>width</code> parameter is passed in no width class
+        will be added.
+
+    p.govuk-body
+      ' Custom widths help users understand the length of the value
+        they are intended to enter. For example, a telephone number
+        field needn't be the full width of the page when it might
+        only be 11 digits long.
