@@ -11,29 +11,29 @@
 
 figure
   border-left: 5px solid $blue
-  padding: 0.5rem 1rem 0.5rem 2rem
+  padding: 0.5rem 1rem 0rem 2rem
   margin: 2.5rem 0rem 4rem
 
   h3.example-subheading
     margin: 1.5rem 0rem 0.5rem
 
-  div.example-output
-    border: 1px solid $light-grey
-    border-radius: 5px
-    padding: 1.5rem 2rem 1rem
-    margin-bottom: 2rem
+  section
+    padding: 1rem
 
-pre
-  overflow: auto
-  padding: 2rem
-  margin: 1rem 0rem
+    pre,.example-output
+      padding: 2rem
+      margin: 0rem
+      border: 1px solid $light-grey
 
-  > code.highlight
-    font-family: FiraMono, monospace
-    word-wrap: normal
+    pre
+      overflow: auto
 
-  &.smaller > code.highlight
-    font-size: 85%
+      > code.highlight
+        font-family: FiraMono, monospace
+        word-wrap: normal
+
+      &.smaller > code.highlight
+        font-size: 85%
 
 p > code, li > code, dt > code, dd > code
   background-color: #fff0f6
