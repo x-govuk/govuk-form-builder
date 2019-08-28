@@ -1,6 +1,5 @@
 module Setup
   module FormBuilderObjects
-
     def builder(errors = false)
       errors ? builder_with_errors : builder_without_errors
     end
@@ -18,7 +17,7 @@ module Setup
     end
 
     def object_with_errors
-      Person.new.tap { |p| p.valid? }
+      Person.new.tap(&:valid?)
     end
 
     def helper
