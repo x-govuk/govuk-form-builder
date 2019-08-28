@@ -7,7 +7,19 @@ class Person
     :first_name,
     :last_name,
     :job_title,
-    :postcode
+    :postcode,
+
+    :twenty,
+    :ten,
+    :five,
+    :four,
+    :three,
+    :two,
+    :full,
+    :three_quarters,
+    :one_half,
+    :one_third,
+    :one_quarter
   )
 
   # select/radio fields
