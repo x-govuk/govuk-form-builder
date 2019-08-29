@@ -13,9 +13,9 @@ module Examples
               span.govuk-warning-text__icon aria-hidden=true !
               strong.govuk-warning-text__text
                 span.govuk-warning-text__assistive
-                  Warning
-                ' Unlike in previous years, nominations are not
-                  anonymous, the list of voters will be published after the
+                  | Warning
+                | Unlike in previous years, nominations are not
+                  anonymous. The list of voters will be published after the
                   prizes have been awarded.
       SNIPPET
     end

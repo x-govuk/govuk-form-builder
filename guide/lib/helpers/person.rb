@@ -66,4 +66,12 @@ class Person
   )
 
   validates :reference_number, presence: { message: 'Enter the reference number you received in your welcome pack' }
+
+  # fieldset
+  attr_accessor(
+    :address_one,
+    :address_two,
+    :address_three,
+    :postcode
+  )
 end

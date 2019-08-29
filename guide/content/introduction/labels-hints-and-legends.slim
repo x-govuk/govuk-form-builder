@@ -9,10 +9,10 @@ section
   h2.govuk-heading-l Labels
 
   p.govuk-body
-    ' All form helpers that generate a single input element
+    | All form helpers that generate a single input element
       automatically associate it with a corresponding <code>label</code>.
 
-    ' By default, the label text is set to the capitalised name of the
+    | By default, the label text is set to the capitalised name of the
       attribute. If the attribute contains underscores they will be left
       in. This is intentional behaviour to prompt the developer to add
       some more-suitable text.
@@ -23,7 +23,7 @@ section
     hide_html_output: true)
 
   p.govuk-body
-    ' Labels are customised by passing in a hash of options with the
+    | Labels are customised by passing in a hash of options with the
       following keys:
 
   dl.govuk-summary-list
@@ -32,24 +32,36 @@ section
         code text
 
       dd.govuk-summary-list__value
-        ' The label text
+        | The label text
 
     div.govuk-summary-list__row
       dt.govuk-summary-list__key
         code tag
 
       dd.govuk-summary-list__value
-        ' The HTML tag that the label will be wrapped in. This is useful
+        | The HTML tag that the label will be wrapped in. This is useful
           on pages where the label is also the main header where the tag
-          should be <code>h1</code>.
+          should be <code>h1</code>
 
     div.govuk-summary-list__row
       dt.govuk-summary-list__key
         code size
 
       dd.govuk-summary-list__value
-        ' The label size which follows the usual GOV.UK pattern of
+        | The label size which follows the usual GOV.UK pattern of
           <code>xl</code>, <code>l</code>, <code>m</code> and <code>s</code>
+
+    div.govuk-summary-list__row
+      dt.govuk-summary-list__key
+        code hidden
+
+      dd.govuk-summary-list__value
+        | Labels can be visually hidden when their presence would complicate
+          the form. This is a common pattern when asking for multiple lines
+          of address where a single label or legend will suffice. The hidden
+          value defaults to <code>false</code> and can be overridden with
+          <code>true</code>
+
 
   == render('/partials/example-fig.*',
     caption: "A fully-configured label",
@@ -61,12 +73,12 @@ section
   h2.govuk-heading-l Hints
 
   p.govuk-body
-    ' Unlike labels, hints cannot be styled and their surrounding tags cannot
+    | Unlike labels, hints cannot be styled and their surrounding tags cannot
       be customised. They are set by providing a <code>hint_text</code> string
       parameter.
 
   p.govuk-body
-    ' To accomodate screenreaders and users of other assistive technology,
+    | To accomodate screenreaders and users of other assistive technology,
       <strong>hints must be associated with inputs</strong> via the
       <code>aria-describedby</code> attribute. The form builder does this
       automatically.
@@ -80,16 +92,16 @@ section
   h2.govuk-heading-l Legends
 
   p.govuk-body
-    ' Legends look, act and work in a similar fashion to labels but they
+    | Legends look, act and work in a similar fashion to labels but they
       describe a group of inputs.
 
   p.govuk-body
-    ' The GOV.UK Design System uses legends to describe radio button, check box
+    | The GOV.UK Design System uses legends to describe radio button, check box
       and date fields but any group of related inputs can be wrapped in a fieldset
       and described by its legend.
 
   p.govuk-body
-    ' Legends are customised by passing in a hash of options with the
+    | Legends are customised by passing in a hash of options with the
       following keys:
 
   dl.govuk-summary-list
@@ -98,23 +110,23 @@ section
         code text
 
       dd.govuk-summary-list__value
-        ' The legend text
+        | The legend text
 
     div.govuk-summary-list__row
       dt.govuk-summary-list__key
         code tag
 
       dd.govuk-summary-list__value
-        ' The HTML tag that the legend will be wrapped in. This is useful
+        | The HTML tag that the legend will be wrapped in. This is useful
           on pages where the label is also the main header. In cases like
-          this, it should be set to to <code>"h1"</code>.
+          this, it should be set to to <code>h1</code>
 
     div.govuk-summary-list__row
       dt.govuk-summary-list__key
         code size
 
       dd.govuk-summary-list__value
-        ' The legend size which follows the usual GOV.UK pattern of
+        | The legend size which follows the usual GOV.UK pattern of
           <code>xl</code>, <code>l</code>, <code>m</code> and <code>s</code>
 
   == render('/partials/example-fig.*',

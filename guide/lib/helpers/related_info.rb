@@ -40,5 +40,12 @@ module Helpers
         'MDN radio documentation' => 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio'
       }
     end
+
+    def fieldset_info
+      {
+        'GOV.UK design system radios component' => 'https://design-system.service.gov.uk/components/fieldset/',
+        'GOV.UK accessibility blog post on fieldset use' => 'https://accessibility.blog.gov.uk/2016/07/22/using-the-fieldset-and-legend-elements/'
+      }
+    end
   end
 end
