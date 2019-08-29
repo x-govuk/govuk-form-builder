@@ -23,6 +23,7 @@ use_helper Examples::SubmitButton
 use_helper Examples::Date
 use_helper Examples::LabelsHintsAndLegends
 use_helper Examples::ErrorHandling
+use_helper Examples::InjectingContent
 
 use_helper Setup::FormBuilderObjects
 use_helper Setup::ExampleData
