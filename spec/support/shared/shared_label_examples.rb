@@ -23,6 +23,16 @@ shared_examples 'a field that supports labels' do
       end
     end
 
+    context 'hidden labels' do
+      subject { builder.send(*args.push(label: { text: label_text, hidden: true })) }
+
+      specify 'the label should be wrapped in a visually-hidden span' do
+        expect(subject).to have_tag('label', text: label_text) do |label_element|
+          expect(label_element).to have_tag('span', text: label_text, with: { class: 'govuk-visually-hidden' })
+        end
+      end
+    end
+
     context 'label styling' do
       context 'font size overrides' do
         label_sizes = {
