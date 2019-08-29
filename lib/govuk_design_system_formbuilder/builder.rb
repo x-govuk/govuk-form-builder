@@ -10,6 +10,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
+    # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -34,6 +35,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
+    # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -59,6 +61,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
+    # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -82,6 +85,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
+    # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -105,6 +109,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
+    # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -130,6 +135,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
+    # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @param max_words [Integer] adds the GOV.UK max word count
     # @param max_chars [Integer] adds the GOV.UK max characters count
     # @param threshold [Integer] only show the +max_words+ and +max_chars+ warnings once a threshold (percentage) is reached
@@ -159,6 +165,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
+    # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @return [ActiveSupport::SafeBuffer] HTML output
     def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, html_options: {}, hint_text: nil, label: {}, &block)
       Elements::Select.new(
@@ -377,6 +384,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
+    # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @param multiple [Boolean] controls whether the check box is part of a collection or represents a single attribute
     # @param block [Block] any HTML passed in will form the contents of the fieldset
     # @return [ActiveSupport::SafeBuffer] HTML output
@@ -504,6 +512,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label text [String] the label text
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
+    # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
     #

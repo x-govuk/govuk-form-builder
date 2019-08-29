@@ -34,7 +34,7 @@ require 'govuk_design_system_formbuilder/containers/character_count'
 
 module GOVUKDesignSystemFormBuilder
   class FormBuilder < ActionView::Helpers::FormBuilder
-    delegate :content_tag, :tag, :safe_join, :safe_concat, :capture, :link_to, to: :@template
+    delegate :content_tag, :tag, :safe_join, :safe_concat, :capture, :link_to, :raw, to: :@template
 
     include GOVUKDesignSystemFormBuilder::Builder
   end
