@@ -28,7 +28,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             class: 'govuk-error-summary',
             tabindex: '-1',
             role: 'alert',
-            'data-module' => 'error-summary'
+            'data-module' => 'govuk-error-summary'
           }
         )
       end
