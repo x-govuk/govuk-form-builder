@@ -13,28 +13,13 @@ p.govuk-body
     Users can find open-ended questions difficult to answer. It might be better
     to break up one complex question into a series of simple ones.
 
+== render('/partials/example-fig.*',
+  caption: "Generating a text area with a label, hint and nine rows",
+  code: text_area_with_label_and_hint_and_nine_rows)
 
-h3.govuk-heading-m Related information
-
-ul.govuk-list
-  li https://design-system.service.gov.uk/components/textarea/
-  li https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea
-
-h2.govuk-heading-l Examples
-
-section
-  h3.govuk-heading-m Regular text inputs
-
-  == render('/partials/example-fig.*',
-    caption: "Generating a text area with no additional params",
-    code: text_area)
-
-  == render('/partials/example-fig.*',
-    caption: "Generating a text area with a label, hint and nine rows",
-    code: text_area_with_label_and_hint_and_nine_rows)
-
-section
-  h3.govuk-heading-m Word and character counts
+== render('/partials/example-fig.*',
+  caption: "Generating a text area with a word limit",
+  code: text_area_with_max_words) do
 
   p.govuk-body
     |
@@ -43,12 +28,19 @@ section
       parameters can be used. They provide feedback on how close the user is to
       the limit and automatically show an error if it is exceeeded.
 
-  form
-    == render('/partials/example-fig.*',
-      caption: "Generating a text area with a word limit",
-      code: text_area_with_max_words)
+== render('/partials/example-fig.*',
+  caption: "Generating a text area with a character limit and threshold",
+  code: text_area_with_max_chars_and_threshold) do
 
-  form
-    == render('/partials/example-fig.*',
-      caption: "Generating a text area with a character limit and threshold",
-      code: text_area_with_max_chars_and_threshold)
+  p.govuk-body
+    |
+      If the limit is much higher than most users are likely to reach, you can
+      choose to only display the message after a user has entered a certain
+      amount.
+
+  p.govuk-body
+    |
+      To do this, set the <code>threshold</code> parameter in conjunction with a word or
+      character limit.
+
+== render('/partials/related-info.*', links: text_area_info)

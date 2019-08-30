@@ -37,7 +37,7 @@ module Helpers
     def radios_info
       {
         'GOV.UK design system radios component' => 'https://design-system.service.gov.uk/components/radios/',
-        'MDN radio documentation' => 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio'
+        'MDN radio button documentation' => 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio'
       }
     end
 
@@ -45,6 +45,21 @@ module Helpers
       {
         'GOV.UK design system radios component' => 'https://design-system.service.gov.uk/components/fieldset/',
         'GOV.UK accessibility blog post on fieldset use' => 'https://accessibility.blog.gov.uk/2016/07/22/using-the-fieldset-and-legend-elements/'
+      }
+    end
+
+    def text_field_info
+      {
+        'GOV.UK design system text input'   => 'https://design-system.service.gov.uk/components/text-input/',
+        'MDN input mode documentation' => 'https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode',
+        'WhatWG documentation on input the type attribute' => 'https://html.spec.whatwg.org/multipage/input.html#states-of-the-type-attribute'
+      }
+    end
+
+    def text_area_info
+      {
+        'GOV.UK design system text area component' => 'https://design-system.service.gov.uk/components/textarea/',
+        'MDN text area documentation' => 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea'
       }
     end
   end

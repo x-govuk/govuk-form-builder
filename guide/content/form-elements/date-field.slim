@@ -19,11 +19,9 @@ ul.govuk-list.govuk-list--bullet
   li often users will be expected to enter a date they know rather
      than to <em>pick</em> a date
 
-== render('/partials/related-info.*', links: date_info)
-
-h2.govuk-heading-l Examples
-
 section
   == render('/partials/example-fig.*',
     caption: "Date field with legend and hint and birth date autocompletion",
     code: date_field)
+
+== render('/partials/related-info.*', links: date_info)
