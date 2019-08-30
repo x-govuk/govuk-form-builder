@@ -1,5 +1,9 @@
 module Helpers
   module Formatters
+    def block_has_content?(block)
+      block.call
+    end
+
     def format_slim(raw, **args)
       # FIXME investigate pretty slim
       # FIXME not sure why when we're several

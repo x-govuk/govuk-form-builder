@@ -14,7 +14,6 @@ p.govuk-body
       connections or suffering from motor impairments.
 
 section
-  h3.govuk-heading-m Single submit buttons
 
   == render('/partials/example-fig.*',
     caption: "Generating a submit button using the default parameters",
@@ -32,16 +31,13 @@ section
     caption: "Generating a submit button without double click prevention",
     code: submit_button_without_double_click_prevention)
 
-section
-  h3.govuk-heading-m Multiple buttons
-
-  p.govuk-body
-    | Some forms have secondary as well as primary functions. Any content
-      passed in as a block will be rendered in-line with the primary submit
-      button.
-
   == render('/partials/example-fig.*',
     caption: "A submit button with an accompanying call to action",
-    code: multiple_buttons)
+    code: multiple_buttons) do
+
+    p.govuk-body
+      | Some forms have secondary as well as primary functions. Any content
+        passed in as a block will be rendered in-line with the primary submit
+        button.
 
 == render('/partials/related-info.*', links: submit_info)
