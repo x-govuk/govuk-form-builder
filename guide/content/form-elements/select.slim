@@ -1,0 +1,26 @@
+---
+title: Select boxes
+---
+
+h1.govuk-heading-xl Select field
+
+p.govuk-body-l
+  | The select component allows users to choose an option from a long list.
+
+p.govuk-body
+  | The select component allows users to choose an option from a long list.
+    Before using the select component, try asking users questions which will
+    allow you to present them with fewer options.
+
+p.govuk-body
+  | Asking questions means you’re less likely to need to use the select
+    component, and can consider using a different solution, such as radios.
+
+section
+
+  == render('/partials/example-fig.*',
+    caption: "Select field with a label and hint",
+    code: select_field_with_label_and_hint_text,
+    sample_data: departments_data_raw)
+
+== render('/partials/related-info.*', links: select_info)

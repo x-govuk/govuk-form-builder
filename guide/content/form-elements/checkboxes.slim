@@ -1,0 +1,39 @@
+---
+title: Check boxes
+---
+
+h1.govuk-heading-xl Checkboxes
+
+p.govuk-body-l
+  | The checkboxes component allows users to select one or more options.
+
+p.govuk-body
+  | Use the checkboxes component when you need to help users:
+
+  ul.govuk-list.govuk-list--bullet
+    li select multiple options from a list
+    li toggle a single option on or off
+
+section
+
+  == render('/partials/example-fig.*',
+    caption: "Generating collection of checkboxes",
+    code: checkbox_field,
+    sample_data: departments_data_raw)
+
+  == render('/partials/example-fig.*',
+    caption: "Generating a collection of checkboxes with hints",
+    code: checkbox_field_with_hints,
+    sample_data: lunch_options_raw)
+
+  == render('/partials/example-fig.*',
+    caption: "Generating checkboxes with a conditionally-revealed text field",
+    code: checkbox_field_with_custom_options) do
+
+    p.govuk-body
+      | When more advanced functionality like conditional fields is required,
+        the <code>govuk_check_boxes_fieldset</code> helper is recommended. Any
+        content passed in via the block will be conditionally revealed when
+        the box is checked.
+
+== render('/partials/related-info.*', links: checkbox_info)
