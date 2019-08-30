@@ -14,14 +14,15 @@ The latest version of this gem that supports GOV.UK Design System version 2 is
 
 In addition to the basic markup, the more-advanced functionality of the Design
 System is exposed via the API. Adding [JavaScript-enhanced word count
-checking](https://www.rubydoc.info/gems/govuk_design_system_formbuilder/GOVUKDesignSystemFormBuilder/Builder#govuk_text_area-instance_method)
+checking](https://govuk-form-builder.netlify.com/form-elements/text-area/)
 to text areas or [setting the size and weight of
-labels](https://www.rubydoc.info/gems/govuk_design_system_formbuilder/GOVUKDesignSystemFormBuilder/Builder#govuk_text_field-instance_method)
+labels](https://govuk-form-builder.netlify.com/introduction/labels-hints-and-legends/)
 on text fields requires only a single argument.
 
 If you're still not sure what a form builder is or how it works, don't worry!
 [This screencast](https://www.youtube.com/watch?v=PhoFZ0qXAlA) should give you
-an idea of what's on offer 😅
+an idea of what's on offer and [the official guide](https://govuk-form-builder.netlify.com) goes
+into a bit more depth on how everything works 😅
 
 ## What's included
 
@@ -33,8 +34,9 @@ an idea of what's on offer 😅
 * Additional params for programmatically adding hints to check box and radio
   button collections
 * No external dependencies
-* [Extensive documentation](https://www.rubydoc.info/gems/govuk_design_system_formbuilder/GOVUKDesignSystemFormBuilder/Builder)
 * An exhaustive test suite
+* [Extensive documentation](https://www.rubydoc.info/gems/govuk_design_system_formbuilder/GOVUKDesignSystemFormBuilder/Builder)
+* [A full guide](https://govuk-form-builder.netlify.com/)
 
 ## Installation
 
