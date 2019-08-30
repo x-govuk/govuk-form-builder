@@ -1,0 +1,25 @@
+---
+title: Fieldsets
+---
+
+h1.govuk-heading-xl Fieldsets
+
+p.govuk-body
+  | Fieldsets are used to group related form elements. They are added
+    automatically by the radio button, checkbox and date helpers but
+    can be manually applied to other groups where applicable.
+
+section
+
+  == render('/partials/example-fig.*',
+    caption: "A fieldset for capturing an address",
+    code: address_fieldset) do
+
+    p.govuk-body
+      | A common use case for fieldsets is grouping address fields. The
+        individual components of an address don't really make sense alone
+        so grouping them is a logical step. The grouping also improves the
+        experience for screen reader users, the screen reader will announce
+        the legend before reading the individual field labels.
+
+== render('/partials/related-info.*', links: fieldset_info)

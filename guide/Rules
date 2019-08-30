@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+compile '/index.slim' do
+  filter :slim
+  layout '/splash.*'
+  write '/index.html'
+end
+
+compile '/**/*.slim' do
+  filter :slim
+  filter :colorize_syntax, default_colorizer: :rouge
+  layout '/default.*'
+  write item.identifier.without_ext + '/index.html'
+end
+
+ignore '/**/_*.sass'
+compile '/**/*.sass' do
+  filter :sass, syntax: :sass
+  write item.identifier.without_ext + '.css'
+end
+
+compile '/**/*' do
+  write item.identifier.to_s
+end
+
+layout '/**/*', :slim

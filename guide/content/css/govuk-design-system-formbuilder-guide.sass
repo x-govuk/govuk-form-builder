@@ -1,0 +1,43 @@
+@import 'colours'
+
+@font-face
+  font-family: FiraMono
+  src: url(/assets/fonts/FiraMono-Regular.woff2) format("woff2"), url(/assets/fonts/FiraMono-Regular.woff) format("woff")
+
+@font-face
+  font-family: FiraMono
+  font-weight: bold
+  src: url(/assets/fonts/FiraMono-Bold.woff2) format("woff2"), url(/assets/fonts/FiraMono-Bold.woff) format("woff")
+
+figure
+  border-left: 5px solid $blue
+  padding: 0.5rem 1rem 0rem 2rem
+  margin: 2.5rem 0rem 4rem
+
+  h3.example-subheading
+    margin: 1.5rem 0rem 0.5rem
+
+  section
+    padding: 1rem
+
+    pre,.example-output
+      padding: 2rem
+      margin: 0rem
+      border: 1px solid $light-grey
+
+pre
+  overflow: auto
+
+  > code.highlight
+    font-family: FiraMono, monospace
+    word-wrap: normal
+
+  &.smaller > code.highlight
+    font-size: 85%
+
+p, li, dt, dd, td, th
+  > code
+    background-color: #fff0f6
+    font-family: FiraMono, monospace
+    padding: 0.2rem 0.4rem
+    font-size: 0.9rem

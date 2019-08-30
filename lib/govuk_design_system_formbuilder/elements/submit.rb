@@ -23,7 +23,7 @@ module GOVUKDesignSystemFormBuilder
                   warning_class,
                   secondary_class,
                   padding_class(@block_content.present?)
-                ),
+                ).compact,
                 **extra_args
               ),
               @block_content

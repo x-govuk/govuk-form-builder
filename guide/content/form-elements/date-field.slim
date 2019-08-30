@@ -1,0 +1,26 @@
+---
+title: Date fields
+---
+
+h1.govuk-heading-xl Date fields
+
+p.govuk-body-l
+  | Date fields allow the user to enter the day, month and year
+    of an event.
+
+p.govuk-body
+  | Three inputs for day, month and year respectively are used to
+    capture the dates rather than a date picker. This is because:
+
+ul.govuk-list.govuk-list--bullet
+  li some users find date inputs difficult to use
+  li often users will be expected to enter a date they know rather
+     than to <em>pick</em> a date
+
+section
+
+  == render('/partials/example-fig.*',
+    caption: "Date field with legend and hint and birth date autocompletion",
+    code: date_field)
+
+== render('/partials/related-info.*', links: date_info)

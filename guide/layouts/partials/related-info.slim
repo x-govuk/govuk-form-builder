@@ -1,0 +1,6 @@
+aside
+  h3.govuk-heading-m Related information
+
+  ul.govuk-list
+    - links.each do |text, link|
+      li== link_to text, link
