@@ -71,7 +71,7 @@ module GOVUKDesignSystemFormBuilder
           tabindex: -1,
           role: 'alert',
           data: {
-            module: 'error-summary'
+            module: 'govuk-error-summary'
           },
           aria: {
             labelledby: error_summary_title_id
