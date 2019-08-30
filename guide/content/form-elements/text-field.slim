@@ -5,12 +5,10 @@ title: Text fields
 h1.govuk-heading-xl Text fields
 
 p.govuk-body-l
-  |
-    Text fields allow users to enter text that's no longer than a single line.
+  | Text fields allow users to enter text that's no longer than a single line.
 
 p.govuk-body
-  |
-    In addition to <code>#text_field</code>, the form builder supports various
+  | In addition to <code>#text_field</code>, the form builder supports various
     other methods that take the same parameters and produce inputs for particular
     data types:
 
@@ -91,8 +89,7 @@ p.govuk-body
 
 
 p.govuk-body
-  |
-    When used, these fields will look and act the same on desktop but on mobile
+  | When used, these fields will look and act the same on desktop but on mobile
     the browser will present a different keyboard depending on the
     <code>type</code> attribute.
 
@@ -108,7 +105,7 @@ section
     code: text_field_with_attributes) do
 
     p.govuk-body
-      ' All values passed into the form helper that aren't among its
+      | All values passed into the form helper that aren't among its
         named parameters will be set as HTML attributes.
 
   == render('/partials/example-fig.*',
@@ -117,12 +114,12 @@ section
     hide_html_output: true) do
 
     p.govuk-body
-      ' By default, inputs will expand to fill their container. When
+      | By default, inputs will expand to fill their container. When
         no <code>width</code> parameter is passed in no width class
         will be added.
 
     p.govuk-body
-      ' Custom widths help users understand the length of the value
+      | Custom widths help users understand the length of the value
         they are intended to enter. For example, a telephone number
         field needn't be the full width of the page when it might
         only be 11 digits long.
