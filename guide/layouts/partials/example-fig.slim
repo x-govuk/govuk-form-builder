@@ -3,7 +3,8 @@ figure
     h3.govuk-heading-m= caption
 
     - if block_given?
-      == yield
+      section
+        == yield
 
   - if defined?(sample_data)
     section

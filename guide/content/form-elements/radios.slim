@@ -21,10 +21,6 @@ p.govuk-body
     practice as it means that users of screen readers will only hear the
     contents once.
 
-== render('/partials/related-info.*', links: radios_info)
-
-h2.govuk-heading-l Examples
-
 section
 
   == render('/partials/example-fig.*',
@@ -72,3 +68,5 @@ section
       '
         Any content passed into <code>#govuk_radio_button</code> as a block will
         be revealed when the radio button is selected.
+
+== render('/partials/related-info.*', links: radios_info)

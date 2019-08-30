@@ -96,19 +96,6 @@ p.govuk-body
     the browser will present a different keyboard depending on the
     <code>type</code> attribute.
 
-h3.govuk-heading-m Related information
-
-ul.govuk-list
-  li
-    a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode"
-      | https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode
-  li
-    a href="https://html.spec.whatwg.org/multipage/input.html#states-of-the-type-attribute"
-      | https://html.spec.whatwg.org/multipage/input.html#states-of-the-type-attribute
-
-
-h2.govuk-heading-l Examples
-
 section
   h3.govuk-heading-m Regular text inputs
 
@@ -139,3 +126,5 @@ section
         they are intended to enter. For example, a telephone number
         field needn't be the full width of the page when it might
         only be 11 digits long.
+
+== render('/partials/related-info.*', links: text_field_info)
