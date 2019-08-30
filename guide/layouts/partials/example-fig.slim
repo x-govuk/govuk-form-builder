@@ -2,9 +2,9 @@ figure
   figcaption
     h3.govuk-heading-m= caption
 
-    - if block_given?
+    - if block_given? && content = yield
       section
-        == yield
+        == content
 
   - if defined?(sample_data)
     section
@@ -27,8 +27,7 @@ figure
 
     h4.govuk-heading-s.example-subheading.output Rendered output
     div.example-output
-      form
-        == format_slim(code, f: builder(display_errors), **form_data)
+      == format_slim(code, f: builder(display_errors), **form_data)
 
   - unless defined?(hide_html_output) && hide_html_output
     section

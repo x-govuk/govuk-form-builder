@@ -11,8 +11,10 @@ p.govuk-body
     into most helpers. This content is inserted after the hint and before the
     form control.
 
-== render('/partials/example-fig.*',
-  caption: "A collection of radio buttons with a paragraph explaining what will happen when the form is submitted",
-  code: text_area_with_injected_content,
-  sample_data: departments_data_raw,
-  show_errors: true)
+section
+
+  == render('/partials/example-fig.*',
+    caption: "A collection of radio buttons with a paragraph explaining what will happen when the form is submitted",
+    code: text_area_with_injected_content,
+    sample_data: departments_data_raw,
+    show_errors: true)

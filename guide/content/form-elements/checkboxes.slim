@@ -16,26 +16,18 @@ p.govuk-body
 
 section
 
-  h3.govuk-heading-m From a collection
-
-  p.govuk-body
-
   == render('/partials/example-fig.*',
     caption: "Generating collection of checkboxes",
     code: checkbox_field,
     sample_data: departments_data_raw)
 
   == render('/partials/example-fig.*',
-    caption: "Check box collection with hints",
+    caption: "Generating a collection of checkboxes with hints",
     code: checkbox_field_with_hints,
     sample_data: lunch_options_raw)
 
-section
-
-  h3.govuk-heading-m Supplying a custom list of options
-
   == render('/partials/example-fig.*',
-    caption: "Check box collection with hints and a conditionally-revealed text field",
+    caption: "Generating checkboxes with a conditionally-revealed text field",
     code: checkbox_field_with_custom_options) do
 
     p.govuk-body
