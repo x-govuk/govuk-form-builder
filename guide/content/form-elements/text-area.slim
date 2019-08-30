@@ -5,12 +5,10 @@ title: Text area
 h1.govuk-heading-xl Text area
 
 p.govuk-body-l
-  |
-    Text areas allow users to enter text that's longer than a single line.
+  | Text areas allow users to enter text that's longer than a single line.
 
 p.govuk-body
-  |
-    Users can find open-ended questions difficult to answer. It might be better
+  | Users can find open-ended questions difficult to answer. It might be better
     to break up one complex question into a series of simple ones.
 
 == render('/partials/example-fig.*',
@@ -22,8 +20,7 @@ p.govuk-body
   code: text_area_with_max_words) do
 
   p.govuk-body
-    |
-      If a limit on the number of words or characters a user can enter is
+    | If a limit on the number of words or characters a user can enter is
       required, the <code>max_chars</code> and <code>max_words</code>
       parameters can be used. They provide feedback on how close the user is to
       the limit and automatically show an error if it is exceeeded.
@@ -33,14 +30,12 @@ p.govuk-body
   code: text_area_with_max_chars_and_threshold) do
 
   p.govuk-body
-    |
-      If the limit is much higher than most users are likely to reach, you can
+    | If the limit is much higher than most users are likely to reach, you can
       choose to only display the message after a user has entered a certain
       amount.
 
   p.govuk-body
-    |
-      To do this, set the <code>threshold</code> parameter in conjunction with a word or
+    | To do this, set the <code>threshold</code> parameter in conjunction with a word or
       character limit.
 
 == render('/partials/related-info.*', links: text_area_info)

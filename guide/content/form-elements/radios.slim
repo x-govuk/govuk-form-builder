@@ -5,18 +5,15 @@ title: Radio buttons
 h1.govuk-heading-xl Radio buttons
 
 p.govuk-body-l
-  '
-    Radio buttons allow users to select a single option from a list.
+  | Radio buttons allow users to select a single option from a list.
 
 p.govuk-body
-  '
-    Radios are grouped together in a <code>fieldset</code> with a
+  | Radios are grouped together in a <code>fieldset</code> with a
     <code>legend</code> that describes them, as shown in the examples on this
     page.
 
 p.govuk-body
-  '
-    If you are asking just one question per page as recommended, you can set
+  | If you are asking just one question per page as recommended, you can set
     the contents of the <code>legend</code> as the page heading. This is good
     practice as it means that users of screen readers will only hear the
     contents once.
@@ -36,15 +33,13 @@ section
     h4.govuk-heading-s Adding conditional content
 
     p.govuk-body
-      '
-        Often radio buttons need a description to help the user pick the
+      | Often radio buttons need a description to help the user pick the
         correct option. In addition to Rails' collection form helper taking
         arguments for the identifier and label text for radio buttons, an
         extra argument can be passed for the description.
 
     p.govuk-body
-      '
-        In this example, our source data has a <code>description</code> attribute
+      | In this example, our source data has a <code>description</code> attribute
         which we want to form the hint text. The attribute name will be called on
         each option and if a description is present it will be displayed, if it is
         null or empty no hint will be rendered.
@@ -58,14 +53,14 @@ section
     h4.govuk-heading-s Adding conditional content
 
     p.govuk-body
-      '
+      |
         If your list of options is hard-coded or you want to add extra
         customisation, like inserting a text divider, the
         <code>#govuk_radio_button_fieldset</code> helper offers additional
         flexibility.
 
     p.govuk-body
-      '
+      |
         Any content passed into <code>#govuk_radio_button</code> as a block will
         be revealed when the radio button is selected.
 
