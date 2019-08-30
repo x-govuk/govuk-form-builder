@@ -32,3 +32,8 @@ checks:
       threshold: # language-specific defaults. an override will affect all languages.
 exclude_patterns:
   - "guide/"
+
+plugins:
+  duplication:
+    exclude_patterns:
+      - spec
