@@ -12,10 +12,11 @@ section
     | All form helpers that generate a single input element
       automatically associate it with a corresponding <code>label</code>.
 
+  p.govuk-body
     | By default, the label text is set to the capitalised name of the
       attribute. If the attribute contains underscores they will be left
       in. This is intentional behaviour to prompt the developer to add
-      some more-suitable text.
+      some more suitable text.
 
   == render('/partials/example-fig.*',
     caption: "An unconfigured label",
@@ -93,12 +94,12 @@ section
 
   p.govuk-body
     | Legends look, act and work in a similar fashion to labels but they
-      describe a group of inputs.
+      describe a <em>group of inputs</em>.
 
   p.govuk-body
     | The GOV.UK Design System uses legends to describe radio button, check box
-      and date fields but any group of related inputs can be wrapped in a fieldset
-      and described by its legend.
+      and date fields but any group of related fields can be wrapped in a
+      fieldset.
 
   p.govuk-body
     | Legends are customised by passing in a hash of options with the
@@ -119,7 +120,7 @@ section
       dd.govuk-summary-list__value
         | The HTML tag that the legend will be wrapped in. This is useful
           on pages where the label is also the main header. In cases like
-          this, it should be set to to <code>h1</code>
+          this, it should be set to <code>h1</code>
 
     div.govuk-summary-list__row
       dt.govuk-summary-list__key
