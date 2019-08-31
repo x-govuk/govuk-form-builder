@@ -36,7 +36,8 @@ class Person
     :lunch_ids,
     :department_ids,
     :languages,
-    :other_language
+    :other_language,
+    :terms_and_conditions_agreed
   )
 
   # textarea fields
