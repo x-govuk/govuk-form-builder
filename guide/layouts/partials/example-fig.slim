@@ -2,9 +2,9 @@ figure
   figcaption
     h3.govuk-heading-m= caption
 
-    - if block_given? && content = yield
-      section
-        == content
+  - if block_given? && content = yield
+    section
+      == content
 
   - if defined?(sample_data)
     section

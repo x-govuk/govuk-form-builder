@@ -8,7 +8,7 @@ p.govuk-body-l
   | Text fields allow users to enter text that's no longer than a single line.
 
 p.govuk-body
-  | In addition to <code>#text_field</code>, the form builder supports various
+  | In addition to <code>#govuk_text_field</code>, the form builder supports various
     other methods that take the same parameters and produce inputs for particular
     data types:
 
@@ -89,8 +89,8 @@ p.govuk-body
 
 
 p.govuk-body
-  | When used, these fields will look and act the same on desktop but on mobile
-    the browser will present a different keyboard depending on the
+  | When used, these fields will look and act the same on desktop but mobile
+    browsers will present a different keyboard depending on the
     <code>type</code> attribute.
 
 section
@@ -108,7 +108,7 @@ section
         named parameters will be set as HTML attributes.
 
   == render('/partials/example-fig.*',
-    caption: "Generating a text inputs with custom widths",
+    caption: "Generating text inputs with custom widths",
     code: text_field_with_custom_width,
     hide_html_output: true) do
 

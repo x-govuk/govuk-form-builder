@@ -16,7 +16,7 @@ module Examples
     def text_area_with_max_words
       <<~SNIPPET
         = f.govuk_text_area :cv,
-          label: { text: 'Curruclum vitae' },
+          label: { text: 'Curriculum vitae' },
           max_words: 20
       SNIPPET
     end
