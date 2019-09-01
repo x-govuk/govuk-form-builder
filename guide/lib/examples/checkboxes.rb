@@ -46,5 +46,16 @@ module Examples
               label: { text: "Which additional language do you speak?" }
       SNIPPET
     end
+
+    def single_checkbox
+      <<~SNIPPET
+        .govuk-form-group
+          = f.govuk_check_box :terms_and_conditions_agreed,
+            true,
+            multiple: false,
+            label: { text: 'Do you agree with the terms and conditions?' },
+            hint_text: "You won't be able to proceed to the next stage unless you do"
+      SNIPPET
+    end
   end
 end
