@@ -18,7 +18,8 @@ module Examples
 
     def text_field_with_custom_width
       <<~SNIPPET
-        h3.govuk-heading-s Fractional widths
+        h3.govuk-heading-s
+          | Fractional widths
 
         = f.govuk_text_field :full,           width: 'full'
         = f.govuk_text_field :three_quarters, width: 'three-quarters'
@@ -26,7 +27,8 @@ module Examples
         = f.govuk_text_field :one_third,      width: 'one-third'
         = f.govuk_text_field :one_quarter,    width: 'one-quarter'
 
-        h3.govuk-heading-s Absolute (character) widths
+        h3.govuk-heading-s
+          | Absolute (character) widths
 
         = f.govuk_text_field :twenty, width: 20
         = f.govuk_text_field :ten,    width: 10
