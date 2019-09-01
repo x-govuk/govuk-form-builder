@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = GOVUKDesignSystemFormBuilder::VERSION
   s.authors     = ["Peter Yates"]
   s.email       = ["peter.yates@graphia.co.uk"]
-  s.homepage    = "https://github.com/DFE-Digital"
+  s.homepage    = "https://govuk-form-builder.netlify.com"
   s.summary     = "GOV.UK-compliant Rails form builder"
   s.description = "A Rails form builder that generates form inputs adhering to the GOV.UK Design System"
   s.license     = "MIT"
