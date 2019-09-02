@@ -28,12 +28,15 @@ class Person
     :new_department_id,
     :old_department_id,
     :lunch_id,
+    :wednesday_lunch_id,
+    :thursday_lunch_id,
     :old_department_description
   )
 
   # checkbox fields
   attr_accessor(
     :lunch_ids,
+    :wednesday_lunch_ids,
     :department_ids,
     :languages,
     :other_language,

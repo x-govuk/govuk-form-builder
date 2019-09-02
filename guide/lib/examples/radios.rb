@@ -22,6 +22,29 @@ module Examples
       SNIPPET
     end
 
+    def small_radio_field
+      <<~SNIPPET
+        = f.govuk_collection_radio_buttons :wednesday_lunch_id,
+          lunch_options,
+          :id,
+          :name,
+          :description,
+          small: true,
+          legend: { text: 'What would you like for lunch on Wednesday?' }
+      SNIPPET
+    end
+
+    def inline_radio_field
+      <<~SNIPPET
+        = f.govuk_collection_radio_buttons :thursday_lunch_id,
+          lunch_options,
+          :id,
+          :name,
+          inline: true,
+          legend: { text: 'What would you like for lunch on Thursday?' }
+      SNIPPET
+    end
+
     def radio_field_with_conditional_content
       <<~SNIPPET
         = f.govuk_radio_buttons_fieldset(:old_department_id, legend: { size: 'm', text: 'Which department do you work in?' }) do
