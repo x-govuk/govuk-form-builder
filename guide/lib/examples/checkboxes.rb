@@ -21,6 +21,18 @@ module Examples
       SNIPPET
     end
 
+    def small_checkboxes
+      <<~SNIPPET
+        = f.govuk_collection_check_boxes :wednesday_lunch_ids,
+          lunch_options,
+          :id,
+          :name,
+          :description,
+          small: true,
+          legend: { text: "What would you like for lunch on Wednesday?" }
+      SNIPPET
+    end
+
     def checkbox_field_with_custom_options
       <<~SNIPPET
         = f.govuk_check_boxes_fieldset :languages, legend: { text: "Which languages do you speak?", size: "m" } do
