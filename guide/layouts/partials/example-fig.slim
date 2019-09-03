@@ -6,7 +6,9 @@ figure
     section
       == content
 
-  - if defined?(sample_data)
+  - display_data = defined?(hide_data) && hide_data
+
+  - if defined?(sample_data) && !display_data
     section
       h4.govuk-heading-s.example-subheading.data Data
 
