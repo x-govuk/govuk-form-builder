@@ -66,10 +66,14 @@ class Person
 
   # errors
   attr_accessor(
-    :reference_number
+    :welcome_pack_reference_number,
+    :welcome_pack_received_on,
+    :welcome_lunch_choice
   )
 
-  validates :reference_number, presence: { message: 'Enter the reference number you received in your welcome pack' }
+  validates :welcome_pack_reference_number, presence: { message: 'Enter the reference number you received in your welcome pack' }
+  validates :welcome_pack_received_on, presence: { message: 'Enter the date you received your welcome pack' }
+  validates :welcome_lunch_choice, presence: { message: 'Select a lunch choice for your first day' }
 
   # fieldset
   attr_accessor(
