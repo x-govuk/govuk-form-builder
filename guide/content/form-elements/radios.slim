@@ -62,7 +62,8 @@ section
   == render('/partials/example-fig.*',
     caption: "Inline radio buttons",
     code: inline_radio_field,
-    sample_data: lunch_options_raw) do
+    sample_data: lunch_options_raw,
+    hide_data: true) do
 
     p.govuk-body
       | When there are only two options, you can either stack the radios or display
