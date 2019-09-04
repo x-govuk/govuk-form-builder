@@ -6,7 +6,8 @@ module Examples
       <<~SNIPPET
         = f.govuk_error_summary
 
-        h2.govuk-heading-m Register your interest in becoming a teacher
+        h2.govuk-heading-m
+          | Register your interest in becoming a teacher
 
         = f.govuk_text_field :welcome_pack_reference_number,
           width: 10,
