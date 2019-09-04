@@ -79,5 +79,13 @@ module Helpers
         'MDN text area documentation' => 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea'
       }
     end
+
+    def file_info
+      {
+        'Form builder documentation for file upload fields' => 'https://www.rubydoc.info/gems/govuk_design_system_formbuilder/GOVUKDesignSystemFormBuilder/Builder#govuk_file_field-instance_method',
+        'GOV.UK design system file upload component' => 'https://design-system.service.gov.uk/components/file-upload/',
+        'MDN file upload documentation' => 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file'
+      }
+    end
   end
 end
