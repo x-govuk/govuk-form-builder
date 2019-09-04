@@ -82,4 +82,9 @@ class Person
     :address_three,
     :postcode
   )
+
+  # file fields
+  attr_accessor(
+    :profile_photo
+  )
 end
