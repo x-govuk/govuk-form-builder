@@ -108,6 +108,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             end
           end
         end
+
+        specify 'all labels should be bold when hints are enabled' do
+          expect(subject).to have_tag('label', with: { class: 'govuk-label--s' }, count: colours.size)
+        end
       end
 
       context 'layout direction' do
@@ -150,6 +154,26 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
           specify "should not have the additional class 'govuk-radios--small'" do
             expect(parsed_subject.at_css('.govuk-radios')['class']).to eql('govuk-radios')
+          end
+        end
+      end
+
+      context 'bold labels' do
+        let(:bold_label_class) { 'govuk-label--s' }
+
+        context 'when bold labels are specified in the options' do
+          subject do
+            builder.send(*args.push(:description), bold_labels: true)
+          end
+
+          specify 'all labels should be bold when hints are enabled' do
+            expect(subject).to have_tag('label', with: { class: bold_label_class }, count: colours.size)
+          end
+        end
+
+        context 'when bold labels are not specified in the options' do
+          specify 'no labels should be bold when hints are enabled' do
+            expect(subject).not_to have_tag('label', with: { class: bold_label_class })
           end
         end
       end

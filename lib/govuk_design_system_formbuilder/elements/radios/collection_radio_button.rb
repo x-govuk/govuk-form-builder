@@ -6,13 +6,14 @@ module GOVUKDesignSystemFormBuilder
         #   error summary requires that the id of the first radio is linked-to from the corresponding
         #   error message. As when the summary is built what happens later in the form is unknown, we
         #   need to control this to ensure the link is generated correctly
-        def initialize(builder, object_name, attribute_name, item, value_method:, text_method:, hint_method:, link_errors: false)
+        def initialize(builder, object_name, attribute_name, item, value_method:, text_method:, hint_method:, link_errors: false, bold_labels:)
           super(builder, object_name, attribute_name)
           @item        = item
           @value       = item.send(value_method)
           @text        = item.send(text_method)
           @hint_text   = item.send(hint_method) if hint_method.present?
           @link_errors = link_errors
+          @bold_labels = bold_labels
         end
 
         def html
@@ -40,7 +41,11 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def label_element
-          @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, text: @text, value: @value, radio: true)
+          @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, text: @text, value: @value, radio: true, size: label_size)
+        end
+
+        def label_size
+          @bold_labels.present? ? 's' : nil
         end
       end
     end
