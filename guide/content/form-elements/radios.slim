@@ -44,6 +44,11 @@ section
         each option and if a description is present it will be displayed, if it is
         null or empty no hint will be rendered.
 
+    p.govuk-body
+      | When descriptions are enabled in a radio button collection the labels
+        are made <strong>bold</strong> by default. This provides additional
+        contrast and makes the labels stand out from the hint.
+
   == render('/partials/example-fig.*',
     caption: "Small radio buttons",
     code: small_radio_field,

@@ -2,7 +2,7 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     module Radios
       class Collection < GOVUKDesignSystemFormBuilder::Base
-        def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint_method:, hint_text:, legend:, inline:, small:, &block)
+        def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint_method:, hint_text:, legend:, inline:, small:, bold_labels:, &block)
           super(builder, object_name, attribute_name)
 
           @collection    = collection
@@ -13,6 +13,7 @@ module GOVUKDesignSystemFormBuilder
           @small         = small
           @legend        = legend
           @hint_text     = hint_text
+          @bold_labels   = hint_method.present? || bold_labels
           @block_content = @builder.capture { block.call } if block_given?
         end
 
@@ -45,7 +46,8 @@ module GOVUKDesignSystemFormBuilder
               value_method: @value_method,
               text_method: @text_method,
               hint_method: @hint_method,
-              link_errors: has_errors? && i.zero?
+              link_errors: has_errors? && i.zero?,
+              bold_labels: @bold_labels
             ).html
           end
         end

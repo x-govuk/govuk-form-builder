@@ -185,8 +185,12 @@ module GOVUKDesignSystemFormBuilder
 
     # Generates a radio button for each item in the supplied collection
     #
-    # @note Unlike the Rails +collection_radio_buttons+ helper, this version can also insert
+    # @note Unlike the Rails +#collection_radio_buttons+ helper, this version can also insert
     #   hints per item in the collection by supplying a +:hint_method+
+    #
+    # @note +:bold_labels+, while false by default, is set to true when a
+    #   +:hint_method+ is provided. This is done to make the label stand out more
+    #   from the hint.
     #
     # @param attribute_name [Symbol] The name of the attribute
     # @param collection [Enumerable<Object>] Options to be added to the +select+ element
@@ -197,6 +201,7 @@ module GOVUKDesignSystemFormBuilder
     # @param legend [Hash] options for configuring the legend
     # @param inline [Boolean] controls whether the radio buttons are displayed inline or not
     # @param small [Boolean] controls whether small radio buttons are used instead of regular-sized ones
+    # @param bold_labels [Boolean] controls whether the radio button labels are bold
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+, defaults to +h1+
@@ -217,7 +222,7 @@ module GOVUKDesignSystemFormBuilder
     #    legend: { text: 'Pick your favourite colour', size: 'm' },
     #    hint_text: 'If you cannot find the exact match choose something close',
     #    inline: false
-    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: {}, inline: false, small: false, &block)
+    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: {}, inline: false, small: false, bold_labels: false, &block)
       Elements::Radios::Collection.new(
         self,
         object_name,
@@ -230,6 +235,7 @@ module GOVUKDesignSystemFormBuilder
         legend: legend,
         inline: inline,
         small: small,
+        bold_labels: bold_labels,
         &block
       ).html
     end
