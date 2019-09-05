@@ -1,0 +1,20 @@
+---
+title: File field
+---
+
+h1.govuk-heading-xl File field
+
+p.govuk-body-l
+  | The file upload field allows users to upload files.
+
+p.govuk-body
+  | You should only ask users to upload something if it’s critical to the
+    delivery of your service.
+
+section
+
+  == render('/partials/example-fig.*',
+    caption: "File upload field with label and hint",
+    code: file_upload)
+
+== render('/partials/related-info.*', links: file_info)
