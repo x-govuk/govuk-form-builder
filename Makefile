@@ -20,7 +20,9 @@ build:
 	${prefix} gem build govuk_design_system_formbuilder.gemspec
 build_guide:
 	${guide_dir} ${prefix} nanoc
-make code-climate:
+docs-server:
+	yard server --reload
+code-climate:
 	codeclimate analyze {lib,spec,guide/lib}
 clean:
 	rm -rf guide/output/**/*
