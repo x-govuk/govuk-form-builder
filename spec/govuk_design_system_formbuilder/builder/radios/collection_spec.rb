@@ -113,7 +113,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       context 'layout direction' do
         context 'when inline is specified in the options' do
           subject do
-            builder.send(method, attribute, colours, :id, :name, :description, inline: true)
+            builder.send(*args.push(:description), inline: true)
           end
 
           specify "should have the additional class 'govuk-radios--inline'" do
@@ -123,7 +123,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
         context 'when inline is not specified in the options' do
           subject do
-            builder.send(method, attribute, colours, :id, :name, :description, inline: false)
+            builder.send(*args.push(:description), inline: false)
           end
 
           specify "should not have the additional class 'govuk-radios--inline'" do
@@ -135,7 +135,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       context 'radio button size' do
         context 'when small is specified in the options' do
           subject do
-            builder.send(method, attribute, colours, :id, :name, :description, small: true)
+            builder.send(*args.push(:description), small: true)
           end
 
           specify "should have the additional class 'govuk-radios--small'" do
@@ -145,7 +145,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
         context 'when small is not specified in the options' do
           subject do
-            builder.send(method, attribute, colours, :id, :name, :description, small: false)
+            builder.send(*args.push(:description), small: false)
           end
 
           specify "should not have the additional class 'govuk-radios--small'" do

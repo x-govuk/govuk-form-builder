@@ -4,6 +4,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
   describe '#submit' do
     let(:method) { :govuk_submit }
     let(:text) { 'Create' }
+    let(:args) { [method] }
     subject { builder.send(method, text) }
 
     specify 'output should be a form group containing a submit input' do
@@ -26,7 +27,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     describe 'button styles and colours' do
       context 'warning' do
-        subject { builder.send(method, 'Create', warning: true) }
+        subject { builder.send(*args.push('Create'), warning: true) }
 
         specify 'button should have the warning class' do
           expect(subject).to have_tag('input', with: { class: %w(govuk-button govuk-button--warning) })
@@ -34,7 +35,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       context 'secondary' do
-        subject { builder.send(method, 'Create', secondary: true) }
+        subject { builder.send(*args.push('Create'), secondary: true) }
 
         specify 'button should have the secondary class' do
           expect(subject).to have_tag('input', with: { class: %w(govuk-button govuk-button--secondary) })
@@ -42,7 +43,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       context 'warning and secondary' do
-        subject { builder.send(method, 'Create', secondary: true, warning: true) }
+        subject { builder.send(*args.push('Create'), secondary: true, warning: true) }
 
         specify 'should fail' do
           expect { subject }.to raise_error(ArgumentError, /buttons can be warning or secondary/)
@@ -56,7 +57,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       context 'when disabled' do
-        subject { builder.send(method, text, prevent_double_click: false) }
+        subject { builder.send(*args.push(text), prevent_double_click: false) }
 
         specify 'data attribute should not be present by default' do
           expect(
@@ -86,7 +87,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     describe 'preventing client-side validation' do
       context 'should be novalidate by default' do
-        subject { builder.send(method) }
+        subject { builder.send(*args) }
 
         specify 'should have attribute formnovalidate' do
           expect(subject).to have_tag('input', with: { type: 'submit', formnovalidate: 'formnovalidate' })
@@ -94,7 +95,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       context 'when validate is false' do
-        subject { builder.send(method, validate: false) }
+        subject { builder.send(*args, validate: false) }
 
         specify 'should have attribute formnovalidate' do
           expect(subject).to have_tag('input', with: { type: 'submit', formnovalidate: 'formnovalidate' })
@@ -102,7 +103,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       context 'when validate is true' do
-        subject { builder.send(method, validate: true) }
+        subject { builder.send(*args, validate: true) }
 
         specify 'should have attribute formnovalidate' do
           expect(parsed_subject.at_css('input').attributes.keys).not_to include('formnovalidate')
