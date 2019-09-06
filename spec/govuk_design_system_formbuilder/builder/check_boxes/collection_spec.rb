@@ -51,7 +51,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
 
         context 'when small is not specified in the options' do
-          subject { builder.send(method, attribute, projects, :id, :name) }
+          subject { builder.send(*args) }
 
           specify "should not have the additional class 'govuk-checkboxes--small'" do
             expect(parsed_subject.at_css('.govuk-checkboxes')['class']).to eql('govuk-checkboxes')
