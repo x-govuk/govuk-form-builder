@@ -76,7 +76,7 @@ shared_examples 'a regular input' do |method_identifier, field_type|
         context "when the width is #{identifier}" do
           let(:identifier) { identifier }
           let(:width_class) { width_class }
-          subject { builder.send(method, :name, width: identifier) }
+          subject { builder.send(*args, width: identifier) }
 
           specify "should have the correct class of #{width_class}" do
             expect(parsed_subject.at_css('input')['class']).to include(width_class)
