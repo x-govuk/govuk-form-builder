@@ -17,4 +17,13 @@ section
     caption: "A collection of radio buttons with a paragraph explaining what will happen when the form is submitted",
     code: text_area_with_injected_content,
     sample_data: departments_data_raw,
-    show_errors: true)
+    show_errors: true) do
+
+    p.govuk-body
+      | All content supplied via a block is considered supplementary to the label
+        and hint.
+
+    p.govuk-body
+      | It is automatically associated with the element via its
+        <code>aria-describedby</code> attribute allowing assistive technologies to
+        provide the user with a full explanation of what is required.
