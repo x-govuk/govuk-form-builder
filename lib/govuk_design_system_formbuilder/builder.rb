@@ -12,6 +12,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
     #
@@ -37,6 +38,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
     # @see https://design-system.service.gov.uk/patterns/telephone-numbers/ GOV.UK Telephone number patterns
@@ -63,6 +65,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
     # @see https://design-system.service.gov.uk/patterns/email-addresses/ GOV.UK Email address patterns
@@ -87,6 +90,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
     #
@@ -111,6 +115,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
+    # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
     #
@@ -141,6 +146,7 @@ module GOVUKDesignSystemFormBuilder
     # @param threshold [Integer] only show the +max_words+ and +max_chars+ warnings once a threshold (percentage) is reached
     # @param rows [Integer] sets the initial number of rows
     # @option args [Hash] args additional arguments are applied as attributes to the +textarea+ element
+    # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/character-count GOV.UK character count component
     # @note Setting +max_chars+ or +max_words+ will add a caption beneath the +textarea+ with a live count of words
@@ -166,6 +172,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, html_options: {}, hint_text: nil, label: {}, &block)
       Elements::Select.new(
