@@ -1,8 +1,8 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class Input < GOVUKDesignSystemFormBuilder::Base
-      def initialize(builder, object_name, attribute_name, attribute_type:, hint_text:, label:, width:, **extra_args)
-        super(builder, object_name, attribute_name)
+      def initialize(builder, object_name, attribute_name, attribute_type:, hint_text:, label:, width:, **extra_args, &block)
+        super(builder, object_name, attribute_name, &block)
 
         @width          = width
         @extra_args     = extra_args

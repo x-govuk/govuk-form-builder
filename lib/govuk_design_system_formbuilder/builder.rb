@@ -21,8 +21,8 @@ module GOVUKDesignSystemFormBuilder
     #     hint_text: 'It says it on your birth certificate',
     #     required: true,
     #     placeholder: 'Ralph Wiggum'
-    def govuk_text_field(attribute_name, hint_text: nil, label: {}, width: nil, **args)
-      Elements::Input.new(self, object_name, attribute_name, attribute_type: :text, hint_text: hint_text, label: label, width: width, **args).html
+    def govuk_text_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
+      Elements::Input.new(self, object_name, attribute_name, attribute_type: :text, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
 
     # Generates a input of type +tel+
@@ -47,8 +47,8 @@ module GOVUKDesignSystemFormBuilder
     #     hint_text: 'Include the dialling code',
     #     required: true,
     #     placeholder: '0123 456 789'
-    def govuk_phone_field(attribute_name, hint_text: nil, label: {}, width: nil, **args)
-      Elements::Input.new(self, object_name, attribute_name, attribute_type: :phone, hint_text: hint_text, label: label, width: width, **args).html
+    def govuk_phone_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
+      Elements::Input.new(self, object_name, attribute_name, attribute_type: :phone, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
 
     # Generates a input of type +email+
@@ -71,8 +71,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_email_field :email_address,
     #     label: { text: 'Enter your email address' },
     #     placeholder: 'ralph.wiggum@springfield.edu'
-    def govuk_email_field(attribute_name, hint_text: nil, label: {}, width: nil, **args)
-      Elements::Input.new(self, object_name, attribute_name, attribute_type: :email, hint_text: hint_text, label: label, width: width, **args).html
+    def govuk_email_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
+      Elements::Input.new(self, object_name, attribute_name, attribute_type: :email, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
 
     # Generates a input of type +url+
@@ -95,8 +95,8 @@ module GOVUKDesignSystemFormBuilder
     #     label: { text: 'Enter your favourite website' },
     #     placeholder: 'https://www.gov.uk',
     #     autocomplete: 'url'
-    def govuk_url_field(attribute_name, hint_text: nil, label: {}, width: nil, **args)
-      Elements::Input.new(self, object_name, attribute_name, attribute_type: :url, hint_text: hint_text, label: label, width: width, **args).html
+    def govuk_url_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
+      Elements::Input.new(self, object_name, attribute_name, attribute_type: :url, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
 
     # Generates a input of type +number+
@@ -121,8 +121,8 @@ module GOVUKDesignSystemFormBuilder
     #     min: 80,
     #     max: 150,
     #     step: 5
-    def govuk_number_field(attribute_name, hint_text: nil, label: {}, width: nil, **args)
-      Elements::Input.new(self, object_name, attribute_name, attribute_type: :number, hint_text: hint_text, label: label, width: width, **args).html
+    def govuk_number_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
+      Elements::Input.new(self, object_name, attribute_name, attribute_type: :number, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
 
     # Generates a +textarea+ element with a label, optional hint. Also offers
@@ -151,8 +151,8 @@ module GOVUKDesignSystemFormBuilder
     #     label: { text: 'Tell us about your work history' },
     #     rows: 8,
     #     max_words: 300
-    def govuk_text_area(attribute_name, hint_text: nil, label: {}, max_words: nil, max_chars: nil, rows: 5, threshold: nil, **args)
-      Elements::TextArea.new(self, object_name, attribute_name, hint_text: hint_text, label: label, max_words: max_words, max_chars: max_chars, rows: rows, threshold: threshold, **args).html
+    def govuk_text_area(attribute_name, hint_text: nil, label: {}, max_words: nil, max_chars: nil, rows: 5, threshold: nil, **args, &block)
+      Elements::TextArea.new(self, object_name, attribute_name, hint_text: hint_text, label: label, max_words: max_words, max_chars: max_chars, rows: rows, threshold: threshold, **args, &block).html
     end
 
     # Generates a +select+ element containing +option+ for each member in the provided collection

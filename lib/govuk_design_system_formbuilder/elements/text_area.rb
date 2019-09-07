@@ -1,8 +1,8 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class TextArea < Base
-      def initialize(builder, object_name, attribute_name, hint_text:, label:, rows:, max_words:, max_chars:, threshold:, **extra_args)
-        super(builder, object_name, attribute_name)
+      def initialize(builder, object_name, attribute_name, hint_text:, label:, rows:, max_words:, max_chars:, threshold:, **extra_args, &block)
+        super(builder, object_name, attribute_name, &block)
         @label      = label
         @hint_text  = hint_text
         @extra_args = extra_args
