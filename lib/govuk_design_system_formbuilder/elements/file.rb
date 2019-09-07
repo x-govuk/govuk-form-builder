@@ -1,8 +1,8 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class File < GOVUKDesignSystemFormBuilder::Base
-      def initialize(builder, object_name, attribute_name, hint_text:, label:, **extra_args)
-        super(builder, object_name, attribute_name)
+      def initialize(builder, object_name, attribute_name, hint_text:, label:, **extra_args, &block)
+        super(builder, object_name, attribute_name, &block)
 
         @label      = label
         @hint_text  = hint_text
@@ -16,11 +16,12 @@ module GOVUKDesignSystemFormBuilder
               label_element.html,
               hint_element.html,
               error_element.html,
+              supplemental_content.html,
               @builder.file_field(
                 @attribute_name,
                 id: field_id(link_errors: true),
                 class: file_classes,
-                aria: { describedby: described_by(hint_element.hint_id, error_element.error_id) },
+                aria: { describedby: described_by(hint_id, error_id, supplemental_id) },
                 **@extra_args
               )
             ]

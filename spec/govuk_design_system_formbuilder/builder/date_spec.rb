@@ -35,6 +35,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     it_behaves_like 'a field that accepts arbitrary blocks of HTML' do
+      let(:described_element) { 'fieldset' }
+
       # the block content (p) should be between the hint (span) and the input container (div)
       context 'ordering' do
         let(:hint_span_selector) { 'span.govuk-hint' }

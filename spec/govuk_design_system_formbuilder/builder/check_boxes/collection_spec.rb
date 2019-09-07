@@ -31,7 +31,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:error_identifier) { 'person-projects-error' }
     end
 
-    it_behaves_like 'a field that accepts arbitrary blocks of HTML'
+    it_behaves_like 'a field that accepts arbitrary blocks of HTML' do
+      let(:described_element) { 'fieldset' }
+    end
 
     describe 'check boxes' do
       specify 'output should contain the correct number of check boxes' do

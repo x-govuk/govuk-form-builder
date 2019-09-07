@@ -528,6 +528,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     #
     # @example A photo upload field with file type specifier
     #   = f.govuk_file_field :photo, label: { text: 'Upload your photo' }, accept: 'image/*'
@@ -538,8 +539,8 @@ module GOVUKDesignSystemFormBuilder
     # @note Remember to set +multipart: true+ when creating a form with file
     #   uploads, {https://guides.rubyonrails.org/form_helpers.html#uploading-files see
     #   the Rails documentation} for more information
-    def govuk_file_field(attribute_name, label: {}, hint_text: nil, **args)
-      Elements::File.new(self, object_name, attribute_name, label: label, hint_text: hint_text, **args).html
+    def govuk_file_field(attribute_name, label: {}, hint_text: nil, **args, &block)
+      Elements::File.new(self, object_name, attribute_name, label: label, hint_text: hint_text, **args, &block).html
     end
   end
 end

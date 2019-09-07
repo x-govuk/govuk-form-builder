@@ -22,7 +22,13 @@ module GOVUKDesignSystemFormBuilder
                   @attribute_name,
                   id: field_id(link_errors: true),
                   class: govuk_textarea_classes,
-                  aria: { describedby: described_by(hint_element.hint_id, error_element.error_id) },
+                  aria: {
+                    describedby: described_by(
+                      hint_id,
+                      error_id,
+                      supplemental_id
+                    )
+                  },
                   **@extra_args.merge(rows: @rows)
                 )
               ].flatten.compact
