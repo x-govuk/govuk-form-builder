@@ -27,7 +27,7 @@ module GOVUKDesignSystemFormBuilder
                 @value_method,
                 @text_method,
                 @options,
-                build_html_options(hint_element, error_element)
+                build_html_options
               )
             ]
           )
@@ -36,7 +36,7 @@ module GOVUKDesignSystemFormBuilder
 
     private
 
-      def build_html_options(hint_element, error_element)
+      def build_html_options
         @html_options.deep_merge(
           id: field_id(link_errors: true),
           class: select_classes,
