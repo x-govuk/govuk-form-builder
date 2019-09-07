@@ -1,9 +1,10 @@
 module GOVUKDesignSystemFormBuilder
   class Base
-    def initialize(builder, object_name, attribute_name)
+    def initialize(builder, object_name, attribute_name, &block)
       @builder = builder
       @object_name = object_name
       @attribute_name = attribute_name
+      @block_content = @builder.capture { block.call } if block_given?
     end
 
     def hint_element

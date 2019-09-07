@@ -4,11 +4,10 @@ module GOVUKDesignSystemFormBuilder
       SEGMENTS = { day: '3i', month: '2i', year: '1i' }.freeze
 
       def initialize(builder, object_name, attribute_name, legend:, hint_text:, date_of_birth: false, &block)
-        super(builder, object_name, attribute_name)
+        super(builder, object_name, attribute_name, &block)
         @legend = legend
         @hint_text = hint_text
         @date_of_birth = date_of_birth
-        @block_content = @builder.capture { block.call } if block_given?
       end
 
       def html

@@ -3,7 +3,7 @@ module GOVUKDesignSystemFormBuilder
     module Radios
       class Collection < GOVUKDesignSystemFormBuilder::Base
         def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint_method:, hint_text:, legend:, inline:, small:, bold_labels:, &block)
-          super(builder, object_name, attribute_name)
+          super(builder, object_name, attribute_name, &block)
 
           @collection    = collection
           @value_method  = value_method
