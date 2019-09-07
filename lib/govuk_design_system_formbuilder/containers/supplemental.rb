@@ -15,6 +15,10 @@ module GOVUKDesignSystemFormBuilder
           @content
         end
       end
+
+      def supplemental_id
+        build_id('supplemental')
+      end
     end
   end
 end

@@ -40,7 +40,7 @@ module GOVUKDesignSystemFormBuilder
         @html_options.deep_merge(
           id: field_id(link_errors: true),
           class: select_classes,
-          aria: { describedby: described_by(hint_element.hint_id, error_element.error_id) }
+          aria: { describedby: described_by(hint_id, error_id, supplemental_id) }
         )
       end
 

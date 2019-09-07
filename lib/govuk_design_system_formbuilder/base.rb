@@ -45,7 +45,7 @@ module GOVUKDesignSystemFormBuilder
     end
 
     def hint_id
-      return nil if @hint_text.blank?
+      return nil unless @hint_text.present?
 
       build_id('hint')
     end
@@ -61,7 +61,7 @@ module GOVUKDesignSystemFormBuilder
     end
 
     def supplemental_id
-      return nil unless supplemental_content.present?
+      return nil unless @block_content.present?
 
       build_id('supplemental')
     end
