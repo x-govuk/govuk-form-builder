@@ -17,7 +17,7 @@ module GOVUKDesignSystemFormBuilder
           Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
             @builder.safe_join(
               [
-                [label_element, hint_element, error_element].map(&:html),
+                [label_element, hint_element, error_element, supplemental_content].map(&:html),
                 @builder.text_area(
                   @attribute_name,
                   id: field_id(link_errors: true),
