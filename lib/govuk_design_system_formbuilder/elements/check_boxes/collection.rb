@@ -12,7 +12,6 @@ module GOVUKDesignSystemFormBuilder
           @small         = small
           @legend        = legend
           @hint_text     = hint_text
-          @block_content = @builder.capture { block.call } if block_given?
         end
 
         def html
@@ -22,7 +21,7 @@ module GOVUKDesignSystemFormBuilder
                 [
                   hint_element.html,
                   error_element.html,
-                  @block_content,
+                  supplemental_content.html,
                   Containers::CheckBoxes.new(@builder, small: @small).html do
                     build_collection
                   end

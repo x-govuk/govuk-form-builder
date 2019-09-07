@@ -252,10 +252,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             end
           end
         end
-
-        def underscores_to_dashes(val)
-          val.to_s.tr('_', '-')
-        end
       end
     end
 

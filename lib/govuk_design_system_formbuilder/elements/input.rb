@@ -17,6 +17,7 @@ module GOVUKDesignSystemFormBuilder
             [
               label_element.html,
               hint_element.html,
+              supplemental_content.html,
               error_element.html,
               @builder.send(
                 @builder_method,

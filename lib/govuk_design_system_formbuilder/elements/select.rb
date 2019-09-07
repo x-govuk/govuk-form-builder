@@ -11,7 +11,6 @@ module GOVUKDesignSystemFormBuilder
         @html_options  = html_options
         @label         = label
         @hint_text     = hint_text
-        @block_content = @builder.capture { block.call } if block_given?
       end
 
       def html
@@ -21,7 +20,7 @@ module GOVUKDesignSystemFormBuilder
               label_element.html,
               hint_element.html,
               error_element.html,
-              @block_content,
+              supplemental_content.html,
               @builder.collection_select(
                 @attribute_name,
                 @collection,

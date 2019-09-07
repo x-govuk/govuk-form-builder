@@ -14,7 +14,6 @@ module GOVUKDesignSystemFormBuilder
           @legend        = legend
           @hint_text     = hint_text
           @bold_labels   = hint_method.present? || bold_labels
-          @block_content = @builder.capture { block.call } if block_given?
         end
 
         def html
@@ -24,7 +23,7 @@ module GOVUKDesignSystemFormBuilder
                 [
                   hint_element.html,
                   error_element.html,
-                  @block_content,
+                  supplemental_content.html,
                   Containers::Radios.new(@builder, inline: @inline, small: @small).html do
                     @builder.safe_join(build_collection)
                   end

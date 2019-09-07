@@ -19,6 +19,10 @@ module GOVUKDesignSystemFormBuilder
       @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, **@label)
     end
 
+    def supplemental_content
+      @supplemental_content ||= Containers::Supplemental.new(@builder, @object_name, @attribute_name, @block_content)
+    end
+
     # returns the id value used for the input
     #
     # @note field_id is overridden so that the error summary can link to the
@@ -54,6 +58,12 @@ module GOVUKDesignSystemFormBuilder
 
     def conditional_id
       build_id('conditional')
+    end
+
+    def supplemental_id
+      return nil unless supplemental_content.present?
+
+      build_id('supplemental')
     end
 
     def has_errors?
