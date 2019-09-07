@@ -9,3 +9,7 @@
 def extract_args(args, subkey)
   args.each.with_object({}) { |(k, v), h| h[k] = v[subkey] }
 end
+
+def underscores_to_dashes(val)
+  val.to_s.tr('_', '-')
+end

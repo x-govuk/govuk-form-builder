@@ -31,6 +31,7 @@ require 'govuk_design_system_formbuilder/containers/radios'
 require 'govuk_design_system_formbuilder/containers/radio_buttons_fieldset'
 require 'govuk_design_system_formbuilder/containers/check_boxes'
 require 'govuk_design_system_formbuilder/containers/character_count'
+require 'govuk_design_system_formbuilder/containers/supplemental'
 
 module GOVUKDesignSystemFormBuilder
   class FormBuilder < ActionView::Helpers::FormBuilder

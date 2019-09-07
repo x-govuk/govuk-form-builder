@@ -17,7 +17,7 @@ module GOVUKDesignSystemFormBuilder
               [
                 hint_element.html,
                 error_element.html,
-                @block_content,
+                supplemental_content.html,
                 @builder.content_tag('div', class: 'govuk-date-input') do
                   @builder.safe_join(
                     [
