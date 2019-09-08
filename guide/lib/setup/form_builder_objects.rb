@@ -21,7 +21,13 @@ module Setup
     end
 
     def helper
-      TestHelper.new
+      ActionView::Base.new(action_view_context)
+    end
+
+  private
+
+    def action_view_context
+      ActionView::LookupContext.new(nil)
     end
   end
 end
