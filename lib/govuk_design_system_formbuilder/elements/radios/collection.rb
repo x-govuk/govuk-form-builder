@@ -3,7 +3,7 @@ module GOVUKDesignSystemFormBuilder
     module Radios
       class Collection < GOVUKDesignSystemFormBuilder::Base
         def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint_method:, hint_text:, legend:, inline:, small:, bold_labels:, &block)
-          super(builder, object_name, attribute_name)
+          super(builder, object_name, attribute_name, &block)
 
           @collection    = collection
           @value_method  = value_method
@@ -14,17 +14,16 @@ module GOVUKDesignSystemFormBuilder
           @legend        = legend
           @hint_text     = hint_text
           @bold_labels   = hint_method.present? || bold_labels
-          @block_content = @builder.capture { block.call } if block_given?
         end
 
         def html
           Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
-            Containers::Fieldset.new(@builder, legend: @legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
+            Containers::Fieldset.new(@builder, legend: @legend, described_by: [error_id, hint_id, supplemental_id]).html do
               @builder.safe_join(
                 [
                   hint_element.html,
                   error_element.html,
-                  @block_content,
+                  supplemental_content.html,
                   Containers::Radios.new(@builder, inline: @inline, small: @small).html do
                     @builder.safe_join(build_collection)
                   end

@@ -2,7 +2,7 @@ module GOVUKDesignSystemFormBuilder
   module Containers
     class CheckBoxesFieldset < GOVUKDesignSystemFormBuilder::Base
       def initialize(builder, object_name, attribute_name, hint_text:, legend:, small:, &block)
-        super(builder, object_name, attribute_name)
+        super(builder, object_name, attribute_name, &block)
 
         @legend        = legend
         @hint_text     = hint_text

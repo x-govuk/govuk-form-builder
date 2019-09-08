@@ -23,7 +23,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:error_class) { nil }
     end
 
-    it_behaves_like 'a field that accepts arbitrary blocks of HTML'
+    it_behaves_like 'a field that accepts arbitrary blocks of HTML' do
+      let(:described_element) { 'select' }
+    end
 
     specify 'output should be a form group containing a label and select box' do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|

@@ -19,8 +19,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
-    it_behaves_like 'a field that accepts arbitrary blocks of HTML'
-
     it_behaves_like 'a field that supports errors' do
       let(:error_message) { /Select at least one project/ }
       let(:error_class) { nil }

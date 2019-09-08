@@ -18,7 +18,7 @@ module GOVUKDesignSystemFormBuilder
                 @checkbox.check_box(
                   id: field_id(link_errors: @link_errors),
                   class: "govuk-checkboxes__input",
-                  aria: { describedby: hint_element.hint_id }
+                  aria: { describedby: hint_id }
                 ),
                 label_element.html,
                 hint_element.html

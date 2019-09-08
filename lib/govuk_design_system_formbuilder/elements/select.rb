@@ -2,7 +2,7 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     class Select < GOVUKDesignSystemFormBuilder::Base
       def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, options: {}, html_options: {}, hint_text:, label:, &block)
-        super(builder, object_name, attribute_name)
+        super(builder, object_name, attribute_name, &block)
 
         @collection    = collection
         @value_method  = value_method
@@ -11,7 +11,6 @@ module GOVUKDesignSystemFormBuilder
         @html_options  = html_options
         @label         = label
         @hint_text     = hint_text
-        @block_content = @builder.capture { block.call } if block_given?
       end
 
       def html
@@ -21,14 +20,14 @@ module GOVUKDesignSystemFormBuilder
               label_element.html,
               hint_element.html,
               error_element.html,
-              @block_content,
+              supplemental_content.html,
               @builder.collection_select(
                 @attribute_name,
                 @collection,
                 @value_method,
                 @text_method,
                 @options,
-                build_html_options(hint_element, error_element)
+                build_html_options
               )
             ]
           )
@@ -37,11 +36,11 @@ module GOVUKDesignSystemFormBuilder
 
     private
 
-      def build_html_options(hint_element, error_element)
+      def build_html_options
         @html_options.deep_merge(
           id: field_id(link_errors: true),
           class: select_classes,
-          aria: { describedby: described_by(hint_element.hint_id, error_element.error_id) }
+          aria: { describedby: described_by(hint_id, error_id, supplemental_id) }
         )
       end
 

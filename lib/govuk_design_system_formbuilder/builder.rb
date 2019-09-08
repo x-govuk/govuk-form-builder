@@ -12,6 +12,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
     #
@@ -21,8 +22,8 @@ module GOVUKDesignSystemFormBuilder
     #     hint_text: 'It says it on your birth certificate',
     #     required: true,
     #     placeholder: 'Ralph Wiggum'
-    def govuk_text_field(attribute_name, hint_text: nil, label: {}, width: nil, **args)
-      Elements::Input.new(self, object_name, attribute_name, attribute_type: :text, hint_text: hint_text, label: label, width: width, **args).html
+    def govuk_text_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
+      Elements::Input.new(self, object_name, attribute_name, attribute_type: :text, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
 
     # Generates a input of type +tel+
@@ -37,6 +38,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
     # @see https://design-system.service.gov.uk/patterns/telephone-numbers/ GOV.UK Telephone number patterns
@@ -47,8 +49,8 @@ module GOVUKDesignSystemFormBuilder
     #     hint_text: 'Include the dialling code',
     #     required: true,
     #     placeholder: '0123 456 789'
-    def govuk_phone_field(attribute_name, hint_text: nil, label: {}, width: nil, **args)
-      Elements::Input.new(self, object_name, attribute_name, attribute_type: :phone, hint_text: hint_text, label: label, width: width, **args).html
+    def govuk_phone_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
+      Elements::Input.new(self, object_name, attribute_name, attribute_type: :phone, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
 
     # Generates a input of type +email+
@@ -63,6 +65,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
     # @see https://design-system.service.gov.uk/patterns/email-addresses/ GOV.UK Email address patterns
@@ -71,8 +74,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_email_field :email_address,
     #     label: { text: 'Enter your email address' },
     #     placeholder: 'ralph.wiggum@springfield.edu'
-    def govuk_email_field(attribute_name, hint_text: nil, label: {}, width: nil, **args)
-      Elements::Input.new(self, object_name, attribute_name, attribute_type: :email, hint_text: hint_text, label: label, width: width, **args).html
+    def govuk_email_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
+      Elements::Input.new(self, object_name, attribute_name, attribute_type: :email, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
 
     # Generates a input of type +url+
@@ -87,6 +90,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
     #
@@ -95,8 +99,8 @@ module GOVUKDesignSystemFormBuilder
     #     label: { text: 'Enter your favourite website' },
     #     placeholder: 'https://www.gov.uk',
     #     autocomplete: 'url'
-    def govuk_url_field(attribute_name, hint_text: nil, label: {}, width: nil, **args)
-      Elements::Input.new(self, object_name, attribute_name, attribute_type: :url, hint_text: hint_text, label: label, width: width, **args).html
+    def govuk_url_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
+      Elements::Input.new(self, object_name, attribute_name, attribute_type: :url, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
 
     # Generates a input of type +number+
@@ -111,6 +115,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
+    # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
     #
@@ -121,8 +126,8 @@ module GOVUKDesignSystemFormBuilder
     #     min: 80,
     #     max: 150,
     #     step: 5
-    def govuk_number_field(attribute_name, hint_text: nil, label: {}, width: nil, **args)
-      Elements::Input.new(self, object_name, attribute_name, attribute_type: :number, hint_text: hint_text, label: label, width: width, **args).html
+    def govuk_number_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
+      Elements::Input.new(self, object_name, attribute_name, attribute_type: :number, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
 
     # Generates a +textarea+ element with a label, optional hint. Also offers
@@ -141,6 +146,7 @@ module GOVUKDesignSystemFormBuilder
     # @param threshold [Integer] only show the +max_words+ and +max_chars+ warnings once a threshold (percentage) is reached
     # @param rows [Integer] sets the initial number of rows
     # @option args [Hash] args additional arguments are applied as attributes to the +textarea+ element
+    # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/character-count GOV.UK character count component
     # @note Setting +max_chars+ or +max_words+ will add a caption beneath the +textarea+ with a live count of words
@@ -151,8 +157,8 @@ module GOVUKDesignSystemFormBuilder
     #     label: { text: 'Tell us about your work history' },
     #     rows: 8,
     #     max_words: 300
-    def govuk_text_area(attribute_name, hint_text: nil, label: {}, max_words: nil, max_chars: nil, rows: 5, threshold: nil, **args)
-      Elements::TextArea.new(self, object_name, attribute_name, hint_text: hint_text, label: label, max_words: max_words, max_chars: max_chars, rows: rows, threshold: threshold, **args).html
+    def govuk_text_area(attribute_name, hint_text: nil, label: {}, max_words: nil, max_chars: nil, rows: 5, threshold: nil, **args, &block)
+      Elements::TextArea.new(self, object_name, attribute_name, hint_text: hint_text, label: label, max_words: max_words, max_chars: max_chars, rows: rows, threshold: threshold, **args, &block).html
     end
 
     # Generates a +select+ element containing +option+ for each member in the provided collection
@@ -166,6 +172,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, html_options: {}, hint_text: nil, label: {}, &block)
       Elements::Select.new(
@@ -521,6 +528,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     #
     # @example A photo upload field with file type specifier
     #   = f.govuk_file_field :photo, label: { text: 'Upload your photo' }, accept: 'image/*'
@@ -531,8 +539,8 @@ module GOVUKDesignSystemFormBuilder
     # @note Remember to set +multipart: true+ when creating a form with file
     #   uploads, {https://guides.rubyonrails.org/form_helpers.html#uploading-files see
     #   the Rails documentation} for more information
-    def govuk_file_field(attribute_name, label: {}, hint_text: nil, **args)
-      Elements::File.new(self, object_name, attribute_name, label: label, hint_text: hint_text, **args).html
+    def govuk_file_field(attribute_name, label: {}, hint_text: nil, **args, &block)
+      Elements::File.new(self, object_name, attribute_name, label: label, hint_text: hint_text, **args, &block).html
     end
   end
 end
