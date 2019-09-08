@@ -4,21 +4,20 @@ module GOVUKDesignSystemFormBuilder
       SEGMENTS = { day: '3i', month: '2i', year: '1i' }.freeze
 
       def initialize(builder, object_name, attribute_name, legend:, hint_text:, date_of_birth: false, &block)
-        super(builder, object_name, attribute_name)
+        super(builder, object_name, attribute_name, &block)
         @legend = legend
         @hint_text = hint_text
         @date_of_birth = date_of_birth
-        @block_content = @builder.capture { block.call } if block_given?
       end
 
       def html
         Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
-          Containers::Fieldset.new(@builder, legend: @legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
+          Containers::Fieldset.new(@builder, legend: @legend, described_by: [error_id, hint_id, supplemental_id]).html do
             @builder.safe_join(
               [
                 hint_element.html,
                 error_element.html,
-                @block_content,
+                supplemental_content.html,
                 @builder.content_tag('div', class: 'govuk-date-input') do
                   @builder.safe_join(
                     [

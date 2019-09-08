@@ -25,6 +25,10 @@ shared_examples 'a regular input' do |method_identifier, field_type|
 
   it_behaves_like 'a field that supports hints'
 
+  it_behaves_like 'a field that accepts arbitrary blocks of HTML' do
+    let(:described_element) { 'input' }
+  end
+
   it_behaves_like 'a field that supports errors' do
     let(:object) { Person.new(name: nil) }
 

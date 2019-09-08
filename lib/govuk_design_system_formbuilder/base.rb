@@ -1,9 +1,10 @@
 module GOVUKDesignSystemFormBuilder
   class Base
-    def initialize(builder, object_name, attribute_name)
+    def initialize(builder, object_name, attribute_name, &block)
       @builder = builder
       @object_name = object_name
       @attribute_name = attribute_name
+      @block_content = @builder.capture { block.call } if block_given?
     end
 
     def hint_element
@@ -16,6 +17,10 @@ module GOVUKDesignSystemFormBuilder
 
     def label_element
       @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, **@label)
+    end
+
+    def supplemental_content
+      @supplemental_content ||= Containers::Supplemental.new(@builder, @object_name, @attribute_name, @block_content)
     end
 
     # returns the id value used for the input
@@ -40,7 +45,7 @@ module GOVUKDesignSystemFormBuilder
     end
 
     def hint_id
-      return nil if @hint_text.blank?
+      return nil unless @hint_text.present?
 
       build_id('hint')
     end
@@ -53,6 +58,12 @@ module GOVUKDesignSystemFormBuilder
 
     def conditional_id
       build_id('conditional')
+    end
+
+    def supplemental_id
+      return nil unless @block_content.present?
+
+      build_id('supplemental')
     end
 
     def has_errors?

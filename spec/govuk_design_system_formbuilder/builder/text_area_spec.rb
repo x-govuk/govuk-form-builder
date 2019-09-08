@@ -15,6 +15,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
   end
 
+  it_behaves_like 'a field that accepts arbitrary blocks of HTML' do
+    let(:described_element) { 'textarea' }
+  end
+
   it_behaves_like 'a field that supports labels', 'textarea'
 
   it_behaves_like 'a field that supports hints' do

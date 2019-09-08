@@ -1,8 +1,8 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class TextArea < Base
-      def initialize(builder, object_name, attribute_name, hint_text:, label:, rows:, max_words:, max_chars:, threshold:, **extra_args)
-        super(builder, object_name, attribute_name)
+      def initialize(builder, object_name, attribute_name, hint_text:, label:, rows:, max_words:, max_chars:, threshold:, **extra_args, &block)
+        super(builder, object_name, attribute_name, &block)
         @label      = label
         @hint_text  = hint_text
         @extra_args = extra_args
@@ -17,12 +17,18 @@ module GOVUKDesignSystemFormBuilder
           Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
             @builder.safe_join(
               [
-                [label_element, hint_element, error_element].map(&:html),
+                [label_element, hint_element, error_element, supplemental_content].map(&:html),
                 @builder.text_area(
                   @attribute_name,
                   id: field_id(link_errors: true),
                   class: govuk_textarea_classes,
-                  aria: { describedby: described_by(hint_element.hint_id, error_element.error_id) },
+                  aria: {
+                    describedby: described_by(
+                      hint_id,
+                      error_id,
+                      supplemental_id
+                    )
+                  },
                   **@extra_args.merge(rows: @rows)
                 )
               ].flatten.compact

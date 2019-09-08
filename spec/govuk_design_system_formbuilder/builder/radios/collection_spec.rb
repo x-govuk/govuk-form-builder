@@ -37,7 +37,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:error_identifier) { 'person-favourite-colour-error' }
     end
 
-    it_behaves_like 'a field that accepts arbitrary blocks of HTML'
+    it_behaves_like 'a field that accepts arbitrary blocks of HTML' do
+      let(:described_element) { 'fieldset' }
+    end
 
     context 'radio buttons' do
       specify 'each radio button should have the correct classes' do

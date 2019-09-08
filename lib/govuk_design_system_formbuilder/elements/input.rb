@@ -1,8 +1,8 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class Input < GOVUKDesignSystemFormBuilder::Base
-      def initialize(builder, object_name, attribute_name, attribute_type:, hint_text:, label:, width:, **extra_args)
-        super(builder, object_name, attribute_name)
+      def initialize(builder, object_name, attribute_name, attribute_type:, hint_text:, label:, width:, **extra_args, &block)
+        super(builder, object_name, attribute_name, &block)
 
         @width          = width
         @extra_args     = extra_args
@@ -17,13 +17,20 @@ module GOVUKDesignSystemFormBuilder
             [
               label_element.html,
               hint_element.html,
+              supplemental_content.html,
               error_element.html,
               @builder.send(
                 @builder_method,
                 @attribute_name,
                 id: field_id(link_errors: true),
                 class: input_classes,
-                aria: { describedby: described_by(hint_element.hint_id, error_element.error_id) },
+                aria: {
+                  describedby: described_by(
+                    hint_id,
+                    error_id,
+                    supplemental_id
+                  )
+                },
                 **@extra_args
               )
             ]

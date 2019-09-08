@@ -20,6 +20,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     it_behaves_like 'a field that supports labels'
 
+    it_behaves_like 'a field that accepts arbitrary blocks of HTML' do
+      let(:described_element) { 'input' }
+    end
+
     it_behaves_like 'a field that supports hints' do
       let(:aria_described_by_target) { 'input' }
     end
