@@ -86,19 +86,29 @@ p, li, dt, dd, td, th
 
   #masthead
     background-color: $blue
+    padding: 3rem 0rem
 
-    *
-      color: white
+    section
+      display: flex
+      flex-direction: row
 
-    > section
-      padding: 2rem 0rem 2rem
+      *
+        color: white
 
-    #icon
-      min-width: 12rem
-      object-fit: cover
+      #intro
+        word-break: normal
+        overflow-wrap: break-word
 
-      @media screen and (max-width: 1000px)
-        display: none
+      #icon
+        flex-shrink: 0
+        display: flex
+        align-items: center
+        justify-content: center
+        margin-right: 7rem
+
+
+        @media screen and (max-width: 1000px)
+          display: none
 
   #links
-    padding: 0rem 0rem 2rem
+    padding: 0rem 0rem 4rem
