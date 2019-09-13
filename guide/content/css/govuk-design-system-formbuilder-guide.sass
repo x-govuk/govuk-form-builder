@@ -84,14 +84,21 @@ p, li, dt, dd, td, th
     margin: 0rem
     padding: 0rem
 
-  .blue
+  #masthead
     background-color: $blue
 
     *
       color: white
 
-  #masthead
-    padding: 2rem 0rem 2rem
+    > section
+      padding: 2rem 0rem 2rem
+
+    #icon
+      min-width: 12rem
+      object-fit: cover
+
+      @media screen and (max-width: 1000px)
+        display: none
 
   #links
     padding: 0rem 0rem 2rem
