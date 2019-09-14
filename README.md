@@ -7,7 +7,7 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/d4c50b8d-6ca3-4797-9ab3-6e0731c72b44/deploy-status)](https://app.netlify.com/sites/govuk-form-builder/deploys)
 
 This gem provides a easy-to-use form builder that generates forms that are
-fully-compliant with version 3 of the [GOV.UK Design System](https://design-system.service.gov.uk/),
+fully-compliant with version 3.2.0 of the [GOV.UK Design System](https://design-system.service.gov.uk/),
 minimising the amount of markup you need to write.
 
 The latest version of this gem that supports GOV.UK Design System version 2 is
