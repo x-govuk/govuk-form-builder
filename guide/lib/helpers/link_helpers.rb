@@ -44,5 +44,9 @@ module Helpers
     def haml_link
       'http://haml.info'
     end
+
+    def version_supporting_design_system_v2
+      'https://rubygems.org/gems/govuk_design_system_formbuilder/versions/0.7.10'
+    end
   end
 end
