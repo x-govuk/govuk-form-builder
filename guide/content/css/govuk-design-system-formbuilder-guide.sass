@@ -75,3 +75,40 @@ p, li, dt, dd, td, th
     padding: 0.1rem
     font-size: 1rem
     letter-spacing: -0.015rem
+
+#splash
+  header.govuk-header
+    border-bottom: 10px solid $blue
+
+  main.govuk-main-wrapper
+    margin: 0rem
+    padding: 0rem
+
+  #masthead
+    background-color: $blue
+    padding: 3rem 0rem
+
+    section
+      display: flex
+      flex-direction: row
+
+      *
+        color: white
+
+      #intro
+        word-break: normal
+        overflow-wrap: break-word
+
+      #icon
+        flex-shrink: 0
+        display: flex
+        align-items: center
+        justify-content: center
+        margin-right: 5rem
+        overflow: hidden
+
+        @media screen and (max-width: 1000px)
+          display: none
+
+  #links
+    padding: 0rem 0rem 4rem
