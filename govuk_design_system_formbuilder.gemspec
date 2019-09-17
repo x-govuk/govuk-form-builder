@@ -14,7 +14,13 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,lib}/**/*", "MIT-LICENSE", "README.md"]
 
-  s.add_dependency "rails", ">= 5.2.3"
+  rails_version_specified = ENV.has_key?("RAILS_VERSION")
+  rails_version = ENV.fetch("RAILS_VERSION") { "5.2.3" }
+
+  s.add_dependency "rails", "%<symbol>s %<version>s" % {
+    symbol: rails_version_specified ? "~>" : ">=",
+    version: rails_version
+  }
 
   s.add_development_dependency "govuk-lint", "~> 0"
   s.add_development_dependency "pry", "~> 0.12.2"
