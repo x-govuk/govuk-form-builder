@@ -1,6 +1,7 @@
 $:.push File.expand_path('lib', __dir__)
 
 require "govuk_design_system_formbuilder/version"
+require_relative "util/version_formatter"
 
 Gem::Specification.new do |s|
   s.name        = "govuk_design_system_formbuilder"
@@ -14,13 +15,12 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,lib}/**/*", "MIT-LICENSE", "README.md"]
 
-  rails_version_specified = ENV.has_key?("RAILS_VERSION")
-  rails_version = ENV.fetch("RAILS_VERSION") { "5.2.3" }
+  exact_rails_version = ENV.has_key?("RAILS_VERSION")
+  rails_version = ENV.fetch("RAILS_VERSION") { "6.0.0" }
 
-  s.add_dependency "rails", "%<symbol>s %<version>s" % {
-    symbol: rails_version_specified ? "~>" : ">=",
-    version: rails_version
-  }
+  %w(actionview activemodel activesupport).each do |lib|
+    s.add_dependency *VersionFormatter.new(lib, rails_version, exact_rails_version).to_a
+  end
 
   s.add_development_dependency "govuk-lint", "~> 0"
   s.add_development_dependency "pry", "~> 0.12.2"
