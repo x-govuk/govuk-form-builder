@@ -11,6 +11,10 @@ script:
   - make rspec
   - make nanoc-check-all
 
+env:
+  - RAILS_VERSION=5.2.3
+  - RAILS_VERSION=6.0.0
+
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
