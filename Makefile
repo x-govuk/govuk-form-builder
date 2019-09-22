@@ -7,7 +7,7 @@ check: ruby-lint rspec nanoc-check
 nanoc-check: nanoc-check-all
 
 ruby-lint:
-	${prefix} govuk-lint-ruby lib spec guide/lib
+	${prefix} govuk-lint-ruby lib spec guide/lib util
 rspec:
 	${prefix} rspec --format progress
 nanoc-check-internal:

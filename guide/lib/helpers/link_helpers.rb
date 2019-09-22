@@ -38,7 +38,7 @@ module Helpers
     end
 
     def erb_link
-      'https://ruby-doc.org/stdlib-2.6.3/libdoc/erb/rdoc/ERB.html'
+      'https://ruby-doc.org/stdlib-2.6.4/libdoc/erb/rdoc/ERB.html'
     end
 
     def haml_link
