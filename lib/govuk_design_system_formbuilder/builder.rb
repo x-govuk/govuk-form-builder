@@ -23,7 +23,7 @@ module GOVUKDesignSystemFormBuilder
     #     required: true,
     #     placeholder: 'Ralph Wiggum'
     def govuk_text_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
-      Elements::Input.new(self, object_name, attribute_name, attribute_type: :text, hint_text: hint_text, label: label, width: width, **args, &block).html
+      Elements::Inputs::Text.new(self, object_name, attribute_name, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
 
     # Generates a input of type +tel+
@@ -50,7 +50,7 @@ module GOVUKDesignSystemFormBuilder
     #     required: true,
     #     placeholder: '0123 456 789'
     def govuk_phone_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
-      Elements::Input.new(self, object_name, attribute_name, attribute_type: :phone, hint_text: hint_text, label: label, width: width, **args, &block).html
+      Elements::Inputs::Phone.new(self, object_name, attribute_name, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
 
     # Generates a input of type +email+
@@ -75,7 +75,7 @@ module GOVUKDesignSystemFormBuilder
     #     label: { text: 'Enter your email address' },
     #     placeholder: 'ralph.wiggum@springfield.edu'
     def govuk_email_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
-      Elements::Input.new(self, object_name, attribute_name, attribute_type: :email, hint_text: hint_text, label: label, width: width, **args, &block).html
+      Elements::Inputs::Email.new(self, object_name, attribute_name, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
 
     # Generates a input of type +url+
@@ -100,7 +100,7 @@ module GOVUKDesignSystemFormBuilder
     #     placeholder: 'https://www.gov.uk',
     #     autocomplete: 'url'
     def govuk_url_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
-      Elements::Input.new(self, object_name, attribute_name, attribute_type: :url, hint_text: hint_text, label: label, width: width, **args, &block).html
+      Elements::Inputs::URL.new(self, object_name, attribute_name, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
 
     # Generates a input of type +number+
@@ -127,7 +127,7 @@ module GOVUKDesignSystemFormBuilder
     #     max: 150,
     #     step: 5
     def govuk_number_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
-      Elements::Input.new(self, object_name, attribute_name, attribute_type: :number, hint_text: hint_text, label: label, width: width, **args, &block).html
+      Elements::Inputs::Number.new(self, object_name, attribute_name, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
 
     # Generates a +textarea+ element with a label, optional hint. Also offers
