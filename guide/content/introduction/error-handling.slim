@@ -25,6 +25,8 @@ p.govuk-body
 == render('/partials/example-fig.*',
   caption: "A text field with an error",
   code: text_field_with_errors,
-  show_errors: true)
+  sample_data: departments_data_raw,
+  show_errors: true,
+  hide_data: true)
 
 == render('/partials/related-info.*', links: error_handling_info)
