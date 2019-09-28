@@ -16,6 +16,12 @@ module Examples
         = f.govuk_date_field :welcome_pack_received_on,
           legend: { text: 'When did you receive your welcome pack?' }
 
+        = f.govuk_collection_select :department_id,
+          departments,
+          :id,
+          :name,
+          label: { text: 'Which department will you work in?', size: 'm' }
+
         = f.govuk_collection_radio_buttons :welcome_lunch_choice,
           lunch_options,
           :id,
