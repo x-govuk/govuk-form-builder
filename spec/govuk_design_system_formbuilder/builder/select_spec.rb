@@ -20,7 +20,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     it_behaves_like 'a field that supports errors' do
       let(:error_message) { /Choose a favourite colour/ }
       let(:error_identifier) { 'person-favourite-colour-error' }
-      let(:error_class) { nil }
+      let(:error_class) { 'govuk-select--error' }
     end
 
     it_behaves_like 'a field that accepts arbitrary blocks of HTML' do

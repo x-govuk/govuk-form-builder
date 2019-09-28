@@ -45,7 +45,9 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def select_classes
-        %w(govuk-select)
+        %w(govuk-select).tap do |classes|
+          classes.push('govuk-select--error') if has_errors?
+        end
       end
     end
   end
