@@ -1,7 +1,7 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class Label < GOVUKDesignSystemFormBuilder::Base
-      def initialize(builder, object_name, attribute_name, text: nil, value: nil, size: nil, hidden: false, radio: false, checkbox: false, tag: nil)
+      def initialize(builder, object_name, attribute_name, text: nil, value: nil, size: nil, hidden: false, radio: false, checkbox: false, tag: nil, link_errors: true)
         super(builder, object_name, attribute_name)
 
         @text           = label_text(text, hidden)
@@ -10,6 +10,7 @@ module GOVUKDesignSystemFormBuilder
         @radio_class    = radio_class(radio)
         @checkbox_class = checkbox_class(checkbox)
         @tag            = tag
+        @link_errors    = link_errors
       end
 
       def html
@@ -28,7 +29,7 @@ module GOVUKDesignSystemFormBuilder
         @builder.label(
           @attribute_name,
           value: @value,
-          for: field_id(link_errors: true),
+          for: field_id(link_errors: @link_errors),
           class: %w(govuk-label).push(@size_class, @weight_class, @radio_class, @checkbox_class).compact
         ) do
           @text

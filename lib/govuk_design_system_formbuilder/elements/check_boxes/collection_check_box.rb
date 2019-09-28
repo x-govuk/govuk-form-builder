@@ -30,7 +30,7 @@ module GOVUKDesignSystemFormBuilder
       private
 
         def label_element
-          @label_element ||= Label.new(@checkbox, @object_name, @attribute_name, value: @value)
+          @label_element ||= Label.new(@builder, @object_name, @attribute_name, @checkbox, value: @value, link_errors: @link_errors)
         end
 
         def hint_element
