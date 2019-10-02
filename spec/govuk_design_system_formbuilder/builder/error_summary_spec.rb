@@ -163,7 +163,12 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             end
 
             specify 'the radio button linked to should be first' do
-              expect(parsed_subject.css('input').first).to eql(parsed_subject.at_css('#' + identifier))
+              expect(parsed_subject.css('input').first['id']).to eql(identifier)
+              expect(parsed_subject.css('label').first['for']).to eql(identifier)
+            end
+
+            specify 'there should be a label associated with the error link target' do
+              expect(subject).to have_tag('label', with: { for: identifier }, count: 1)
             end
           end
 
@@ -227,7 +232,12 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             end
 
             specify 'the radio button linked to should be first' do
-              expect(parsed_subject.css('input').first).to eql(parsed_subject.at_css('#' + identifier))
+              expect(parsed_subject.css('input').first['id']).to eql(identifier)
+              expect(parsed_subject.css('label').first['for']).to eql(identifier)
+            end
+
+            specify 'there should be a label associated with the error link target' do
+              expect(subject).to have_tag('label', with: { for: identifier }, count: 1)
             end
           end
 
