@@ -17,16 +17,20 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def html
-          @builder.content_tag('div', class: 'govuk-radios__item') do
-            @builder.safe_join(
-              [
-                input,
-                label_element.html,
-                hint_element.html,
-                @conditional_content
-              ]
-            )
-          end
+          @builder.safe_join(
+            [
+              @builder.content_tag('div', class: 'govuk-radios__item') do
+                @builder.safe_join(
+                  [
+                    input,
+                    label_element.html,
+                    hint_element.html,
+                  ]
+                )
+              end,
+              @conditional_content
+            ]
+          )
         end
 
       private
