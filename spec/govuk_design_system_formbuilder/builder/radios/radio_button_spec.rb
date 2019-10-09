@@ -47,7 +47,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           end
         end
 
-        specify 'should place the conditional content at the same level as the form' do
+        specify 'should place the conditional content at the same level as the radio button container' do
           expect(parsed_subject).to have_root_element_with_class('govuk-radios__conditional')
         end
 
