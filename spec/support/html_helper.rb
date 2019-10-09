@@ -1,5 +1,5 @@
-def extract_classes(nokogiri_document, selector)
-  nokogiri_document
+def extract_classes(nokogiri_fragment, selector)
+  nokogiri_fragment
     .at_css(selector)
     .attributes['class']
     .value
