@@ -11,7 +11,7 @@ module GOVUKDesignSystemFormBuilder
       def html
         return nil unless @content.present?
 
-        @builder.content_tag('div', id: supplemental_id) do
+        content_tag('div', id: supplemental_id) do
           @content
         end
       end

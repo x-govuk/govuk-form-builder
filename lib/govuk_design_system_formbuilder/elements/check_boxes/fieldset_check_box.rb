@@ -18,10 +18,10 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def html
-          @builder.safe_join(
+          safe_join(
             [
-              @builder.content_tag('div', class: 'govuk-checkboxes__item') do
-                @builder.safe_join(
+              content_tag('div', class: 'govuk-checkboxes__item') do
+                safe_join(
                   [
                     input,
                     label_element.html,

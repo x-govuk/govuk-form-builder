@@ -17,8 +17,8 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def html
-          @builder.content_tag('div', class: 'govuk-radios__item') do
-            @builder.safe_join(
+          content_tag('div', class: 'govuk-radios__item') do
+            safe_join(
               [
                 @builder.radio_button(
                   @attribute_name,

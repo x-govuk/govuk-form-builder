@@ -8,7 +8,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        @builder.content_tag('div', class: radios_classes, data: { module: 'govuk-radios' }) do
+        content_tag('div', class: radios_classes, data: { module: 'govuk-radios' }) do
           yield
         end
       end

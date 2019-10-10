@@ -1,10 +1,12 @@
 module GOVUKDesignSystemFormBuilder
   class Base
+    delegate :capture, :content_tag, :safe_join, :tag, :raw, :link_to, to: :@builder
+
     def initialize(builder, object_name, attribute_name, &block)
       @builder = builder
       @object_name = object_name
       @attribute_name = attribute_name
-      @block_content = @builder.capture { block.call } if block_given?
+      @block_content = capture { block.call } if block_given?
     end
 
     def hint_element
@@ -72,8 +74,8 @@ module GOVUKDesignSystemFormBuilder
     end
 
     def wrap_conditional(block)
-      @builder.content_tag('div', class: conditional_classes, id: conditional_id) do
-        @builder.capture { block.call }
+      content_tag('div', class: conditional_classes, id: conditional_id) do
+        capture { block.call }
       end
     end
 

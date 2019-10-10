@@ -17,7 +17,7 @@ module GOVUKDesignSystemFormBuilder
         return nil if @text.blank?
 
         if @tag.present?
-          @builder.content_tag(@tag, class: 'govuk-label-wrapper') { build_label }
+          content_tag(@tag, class: 'govuk-label-wrapper') { build_label }
         else
           build_label
         end
@@ -40,9 +40,9 @@ module GOVUKDesignSystemFormBuilder
         text = [option_text, @value, @attribute_name.capitalize].compact.first
 
         if hidden
-          @builder.tag.span(text, class: %w(govuk-visually-hidden))
+          tag.span(text, class: %w(govuk-visually-hidden))
         else
-          @builder.raw(text)
+          raw(text)
         end
       end
 
