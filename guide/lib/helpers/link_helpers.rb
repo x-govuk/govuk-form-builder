@@ -1,4 +1,12 @@
 module Helpers
+  module GOVUKLinkTo
+    def link_to(*args, **kwargs)
+      return super if kwargs.has_key?('class')
+
+      super(*args, **kwargs.merge(class: 'govuk-link'))
+    end
+  end
+
   module LinkHelpers
     def code_climate_report_link
       'https://codeclimate.com/github/DFE-Digital/govuk_design_system_formbuilder'
