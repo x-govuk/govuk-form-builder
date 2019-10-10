@@ -12,8 +12,8 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def html
-          @builder.content_tag('div', class: 'govuk-checkboxes__item') do
-            @builder.safe_join(
+          content_tag('div', class: 'govuk-checkboxes__item') do
+            safe_join(
               [
                 @checkbox.check_box(
                   id: field_id(link_errors: @link_errors),
