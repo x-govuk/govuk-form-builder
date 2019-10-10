@@ -78,6 +78,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           end
         end
 
+        specify 'should place the conditional content at the same level as the checkbox container' do
+          expect(parsed_subject).to have_root_element_with_class('govuk-checkboxes__conditional')
+        end
+
         specify 'should include content provided in the block in a conditional div' do
           expect(subject).to have_tag('div', with: { class: 'govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden' }) do |cd|
             expect(cd).to have_tag('label', with: { class: 'govuk-label' }, text: 'Project_responsibilities')
