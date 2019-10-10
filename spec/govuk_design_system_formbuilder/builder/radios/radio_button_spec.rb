@@ -47,6 +47,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           end
         end
 
+        specify 'should place the conditional content at the same level as the radio button container' do
+          expect(parsed_subject).to have_root_element_with_class('govuk-radios__conditional')
+        end
+
         specify 'should include content provided in the block in a conditional div' do
           expect(subject).to have_tag('div', with: { class: 'govuk-radios__conditional govuk-radios__conditional--hidden' }) do |cd|
             expect(cd).to have_tag('label', with: { class: 'govuk-label' }, text: 'Favourite_colour_reason')
