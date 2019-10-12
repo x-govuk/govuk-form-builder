@@ -19,6 +19,9 @@ compile '/**/*.sass' do
   write item.identifier.without_ext + '.css'
 end
 
+# Ignore all the GOV.UK assets, they are pulled in manually
+ignore '/css/govuk/**/*'
+
 compile '/**/*' do
   write item.identifier.to_s
 end
