@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,lib}/**/*", "MIT-LICENSE", "README.md"]
 
   exact_rails_version = ENV.has_key?("RAILS_VERSION")
-  rails_version = ENV.fetch("RAILS_VERSION") { "6.0.0" }
+  rails_version = ENV.fetch("RAILS_VERSION") { "5.2.3" }
 
   %w(actionview activemodel activesupport).each do |lib|
     s.add_dependency(*VersionFormatter.new(lib, rails_version, exact_rails_version).to_a)
