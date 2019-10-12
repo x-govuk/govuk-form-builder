@@ -8,3 +8,6 @@ coverage/*
 guide/tmp
 guide/output
 guide/*.log
+guide/node_modules
+
+crash.log
