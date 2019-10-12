@@ -10,6 +10,8 @@ ruby-lint:
 	${prefix} govuk-lint-ruby lib spec guide/lib util
 rspec:
 	${prefix} rspec --format progress
+npm-install:
+	${guide_dir} npm ci
 nanoc-check-internal:
 	${guide_dir} ${prefix} nanoc check ${nanoc_internal_checks}
 nanoc-check-external:
@@ -18,7 +20,7 @@ nanoc-check-all: build_guide
 	${guide_dir} ${prefix} nanoc check ${nanoc_internal_checks} ${nanoc_external_checks}
 build:
 	${prefix} gem build govuk_design_system_formbuilder.gemspec
-build_guide:
+build_guide: npm-install
 	${guide_dir} ${prefix} nanoc
 docs-server:
 	yard server --reload
