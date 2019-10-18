@@ -14,7 +14,7 @@ module GOVUKDesignSystemFormBuilder
       def html
         return yield unless limit?
 
-        @builder.content_tag(
+        content_tag(
           'div',
           class: 'govuk-character-count',
           data: { module: 'govuk-character-count' }.merge(**limit, **threshold).compact

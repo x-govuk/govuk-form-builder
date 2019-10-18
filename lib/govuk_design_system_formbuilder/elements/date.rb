@@ -13,13 +13,13 @@ module GOVUKDesignSystemFormBuilder
       def html
         Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
           Containers::Fieldset.new(@builder, legend: @legend, described_by: [error_id, hint_id, supplemental_id]).html do
-            @builder.safe_join(
+            safe_join(
               [
                 hint_element.html,
                 error_element.html,
                 supplemental_content.html,
-                @builder.content_tag('div', class: 'govuk-date-input') do
-                  @builder.safe_join(
+                content_tag('div', class: 'govuk-date-input') do
+                  safe_join(
                     [
                       date_input_item(:day, link_errors: true),
                       date_input_item(:month),
@@ -38,17 +38,17 @@ module GOVUKDesignSystemFormBuilder
       def date_input_item(segment, width: 2, link_errors: false)
         value = @builder.object.try(@attribute_name).try(segment)
 
-        @builder.content_tag('div', class: %w(govuk-date-input__item)) do
-          @builder.content_tag('div', class: %w(govuk-form-group)) do
-            @builder.safe_join(
+        content_tag('div', class: %w(govuk-date-input__item)) do
+          content_tag('div', class: %w(govuk-form-group)) do
+            safe_join(
               [
-                @builder.tag.label(
+                tag.label(
                   segment.capitalize,
                   class: date_input_label_classes,
                   for: date_attribute_id(segment, link_errors)
                 ),
 
-                @builder.tag.input(
+                tag.input(
                   id: date_attribute_id(segment, link_errors),
                   class: date_input_classes(width),
                   name: date_attribute_name(segment),

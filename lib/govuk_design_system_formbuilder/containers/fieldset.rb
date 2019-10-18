@@ -11,8 +11,8 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        @builder.content_tag('fieldset', class: fieldset_classes, aria: { describedby: @described_by }) do
-          @builder.safe_join([build_legend, yield])
+        content_tag('fieldset', class: fieldset_classes, aria: { describedby: @described_by }) do
+          safe_join([build_legend, yield])
         end
       end
 
@@ -20,8 +20,8 @@ module GOVUKDesignSystemFormBuilder
 
       def build_legend
         if @legend.dig(:text).present?
-          @builder.content_tag('legend', class: legend_classes) do
-            @builder.tag.send(@legend.dig(:tag), @legend.dig(:text), class: legend_heading_classes)
+          content_tag('legend', class: legend_classes) do
+            tag.send(@legend.dig(:tag), @legend.dig(:text), class: legend_heading_classes)
           end
         end
       end

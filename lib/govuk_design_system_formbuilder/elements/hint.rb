@@ -13,7 +13,7 @@ module GOVUKDesignSystemFormBuilder
       def html
         return nil if @hint_text.blank?
 
-        @builder.tag.span(@hint_text, class: hint_classes, id: hint_id)
+        tag.span(@hint_text, class: hint_classes, id: hint_id)
       end
 
     private

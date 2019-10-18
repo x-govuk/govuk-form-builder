@@ -10,12 +10,12 @@ module GOVUKDesignSystemFormBuilder
         @warning              = warning
         @secondary            = secondary
         @validate             = validate
-        @block_content        = @builder.capture { block.call } if block_given?
+        @block_content        = capture { block.call } if block_given?
       end
 
       def html
-        @builder.content_tag('div', class: %w(govuk-form-group)) do
-          @builder.safe_join(
+        content_tag('div', class: %w(govuk-form-group)) do
+          safe_join(
             [
               @builder.submit(
                 @text,
