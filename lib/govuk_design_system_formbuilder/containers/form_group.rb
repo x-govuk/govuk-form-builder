@@ -6,7 +6,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        @builder.content_tag('div', class: form_group_classes) do
+        content_tag('div', class: form_group_classes) do
           yield
         end
       end

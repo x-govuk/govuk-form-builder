@@ -12,7 +12,7 @@ module GOVUKDesignSystemFormBuilder
         def html
           return nil if @hint_text.blank?
 
-          @builder.tag.span(@hint_text, class: hint_classes, id: id)
+          tag.span(@hint_text, class: hint_classes, id: id)
         end
 
         def id

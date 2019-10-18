@@ -11,7 +11,7 @@ module GOVUKDesignSystemFormBuilder
 
       def html
         Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
-          @builder.safe_join(
+          safe_join(
             [
               label_element.html,
               hint_element.html,
