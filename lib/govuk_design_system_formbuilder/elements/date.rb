@@ -3,11 +3,13 @@ module GOVUKDesignSystemFormBuilder
     class Date < GOVUKDesignSystemFormBuilder::Base
       SEGMENTS = { day: '3i', month: '2i', year: '1i' }.freeze
 
-      def initialize(builder, object_name, attribute_name, legend:, hint_text:, date_of_birth: false, &block)
+      def initialize(builder, object_name, attribute_name, legend:, hint_text:, date_of_birth: false, smallest_segment:, &block)
         super(builder, object_name, attribute_name, &block)
-        @legend = legend
-        @hint_text = hint_text
-        @date_of_birth = date_of_birth
+
+        @legend           = legend
+        @hint_text        = hint_text
+        @date_of_birth    = date_of_birth
+        @smallest_segment = identify_smallest_segment(smallest_segment)
       end
 
       def html
@@ -19,13 +21,7 @@ module GOVUKDesignSystemFormBuilder
                 error_element.html,
                 supplemental_content.html,
                 content_tag('div', class: 'govuk-date-input') do
-                  safe_join(
-                    [
-                      date_input_item(:day, link_errors: true),
-                      date_input_item(:month),
-                      date_input_item(:year, width: 4)
-                    ]
-                  )
+                  safe_join([day, month, year])
                 end
               ]
             )
@@ -34,6 +30,24 @@ module GOVUKDesignSystemFormBuilder
       end
 
     private
+
+      def day
+        return nil unless @smallest_segment == :day
+
+        date_input_item(:day, link_errors: link_errors_on?(:day))
+      end
+
+      def month
+        date_input_item(:month, link_errors: link_errors_on?(:month))
+      end
+
+      def year
+        date_input_item(:year, width: 4)
+      end
+
+      def link_errors_on?(segment)
+        @smallest_segment.eql?(segment)
+      end
 
       def date_input_item(segment, width: 2, link_errors: false)
         value = @builder.object.try(@attribute_name).try(segment)
@@ -98,6 +112,12 @@ module GOVUKDesignSystemFormBuilder
         return nil unless @date_of_birth
 
         { day: 'bday-day', month: 'bday-month', year: 'bday-year' }.fetch(segment)
+      end
+
+      def identify_smallest_segment(segment)
+        segment.to_sym.tap do |s|
+          fail(ArgumentError, "smallest_segment must be :day or :month") unless s.in?(%i(day month))
+        end
       end
     end
   end
