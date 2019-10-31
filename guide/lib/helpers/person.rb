@@ -53,7 +53,8 @@ class Person
 
   # date fields
   attr_accessor(
-    :date_of_birth
+    :date_of_birth,
+    :start_month
   )
 
   # labels, hints and legends
