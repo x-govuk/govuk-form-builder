@@ -3,11 +3,13 @@ module GOVUKDesignSystemFormBuilder
     class Date < GOVUKDesignSystemFormBuilder::Base
       SEGMENTS = { day: '3i', month: '2i', year: '1i' }.freeze
 
-      def initialize(builder, object_name, attribute_name, legend:, hint_text:, date_of_birth: false, &block)
+      def initialize(builder, object_name, attribute_name, legend:, hint_text:, date_of_birth: false, omit_day:, &block)
         super(builder, object_name, attribute_name, &block)
-        @legend = legend
-        @hint_text = hint_text
+
+        @legend        = legend
+        @hint_text     = hint_text
         @date_of_birth = date_of_birth
+        @omit_day      = omit_day
       end
 
       def html
@@ -19,13 +21,7 @@ module GOVUKDesignSystemFormBuilder
                 error_element.html,
                 supplemental_content.html,
                 content_tag('div', class: 'govuk-date-input') do
-                  safe_join(
-                    [
-                      date_input_item(:day, link_errors: true),
-                      date_input_item(:month),
-                      date_input_item(:year, width: 4)
-                    ]
-                  )
+                  safe_join([day, month, year])
                 end
               ]
             )
@@ -34,6 +30,24 @@ module GOVUKDesignSystemFormBuilder
       end
 
     private
+
+      def omit_day?
+        @omit_day
+      end
+
+      def day
+        return nil if omit_day?
+
+        date_input_item(:day, link_errors: true)
+      end
+
+      def month
+        date_input_item(:month, link_errors: omit_day?)
+      end
+
+      def year
+        date_input_item(:year, width: 4)
+      end
 
       def date_input_item(segment, width: 2, link_errors: false)
         value = @builder.object.try(@attribute_name).try(segment)
