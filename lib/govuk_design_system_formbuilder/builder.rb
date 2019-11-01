@@ -465,7 +465,7 @@ module GOVUKDesignSystemFormBuilder
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
-    # @param smallest_segment [Symbol,String] the smallest date part that will be displayed, can be either +day+ or +month+
+    # @param omit_day [Boolean] do not render a day input, only capture month and year
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input group
     # @param date_of_birth [Boolean] if +true+ {https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete#Values birth date auto completion attributes}
     #   will be added to the inputs
@@ -477,8 +477,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_date_field :starts_on,
     #     legend: { 'When does your event start?' },
     #     hint_text: 'Leave this field blank if you don't know exactly' }
-    def govuk_date_field(attribute_name, hint_text: nil, legend: {}, date_of_birth: false, smallest_segment: :day, &block)
-      Elements::Date.new(self, object_name, attribute_name, hint_text: hint_text, legend: legend, date_of_birth: date_of_birth, smallest_segment: smallest_segment, &block).html
+    def govuk_date_field(attribute_name, hint_text: nil, legend: {}, date_of_birth: false, omit_day: false, &block)
+      Elements::Date.new(self, object_name, attribute_name, hint_text: hint_text, legend: legend, date_of_birth: date_of_birth, omit_day: omit_day, &block).html
     end
 
     # Generates a summary of errors in the form, each linking to the corresponding

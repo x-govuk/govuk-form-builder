@@ -125,16 +125,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     context 'showing only month and year inputs' do
-      subject { builder.send(*args.push(smallest_segment: 'month')) }
-
-      specify 'there be no day label and label' do
-        expect(subject).not_to have_tag('label', text: 'Day')
-      end
-
-      specify 'there should only be month and year labels' do
-        expect(subject).to have_tag('label', text: 'Month')
-        expect(subject).to have_tag('label', text: 'Year')
-      end
+      subject { builder.send(*args.push(omit_day: true)) }
 
       specify 'there should only be month and year inputs' do
         expect(subject).to have_tag('input', count: 2)
@@ -144,28 +135,13 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
 
-      context 'validating smallest segments' do
-        context 'valid arguments' do
-          %w(day month).each do |segment|
-            context segment.capitalize do
-              subject { builder.send(*args.push(smallest_segment: segment)) }
+      specify 'there be no day label' do
+        expect(subject).not_to have_tag('label', text: 'Day')
+      end
 
-              specify 'should return some HTML' do
-                expect(subject).to have_tag('div')
-              end
-            end
-          end
-        end
-
-        context 'the following arguments should be invalid' do
-          %w(DAY days year months MONTH).each do |invalid_segment|
-            subject { builder.send(*args.push(smallest_segment: invalid_segment)) }
-
-            specify "#{invalid_segment}" do
-              expect { subject }.to raise_error(ArgumentError, "smallest_segment must be :day or :month")
-            end
-          end
-        end
+      specify 'there should only be month and year labels' do
+        expect(subject).to have_tag('label', text: 'Month')
+        expect(subject).to have_tag('label', text: 'Year')
       end
     end
 
