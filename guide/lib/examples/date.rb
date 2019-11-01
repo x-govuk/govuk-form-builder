@@ -12,7 +12,7 @@ module Examples
     def month_field
       <<~SNIPPET
         = f.govuk_date_field :start_month,
-          smallest_segment: 'month',
+          omit_day: true,
           legend: { text: 'When did you begin your current job?' }
       SNIPPET
     end
