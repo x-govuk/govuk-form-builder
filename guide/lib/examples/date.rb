@@ -8,5 +8,13 @@ module Examples
           hint_text: "Check your passport if you're unsure"
       SNIPPET
     end
+
+    def month_field
+      <<~SNIPPET
+        = f.govuk_date_field :start_month,
+          omit_day: true,
+          legend: { text: 'When did you begin your current job?' }
+      SNIPPET
+    end
   end
 end

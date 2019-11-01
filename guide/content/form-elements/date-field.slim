@@ -23,4 +23,24 @@ section
     caption: "Date field with legend and hint and birth date autocompletion",
     code: date_field)
 
+  == render('/partials/example-fig.*',
+    caption: "Month field",
+    code: month_field,
+    hide_html_output: true) do
+
+    .govuk-warning-text
+      span.govuk-warning-text__icon aria-hidden=true
+        | !
+      strong.govuk-warning-text__text
+        span.govuk-warning-text__assistive Warning
+
+        | Date inputs without a day field are not currently part of the GOV.UK Design
+          System
+
+    p.govuk-body
+      | When asking for dates that the user might not know exactly, such as
+        their graduation date or their start date at a past job, the exact date
+        might not be necessary. The day can be optionally omitted by providing
+        the <code>omit_day</code> parameter.
+
 == render('/partials/related-info.*', links: date_info)
