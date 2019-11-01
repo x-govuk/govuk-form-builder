@@ -244,31 +244,37 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           describe 'date fields' do
             let(:object) { Person.new(born_on: Date.today.next_year(5)) }
             let(:identifier) { 'person-born-on-field-error' }
-            let(:day_field_name) { 'person[born_on(3i)]' }
-            subject do
-              builder.content_tag('div') do
-                builder.capture do
-                  builder.safe_join(
-                    [
-                      builder.govuk_error_summary,
-                      builder.govuk_date_field(:born_on)
-                    ]
-                  )
+
+            # 1i is year, 2i is month, 3i is day - we're only dealing with day and month here
+            { true => '2i', false => '3i' }.each do |omit_day, segment|
+              context "when omit_day is #{omit_day}" do
+                let(:first_date_segment_name) { "person[born_on(#{segment})]" }
+                subject do
+                  builder.content_tag('div') do
+                    builder.capture do
+                      builder.safe_join(
+                        [
+                          builder.govuk_error_summary,
+                          builder.govuk_date_field(:born_on, omit_day: omit_day)
+                        ]
+                      )
+                    end
+                  end
+                end
+
+                specify 'the error message should link to only one check box' do
+                  expect(subject).to have_tag('a', with: { href: "#" + identifier })
+                  expect(subject).to have_tag('input', with: { id: identifier }, count: 1)
+                end
+
+                specify 'the targetted input should be the first field' do
+                  expect(parsed_subject.css("input").first).to eql(parsed_subject.at_css('#' + identifier))
+                end
+
+                specify 'the targetted input should be the day field' do
+                  expect(parsed_subject.at_css('#' + identifier).attribute('name').value).to eql(first_date_segment_name)
                 end
               end
-            end
-
-            specify 'the error message should link to only one check box' do
-              expect(subject).to have_tag('a', with: { href: "#" + identifier })
-              expect(subject).to have_tag('input', with: { id: identifier }, count: 1)
-            end
-
-            specify 'the targetted input should be the first field' do
-              expect(parsed_subject.css("input").first).to eql(parsed_subject.at_css('#' + identifier))
-            end
-
-            specify 'the targetted input should be the day field' do
-              expect(parsed_subject.at_css('#' + identifier).attribute('name').value).to eql(day_field_name)
             end
           end
         end
