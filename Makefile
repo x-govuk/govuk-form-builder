@@ -11,7 +11,7 @@ ruby-lint:
 rspec:
 	${prefix} rspec --format progress
 npm-install:
-	${guide_dir} npm ci
+	${guide_dir} npm ci --silent
 nanoc-check-internal:
 	${guide_dir} ${prefix} nanoc check ${nanoc_internal_checks}
 nanoc-check-external:
