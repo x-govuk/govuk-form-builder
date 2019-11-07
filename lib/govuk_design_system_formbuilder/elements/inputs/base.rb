@@ -45,7 +45,7 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def error_classes
-          ('govuk-input--error') if has_errors?
+          'govuk-input--error' if has_errors?
         end
 
         def width_classes

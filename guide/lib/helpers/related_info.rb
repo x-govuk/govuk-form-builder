@@ -66,7 +66,7 @@ module Helpers
         'Form builder documentation for email fields' => 'https://www.rubydoc.info/gems/govuk_design_system_formbuilder/GOVUKDesignSystemFormBuilder/Builder#govuk_email_field-instance_method',
         'Form builder documentation for URL fields' => 'https://www.rubydoc.info/gems/govuk_design_system_formbuilder/GOVUKDesignSystemFormBuilder/Builder#govuk_url_field-instance_method',
 
-        'GOV.UK design system text input'   => 'https://design-system.service.gov.uk/components/text-input/',
+        'GOV.UK design system text input' => 'https://design-system.service.gov.uk/components/text-input/',
         'MDN input mode documentation' => 'https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode',
         'WhatWG documentation on input the type attribute' => 'https://html.spec.whatwg.org/multipage/input.html#states-of-the-type-attribute'
       }
