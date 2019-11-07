@@ -4,7 +4,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/fde73b5dc9476197281b/maintainability)](https://codeclimate.com/github/DFE-Digital/govuk_design_system_formbuilder/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/fde73b5dc9476197281b/test_coverage)](https://codeclimate.com/github/DFE-Digital/govuk_design_system_formbuilder/test_coverage)
 [![Gem Version](https://badge.fury.io/rb/govuk_design_system_formbuilder.svg)](https://badge.fury.io/rb/govuk_design_system_formbuilder)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/d4c50b8d-6ca3-4797-9ab3-6e0731c72b44/deploy-status)](https://app.netlify.com/sites/govuk-form-builder/deploys)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=DFE-Digital/govuk_design_system_formbuilder)](https://dependabot.com)
 
 This gem provides a easy-to-use form builder that generates forms that are
 fully-compliant with version 3.3.0 of the [GOV.UK Design System](https://design-system.service.gov.uk/),
@@ -24,6 +24,8 @@ If you're still not sure what a form builder is or how it works, don't worry!
 [This screencast](https://www.youtube.com/watch?v=PhoFZ0qXAlA) should give you
 an idea of what's on offer and [the official guide](https://govuk-form-builder.netlify.com) goes
 into a bit more depth on how everything works 😅
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d4c50b8d-6ca3-4797-9ab3-6e0731c72b44/deploy-status)](https://app.netlify.com/sites/govuk-form-builder/deploys)
 
 ## What's included
 
