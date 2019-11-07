@@ -61,12 +61,26 @@ module Examples
 
     def single_checkbox
       <<~SNIPPET
-        .govuk-form-group
+
+        = f.govuk_check_boxes_fieldset :terms_and_conditions_agreed,
+          legend: { text: 'Terms and conditions', size: 'l' } do
+
+          = f.hidden_field :terms_and_conditions_agreed, value: false
+
+          p.govuk-body
+            | Our terms and conditions contain important information about:
+
+          ul.govuk-list.govuk-list--bullet
+            li the application process
+            li contacting us
+            li our use of your data
+            li checking you're safe to work with children
+
           = f.govuk_check_box :terms_and_conditions_agreed,
             true,
             multiple: false,
-            label: { text: 'Do you agree with the terms and conditions?' },
-            hint_text: "You won't be able to proceed to the next stage unless you do"
+            link_errors: true,
+            label: { text: 'I agree to the terms and conditions' }
       SNIPPET
     end
   end
