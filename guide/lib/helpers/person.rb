@@ -7,8 +7,11 @@ class Person
     :first_name,
     :last_name,
     :job_title,
-    :postcode,
+    :postcode
+  )
 
+  # width examples
+  attr_accessor(
     :twenty,
     :ten,
     :five,
@@ -81,8 +84,7 @@ class Person
   attr_accessor(
     :address_one,
     :address_two,
-    :address_three,
-    :postcode
+    :address_three
   )
 
   # file fields
