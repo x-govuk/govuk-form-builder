@@ -1,3 +1,6 @@
+AllCops:
+  Exclude:
+    - govuk_design_system_formbuilder.gemspec
 Rails/Date:
   Enabled: false
 Style/StringLiterals:
