@@ -1,6 +1,7 @@
 figure
   figcaption
-    h3.govuk-heading-m= caption
+    h3.govuk-heading-m id=anchor_id(caption)
+      = caption
 
   - if block_given? && content = yield
     section
