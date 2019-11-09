@@ -63,8 +63,16 @@ figure
 
   margin: 2.5rem 0rem 2.5rem
 
-  h3.example-subheading
-    margin: 1.5rem 0rem 0.5rem
+  h3.example-heading
+    > a.govuk-link
+      &, &:hover, &:visited
+        color: $govuk-text-colour
+        text-decoration: none
+
+    > a:hover
+      &::after
+        content: "🔗"
+        padding-left: 0.8rem
 
   section
     padding: 1rem 0rem
