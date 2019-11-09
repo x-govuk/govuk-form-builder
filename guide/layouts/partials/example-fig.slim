@@ -1,6 +1,7 @@
 figure
   figcaption
-    h3.govuk-heading-m= caption
+    h3.govuk-heading-m.example-heading id=anchor_id(caption)
+      == link_to caption, "#".concat(anchor_id(caption))
 
   - if block_given? && content = yield
     section
