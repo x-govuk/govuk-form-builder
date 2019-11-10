@@ -20,11 +20,11 @@ ul.govuk-list.govuk-list--bullet
 section
 
   == render('/partials/example-fig.*',
-    caption: "Date field with legend and hint and birth date autocompletion",
+    caption: 'Exact date field with legend and hint and birth date autocompletion',
     code: date_field)
 
   == render('/partials/example-fig.*',
-    caption: "Month field",
+    caption: 'Approximate dates - recording the closest month',
     code: month_field,
     hide_html_output: true) do
 
@@ -38,9 +38,15 @@ section
           System
 
     p.govuk-body
-      | When asking for dates that the user might not know exactly, such as
-        their graduation date or their start date at a past job, the exact date
-        might not be necessary. The day can be optionally omitted by providing
-        the <code>omit_day</code> parameter.
+      | When asking for dates that the user might not know or could struggle to
+        remember, such as their graduation date, the exact date might not be
+        necessary. The day can be optionally omitted by providing the
+        <code>omit_day</code> parameter.
+
+    p.govuk-body
+      | When mapped to a <code>Date</code> attribute, Ruby will automatically
+        set the <code>Day</code> to be <code>1</code> when none is provided. This
+        should be taken into account when displaying the data or using it for
+        analysis.
 
 == render('/partials/related-info.*', links: date_info)
