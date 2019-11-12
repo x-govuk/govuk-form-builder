@@ -14,9 +14,6 @@ This gem provides a easy-to-use form builder that generates forms that are
 fully-compliant with version 3.3.0 of the [GOV.UK Design System](https://design-system.service.gov.uk/),
 minimising the amount of markup you need to write.
 
-The latest version of this gem that supports GOV.UK Design System version 2 is
-[0.7.10](https://github.com/DFE-Digital/govuk_design_system_formbuilder/releases/tag/v0.7.10).
-
 In addition to the basic markup, the more-advanced functionality of the Design
 System is exposed via the API. Adding [JavaScript-enhanced word count
 checking](https://govuk-form-builder.netlify.com/form-elements/text-area/)
@@ -108,7 +105,7 @@ Now we can get started!
   = f.govuk_submit 'Away we go!'
 ```
 
-## Developing and running the tests 🧑🏼‍🔬
+## Developing and running the tests 👨🏻‍🏭
 
 The form builder is covered by RSpec, to run all the tests first ensure that
 all of the development and testing prerequisite gems are installed. At the root
