@@ -120,7 +120,7 @@ Now, if everything was successful, run RSpec:
 bundle exec rspec -fd
 ```
 
-## Contributing 🎁
+## Contributing 📦
 
 Bug reports and feature requests are most welcome, please raise an issue or
 submit a pull request.
