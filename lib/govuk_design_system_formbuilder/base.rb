@@ -94,7 +94,9 @@ module GOVUKDesignSystemFormBuilder
     end
 
     def localisation_key(context)
-      ['helpers', context, @object_name, @attribute_name].compact.join('.')
+      return nil unless @object_name.present? && @attribute_name.present?
+
+      ['helpers', context, @object_name, @attribute_name].join('.')
     end
 
     # Builds the values used for HTML id attributes throughout the builder
