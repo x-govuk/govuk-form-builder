@@ -4,10 +4,12 @@ module GOVUKDesignSystemFormBuilder
       LEGEND_DEFAULTS = { text: nil, tag: 'h1', size: 'm' }.freeze
       LEGEND_SIZES = %w(xl l m s).freeze
 
-      def initialize(builder, legend: {}, described_by: nil)
-        @builder = builder
-        @legend = LEGEND_DEFAULTS.merge(legend)
-        @described_by = described_by(described_by)
+      def initialize(builder, object_name = nil, attribute_name = nil, legend: {}, described_by: nil)
+        super(builder, object_name, attribute_name)
+
+        @legend         = LEGEND_DEFAULTS.merge(legend)
+        @described_by   = described_by(described_by)
+        @attribute_name = attribute_name
       end
 
       def html
