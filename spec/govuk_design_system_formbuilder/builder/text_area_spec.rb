@@ -34,6 +34,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     let(:error_identifier) { 'person-cv-error' }
   end
 
+  it_behaves_like 'a field that supports setting the label via localisation'
+  it_behaves_like 'a field that supports setting the hint via localisation'
+
   specify 'should have the correct classes' do
     expect(subject).to have_tag('textarea', with: { class: 'govuk-textarea' })
   end
