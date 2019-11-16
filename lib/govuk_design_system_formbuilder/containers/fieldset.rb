@@ -19,11 +19,15 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def build_legend
-        if @legend.dig(:text).present?
+        if legend_text.present?
           content_tag('legend', class: legend_classes) do
-            tag.send(@legend.dig(:tag), @legend.dig(:text), class: legend_heading_classes)
+            tag.send(@legend.dig(:tag), legend_text, class: legend_heading_classes)
           end
         end
+      end
+
+      def legend_text
+        [@legend.dig(:text), localised_text('fieldset')].compact.first
       end
 
       def fieldset_classes
