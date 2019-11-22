@@ -68,6 +68,10 @@ module GOVUKDesignSystemFormBuilder
       build_id('supplemental')
     end
 
+    def limit_id
+      build_id('limit')
+    end
+
     def has_errors?
       @builder.object.errors.any? &&
         @builder.object.errors.messages.dig(@attribute_name).present?
