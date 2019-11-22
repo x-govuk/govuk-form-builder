@@ -68,8 +68,12 @@ module GOVUKDesignSystemFormBuilder
       build_id('supplemental')
     end
 
+    # Provides an id for use by the textual description of character and word limits.
+    #
+    # @note In order for the GOV.UK Frontend JavaScript to pick up this associated field
+    #   it has to have the same id as the text area with the additional suffix of '-info'
     def limit_id
-      build_id('limit')
+      [field_id(link_errors: true), 'info'].join('-')
     end
 
     def has_errors?
