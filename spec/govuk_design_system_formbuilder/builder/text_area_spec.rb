@@ -38,6 +38,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     expect(subject).to have_tag('textarea', with: { class: 'govuk-textarea' })
   end
 
+  specify 'should be no character count description when no limit is specified' do
+    expect(subject).not_to have_tag('span', with: { class: 'govuk-character-count__message' })
+  end
+
   describe 'limits' do
     context 'max words' do
       let(:max_words) { 20 }
@@ -56,6 +60,17 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       specify 'should add govuk-js-character-count class to the textarea' do
         expect(subject).to have_tag('textarea', with: { class: 'govuk-js-character-count' })
+      end
+
+      context 'limit description' do
+        let(:message_selector) { { with: { class: 'govuk-character-count__message' } } }
+        specify 'should add a character count description' do
+          expect(subject).to have_tag('span', **message_selector)
+        end
+
+        specify 'the description should contain the correct limit and count type' do
+          expect(subject).to have_tag('span', **message_selector, text: /#{max_words} words/)
+        end
       end
     end
 
@@ -76,6 +91,17 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       specify 'should add govuk-js-character-count class to the textarea' do
         expect(subject).to have_tag('textarea', with: { class: 'govuk-js-character-count' })
+      end
+
+      context 'limit description' do
+        let(:message_selector) { { with: { class: 'govuk-character-count__message' } } }
+        specify 'should add a character count description' do
+          expect(subject).to have_tag('span', **message_selector)
+        end
+
+        specify 'the description should contain the correct limit and count type' do
+          expect(subject).to have_tag('span', **message_selector, text: /#{max_chars} characters/)
+        end
       end
     end
 
