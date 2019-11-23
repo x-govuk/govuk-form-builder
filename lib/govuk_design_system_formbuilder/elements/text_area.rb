@@ -23,14 +23,11 @@ module GOVUKDesignSystemFormBuilder
                   id: field_id(link_errors: true),
                   class: govuk_textarea_classes,
                   aria: {
-                    describedby: described_by(
-                      hint_id,
-                      error_id,
-                      supplemental_id
-                    )
+                    describedby: described_by(hint_id, error_id, supplemental_id, limit_description_id)
                   },
                   **@extra_args.merge(rows: @rows)
-                )
+                ),
+                limit_description
               ].flatten.compact
             )
           end
@@ -48,6 +45,28 @@ module GOVUKDesignSystemFormBuilder
 
       def limit?
         @max_words || @max_chars
+      end
+
+      def limit_description
+        return nil unless limit?
+
+        content_tag('span', id: limit_id, class: %w(govuk-hint govuk-character-count__message), aria: { live: 'polite' }) do
+          "You can enter up to #{limit_quantity} #{limit_type}"
+        end
+      end
+
+      def limit_quantity
+        @max_words || @max_chars
+      end
+
+      def limit_type
+        @max_words.present? ? 'words' : 'characters'
+      end
+
+      def limit_description_id
+        return nil unless limit?
+
+        limit_id
       end
     end
   end
