@@ -1,0 +1,38 @@
+---
+title: Localisation
+---
+
+h1.govuk-heading-xl Localisation
+
+p.govuk-body
+  | The simplest way of adding textual information like labels and hints to
+    forms is to provide strings as arguments to the form helpers.
+
+.code-sample
+  pre
+    code.highlight.language-ruby
+      | = f.govuk_text_field :name, label: { text: "Your full name" }
+
+p.govuk-body
+  | On larger, more-complex projects, copy is spread throughout the application
+    and often duplicated, making it difficult for content designers to make
+    changes.
+
+p.govuk-body
+  | Many teams approach this problem by making use of
+    #{link_to("Rails' excellent localisation functionality", rails_localisation_link).html_safe},
+    allowing text to be stored in locale dictionaries. This allows editors to
+    make changes without the risk of breaking templates and having to learn
+    templating languages and hunt down content.
+
+section
+
+  == render('/partials/example-fig.*',
+    caption: "Populating label and hint text from the localisation data",
+    localisation: favourite_kind_of_hat_locale,
+    code: favourite_kind_of_hat) do
+
+    p.govuk-body
+      | Note that despite the <code>text</code> attribute being omitted from
+        the label options hash, the other display and formatting parameters
+        can be supplied and work in the normal manner.

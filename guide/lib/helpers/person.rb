@@ -91,4 +91,9 @@ class Person
   attr_accessor(
     :profile_photo
   )
+
+  # localisation
+  attr_accessor(
+    :favourite_kind_of_hat
+  )
 end
