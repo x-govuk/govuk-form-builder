@@ -9,7 +9,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        return nil unless @content.present?
+        return nil if @content.blank?
 
         content_tag('div', id: supplemental_id) do
           @content

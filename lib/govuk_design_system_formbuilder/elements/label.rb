@@ -37,12 +37,12 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def label_text(option_text, hidden)
-        text = [option_text, @value, @attribute_name.capitalize].compact.first
+        text = [option_text, @value, @attribute_name.capitalize].compact.first.to_s
 
         if hidden
           tag.span(text, class: %w(govuk-visually-hidden))
         else
-          raw(text)
+          text
         end
       end
 
