@@ -47,7 +47,5 @@ module GOVUKDesignSystemFormBuilder
   end
 
   # Disable Rails' div.field_with_error wrapper
-  ActionView::Base.field_error_proc = Proc.new do |html_tag, _instance|
-    html_tag.html_safe
-  end
+  ActionView::Base.field_error_proc = ->(html_tag, _instance) { html_tag }
 end

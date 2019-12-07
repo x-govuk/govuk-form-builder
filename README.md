@@ -7,15 +7,11 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/fde73b5dc9476197281b/test_coverage)](https://codeclimate.com/github/DFE-Digital/govuk_design_system_formbuilder/test_coverage)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=DFE-Digital/govuk_design_system_formbuilder)](https://dependabot.com)
 [![GitHub license](https://img.shields.io/github/license/DFE-Digital/govuk_design_system_formbuilder)](https://github.com/DFE-Digital/govuk_design_system_formbuilder/blob/master/LICENSE)
-[![GOV.UK Design System Version 2](https://img.shields.io/github/v/release/dfe-digital/govuk_design_system_formbuilder?label=govuk+design+system+v2)](https://github.com/DFE-Digital/govuk_design_system_formbuilder/releases/tag/v0.7.10)
-[![GOV.UK Design System Version 3](https://img.shields.io/github/v/release/dfe-digital/govuk_design_system_formbuilder?include_prereleases&label=govuk+design+system+v3)](https://github.com/DFE-Digital/govuk_design_system_formbuilder)
+[![GOV.UK Design System Version](https://img.shields.io/badge/GOV.UK%20Design%20System-3.4.0-brightgreen)](https://design-system.service.gov.uk)
 
 This gem provides a easy-to-use form builder that generates forms that are
-fully-compliant with version 3.3.0 of the [GOV.UK Design System](https://design-system.service.gov.uk/),
+fully-compliant with version 3.4.0 of the [GOV.UK Design System](https://design-system.service.gov.uk/),
 minimising the amount of markup you need to write.
-
-The latest version of this gem that supports GOV.UK Design System version 2 is
-[0.7.10](https://github.com/DFE-Digital/govuk_design_system_formbuilder/releases/tag/v0.7.10).
 
 In addition to the basic markup, the more-advanced functionality of the Design
 System is exposed via the API. Adding [JavaScript-enhanced word count
@@ -108,7 +104,7 @@ Now we can get started!
   = f.govuk_submit 'Away we go!'
 ```
 
-## Developing and running the tests 🧑🏼‍🔬
+## Developing and running the tests 👨🏻‍🏭
 
 The form builder is covered by RSpec, to run all the tests first ensure that
 all of the development and testing prerequisite gems are installed. At the root
@@ -124,7 +120,7 @@ Now, if everything was successful, run RSpec:
 bundle exec rspec -fd
 ```
 
-## Contributing 🎁
+## Contributing 📦
 
 Bug reports and feature requests are most welcome, please raise an issue or
 submit a pull request.
