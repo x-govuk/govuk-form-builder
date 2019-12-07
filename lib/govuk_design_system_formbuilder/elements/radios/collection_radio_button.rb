@@ -2,6 +2,8 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     module Radios
       class CollectionRadioButton < Base
+        include Traits::CollectionItem
+
         # @param link_errors [Boolean] used to control the id generated for radio buttons. The
         #   error summary requires that the id of the first radio is linked-to from the corresponding
         #   error message. As when the summary is built what happens later in the form is unknown, we
@@ -9,9 +11,9 @@ module GOVUKDesignSystemFormBuilder
         def initialize(builder, object_name, attribute_name, item, value_method:, text_method:, hint_method:, link_errors: false, bold_labels:)
           super(builder, object_name, attribute_name)
           @item        = item
-          @value       = item.send(value_method)
-          @text        = item.send(text_method)
-          @hint_text   = item.send(hint_method) if hint_method.present?
+          @value       = retrieve(item, value_method)
+          @label_text  = retrieve(item, text_method)
+          @hint_text   = retrieve(item, hint_method)
           @link_errors = link_errors
           @bold_labels = bold_labels
         end
@@ -41,7 +43,7 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def label_element
-          @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, text: @text, value: @value, radio: true, size: label_size, link_errors: @link_errors)
+          @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, text: @label_text, value: @value, radio: true, size: label_size, link_errors: @link_errors)
         end
 
         def label_size
