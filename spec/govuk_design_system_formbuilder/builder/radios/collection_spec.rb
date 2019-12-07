@@ -87,6 +87,11 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
 
+      it_behaves_like 'a field that allows the label to be localised via a proc' do
+        let(:i18n_proc) { ->(item) { I18n.t("colours.#{item.name.downcase}") } }
+        let(:args) { [method, attribute, colours, :id, i18n_proc] }
+      end
+
       context 'radio button hints' do
         let(:colours_with_descriptions) { colours.select { |c| c.description.present? } }
         let(:colours_without_descriptions) { colours.reject { |c| c.description.present? } }
@@ -116,6 +121,11 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
         specify 'all labels should be bold when hints are enabled' do
           expect(subject).to have_tag('label', with: { class: 'govuk-label--s' }, count: colours.size)
+        end
+
+        it_behaves_like 'a field that allows the hint to be localised via a proc' do
+          let(:i18n_proc) { ->(item) { I18n.t("colours.#{item.name.downcase}") } }
+          let(:args) { [method, attribute, colours, :id, :name, i18n_proc] }
         end
       end
 

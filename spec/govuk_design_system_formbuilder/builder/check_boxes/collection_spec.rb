@@ -121,6 +121,12 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           end
         end
       end
+
+      it_behaves_like 'a field that allows the hint to be localised via a proc' do
+        let(:attribute) { :favourite_colour }
+        let(:i18n_proc) { ->(item) { I18n.t("colours.#{item.name.downcase}") } }
+        let(:args) { [method, attribute, colours, :id, :name].push(i18n_proc) }
+      end
     end
   end
 end
