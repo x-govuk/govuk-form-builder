@@ -44,5 +44,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency("nanoc", "~> 4.11")
   s.add_development_dependency("rouge", "~> 3.12.0")
   s.add_development_dependency("sassc", "~> 2.2.1")
+  s.add_development_dependency("sass")
   s.add_development_dependency("slim", "~> 4.0.1")
 end
