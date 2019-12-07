@@ -47,7 +47,7 @@ module GOVUKDesignSystemFormBuilder
     end
 
     def hint_id
-      return nil unless @hint_text.present?
+      return nil if @hint_text.blank?
 
       build_id('hint')
     end
@@ -63,9 +63,17 @@ module GOVUKDesignSystemFormBuilder
     end
 
     def supplemental_id
-      return nil unless @block_content.present?
+      return nil if @block_content.blank?
 
       build_id('supplemental')
+    end
+
+    # Provides an id for use by the textual description of character and word limits.
+    #
+    # @note In order for the GOV.UK Frontend JavaScript to pick up this associated field
+    #   it has to have the same id as the text area with the additional suffix of '-info'
+    def limit_id
+      [field_id(link_errors: true), 'info'].join('-')
     end
 
     def has_errors?
