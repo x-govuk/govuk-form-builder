@@ -56,5 +56,41 @@ module Examples
               label: { text: 'Which department did you work in most recently?' }
       SNIPPET
     end
+
+    def radio_field_with_proc_labels_and_hints_locale
+      <<~LOCALE
+        laptops:
+          names:
+            thinkpad: Lenovo ThinkPad X1 Carbon
+            macbook_pro: MacBook Pro
+            xps: Dell XPS
+            zenbook: Asus ZenBook
+          descriptions:
+            macbook_pro: |-
+              The MacBook Pro is a line of Macintosh portable computers
+              introduced in January 2006, by Apple Inc.
+            thinkpad: |-
+              ThinkPad, known for their minimalist, black and boxy design, is a
+              line of business-oriented laptops designed, developed, marketed,
+              and sold by Lenovo (formerly IBM)
+            zenbook: |-
+              Zenbook are a family of ultrabooks – low-bulk laptop computers –
+              produced by Asus.
+            xps: |-
+              Dell XPS 'Xtreme Performance System' is a line of high
+              performance computers manufactured by Dell.
+      LOCALE
+    end
+
+    def radio_field_with_proc_labels_and_hints
+      <<~SNIPPET
+        = f.govuk_collection_radio_buttons :laptop,
+          laptops,
+          ->(option) { option },
+          ->(option) { I18n.t('laptops.names.' + option.to_s) },
+          ->(option) { I18n.t('laptops.descriptions.' + option.to_s) },
+          legend: { text: "Which laptop would you like to use?" }
+      SNIPPET
+    end
   end
 end
