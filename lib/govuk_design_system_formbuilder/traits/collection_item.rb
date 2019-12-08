@@ -4,12 +4,12 @@ module GOVUKDesignSystemFormBuilder
       module CollectionItem
       private
 
-        def retrieve(item, text_method)
-          case text_method
+        def retrieve(item, method)
+          case method
           when Symbol, String
-            item.send(text_method)
+            item.send(method)
           when Proc
-            text_method.call(item)
+            method.call(item)
           end
         end
       end
