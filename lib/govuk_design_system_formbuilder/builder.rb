@@ -201,9 +201,12 @@ module GOVUKDesignSystemFormBuilder
     #
     # @param attribute_name [Symbol] The name of the attribute
     # @param collection [Enumerable<Object>] Options to be added to the +select+ element
-    # @param value_method [Symbol] The method called against each member of the collection to provide the value
-    # @param text_method [Symbol] The method called against each member of the collection to provide the text
-    # @param hint_method [Symbol] The method called against each member of the collection to provide the hint text
+    # @param value_method [Symbol, Proc] The method called against each member of the collection to provide the value.
+    #   When a +Proc+ is provided it must take a single argument that is a single member of the collection
+    # @param text_method [Symbol, Proc] The method called against each member of the collection to provide the label text.
+    #   When a +Proc+ is provided it must take a single argument that is a single member of the collection
+    # @param hint_method [Symbol, Proc] The method called against each member of the collection to provide the hint text.
+    #   When a +Proc+ is provided it must take a single argument that is a single member of the collection
     # @param hint_text [String] The content of the fieldset hint. No hint will be injected if left +nil+
     # @param legend [Hash] options for configuring the legend
     # @param inline [Boolean] controls whether the radio buttons are displayed inline or not
@@ -214,7 +217,7 @@ module GOVUKDesignSystemFormBuilder
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+, defaults to +h1+
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
-    # @example A collection of radio buttons for favourite colours
+    # @example A collection of radio buttons for favourite colours, labels capitalised via a proc
     #
     #  @colours = [
     #    OpenStruct.new(id: 'red', name: 'Red', description: 'Roses are red'),
@@ -224,7 +227,7 @@ module GOVUKDesignSystemFormBuilder
     #  = f.govuk_collection_radio_buttons :favourite_colour,
     #    @colours,
     #    :id,
-    #    :name,
+    #    ->(option) { option.name.upcase },
     #    :description,
     #    legend: { text: 'Pick your favourite colour', size: 'm' },
     #    hint_text: 'If you cannot find the exact match choose something close',
@@ -316,8 +319,9 @@ module GOVUKDesignSystemFormBuilder
     # @param attribute_name [Symbol] The name of the attribute
     # @param collection [Enumerable<Object>] Options to be added to the +select+ element
     # @param value_method [Symbol] The method called against each member of the collection to provide the value
-    # @param text_method [Symbol] The method called against each member of the collection to provide the text
-    # @param hint_method [Symbol] The method called against each member of the collection to provide the hint text
+    # @param text_method [Symbol] The method called against each member of the collection to provide the label text
+    # @param hint_method [Symbol, Proc] The method called against each member of the collection to provide the hint text.
+    #   When a +Proc+ is provided it must take a single argument that is a single member of the collection
     # @param hint_text [String] The content of the fieldset hint. No hint will be injected if left +nil+
     # @param small [Boolean] controls whether small check boxes are used instead of regular-sized ones
     # @param legend [Hash] options for configuring the legend
