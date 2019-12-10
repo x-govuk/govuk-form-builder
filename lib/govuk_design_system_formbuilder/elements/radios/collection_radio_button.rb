@@ -2,6 +2,7 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     module Radios
       class CollectionRadioButton < Base
+        include Traits::Hint
         include Traits::CollectionItem
 
         # @param link_errors [Boolean] used to control the id generated for radio buttons. The

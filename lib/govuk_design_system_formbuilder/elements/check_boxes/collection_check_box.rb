@@ -3,6 +3,7 @@ module GOVUKDesignSystemFormBuilder
     module CheckBoxes
       class CollectionCheckBox < GOVUKDesignSystemFormBuilder::Base
         include Traits::CollectionItem
+        include Traits::Hint
 
         def initialize(builder, object_name, attribute_name, checkbox, hint_method = nil, link_errors: false)
           super(builder, object_name, attribute_name)
