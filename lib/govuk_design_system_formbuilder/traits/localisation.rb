@@ -1,6 +1,8 @@
 module GOVUKDesignSystemFormBuilder
   module Traits
     module Localisation
+    private
+
       def localised_text(context)
         key = localisation_key(context)
 
