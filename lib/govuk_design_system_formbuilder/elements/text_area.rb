@@ -5,6 +5,7 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Hint
       include Traits::Label
       include Traits::Supplemental
+
       def initialize(builder, object_name, attribute_name, hint_text:, label:, rows:, max_words:, max_chars:, threshold:, **extra_args, &block)
         super(builder, object_name, attribute_name, &block)
         @label      = label

@@ -1,6 +1,6 @@
 module GOVUKDesignSystemFormBuilder
   module Containers
-    class RadioButtonsFieldset < GOVUKDesignSystemFormBuilder::Base
+    class RadioButtonsFieldset < Base
       include Traits::Hint
       include Traits::Error
 

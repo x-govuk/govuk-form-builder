@@ -1,6 +1,6 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
-    class Submit < GOVUKDesignSystemFormBuilder::Base
+    class Submit < Base
       def initialize(builder, text, warning:, secondary:, prevent_double_click:, validate:, &block)
         fail ArgumentError, 'buttons can be warning or secondary' if warning && secondary
 

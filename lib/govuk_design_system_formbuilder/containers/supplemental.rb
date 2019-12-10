@@ -1,6 +1,6 @@
 module GOVUKDesignSystemFormBuilder
   module Containers
-    class Supplemental < GOVUKDesignSystemFormBuilder::Base
+    class Supplemental < Base
       def initialize(builder, object_name, attribute_name, content)
         @builder        = builder
         @object_name    = object_name

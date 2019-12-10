@@ -1,7 +1,8 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
-    class ErrorSummary < GOVUKDesignSystemFormBuilder::Base
+    class ErrorSummary < Base
       include Traits::Error
+
       def initialize(builder, object_name, title)
         @builder = builder
         @object_name = object_name

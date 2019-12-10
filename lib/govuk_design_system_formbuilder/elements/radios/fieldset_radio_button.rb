@@ -4,6 +4,7 @@ module GOVUKDesignSystemFormBuilder
       class FieldsetRadioButton < Base
         include Traits::Hint
         include Traits::Conditional
+
         def initialize(builder, object_name, attribute_name, value, label:, hint_text:, link_errors:, &block)
           super(builder, object_name, attribute_name)
 
