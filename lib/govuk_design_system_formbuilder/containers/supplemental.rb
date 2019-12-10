@@ -2,10 +2,9 @@ module GOVUKDesignSystemFormBuilder
   module Containers
     class Supplemental < Base
       def initialize(builder, object_name, attribute_name, content)
-        @builder        = builder
-        @object_name    = object_name
-        @attribute_name = attribute_name
-        @content        = content
+        super(builder, object_name, attribute_name)
+
+        @content = content
       end
 
       def html
