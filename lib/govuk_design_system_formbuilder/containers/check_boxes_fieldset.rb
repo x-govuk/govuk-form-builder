@@ -1,6 +1,8 @@
 module GOVUKDesignSystemFormBuilder
   module Containers
     class CheckBoxesFieldset < GOVUKDesignSystemFormBuilder::Base
+      include Traits::Error
+      include Traits::Hint
       def initialize(builder, object_name, attribute_name, hint_text:, legend:, small:, &block)
         super(builder, object_name, attribute_name, &block)
 

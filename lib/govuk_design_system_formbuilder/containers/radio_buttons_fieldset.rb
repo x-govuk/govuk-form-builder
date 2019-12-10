@@ -1,6 +1,9 @@
 module GOVUKDesignSystemFormBuilder
   module Containers
     class RadioButtonsFieldset < GOVUKDesignSystemFormBuilder::Base
+      include Traits::Hint
+      include Traits::Error
+
       def initialize(builder, object_name, attribute_name, hint_text:, legend:, inline:, small:, &block)
         super(builder, object_name, attribute_name)
 
