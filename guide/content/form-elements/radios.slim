@@ -92,4 +92,23 @@ section
         Any content passed into <code>#govuk_radio_button</code> as a block will
         be revealed when the radio button is selected.
 
+  == render('/partials/example-fig.*',
+    caption: "Populating values, labels and hints with procs",
+    localisation: radio_field_with_proc_labels_and_hints_locale,
+    code: radio_field_with_proc_labels_and_hints,
+    sample_data: laptops_data_raw,
+    display_data: true,
+    hide_html_output: true) do
+
+    p.govuk-body
+      | It's often convenient to hold label and hint text in locale or
+        configuration files. This approach allows content changes to be made in
+        the repository rather than modifying via data migrations.
+
+    p.govuk-body
+      | To support this behaviour the form builder allows #{link_to('Ruby Procs', ruby_proc_link).html_safe}
+        to be supplied for the <code>:value_method</code>, <code>:text_method</code> and
+        <code>:hint_method</code> parameters. They each take a single argument, <code>item</code>,
+        which is object representing the radio button.
+
 == render('/partials/related-info.*', links: radios_info)
