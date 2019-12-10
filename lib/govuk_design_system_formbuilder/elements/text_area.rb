@@ -8,6 +8,7 @@ module GOVUKDesignSystemFormBuilder
 
       def initialize(builder, object_name, attribute_name, hint_text:, label:, rows:, max_words:, max_chars:, threshold:, **extra_args, &block)
         super(builder, object_name, attribute_name, &block)
+
         @label      = label
         @hint_text  = hint_text
         @extra_args = extra_args
