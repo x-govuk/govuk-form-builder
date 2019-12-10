@@ -7,6 +7,7 @@ module GOVUKDesignSystemFormBuilder
 
         def initialize(builder, object_name, attribute_name, checkbox, hint_method = nil, link_errors: false)
           super(builder, object_name, attribute_name)
+
           @checkbox  = checkbox
           @item      = checkbox.object
           @value     = checkbox.value

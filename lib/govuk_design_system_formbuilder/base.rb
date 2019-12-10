@@ -11,6 +11,8 @@ module GOVUKDesignSystemFormBuilder
       @block_content  = capture { block.call } if block_given?
     end
 
+  private
+
     # returns the id value used for the input
     #
     # @note field_id is overridden so that the error summary can link to the
@@ -40,8 +42,6 @@ module GOVUKDesignSystemFormBuilder
     def described_by(*ids)
       ids.flatten.compact.join(' ').presence
     end
-
-  private
 
     # Builds the values used for HTML id attributes throughout the builder
     #
