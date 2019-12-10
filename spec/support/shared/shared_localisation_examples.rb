@@ -94,3 +94,49 @@ shared_examples 'a field that supports setting the legend via localisation' do
     end
   end
 end
+
+shared_examples 'a field that allows the label to be localised via a proc' do
+  let(:locale) { :de }
+  let(:localisations) do
+    YAML.load_file('spec/support/locales/colours.de.yaml')
+  end
+
+  context 'localising collection items using procs' do
+    subject { builder.send(*args) }
+
+    specify 'labels should be present and correctly-localised' do
+      with_localisations({ locale => localisations }, locale: locale) do
+        colours.each do |c|
+          expect(subject).to have_tag(
+            'label',
+            text: localisations.dig("colours", c.name.downcase),
+            with: { class: 'govuk-label' }
+          )
+        end
+      end
+    end
+  end
+end
+
+shared_examples 'a field that allows the hint to be localised via a proc' do
+  let(:locale) { :de }
+  let(:localisations) do
+    YAML.load_file('spec/support/locales/colours.de.yaml')
+  end
+
+  context 'localising collection items using procs' do
+    subject { builder.send(*args) }
+
+    specify 'hints should be present and correctly-localised' do
+      with_localisations({ locale => localisations }, locale: locale) do
+        colours.each do |c|
+          expect(subject).to have_tag(
+            'span',
+            text: localisations.dig("colours", c.name.downcase),
+            with: { class: 'govuk-hint' }
+          )
+        end
+      end
+    end
+  end
+end

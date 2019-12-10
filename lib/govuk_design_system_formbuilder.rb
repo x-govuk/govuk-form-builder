@@ -2,6 +2,8 @@ require 'govuk_design_system_formbuilder/version'
 require 'govuk_design_system_formbuilder/builder'
 require 'govuk_design_system_formbuilder/base'
 
+require 'govuk_design_system_formbuilder/traits/collection_item'
+
 require 'govuk_design_system_formbuilder/elements/hint'
 require 'govuk_design_system_formbuilder/elements/label'
 require 'govuk_design_system_formbuilder/elements/date'

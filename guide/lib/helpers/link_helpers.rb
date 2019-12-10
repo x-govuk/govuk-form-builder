@@ -65,5 +65,9 @@ module Helpers
     def rails_localisation_link
       'https://guides.rubyonrails.org/i18n.html'
     end
+
+    def ruby_proc_link
+      'https://ruby-doc.org/core-2.6.5/Proc.html'
+    end
   end
 end
