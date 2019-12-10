@@ -37,6 +37,9 @@ shared_examples 'a regular input' do |method_identifier, field_type|
     let(:error_identifier) { 'person-name-error' }
   end
 
+  it_behaves_like 'a field that supports setting the label via localisation'
+  it_behaves_like 'a field that supports setting the hint via localisation'
+
   context 'extra attributes' do
     let(:regular_args) { { label: { text: 'What should we call you?' } } }
 

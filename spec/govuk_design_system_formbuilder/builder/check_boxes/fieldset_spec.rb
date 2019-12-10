@@ -25,6 +25,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:error_identifier) { 'person-projects-error' }
     end
 
+    it_behaves_like 'a field that supports setting the hint via localisation'
+    it_behaves_like 'a field that supports setting the legend via localisation'
+
     context 'when no block is supplied' do
       subject { builder.send(*args) }
       specify { expect { subject }.to raise_error(NoMethodError, /undefined method.*call/) }

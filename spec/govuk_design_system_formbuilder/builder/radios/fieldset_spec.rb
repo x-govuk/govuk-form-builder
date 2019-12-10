@@ -29,6 +29,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:error_identifier) { 'person-favourite-colour-error' }
     end
 
+    it_behaves_like 'a field that supports setting the hint via localisation'
+    it_behaves_like 'a field that supports setting the legend via localisation'
+
     context 'when a block containing radio buttons is supplied' do
       specify 'output should be a form group containing a form group and fieldset' do
         expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|

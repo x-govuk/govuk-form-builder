@@ -58,6 +58,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
+    it_behaves_like 'a field that supports setting the legend via localisation'
+    it_behaves_like 'a field that supports setting the hint via localisation'
+
     specify 'should output a form group with fieldset, date group and 3 inputs and labels' do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
         expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|

@@ -18,7 +18,7 @@ module GOVUKDesignSystemFormBuilder
 
         def html
           Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
-            Containers::Fieldset.new(@builder, legend: @legend, described_by: [error_id, hint_id, supplemental_id]).html do
+            Containers::Fieldset.new(@builder, @object_name, @attribute_name, legend: @legend, described_by: [error_id, hint_id, supplemental_id]).html do
               safe_join(
                 [
                   hint_element.html,
