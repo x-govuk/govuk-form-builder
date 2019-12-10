@@ -61,5 +61,9 @@ module Helpers
     def version_supporting_design_system_v2
       'https://rubygems.org/gems/govuk_design_system_formbuilder/versions/0.7.10'
     end
+
+    def rails_localisation_link
+      'https://guides.rubyonrails.org/i18n.html'
+    end
   end
 end

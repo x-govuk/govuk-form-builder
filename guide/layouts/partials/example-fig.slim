@@ -9,6 +9,16 @@ figure
 
   - display_data = defined?(hide_data) && hide_data
 
+  - if defined?(localisation)
+    - I18n.backend.store_translations(:en, YAML.load(localisation))
+
+    section
+      h4.govuk-heading-s.example-subheading.locale Localisation data
+
+      pre.example-input
+        code.highlight.language-yaml
+          | #{localisation}
+
   - if defined?(sample_data) && !display_data
     section
       h4.govuk-heading-s.example-subheading.data Data
@@ -22,8 +32,6 @@ figure
     pre.example-input
       code.highlight.language-slim
         | #{code}
-
-
 
   section
     - display_errors = defined?(show_errors) && show_errors
