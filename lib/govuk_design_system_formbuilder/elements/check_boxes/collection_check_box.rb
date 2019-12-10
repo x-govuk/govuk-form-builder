@@ -1,7 +1,7 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     module CheckBoxes
-      class CollectionCheckBox < GOVUKDesignSystemFormBuilder::Base
+      class CollectionCheckBox < Base
         include Traits::CollectionItem
         include Traits::Hint
 

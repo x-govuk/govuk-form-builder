@@ -1,10 +1,11 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
-    class Select < GOVUKDesignSystemFormBuilder::Base
+    class Select < Base
       include Traits::Error
       include Traits::Label
       include Traits::Hint
       include Traits::Supplemental
+
       def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, options: {}, html_options: {}, hint_text:, label:, &block)
         super(builder, object_name, attribute_name, &block)
 

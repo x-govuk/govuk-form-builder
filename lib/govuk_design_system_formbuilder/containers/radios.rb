@@ -1,6 +1,8 @@
 module GOVUKDesignSystemFormBuilder
   module Containers
-    class Radios < GOVUKDesignSystemFormBuilder::Base
+    class Radios < Base
+      include Traits::Hint
+
       def initialize(builder, inline:, small:)
         @builder = builder
         @inline  = inline

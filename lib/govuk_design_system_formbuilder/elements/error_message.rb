@@ -1,7 +1,8 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
-    class ErrorMessage < GOVUKDesignSystemFormBuilder::Base
+    class ErrorMessage < Base
       include Traits::Error
+
       def initialize(builder, object_name, attribute_name)
         super(builder, object_name, attribute_name)
       end
