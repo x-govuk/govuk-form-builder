@@ -1,6 +1,10 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
-    class Date < GOVUKDesignSystemFormBuilder::Base
+    class Date < Base
+      include Traits::Error
+      include Traits::Hint
+      include Traits::Supplemental
+
       SEGMENTS = { day: '3i', month: '2i', year: '1i' }.freeze
 
       def initialize(builder, object_name, attribute_name, legend:, hint_text:, date_of_birth: false, omit_day:, &block)

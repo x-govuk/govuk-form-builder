@@ -1,6 +1,6 @@
 module GOVUKDesignSystemFormBuilder
   module Containers
-    class Fieldset < GOVUKDesignSystemFormBuilder::Base
+    class Fieldset < Base
       LEGEND_DEFAULTS = { text: nil, tag: 'h1', size: 'm' }.freeze
       LEGEND_SIZES = %w(xl l m s).freeze
 

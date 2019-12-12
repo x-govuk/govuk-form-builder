@@ -2,6 +2,11 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     module Inputs
       class Base < GOVUKDesignSystemFormBuilder::Base
+        include Traits::Error
+        include Traits::Hint
+        include Traits::Label
+        include Traits::Supplemental
+
         def initialize(builder, object_name, attribute_name, hint_text:, label:, width:, **extra_args, &block)
           super(builder, object_name, attribute_name, &block)
 
