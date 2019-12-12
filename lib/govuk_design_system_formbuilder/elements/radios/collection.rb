@@ -1,7 +1,11 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     module Radios
-      class Collection < GOVUKDesignSystemFormBuilder::Base
+      class Collection < Base
+        include Traits::Error
+        include Traits::Hint
+        include Traits::Supplemental
+
         def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint_method:, hint_text:, legend:, inline:, small:, bold_labels:, &block)
           super(builder, object_name, attribute_name, &block)
 

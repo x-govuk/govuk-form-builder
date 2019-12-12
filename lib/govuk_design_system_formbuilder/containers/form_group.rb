@@ -1,6 +1,6 @@
 module GOVUKDesignSystemFormBuilder
   module Containers
-    class FormGroup < GOVUKDesignSystemFormBuilder::Base
+    class FormGroup < Base
       def initialize(builder, object_name, attribute_name)
         super(builder, object_name, attribute_name)
       end

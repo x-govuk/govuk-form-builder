@@ -1,7 +1,10 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     module CheckBoxes
-      class FieldsetCheckBox < GOVUKDesignSystemFormBuilder::Base
+      class FieldsetCheckBox < Base
+        include Traits::Hint
+        include Traits::Conditional
+
         def initialize(builder, object_name, attribute_name, value, label:, hint_text:, link_errors:, multiple:, &block)
           super(builder, object_name, attribute_name)
 

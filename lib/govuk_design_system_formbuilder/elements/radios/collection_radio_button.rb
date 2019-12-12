@@ -2,6 +2,7 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     module Radios
       class CollectionRadioButton < Base
+        include Traits::Hint
         include Traits::CollectionItem
 
         # @param link_errors [Boolean] used to control the id generated for radio buttons. The
@@ -10,6 +11,7 @@ module GOVUKDesignSystemFormBuilder
         #   need to control this to ensure the link is generated correctly
         def initialize(builder, object_name, attribute_name, item, value_method:, text_method:, hint_method:, link_errors: false, bold_labels:)
           super(builder, object_name, attribute_name)
+
           @item        = item
           @value       = retrieve(item, value_method)
           @label_text  = retrieve(item, text_method)

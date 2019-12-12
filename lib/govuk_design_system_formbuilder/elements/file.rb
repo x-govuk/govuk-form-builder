@@ -1,6 +1,11 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
-    class File < GOVUKDesignSystemFormBuilder::Base
+    class File < Base
+      include Traits::Error
+      include Traits::Hint
+      include Traits::Label
+      include Traits::Supplemental
+
       def initialize(builder, object_name, attribute_name, hint_text:, label:, **extra_args, &block)
         super(builder, object_name, attribute_name, &block)
 
