@@ -3,6 +3,7 @@ module GOVUKDesignSystemFormBuilder
     include Traits::Localisation
 
     delegate :capture, :content_tag, :safe_join, :tag, :raw, :link_to, to: :@builder
+    delegate :config, to: GOVUKDesignSystemFormBuilder
 
     def initialize(builder, object_name, attribute_name, &block)
       @builder        = builder
