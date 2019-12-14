@@ -1,13 +1,12 @@
 module GOVUKDesignSystemFormBuilder
   module Containers
     class Fieldset < Base
-      LEGEND_DEFAULTS = { text: nil, tag: 'h1', size: 'm' }.freeze
       LEGEND_SIZES = %w(xl l m s).freeze
 
       def initialize(builder, object_name = nil, attribute_name = nil, legend: {}, described_by: nil)
         super(builder, object_name, attribute_name)
 
-        @legend         = LEGEND_DEFAULTS.merge(legend)
+        @legend         = legend_defaults.merge(legend)
         @described_by   = described_by(described_by)
         @attribute_name = attribute_name
       end
@@ -19,6 +18,14 @@ module GOVUKDesignSystemFormBuilder
       end
 
     private
+
+      def legend_defaults
+        {
+          text: nil,
+          tag:  config.default_legend_tag,
+          size: config.default_legend_size
+        }
+      end
 
       def build_legend
         if legend_text.present?
