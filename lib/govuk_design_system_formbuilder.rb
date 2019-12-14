@@ -1,3 +1,5 @@
+require 'active_support/configurable'
+
 require 'govuk_design_system_formbuilder/traits/collection_item'
 require 'govuk_design_system_formbuilder/traits/conditional'
 require 'govuk_design_system_formbuilder/traits/error'
@@ -48,6 +50,30 @@ require 'govuk_design_system_formbuilder/containers/character_count'
 require 'govuk_design_system_formbuilder/containers/supplemental'
 
 module GOVUKDesignSystemFormBuilder
+  include ActiveSupport::Configurable
+
+  DEFAULTS = {
+    default_legend_size: 'm',
+    default_legend_tag: 'h1'
+  }.freeze
+
+  config_accessor(:default_legend_size) { DEFAULTS[:default_legend_size] }
+  config_accessor(:default_legend_tag)  { DEFAULTS[:default_legend_tag] }
+
+  class << self
+    def configure
+      yield(config)
+    end
+
+    # Resets each of the configurable values to its default, only really
+    # intended for use by the tests
+    def reset!
+      configure do |c|
+        DEFAULTS.each { |k, v| c.send("#{k}=", v) }
+      end
+    end
+  end
+
   class FormBuilder < ActionView::Helpers::FormBuilder
     delegate :content_tag, :tag, :safe_join, :safe_concat, :capture, :link_to, :raw, to: :@template
 
