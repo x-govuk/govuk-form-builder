@@ -501,7 +501,7 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_error_summary 'Uh-oh, spaghettios'
     #
     # @see https://design-system.service.gov.uk/components/error-summary/ GOV.UK error summary
-    def govuk_error_summary(title = 'There is a problem')
+    def govuk_error_summary(title = config.default_error_summary_title)
       Elements::ErrorSummary.new(self, object_name, title).html
     end
 
