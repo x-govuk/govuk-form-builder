@@ -64,30 +64,71 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     describe 'submit config' do
-      let(:method) { :govuk_submit }
-      let(:args) { [method] }
-      let(:default_submit_button_text) { 'Make it so, number one' }
-
-      subject { builder.send(*args) }
-
-      before do
-        GOVUKDesignSystemFormBuilder.configure do |conf|
-          conf.default_submit_button_text = default_submit_button_text
-        end
+      specify %(the default should be 'Continue') do
+        expect(GOVUKDesignSystemFormBuilder.config.default_submit_button_text).to eql('Continue')
       end
 
-      specify 'should use the default value when no override supplied' do
-        expect(subject).to have_tag('input', with: { type: 'submit', value: default_submit_button_text })
-      end
-
-      context %(overriding with 'Engage') do
-        let(:submit_button_text) { 'Engage' }
-        let(:args) { [method, submit_button_text] }
+      context 'overriding with custom text' do
+        let(:method) { :govuk_submit }
+        let(:args) { [method] }
+        let(:default_submit_button_text) { 'Make it so, number one' }
 
         subject { builder.send(*args) }
 
-        specify 'should use supplied value when overridden' do
-          expect(subject).to have_tag('input', with: { type: 'submit', value: submit_button_text })
+        before do
+          GOVUKDesignSystemFormBuilder.configure do |conf|
+            conf.default_submit_button_text = default_submit_button_text
+          end
+        end
+
+        specify 'should use the default value when no override supplied' do
+          expect(subject).to have_tag('input', with: { type: 'submit', value: default_submit_button_text })
+        end
+
+        context %(overriding with 'Engage') do
+          let(:submit_button_text) { 'Engage' }
+          let(:args) { [method, submit_button_text] }
+
+          subject { builder.send(*args) }
+
+          specify 'should use supplied value when overridden' do
+            expect(subject).to have_tag('input', with: { type: 'submit', value: submit_button_text })
+          end
+        end
+      end
+    end
+
+    describe 'radio divider config' do
+      specify %(the default should be 'or') do
+        expect(GOVUKDesignSystemFormBuilder.config.default_radio_divider_text).to eql('or')
+      end
+
+      context 'overriding with custom text' do
+        let(:method) { :govuk_radio_divider }
+        let(:args) { [method] }
+        let(:default_radio_divider_text) { 'Actually, on the other hand' }
+
+        subject { builder.send(*args) }
+
+        before do
+          GOVUKDesignSystemFormBuilder.configure do |conf|
+            conf.default_radio_divider_text = default_radio_divider_text
+          end
+        end
+
+        specify 'should use the default value when no override supplied' do
+          expect(subject).to have_tag('div', text: default_radio_divider_text, with: { class: 'govuk-radios__divider' })
+        end
+
+        context %(overriding with 'Engage') do
+          let(:radio_divider_text) { 'Alternatively' }
+          let(:args) { [method, radio_divider_text] }
+
+          subject { builder.send(*args) }
+
+          specify 'should use supplied text when overridden' do
+            expect(subject).to have_tag('div', text: radio_divider_text, with: { class: 'govuk-radios__divider' })
+          end
         end
       end
     end
