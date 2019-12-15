@@ -5,7 +5,7 @@ module GOVUKDesignSystemFormBuilder
         fail ArgumentError, 'buttons can be warning or secondary' if warning && secondary
 
         @builder              = builder
-        @text                 = text
+        @text                 = submit_button_value(text)
         @prevent_double_click = prevent_double_click
         @warning              = warning
         @secondary            = secondary
@@ -33,6 +33,10 @@ module GOVUKDesignSystemFormBuilder
       end
 
     private
+
+      def submit_button_value(text)
+        text || config.default_submit_button_text
+      end
 
       def warning_class
         'govuk-button--warning' if @warning

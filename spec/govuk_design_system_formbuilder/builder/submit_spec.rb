@@ -25,6 +25,14 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       expect(subject).to have_tag('input', with: { 'data-module' => 'govuk-button' })
     end
 
+    context 'when no value is passed in' do
+      subject { builder.send(method) }
+
+      specify %(it should default to 'Continue) do
+        expect(subject).to have_tag('input', with: { value: 'Continue' })
+      end
+    end
+
     describe 'button styles and colours' do
       context 'warning' do
         subject { builder.send(*args.push('Create'), warning: true) }

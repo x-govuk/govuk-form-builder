@@ -54,11 +54,11 @@ module GOVUKDesignSystemFormBuilder
 
   DEFAULTS = {
     default_legend_size: 'm',
-    default_legend_tag: 'h1'
+    default_legend_tag: 'h1',
+    default_submit_button_text: 'Continue'
   }.freeze
 
-  config_accessor(:default_legend_size) { DEFAULTS[:default_legend_size] }
-  config_accessor(:default_legend_tag)  { DEFAULTS[:default_legend_tag] }
+  DEFAULTS.keys.each { |k| config_accessor(k) { DEFAULTS[k] } }
 
   class << self
     def configure
