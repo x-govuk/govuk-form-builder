@@ -311,7 +311,7 @@ module GOVUKDesignSystemFormBuilder
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @example A custom divider
     #   = govuk_radio_divider 'Alternatively'
-    def govuk_radio_divider(text = 'or')
+    def govuk_radio_divider(text = config.default_radio_divider_text)
       tag.div(text, class: %w(govuk-radios__divider))
     end
 

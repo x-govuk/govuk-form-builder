@@ -86,8 +86,37 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
         subject { builder.send(*args) }
 
-        specify 'should use the default value when no override supplied' do
+        specify 'should use supplied value when overridden' do
           expect(subject).to have_tag('input', with: { type: 'submit', value: submit_button_text })
+        end
+      end
+    end
+
+    describe 'radio divider config' do
+      let(:method) { :govuk_radio_divider }
+      let(:args) { [method] }
+      let(:default_radio_divider_text) { 'Actually, on the other hand' }
+
+      subject { builder.send(*args) }
+
+      before do
+        GOVUKDesignSystemFormBuilder.configure do |conf|
+          conf.default_radio_divider_text = default_radio_divider_text
+        end
+      end
+
+      specify 'should use the default value when no override supplied' do
+        expect(subject).to have_tag('div', text: default_radio_divider_text, with: { class: 'govuk-radios__divider' })
+      end
+
+      context %(overriding with 'Engage') do
+        let(:radio_divider_text) { 'Alternatively' }
+        let(:args) { [method, radio_divider_text] }
+
+        subject { builder.send(*args) }
+
+        specify 'should use supplied text when overridden' do
+          expect(subject).to have_tag('div', text: radio_divider_text, with: { class: 'govuk-radios__divider' })
         end
       end
     end
