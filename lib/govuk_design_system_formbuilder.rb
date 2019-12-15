@@ -63,12 +63,22 @@ module GOVUKDesignSystemFormBuilder
   DEFAULTS.keys.each { |k| config_accessor(k) { DEFAULTS[k] } }
 
   class << self
+    # Configure the form builder in the usual manner. All of the
+    # keys in {DEFAULTS} can be configured as per the example below
+    #
+    # @example
+    #   GOVUKDesignSystemFormBuilder.configure do |conf|
+    #     conf.default_legend_size = 'xl'
+    #     conf.default_error_summary_title = 'OMG'
+    #   end
     def configure
       yield(config)
     end
 
-    # Resets each of the configurable values to its default, only really
-    # intended for use by the tests
+    # Resets each of the configurable values to its default
+    #
+    # @note This method is only really intended for use to clean up
+    #   during testing
     def reset!
       configure do |c|
         DEFAULTS.each { |k, v| c.send("#{k}=", v) }
