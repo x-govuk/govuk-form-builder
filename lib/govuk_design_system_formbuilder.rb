@@ -56,7 +56,8 @@ module GOVUKDesignSystemFormBuilder
     default_legend_size: 'm',
     default_legend_tag: 'h1',
     default_submit_button_text: 'Continue',
-    default_radio_divider_text: 'or'
+    default_radio_divider_text: 'or',
+    default_error_summary_title: 'There is a problem'
   }.freeze
 
   DEFAULTS.keys.each { |k| config_accessor(k) { DEFAULTS[k] } }
