@@ -1,0 +1,29 @@
+---
+title: Configuration
+---
+
+h1.govuk-heading-xl Configuration
+
+p.govuk-body
+  | The form builder's defaults follow the guidance specified in the
+    GOV.UK Design System documentation, but every project is different
+    and having to repeatedly override settings would soon become annoying.
+
+p.govuk-body
+  | To configure the builder for your project, just create an initialiser
+    in <code>config/initializers/govuk_design_system_formbuilder.rb</code>.
+
+.code-sample
+  pre
+    code.highlight.language-ruby
+      | GOVUKDesignSystemFormBuilder.configure do |conf|
+          conf.default_submit_button_text  = 'Apply'              # Continue
+          conf.default_error_summary_title = 'Uh-oh, spaghettios' # There is a problem
+          conf.default_legend_tag          = 'h3'                 # h1
+          conf.default_legend_size         = 'l'                  # m
+          conf.default_radio_divider_text  = 'how about'          # or
+        end
+
+p.govuk-body
+  | If there's anything you'd like to be able to set defaults for but can't,
+    #{link_to('raise an issue', project_new_issue_link).html_safe}.
