@@ -1,5 +1,6 @@
 module GOVUKDesignSystemFormBuilder
   module Builder
+    delegate :config, to: GOVUKDesignSystemFormBuilder
     # Generates a input of type +text+
     #
     # @param attribute_name [Symbol] The name of the attribute
@@ -310,7 +311,7 @@ module GOVUKDesignSystemFormBuilder
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @example A custom divider
     #   = govuk_radio_divider 'Alternatively'
-    def govuk_radio_divider(text = 'or')
+    def govuk_radio_divider(text = config.default_radio_divider_text)
       tag.div(text, class: %w(govuk-radios__divider))
     end
 
@@ -454,7 +455,7 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_submit "Proceed", prevent_double_click: true do
     #     = link_to 'Cancel', some_other_path, class: 'govuk-button__secondary'
     #
-    def govuk_submit(text = 'Continue', warning: false, secondary: false, prevent_double_click: true, validate: false, &block)
+    def govuk_submit(text = config.default_submit_button_text, warning: false, secondary: false, prevent_double_click: true, validate: false, &block)
       Elements::Submit.new(self, text, warning: warning, secondary: secondary, prevent_double_click: prevent_double_click, validate: validate, &block).html
     end
 
@@ -500,7 +501,7 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_error_summary 'Uh-oh, spaghettios'
     #
     # @see https://design-system.service.gov.uk/components/error-summary/ GOV.UK error summary
-    def govuk_error_summary(title = 'There is a problem')
+    def govuk_error_summary(title = config.default_error_summary_title)
       Elements::ErrorSummary.new(self, object_name, title).html
     end
 

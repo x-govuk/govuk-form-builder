@@ -22,6 +22,10 @@ build:
 	${prefix} gem build govuk_design_system_formbuilder.gemspec
 build_guide: npm-install
 	${guide_dir} ${prefix} nanoc
+watch_guide: npm-install
+	${guide_dir} ${prefix} nanoc view --live-reload --port 3006 --color
+keep_building_guide:
+	${guide_dir} fd -e rb -eslim -esass -ejs -p guide | entr nanoc
 docs-server:
 	yard server --reload
 code-climate:
