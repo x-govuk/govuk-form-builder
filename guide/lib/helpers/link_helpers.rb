@@ -69,5 +69,9 @@ module Helpers
     def ruby_proc_link
       'https://ruby-doc.org/core-2.6.5/Proc.html'
     end
+
+    def project_new_issue_link
+      'https://github.com/DFE-Digital/govuk_design_system_formbuilder/issues'
+    end
   end
 end
