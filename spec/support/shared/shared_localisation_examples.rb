@@ -65,7 +65,7 @@ shared_examples 'a field that supports setting the legend via localisation' do
   let(:localisations) { LOCALISATIONS }
 
   context 'localising when no text is supplied' do
-    let(:expected_legend) { I18n.translate("helpers.fieldset.person.#{attribute}") }
+    let(:expected_legend) { I18n.translate("helpers.legend.person.#{attribute}") }
     subject { builder.send(*args) { arbitrary_html_content } }
 
     specify 'should set the legend from the locales' do
