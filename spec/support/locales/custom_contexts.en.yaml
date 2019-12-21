@@ -1,0 +1,18 @@
+a:
+  long:
+    convoluted:
+      schema:
+        legend:
+          nested_far_too_deeply:
+            person:
+              projects: The things that keep you busiest at work
+        hint:
+          nested_far_too_deeply:
+            person:
+              name: It should say it on your birth certificate
+        nested_far_far:
+          label:
+            too_inconsistently:
+              person:
+                name: Your name, what is it?
+                projects: What do you do at work?

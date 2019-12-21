@@ -5,7 +5,7 @@ helpers:
       cv: Tell us about your employment history
       favourite_colour: What is your favourite colour?
       photo: Upload a recent passport photo
-  fieldset:
+  legend:
     person:
       favourite_colour: To which colours are you most partial?
       born_on: What is your date of birth?

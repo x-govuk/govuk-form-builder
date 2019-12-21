@@ -95,6 +95,7 @@ class Person
 
   # localisation
   attr_accessor(
-    :favourite_kind_of_hat
+    :favourite_kind_of_hat,
+    :role
   )
 end

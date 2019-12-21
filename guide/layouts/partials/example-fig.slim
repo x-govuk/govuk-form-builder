@@ -1,3 +1,6 @@
+- if defined?(custom_config)
+  - custom_config
+
 figure
   figcaption
     h3.govuk-heading-m.example-heading id=anchor_id(caption)
@@ -17,6 +20,19 @@ figure
         code.highlight.language-ruby
           | #{sample_data}
 
+  - if defined?(raw_config)
+    section
+      h4.govuk-heading-s.example-subheading.locale Configuration
+
+      div.govuk-inset-text
+        | Place your configuration in an
+          #{link_to('initializer', rails_initializer_link).html_safe} to ensure
+          it's loaded every time you start your Rails application.
+
+      pre.example-input
+        code.highlight.language-ruby
+          | #{raw_config}
+
   - if defined?(localisation)
     - I18n.backend.store_translations(:en, YAML.load(localisation))
 
@@ -26,7 +42,6 @@ figure
       pre.example-input
         code.highlight.language-yaml
           | #{localisation}
-
 
   section
     h4.govuk-heading-s.example-subheading.input Input
@@ -49,3 +64,7 @@ figure
           - if defined?(sample_data)
             - eval(sample_data)
           = format_slim(code, f: builder(display_errors), **form_data)
+
+
+- if defined?(custom_config)
+  - reset_config

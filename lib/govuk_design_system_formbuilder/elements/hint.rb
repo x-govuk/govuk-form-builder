@@ -23,7 +23,7 @@ module GOVUKDesignSystemFormBuilder
       def hint_text(supplied)
         [
           supplied.presence,
-          localised_text('hint')
+          localised_text(:hint)
         ].compact.first
       end
 
