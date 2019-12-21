@@ -1,53 +1,8 @@
 require 'active_support/configurable'
 
-require 'govuk_design_system_formbuilder/traits/collection_item'
-require 'govuk_design_system_formbuilder/traits/conditional'
-require 'govuk_design_system_formbuilder/traits/error'
-require 'govuk_design_system_formbuilder/traits/hint'
-require 'govuk_design_system_formbuilder/traits/label'
-require 'govuk_design_system_formbuilder/traits/localisation'
-require 'govuk_design_system_formbuilder/traits/supplemental'
-
-require 'govuk_design_system_formbuilder/version'
-require 'govuk_design_system_formbuilder/builder'
-require 'govuk_design_system_formbuilder/base'
-
-require 'govuk_design_system_formbuilder/elements/hint'
-require 'govuk_design_system_formbuilder/elements/label'
-require 'govuk_design_system_formbuilder/elements/date'
-require 'govuk_design_system_formbuilder/elements/select'
-require 'govuk_design_system_formbuilder/elements/submit'
-require 'govuk_design_system_formbuilder/elements/text_area'
-require 'govuk_design_system_formbuilder/elements/file'
-
-require 'govuk_design_system_formbuilder/elements/inputs/base'
-require 'govuk_design_system_formbuilder/elements/inputs/email'
-require 'govuk_design_system_formbuilder/elements/inputs/number'
-require 'govuk_design_system_formbuilder/elements/inputs/phone'
-require 'govuk_design_system_formbuilder/elements/inputs/text'
-require 'govuk_design_system_formbuilder/elements/inputs/url'
-
-require 'govuk_design_system_formbuilder/elements/radios/collection'
-require 'govuk_design_system_formbuilder/elements/radios/collection_radio_button'
-require 'govuk_design_system_formbuilder/elements/radios/fieldset_radio_button'
-
-require 'govuk_design_system_formbuilder/elements/check_boxes/collection'
-require 'govuk_design_system_formbuilder/elements/check_boxes/collection_check_box'
-require 'govuk_design_system_formbuilder/elements/check_boxes/fieldset_check_box'
-require 'govuk_design_system_formbuilder/elements/check_boxes/label'
-require 'govuk_design_system_formbuilder/elements/check_boxes/hint'
-
-require 'govuk_design_system_formbuilder/elements/error_message'
-require 'govuk_design_system_formbuilder/elements/error_summary'
-
-require 'govuk_design_system_formbuilder/containers/check_boxes_fieldset'
-require 'govuk_design_system_formbuilder/containers/form_group'
-require 'govuk_design_system_formbuilder/containers/fieldset'
-require 'govuk_design_system_formbuilder/containers/radios'
-require 'govuk_design_system_formbuilder/containers/radio_buttons_fieldset'
-require 'govuk_design_system_formbuilder/containers/check_boxes'
-require 'govuk_design_system_formbuilder/containers/character_count'
-require 'govuk_design_system_formbuilder/containers/supplemental'
+[%w(traits *.rb), %w(*.rb), %w(elements ** *.rb), %w(containers ** *.rb)]
+  .flat_map { |matcher| Dir.glob(File.join(__dir__, 'govuk_design_system_formbuilder', *matcher)) }
+  .each { |file| require file }
 
 module GOVUKDesignSystemFormBuilder
   include ActiveSupport::Configurable
