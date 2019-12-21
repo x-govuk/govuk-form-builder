@@ -46,6 +46,10 @@ module Helpers
       'https://github.com/DFE-Digital/govuk-rails-boilerplate'
     end
 
+    def rails_initializer_link
+      'https://guides.rubyonrails.org/configuring.html#using-initializer-files'
+    end
+
     def slim_link
       'https://slim-lang.com'
     end
