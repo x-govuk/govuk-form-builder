@@ -36,7 +36,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def legend_text
-        [@legend.dig(:text), localised_text('fieldset')].compact.first
+        [@legend.dig(:text), localised_text(:legend)].compact.first
       end
 
       def fieldset_classes
