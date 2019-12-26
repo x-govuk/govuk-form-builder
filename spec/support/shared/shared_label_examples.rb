@@ -1,6 +1,6 @@
 shared_examples 'a field that supports labels' do
   context 'when a label is provided' do
-    subject { builder.send(*args.push(label: { text: label_text })) }
+    subject { builder.send(*args, label: { text: label_text }) }
 
     specify 'the label should be included' do
       expect(subject).to have_tag('label', with: { class: 'govuk-label' }, text: label_text)
@@ -14,7 +14,7 @@ shared_examples 'a field that supports labels' do
 
     context 'when the label is supplied with a wrapping tag' do
       let(:wrapping_tag) { 'h2' }
-      subject { builder.send(*args.push(label: { text: label_text, tag: wrapping_tag })) }
+      subject { builder.send(*args, label: { text: label_text, tag: wrapping_tag }) }
 
       specify 'the label should be wrapped in by the wrapping tag' do
         expect(subject).to have_tag(wrapping_tag, with: { class: %w(govuk-label-wrapper) }) do |wt|
@@ -24,7 +24,7 @@ shared_examples 'a field that supports labels' do
     end
 
     context 'hidden labels' do
-      subject { builder.send(*args.push(label: { text: label_text, hidden: true })) }
+      subject { builder.send(*args, label: { text: label_text, hidden: true }) }
 
       specify 'the label should be wrapped in a visually-hidden span' do
         expect(subject).to have_tag('label', text: label_text) do |label_element|
@@ -48,7 +48,7 @@ shared_examples 'a field that supports labels' do
           context "#{size_name || 'no'} param" do
             let(:size_name) { size_name }
             let(:size_class) { size_class }
-            subject { builder.send(*args.push(label: { size: size_name })) }
+            subject { builder.send(*args, label: { size: size_name }) }
 
             if size_class.present?
               specify "should have extra class '#{size_class}'" do
@@ -64,7 +64,7 @@ shared_examples 'a field that supports labels' do
 
         context 'when an invalid size is supplied' do
           let(:size) { 'extra-medium' }
-          subject { builder.send(*args.push(label: { size: size })) }
+          subject { builder.send(*args, label: { size: size }) }
           specify { expect { subject }.to raise_error("invalid size '#{size}', must be xl, l, m, s or nil") }
         end
       end

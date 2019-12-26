@@ -1,7 +1,7 @@
 shared_examples 'a field that supports a fieldset with legend' do
   context 'when a legend is supplied' do
     context 'when text is supplied' do
-      subject { builder.send(*args.push(legend: { text: legend_text })) }
+      subject { builder.send(*args, legend: { text: legend_text }) }
 
       specify 'legend tag should be present' do
         expect(subject).to have_tag('legend')
@@ -9,7 +9,7 @@ shared_examples 'a field that supports a fieldset with legend' do
     end
 
     context 'when no text is supplied' do
-      subject { builder.send(*args.push(legend: { text: nil })) }
+      subject { builder.send(*args, legend: { text: nil }) }
 
       specify 'output should not contain a header' do
         expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
@@ -22,7 +22,7 @@ shared_examples 'a field that supports a fieldset with legend' do
 
     context 'when text is supplied with a custom tag' do
       let(:tag) { 'h4' }
-      subject { builder.send(*args.push(legend: { text: legend_text, tag: tag })) }
+      subject { builder.send(*args, legend: { text: legend_text, tag: tag }) }
 
       specify 'output fieldset should contain the specified tag' do
         expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
@@ -36,7 +36,7 @@ shared_examples 'a field that supports a fieldset with legend' do
     context 'when text is supplied with a custom size' do
       context 'with a valid size' do
         let(:size) { 'm' }
-        subject { builder.send(*args.push(legend: { text: legend_text, size: size })) }
+        subject { builder.send(*args, legend: { text: legend_text, size: size }) }
 
         specify 'output fieldset should contain the specified tag' do
           expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
@@ -49,7 +49,7 @@ shared_examples 'a field that supports a fieldset with legend' do
 
       context 'with an invalid size' do
         let(:size) { 'extra-medium' }
-        subject { builder.send(*args.push(legend: { text: legend_text, size: size })) }
+        subject { builder.send(*args, legend: { text: legend_text, size: size }) }
 
         specify 'should raise an error' do
           expect { subject }.to raise_error("invalid size '#{size}', must be xl, l, m, s")

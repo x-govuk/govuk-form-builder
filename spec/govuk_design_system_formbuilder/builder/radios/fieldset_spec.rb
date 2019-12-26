@@ -48,7 +48,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       context 'layout direction' do
         context 'when inline is specified in the options' do
           subject do
-            builder.send(*args.push(inline: true)) do
+            builder.send(*args, inline: true) do
               builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label })
             end
           end
@@ -74,7 +74,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       context 'radio button size' do
         context 'when small is specified in the options' do
           subject do
-            builder.send(*args.push(small: true)) do
+            builder.send(*args, small: true) do
               builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label })
             end
           end
