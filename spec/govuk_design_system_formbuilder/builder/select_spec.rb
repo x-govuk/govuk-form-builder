@@ -54,7 +54,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         }
       end
 
-      subject { builder.send(*args.push(html_options: extract_args(extra_args, :provided))) }
+      subject { builder.send(*args, html_options: extract_args(extra_args, :provided)) }
 
       specify 'select tag should have the extra attributes' do
         select_tag = parsed_subject.at_css('select')

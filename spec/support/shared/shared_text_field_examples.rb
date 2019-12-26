@@ -4,7 +4,7 @@ shared_examples 'a regular input' do |method_identifier, field_type|
   let(:hint_text) { 'It says it on your passport' }
   let(:method) { "govuk_#{method_identifier}_field".to_sym }
   let(:args) { [method, :name] }
-  subject { builder.send(*args.push(label: { text: label_text })) }
+  subject { builder.send(*args, label: { text: label_text }) }
 
   specify "output should have the correct type of #{field_type}" do
     input_type = parsed_subject.at_css('input')['type']

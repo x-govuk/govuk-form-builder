@@ -19,7 +19,7 @@ shared_examples 'a field that supports setting the label via localisation' do
   context 'allowing localised text to be overridden' do
     let(:expected_label) { "Yeah but, who are you really?" }
 
-    subject { builder.send(*args.push(label: { text: expected_label })) }
+    subject { builder.send(*args, label: { text: expected_label }) }
 
     specify 'should use the supplied label text' do
       with_localisations(localisations) do
@@ -49,7 +49,7 @@ shared_examples 'a field that supports setting the hint via localisation' do
     let(:expected_hint) { "It's quite a straightforward question!" }
 
     subject do
-      builder.send(*args.push(hint_text: expected_hint)) { arbitrary_html_content }
+      builder.send(*args, hint_text: expected_hint) { arbitrary_html_content }
     end
 
     specify 'should use the supplied hint text' do
@@ -81,7 +81,7 @@ shared_examples 'a field that supports setting the legend via localisation' do
 
   context 'allowing localised text to be overridden' do
     let(:expected_legend) { "It is quite a straightforward question!" }
-    subject { builder.send(*args.push(legend: { text: expected_legend })) { arbitrary_html_content } }
+    subject { builder.send(*args, legend: { text: expected_legend }) { arbitrary_html_content } }
 
     specify 'should set the legend from the locales' do
       with_localisations(localisations) do

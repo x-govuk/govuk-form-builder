@@ -9,10 +9,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       include_context 'setup radios'
       let(:method) { :govuk_collection_radio_buttons }
       let(:colours) { Array.wrap(OpenStruct.new(id: 'red', name: 'Red')) }
-      let(:args) { [method, attribute, colours, :id, :name, legend: { text: legend_text }] }
+      let(:args) { [method, attribute, colours, :id, :name] }
       let(:legend_text) { 'Choose a colour' }
 
-      subject { builder.send(*args) }
+      subject { builder.send(*args, legend: { text: legend_text }) }
 
       describe 'legend tag' do
         specify 'the default tag should be h1' do
