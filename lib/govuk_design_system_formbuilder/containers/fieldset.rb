@@ -1,6 +1,8 @@
 module GOVUKDesignSystemFormBuilder
   module Containers
     class Fieldset < Base
+      include Traits::Localisation
+
       LEGEND_SIZES = %w(xl l m s).freeze
 
       def initialize(builder, object_name = nil, attribute_name = nil, legend: {}, described_by: nil)

@@ -1,7 +1,5 @@
 module GOVUKDesignSystemFormBuilder
   class Base
-    include Traits::Localisation
-
     delegate :capture, :content_tag, :safe_join, :tag, :raw, :link_to, to: :@builder
     delegate :config, to: GOVUKDesignSystemFormBuilder
 
