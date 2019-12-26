@@ -1,6 +1,7 @@
 module GOVUKDesignSystemFormBuilder
   module Builder
     delegate :config, to: GOVUKDesignSystemFormBuilder
+
     # Generates a input of type +text+
     #
     # @param attribute_name [Symbol] The name of the attribute

@@ -2,6 +2,7 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     class Hint < Base
       include Traits::Hint
+      include Traits::Localisation
 
       def initialize(builder, object_name, attribute_name, text, value = nil, radio: false, checkbox: false)
         super(builder, object_name, attribute_name)
