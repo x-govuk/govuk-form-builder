@@ -48,7 +48,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       context 'check box size' do
         context 'when small is specified in the options' do
-          subject { builder.send(*args.push(small: true)) }
+          subject { builder.send(*args, small: true) }
 
           specify "should have the additional class 'govuk-checkboxes--small'" do
             expect(subject).to have_tag('div', with: { class: %w(govuk-checkboxes govuk-checkboxes--small) })

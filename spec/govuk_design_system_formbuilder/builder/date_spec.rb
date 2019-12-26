@@ -44,8 +44,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         let(:govuk_date_selector) { 'div.govuk-date-input' }
 
         let(:paragraph) { 'A descriptive paragraph all about dates' }
+
         subject do
-          builder.send(*args.push(legend: { text: legend_text }, hint_text: hint_text)) do
+          builder.send(*args, legend: { text: legend_text }, hint_text: hint_text) do
             builder.tag.p(paragraph, class: 'block-content')
           end
         end
@@ -128,7 +129,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     context 'showing only month and year inputs' do
-      subject { builder.send(*args.push(omit_day: true)) }
+      subject { builder.send(*args, omit_day: true) }
 
       specify 'there should only be month and year inputs' do
         expect(subject).to have_tag('input', count: 2)
@@ -183,7 +184,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     context 'auto-completion' do
       context 'date of birth' do
-        subject { builder.send(*args.push(date_of_birth: true)) }
+        subject { builder.send(*args, date_of_birth: true) }
         specify "day field should have autocomplete attribute with value 'bday-day'" do
           expect(subject).to have_tag('input', with: { autocomplete: 'bday-day' })
         end
