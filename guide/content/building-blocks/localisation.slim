@@ -68,3 +68,9 @@ section
         current translation context. It will automatically be replaced with
         either <em>label</em>, <em>legend</em> or <em>hint</em> when the
         translation key is generated.
+
+    p.govuk-body
+      | When retrieving a localised string the builder first checks whether
+        a contextual schema has been set for the context. If there hasn't,
+        the <code>localisation_schema_fallback</code> key will be used. <strong>It is
+        the only one set by default</strong>.

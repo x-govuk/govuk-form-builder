@@ -51,6 +51,7 @@ module GOVUKDesignSystemFormBuilder
   }.freeze
 
   DEFAULTS.keys.each { |k| config_accessor(k) { DEFAULTS[k] } }
+  # @!endgroup
 
   class << self
     # Configure the form builder in the usual manner. All of the
