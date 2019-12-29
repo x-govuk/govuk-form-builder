@@ -1,10 +1,11 @@
 language: ruby
 
-cache: bundler
+# cache: bundler
 
 rvm:
-  - 2.5.6
-  - 2.6.4
+  - 2.5.7
+  - 2.6.5
+  - 2.7.0
 
 script:
   - make ruby-lint
@@ -12,8 +13,8 @@ script:
   - make nanoc-check-all
 
 env:
-  - RAILS_VERSION=5.2.3
-  - RAILS_VERSION=6.0.0
+  - RAILS_VERSION=5.2.4
+  - RAILS_VERSION=6.0.2
 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter

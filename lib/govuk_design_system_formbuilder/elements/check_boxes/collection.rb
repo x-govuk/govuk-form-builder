@@ -1,7 +1,11 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     module CheckBoxes
-      class Collection < GOVUKDesignSystemFormBuilder::Base
+      class Collection < Base
+        include Traits::Error
+        include Traits::Hint
+        include Traits::Supplemental
+
         def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint_method: nil, hint_text:, legend:, small:, &block)
           super(builder, object_name, attribute_name, &block)
 
@@ -16,7 +20,7 @@ module GOVUKDesignSystemFormBuilder
 
         def html
           Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
-            Containers::Fieldset.new(@builder, legend: @legend, described_by: [error_id, hint_id, supplemental_id]).html do
+            Containers::Fieldset.new(@builder, @object_name, @attribute_name, legend: @legend, described_by: [error_id, hint_id, supplemental_id]).html do
               safe_join(
                 [
                   hint_element.html,

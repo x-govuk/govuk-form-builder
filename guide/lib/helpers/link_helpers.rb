@@ -22,6 +22,10 @@ module Helpers
       'https://www.rubydoc.info/gems/govuk_design_system_formbuilder/GOVUKDesignSystemFormBuilder/Builder'
     end
 
+    def config_documentation_link
+      'https://www.rubydoc.info/gems/govuk_design_system_formbuilder/GOVUKDesignSystemFormBuilder'
+    end
+
     def github_link
       'https://github.com/DFE-Digital/govuk_design_system_formbuilder'
     end
@@ -46,6 +50,10 @@ module Helpers
       'https://github.com/DFE-Digital/govuk-rails-boilerplate'
     end
 
+    def rails_initializer_link
+      'https://guides.rubyonrails.org/configuring.html#using-initializer-files'
+    end
+
     def slim_link
       'https://slim-lang.com'
     end
@@ -60,6 +68,18 @@ module Helpers
 
     def version_supporting_design_system_v2
       'https://rubygems.org/gems/govuk_design_system_formbuilder/versions/0.7.10'
+    end
+
+    def rails_localisation_link
+      'https://guides.rubyonrails.org/i18n.html'
+    end
+
+    def ruby_proc_link
+      'https://ruby-doc.org/core-2.6.5/Proc.html'
+    end
+
+    def project_new_issue_link
+      'https://github.com/DFE-Digital/govuk_design_system_formbuilder/issues'
     end
   end
 end

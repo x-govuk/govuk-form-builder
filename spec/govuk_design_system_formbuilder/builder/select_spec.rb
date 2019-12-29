@@ -27,6 +27,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:described_element) { 'select' }
     end
 
+    it_behaves_like 'a field that supports setting the label via localisation'
+    it_behaves_like 'a field that supports setting the hint via localisation'
+
     specify 'output should be a form group containing a label and select box' do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
         expect(fg).to have_tag('select')
@@ -51,7 +54,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         }
       end
 
-      subject { builder.send(*args.push(html_options: extract_args(extra_args, :provided))) }
+      subject { builder.send(*args, html_options: extract_args(extra_args, :provided)) }
 
       specify 'select tag should have the extra attributes' do
         select_tag = parsed_subject.at_css('select')

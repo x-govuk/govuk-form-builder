@@ -41,6 +41,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:described_element) { 'fieldset' }
     end
 
+    it_behaves_like 'a field that supports setting the hint via localisation'
+    it_behaves_like 'a field that supports setting the legend via localisation'
+
     context 'radio buttons' do
       specify 'each radio button should have the correct classes' do
         expect(subject).to have_tag('input', with: { class: %w(govuk-radios__input) }, count: colours.size)
@@ -84,6 +87,11 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
 
+      it_behaves_like 'a field that allows the label to be localised via a proc' do
+        let(:i18n_proc) { ->(item) { I18n.t("colours.#{item.name.downcase}") } }
+        let(:args) { [method, attribute, colours, :id, i18n_proc] }
+      end
+
       context 'radio button hints' do
         let(:colours_with_descriptions) { colours.select { |c| c.description.present? } }
         let(:colours_without_descriptions) { colours.reject { |c| c.description.present? } }
@@ -113,6 +121,11 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
         specify 'all labels should be bold when hints are enabled' do
           expect(subject).to have_tag('label', with: { class: 'govuk-label--s' }, count: colours.size)
+        end
+
+        it_behaves_like 'a field that allows the hint to be localised via a proc' do
+          let(:i18n_proc) { ->(item) { I18n.t("colours.#{item.name.downcase}") } }
+          let(:args) { [method, attribute, colours, :id, :name, i18n_proc] }
         end
       end
 

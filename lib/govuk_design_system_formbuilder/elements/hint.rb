@@ -1,11 +1,14 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
-    class Hint < GOVUKDesignSystemFormBuilder::Base
+    class Hint < Base
+      include Traits::Hint
+      include Traits::Localisation
+
       def initialize(builder, object_name, attribute_name, text, value = nil, radio: false, checkbox: false)
         super(builder, object_name, attribute_name)
 
         @value          = value
-        @hint_text      = text
+        @hint_text      = hint_text(text)
         @radio_class    = radio_class(radio)
         @checkbox_class = checkbox_class(checkbox)
       end
@@ -17,6 +20,13 @@ module GOVUKDesignSystemFormBuilder
       end
 
     private
+
+      def hint_text(supplied)
+        [
+          supplied.presence,
+          localised_text(:hint)
+        ].compact.first
+      end
 
       def hint_classes
         %w(govuk-hint).push(@radio_class, @checkbox_class).compact

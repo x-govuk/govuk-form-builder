@@ -1,8 +1,14 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class TextArea < Base
+      include Traits::Error
+      include Traits::Hint
+      include Traits::Label
+      include Traits::Supplemental
+
       def initialize(builder, object_name, attribute_name, hint_text:, label:, rows:, max_words:, max_chars:, threshold:, **extra_args, &block)
         super(builder, object_name, attribute_name, &block)
+
         @label      = label
         @hint_text  = hint_text
         @extra_args = extra_args
@@ -41,6 +47,14 @@ module GOVUKDesignSystemFormBuilder
           classes.push('govuk-textarea--error') if has_errors?
           classes.push('govuk-js-character-count') if limit?
         end
+      end
+
+      # Provides an id for use by the textual description of character and word limits.
+      #
+      # @note In order for the GOV.UK Frontend JavaScript to pick up this associated field
+      #   it has to have the same id as the text area with the additional suffix of '-info'
+      def limit_id
+        [field_id(link_errors: true), 'info'].join('-')
       end
 
       def limit?

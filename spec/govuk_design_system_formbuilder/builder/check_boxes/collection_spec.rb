@@ -35,6 +35,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:described_element) { 'fieldset' }
     end
 
+    it_behaves_like 'a field that supports setting the legend via localisation'
+    it_behaves_like 'a field that supports setting the hint via localisation'
+
     describe 'check boxes' do
       specify 'output should contain the correct number of check boxes' do
         expect(subject).to have_tag('div', with: { 'data-module' => 'govuk-checkboxes' }) do |cb|
@@ -45,7 +48,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       context 'check box size' do
         context 'when small is specified in the options' do
-          subject { builder.send(*args.push(small: true)) }
+          subject { builder.send(*args, small: true) }
 
           specify "should have the additional class 'govuk-checkboxes--small'" do
             expect(subject).to have_tag('div', with: { class: %w(govuk-checkboxes govuk-checkboxes--small) })
@@ -117,6 +120,12 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             expect(subject).not_to have_tag('span', with: { class: 'govuk-hint' })
           end
         end
+      end
+
+      it_behaves_like 'a field that allows the hint to be localised via a proc' do
+        let(:attribute) { :favourite_colour }
+        let(:i18n_proc) { ->(item) { I18n.t("colours.#{item.name.downcase}") } }
+        let(:args) { [method, attribute, colours, :id, :name].push(i18n_proc) }
       end
     end
   end

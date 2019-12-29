@@ -1,6 +1,9 @@
 module GOVUKDesignSystemFormBuilder
   module Containers
-    class RadioButtonsFieldset < GOVUKDesignSystemFormBuilder::Base
+    class RadioButtonsFieldset < Base
+      include Traits::Hint
+      include Traits::Error
+
       def initialize(builder, object_name, attribute_name, hint_text:, legend:, inline:, small:, &block)
         super(builder, object_name, attribute_name)
 
@@ -13,7 +16,7 @@ module GOVUKDesignSystemFormBuilder
 
       def html
         Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
-          Containers::Fieldset.new(@builder, legend: @legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
+          Containers::Fieldset.new(@builder, @object_name, @attribute_name, legend: @legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
             safe_join(
               [
                 hint_element.html,

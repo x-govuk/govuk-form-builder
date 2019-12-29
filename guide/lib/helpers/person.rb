@@ -33,7 +33,8 @@ class Person
     :lunch_id,
     :wednesday_lunch_id,
     :thursday_lunch_id,
-    :old_department_description
+    :old_department_description,
+    :laptop
   )
 
   # checkbox fields
@@ -90,5 +91,11 @@ class Person
   # file fields
   attr_accessor(
     :profile_photo
+  )
+
+  # localisation
+  attr_accessor(
+    :favourite_kind_of_hat,
+    :role
   )
 end

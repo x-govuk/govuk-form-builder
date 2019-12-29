@@ -56,6 +56,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     let(:error_identifier) { 'person-cv-error' }
   end
 
+  it_behaves_like 'a field that supports setting the label via localisation'
+  it_behaves_like 'a field that supports setting the hint via localisation'
+
   specify 'should have the correct classes' do
     expect(subject).to have_tag('textarea', with: { class: 'govuk-textarea' })
   end
@@ -67,7 +70,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
   describe 'limits' do
     context 'max words' do
       let(:max_words) { 20 }
-      subject { builder.send(*args.push(max_words: max_words)) }
+      subject { builder.send(*args, max_words: max_words) }
 
       specify 'should wrap the form group inside a character count tag' do
         expect(subject).to have_tag(
@@ -101,7 +104,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     context 'max chars' do
       let(:max_chars) { 35 }
-      subject { builder.send(*args.push(max_chars: max_chars)) }
+      subject { builder.send(*args, max_chars: max_chars) }
 
       specify 'should wrap the form group inside a character count tag' do
         expect(subject).to have_tag(
@@ -134,7 +137,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     context 'max chars and max words' do
-      subject { builder.send(*args.push(max_chars: 5, max_words: 5)) }
+      subject { builder.send(*args, max_chars: 5, max_words: 5) }
 
       specify 'should raise an error' do
         expect { subject }.to raise_error(ArgumentError, 'limit can be words or chars')
@@ -144,7 +147,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     context 'thresholds' do
       let(:threshold) { 60 }
       let(:max_chars) { 35 }
-      subject { builder.send(*args.push(max_chars: max_chars, threshold: threshold)) }
+      subject { builder.send(*args, max_chars: max_chars, threshold: threshold) }
 
       specify 'should wrap the form group inside a character count tag with a threshold' do
         expect(subject).to have_tag(
@@ -179,7 +182,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
   describe 'extra arguments' do
     let(:placeholder) { 'Once upon a time…' }
-    subject { builder.send(*args.push(placeholder: placeholder, required: true)) }
+    subject { builder.send(*args, placeholder: placeholder, required: true) }
 
     specify 'should add the extra attributes to the textarea' do
       expect(subject).to have_tag(

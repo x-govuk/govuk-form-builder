@@ -1,13 +1,17 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     module CheckBoxes
-      class CollectionCheckBox < GOVUKDesignSystemFormBuilder::Base
+      class CollectionCheckBox < Base
+        include Traits::CollectionItem
+        include Traits::Hint
+
         def initialize(builder, object_name, attribute_name, checkbox, hint_method = nil, link_errors: false)
           super(builder, object_name, attribute_name)
+
           @checkbox  = checkbox
           @item      = checkbox.object
           @value     = checkbox.value
-          @hint_text = @item.send(hint_method) if hint_method.present?
+          @hint_text = retrieve(@item, hint_method)
           @link_errors = link_errors
         end
 
