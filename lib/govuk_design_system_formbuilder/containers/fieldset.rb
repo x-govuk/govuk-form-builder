@@ -1,13 +1,16 @@
 module GOVUKDesignSystemFormBuilder
   module Containers
-    class Fieldset < GOVUKDesignSystemFormBuilder::Base
-      LEGEND_DEFAULTS = { text: nil, tag: 'h1', size: 'm' }.freeze
+    class Fieldset < Base
+      include Traits::Localisation
+
       LEGEND_SIZES = %w(xl l m s).freeze
 
-      def initialize(builder, legend: {}, described_by: nil)
-        @builder = builder
-        @legend = LEGEND_DEFAULTS.merge(legend)
-        @described_by = described_by(described_by)
+      def initialize(builder, object_name = nil, attribute_name = nil, legend: {}, described_by: nil)
+        super(builder, object_name, attribute_name)
+
+        @legend         = legend_defaults.merge(legend)
+        @described_by   = described_by(described_by)
+        @attribute_name = attribute_name
       end
 
       def html
@@ -18,12 +21,24 @@ module GOVUKDesignSystemFormBuilder
 
     private
 
+      def legend_defaults
+        {
+          text: nil,
+          tag:  config.default_legend_tag,
+          size: config.default_legend_size
+        }
+      end
+
       def build_legend
-        if @legend.dig(:text).present?
+        if legend_text.present?
           content_tag('legend', class: legend_classes) do
-            tag.send(@legend.dig(:tag), @legend.dig(:text), class: legend_heading_classes)
+            tag.send(@legend.dig(:tag), legend_text, class: legend_heading_classes)
           end
         end
+      end
+
+      def legend_text
+        [@legend.dig(:text), localised_text(:legend)].compact.first
       end
 
       def fieldset_classes

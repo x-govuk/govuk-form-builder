@@ -49,6 +49,21 @@ module Setup
       DATA
     end
 
+    def laptops_data_raw
+      <<~DATA
+        laptops = %i(thinkpad xps macbook_pro zenbook)
+      DATA
+    end
+
+    def custom_locale_config_raw
+      <<~CONFIG
+        GOVUKDesignSystemFormBuilder.configure do |conf|
+          conf.localisation_schema_fallback = %i(helpers __context__)
+          conf.localisation_schema_hint     = %i(copy descriptions __context__ subdivision)
+        end
+      CONFIG
+    end
+
     # Yes, eval is bad, but when you want to display code in documentation as
     # well as run it, it's kind of necessary. Not considering this a security
     # threat as it's only used in the guide 👮
@@ -65,10 +80,23 @@ module Setup
     def primary_colours
       eval(primary_colours_raw)
     end
+
+    def laptops
+      eval(laptops_data_raw)
+    end
+
+    def custom_locale_config
+      eval(custom_locale_config_raw)
+    end
     # rubocop:enable Security/Eval
 
     def form_data
-      { departments: departments, lunch_options: lunch_options, primary_colours: primary_colours }
+      {
+        departments: departments,
+        lunch_options: lunch_options,
+        primary_colours: primary_colours,
+        laptops: laptops
+      }
     end
   end
 end

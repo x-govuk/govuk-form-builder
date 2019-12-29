@@ -1,7 +1,9 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     module CheckBoxes
-      class Hint < GOVUKDesignSystemFormBuilder::Base
+      class Hint < Base
+        include Traits::Hint
+
         def initialize(builder, object_name, attribute_name, hint_text, value:)
           super(builder, object_name, attribute_name)
 

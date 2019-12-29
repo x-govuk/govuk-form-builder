@@ -1,0 +1,21 @@
+helpers:
+  label:
+    person:
+      name: Who goes there?
+      cv: Tell us about your employment history
+      favourite_colour: What is your favourite colour?
+      photo: Upload a recent passport photo
+  legend:
+    person:
+      favourite_colour: To which colours are you most partial?
+      born_on: What is your date of birth?
+      projects: What do you do all day at work?
+  hint:
+    person:
+      name: Enter your full name including middle names, nicknames and aliases
+      favourite_colour: |-
+        Yes, there are plenty of options but please pick the one you enjoy most
+      cv: Where did you work? What did you do?
+      photo: Make sure your face is clear and you are looking at the camera
+      born_on: Check your birth certificate or passport
+      projects: If you cannot remember check with your teammates or manager

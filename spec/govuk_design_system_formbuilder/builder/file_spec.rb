@@ -37,6 +37,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:error_identifier) { 'person-photo-error' }
     end
 
+    it_behaves_like 'a field that supports setting the label via localisation'
+    it_behaves_like 'a field that supports setting the hint via localisation'
+
     describe 'additional attributes' do
       subject { builder.send(method, attribute, accept: 'image/*', multiple: true) }
 

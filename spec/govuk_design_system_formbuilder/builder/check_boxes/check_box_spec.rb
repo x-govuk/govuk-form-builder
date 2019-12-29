@@ -59,7 +59,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       context 'overridden to false' do
-        subject { builder.send(*args.push(multiple: false)) }
+        subject { builder.send(*args, multiple: false) }
 
         specify 'check box name should allow a single value only' do
           expect(subject).to have_tag('input', with: {

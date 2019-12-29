@@ -1,7 +1,7 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     module CheckBoxes
-      class Label < GOVUKDesignSystemFormBuilder::Base
+      class Label < Base
         def initialize(builder, object_name, attribute_name, checkbox, value:, link_errors: true)
           super(builder, object_name, attribute_name)
 

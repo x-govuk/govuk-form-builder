@@ -29,6 +29,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:error_identifier) { 'person-favourite-colour-error' }
     end
 
+    it_behaves_like 'a field that supports setting the hint via localisation'
+    it_behaves_like 'a field that supports setting the legend via localisation'
+
     context 'when a block containing radio buttons is supplied' do
       specify 'output should be a form group containing a form group and fieldset' do
         expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
@@ -45,7 +48,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       context 'layout direction' do
         context 'when inline is specified in the options' do
           subject do
-            builder.send(*args.push(inline: true)) do
+            builder.send(*args, inline: true) do
               builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label })
             end
           end
@@ -71,7 +74,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       context 'radio button size' do
         context 'when small is specified in the options' do
           subject do
-            builder.send(*args.push(small: true)) do
+            builder.send(*args, small: true) do
               builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label })
             end
           end

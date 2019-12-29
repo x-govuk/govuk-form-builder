@@ -16,12 +16,16 @@ nanoc-check-internal:
 	${guide_dir} ${prefix} nanoc check ${nanoc_internal_checks}
 nanoc-check-external:
 	${guide_dir} ${prefix} nanoc check ${nanoc_external_checks}
-nanoc-check-all: build_guide
+nanoc-check-all: build-guide
 	${guide_dir} ${prefix} nanoc check ${nanoc_internal_checks} ${nanoc_external_checks}
 build:
 	${prefix} gem build govuk_design_system_formbuilder.gemspec
-build_guide: npm-install
+build-guide: npm-install
 	${guide_dir} ${prefix} nanoc
+watch-guide: npm-install
+	${guide_dir} ${prefix} nanoc view --live-reload --port 3006 --color
+keep-building-guide:
+	${guide_dir} fd -e rb -eslim -esass -ejs -p guide | entr nanoc
 docs-server:
 	yard server --reload
 code-climate:

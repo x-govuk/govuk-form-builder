@@ -1,0 +1,76 @@
+---
+title: Localisation
+---
+
+h1.govuk-heading-xl Localisation
+
+p.govuk-body
+  | The simplest way of adding textual information like labels and hints to
+    forms is to provide strings as arguments to the form helpers.
+
+.code-sample
+  pre
+    code.highlight.language-ruby
+      | = f.govuk_text_field :name, label: { text: "Your full name" }
+
+p.govuk-body
+  | On larger, more-complex projects, copy is spread throughout the application
+    and often duplicated, making it difficult for content designers to make
+    changes.
+
+p.govuk-body
+  | Many teams approach this problem by making use of
+    #{link_to("Rails' excellent localisation functionality", rails_localisation_link).html_safe},
+    allowing text to be stored in locale dictionaries. This allows editors to
+    make changes without the risk of breaking templates and having to learn
+    templating languages and hunt down content.
+
+section
+
+  == render('/partials/example-fig.*',
+    caption: "Populating label and hint text from the localisation data",
+    localisation: favourite_kind_of_hat_locale,
+    code: favourite_kind_of_hat) do
+
+    p.govuk-body
+      | Note that despite the <code>text</code> attribute being omitted from
+        the label options hash, the other display and formatting parameters
+        can be supplied and work in the normal manner.
+
+  == render('/partials/example-fig.*',
+    caption: "Customising locale structure",
+    localisation: custom_locale,
+    code: role_name,
+    custom_config: custom_locale_config,
+    raw_config: custom_locale_config_raw,
+    hide_html_output: true) do
+
+    p.govuk-body
+      | There are many approaches to organising localisation data and while the default
+        will work for most projects, sometimes a different approach can be beneficial. This
+        is especially true when working with external localisation agencies or when dealing
+        with large volumes of copy.
+
+    p.govuk-body
+      | To customise the location of our localisation strings, we can
+        #{link_to('configure', '/introduction/configuration').html_safe} the schema as
+        part of the application's initialisation process.
+
+    h4.govuk-heading-s Contexts
+
+    p.govuk-body
+      | There are three contexts supported by the form builder: <em>label</em>,
+        <em>legend</em> and <em>hint</em>. Custom locale schemas are
+        configured using an array of symbols that match your locale structure.
+
+    p.govuk-body
+      | The special value <code>__context__</code> is used to represent the
+        current translation context. It will automatically be replaced with
+        either <em>label</em>, <em>legend</em> or <em>hint</em> when the
+        translation key is generated.
+
+    p.govuk-body
+      | When retrieving a localised string the builder first checks whether
+        a contextual schema has been set for the context. If there hasn't,
+        the <code>localisation_schema_fallback</code> key will be used. <strong>It is
+        the only one set by default</strong>.
