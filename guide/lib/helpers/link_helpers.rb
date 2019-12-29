@@ -22,6 +22,10 @@ module Helpers
       'https://www.rubydoc.info/gems/govuk_design_system_formbuilder/GOVUKDesignSystemFormBuilder/Builder'
     end
 
+    def config_documentation_link
+      'https://www.rubydoc.info/gems/govuk_design_system_formbuilder/GOVUKDesignSystemFormBuilder'
+    end
+
     def github_link
       'https://github.com/DFE-Digital/govuk_design_system_formbuilder'
     end
