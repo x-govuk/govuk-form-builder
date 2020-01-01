@@ -42,7 +42,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency("adsf-live", "~> 1.4.2")
   s.add_development_dependency("htmlbeautifier", "~> 1.3.1")
   s.add_development_dependency("nanoc", "~> 4.11")
-  s.add_development_dependency("rouge", "~> 3.13.0")
+  s.add_development_dependency("rouge", "~> 3.14.0")
   s.add_development_dependency("rubypants", "~> 0.7.0")
   s.add_development_dependency("sassc", "~> 2.2.1")
   s.add_development_dependency("sass")
