@@ -39,3 +39,15 @@ class Project
   include ActiveModel::Model
   attr_accessor(:id, :name, :description)
 end
+
+Guest = Struct.new(:name, :favourite_colour, :projects, :cv, :born_on, keyword_init: true) do
+  def self.example
+    new(
+      name: 'Minnie von Mouse',
+      favourite_colour: 'red',
+      projects: [4, 5, 6],
+      cv: 'Basic vocabulary',
+      born_on: Date.new(1974, 7, 1)
+    )
+  end
+end

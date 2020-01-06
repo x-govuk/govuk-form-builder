@@ -289,5 +289,14 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         expect(subject).to be_nil
       end
     end
+
+    context 'when the object does not support errors' do
+      let(:object) { Guest.example }
+      subject { builder.send(method) }
+
+      specify 'no error should be raised' do
+        expect { subject }.not_to raise_error
+      end
+    end
   end
 end
