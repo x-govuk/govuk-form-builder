@@ -50,4 +50,12 @@ shared_examples 'a field that supports errors' do
       expect(subject).not_to have_tag('span', with: { class: 'govuk-error-message' })
     end
   end
+
+  context 'when the object does not support errors' do
+    let(:object) { Guest.example }
+
+    specify 'no error should be raised' do
+      expect { subject }.not_to raise_error
+    end
+  end
 end
