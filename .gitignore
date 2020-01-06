@@ -9,5 +9,6 @@ guide/tmp
 guide/output
 guide/*.log
 guide/node_modules
+/node_modules
 
 crash.log
