@@ -8,7 +8,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        return nil unless has_errors?
+        return unless has_errors?
 
         content_tag('span', class: 'govuk-error-message', id: error_id) do
           safe_join(

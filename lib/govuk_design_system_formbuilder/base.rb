@@ -34,6 +34,8 @@ module GOVUKDesignSystemFormBuilder
     end
 
     def has_errors?
+      return unless @builder.object.respond_to?(:errors)
+
       @builder.object.errors.any? &&
         @builder.object.errors.messages.dig(@attribute_name).present?
     end

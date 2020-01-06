@@ -10,7 +10,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        return nil unless object_has_errors?
+        return unless object_has_errors?
 
         content_tag('div', class: summary_class, **error_summary_attributes) do
           safe_join(
@@ -65,6 +65,8 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def object_has_errors?
+        return unless @builder.object.respond_to?(:errors)
+
         @builder.object.errors.any?
       end
 
