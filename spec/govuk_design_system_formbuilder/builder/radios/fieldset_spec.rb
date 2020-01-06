@@ -122,5 +122,26 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
     end
+
+    context 'with hint_text' do
+      subject do
+        builder.send(*args) do
+          builder.safe_join(
+            [
+              builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label }, hint_text: 'red'),
+              builder.govuk_radio_button(:favourite_colour, :green, label: { text: green_label }, hint_text: 'green')
+            ]
+          )
+        end
+      end
+
+      specify 'the hint should be associated with the correct radio button' do
+        %i[red green].each do |value|
+          hint_id = "person-favourite-colour-#{value}-hint"
+          expect(subject).to have_tag('input', with: { "aria-describedby" => hint_id })
+          expect(subject).to have_tag('span', with: { class: 'govuk-hint', id: hint_id })
+        end
+      end
+    end
   end
 end
