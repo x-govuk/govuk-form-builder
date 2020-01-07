@@ -1,9 +1,25 @@
-class Person
+class Project
   include ActiveModel::Model
-  attr_accessor(:name, :born_on, :gender, :over_18, :favourite_colour, :favourite_colour_reason)
-  attr_accessor(:projects, :project_responsibilities)
-  attr_accessor(:cv)
-  attr_accessor(:photo)
+  attr_accessor(:id, :name, :description)
+end
+
+class Being
+  attr_accessor(
+    :name,
+    :born_on,
+    :gender,
+    :over_18,
+    :favourite_colour,
+    :favourite_colour_reason,
+    :projects,
+    :project_responsibilities,
+    :cv,
+    :photo
+  )
+end
+
+class Person < Being
+  include ActiveModel::Model
 
   validates :name, presence: { message: 'Enter a name' }
   validates :favourite_colour, presence: { message: 'Choose a favourite colour' }
@@ -35,12 +51,15 @@ private
   end
 end
 
-class Project
-  include ActiveModel::Model
-  attr_accessor(:id, :name, :description)
-end
+class Guest < Being
+  def initialize(name:, favourite_colour:, projects:, cv:, born_on:)
+    self.name             = name
+    self.favourite_colour = favourite_colour
+    self.projects         = projects
+    self.cv               = cv
+    self.born_on          = born_on
+  end
 
-Guest = Struct.new(:name, :favourite_colour, :projects, :cv, :born_on, keyword_init: true) do
   def self.example
     new(
       name: 'Minnie von Mouse',

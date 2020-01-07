@@ -294,8 +294,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:object) { Guest.example }
       subject { builder.send(method) }
 
-      specify 'no error should be raised' do
-        expect { subject }.not_to raise_error
+      specify 'an error should be raised' do
+        expect { subject }.to raise_error(NoMethodError, /errors/)
       end
     end
   end
