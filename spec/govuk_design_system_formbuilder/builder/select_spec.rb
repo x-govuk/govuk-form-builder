@@ -30,6 +30,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     it_behaves_like 'a field that supports setting the label via localisation'
     it_behaves_like 'a field that supports setting the hint via localisation'
 
+    it_behaves_like 'a field that accepts a plain ruby object' do
+      let(:described_element) { 'select' }
+    end
+
     specify 'output should be a form group containing a label and select box' do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
         expect(fg).to have_tag('select')

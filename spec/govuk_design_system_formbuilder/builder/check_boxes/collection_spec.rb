@@ -38,6 +38,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     it_behaves_like 'a field that supports setting the legend via localisation'
     it_behaves_like 'a field that supports setting the hint via localisation'
 
+    it_behaves_like 'a field that accepts a plain ruby object' do
+      let(:described_element) { ['input', { with: { type: 'checkbox' }, count: projects.size }] }
+    end
+
     describe 'check boxes' do
       specify 'output should contain the correct number of check boxes' do
         expect(subject).to have_tag('div', with: { 'data-module' => 'govuk-checkboxes' }) do |cb|

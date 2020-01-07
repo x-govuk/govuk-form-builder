@@ -28,6 +28,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     it_behaves_like 'a field that supports setting the hint via localisation'
     it_behaves_like 'a field that supports setting the legend via localisation'
 
+    it_behaves_like 'a field that accepts a plain ruby object' do
+      let(:described_element) { 'fieldset' }
+    end
+
     context 'when no block is supplied' do
       subject { builder.send(*args) }
       specify { expect { subject }.to raise_error(NoMethodError, /undefined method.*call/) }
