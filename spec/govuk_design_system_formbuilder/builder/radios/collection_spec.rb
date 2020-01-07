@@ -44,6 +44,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     it_behaves_like 'a field that supports setting the hint via localisation'
     it_behaves_like 'a field that supports setting the legend via localisation'
 
+    it_behaves_like 'a field that accepts a plain ruby object' do
+      let(:described_element) { ['input', { with: { type: 'radio' }, count: colours.size }] }
+    end
+
     context 'radio buttons' do
       specify 'each radio button should have the correct classes' do
         expect(subject).to have_tag('input', with: { class: %w(govuk-radios__input) }, count: colours.size)
