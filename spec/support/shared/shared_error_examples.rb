@@ -54,6 +54,10 @@ shared_examples 'a field that supports errors' do
   context 'when the object does not support errors' do
     let(:object) { Guest.example }
 
+    specify 'should correctly render the form group' do
+      expect(subject).to have_tag('div', with: { class: 'govuk-form-group' })
+    end
+
     specify 'no error should be raised' do
       expect { subject }.not_to raise_error
     end
