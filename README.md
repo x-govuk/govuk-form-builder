@@ -129,6 +129,12 @@ Currently we're using [GOVUK Lint](https://github.com/alphagov/govuk-lint) to
 ensure code meets the GOV.UK guidelines. Please ensure that any PRs also adhere
 to this standard.
 
+To help keep the logs clean and tidy, please configure git to use your full name:
+
+```sh
+git config --global user.name "Julius Hibbert"
+```
+
 ## Thanks 👩🏽‍⚖️
 
 This project was inspired by [Ministry of Justice's GovukElementsFormBuilder](https://github.com/ministryofjustice/govuk_elements_form_builder),
