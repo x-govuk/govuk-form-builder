@@ -64,6 +64,7 @@ module Helpers
         'Form builder documentation for number fields' => 'https://www.rubydoc.info/gems/govuk_design_system_formbuilder/GOVUKDesignSystemFormBuilder/Builder#govuk_number_field-instance_method',
         'Form builder documentation for telephone number fields' => 'https://www.rubydoc.info/gems/govuk_design_system_formbuilder/GOVUKDesignSystemFormBuilder/Builder#govuk_phone_field-instance_method',
         'Form builder documentation for email fields' => 'https://www.rubydoc.info/gems/govuk_design_system_formbuilder/GOVUKDesignSystemFormBuilder/Builder#govuk_email_field-instance_method',
+        'Form builder documentation for password fields' => 'https://www.rubydoc.info/gems/govuk_design_system_formbuilder/GOVUKDesignSystemFormBuilder/Builder#govuk_password_field-instance_method',
         'Form builder documentation for URL fields' => 'https://www.rubydoc.info/gems/govuk_design_system_formbuilder/GOVUKDesignSystemFormBuilder/Builder#govuk_url_field-instance_method',
 
         'GOV.UK design system text input' => 'https://design-system.service.gov.uk/components/text-input/',
