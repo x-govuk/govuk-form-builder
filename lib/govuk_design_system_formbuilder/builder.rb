@@ -80,6 +80,30 @@ module GOVUKDesignSystemFormBuilder
       Elements::Inputs::Email.new(self, object_name, attribute_name, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
 
+    # Generates a input of type +password+
+    #
+    # @param attribute_name [Symbol] The name of the attribute
+    # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
+    # @param width [Integer,String] sets the width of the input, can be +2+, +3+ +4+, +5+, +10+ or +20+ characters
+    #   or +one-quarter+, +one-third+, +one-half+, +two-thirds+ or +full+ width of the container
+    # @param [Hash] label configures the associated label
+    # @option label text [String] the label text
+    # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
+    # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
+    # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
+    # @return [ActiveSupport::SafeBuffer] HTML output
+    # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
+    # @see https://design-system.service.gov.uk/patterns/passwords/ GOV.UK Password patterns
+    #
+    # @example A password field
+    #   = f.govuk_password_field :password,
+    #     label: { text: 'Enter your password' }
+    def govuk_password_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
+      Elements::Inputs::Password.new(self, object_name, attribute_name, hint_text: hint_text, label: label, width: width, **args, &block).html
+    end
+
     # Generates a input of type +url+
     #
     # @param attribute_name [Symbol] The name of the attribute
