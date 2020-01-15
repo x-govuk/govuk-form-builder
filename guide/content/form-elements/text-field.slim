@@ -73,6 +73,22 @@ p.govuk-body
 
       tr.govuk-table__row
         td.govuk-table__cell
+          code #govuk_password_field
+        td.govuk-table__cell
+          code password
+        td.govuk-table__cell
+          == link_to 'MDN', 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password'
+          span.govuk-visually-hidden
+            ' documentation for number inputs
+
+          ' ,
+
+          == link_to 'WHATWG', 'https://html.spec.whatwg.org/multipage/input.html#password-state-(type=password)'
+          span.govuk-visually-hidden
+            ' standard document for number inputs
+
+      tr.govuk-table__row
+        td.govuk-table__cell
           code #govuk_url_field
         td.govuk-table__cell
           code url

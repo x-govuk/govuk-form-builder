@@ -80,6 +80,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           it_behaves_like 'an error summary linking directly to a form element', :govuk_phone_field
           it_behaves_like 'an error summary linking directly to a form element', :govuk_url_field
           it_behaves_like 'an error summary linking directly to a form element', :govuk_email_field
+          it_behaves_like 'an error summary linking directly to a form element', :govuk_password_field
           it_behaves_like 'an error summary linking directly to a form element', :govuk_file_field
           it_behaves_like 'an error summary linking directly to a form element', :govuk_text_area, 'textarea'
 
