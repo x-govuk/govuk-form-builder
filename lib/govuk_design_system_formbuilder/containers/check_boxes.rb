@@ -1,9 +1,10 @@
 module GOVUKDesignSystemFormBuilder
   module Containers
     class CheckBoxes < Base
-      def initialize(builder, small:)
+      def initialize(builder, small:, classes: nil)
         @builder = builder
         @small   = small
+        @classes = classes
       end
 
       def html
@@ -17,6 +18,7 @@ module GOVUKDesignSystemFormBuilder
       def check_boxes_classes
         %w(govuk-checkboxes).tap do |c|
           c.push('govuk-checkboxes--small') if @small
+          c.push(@classes) if @classes
         end
       end
     end
