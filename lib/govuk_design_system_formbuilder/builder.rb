@@ -350,6 +350,7 @@ module GOVUKDesignSystemFormBuilder
     #   When a +Proc+ is provided it must take a single argument that is a single member of the collection
     # @param hint_text [String] The content of the fieldset hint. No hint will be injected if left +nil+
     # @param small [Boolean] controls whether small check boxes are used instead of regular-sized ones
+    # @param classes [String] Classes to add to the checkbox container.
     # @param legend [Hash] options for configuring the legend
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
@@ -371,8 +372,9 @@ module GOVUKDesignSystemFormBuilder
     #    :description,
     #    legend: { text: 'What do you want in your sandwich?', size: 'm' },
     #    hint_text: "If it isn't listed here, tough luck",
-    #    inline: false
-    def govuk_collection_check_boxes(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: {}, small: false, &block)
+    #    inline: false,
+    #    classes: 'app-overflow-scroll',
+    def govuk_collection_check_boxes(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: {}, small: false, classes: nil, &block)
       Elements::CheckBoxes::Collection.new(
         self,
         object_name,
@@ -384,6 +386,7 @@ module GOVUKDesignSystemFormBuilder
         hint_text: hint_text,
         legend: legend,
         small: small,
+        classes: classes,
         &block
       ).html
     end

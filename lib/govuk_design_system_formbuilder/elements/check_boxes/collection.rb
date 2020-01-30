@@ -6,7 +6,7 @@ module GOVUKDesignSystemFormBuilder
         include Traits::Hint
         include Traits::Supplemental
 
-        def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint_method: nil, hint_text:, legend:, small:, &block)
+        def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint_method: nil, hint_text:, legend:, small:, classes:, &block)
           super(builder, object_name, attribute_name, &block)
 
           @collection    = collection
@@ -16,6 +16,7 @@ module GOVUKDesignSystemFormBuilder
           @small         = small
           @legend        = legend
           @hint_text     = hint_text
+          @classes       = classes
         end
 
         def html
@@ -26,7 +27,7 @@ module GOVUKDesignSystemFormBuilder
                   hint_element.html,
                   error_element.html,
                   supplemental_content.html,
-                  Containers::CheckBoxes.new(@builder, small: @small).html do
+                  Containers::CheckBoxes.new(@builder, small: @small, classes: @classes).html do
                     build_collection
                   end
                 ]

@@ -68,6 +68,16 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
 
+      context 'check box classes' do
+        context 'when extra css classes are specified in the options' do
+          subject { builder.send(*args, classes: 'foo') }
+
+          specify "should have the additional class 'foo'" do
+            expect(subject).to have_tag('div', with: { class: %w(govuk-checkboxes foo) })
+          end
+        end
+      end
+
       context 'check box labels' do
         specify 'labels should contain the correct content' do
           projects.map(&:name).each do |label_text|
