@@ -196,6 +196,16 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           end
         end
       end
+
+      context 'radio button classes' do
+        context 'when extra css classes are specified in the options' do
+          subject { builder.send(*args, classes: 'foo') }
+
+          specify "should have the additional class 'foo'" do
+            expect(subject).to have_tag('div', with: { class: %w(govuk-radios foo) })
+          end
+        end
+      end
     end
   end
 end

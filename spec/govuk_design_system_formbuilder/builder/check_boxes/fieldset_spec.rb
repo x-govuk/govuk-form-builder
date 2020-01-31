@@ -9,8 +9,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     let(:aria_described_by_target) { 'fieldset' }
     let(:args) { [method, attribute] }
 
-    subject do
-      builder.send(*args) do
+    let(:example_block) do
+      proc do
         builder.safe_join(
           projects.map do |p|
             builder.govuk_check_box(attribute, p.id)
@@ -18,6 +18,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         )
       end
     end
+
+    subject { builder.send(*args, &example_block) }
 
     it_behaves_like 'a field that supports errors' do
       let(:error_message) { /Select at least one project/ }
@@ -47,6 +49,16 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       specify 'output should contain check boxes' do
         expect(subject).to have_tag('div', with: { class: 'govuk-checkboxes', 'data-module' => 'govuk-checkboxes' }) do
           expect(subject).to have_tag('input', with: { type: 'checkbox' }, count: 3)
+        end
+      end
+
+      context 'check boxes classes' do
+        context 'when extra css classes are specified in the options' do
+          subject { builder.send(*args, classes: 'foo', &example_block) }
+
+          specify "should have the additional class 'foo'" do
+            expect(subject).to have_tag('div', with: { class: %w(govuk-checkboxes foo) })
+          end
         end
       end
 
