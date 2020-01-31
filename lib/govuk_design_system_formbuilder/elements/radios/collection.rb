@@ -6,7 +6,7 @@ module GOVUKDesignSystemFormBuilder
         include Traits::Hint
         include Traits::Supplemental
 
-        def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint_method:, hint_text:, legend:, inline:, small:, bold_labels:, &block)
+        def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint_method:, hint_text:, legend:, inline:, small:, bold_labels:, classes:, &block)
           super(builder, object_name, attribute_name, &block)
 
           @collection    = collection
@@ -17,6 +17,7 @@ module GOVUKDesignSystemFormBuilder
           @small         = small
           @legend        = legend
           @hint_text     = hint_text
+          @classes       = classes
           @bold_labels   = hint_method.present? || bold_labels
         end
 
@@ -28,7 +29,7 @@ module GOVUKDesignSystemFormBuilder
                   hint_element.html,
                   error_element.html,
                   supplemental_content.html,
-                  Containers::Radios.new(@builder, inline: @inline, small: @small).html do
+                  Containers::Radios.new(@builder, inline: @inline, small: @small, classes: @classes).html do
                     safe_join(build_collection)
                   end
                 ]

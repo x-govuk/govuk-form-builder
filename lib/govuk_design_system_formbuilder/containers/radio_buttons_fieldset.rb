@@ -4,13 +4,14 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Hint
       include Traits::Error
 
-      def initialize(builder, object_name, attribute_name, hint_text:, legend:, inline:, small:, &block)
+      def initialize(builder, object_name, attribute_name, hint_text:, legend:, inline:, small:, classes:, &block)
         super(builder, object_name, attribute_name)
 
         @inline        = inline
         @small         = small
         @legend        = legend
         @hint_text     = hint_text
+        @classes       = classes
         @block_content = capture { block.call }
       end
 
@@ -21,7 +22,7 @@ module GOVUKDesignSystemFormBuilder
               [
                 hint_element.html,
                 error_element.html,
-                Containers::Radios.new(@builder, inline: @inline, small: @small).html do
+                Containers::Radios.new(@builder, inline: @inline, small: @small, classes: @classes).html do
                   @block_content
                 end
               ]

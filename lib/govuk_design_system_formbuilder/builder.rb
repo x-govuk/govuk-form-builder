@@ -258,7 +258,7 @@ module GOVUKDesignSystemFormBuilder
     #    legend: { text: 'Pick your favourite colour', size: 'm' },
     #    hint_text: 'If you cannot find the exact match choose something close',
     #    inline: false
-    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: {}, inline: false, small: false, bold_labels: false, &block)
+    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: {}, inline: false, small: false, bold_labels: false, classes: nil, &block)
       Elements::Radios::Collection.new(
         self,
         object_name,
@@ -272,6 +272,7 @@ module GOVUKDesignSystemFormBuilder
         inline: inline,
         small: small,
         bold_labels: bold_labels,
+        classes: classes,
         &block
       ).html
     end
@@ -300,8 +301,8 @@ module GOVUKDesignSystemFormBuilder
     #    = f.govuk_radio_divider
     #    = f.govuk_radio_button :favourite_colour, :yellow, label: { text: 'Yellow' }
     #
-    def govuk_radio_buttons_fieldset(attribute_name, hint_text: nil, legend: {}, inline: false, small: false, &block)
-      Containers::RadioButtonsFieldset.new(self, object_name, attribute_name, hint_text: hint_text, legend: legend, inline: inline, small: small, &block).html
+    def govuk_radio_buttons_fieldset(attribute_name, hint_text: nil, legend: {}, inline: false, small: false, classes: nil, &block)
+      Containers::RadioButtonsFieldset.new(self, object_name, attribute_name, hint_text: hint_text, legend: legend, inline: inline, small: small, classes: classes, &block).html
     end
 
     # Generates a radio button
@@ -409,7 +410,7 @@ module GOVUKDesignSystemFormBuilder
     #    = f.govuk_check_box :desired_filling, :cheese, label: { text: 'Cheese' }, link_errors: true
     #    = f.govuk_check_box :desired_filling, :tomato, label: { text: 'Tomato' }
     #
-    def govuk_check_boxes_fieldset(attribute_name, legend: {}, hint_text: {}, small: false, &block)
+    def govuk_check_boxes_fieldset(attribute_name, legend: {}, hint_text: {}, small: false, classes: nil, &block)
       Containers::CheckBoxesFieldset.new(
         self,
         object_name,
@@ -417,6 +418,7 @@ module GOVUKDesignSystemFormBuilder
         hint_text: hint_text,
         legend: legend,
         small: small,
+        classes: classes,
         &block
       ).html
     end
