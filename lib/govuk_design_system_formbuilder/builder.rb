@@ -238,6 +238,7 @@ module GOVUKDesignSystemFormBuilder
     # @param inline [Boolean] controls whether the radio buttons are displayed inline or not
     # @param small [Boolean] controls whether small radio buttons are used instead of regular-sized ones
     # @param bold_labels [Boolean] controls whether the radio button labels are bold
+    # @param classes [String] Classes to add to the radio button container.
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+, defaults to +h1+
@@ -290,6 +291,7 @@ module GOVUKDesignSystemFormBuilder
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
     # @param block [Block] a block of HTML that will be used to populate the fieldset
+    # @param classes [String] Classes to add to the radio button container.
     # @see https://design-system.service.gov.uk/components/radios/ GOV.UK Radios
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
@@ -401,6 +403,7 @@ module GOVUKDesignSystemFormBuilder
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
+    # @param classes [String] Classes to add to the checkbox container.
     # @param block [Block] a block of HTML that will be used to populate the fieldset
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
