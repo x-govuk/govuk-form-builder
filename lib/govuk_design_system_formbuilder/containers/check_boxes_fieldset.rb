@@ -4,12 +4,13 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Error
       include Traits::Hint
 
-      def initialize(builder, object_name, attribute_name, hint_text:, legend:, small:, &block)
+      def initialize(builder, object_name, attribute_name, hint_text:, legend:, small:, classes:, &block)
         super(builder, object_name, attribute_name, &block)
 
         @legend        = legend
         @hint_text     = hint_text
         @small         = small
+        @classes       = classes
         @block_content = capture { block.call }
       end
 
@@ -20,7 +21,7 @@ module GOVUKDesignSystemFormBuilder
               [
                 hint_element.html,
                 error_element.html,
-                Containers::CheckBoxes.new(@builder, small: @small).html do
+                Containers::CheckBoxes.new(@builder, small: @small, classes: @classes).html do
                   @block_content
                 end
               ]

@@ -238,6 +238,7 @@ module GOVUKDesignSystemFormBuilder
     # @param inline [Boolean] controls whether the radio buttons are displayed inline or not
     # @param small [Boolean] controls whether small radio buttons are used instead of regular-sized ones
     # @param bold_labels [Boolean] controls whether the radio button labels are bold
+    # @param classes [String] Classes to add to the radio button container.
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+, defaults to +h1+
@@ -258,7 +259,7 @@ module GOVUKDesignSystemFormBuilder
     #    legend: { text: 'Pick your favourite colour', size: 'm' },
     #    hint_text: 'If you cannot find the exact match choose something close',
     #    inline: false
-    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: {}, inline: false, small: false, bold_labels: false, &block)
+    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: {}, inline: false, small: false, bold_labels: false, classes: nil, &block)
       Elements::Radios::Collection.new(
         self,
         object_name,
@@ -272,6 +273,7 @@ module GOVUKDesignSystemFormBuilder
         inline: inline,
         small: small,
         bold_labels: bold_labels,
+        classes: classes,
         &block
       ).html
     end
@@ -289,6 +291,7 @@ module GOVUKDesignSystemFormBuilder
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
     # @param block [Block] a block of HTML that will be used to populate the fieldset
+    # @param classes [String] Classes to add to the radio button container.
     # @see https://design-system.service.gov.uk/components/radios/ GOV.UK Radios
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
@@ -300,8 +303,8 @@ module GOVUKDesignSystemFormBuilder
     #    = f.govuk_radio_divider
     #    = f.govuk_radio_button :favourite_colour, :yellow, label: { text: 'Yellow' }
     #
-    def govuk_radio_buttons_fieldset(attribute_name, hint_text: nil, legend: {}, inline: false, small: false, &block)
-      Containers::RadioButtonsFieldset.new(self, object_name, attribute_name, hint_text: hint_text, legend: legend, inline: inline, small: small, &block).html
+    def govuk_radio_buttons_fieldset(attribute_name, hint_text: nil, legend: {}, inline: false, small: false, classes: nil, &block)
+      Containers::RadioButtonsFieldset.new(self, object_name, attribute_name, hint_text: hint_text, legend: legend, inline: inline, small: small, classes: classes, &block).html
     end
 
     # Generates a radio button
@@ -400,6 +403,7 @@ module GOVUKDesignSystemFormBuilder
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
+    # @param classes [String] Classes to add to the checkbox container.
     # @param block [Block] a block of HTML that will be used to populate the fieldset
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
@@ -409,7 +413,7 @@ module GOVUKDesignSystemFormBuilder
     #    = f.govuk_check_box :desired_filling, :cheese, label: { text: 'Cheese' }, link_errors: true
     #    = f.govuk_check_box :desired_filling, :tomato, label: { text: 'Tomato' }
     #
-    def govuk_check_boxes_fieldset(attribute_name, legend: {}, hint_text: {}, small: false, &block)
+    def govuk_check_boxes_fieldset(attribute_name, legend: {}, hint_text: {}, small: false, classes: nil, &block)
       Containers::CheckBoxesFieldset.new(
         self,
         object_name,
@@ -417,6 +421,7 @@ module GOVUKDesignSystemFormBuilder
         hint_text: hint_text,
         legend: legend,
         small: small,
+        classes: classes,
         &block
       ).html
     end

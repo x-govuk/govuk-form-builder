@@ -3,10 +3,11 @@ module GOVUKDesignSystemFormBuilder
     class Radios < Base
       include Traits::Hint
 
-      def initialize(builder, inline:, small:)
+      def initialize(builder, inline:, small:, classes:)
         @builder = builder
         @inline  = inline
         @small   = small
+        @classes = classes
       end
 
       def html
@@ -21,6 +22,7 @@ module GOVUKDesignSystemFormBuilder
         %w(govuk-radios).tap do |c|
           c.push('govuk-radios--inline') if @inline
           c.push('govuk-radios--small')  if @small
+          c.push(@classes)               if @classes
         end
       end
     end

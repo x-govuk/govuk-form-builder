@@ -39,6 +39,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     context 'when a block containing radio buttons is supplied' do
+      let(:example_block) do
+        proc { builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label }) }
+      end
+
       specify 'output should be a form group containing a form group and fieldset' do
         expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
           expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' })
@@ -53,11 +57,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       context 'layout direction' do
         context 'when inline is specified in the options' do
-          subject do
-            builder.send(*args, inline: true) do
-              builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label })
-            end
-          end
+          subject { builder.send(*args, inline: true, &example_block) }
 
           specify "should have the additional class 'govuk-radios--inline'" do
             expect(subject).to have_tag('div', with: { class: %w(govuk-radios govuk-radios--inline) })
@@ -65,11 +65,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
 
         context 'when inline is not specified in the options' do
-          subject do
-            builder.send(*args) do
-              builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label })
-            end
-          end
+          subject { builder.send(*args, &example_block) }
 
           specify "should have no additional classes" do
             expect(parsed_subject.at_css('.govuk-radios')['class']).to eql('govuk-radios')
@@ -79,11 +75,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       context 'radio button size' do
         context 'when small is specified in the options' do
-          subject do
-            builder.send(*args, small: true) do
-              builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label })
-            end
-          end
+          subject { builder.send(*args, small: true, &example_block) }
 
           specify "should have the additional class 'govuk-radios--small'" do
             expect(subject).to have_tag('div', with: { class: %w(govuk-radios govuk-radios--small) })
@@ -91,14 +83,20 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
 
         context 'when small is not specified in the options' do
-          subject do
-            builder.send(*args) do
-              builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label })
-            end
-          end
+          subject { builder.send(*args, &example_block) }
 
           specify "should not have the additional class 'govuk-radios--small'" do
             expect(parsed_subject.at_css('.govuk-radios')['class']).to eql('govuk-radios')
+          end
+        end
+      end
+
+      context 'radio button classes' do
+        context 'when extra css classes are specified in the options' do
+          subject { builder.send(*args, classes: 'foo', &example_block) }
+
+          specify "should have the additional class 'foo'" do
+            expect(subject).to have_tag('div', with: { class: %w(govuk-radios foo) })
           end
         end
       end
