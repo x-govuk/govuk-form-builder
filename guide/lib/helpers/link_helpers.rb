@@ -46,6 +46,10 @@ module Helpers
       'https://design-system.service.gov.uk/components/button/#stop-users-from-accidentally-sending-information-more-than-once'
     end
 
+    def input_types_for_numbers_link
+      'https://technology.blog.gov.uk/2020/02/24/why-the-gov-uk-design-system-team-changed-the-input-type-for-numbers/'
+    end
+
     def dfe_rails_boilerplate_link
       'https://github.com/DFE-Digital/govuk-rails-boilerplate'
     end

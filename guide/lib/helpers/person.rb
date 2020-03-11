@@ -7,7 +7,8 @@ class Person
     :first_name,
     :last_name,
     :job_title,
-    :postcode
+    :postcode,
+    :account_number
   )
 
   # width examples
