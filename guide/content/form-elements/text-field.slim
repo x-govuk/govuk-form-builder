@@ -116,12 +116,17 @@ section
     code: text_field_with_label_and_hint)
 
   == render('/partials/example-fig.*',
-    caption: "Generating a text input with some extra attributes",
-    code: text_field_with_attributes) do
+    caption: "Numeric text fields",
+    code: text_field_with_numeric_attributes) do
 
     p.govuk-body
       | All values passed into the form helper that aren't among its
         named parameters will be set as HTML attributes.
+
+    p.govuk-body
+      | This feature is useful when requesting non-quantity values like
+        account numbers, payment card numbers and sort codes. There are
+        more details on the reasoning behind this decision in #{link_to("the accompanying blog post", input_types_for_numbers_link).html_safe}.
 
   == render('/partials/example-fig.*',
     caption: "Generating text inputs with custom widths",
