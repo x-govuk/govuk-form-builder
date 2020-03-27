@@ -25,8 +25,8 @@ module GOVUKDesignSystemFormBuilder
               safe_join(
                 [
                   hint_element.html,
-                  error_element.html,
                   supplemental_content.html,
+                  error_element.html,
                   Containers::CheckBoxes.new(@builder, small: @small, classes: @classes).html do
                     build_collection
                   end
