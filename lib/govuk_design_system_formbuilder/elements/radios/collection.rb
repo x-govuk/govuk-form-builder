@@ -27,8 +27,8 @@ module GOVUKDesignSystemFormBuilder
               safe_join(
                 [
                   hint_element.html,
-                  error_element.html,
                   supplemental_content.html,
+                  error_element.html,
                   Containers::Radios.new(@builder, inline: @inline, small: @small, classes: @classes).html do
                     safe_join(build_collection)
                   end
