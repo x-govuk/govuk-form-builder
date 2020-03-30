@@ -7,10 +7,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     let(:args) { [method] }
     subject { builder.send(method, text) }
 
-    specify 'output should be a form group containing a submit input' do
-      expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-        expect(fg).to have_tag('input', with: { type: 'submit' })
-      end
+    specify 'output should be a submit input' do
+      expect(subject).to have_tag('input', with: { type: 'submit' })
     end
 
     specify 'button should have the correct classes' do

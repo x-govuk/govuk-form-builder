@@ -14,22 +14,20 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        content_tag('div', class: %w(govuk-form-group)) do
-          safe_join(
-            [
-              @builder.submit(
-                @text,
-                class: %w(govuk-button).push(
-                  warning_class,
-                  secondary_class,
-                  padding_class(@block_content.present?)
-                ).compact,
-                **extra_args
-              ),
-              @block_content
-            ]
-          )
-        end
+        safe_join(
+          [
+            @builder.submit(
+              @text,
+              class: %w(govuk-button).push(
+                warning_class,
+                secondary_class,
+                padding_class(@block_content.present?)
+              ).compact,
+              **extra_args
+            ),
+            @block_content
+          ]
+        )
       end
 
     private
