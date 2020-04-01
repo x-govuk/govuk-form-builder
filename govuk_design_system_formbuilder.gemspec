@@ -7,7 +7,7 @@ METADATA = {
   "bug_tracker_uri"   => "https://github.com/DFE-Digital/govuk_design_system_formbuilder/issues",
   "changelog_uri"     => "https://github.com/DFE-Digital/govuk_design_system_formbuilder/releases",
   "documentation_uri" => "https://www.rubydoc.info/gems/govuk_design_system_formbuilder/GOVUKDesignSystemFormBuilder/Builder",
-  "homepage_uri"      => "https://govuk-form-builder.netlify.com",
+  "homepage_uri"      => "https://govuk-form-builder.netlify.app",
   "source_code_uri"   => "https://github.com/DFE-Digital/govuk_design_system_formbuilder"
 }.freeze
 
@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.version     = GOVUKDesignSystemFormBuilder::VERSION
   s.authors     = ["Peter Yates"]
   s.email       = ["peter.yates@graphia.co.uk"]
-  s.homepage    = "https://govuk-form-builder.netlify.com"
+  s.homepage    = "https://govuk-form-builder.netlify.app"
   s.summary     = "GOV.UK-compliant Rails form builder"
   s.description = "A Rails form builder that generates form inputs adhering to the GOV.UK Design System"
   s.license     = "MIT"

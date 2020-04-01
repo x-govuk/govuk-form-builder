@@ -15,14 +15,14 @@ minimising the amount of markup you need to write.
 
 In addition to the basic markup, the more-advanced functionality of the Design
 System is exposed via the API. Adding [JavaScript-enhanced word count
-checking](https://govuk-form-builder.netlify.com/form-elements/text-area/)
+checking](https://govuk-form-builder.netlify.app/form-elements/text-area/)
 to text areas or [setting the size and weight of
-labels](https://govuk-form-builder.netlify.com/introduction/labels-hints-and-legends/)
+labels](https://govuk-form-builder.netlify.app/introduction/labels-hints-and-legends/)
 on text fields requires only a single argument.
 
 ## Documentation 📚
 
-The gem comes with [a full guide](https://govuk-form-builder.netlify.com/) that
+The gem comes with [a full guide](https://govuk-form-builder.netlify.app/) that
 covers most aspects of day-to-day use, along with code and output examples. The guide
 is generated from the builder itself so it will always be up to date.
 
