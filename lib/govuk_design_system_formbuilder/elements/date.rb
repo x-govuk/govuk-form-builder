@@ -21,9 +21,9 @@ module GOVUKDesignSystemFormBuilder
           Containers::Fieldset.new(@builder, @object_name, @attribute_name, legend: @legend, described_by: [error_id, hint_id, supplemental_id]).html do
             safe_join(
               [
+                supplemental_content.html,
                 hint_element.html,
                 error_element.html,
-                supplemental_content.html,
                 content_tag('div', class: 'govuk-date-input') do
                   safe_join([day, month, year])
                 end
