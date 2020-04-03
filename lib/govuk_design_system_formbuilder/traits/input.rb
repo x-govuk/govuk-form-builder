@@ -15,8 +15,8 @@ module GOVUKDesignSystemFormBuilder
           safe_join(
             [
               label_element.html,
-              hint_element.html,
               supplemental_content.html,
+              hint_element.html,
               error_element.html,
               @builder.send(
                 builder_method,
