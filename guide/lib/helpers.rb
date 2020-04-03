@@ -2,7 +2,7 @@ require 'pry'
 require 'action_view'
 require 'active_model'
 require 'htmlbeautifier'
-Dir.glob(File.join('./lib', '**', '*.rb')).each { |f| require f }
+Dir.glob(File.join('./lib', '**', '*.rb')).sort.each { |f| require f }
 
 $LOAD_PATH.unshift(File.expand_path("../../lib", "lib"))
 require 'govuk_design_system_formbuilder'

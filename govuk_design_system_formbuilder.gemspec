@@ -30,9 +30,9 @@ Gem::Specification.new do |s|
     s.add_dependency(*VersionFormatter.new(lib, rails_version, exact_rails_version).to_a)
   end
 
-  s.add_development_dependency("rubocop-govuk", "~> 2")
+  s.add_development_dependency("rubocop-govuk", "~> 3")
   s.add_development_dependency("pry", "~> 0.13.0")
-  s.add_development_dependency("pry-byebug", "~> 3.7", ">= 3.7.0")
+  s.add_development_dependency("pry-byebug", "~> 3.9", ">= 3.9.0")
   s.add_development_dependency("rspec-html-matchers", "~> 0")
   s.add_development_dependency("rspec-rails", "~> 4.0")
   s.add_development_dependency("simplecov", "~> 0")
