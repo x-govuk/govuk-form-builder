@@ -19,9 +19,9 @@ module GOVUKDesignSystemFormBuilder
           safe_join(
             [
               label_element.html,
+              supplemental_content.html,
               hint_element.html,
               error_element.html,
-              supplemental_content.html,
               @builder.file_field(
                 @attribute_name,
                 id: field_id(link_errors: true),
