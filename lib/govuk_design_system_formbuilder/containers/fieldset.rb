@@ -23,6 +23,7 @@ module GOVUKDesignSystemFormBuilder
 
       def legend_defaults
         {
+          hidden: false,
           text: nil,
           tag:  config.default_legend_tag,
           size: config.default_legend_size
@@ -49,7 +50,10 @@ module GOVUKDesignSystemFormBuilder
         size = @legend.dig(:size)
         fail "invalid size '#{size}', must be #{LEGEND_SIZES.join(', ')}" unless size.in?(LEGEND_SIZES)
 
-        ["govuk-fieldset__legend", "govuk-fieldset__legend--#{size}"]
+        classes = %W(govuk-fieldset__legend govuk-fieldset__legend--#{size})
+        classes.push('govuk-visually-hidden') if @legend.dig(:hidden)
+
+        classes
       end
 
       def legend_heading_classes
