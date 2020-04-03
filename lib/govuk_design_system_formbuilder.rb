@@ -50,7 +50,7 @@ module GOVUKDesignSystemFormBuilder
     localisation_schema_legend: nil
   }.freeze
 
-  DEFAULTS.keys.each { |k| config_accessor(k) { DEFAULTS[k] } }
+  DEFAULTS.each_key { |k| config_accessor(k) { DEFAULTS[k] } }
   # @!endgroup
 
   class << self
