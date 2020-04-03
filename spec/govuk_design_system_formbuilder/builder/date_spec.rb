@@ -54,7 +54,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         specify 'the block content should be between the hint and the date inputs' do
           expect(
             parsed_subject.css([hint_span_selector, block_paragraph_selector, govuk_date_selector].join(',')).map(&:name)
-          ).to eql(%w(span p div))
+          ).to eql(%w(p span div))
         end
       end
     end
