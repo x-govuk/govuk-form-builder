@@ -26,8 +26,8 @@ module GOVUKDesignSystemFormBuilder
             Containers::Fieldset.new(@builder, @object_name, @attribute_name, legend: @legend, described_by: [error_id, hint_id, supplemental_id]).html do
               safe_join(
                 [
-                  hint_element.html,
                   supplemental_content.html,
+                  hint_element.html,
                   error_element.html,
                   Containers::Radios.new(@builder, inline: @inline, small: @small, classes: @classes).html do
                     safe_join(build_collection)
