@@ -6,7 +6,9 @@ module GOVUKDesignSystemFormBuilder
       def localised_text(context)
         key = localisation_key(context)
 
-        return nil unless I18n.exists?(key)
+        # `I18n.exists?(nil)` returns true when `config.i18n.fallbacks` is
+        # enabled, so only proceed if the key is present too
+        return nil unless key.present? && I18n.exists?(key)
 
         I18n.translate(key)
       end
