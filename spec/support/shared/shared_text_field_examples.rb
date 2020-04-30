@@ -82,7 +82,6 @@ shared_examples 'a regular input' do |method_identifier, field_type|
         'one-half'       => 'govuk-!-width-one-half',
         'one-third'      => 'govuk-!-width-one-third',
         'one-quarter'    => 'govuk-!-width-one-quarter'
-
       }.each do |identifier, width_class|
         context "when the width is #{identifier}" do
           let(:identifier) { identifier }

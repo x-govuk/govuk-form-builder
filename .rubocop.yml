@@ -19,3 +19,7 @@ Style/TrailingCommaInArrayLiteral:
   Enabled: false
 Naming/MethodParameterName:
   Enabled: false
+Style/PercentLiteralDelimiters:
+  Enabled: false
+Layout/HashAlignment:
+  Enabled: false
