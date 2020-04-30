@@ -9,7 +9,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
   let(:field_type) { 'textarea' }
   subject { builder.send(*args) }
 
-
   shared_context 'a text area that is associated with a character count description' do
     context 'association with the text area' do
       context 'when there are no errors on the field' do

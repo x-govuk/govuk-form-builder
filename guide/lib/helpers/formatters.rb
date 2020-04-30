@@ -5,10 +5,10 @@ module Helpers
     end
 
     def format_slim(raw, **args)
-      # FIXME investigate pretty slim
-      # FIXME not sure why when we're several
-      #       blocks deep we need to unescape more
-      #       than once
+      # FIXME: investigate pretty slim
+      # FIXME: not sure why when we're several
+      #        blocks deep we need to unescape more
+      #        than once
       beautify(
         CGI.unescapeHTML(
           CGI.unescapeHTML(
@@ -31,7 +31,7 @@ module Helpers
             .gsub("\<\/", "\n\<\/")
             .gsub(/\>\s+\<\/textarea\>/, "></textarea>")
             .strip
-      )
+        )
     end
   end
 end
