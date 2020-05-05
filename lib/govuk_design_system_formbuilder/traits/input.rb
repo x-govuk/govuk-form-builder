@@ -51,7 +51,6 @@ module GOVUKDesignSystemFormBuilder
         return if @width.blank?
 
         case @width
-        when nil then nil
 
           # fixed (character) widths
         when 20 then 'govuk-input--width-20'
