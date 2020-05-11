@@ -105,11 +105,12 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def date_attribute_name(segment)
-        "%<object_name>s[%<attribute_name>s(%<segment>s)]" % {
+        format(
+          "%<object_name>s[%<attribute_name>s(%<segment>s)]",
           object_name: @object_name,
           attribute_name: @attribute_name,
           segment: SEGMENTS.fetch(segment)
-        }
+        )
       end
 
       def date_of_birth_autocomplete_value(segment)
