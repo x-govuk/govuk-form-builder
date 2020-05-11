@@ -24,6 +24,14 @@ module GOVUKDesignSystemFormBuilder
     #     hint_text: 'It says it on your birth certificate',
     #     required: true,
     #     placeholder: 'Ralph Wiggum'
+    #
+    # @example A text field with injected content
+    #   = f.govuk_text_field :pseudonym,
+    #     label: { text: 'Pseudonym' } do
+    #
+    #     p.govuk-inset-text
+    #       | Ensure your stage name is unique
+    #
     def govuk_text_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
       Elements::Inputs::Text.new(self, object_name, attribute_name, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
@@ -51,6 +59,14 @@ module GOVUKDesignSystemFormBuilder
     #     hint_text: 'Include the dialling code',
     #     required: true,
     #     placeholder: '0123 456 789'
+    #
+    # @example A phone field with injected content
+    #   = f.govuk_phone_field :fax_number,
+    #     label: { text: 'Fax number' } do
+    #
+    #     p.govuk-inset-text
+    #       | Yes, fax machines are still a thing
+    #
     def govuk_phone_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
       Elements::Inputs::Phone.new(self, object_name, attribute_name, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
@@ -76,6 +92,14 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_email_field :email_address,
     #     label: { text: 'Enter your email address' },
     #     placeholder: 'ralph.wiggum@springfield.edu'
+    #
+    # @example A email field with injected content
+    #   = f.govuk_phone_field :email_address,
+    #     label: { text: 'Email address' } do
+    #
+    #     p.govuk-inset-text
+    #       | Use your work address
+    #
     def govuk_email_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
       Elements::Inputs::Email.new(self, object_name, attribute_name, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
@@ -100,6 +124,14 @@ module GOVUKDesignSystemFormBuilder
     # @example A password field
     #   = f.govuk_password_field :password,
     #     label: { text: 'Enter your password' }
+    #
+    # @example A password field with injected content
+    #   = f.govuk_password_field :password,
+    #     label: { text: 'Password' } do
+    #
+    #     p.govuk-inset-text
+    #       | Ensure your password is at least 16 characters long
+    #
     def govuk_password_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
       Elements::Inputs::Password.new(self, object_name, attribute_name, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
@@ -125,6 +157,14 @@ module GOVUKDesignSystemFormBuilder
     #     label: { text: 'Enter your favourite website' },
     #     placeholder: 'https://www.gov.uk',
     #     autocomplete: 'url'
+    #
+    # @example A url field with injected content
+    #   = f.govuk_url_field :personal_website,
+    #     label: { text: 'Enter your website' } do
+    #
+    #       p.govuk-inset-text
+    #         | This will be visible on your profile
+    #
     def govuk_url_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
       Elements::Inputs::URL.new(self, object_name, attribute_name, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
@@ -152,6 +192,15 @@ module GOVUKDesignSystemFormBuilder
     #     min: 80,
     #     max: 150,
     #     step: 5
+    #
+    # @example A number field with injected content
+    #   = f.govuk_number_field :height_in_cm,
+    #     label: { text: 'Height in centimetres' } do
+    #
+    #       p.govuk-inset-text
+    #         | If you haven't measured your height in the last 6 months
+    #           do it now
+    #
     def govuk_number_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
       Elements::Inputs::Number.new(self, object_name, attribute_name, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
@@ -183,6 +232,14 @@ module GOVUKDesignSystemFormBuilder
     #     label: { text: 'Tell us about your work history' },
     #     rows: 8,
     #     max_words: 300
+    #
+    # @example A text area with injected content
+    #   = f.govuk_number_field :description,
+    #     label: { text: 'Where did the incident take place?' } do
+    #
+    #     p.govuk-inset-text
+    #       | If you don't know exactly leave this section blank
+    #
     def govuk_text_area(attribute_name, hint_text: nil, label: {}, max_words: nil, max_chars: nil, rows: 5, threshold: nil, **args, &block)
       Elements::TextArea.new(self, object_name, attribute_name, hint_text: hint_text, label: label, max_words: max_words, max_chars: max_chars, rows: rows, threshold: threshold, **args, &block).html
     end
@@ -200,6 +257,22 @@ module GOVUKDesignSystemFormBuilder
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
+    #
+    # @example A select box with hint
+    #   = f.govuk_number_field :grade,
+    #     @grades,
+    #     :id,
+    #     :name,
+    #     hint_text: "If you took the test more than once enter your highest grade"
+    #
+    # @example A select box with injected content
+    #   = f.govuk_number_field :favourite_colour,
+    #     @colours,
+    #     :id,
+    #     :name do
+    #
+    #       p.govuk-inset-text
+    #         | Select the closest match
     def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, html_options: {}, hint_text: nil, label: {}, &block)
       Elements::Select.new(
         self,
@@ -259,6 +332,15 @@ module GOVUKDesignSystemFormBuilder
     #    legend: { text: 'Pick your favourite colour', size: 'm' },
     #    hint_text: 'If you cannot find the exact match choose something close',
     #    inline: false
+    #
+    # @example A collection of radio buttons for grades with injected content
+    #  = f.govuk_collection_radio_buttons :favourite_colour,
+    #    @grades,
+    #    :id,
+    #    :name do
+    #
+    #      p.govuk-inset-text
+    #        | If you took the test more than once enter your highest grade
     def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: {}, inline: false, small: false, bold_labels: false, classes: nil, &block)
       Elements::Radios::Collection.new(
         self,
@@ -325,7 +407,7 @@ module GOVUKDesignSystemFormBuilder
     # @example A collection of radio buttons for favourite colours with a divider
     #
     #  = f.govuk_collection_radio_buttons :favourite_colour, inline: false do
-    #    = f.govuk_radio_button :favourite_colour, :red, label: { text: 'Red' } do
+    #    = f.govuk_radio_button :favourite_colour, :red, label: { text: 'Red' }
     #
     def govuk_radio_button(attribute_name, value, hint_text: nil, label: {}, link_errors: false, &block)
       Elements::Radios::FieldsetRadioButton.new(self, object_name, attribute_name, value, hint_text: hint_text, label: label, link_errors: link_errors, &block).html
@@ -377,6 +459,15 @@ module GOVUKDesignSystemFormBuilder
     #    hint_text: "If it isn't listed here, tough luck",
     #    inline: false,
     #    classes: 'app-overflow-scroll',
+    #
+    # @example A collection of check boxes for types of bread
+    #  = f.govuk_collection_radio_buttons :bread,
+    #    @variety,
+    #    :id,
+    #    :name do
+    #
+    #      p.govuk-inset-text
+    #        | Only Hearty Italian is available with the meal deal menu
     def govuk_collection_check_boxes(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: {}, small: false, classes: nil, &block)
       Elements::CheckBoxes::Collection.new(
         self,
@@ -511,10 +602,14 @@ module GOVUKDesignSystemFormBuilder
     #
     # @see https://github.com/alphagov/govuk-frontend/issues/1449 GOV.UK date input element attributes, using text instead of number
     #
-    # @example A regular date input with a legend and hint
+    # @example A regular date input with a legend, hint and injected content
     #   = f.govuk_date_field :starts_on,
     #     legend: { 'When does your event start?' },
-    #     hint_text: 'Leave this field blank if you don't know exactly' }
+    #     hint_text: 'Leave this field blank if you don't know exactly' } do
+    #
+    #       p.govuk-inset-text
+    #         | If you don't fill this in you won't be eligable for a refund
+    #
     def govuk_date_field(attribute_name, hint_text: nil, legend: {}, date_of_birth: false, omit_day: false, &block)
       Elements::Date.new(self, object_name, attribute_name, hint_text: hint_text, legend: legend, date_of_birth: date_of_birth, omit_day: omit_day, &block).html
     end
@@ -569,8 +664,11 @@ module GOVUKDesignSystemFormBuilder
     # @option args [Hash] args additional arguments are applied as attributes to +input+ element
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     #
-    # @example A photo upload field with file type specifier
-    #   = f.govuk_file_field :photo, label: { text: 'Upload your photo' }, accept: 'image/*'
+    # @example A photo upload field with file type specifier and injected content
+    #   = f.govuk_file_field :photo, label: { text: 'Upload your photo' }, accept: 'image/*' do
+    #
+    #     p.govuk-inset-text
+    #       | Explicit images will result in account termination
     #
     # @see https://design-system.service.gov.uk/components/file-upload/ GOV.UK file upload
     # @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file MDN documentation for file upload
