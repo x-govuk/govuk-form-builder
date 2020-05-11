@@ -11,6 +11,41 @@ p.govuk-body
     into most helpers. This content is inserted after the hint and before the
     form control.
 
+p.govuk-inset-text
+  | Injected content is automatically associated with the element via its
+    <code>aria-describedby</code> attribute allowing assistive technologies to
+    provide the user with a full explanation of what is required.
+
+p.govuk-body
+  | The following helpers support content injection:
+
+ul.govuk-list.govuk-list--bullet
+  li
+    code #govuk_collection_check_boxes
+  li
+    code #govuk_collection_radio_buttons
+  li
+    code #govuk_collection_select
+  li
+    code #govuk_date_field
+  li
+    code #govuk_email_field
+  li
+    code #govuk_file_field
+  li
+    code #govuk_number_field
+  li
+    code #govuk_password_field
+  li
+    code #govuk_phone_field
+  li
+    code #govuk_text_area
+  li
+    code #govuk_text_field
+  li
+    code #govuk_url_field
+
+
 section
 
   == render('/partials/example-fig.*',
@@ -21,8 +56,3 @@ section
     p.govuk-body
       | All content supplied via a block is considered supplementary to the label
         and hint.
-
-    p.govuk-body
-      | It is automatically associated with the element via its
-        <code>aria-describedby</code> attribute allowing assistive technologies to
-        provide the user with a full explanation of what is required.
