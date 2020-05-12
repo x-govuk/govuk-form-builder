@@ -314,7 +314,7 @@ module GOVUKDesignSystemFormBuilder
     # @param classes [String] Classes to add to the radio button container.
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
-    # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+, defaults to +h1+
+    # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
     # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
