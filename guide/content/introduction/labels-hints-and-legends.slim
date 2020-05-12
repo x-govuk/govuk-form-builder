@@ -130,6 +130,15 @@ section
         | The legend size which follows the usual GOV.UK pattern of
           <code>xl</code>, <code>l</code>, <code>m</code> and <code>s</code>
 
+    div.govuk-summary-list__row
+      dt.govuk-summary-list__key
+        code hidden
+
+      dd.govuk-summary-list__value
+        | Legends can be visually hidden when their presence would complicate
+          the form. The hidden value defaults to <code>false</code> and can be
+          overridden with <code>true</code>
+
   == render('/partials/example-fig.*',
     caption: "Radio buttons with a fully-customised legend",
     code: radios_with_legend,

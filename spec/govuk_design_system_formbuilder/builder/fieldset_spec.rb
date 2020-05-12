@@ -6,8 +6,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     let(:legend_text) { 'Current address' }
     let(:inner_text) { 'Where do you live?' }
 
+    let(:legend_options) { { text: legend_text } }
+
     subject do
-      builder.send(method, legend: { text: legend_text }) do
+      builder.send(method, legend: legend_options) do
         builder.tag.span(inner_text)
       end
     end
@@ -16,6 +18,18 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       expect(subject).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
         expect(fs).to have_tag('legend', text: legend_text)
         expect(fs).to have_tag('span', text: inner_text)
+      end
+    end
+
+    context 'when the fieldset legend is configured' do
+      let(:legend_options) { { text: legend_text, size: 'm', tag: 'h3', hidden: true } }
+
+      specify 'output should have classes according to size and visibility' do
+        expect(subject).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
+          expect(fs).to have_tag('legend', with: { class: 'govuk-fieldset__legend--m govuk-visually-hidden' }) do |lg|
+            expect(lg).to have_tag('h3', text: legend_text)
+          end
+        end
       end
     end
 

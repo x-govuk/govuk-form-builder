@@ -315,6 +315,7 @@ module GOVUKDesignSystemFormBuilder
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+, defaults to +h1+
+    # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
     # @example A collection of radio buttons for favourite colours, labels capitalised via a proc
@@ -372,6 +373,7 @@ module GOVUKDesignSystemFormBuilder
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
+    # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
     # @param block [Block] a block of HTML that will be used to populate the fieldset
     # @param classes [String] Classes to add to the radio button container.
     # @see https://design-system.service.gov.uk/components/radios/ GOV.UK Radios
@@ -397,6 +399,7 @@ module GOVUKDesignSystemFormBuilder
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
+    # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
     # @see https://design-system.service.gov.uk/components/radios/ GOV.UK Radios
     # @param block [Block] Any supplied HTML will be wrapped in a conditional
     #   container and only revealed when the radio button is picked
@@ -440,6 +443,7 @@ module GOVUKDesignSystemFormBuilder
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
+    # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
     # @param block [Block] any HTML passed in will be injected into the fieldset, after the hint and before the checkboxes
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
@@ -494,6 +498,7 @@ module GOVUKDesignSystemFormBuilder
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
+    # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
     # @param classes [String] Classes to add to the checkbox container.
     # @param block [Block] a block of HTML that will be used to populate the fieldset
     # @return [ActiveSupport::SafeBuffer] HTML output
@@ -594,6 +599,7 @@ module GOVUKDesignSystemFormBuilder
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
+    # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
     # @param omit_day [Boolean] do not render a day input, only capture month and year
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input group
     # @param date_of_birth [Boolean] if +true+ {https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete#Values birth date auto completion attributes}
@@ -640,6 +646,7 @@ module GOVUKDesignSystemFormBuilder
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
+    # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
     #
     # @example A fieldset containing address fields
     #   = f.govuk_fieldset legend: { text: 'Address' }
