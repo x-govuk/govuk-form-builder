@@ -25,6 +25,9 @@ p.govuk-body
     make changes without the risk of breaking templates and having to learn
     templating languages and hunt down content.
 
+p.govuk-body
+  | You can use HTML in locales if you append the suffix <code>_html</code> to the key.
+
 section
 
   == render('/partials/example-fig.*',
@@ -36,6 +39,23 @@ section
       | Note that despite the <code>text</code> attribute being omitted from
         the label options hash, the other display and formatting parameters
         can be supplied and work in the normal manner.
+
+p.govuk-body
+  | Radio and check box labels use a special key in the locale dictionary composed by the
+    attribute name and the suffix <code>_options</code>. This makes it possible to localise
+    the fieldset legend and each of the individual choices separately.
+
+  == render('/partials/example-fig.*',
+    caption: "Populating radio labels from the localisation data",
+    localisation: contact_type_locale,
+    code: contact_type,
+    sample_data: contact_types_data_raw)
+
+  == render('/partials/example-fig.*',
+    caption: "Populating check box labels from the localisation data",
+    localisation: department_check_boxes_locale,
+    code: department_check_boxes,
+    sample_data: departments_value_data_raw)
 
   == render('/partials/example-fig.*',
     caption: "Customising locale structure",

@@ -302,10 +302,12 @@ module GOVUKDesignSystemFormBuilder
     # @param collection [Enumerable<Object>] Options to be added to the +select+ element
     # @param value_method [Symbol, Proc] The method called against each member of the collection to provide the value.
     #   When a +Proc+ is provided it must take a single argument that is a single member of the collection
-    # @param text_method [Symbol, Proc] The method called against each member of the collection to provide the label text.
-    #   When a +Proc+ is provided it must take a single argument that is a single member of the collection
-    # @param hint_method [Symbol, Proc] The method called against each member of the collection to provide the hint text.
-    #   When a +Proc+ is provided it must take a single argument that is a single member of the collection
+    # @param text_method [Symbol, Proc, nil] The method called against each member of the collection to provide the label text.
+    #   When a +Proc+ is provided it must take a single argument that is a single member of the collection.
+    #   When a +nil+ value is provided the label text will be retrieved from the locale.
+    # @param hint_method [Symbol, Proc, nil] The method called against each member of the collection to provide the hint text.
+    #   When a +Proc+ is provided it must take a single argument that is a single member of the collection.
+    #   When a +nil+ value is provided the hint text will be retrieved from the locale. This is the default and param can be omitted.
     # @param hint_text [String] The content of the fieldset hint. No hint will be injected if left +nil+
     # @param legend [Hash] options for configuring the legend
     # @param inline [Boolean] controls whether the radio buttons are displayed inline or not

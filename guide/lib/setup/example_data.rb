@@ -10,6 +10,27 @@ module Setup
       DATA
     end
 
+    def departments_value_data_raw
+      <<~DATA
+        departments = [
+          OpenStruct.new(id: :sales),
+          OpenStruct.new(id: :marketing),
+          OpenStruct.new(id: :finance),
+          OpenStruct.new(id: :digital)
+        ]
+      DATA
+    end
+
+    def contact_types_data_raw
+      <<~DATA
+        contact_types = [
+          OpenStruct.new(value: :email),
+          OpenStruct.new(value: :phone),
+          OpenStruct.new(value: :letter)
+        ]
+      DATA
+    end
+
     def lunch_options_raw
       <<~DATA
         lunch_options = [
@@ -73,6 +94,14 @@ module Setup
       eval(departments_data_raw)
     end
 
+    def departments_collection
+      eval(departments_value_data_raw)
+    end
+
+    def contact_types
+      eval(contact_types_data_raw)
+    end
+
     def lunch_options
       eval(lunch_options_raw)
     end
@@ -93,6 +122,8 @@ module Setup
     def form_data
       {
         departments: departments,
+        departments_collection: departments_collection,
+        contact_types: contact_types,
         lunch_options: lunch_options,
         primary_colours: primary_colours,
         laptops: laptops
