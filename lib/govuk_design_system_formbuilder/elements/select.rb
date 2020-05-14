@@ -1,6 +1,8 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class Select < Base
+      using PrefixableArray
+
       include Traits::Error
       include Traits::Label
       include Traits::Hint
@@ -50,8 +52,8 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def select_classes
-        %w(govuk-select).tap do |classes|
-          classes.push('govuk-select--error') if has_errors?
+        %w(select).prefix_all(prefix).tap do |classes|
+          classes.push(%(#{prefix}-select--error)) if has_errors?
         end
       end
     end
