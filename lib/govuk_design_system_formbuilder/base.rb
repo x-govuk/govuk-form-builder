@@ -1,8 +1,8 @@
 module GOVUKDesignSystemFormBuilder
   module PrefixableArray
     refine Array do
-      def prefix_all(text, delimiter: '-')
-        self.map { |item| text.concat(delimiter, item) }
+      def prefix(text, delimiter: '-')
+        map { |item| text + delimiter + item }
       end
     end
   end
@@ -20,8 +20,8 @@ module GOVUKDesignSystemFormBuilder
 
   private
 
-    def prefix
-      'govuk' # FIXME pull from config
+    def brand(override = nil)
+      override || config.brand
     end
 
     # returns the id value used for the input
