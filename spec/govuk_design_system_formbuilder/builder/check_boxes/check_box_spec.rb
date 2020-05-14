@@ -32,6 +32,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
+    it_behaves_like 'a field that supports setting the label via localisation'
+
     context 'check box hints' do
       let(:hint_text) { project_x.description }
 

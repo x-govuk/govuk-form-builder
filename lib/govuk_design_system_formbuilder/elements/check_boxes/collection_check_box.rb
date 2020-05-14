@@ -38,7 +38,7 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def hint_element
-          @hint_element ||= Hint.new(@builder, @object_name, @attribute_name, @hint_text, value: @value)
+          @hint_element ||= Elements::Hint.new(@builder, @object_name, @attribute_name, @hint_text, @value, checkbox: true)
         end
       end
     end

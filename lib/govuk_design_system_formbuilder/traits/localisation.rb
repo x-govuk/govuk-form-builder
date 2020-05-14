@@ -4,26 +4,32 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def localised_text(context)
-        key = localisation_key(context)
+        return unless @object_name.present? && @attribute_name.present?
 
-        # `I18n.exists?(nil)` returns true when `config.i18n.fallbacks` is
-        # enabled, so only proceed if the key is present too
-        return nil unless key.present? && I18n.exists?(key)
-
-        I18n.translate(key)
+        localise(context) || localise_html(context)
       end
 
-      def localisation_key(context)
-        return nil unless @object_name.present? && @attribute_name.present?
+      def localise(context)
+        I18n.translate(schema(context), default: nil)
+      end
 
-        schema(context)
+      def localise_html(context)
+        I18n.translate("#{schema(context)}_html", default: nil).try(:html_safe)
       end
 
       def schema(context)
         schema_root(context)
-          .push(@object_name, @attribute_name)
+          .push(*schema_path)
           .map { |e| e == :__context__ ? context : e }
           .join('.')
+      end
+
+      def schema_path
+        if @value.present?
+          [@object_name, "#{@attribute_name}_options", @value]
+        else
+          [@object_name, @attribute_name]
+        end
       end
 
       def schema_root(context)

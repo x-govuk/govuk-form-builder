@@ -25,6 +25,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
+    it_behaves_like 'a field that supports setting the label via localisation'
+
     context 'radio button hints' do
       subject do
         builder.govuk_radio_button(:favourite_colour, :red, hint_text: red_hint)

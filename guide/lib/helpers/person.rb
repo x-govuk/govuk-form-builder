@@ -35,7 +35,8 @@ class Person
     :wednesday_lunch_id,
     :thursday_lunch_id,
     :old_department_description,
-    :laptop
+    :laptop,
+    :contact_type
   )
 
   # checkbox fields
