@@ -11,6 +11,10 @@ module GOVUKDesignSystemFormBuilder
 
   # Default form builder configuration
   #
+  # * +:default_prefix+ sets the value used to prefix all classes, used
+  #   to allow the builder to be used with alternative (similar) design
+  #   systems.
+  #
   # * +:default_legend_size+ controls the default size of legend text.
   #   Can be either +xl+, +l+, +m+ or +s+.
   #
@@ -38,6 +42,7 @@ module GOVUKDesignSystemFormBuilder
   #   particular context, allowing them to be independently customised.
   # ===
   DEFAULTS = {
+    default_prefix: 'govuk',
     default_legend_size: 'm',
     default_legend_tag: 'h1',
     default_submit_button_text: 'Continue',
