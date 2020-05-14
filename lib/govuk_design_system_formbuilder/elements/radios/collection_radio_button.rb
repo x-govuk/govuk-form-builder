@@ -2,6 +2,8 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     module Radios
       class CollectionRadioButton < Base
+        using PrefixableArray
+
         include Traits::Hint
         include Traits::CollectionItem
 
@@ -21,7 +23,7 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def html
-          content_tag('div', class: 'govuk-radios__item') do
+          content_tag('div', class: %(#{brand}-radios__item)) do
             safe_join(
               [
                 @builder.radio_button(
@@ -29,7 +31,7 @@ module GOVUKDesignSystemFormBuilder
                   @value,
                   id: field_id(link_errors: @link_errors),
                   aria: { describedby: hint_id },
-                  class: %w(govuk-radios__input)
+                  class: %w(radios__input).prefix(brand)
                 ),
                 label_element.html,
                 hint_element.html

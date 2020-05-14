@@ -1,6 +1,8 @@
 module GOVUKDesignSystemFormBuilder
   module Containers
     class FormGroup < Base
+      using PrefixableArray
+
       def initialize(builder, object_name, attribute_name)
         super(builder, object_name, attribute_name)
       end
@@ -14,8 +16,8 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def form_group_classes
-        %w(govuk-form-group).tap do |classes|
-          classes.push('govuk-form-group--error') if has_errors?
+        %w(form-group).prefix(brand).tap do |classes|
+          classes.push(%(#{brand}-form-group--error)) if has_errors?
         end
       end
     end

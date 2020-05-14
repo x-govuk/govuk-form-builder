@@ -52,8 +52,8 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def select_classes
-        %w(select).prefix_all(prefix).tap do |classes|
-          classes.push(%(#{prefix}-select--error)) if has_errors?
+        %w(select).prefix(brand).tap do |classes|
+          classes.push(%(#{brand}-select--error)) if has_errors?
         end
       end
     end

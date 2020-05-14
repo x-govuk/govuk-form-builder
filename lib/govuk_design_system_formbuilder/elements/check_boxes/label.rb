@@ -2,6 +2,8 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     module CheckBoxes
       class Label < Base
+        using PrefixableArray
+
         def initialize(builder, object_name, attribute_name, checkbox, value:, link_errors: true)
           super(builder, object_name, attribute_name)
 
@@ -17,7 +19,7 @@ module GOVUKDesignSystemFormBuilder
       private
 
         def label_classes
-          %w(govuk-label govuk-checkboxes__label)
+          %w(label checkboxes__label).prefix(brand)
         end
       end
     end

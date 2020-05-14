@@ -2,6 +2,8 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     module CheckBoxes
       class FieldsetCheckBox < Base
+        using PrefixableArray
+
         include Traits::Hint
         include Traits::Conditional
 
@@ -23,7 +25,7 @@ module GOVUKDesignSystemFormBuilder
         def html
           safe_join(
             [
-              content_tag('div', class: 'govuk-checkboxes__item') do
+              content_tag('div', class: %(#{brand}-checkboxes__item)) do
                 safe_join(
                   [
                     input,
@@ -63,11 +65,11 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def conditional_classes
-          %w(govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden)
+          %w(checkboxes__conditional checkboxes__conditional--hidden).prefix(brand)
         end
 
         def check_box_classes
-          %w(govuk-checkboxes__input)
+          %w(checkboxes__input).prefix(brand)
         end
       end
     end

@@ -1,6 +1,8 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class ErrorMessage < Base
+      using PrefixableArray
+
       include Traits::Error
 
       def initialize(builder, object_name, attribute_name)
@@ -10,10 +12,10 @@ module GOVUKDesignSystemFormBuilder
       def html
         return nil unless has_errors?
 
-        content_tag('span', class: 'govuk-error-message', id: error_id) do
+        content_tag('span', class: %(#{brand}-error-message), id: error_id) do
           safe_join(
             [
-              tag.span('Error: ', class: 'govuk-visually-hidden'),
+              tag.span('Error: ', class: %(#{brand}-visually-hidden)),
               message
             ]
           )

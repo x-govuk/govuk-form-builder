@@ -2,6 +2,8 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     module Radios
       class FieldsetRadioButton < Base
+        using PrefixableArray
+
         include Traits::Hint
         include Traits::Conditional
 
@@ -22,7 +24,7 @@ module GOVUKDesignSystemFormBuilder
         def html
           safe_join(
             [
-              content_tag('div', class: 'govuk-radios__item') do
+              content_tag('div', class: %(#{brand}-radios__item)) do
                 safe_join(
                   [
                     input,
@@ -53,12 +55,12 @@ module GOVUKDesignSystemFormBuilder
             id: field_id(link_errors: @link_errors),
             aria: { describedby: hint_id },
             data: { 'aria-controls' => @conditional_id },
-            class: %w(govuk-radios__input)
+            class: %w(radios__input).prefix(brand)
           )
         end
 
         def conditional_classes
-          %w(govuk-radios__conditional govuk-radios__conditional--hidden)
+          %w(radios__conditional radios__conditional--hidden).prefix(brand)
         end
       end
     end

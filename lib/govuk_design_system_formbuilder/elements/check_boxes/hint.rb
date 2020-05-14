@@ -2,6 +2,8 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     module CheckBoxes
       class Hint < Base
+        using PrefixableArray
+
         include Traits::Hint
 
         def initialize(builder, object_name, attribute_name, hint_text, value:)
@@ -24,7 +26,7 @@ module GOVUKDesignSystemFormBuilder
       private
 
         def hint_classes
-          %w(govuk-hint govuk-checkboxes__hint)
+          %w(hint checkboxes__hint).prefix(brand)
         end
       end
     end
