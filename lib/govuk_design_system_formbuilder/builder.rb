@@ -302,10 +302,12 @@ module GOVUKDesignSystemFormBuilder
     # @param collection [Enumerable<Object>] Options to be added to the +select+ element
     # @param value_method [Symbol, Proc] The method called against each member of the collection to provide the value.
     #   When a +Proc+ is provided it must take a single argument that is a single member of the collection
-    # @param text_method [Symbol, Proc] The method called against each member of the collection to provide the label text.
-    #   When a +Proc+ is provided it must take a single argument that is a single member of the collection
-    # @param hint_method [Symbol, Proc] The method called against each member of the collection to provide the hint text.
-    #   When a +Proc+ is provided it must take a single argument that is a single member of the collection
+    # @param text_method [Symbol, Proc, nil] The method called against each member of the collection to provide the label text.
+    #   When a +Proc+ is provided it must take a single argument that is a single member of the collection.
+    #   When a +nil+ value is provided the label text will be retrieved from the locale.
+    # @param hint_method [Symbol, Proc, nil] The method called against each member of the collection to provide the hint text.
+    #   When a +Proc+ is provided it must take a single argument that is a single member of the collection.
+    #   When a +nil+ value is provided the hint text will be retrieved from the locale. This is the default and param can be omitted.
     # @param hint_text [String] The content of the fieldset hint. No hint will be injected if left +nil+
     # @param legend [Hash] options for configuring the legend
     # @param inline [Boolean] controls whether the radio buttons are displayed inline or not
@@ -314,7 +316,7 @@ module GOVUKDesignSystemFormBuilder
     # @param classes [String] Classes to add to the radio button container.
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
-    # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+, defaults to +h1+
+    # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
     # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
@@ -565,6 +567,7 @@ module GOVUKDesignSystemFormBuilder
     # @param secondary [Boolean] makes the button grey ({https://design-system.service.gov.uk/components/button/#secondary-buttons secondary}) when true
     # @todo The GOV.UK design system also supports {https://design-system.service.gov.uk/components/button/#disabled-buttons disabled buttons}, they
     #   should probably be supported too
+    # @param classes [String] Classes to add to the submit button
     # @param prevent_double_click [Boolean] adds JavaScript to safeguard the
     #   form from being submitted more than once
     # @param validate [Boolean] adds the formnovalidate to the submit button when true, this disables all
@@ -584,8 +587,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_submit "Proceed", prevent_double_click: true do
     #     = link_to 'Cancel', some_other_path, class: 'govuk-button__secondary'
     #
-    def govuk_submit(text = config.default_submit_button_text, warning: false, secondary: false, prevent_double_click: true, validate: false, &block)
-      Elements::Submit.new(self, text, warning: warning, secondary: secondary, prevent_double_click: prevent_double_click, validate: validate, &block).html
+    def govuk_submit(text = config.default_submit_button_text, warning: false, secondary: false, classes: nil, prevent_double_click: true, validate: false, &block)
+      Elements::Submit.new(self, text, warning: warning, secondary: secondary, classes: classes, prevent_double_click: prevent_double_click, validate: validate, &block).html
     end
 
     # Generates three inputs for the +day+, +month+ and +year+ components of a date

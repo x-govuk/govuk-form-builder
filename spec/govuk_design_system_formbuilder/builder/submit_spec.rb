@@ -57,6 +57,14 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           expect { subject }.to raise_error(ArgumentError, /buttons can be warning or secondary/)
         end
       end
+
+      context 'classes' do
+        subject { builder.send(*args.push('Create'), classes: 'custom-class--one custom-class--two') }
+
+        specify 'button should have the custom class' do
+          expect(subject).to have_tag('input', with: { class: %w(govuk-button custom-class--one custom-class--two) })
+        end
+      end
     end
 
     describe 'preventing double clicks' do
