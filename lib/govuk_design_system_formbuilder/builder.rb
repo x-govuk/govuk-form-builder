@@ -567,6 +567,7 @@ module GOVUKDesignSystemFormBuilder
     # @param secondary [Boolean] makes the button grey ({https://design-system.service.gov.uk/components/button/#secondary-buttons secondary}) when true
     # @todo The GOV.UK design system also supports {https://design-system.service.gov.uk/components/button/#disabled-buttons disabled buttons}, they
     #   should probably be supported too
+    # @param classes [String] Classes to add to the submit button
     # @param prevent_double_click [Boolean] adds JavaScript to safeguard the
     #   form from being submitted more than once
     # @param validate [Boolean] adds the formnovalidate to the submit button when true, this disables all
@@ -586,8 +587,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_submit "Proceed", prevent_double_click: true do
     #     = link_to 'Cancel', some_other_path, class: 'govuk-button__secondary'
     #
-    def govuk_submit(text = config.default_submit_button_text, warning: false, secondary: false, prevent_double_click: true, validate: false, &block)
-      Elements::Submit.new(self, text, warning: warning, secondary: secondary, prevent_double_click: prevent_double_click, validate: validate, &block).html
+    def govuk_submit(text = config.default_submit_button_text, warning: false, secondary: false, classes: nil, prevent_double_click: true, validate: false, &block)
+      Elements::Submit.new(self, text, warning: warning, secondary: secondary, classes: classes, prevent_double_click: prevent_double_click, validate: validate, &block).html
     end
 
     # Generates three inputs for the +day+, +month+ and +year+ components of a date

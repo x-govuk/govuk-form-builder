@@ -12,6 +12,10 @@ module Examples
       "= f.govuk_submit 'Delete all records', warning: true"
     end
 
+    def custom_classes_button
+      "= f.govuk_submit 'Special button', classes: 'special-button-class'"
+    end
+
     def submit_button_without_double_click_prevention
       "= f.govuk_submit prevent_double_click: false"
     end
