@@ -16,6 +16,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     it_behaves_like 'a field that supports labels'
 
     it_behaves_like 'a field that supports hints'
+    it_behaves_like 'a field that supports custom branding'
 
     it_behaves_like 'a field that supports errors' do
       let(:error_message) { /Choose a favourite colour/ }

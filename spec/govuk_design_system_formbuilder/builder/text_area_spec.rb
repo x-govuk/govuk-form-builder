@@ -46,6 +46,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     let(:aria_described_by_target) { 'textarea' }
   end
 
+  it_behaves_like 'a field that supports custom branding'
+
   it_behaves_like 'a field that supports errors' do
     let(:object) { Person.new(cv: 'a' * 50) } # max length is 30
     let(:aria_described_by_target) { 'textarea' }
