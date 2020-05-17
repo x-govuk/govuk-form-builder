@@ -34,3 +34,28 @@ p.govuk-body
 
 figure.image
   img src="/images/nhs.png" alt="A NHS-branded form generated with the GOV.UK Design System form builder"
+
+h2.govuk-heading-m Customising methods
+
+p.govuk-body
+  | To make the form builder fit in better with the project it might be helpful to
+    provide aliases for the helper methods that are inkeeping with the design
+    system's name:
+
+.code-sample
+  pre
+    code.highlight.language-ruby
+      | module GOVUKDesignSystemFormBuilder::Builder
+          {
+            :nhsuk_collection_select => :govuk_collection_select,
+            :nhsuk_email_field       => :govuk_email_field,
+            :nhsuk_number_field      => :govuk_number_field,
+            :nhsuk_phone_field       => :govuk_phone_field,
+            :nhsuk_text_area         => :govuk_text_area,
+            :nhsuk_text_field        => :govuk_text_field,
+            :nhsuk_url_field         => :govuk_url_field
+
+            # repeat for the other helpers in GOVUKDesignSystemFormBuilder::Builder
+
+          }.each { |branded, unbranded| alias_method(branded, unbranded) }
+        end
