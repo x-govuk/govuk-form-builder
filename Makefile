@@ -23,9 +23,7 @@ build:
 build-guide: npm-install
 	${guide_dir} ${prefix} nanoc
 watch-guide: npm-install
-	${guide_dir} ${prefix} nanoc view --live-reload --port 3006 --color
-keep-building-guide:
-	${guide_dir} fd -e rb -eslim -esass -ejs -p guide | entr nanoc
+	${guide_dir} ${prefix} nanoc live
 docs-server:
 	yard server --reload
 code-climate:

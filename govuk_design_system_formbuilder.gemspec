@@ -38,8 +38,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency("simplecov", "~> 0.17.1")
 
   # Required for the guide
-  s.add_development_dependency("adsf", "~> 1.4.2")
-  s.add_development_dependency("adsf-live", "~> 1.4.2")
   s.add_development_dependency("htmlbeautifier", "~> 1.3.1")
   s.add_development_dependency("nanoc", "~> 4.11")
   s.add_development_dependency("rouge", "~> 3.18.0")
