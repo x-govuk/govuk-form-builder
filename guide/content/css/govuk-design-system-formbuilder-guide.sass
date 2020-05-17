@@ -55,7 +55,14 @@ $tablet: 768px
 article > pre
   @include blue-left-border
 
-figure
+figure.image
+  margin: 0;
+
+  img
+    width: 100%;
+    max-width: 30em;
+
+figure.full-sample
   @media screen and (max-width: $tablet)
     @include blue-top-border
   @media screen and (min-width: $tablet)

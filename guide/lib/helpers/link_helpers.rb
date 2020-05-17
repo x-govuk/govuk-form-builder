@@ -85,5 +85,9 @@ module Helpers
     def project_new_issue_link
       'https://github.com/DFE-Digital/govuk_design_system_formbuilder/issues'
     end
+
+    def nhs_design_system_link
+      'https://service-manual.nhs.uk/design-system'
+    end
   end
 end

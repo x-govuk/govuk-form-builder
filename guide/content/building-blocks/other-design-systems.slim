@@ -1,0 +1,36 @@
+---
+title: Other design systems
+---
+
+h1.govuk-heading-xl Other design systems
+
+p.govuk-body
+  | While this form builder was designed to work with and closely follow the
+    GOV.UK Design System, it can be configured to work with others that follow
+    the same structure and naming conventions.
+
+p.govuk-body
+  | In the GOV.UK Design System every CSS class name and data module is
+    prefixed with <code>govuk</code>.  To override this for compatible systems we
+    can override the <code>brand</code> setting.
+
+/ TODO: try to find out which other design systems are forks of the GOV.UK DS
+  and list them here
+
+p.govuk-body
+  | To reconfigure the builder to work with the #{link_to('NHS Design System', nhs_design_system_link).html_safe}.
+    add the following snippet to the form builder's initialiser:
+
+.code-sample
+  pre
+    code.highlight.language-ruby
+      | GOVUKDesignSystemFormBuilder.configure do |conf|
+          conf.brand = 'nhsuk'
+        end
+
+p.govuk-body
+  | With this setting in place, any application that uses the NHS Design System can use the
+    form builder.
+
+figure.image
+  img src="/images/nhs.png" alt="A NHS-branded form generated with the GOV.UK Design System form builder"

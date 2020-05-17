@@ -17,6 +17,8 @@ p.govuk-body
   pre
     code.highlight.language-ruby
       | GOVUKDesignSystemFormBuilder.configure do |conf|
+          conf.brand                        = 'swanky-new-design-system'    # govuk
+
           conf.default_submit_button_text   = 'Apply'                       # Continue
           conf.default_error_summary_title  = 'Uh-oh, spaghettios'          # There is a problem
           conf.default_legend_tag           = 'h3'                          # h1
@@ -32,9 +34,16 @@ p.govuk-body
 
 p.govuk-body
   | For a full list and description of configuration options
-    #{link_to('check the documentation', config_documentation_link).html_safe}
-    and for more information on setting up localisations for your application, there's
-    a #{link_to('dedicated page in this guide', '/building-blocks/localisation').html_safe}.
+    #{link_to('check the documentation', config_documentation_link).html_safe}.
+ 
+p.govuk-body
+  | Other configuration options are covered in the following sections:
+
+ul.govuk-list.govuk-list--bullet
+  li
+    a #{link_to('branding', '/building-blocks/other-design-systems').html_safe}
+  li
+    a #{link_to('localisation', '/building-blocks/localisation').html_safe}
 
 p.govuk-body
   | If there are any settings you'd like to be able to set defaults for but
