@@ -660,7 +660,7 @@ module GOVUKDesignSystemFormBuilder
     # @see https://design-system.service.gov.uk/components/fieldset/ GOV.UK fieldset
     # @return [ActiveSupport::SafeBuffer] HTML output
     def govuk_fieldset(legend: { text: 'Fieldset heading' }, described_by: nil, &block)
-      Containers::Fieldset.new(self, legend: legend, described_by: described_by).html(&block)
+      Containers::Fieldset.new(self, legend: legend, described_by: described_by, &block).html
     end
 
     # Generates an input of type +file+
