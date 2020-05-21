@@ -9,38 +9,38 @@ p.govuk-body
     latest stable versions of the GOV.UK Design System, Ruby and Rails.
 
 dl.govuk-summary-list
-  div.govuk-summary-list__row
+  .govuk-summary-list__row
     dt.govuk-summary-list__key
-      | GOV.UK Design System
+      == link_to('GOV.UK Design System', design_system_link)
     dl.govuk-summary-list__value
       ul.govuk-list
         li
-          span.govuk-tag
+          span.govuk-tag.govuk-tag-govuk
             | Version 3.6.0
 
-  div.govuk-summary-list__row
+  .govuk-summary-list__row
     dt.govuk-summary-list__key
-      | Ruby
+      == link_to('Ruby', 'https://www.ruby-lang.org')
     dl.govuk-summary-list__value
       ul.govuk-list
         li
           span.govuk-tag.govuk-tag-red
-            | 2.5.7
+            | 2.7.0
         li
           span.govuk-tag.govuk-tag-red
             | 2.6.5
         li
           span.govuk-tag.govuk-tag-red
-            | 2.7.0
+            | 2.5.7
 
-  div.govuk-summary-list__row
+  .govuk-summary-list__row
     dt.govuk-summary-list__key
-      | Rails
+      == link_to('Ruby on Rails', 'https://rubyonrails.org/')
     dl.govuk-summary-list__value
       ul.govuk-list
         li
           span.govuk-tag.govuk-tag-red
-            | 5.2.4
+            | 6.0.2
         li
           span.govuk-tag.govuk-tag-red
-            | 6.0.2
+            | 5.2.4

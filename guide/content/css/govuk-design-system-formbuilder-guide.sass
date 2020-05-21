@@ -56,11 +56,11 @@ article > pre
   @include blue-left-border
 
 figure.image
-  margin: 0 0 2rem 0;
+  margin: 0 0 2rem 0
 
   img
-    width: 100%;
-    max-width: 30em;
+    width: 100%
+    max-width: 30em
 
 figure.full-sample
   @media screen and (max-width: $tablet)
@@ -158,3 +158,9 @@ p, li, dt, dd, td, th
 .govuk-tag
   &.govuk-tag-red
     background-color: $red
+
+  &.govuk-tag-govuk
+    background-color: govuk-colour('black')
+
+.govuk-summary-list__key > a
+  text-decoration: none
