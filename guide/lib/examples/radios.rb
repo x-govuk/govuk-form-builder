@@ -48,7 +48,7 @@ module Examples
     def radio_field_with_conditional_content
       <<~SNIPPET
         = f.govuk_radio_buttons_fieldset(:old_department_id, legend: { size: 'm', text: 'Which department do you work in?' }) do
-          = f.govuk_radio_button :old_department_id, 'it', label: { text: 'Information Technology' }
+          = f.govuk_radio_button :old_department_id, 'it', label: { text: 'Information Technology' }, link_errors: true
           = f.govuk_radio_button :old_department_id, 'marketing', label: { text: 'Marketing' }
           = f.govuk_radio_divider
           = f.govuk_radio_button :old_department_id, 'other', label: { text: 'Other' } do
