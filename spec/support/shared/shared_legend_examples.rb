@@ -56,6 +56,35 @@ shared_examples 'a field that supports a fieldset with legend' do
         end
       end
     end
+
+    context 'when a proc is supplied' do
+      let(:caption_classes) { %w(govuk-caption-m) }
+      let(:heading_classes) { %w(govuk-heading-l) }
+      let(:caption) { %(Caption from the proc) }
+      let(:heading) { %(Heading from the proc) }
+
+      let(:legend) do
+        proc do
+          builder.safe_join(
+            [
+              builder.tag.span(caption, class: caption_classes),
+              builder.tag.h1(heading, class: heading_classes)
+            ]
+          )
+        end
+      end
+
+      subject { builder.send(*args, legend: legend) }
+
+      specify 'output fieldset should contain the specified tag' do
+        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
+          expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
+            expect(fs).to have_tag('span', class: caption_classes, text: caption)
+            expect(fs).to have_tag('h1', class: heading_classes, text: heading)
+          end
+        end
+      end
+    end
   end
 
   context 'when no legend is supplied' do
