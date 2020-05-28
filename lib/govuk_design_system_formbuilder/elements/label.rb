@@ -5,20 +5,24 @@ module GOVUKDesignSystemFormBuilder
 
       include Traits::Localisation
 
-      def initialize(builder, object_name, attribute_name, text: nil, value: nil, size: nil, hidden: false, radio: false, checkbox: false, tag: nil, link_errors: true)
+      def initialize(builder, object_name, attribute_name, text: nil, value: nil, size: nil, hidden: false, radio: false, checkbox: false, tag: nil, link_errors: true, content: nil)
         super(builder, object_name, attribute_name)
 
-        @value          = value # used by field_id
-        @text           = label_text(text, hidden)
-        @size_class     = label_size_class(size)
-        @radio_class    = radio_class(radio)
-        @checkbox_class = checkbox_class(checkbox)
-        @tag            = tag
-        @link_errors    = link_errors
+        if content
+          @content = content.call
+        else
+          @value          = value # used by field_id
+          @text           = label_text(text, hidden)
+          @size_class     = label_size_class(size)
+          @radio_class    = radio_class(radio)
+          @checkbox_class = checkbox_class(checkbox)
+          @tag            = tag
+          @link_errors    = link_errors
+        end
       end
 
       def html
-        return nil if @text.blank?
+        return nil if [@content, @text].all?(&:blank?)
 
         if @tag.present?
           content_tag(@tag, class: %(#{brand}-label-wrapper)) { build_label }
@@ -36,7 +40,7 @@ module GOVUKDesignSystemFormBuilder
           for: field_id(link_errors: @link_errors),
           class: %w(label).prefix(brand).push(@size_class, @weight_class, @radio_class, @checkbox_class).compact
         ) do
-          @text
+          @content || @text
         end
       end
 
