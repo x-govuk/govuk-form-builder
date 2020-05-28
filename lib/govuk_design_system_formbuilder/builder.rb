@@ -367,6 +367,9 @@ module GOVUKDesignSystemFormBuilder
     #
     # @note The intention is to use {#govuk_radio_button} and {#govuk_radio_divider} within the passed-in block
     #
+    # @note To ensure the {#govuk_error_summary} link functions correctly ensure the first {#govuk_radio_button}
+    #   is set to +link_errors: true+
+    #
     # @param attribute_name [Symbol] The name of the attribute
     # @param hint_text [String] The content of the fieldset hint. No hint will be injected if left +nil+
     # @param legend [Hash] options for configuring the legend
@@ -384,7 +387,7 @@ module GOVUKDesignSystemFormBuilder
     # @example A collection of radio buttons for favourite colours with a divider
     #
     #  = f.govuk_collection_radio_buttons :favourite_colour, inline: false do
-    #    = f.govuk_radio_button :favourite_colour, :red, label: { text: 'Red' }
+    #    = f.govuk_radio_button :favourite_colour, :red, label: { text: 'Red' }, link_errors: true
     #    = f.govuk_radio_button :favourite_colour, :green, label: { text: 'Green' }
     #    = f.govuk_radio_divider
     #    = f.govuk_radio_button :favourite_colour, :yellow, label: { text: 'Yellow' }
@@ -405,7 +408,7 @@ module GOVUKDesignSystemFormBuilder
     # @see https://design-system.service.gov.uk/components/radios/ GOV.UK Radios
     # @param block [Block] Any supplied HTML will be wrapped in a conditional
     #   container and only revealed when the radio button is picked
-    # @param link_errors [Boolean] controls whether this radio button should be linked to
+    # @param link_errors [Boolean] controls whether this radio button should be linked to from {#govuk_error_summary}
     #   from the error summary. <b>Should only be set to +true+ for the first radio button in a fieldset</b>
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
@@ -493,6 +496,9 @@ module GOVUKDesignSystemFormBuilder
 
     # Generate a fieldset intended to conatain one or more {#govuk_check_box}
     #
+    # @note To ensure the {#govuk_error_summary} link functions correctly ensure the first {#govuk_check_box}
+    #   is set to +link_errors: true+
+    #
     # @param attribute_name [Symbol] The name of the attribute
     # @param hint_text [String] The content of the fieldset hint. No hint will be injected if left +nil+
     # @param small [Boolean] controls whether small check boxes are used instead of regular-sized ones
@@ -529,7 +535,7 @@ module GOVUKDesignSystemFormBuilder
     # @param attribute_name [Symbol] The name of the attribute
     # @param value [Boolean,String,Symbol,Integer] The value of the checkbox when it is checked
     # @param hint_text [String] the contents of the hint
-    # @param link_errors [Boolean] controls whether this radio button should be linked to
+    # @param link_errors [Boolean] controls whether this radio button should be linked to from {#govuk_error_summary}
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
@@ -660,7 +666,7 @@ module GOVUKDesignSystemFormBuilder
     # @see https://design-system.service.gov.uk/components/fieldset/ GOV.UK fieldset
     # @return [ActiveSupport::SafeBuffer] HTML output
     def govuk_fieldset(legend: { text: 'Fieldset heading' }, described_by: nil, &block)
-      Containers::Fieldset.new(self, legend: legend, described_by: described_by).html(&block)
+      Containers::Fieldset.new(self, legend: legend, described_by: described_by, &block).html
     end
 
     # Generates an input of type +file+

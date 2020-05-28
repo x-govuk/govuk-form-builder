@@ -7,8 +7,8 @@ module GOVUKDesignSystemFormBuilder
 
       LEGEND_SIZES = %w(xl l m s).freeze
 
-      def initialize(builder, object_name = nil, attribute_name = nil, legend: {}, described_by: nil)
-        super(builder, object_name, attribute_name)
+      def initialize(builder, object_name = nil, attribute_name = nil, legend: {}, described_by: nil, &block)
+        super(builder, object_name, attribute_name, &block)
 
         @legend         = legend_defaults.merge(legend)
         @described_by   = described_by(described_by)
@@ -17,7 +17,7 @@ module GOVUKDesignSystemFormBuilder
 
       def html
         content_tag('fieldset', class: fieldset_classes, aria: { describedby: @described_by }) do
-          safe_join([build_legend, yield])
+          safe_join([build_legend, (@block_content || yield)])
         end
       end
 

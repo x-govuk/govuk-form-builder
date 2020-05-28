@@ -75,8 +75,10 @@ section
         them inline.
 
   == render('/partials/example-fig.*',
-    caption: "Radio buttons collection with conditional content and a divider",
+    caption: "Radio buttons fieldset with conditional content and a divider",
     code: radio_field_with_conditional_content) do
+
+    == render('/partials/fieldset-warning.*', input_type: 'radio button')
 
     h4.govuk-heading-s Adding conditional content
 
@@ -84,7 +86,7 @@ section
       |
         If your list of options is hard-coded or you want to add extra
         customisation, like inserting a text divider, the
-        <code>#govuk_radio_button_fieldset</code> helper offers additional
+        <code>#govuk_radio_buttons_fieldset</code> helper offers additional
         flexibility.
 
     p.govuk-body

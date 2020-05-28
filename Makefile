@@ -1,5 +1,6 @@
 prefix=bundle exec
 guide_dir=cd guide;
+nanoc_default_port=3006
 nanoc_internal_checks=internal_links stale mixed_content
 nanoc_external_checks=external_links
 
@@ -23,9 +24,7 @@ build:
 build-guide: npm-install
 	${guide_dir} ${prefix} nanoc
 watch-guide: npm-install
-	${guide_dir} ${prefix} nanoc view --live-reload --port 3006 --color
-keep-building-guide:
-	${guide_dir} fd -e rb -eslim -esass -ejs -p guide | entr nanoc
+	${guide_dir} ${prefix} nanoc live --port ${nanoc_default_port}
 docs-server:
 	yard server --reload
 code-climate:
