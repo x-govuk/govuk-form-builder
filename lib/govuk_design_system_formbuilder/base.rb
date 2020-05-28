@@ -1,4 +1,12 @@
 module GOVUKDesignSystemFormBuilder
+  module PrefixableArray
+    refine Array do
+      def prefix(text, delimiter: '-')
+        map { |item| text + delimiter + item }
+      end
+    end
+  end
+
   class Base
     delegate :capture, :content_tag, :safe_join, :tag, :raw, :link_to, to: :@builder
     delegate :config, to: GOVUKDesignSystemFormBuilder
@@ -11,6 +19,10 @@ module GOVUKDesignSystemFormBuilder
     end
 
   private
+
+    def brand(override = nil)
+      override || config.brand
+    end
 
     # returns the id value used for the input
     #

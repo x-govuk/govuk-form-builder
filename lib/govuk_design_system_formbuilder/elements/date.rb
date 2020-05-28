@@ -1,6 +1,8 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class Date < Base
+      using PrefixableArray
+
       include Traits::Error
       include Traits::Hint
       include Traits::Supplemental
@@ -24,7 +26,7 @@ module GOVUKDesignSystemFormBuilder
                 supplemental_content.html,
                 hint_element.html,
                 error_element.html,
-                content_tag('div', class: 'govuk-date-input') do
+                content_tag('div', class: %(#{brand}-date-input)) do
                   safe_join([day, month, year])
                 end
               ]
@@ -56,8 +58,8 @@ module GOVUKDesignSystemFormBuilder
       def date_input_item(segment, width: 2, link_errors: false)
         value = @builder.object.try(@attribute_name).try(segment)
 
-        content_tag('div', class: %w(govuk-date-input__item)) do
-          content_tag('div', class: %w(govuk-form-group)) do
+        content_tag('div', class: %w(date-input__item).prefix(brand)) do
+          content_tag('div', class: %w(form-group).prefix(brand)) do
             safe_join(
               [
                 tag.label(
@@ -83,14 +85,14 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def date_input_classes(width)
-        %w(govuk-input govuk-date-input__input).tap do |classes|
-          classes.push("govuk-input--width-#{width}")
-          classes.push("govuk-input--error") if has_errors?
+        %w(input date-input__input).prefix(brand).tap do |classes|
+          classes.push(%(#{brand}-input--width-#{width}))
+          classes.push(%(#{brand}-input--error)) if has_errors?
         end
       end
 
       def date_input_label_classes
-        %w(govuk-label govuk-date-input__label)
+        %w(label date-input__label).prefix(brand)
       end
 
       # if the field has errors we want the govuk_error_summary to

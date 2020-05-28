@@ -35,6 +35,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:described_element) { 'fieldset' }
     end
 
+    it_behaves_like 'a field that supports custom branding'
+
     it_behaves_like 'a field that supports setting the legend via localisation'
     it_behaves_like 'a field that supports setting the hint via localisation'
 

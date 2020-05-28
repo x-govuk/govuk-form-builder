@@ -2,6 +2,8 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     module Inputs
       class Text < Base
+        using PrefixableArray
+
         include Traits::Input
         include Traits::Error
         include Traits::Hint

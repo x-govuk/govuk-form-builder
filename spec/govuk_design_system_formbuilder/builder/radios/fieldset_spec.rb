@@ -29,6 +29,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:error_identifier) { 'person-favourite-colour-error' }
     end
 
+    it_behaves_like 'a field that supports custom branding'
+
     it_behaves_like 'a field that supports setting the hint via localisation'
     it_behaves_like 'a field that supports setting the legend via localisation'
 

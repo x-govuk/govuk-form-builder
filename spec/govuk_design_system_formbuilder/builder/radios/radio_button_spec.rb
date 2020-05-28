@@ -10,6 +10,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     subject { builder.send(*args) }
 
+    it_behaves_like 'a field that supports custom branding'
+
     specify 'output should contain a radio item group with a radio input' do
       expect(subject).to have_tag('div', with: { class: 'govuk-radios__item' }) do |ri|
         expect(ri).to have_tag('input', with: { type: 'radio', value: value })

@@ -1,6 +1,8 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class TextArea < Base
+      using PrefixableArray
+
       include Traits::Error
       include Traits::Hint
       include Traits::Label
@@ -48,9 +50,9 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def govuk_textarea_classes
-        %w(govuk-textarea).tap do |classes|
-          classes.push('govuk-textarea--error') if has_errors?
-          classes.push('govuk-js-character-count') if limit?
+        %w(textarea).prefix(brand).tap do |classes|
+          classes.push(%(#{brand}-textarea--error)) if has_errors?
+          classes.push(%(#{brand}-js-character-count)) if limit?
         end
       end
 
@@ -69,9 +71,13 @@ module GOVUKDesignSystemFormBuilder
       def limit_description
         return nil unless limit?
 
-        content_tag('span', id: limit_id, class: %w(govuk-hint govuk-character-count__message), aria: { live: 'polite' }) do
+        content_tag('span', id: limit_id, class: limit_description_classes, aria: { live: 'polite' }) do
           "You can enter up to #{limit_quantity} #{limit_type}"
         end
+      end
+
+      def limit_description_classes
+        %w(hint character-count__message).prefix(brand)
       end
 
       def limit_quantity

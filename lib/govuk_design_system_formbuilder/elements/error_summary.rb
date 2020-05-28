@@ -17,7 +17,7 @@ module GOVUKDesignSystemFormBuilder
             [
               tag.h2(@title, id: error_summary_title_id, class: summary_class('title')),
               content_tag('div', class: summary_class('body')) do
-                content_tag('ul', class: ['govuk-list', summary_class('list')]) do
+                content_tag('ul', class: [%(#{brand}-list), summary_class('list')]) do
                   safe_join(
                     @builder.object.errors.messages.map do |attribute, messages|
                       error_list_item(attribute, messages.first)
@@ -50,9 +50,9 @@ module GOVUKDesignSystemFormBuilder
 
       def summary_class(part = nil)
         if part
-          'govuk-error-summary'.concat('__', part)
+          %(#{brand}-error-summary).concat('__', part)
         else
-          'govuk-error-summary'
+          %(#{brand}-error-summary)
         end
       end
 
@@ -73,7 +73,7 @@ module GOVUKDesignSystemFormBuilder
           tabindex: -1,
           role: 'alert',
           data: {
-            module: 'govuk-error-summary'
+            module: %(#{brand}-error-summary)
           },
           aria: {
             labelledby: error_summary_title_id

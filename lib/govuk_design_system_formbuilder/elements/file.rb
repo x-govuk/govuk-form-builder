@@ -1,6 +1,8 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class File < Base
+      using PrefixableArray
+
       include Traits::Error
       include Traits::Hint
       include Traits::Label
@@ -37,8 +39,8 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def file_classes
-        %w(govuk-file-upload).tap do |c|
-          c.push('govuk-file-upload--error') if has_errors?
+        %w(file-upload).prefix(brand).tap do |c|
+          c.push(%(#{brand}-file-upload--error)) if has_errors?
         end
       end
     end

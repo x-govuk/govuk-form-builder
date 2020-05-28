@@ -1,6 +1,8 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class Hint < Base
+      using PrefixableArray
+
       include Traits::Hint
       include Traits::Localisation
 
@@ -29,15 +31,15 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def hint_classes
-        %w(govuk-hint).push(@radio_class, @checkbox_class).compact
+        %w(hint).prefix(brand).push(@radio_class, @checkbox_class).compact
       end
 
       def radio_class(radio)
-        radio ? 'govuk-radios__hint' : nil
+        radio ? %(#{brand}-radios__hint) : nil
       end
 
       def checkbox_class(checkbox)
-        checkbox ? 'govuk-checkboxes__hint' : nil
+        checkbox ? %(#{brand}-checkboxes__hint) : nil
       end
     end
   end

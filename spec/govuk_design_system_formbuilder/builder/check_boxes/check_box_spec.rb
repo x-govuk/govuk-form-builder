@@ -20,6 +20,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
+    it_behaves_like 'a field that supports custom branding'
+
     it_behaves_like 'a field that supports labels' do
       let(:label_text) { 'Project X' }
       # the reason we're specifying the type is that

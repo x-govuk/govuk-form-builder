@@ -1,6 +1,8 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class Submit < Base
+      using PrefixableArray
+
       def initialize(builder, text, warning:, secondary:, classes:, prevent_double_click:, validate:, &block)
         fail ArgumentError, 'buttons can be warning or secondary' if warning && secondary
 
@@ -19,7 +21,7 @@ module GOVUKDesignSystemFormBuilder
           [
             @builder.submit(
               @text,
-              class: %w(govuk-button).push(
+              class: %w(button).prefix(brand).push(
                 warning_class,
                 secondary_class,
                 @classes,
@@ -35,23 +37,22 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def warning_class
-        'govuk-button--warning' if @warning
+        %(#{brand}-button--warning) if @warning
       end
 
       def secondary_class
-        'govuk-button--secondary' if @secondary
+        %(#{brand}-button--secondary) if @secondary
       end
 
       def padding_class(content_present)
-        'govuk-!-margin-right-1' if content_present
+        %(#{brand}-!-margin-right-1) if content_present
       end
 
       def extra_args
         {
           formnovalidate: !@validate,
           data: {
-            module: 'govuk-button',
-            'prevent-double-click' => @prevent_double_click
+            module: %(#{brand}-button), 'prevent-double-click' => @prevent_double_click
           }.select { |_k, v| v.present? }
         }
       end

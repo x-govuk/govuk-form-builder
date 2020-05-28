@@ -1,6 +1,8 @@
 module GOVUKDesignSystemFormBuilder
   module Containers
     class Fieldset < Base
+      using PrefixableArray
+
       include Traits::Localisation
 
       LEGEND_SIZES = %w(xl l m s).freeze
@@ -43,21 +45,20 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def fieldset_classes
-        %w(govuk-fieldset)
+        %w(fieldset).prefix(brand)
       end
 
       def legend_classes
         size = @legend.dig(:size)
         fail "invalid size '#{size}', must be #{LEGEND_SIZES.join(', ')}" unless size.in?(LEGEND_SIZES)
 
-        classes = %W(govuk-fieldset__legend govuk-fieldset__legend--#{size})
-        classes.push('govuk-visually-hidden') if @legend.dig(:hidden)
-
-        classes
+        [%(fieldset__legend), %(fieldset__legend--#{size})].prefix(brand).tap do |classes|
+          classes.push(%(#{brand}-visually-hidden)) if @legend.dig(:hidden)
+        end
       end
 
       def legend_heading_classes
-        %(govuk-fieldset__heading)
+        %w(fieldset__heading).prefix(brand)
       end
     end
   end
