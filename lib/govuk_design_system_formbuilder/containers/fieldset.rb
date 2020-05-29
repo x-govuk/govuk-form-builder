@@ -3,6 +3,7 @@ module GOVUKDesignSystemFormBuilder
     class Fieldset < Base
       using PrefixableArray
 
+      include Traits::Caption
       include Traits::Localisation
 
       LEGEND_SIZES = %w(xl l m s).freeze
@@ -18,6 +19,7 @@ module GOVUKDesignSystemFormBuilder
           @legend = legend.call
         when Hash
           @legend_options = legend_defaults.merge(legend)
+          @caption        = @legend_options.dig(:caption)
         else
           fail(ArgumentError, %(legend must be a Proc or Hash))
         end
@@ -38,7 +40,9 @@ module GOVUKDesignSystemFormBuilder
       def build_legend
         if legend_text.present?
           content_tag('legend', class: legend_classes) do
-            tag.send(@legend_options.dig(:tag), legend_text, class: legend_heading_classes)
+            content_tag(@legend_options.dig(:tag), class: legend_heading_classes) do
+              safe_join([caption_element.html, legend_text])
+            end
           end
         end
       end

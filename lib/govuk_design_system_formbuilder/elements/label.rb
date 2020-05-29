@@ -3,11 +3,14 @@ module GOVUKDesignSystemFormBuilder
     class Label < Base
       using PrefixableArray
 
+      include Traits::Caption
       include Traits::Localisation
 
-      def initialize(builder, object_name, attribute_name, text: nil, value: nil, size: nil, hidden: false, radio: false, checkbox: false, tag: nil, link_errors: true, content: nil)
+      def initialize(builder, object_name, attribute_name, text: nil, value: nil, size: nil, hidden: false, radio: false, checkbox: false, tag: nil, link_errors: true, content: nil, caption: nil)
         super(builder, object_name, attribute_name)
 
+        # content is passed in directly via a proc and overrides
+        # the other display options
         if content
           @content = content.call
         else
@@ -18,6 +21,7 @@ module GOVUKDesignSystemFormBuilder
           @checkbox_class = checkbox_class(checkbox)
           @tag            = tag
           @link_errors    = link_errors
+          @caption        = caption
         end
       end
 
@@ -40,7 +44,7 @@ module GOVUKDesignSystemFormBuilder
           for: field_id(link_errors: @link_errors),
           class: %w(label).prefix(brand).push(@size_class, @weight_class, @radio_class, @checkbox_class).compact
         ) do
-          @content || @text
+          @content || safe_join([caption_element.html, @text])
         end
       end
 
