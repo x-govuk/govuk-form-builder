@@ -634,12 +634,6 @@ module GOVUKDesignSystemFormBuilder
     #
     # @param title [String] the error summary heading
     #
-    # @todo Currently the summary anchors link to the inline error messages themselves rather to
-    #   the accompanying input. More work is required to improve this and it needs to be
-    #   handled in a less-generic manner. For example, we can't link to a specific radio button
-    #   if one hasn't been chosen but we should link to a {#govuk_text_field} if one has been left
-    #   blank
-    #
     # @example An error summary with a custom title
     #   = f.govuk_error_summary 'Uh-oh, spaghettios'
     #
