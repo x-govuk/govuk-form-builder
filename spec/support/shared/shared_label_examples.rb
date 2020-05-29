@@ -117,6 +117,12 @@ shared_examples 'a field that supports labels' do
       expect(subject).to have_tag('label', with: { class: 'govuk-label' }, text: attribute.capitalize)
     end
   end
+
+  context 'when something other than a Proc or Hash is supplied' do
+    subject { builder.send(*args, label: "This should fail") }
+
+    specify { expect { subject }.to raise_error(ArgumentError, 'label must be a Proc or Hash') }
+  end
 end
 
 shared_examples 'a field that supports labels as procs' do
