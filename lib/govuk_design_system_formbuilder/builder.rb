@@ -8,7 +8,7 @@ module GOVUKDesignSystemFormBuilder
     # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
     # @param width [Integer,String] sets the width of the input, can be +2+, +3+ +4+, +5+, +10+ or +20+ characters
     #   or +one-quarter+, +one-third+, +one-half+, +two-thirds+ or +full+ width of the container
-    # @param [Hash] label configures the associated label
+    # @param label [Hash,Proc] configures or sets the associated label content
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
@@ -32,6 +32,10 @@ module GOVUKDesignSystemFormBuilder
     #     p.govuk-inset-text
     #       | Ensure your stage name is unique
     #
+    # @example A text field with the label supplied as a proc
+    #   = f.govuk_text_field :callsign,
+    #     label: -> { tag.h3('Call-sign') }
+    #
     def govuk_text_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
       Elements::Inputs::Text.new(self, object_name, attribute_name, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
@@ -42,7 +46,7 @@ module GOVUKDesignSystemFormBuilder
     # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
     # @param width [Integer,String] sets the width of the input, can be +2+, +3+ +4+, +5+, +10+ or +20+ characters
     #   or +one-quarter+, +one-third+, +one-half+, +two-thirds+ or +full+ width of the container
-    # @param [Hash] label configures the associated label
+    # @param label [Hash,Proc] configures or sets the associated label content
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
@@ -67,6 +71,10 @@ module GOVUKDesignSystemFormBuilder
     #     p.govuk-inset-text
     #       | Yes, fax machines are still a thing
     #
+    # @example A phone field with the label supplied as a proc
+    #   = f.govuk_phone_field :work_number,
+    #     label: -> { tag.h3('Work number') }
+    #
     def govuk_phone_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
       Elements::Inputs::Phone.new(self, object_name, attribute_name, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
@@ -77,7 +85,7 @@ module GOVUKDesignSystemFormBuilder
     # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
     # @param width [Integer,String] sets the width of the input, can be +2+, +3+ +4+, +5+, +10+ or +20+ characters
     #   or +one-quarter+, +one-third+, +one-half+, +two-thirds+ or +full+ width of the container
-    # @param [Hash] label configures the associated label
+    # @param label [Hash,Proc] configures or sets the associated label content
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
@@ -93,12 +101,16 @@ module GOVUKDesignSystemFormBuilder
     #     label: { text: 'Enter your email address' },
     #     placeholder: 'ralph.wiggum@springfield.edu'
     #
-    # @example A email field with injected content
-    #   = f.govuk_phone_field :email_address,
-    #     label: { text: 'Email address' } do
+    # @example An email field with injected content
+    #   = f.govuk_phone_field :work_email,
+    #     label: { text: 'Work email address' } do
     #
     #     p.govuk-inset-text
     #       | Use your work address
+    #
+    # @example A email field with the label supplied as a proc
+    #   = f.govuk_email_field :personal_email,
+    #     label: -> { tag.h3('Personal email address') }
     #
     def govuk_email_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
       Elements::Inputs::Email.new(self, object_name, attribute_name, hint_text: hint_text, label: label, width: width, **args, &block).html
@@ -110,7 +122,7 @@ module GOVUKDesignSystemFormBuilder
     # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
     # @param width [Integer,String] sets the width of the input, can be +2+, +3+ +4+, +5+, +10+ or +20+ characters
     #   or +one-quarter+, +one-third+, +one-half+, +two-thirds+ or +full+ width of the container
-    # @param [Hash] label configures the associated label
+    # @param label [Hash,Proc] configures or sets the associated label content
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
@@ -132,6 +144,10 @@ module GOVUKDesignSystemFormBuilder
     #     p.govuk-inset-text
     #       | Ensure your password is at least 16 characters long
     #
+    # @example A password field with the label supplied as a proc
+    #   = f.govuk_password_field :passcode,
+    #     label: -> { tag.h3('What is your secret pass code?') }
+    #
     def govuk_password_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
       Elements::Inputs::Password.new(self, object_name, attribute_name, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
@@ -142,7 +158,7 @@ module GOVUKDesignSystemFormBuilder
     # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
     # @param width [Integer,String] sets the width of the input, can be +2+, +3+ +4+, +5+, +10+ or +20+ characters
     #   or +one-quarter+, +one-third+, +one-half+, +two-thirds+ or +full+ width of the container
-    # @param [Hash] label configures the associated label
+    # @param label [Hash,Proc] configures or sets the associated label content
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
@@ -165,6 +181,10 @@ module GOVUKDesignSystemFormBuilder
     #       p.govuk-inset-text
     #         | This will be visible on your profile
     #
+    # @example A url field with the label supplied as a proc
+    #   = f.govuk_url_field :work_website,
+    #     label: -> { tag.h3("Enter your company's website") }
+    #
     def govuk_url_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
       Elements::Inputs::URL.new(self, object_name, attribute_name, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
@@ -175,7 +195,7 @@ module GOVUKDesignSystemFormBuilder
     # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
     # @param width [Integer,String] sets the width of the input, can be +2+, +3+ +4+, +5+, +10+ or +20+ characters
     #   or +one-quarter+, +one-third+, +one-half+, +two-thirds+ or +full+ width of the container
-    # @param [Hash] label configures the associated label
+    # @param label [Hash,Proc] configures or sets the associated label content
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
@@ -201,6 +221,10 @@ module GOVUKDesignSystemFormBuilder
     #         | If you haven't measured your height in the last 6 months
     #           do it now
     #
+    # @example A number field with the label supplied as a proc
+    #   = f.govuk_url_field :personal_best_over_100m,
+    #     label: -> { tag.h3("How many seconds does it take you to run 100m?") }
+    #
     def govuk_number_field(attribute_name, hint_text: nil, label: {}, width: nil, **args, &block)
       Elements::Inputs::Number.new(self, object_name, attribute_name, hint_text: hint_text, label: label, width: width, **args, &block).html
     end
@@ -211,7 +235,7 @@ module GOVUKDesignSystemFormBuilder
     #
     # @param attribute_name [Symbol] The name of the attribute
     # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
-    # @param [Hash] label configures the associated label
+    # @param label [Hash,Proc] configures or sets the associated label content
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
@@ -228,17 +252,21 @@ module GOVUKDesignSystemFormBuilder
     #   or characters
     #
     # @example A text area with a custom number of rows and a word limit
-    #   = f.govuk_number_field :cv,
+    #   = f.govuk_text_area :cv,
     #     label: { text: 'Tell us about your work history' },
     #     rows: 8,
     #     max_words: 300
     #
     # @example A text area with injected content
-    #   = f.govuk_number_field :description,
+    #   = f.govuk_text_area :description,
     #     label: { text: 'Where did the incident take place?' } do
     #
     #     p.govuk-inset-text
     #       | If you don't know exactly leave this section blank
+    #
+    # @example A text area with the label supplied as a proc
+    #   = f.govuk_text_area :instructions,
+    #     label: -> { tag.h3("How do you set it up?") }
     #
     def govuk_text_area(attribute_name, hint_text: nil, label: {}, max_words: nil, max_chars: nil, rows: 5, threshold: nil, **args, &block)
       Elements::TextArea.new(self, object_name, attribute_name, hint_text: hint_text, label: label, max_words: max_words, max_chars: max_chars, rows: rows, threshold: threshold, **args, &block).html
@@ -259,20 +287,22 @@ module GOVUKDesignSystemFormBuilder
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
     # @example A select box with hint
-    #   = f.govuk_number_field :grade,
+    #   = f.govuk_collection_select :grade,
     #     @grades,
     #     :id,
     #     :name,
     #     hint_text: "If you took the test more than once enter your highest grade"
     #
     # @example A select box with injected content
-    #   = f.govuk_number_field :favourite_colour,
-    #     @colours,
-    #     :id,
-    #     :name do
+    #   = f.govuk_collection_select(:favourite_colour, @colours, :id, :name) do
     #
     #       p.govuk-inset-text
     #         | Select the closest match
+    #
+    # @example A select box with the label supplied as a proc
+    #   = f.govuk_collection_select(:team, @teams, :id, :name) do
+    #     label: -> { tag.h3("Which team did you represent?") }
+    #
     def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, html_options: {}, hint_text: nil, label: {}, &block)
       Elements::Select.new(
         self,
@@ -309,7 +339,7 @@ module GOVUKDesignSystemFormBuilder
     #   When a +Proc+ is provided it must take a single argument that is a single member of the collection.
     #   When a +nil+ value is provided the hint text will be retrieved from the locale. This is the default and param can be omitted.
     # @param hint_text [String] The content of the fieldset hint. No hint will be injected if left +nil+
-    # @param legend [Hash] options for configuring the legend
+    # @param legend [Hash,Proc] options for configuring the legend
     # @param inline [Boolean] controls whether the radio buttons are displayed inline or not
     # @param small [Boolean] controls whether small radio buttons are used instead of regular-sized ones
     # @param bold_labels [Boolean] controls whether the radio button labels are bold
@@ -337,13 +367,21 @@ module GOVUKDesignSystemFormBuilder
     #    inline: false
     #
     # @example A collection of radio buttons for grades with injected content
-    #  = f.govuk_collection_radio_buttons :favourite_colour,
+    #  = f.govuk_collection_radio_buttons :grade,
     #    @grades,
     #    :id,
     #    :name do
     #
     #      p.govuk-inset-text
     #        | If you took the test more than once enter your highest grade
+    #
+    # @example A collection of radio buttons with the legend supplied as a proc
+    #  = f.govuk_collection_radio_buttons :category,
+    #    @categories,
+    #    :id,
+    #    :name,
+    #    legend: -> { tag.h3('Which category do you belong to?') }
+    #
     def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: {}, inline: false, small: false, bold_labels: false, classes: nil, &block)
       Elements::Radios::Collection.new(
         self,
@@ -372,7 +410,7 @@ module GOVUKDesignSystemFormBuilder
     #
     # @param attribute_name [Symbol] The name of the attribute
     # @param hint_text [String] The content of the fieldset hint. No hint will be injected if left +nil+
-    # @param legend [Hash] options for configuring the legend
+    # @param legend [Hash,Proc] options for configuring the legend
     # @param inline [Boolean] controls whether the radio buttons are displayed inline or not
     # @param small [Boolean] controls whether small radio buttons are used instead of regular-sized ones
     # @option legend text [String] the fieldset legend's text content
@@ -384,13 +422,22 @@ module GOVUKDesignSystemFormBuilder
     # @see https://design-system.service.gov.uk/components/radios/ GOV.UK Radios
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
-    # @example A collection of radio buttons for favourite colours with a divider
+    # @example A radio button fieldset for favourite colours with a divider
     #
-    #  = f.govuk_collection_radio_buttons :favourite_colour, inline: false do
+    #  = f.govuk_radio_buttons_fieldset :favourite_colour, inline: false do
     #    = f.govuk_radio_button :favourite_colour, :red, label: { text: 'Red' }, link_errors: true
     #    = f.govuk_radio_button :favourite_colour, :green, label: { text: 'Green' }
     #    = f.govuk_radio_divider
     #    = f.govuk_radio_button :favourite_colour, :yellow, label: { text: 'Yellow' }
+    #
+    # @example A radio button fieldset with the legend supplied as a proc
+    #  = f.govuk_radio_buttons_fieldset :burger_id do
+    #    @burgers,
+    #    :id,
+    #    :name,
+    #    legend: -> { tag.h3('Which hamburger do you want with your meal?') } do
+    #      = f.govuk_radio_button :burger_id, :regular, label: { text: 'Hamburger' }, link_errors: true
+    #      = f.govuk_radio_button :burger_id, :cheese, label: { text: 'Cheeseburger' }
     #
     def govuk_radio_buttons_fieldset(attribute_name, hint_text: nil, legend: {}, inline: false, small: false, classes: nil, &block)
       Containers::RadioButtonsFieldset.new(self, object_name, attribute_name, hint_text: hint_text, legend: legend, inline: inline, small: small, classes: classes, &block).html
@@ -412,9 +459,9 @@ module GOVUKDesignSystemFormBuilder
     #   from the error summary. <b>Should only be set to +true+ for the first radio button in a fieldset</b>
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
-    # @example A collection of radio buttons for favourite colours with a divider
+    # @example A single radio button for our new favourite colour
     #
-    #  = f.govuk_collection_radio_buttons :favourite_colour, inline: false do
+    #  = f.govuk_radio_buttons_fieldset :favourite_colour do
     #    = f.govuk_radio_button :favourite_colour, :red, label: { text: 'Red' }
     #
     def govuk_radio_button(attribute_name, value, hint_text: nil, label: {}, link_errors: false, &block)
@@ -444,7 +491,7 @@ module GOVUKDesignSystemFormBuilder
     # @param hint_text [String] The content of the fieldset hint. No hint will be injected if left +nil+
     # @param small [Boolean] controls whether small check boxes are used instead of regular-sized ones
     # @param classes [String] Classes to add to the checkbox container.
-    # @param legend [Hash] options for configuring the legend
+    # @param legend [Hash,Proc] options for configuring the legend
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
@@ -470,13 +517,21 @@ module GOVUKDesignSystemFormBuilder
     #    classes: 'app-overflow-scroll',
     #
     # @example A collection of check boxes for types of bread
-    #  = f.govuk_collection_radio_buttons :bread,
+    #  = f.govuk_collection_check_boxes :bread,
     #    @variety,
     #    :id,
     #    :name do
     #
     #      p.govuk-inset-text
     #        | Only Hearty Italian is available with the meal deal menu
+    #
+    # @example A collection of check boxes with the legend supplied as a proc
+    #  = f.govuk_collection_check_boxes :sandwich_type,
+    #    @breads,
+    #    :id,
+    #    :name,
+    #    legend: -> { tag.h3('What kind of sandwich do you want?') }
+    #
     def govuk_collection_check_boxes(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: {}, small: false, classes: nil, &block)
       Elements::CheckBoxes::Collection.new(
         self,
@@ -502,7 +557,7 @@ module GOVUKDesignSystemFormBuilder
     # @param attribute_name [Symbol] The name of the attribute
     # @param hint_text [String] The content of the fieldset hint. No hint will be injected if left +nil+
     # @param small [Boolean] controls whether small check boxes are used instead of regular-sized ones
-    # @param legend [Hash] options for configuring the legend
+    # @param legend [Hash,Proc] options for configuring the legend
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
@@ -512,10 +567,14 @@ module GOVUKDesignSystemFormBuilder
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
     # @example A collection of check boxes for sandwich fillings
-    #
-    #  = f.govuk_check_boxes_fieldset :desired_filling,
+    #  = f.govuk_check_boxes_fieldset :desired_filling, legend: { text: 'Which filling do you want?' },
     #    = f.govuk_check_box :desired_filling, :cheese, label: { text: 'Cheese' }, link_errors: true
     #    = f.govuk_check_box :desired_filling, :tomato, label: { text: 'Tomato' }
+    #
+    # @example A collection of check boxes for drinks choices with legend as a proc
+    #  = f.govuk_check_boxes_fieldset :drink_id, legend: -> { tag.h3('Choose drinks to accompany your meal') },
+    #    = f.govuk_check_box :desired_filling, :lemonade, label: { text: 'Lemonade' }, link_errors: true
+    #    = f.govuk_check_box :desired_filling, :fizzy_orange, label: { text: 'Fizzy orange' }
     #
     def govuk_check_boxes_fieldset(attribute_name, legend: {}, hint_text: {}, small: false, classes: nil, &block)
       Containers::CheckBoxesFieldset.new(
@@ -530,7 +589,7 @@ module GOVUKDesignSystemFormBuilder
       ).html
     end
 
-    # Generates a single fieldset, intended for use within a {#govuk_check_boxes_fieldset}
+    # Generates a single check box, intended for use within a {#govuk_check_boxes_fieldset}
     #
     # @param attribute_name [Symbol] The name of the attribute
     # @param value [Boolean,String,Symbol,Integer] The value of the checkbox when it is checked
@@ -604,7 +663,7 @@ module GOVUKDesignSystemFormBuilder
     #   be 'rounded' up to +2019-10-01+.
     # @param attribute_name [Symbol] The name of the attribute
     # @param hint_text [String] the contents of the hint
-    # @param legend [Hash] options for configuring the legend
+    # @param legend [Hash,Proc] options for configuring the legend
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
@@ -625,6 +684,9 @@ module GOVUKDesignSystemFormBuilder
     #       p.govuk-inset-text
     #         | If you don't fill this in you won't be eligable for a refund
     #
+    # @example A date input with legend supplied as a proc
+    #  = f.govuk_date_field :finishes_on,
+    #    legend: -> { tag.h3('Which category do you belong to?') }
     def govuk_date_field(attribute_name, hint_text: nil, legend: {}, date_of_birth: false, omit_day: false, &block)
       Elements::Date.new(self, object_name, attribute_name, hint_text: hint_text, legend: legend, date_of_birth: date_of_birth, omit_day: omit_day, &block).html
     end
@@ -644,7 +706,7 @@ module GOVUKDesignSystemFormBuilder
 
     # Generates a fieldset containing the contents of the block
     #
-    # @param legend [Hash] options for configuring the legend
+    # @param legend [Hash,Proc] options for configuring the legend
     # @param described_by [Array<String>] the ids of the elements that describe this fieldset, usually hints and errors
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
@@ -656,6 +718,11 @@ module GOVUKDesignSystemFormBuilder
     #     = f.govuk_text_field :street
     #     = f.govuk_text_field :town
     #     = f.govuk_text_field :city
+    #
+    # @example A fieldset with the legend as a proc
+    #   = f.govuk_fieldset legend: -> { tag.h3('Skills') }
+    #     = f.govuk_text_area :physical
+    #     = f.govuk_text_area :mental
     #
     # @see https://design-system.service.gov.uk/components/fieldset/ GOV.UK fieldset
     # @return [ActiveSupport::SafeBuffer] HTML output
@@ -679,6 +746,9 @@ module GOVUKDesignSystemFormBuilder
     #
     #     p.govuk-inset-text
     #       | Explicit images will result in account termination
+    #
+    # @example A CV upload field with label as a proc
+    #   = f.govuk_file_field :cv, label: -> { tag.h3('Upload your CV') }
     #
     # @see https://design-system.service.gov.uk/components/file-upload/ GOV.UK file upload
     # @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file MDN documentation for file upload
