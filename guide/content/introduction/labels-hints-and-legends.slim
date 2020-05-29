@@ -63,11 +63,24 @@ section
           value defaults to <code>false</code> and can be overridden with
           <code>true</code>
 
-
   == render('/partials/example-fig.*',
     caption: "A fully-configured label",
     code: text_field_with_configured_label,
     hide_html_output: false)
+
+  == render('/partials/example-fig.*',
+    caption: "Setting label content with a proc",
+    code: text_field_with_label_proc,
+    hide_html_output: false) do
+      p.govuk-body
+        | Label content can be customised further using a
+          #{link_to('Ruby proc', ruby_proc_link).html_safe}. Note that the content
+          of the proc is rendered <em>inside the label</em> so the form builder
+          can enforce consistency between the label's <code>for</code> attribute
+          and the associated form element.
+
+      p.govuk-body.important
+        | This example contains raw html but Rails' built-in tag helpers are fully-supported.
 
 section
 
@@ -143,3 +156,15 @@ section
     caption: "Radio buttons with a fully-customised legend",
     code: radios_with_legend,
     hide_html_output: true)
+
+  == render('/partials/example-fig.*',
+    caption: "Fully customising legends with procs",
+    code: radios_with_legend_proc,
+    hide_html_output: true) do
+
+    p.govuk-body
+      | To take even more control of legends the content can be passed in using
+        a #{link_to('Ruby proc', ruby_proc_link).html_safe}.
+
+    p.govuk-body.important
+      | This example contains raw html but Rails' built-in tag helpers are fully-supported.
