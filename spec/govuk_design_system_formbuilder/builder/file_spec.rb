@@ -41,6 +41,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     it_behaves_like 'a field that supports setting the label via localisation'
+    it_behaves_like 'a field that supports setting the label caption via localisation'
     it_behaves_like 'a field that supports setting the hint via localisation'
 
     it_behaves_like 'a field that accepts a plain ruby object' do

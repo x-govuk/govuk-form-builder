@@ -1,24 +1,23 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class Caption < Base
-      def initialize(builder:, text:, size: 'm')
-        @builder = builder
-        @text    = text
-        @size    = caption_size_class(size)
+      include Traits::Localisation
+
+      def initialize(builder, object_name, attribute_name, text:, size: 'm')
+        super(builder, object_name, attribute_name)
+
+        @text       = caption_text(text)
+        @size_class = caption_size_class(size)
       end
 
       def html
         return nil if @text.blank?
 
-        tag.span(@text, class: @size)
+        tag.span(@text, class: @size_class)
       end
 
       def caption_text(override)
         override || localised_text(:caption)
-      end
-
-      def caption_size
-        @size
       end
 
       def caption_size_class(size)

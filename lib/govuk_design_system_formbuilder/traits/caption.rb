@@ -5,26 +5,19 @@ module GOVUKDesignSystemFormBuilder
 
       def caption_element
         @caption_element ||= Elements::Caption.new(
-          **{ text: nil }.merge(
-            {
-              builder: @builder,
-              text: caption_text,
-              size: caption_size
-            }.compact
-          )
+          @builder,
+          @object_name,
+          @attribute_name,
+          **{ text: nil }.merge({ text: caption_text, size: caption_size }.compact)
         )
       end
 
       def caption_text
-        return nil if @caption.blank?
-
-        @caption.dig(:text)
+        @caption&.dig(:text)
       end
 
       def caption_size
-        return nil if @caption.blank?
-
-        @caption.dig(:size)
+        @caption&.dig(:size)
       end
     end
   end

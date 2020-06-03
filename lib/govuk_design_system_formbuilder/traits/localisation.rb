@@ -40,6 +40,8 @@ module GOVUKDesignSystemFormBuilder
                               config.localisation_schema_hint
                             when :label
                               config.localisation_schema_label
+                            when :caption
+                              config.localisation_schema_caption
                             end
 
         (contextual_schema || config.localisation_schema_fallback).dup

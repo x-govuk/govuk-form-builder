@@ -52,7 +52,8 @@ module GOVUKDesignSystemFormBuilder
     localisation_schema_fallback: %i(helpers __context__),
     localisation_schema_label: nil,
     localisation_schema_hint: nil,
-    localisation_schema_legend: nil
+    localisation_schema_legend: nil,
+    localisation_schema_caption: nil
   }.freeze
 
   DEFAULTS.each_key { |k| config_accessor(k) { DEFAULTS[k] } }
