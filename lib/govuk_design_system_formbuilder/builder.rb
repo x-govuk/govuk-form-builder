@@ -13,7 +13,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
-    # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -51,7 +51,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
-    # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -90,7 +90,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
-    # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -127,7 +127,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
-    # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -163,7 +163,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
-    # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -742,7 +742,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
-    # @option args [Hash] args additional arguments are applied as attributes to +input+ element
+    # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     #
     # @example A photo upload field with file type specifier and injected content
