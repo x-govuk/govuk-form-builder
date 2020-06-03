@@ -13,10 +13,14 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @param caption [Hash] configures or sets the caption content which is inserted above the label
+    # @option caption text [String] the caption text
+    # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
+    # @see https://design-system.service.gov.uk/styles/typography/#headings-with-captions Headings with captions
     #
     # @example A required full name field with a placeholder
     #   = f.govuk_text_field :name,
@@ -51,11 +55,15 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @param caption [Hash] configures or sets the caption content which is inserted above the label
+    # @option caption text [String] the caption text
+    # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
     # @see https://design-system.service.gov.uk/patterns/telephone-numbers/ GOV.UK Telephone number patterns
+    # @see https://design-system.service.gov.uk/styles/typography/#headings-with-captions Headings with captions
     #
     # @example A required phone number field with a placeholder
     #   = f.govuk_phone_field :phone_number,
@@ -90,11 +98,15 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @param caption [Hash] configures or sets the caption content which is inserted above the label
+    # @option caption text [String] the caption text
+    # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
     # @see https://design-system.service.gov.uk/patterns/email-addresses/ GOV.UK Email address patterns
+    # @see https://design-system.service.gov.uk/styles/typography/#headings-with-captions Headings with captions
     #
     # @example An email address field with a placeholder
     #   = f.govuk_email_field :email_address,
@@ -127,11 +139,15 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @param caption [Hash] configures or sets the caption content which is inserted above the label
+    # @option caption text [String] the caption text
+    # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
     # @see https://design-system.service.gov.uk/patterns/passwords/ GOV.UK Password patterns
+    # @see https://design-system.service.gov.uk/styles/typography/#headings-with-captions Headings with captions
     #
     # @example A password field
     #   = f.govuk_password_field :password,
@@ -163,10 +179,14 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @param caption [Hash] configures or sets the caption content which is inserted above the label
+    # @option caption text [String] the caption text
+    # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
+    # @see https://design-system.service.gov.uk/styles/typography/#headings-with-captions Headings with captions
     #
     # @example A url field with autocomplete
     #   = f.govuk_url_field :favourite_website,
@@ -200,10 +220,14 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @param caption [Hash] configures or sets the caption content which is inserted above the label
+    # @option caption text [String] the caption text
+    # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
+    # @see https://design-system.service.gov.uk/styles/typography/#headings-with-captions Headings with captions
     #
     # @example A number field with placeholder, min, max and step
     #   = f.govuk_number_field :iq,
@@ -240,6 +264,9 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @param caption [Hash] configures or sets the caption content which is inserted above the label
+    # @option caption text [String] the caption text
+    # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @param max_words [Integer] adds the GOV.UK max word count
     # @param max_chars [Integer] adds the GOV.UK max characters count
     # @param threshold [Integer] only show the +max_words+ and +max_chars+ warnings once a threshold (percentage) is reached
@@ -247,7 +274,9 @@ module GOVUKDesignSystemFormBuilder
     # @option args [Hash] args additional arguments are applied as attributes to the +textarea+ element
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
+    # @see https://design-system.service.gov.uk/components/textarea/ GOV.UK text area component
     # @see https://design-system.service.gov.uk/components/character-count GOV.UK character count component
+    # @see https://design-system.service.gov.uk/styles/typography/#headings-with-captions Headings with captions
     # @note Setting +max_chars+ or +max_words+ will add a caption beneath the +textarea+ with a live count of words
     #   or characters
     #
@@ -349,6 +378,9 @@ module GOVUKDesignSystemFormBuilder
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
     # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
+    # @param caption [Hash] configures or sets the caption content which is inserted above the legend
+    # @option caption text [String] the caption text
+    # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
     # @example A collection of radio buttons for favourite colours, labels capitalised via a proc
@@ -419,9 +451,13 @@ module GOVUKDesignSystemFormBuilder
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
     # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
+    # @param caption [Hash] configures or sets the caption content which is inserted above the legend
+    # @option caption text [String] the caption text
+    # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @param block [Block] a block of HTML that will be used to populate the fieldset
     # @param classes [String] Classes to add to the radio button container.
     # @see https://design-system.service.gov.uk/components/radios/ GOV.UK Radios
+    # @see https://design-system.service.gov.uk/styles/typography/#headings-with-captions Headings with captions
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
     # @example A radio button fieldset for favourite colours with a divider
@@ -455,6 +491,7 @@ module GOVUKDesignSystemFormBuilder
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
     # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
     # @see https://design-system.service.gov.uk/components/radios/ GOV.UK Radios
+    # @see https://design-system.service.gov.uk/styles/typography/#headings-with-captions Headings with captions
     # @param block [Block] Any supplied HTML will be wrapped in a conditional
     #   container and only revealed when the radio button is picked
     # @param link_errors [Boolean] controls whether this radio button should be linked to from {#govuk_error_summary}
@@ -498,6 +535,9 @@ module GOVUKDesignSystemFormBuilder
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
     # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
+    # @param caption [Hash] configures or sets the caption content which is inserted above the legend
+    # @option caption text [String] the caption text
+    # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @param block [Block] any HTML passed in will be injected into the fieldset, after the hint and before the checkboxes
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
@@ -565,6 +605,9 @@ module GOVUKDesignSystemFormBuilder
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
     # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
+    # @param caption [Hash] configures or sets the caption content which is inserted above the legend
+    # @option caption text [String] the caption text
+    # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @param classes [String] Classes to add to the checkbox container.
     # @param block [Block] a block of HTML that will be used to populate the fieldset
     # @return [ActiveSupport::SafeBuffer] HTML output
@@ -672,6 +715,9 @@ module GOVUKDesignSystemFormBuilder
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
     # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
+    # @param caption [Hash] configures or sets the caption content which is inserted above the legend
+    # @option caption text [String] the caption text
+    # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @param omit_day [Boolean] do not render a day input, only capture month and year
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input group
     # @param date_of_birth [Boolean] if +true+ {https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete#Values birth date auto completion attributes}
@@ -679,6 +725,7 @@ module GOVUKDesignSystemFormBuilder
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
     # @see https://github.com/alphagov/govuk-frontend/issues/1449 GOV.UK date input element attributes, using text instead of number
+    # @see https://design-system.service.gov.uk/styles/typography/#headings-with-captions Headings with captions
     #
     # @example A regular date input with a legend, hint and injected content
     #   = f.govuk_date_field :starts_on,
@@ -716,6 +763,9 @@ module GOVUKDesignSystemFormBuilder
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
     # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
+    # @param caption [Hash] configures or sets the caption content which is inserted above the label
+    # @option caption text [String] the caption text
+    # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     #
     # @example A fieldset containing address fields
     #   = f.govuk_fieldset legend: { text: 'Address' }
@@ -729,6 +779,7 @@ module GOVUKDesignSystemFormBuilder
     #     = f.govuk_text_area :mental
     #
     # @see https://design-system.service.gov.uk/components/fieldset/ GOV.UK fieldset
+    # @see https://design-system.service.gov.uk/styles/typography/#headings-with-captions Headings with captions
     # @return [ActiveSupport::SafeBuffer] HTML output
     def govuk_fieldset(legend: { text: 'Fieldset heading' }, caption: {}, described_by: nil, &block)
       Containers::Fieldset.new(self, legend: legend, caption: caption, described_by: described_by, &block).html
@@ -741,6 +792,9 @@ module GOVUKDesignSystemFormBuilder
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @param caption [Hash] configures or sets the caption content which is inserted above the label
+    # @option caption text [String] the caption text
+    # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
@@ -755,6 +809,7 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_file_field :cv, label: -> { tag.h3('Upload your CV') }
     #
     # @see https://design-system.service.gov.uk/components/file-upload/ GOV.UK file upload
+    # @see https://design-system.service.gov.uk/styles/typography/#headings-with-captions Headings with captions
     # @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file MDN documentation for file upload
     #
     # @note Remember to set +multipart: true+ when creating a form with file
