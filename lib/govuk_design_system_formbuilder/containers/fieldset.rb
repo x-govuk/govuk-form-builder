@@ -8,7 +8,7 @@ module GOVUKDesignSystemFormBuilder
 
       LEGEND_SIZES = %w(xl l m s).freeze
 
-      def initialize(builder, object_name = nil, attribute_name = nil, legend: {}, described_by: nil, &block)
+      def initialize(builder, object_name = nil, attribute_name = nil, legend: {}, caption: {}, described_by: nil, &block)
         super(builder, object_name, attribute_name, &block)
 
         @described_by   = described_by(described_by)
@@ -16,10 +16,10 @@ module GOVUKDesignSystemFormBuilder
 
         case legend
         when Proc
-          @legend = legend.call
+          @legend_raw = legend.call
         when Hash
           @legend_options = legend_defaults.merge(legend)
-          @caption        = @legend_options.dig(:caption)
+          @caption        = caption
         else
           fail(ArgumentError, %(legend must be a Proc or Hash))
         end
@@ -34,7 +34,7 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def legend_content
-        @legend || build_legend
+        @legend_raw || build_legend
       end
 
       def build_legend

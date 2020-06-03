@@ -6,9 +6,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
   describe '#govuk_radio_buttons_fieldset' do
     let(:method) { :govuk_radio_buttons_fieldset }
     let(:args) { [method, attribute] }
-
-    subject do
-      builder.send(*args) do
+    let(:example_block) do
+      proc do
         builder.safe_join(
           [
             builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label }),
@@ -17,6 +16,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         )
       end
     end
+
+    subject { builder.send(*args, &example_block) }
 
     context 'when no block is supplied' do
       subject { builder.send(*args) }
@@ -40,11 +41,37 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:described_element) { 'fieldset' }
     end
 
-    context 'when a block containing radio buttons is supplied' do
-      let(:example_block) do
-        proc { builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label }) }
+    context 'when a caption is supplied' do
+      let(:caption_text) { 'Personal preferences' }
+      let(:caption_size) { 'l' }
+      let(:caption) { { text: caption_text, size: caption_size } }
+      let(:caption_class) { "govuk-caption-#{caption_size}" }
+
+      subject do
+        builder.send(*args, legend: legend, caption: caption, &example_block)
       end
 
+      context 'with a legend' do
+        let(:legend_text) { 'Favourite colour?' }
+        let(:legend) { { text: legend_text } }
+
+        specify 'output should contain a correclty-positioned caption with the right content' do
+          expect(subject).to have_tag('fieldset', with: { class: %w(govuk-fieldset) }) do
+            with_tag('span', text: caption_text, with: { class: caption_class })
+          end
+        end
+      end
+
+      context 'without a legend' do
+        let(:legend) { {} }
+
+        specify 'output should contain no caption at all' do
+          expect(subject).not_to have_tag('span', with: { class: caption_class })
+        end
+      end
+    end
+
+    context 'when a block containing radio buttons is supplied' do
       specify 'output should be a form group containing a form group and fieldset' do
         expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
           expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' })

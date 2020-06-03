@@ -4,7 +4,7 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def label_element
-        @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, **label_args)
+        @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, caption: @caption, **label_args)
       end
 
       def label_args

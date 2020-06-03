@@ -21,6 +21,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:legend_text) { 'Which projects is this person assigned to?' }
     end
 
+    it_behaves_like 'a field that supports a fieldset with legend' do
+      let(:legend_text) { 'Which projects is this person assigned to?' }
+    end
+
     it_behaves_like 'a field that supports hints' do
       let(:hint_text) { 'The most agile project in the world!' }
     end

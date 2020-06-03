@@ -4,12 +4,13 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Hint
       include Traits::Error
 
-      def initialize(builder, object_name, attribute_name, hint_text:, legend:, inline:, small:, classes:, &block)
+      def initialize(builder, object_name, attribute_name, hint_text:, legend:, caption:, inline:, small:, classes:, &block)
         super(builder, object_name, attribute_name)
 
         @inline        = inline
         @small         = small
         @legend        = legend
+        @caption       = caption
         @hint_text     = hint_text
         @classes       = classes
         @block_content = capture { block.call }
@@ -17,7 +18,7 @@ module GOVUKDesignSystemFormBuilder
 
       def html
         Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
-          Containers::Fieldset.new(@builder, @object_name, @attribute_name, legend: @legend, described_by: [error_element.error_id, hint_element.hint_id]).html do
+          Containers::Fieldset.new(@builder, @object_name, @attribute_name, legend: @legend, caption: @caption, described_by: [error_element.error_id, hint_element.hint_id]).html do
             safe_join(
               [
                 hint_element.html,

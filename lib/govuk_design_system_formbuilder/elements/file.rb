@@ -8,10 +8,11 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Label
       include Traits::Supplemental
 
-      def initialize(builder, object_name, attribute_name, hint_text:, label:, **extra_args, &block)
+      def initialize(builder, object_name, attribute_name, hint_text:, label:, caption:, **extra_args, &block)
         super(builder, object_name, attribute_name, &block)
 
         @label      = label
+        @caption    = caption
         @hint_text  = hint_text
         @extra_args = extra_args
       end

@@ -14,6 +14,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     let(:aria_described_by_target) { 'select' }
 
     it_behaves_like 'a field that supports labels'
+    it_behaves_like 'a field that supports captions on the label'
     it_behaves_like 'a field that supports labels as procs'
 
     it_behaves_like 'a field that supports hints'

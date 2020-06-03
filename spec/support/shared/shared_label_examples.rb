@@ -69,45 +69,6 @@ shared_examples 'a field that supports labels' do
         end
       end
     end
-
-    context 'captions' do
-      let(:label_header_tag) { 'h3' }
-      let(:caption_args) { { text: caption_text, size: caption_size } }
-      subject { builder.send(*args, label: { text: label_text, tag: label_header_tag, caption: caption_args }) }
-
-      context 'when a label and caption are present' do
-        let(:caption_text) { 'Stage 3' }
-
-        describe 'inserting a caption' do
-          let(:caption_size) { 'l' }
-
-          specify 'should contain the caption' do
-            expect(subject).to have_tag(label_header_tag) do
-              with_tag('span', text: caption_text, with: { class: "govuk-caption-#{caption_size}" })
-            end
-          end
-        end
-
-        %w(xl l m).each do |size|
-          context %(when the caption size is #{size}) do
-            let(:caption_size) { size }
-            subject { builder.send(*args, label: { text: label_text, tag: label_header_tag, caption: caption_args.merge(size: caption_size) }) }
-
-            specify "the caption should be size #{size}" do
-              expect(subject).to have_tag('span', text: caption_text, with: { class: "govuk-caption-#{caption_size}" })
-            end
-          end
-        end
-
-        context 'when the caption size is invalid' do
-          let(:caption_size) { 'super-xxxl' }
-
-          specify 'should fail with an appropriate error message' do
-            expect { subject }.to raise_error(ArgumentError, %(invalid size '#{caption_size}', must be xl, l or m))
-          end
-        end
-      end
-    end
   end
 
   context 'when no label is provided' do

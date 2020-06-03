@@ -6,7 +6,7 @@ module GOVUKDesignSystemFormBuilder
         include Traits::Hint
         include Traits::Supplemental
 
-        def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint_method:, hint_text:, legend:, inline:, small:, bold_labels:, classes:, &block)
+        def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint_method:, hint_text:, legend:, caption:, inline:, small:, bold_labels:, classes:, &block)
           super(builder, object_name, attribute_name, &block)
 
           @collection    = collection
@@ -16,6 +16,7 @@ module GOVUKDesignSystemFormBuilder
           @inline        = inline
           @small         = small
           @legend        = legend
+          @caption       = caption
           @hint_text     = hint_text
           @classes       = classes
           @bold_labels   = hint_method.present? || bold_labels
@@ -23,7 +24,7 @@ module GOVUKDesignSystemFormBuilder
 
         def html
           Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
-            Containers::Fieldset.new(@builder, @object_name, @attribute_name, legend: @legend, described_by: [error_id, hint_id, supplemental_id]).html do
+            Containers::Fieldset.new(@builder, @object_name, @attribute_name, legend: @legend, caption: @caption, described_by: [error_id, hint_id, supplemental_id]).html do
               safe_join(
                 [
                   supplemental_content.html,

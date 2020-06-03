@@ -8,10 +8,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     let(:legend_options) { { text: legend_text } }
 
+    let(:example_block) { proc { builder.tag.span(inner_text) } }
+
     subject do
-      builder.send(method, legend: legend_options) do
-        builder.tag.span(inner_text)
-      end
+      builder.send(method, legend: legend_options, &example_block)
     end
 
     specify 'output should be a fieldset containing the block contents' do
@@ -34,10 +34,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     context 'with inner form elements' do
+      let(:example_block) { proc { builder.govuk_text_field(:name) } }
+
       subject do
-        builder.send(method, legend: { text: legend_text }) do
-          builder.govuk_text_field(:name)
-        end
+        builder.send(method, legend: { text: legend_text }, &example_block)
       end
 
       specify 'inner inputs should be contained in the fieldset' do
@@ -81,6 +81,36 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
         specify 'the aria-describedby attribute should contain the supplied element ids' do
           expect(subject).to have_tag('fieldset', with: { 'aria-describedby' => element_id })
+        end
+      end
+    end
+
+    context 'when a caption is supplied' do
+      let(:caption_text) { 'Personal preferences' }
+      let(:caption_size) { 'l' }
+      let(:caption) { { text: caption_text, size: caption_size } }
+      let(:caption_class) { "govuk-caption-#{caption_size}" }
+
+      subject do
+        builder.send(method, legend: legend, caption: caption, &example_block)
+      end
+
+      context 'with a legend' do
+        let(:legend_text) { 'Favourite colour?' }
+        let(:legend) { { text: legend_text } }
+
+        specify 'output should contain a correclty-positioned caption with the right content' do
+          expect(subject).to have_tag('fieldset', with: { class: %w(govuk-fieldset) }) do
+            with_tag('span', text: caption_text, with: { class: caption_class })
+          end
+        end
+      end
+
+      context 'without a legend' do
+        let(:legend) { {} }
+
+        specify 'output should contain no caption at all' do
+          expect(subject).not_to have_tag('span', with: { class: caption_class })
         end
       end
     end
