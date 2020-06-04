@@ -31,7 +31,7 @@ p.govuk-body
 section
 
   == render('/partials/example-fig.*',
-    caption: "Populating label and hint text from the localisation data",
+    caption: "Populating label, caption and hint text from the localisation data",
     localisation: favourite_kind_of_hat_locale,
     code: favourite_kind_of_hat) do
 
@@ -41,7 +41,7 @@ section
         can be supplied and work in the normal manner.
 
 p.govuk-body
-  | Radio and check box labels use a special key in the locale dictionary composed by the
+  | Radio and check box labels use a special key in the locale dictionary composed from the
     attribute name and the suffix <code>_options</code>. This makes it possible to localise
     the fieldset legend and each of the individual choices separately.
 
@@ -79,18 +79,24 @@ p.govuk-body
     h4.govuk-heading-s Contexts
 
     p.govuk-body
-      | There are three contexts supported by the form builder: <em>label</em>,
-        <em>legend</em> and <em>hint</em>. Custom locale schemas are
-        configured using an array of symbols that match your locale structure.
+      | There are four contexts supported by the form builder: <em>label</em>,
+        <em>legend</em>, <em>caption</em> and <em>hint</em>. Custom locale
+        schemas are configured using an array of symbols that match your locale
+        structure.
 
     p.govuk-body
       | The special value <code>__context__</code> is used to represent the
         current translation context. It will automatically be replaced with
-        either <em>label</em>, <em>legend</em> or <em>hint</em> when the
-        translation key is generated.
+        either <em>label</em>, <em>legend</em>, <em>caption</em> or <em>hint</em>
+        when the translation key is generated.
 
     p.govuk-body
       | When retrieving a localised string the builder first checks whether
         a contextual schema has been set for the context. If there hasn't,
         the <code>localisation_schema_fallback</code> key will be used. <strong>It is
-        the only one set by default</strong>.
+        the only schema set by default</strong>.
+
+    p.govuk-body.important
+      | Captions are rendered inside the corresponding <code>label</code> or
+        <code>legend</code> tag. If the label or legend is hidden or not rendered,
+        the caption won't be either.

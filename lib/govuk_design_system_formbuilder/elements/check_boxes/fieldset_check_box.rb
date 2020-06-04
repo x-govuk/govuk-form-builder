@@ -4,6 +4,7 @@ module GOVUKDesignSystemFormBuilder
       class FieldsetCheckBox < Base
         using PrefixableArray
 
+        include Traits::Label
         include Traits::Hint
         include Traits::Conditional
 
@@ -57,7 +58,7 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def label_element
-          @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, checkbox: true, value: @value, **@label, link_errors: @link_errors)
+          @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, checkbox: true, value: @value, link_errors: @link_errors, **label_args)
         end
 
         def hint_element

@@ -4,6 +4,7 @@ module GOVUKDesignSystemFormBuilder
       class FieldsetRadioButton < Base
         using PrefixableArray
 
+        include Traits::Label
         include Traits::Hint
         include Traits::Conditional
 
@@ -41,7 +42,7 @@ module GOVUKDesignSystemFormBuilder
       private
 
         def label_element
-          @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, radio: true, value: @value, **@label, link_errors: @link_errors)
+          @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, radio: true, value: @value, link_errors: @link_errors, **label_args)
         end
 
         def hint_element

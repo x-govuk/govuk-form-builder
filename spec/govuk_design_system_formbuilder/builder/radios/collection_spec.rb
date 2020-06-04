@@ -29,6 +29,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:legend_text) { 'Pick your favourite colour' }
     end
 
+    it_behaves_like 'a field that supports captions on the legend' do
+      let(:legend_text) { 'Pick your favourite colour' }
+    end
+
     it_behaves_like 'a field that supports hints' do
       let(:hint_text) { 'The colour of your favourite handkerchief' }
     end
@@ -44,6 +48,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     it_behaves_like 'a field that supports setting the hint via localisation'
+    it_behaves_like 'a field that supports setting the legend caption via localisation'
     it_behaves_like 'a field that supports setting the legend via localisation'
 
     it_behaves_like 'a field that accepts a plain ruby object' do

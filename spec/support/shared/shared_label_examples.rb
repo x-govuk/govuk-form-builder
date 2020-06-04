@@ -78,4 +78,39 @@ shared_examples 'a field that supports labels' do
       expect(subject).to have_tag('label', with: { class: 'govuk-label' }, text: attribute.capitalize)
     end
   end
+
+  context 'when something other than a Proc or Hash is supplied' do
+    subject { builder.send(*args, label: "This should fail") }
+
+    specify { expect { subject }.to raise_error(ArgumentError, 'label must be a Proc or Hash') }
+  end
+end
+
+shared_examples 'a field that supports labels as procs' do
+  let(:caption_classes) { %w(govuk-caption-m) }
+  let(:heading_classes) { %w(govuk-heading-l) }
+  let(:caption) { %(Caption from the proc) }
+  let(:heading) { %(Heading from the proc) }
+
+  let(:label) do
+    proc do
+      builder.safe_join(
+        [
+          builder.tag.span(caption, class: caption_classes),
+          builder.tag.h1(heading, class: heading_classes)
+        ]
+      )
+    end
+  end
+
+  subject { builder.send(*args, label: label) }
+
+  specify 'output fieldset should contain the specified tag' do
+    expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
+      expect(fg).to have_tag('label', with: { class: 'govuk-label' }) do |fs|
+        expect(fs).to have_tag('span', class: caption_classes, text: caption)
+        expect(fs).to have_tag('h1', class: heading_classes, text: heading)
+      end
+    end
+  end
 end

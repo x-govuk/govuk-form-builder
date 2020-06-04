@@ -6,6 +6,9 @@ module Examples
           label:
             person:
               favourite_kind_of_hat: Which style of hat do you prefer?
+          caption:
+            person:
+              favourite_kind_of_hat: Fashion choices
           hint:
             person:
               favourite_kind_of_hat: |-
@@ -16,7 +19,7 @@ module Examples
 
     def favourite_kind_of_hat
       <<~SNIPPET
-        = f.govuk_text_field :favourite_kind_of_hat, label: { size: 'm' }
+        = f.govuk_text_field :favourite_kind_of_hat, label: { size: 'l' }
       SNIPPET
     end
 

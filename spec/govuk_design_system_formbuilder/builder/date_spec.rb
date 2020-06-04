@@ -60,8 +60,12 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     it_behaves_like 'a field that supports setting the legend via localisation'
+    it_behaves_like 'a field that supports setting the legend caption via localisation'
     it_behaves_like 'a field that supports setting the hint via localisation'
+
     it_behaves_like 'a field that supports custom branding'
+    it_behaves_like 'a field that supports a fieldset with legend'
+    it_behaves_like 'a field that supports captions on the legend'
 
     it_behaves_like 'a field that accepts a plain ruby object' do
       let(:described_element) { ['input', { count: 3 }] }

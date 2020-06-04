@@ -1,12 +1,13 @@
 module GOVUKDesignSystemFormBuilder
   module Traits
     module Input
-      def initialize(builder, object_name, attribute_name, hint_text:, label:, width:, **extra_args, &block)
+      def initialize(builder, object_name, attribute_name, hint_text:, label:, caption:, width:, **extra_args, &block)
         super(builder, object_name, attribute_name, &block)
 
         @width          = width
         @extra_args     = extra_args
         @label          = label
+        @caption        = caption
         @hint_text      = hint_text
       end
 

@@ -9,6 +9,14 @@ helpers:
       projects_options:
         11: Eleven
       photo: Upload a recent passport photo
+  caption:
+    person:
+      name: Personal information
+      favourite_colour: Aesthetic choices
+      photo: Personal appearance
+      cv: Background information
+      born_on: Required data
+      projects: Workplace data
   legend:
     person:
       favourite_colour: To which colours are you most partial?

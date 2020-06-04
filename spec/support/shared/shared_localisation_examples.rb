@@ -9,6 +9,7 @@ shared_examples 'a field that supports setting the label via localisation' do
     let(:localisation_key) do
       defined?(value) ? "#{attribute}_options.#{value}" : attribute
     end
+
     let(:expected_label) do
       I18n.translate(localisation_key, scope: 'helpers.label.person')
     end
@@ -17,7 +18,8 @@ shared_examples 'a field that supports setting the label via localisation' do
 
     specify 'should set the label from the locales' do
       with_localisations(localisations) do
-        expect(subject).to have_tag('label', text: expected_label)
+        # wrap label assertation in a regexp because the caption is placed alongside the text
+        expect(subject).to have_tag('label', text: Regexp.new(expected_label))
       end
     end
   end
@@ -29,7 +31,72 @@ shared_examples 'a field that supports setting the label via localisation' do
 
     specify 'should use the supplied label text' do
       with_localisations(localisations) do
-        expect(subject).to have_tag('label', text: expected_label)
+        # wrap label assertation in a regexp because the caption is placed alongside the text
+        expect(subject).to have_tag('label', text: Regexp.new(expected_label))
+      end
+    end
+  end
+end
+
+shared_examples 'a field that supports setting the label caption via localisation' do
+  let(:localisations) { LOCALISATIONS }
+
+  context 'localising when no text is supplied' do
+    let(:localisation_key) { attribute }
+
+    let(:expected_caption) do
+      I18n.translate(localisation_key, scope: 'helpers.caption.person')
+    end
+
+    subject { builder.send(*args) }
+
+    specify 'should set the caption from the locales' do
+      with_localisations(localisations) do
+        expect(subject).to have_tag('span', text: expected_caption)
+      end
+    end
+  end
+
+  context 'allowing localised text to be overridden' do
+    let(:expected_caption) { "Private data" }
+
+    subject { builder.send(*args, caption: { text: expected_caption }) }
+
+    specify 'should use the supplied caption text' do
+      with_localisations(localisations) do
+        expect(subject).to have_tag('span', text: expected_caption)
+      end
+    end
+  end
+end
+
+shared_examples 'a field that supports setting the legend caption via localisation' do
+  let(:localisations) { LOCALISATIONS }
+
+  context 'localising when no text is supplied' do
+    let(:localisation_key) { attribute }
+
+    let(:expected_caption) do
+      I18n.translate(localisation_key, scope: 'helpers.caption.person')
+    end
+
+    subject { builder.send(*args) }
+
+    specify 'should set the caption from the locales' do
+      with_localisations(localisations) do
+        expect(subject).to have_tag('span', text: expected_caption)
+      end
+    end
+  end
+
+  context 'allowing localised text to be overridden' do
+    let(:expected_caption) { "Private data" }
+
+    subject { builder.send(*args, caption: { text: expected_caption }) }
+
+    specify 'should use the supplied caption text' do
+      with_localisations(localisations) do
+        expect(subject).to have_tag('span', text: expected_caption)
       end
     end
   end
@@ -78,7 +145,7 @@ shared_examples 'a field that supports setting the legend via localisation' do
       with_localisations(localisations) do
         expect(subject).to have_tag('fieldset') do
           with_tag('legend', with: { class: 'govuk-fieldset__legend' }) do
-            with_tag('h1', text: expected_legend, with: { class: 'govuk-fieldset__heading' })
+            with_tag('h1', text: Regexp.new(expected_legend), with: { class: 'govuk-fieldset__heading' })
           end
         end
       end
@@ -93,7 +160,7 @@ shared_examples 'a field that supports setting the legend via localisation' do
       with_localisations(localisations) do
         expect(subject).to have_tag('fieldset') do
           with_tag('legend', with: { class: 'govuk-fieldset__legend' }) do
-            with_tag('h1', text: expected_legend, with: { class: 'govuk-fieldset__heading' })
+            with_tag('h1', text: Regexp.new(expected_legend), with: { class: 'govuk-fieldset__heading' })
           end
         end
       end

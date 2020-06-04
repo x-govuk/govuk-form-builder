@@ -63,12 +63,15 @@ class Person
     :graduation_month
   )
 
-  # labels, hints and legends
+  # labels, captions, hints and legends
   attr_accessor(
     :favourite_colour,
     :favourite_shade_of_red,
+    :favourite_shade_of_orange,
     :favourite_shade_of_blue,
-    :favourite_primary_colour
+    :favourite_shade_of_grey,
+    :favourite_primary_colour,
+    :least_favourite_colour
   )
 
   # errors
