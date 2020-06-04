@@ -27,3 +27,5 @@ Style/SignalException:
   Enabled: false
 Style/AsciiComments:
   Enabled: false
+Style/FormatString:
+  EnforcedStyle: format
