@@ -3,9 +3,9 @@ language: ruby
 # cache: bundler
 
 rvm:
-  - 2.5.7
-  - 2.6.5
-  - 2.7.0
+  - 2.5.8
+  - 2.6.6
+  - 2.7.1
 
 script:
   - make ruby-lint
@@ -14,7 +14,7 @@ script:
 
 env:
   - RAILS_VERSION=5.2.4
-  - RAILS_VERSION=6.0.2
+  - RAILS_VERSION=6.0.3
 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
