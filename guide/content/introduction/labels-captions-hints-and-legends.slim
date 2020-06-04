@@ -1,5 +1,5 @@
 ---
-title: Labels, hints and legends
+title: Labels, captions, hints and legends
 ---
 
 h1.govuk-heading-xl Labels, hints and legends
@@ -81,6 +81,42 @@ section
 
       p.govuk-body.important
         | This example contains raw html but Rails' built-in tag helpers are fully-supported.
+
+section
+
+  h2.govuk-heading-l Captions
+
+  p.govuk-body
+    | Sometimes you may need to make it clear that a heading is part of a
+      larger section or group. To do this, you can use a heading with a caption.
+
+  p.govuk-body
+    | Captions are supported by all helpers that have labels or legends and can
+      be configured with the following options:
+
+  dl.govuk-summary-list
+    .govuk-summary-list__row
+      dt.govuk-summary-list__key
+        code text
+
+      dd.govuk-summary-list__value
+        | The caption text
+
+    .govuk-summary-list__row
+      dt.govuk-summary-list__key
+        code size
+
+      dd.govuk-summary-list__value
+        | The caption size, either <code>xl</code>, <code>l</code> or <code>m</code>
+
+  p.govuk-body.important
+    | If you want to place the caption <em>outside</em> of the label's tag you can
+      do this by #{link_to('setting the label content with a proc', '#setting-label-content-with-a-proc').html_safe}.
+
+  == render('/partials/example-fig.*',
+    caption: "A label with a caption",
+    code: text_field_with_caption,
+    hide_html_output: false)
 
 section
 

@@ -1,5 +1,5 @@
 module Examples
-  module LabelsHintsAndLegends
+  module LabelsCaptionsHintsAndLegends
     def text_field_with_no_label
       "= f.govuk_text_field :favourite_colour"
     end
@@ -15,6 +15,14 @@ module Examples
       <<~SNIPPET
         = f.govuk_text_field :favourite_shade_of_orange,
           label: -> { %(<h2 class="govuk-header-m orange-underline">What's your favourite shade of orange?</h2>) }
+      SNIPPET
+    end
+
+    def text_field_with_caption
+      <<~SNIPPET
+        = f.govuk_text_field :favourite_shade_of_grey,
+          label: { text: 'Favourite shade of grey', tag: 'h2', size: 'l' },
+          caption: { text: 'Aesthetic preferences', size: 'm' }
       SNIPPET
     end
 
