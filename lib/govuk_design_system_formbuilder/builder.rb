@@ -685,6 +685,7 @@ module GOVUKDesignSystemFormBuilder
     # @param validate [Boolean] adds the formnovalidate to the submit button when true, this disables all
     #   client-side validation provided by the browser. This is to provide a more consistent and accessible user
     #   experience
+    # @param disabled [Boolean] makes the button disabled when true
     # @param block [Block] Any supplied HTML will be inserted immediately after
     #   the submit button. It is intended for other buttons directly related to
     #   the form's operation, such as 'Cancel' or 'Safe draft'
@@ -699,8 +700,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_submit "Proceed", prevent_double_click: true do
     #     = link_to 'Cancel', some_other_path, class: 'govuk-button__secondary'
     #
-    def govuk_submit(text = config.default_submit_button_text, warning: false, secondary: false, classes: nil, prevent_double_click: true, validate: false, &block)
-      Elements::Submit.new(self, text, warning: warning, secondary: secondary, classes: classes, prevent_double_click: prevent_double_click, validate: validate, &block).html
+    def govuk_submit(text = config.default_submit_button_text, warning: false, secondary: false, classes: nil, prevent_double_click: true, validate: false, disabled: false, &block)
+      Elements::Submit.new(self, text, warning: warning, secondary: secondary, classes: classes, prevent_double_click: prevent_double_click, validate: validate, disabled: disabled, &block).html
     end
 
     # Generates three inputs for the +day+, +month+ and +year+ components of a date
