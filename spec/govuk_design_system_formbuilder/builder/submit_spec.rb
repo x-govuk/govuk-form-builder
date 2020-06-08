@@ -126,5 +126,23 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
     end
+
+    describe 'disabling button' do
+      context 'when disabled is false' do
+        subject { builder.send(*args.push('Create')) }
+
+        specify 'input should not have the disabled attribute' do
+          expect(parsed_subject.at_css('input').attributes.keys).not_to include('disabled')
+        end
+      end
+
+      context 'when disabled is true' do
+        subject { builder.send(*args.push('Create'), disabled: true) }
+
+        specify 'input should have the disabled attribute' do
+          expect(parsed_subject.at_css('input').attributes.keys).to include('disabled')
+        end
+      end
+    end
   end
 end
