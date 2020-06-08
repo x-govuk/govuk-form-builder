@@ -141,6 +141,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
         specify 'input should have the disabled attribute' do
           expect(parsed_subject.at_css('input').attributes.keys).to include('disabled')
+          expect(subject).to have_tag('input', with: { class: %w(govuk-button govuk-button--disabled) })
         end
       end
     end

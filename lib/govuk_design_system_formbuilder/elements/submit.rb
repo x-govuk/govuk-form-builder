@@ -25,6 +25,7 @@ module GOVUKDesignSystemFormBuilder
               class: %w(button).prefix(brand).push(
                 warning_class,
                 secondary_class,
+                disabled_class,
                 @classes,
                 padding_class(@block_content.present?)
               ).compact,
@@ -47,6 +48,10 @@ module GOVUKDesignSystemFormBuilder
 
       def padding_class(content_present)
         %(#{brand}-!-margin-right-1) if content_present
+      end
+
+      def disabled_class
+        %(#{brand}-button--disabled) if @disabled
       end
 
       def extra_args
