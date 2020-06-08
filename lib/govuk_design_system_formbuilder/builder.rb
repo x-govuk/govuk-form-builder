@@ -677,8 +677,6 @@ module GOVUKDesignSystemFormBuilder
     # @param text [String] the button text
     # @param warning [Boolean] makes the button red ({https://design-system.service.gov.uk/components/button/#warning-buttons warning}) when true
     # @param secondary [Boolean] makes the button grey ({https://design-system.service.gov.uk/components/button/#secondary-buttons secondary}) when true
-    # @todo The GOV.UK design system also supports {https://design-system.service.gov.uk/components/button/#disabled-buttons disabled buttons}, they
-    #   should probably be supported too
     # @param classes [String] Classes to add to the submit button
     # @param prevent_double_click [Boolean] adds JavaScript to safeguard the
     #   form from being submitted more than once
