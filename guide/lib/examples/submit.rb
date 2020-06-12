@@ -20,6 +20,10 @@ module Examples
       "= f.govuk_submit prevent_double_click: false"
     end
 
+    def submit_button_disabled
+      "= f.govuk_submit 'Disabled button', disabled: true"
+    end
+
     def multiple_buttons
       <<~SNIPPET
         = f.govuk_submit 'Save and continue' do
