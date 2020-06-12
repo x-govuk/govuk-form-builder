@@ -55,13 +55,13 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def extra_args
-        disabled_hash = @disabled ? { disabled: 'disabled' } : {}
         {
           formnovalidate: !@validate,
+          disabled: @disabled,
           data: {
             module: %(#{brand}-button), 'prevent-double-click' => @prevent_double_click
           }.select { |_k, v| v.present? }
-        }.merge!(disabled_hash)
+        }
       end
     end
   end
