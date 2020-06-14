@@ -8,13 +8,13 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Label
       include Traits::Supplemental
 
-      def initialize(builder, object_name, attribute_name, hint_text:, label:, caption:, rows:, max_words:, max_chars:, threshold:, **extra_args, &block)
+      def initialize(builder, object_name, attribute_name, hint_text:, label:, caption:, rows:, max_words:, max_chars:, threshold:, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
 
         @label      = label
         @caption    = caption
         @hint_text  = hint_text
-        @extra_args = extra_args
+        @attributes = kwargs
         @max_words  = max_words
         @max_chars  = max_chars
         @threshold  = threshold
@@ -26,23 +26,10 @@ module GOVUKDesignSystemFormBuilder
           Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
             safe_join(
               [
-                [
-                  label_element,
-                  supplemental_content,
-                  hint_element,
-                  error_element
-                ].map(&:html),
-                @builder.text_area(
-                  @attribute_name,
-                  id: field_id(link_errors: true),
-                  class: govuk_textarea_classes,
-                  aria: {
-                    describedby: described_by(hint_id, error_id, supplemental_id, limit_description_id)
-                  },
-                  **@extra_args.merge(rows: @rows)
-                ),
+                [label_element, supplemental_content, hint_element, error_element].map(&:html),
+                text_area,
                 limit_description
-              ].flatten.compact
+              ]
             )
           end
         end
@@ -50,11 +37,23 @@ module GOVUKDesignSystemFormBuilder
 
     private
 
-      def govuk_textarea_classes
+      def text_area
+        @builder.text_area(@attribute_name, **text_area_options, **@attributes.merge(rows: @rows))
+      end
+
+      def text_area_classes
         %w(textarea).prefix(brand).tap do |classes|
           classes.push(%(#{brand}-textarea--error)) if has_errors?
           classes.push(%(#{brand}-js-character-count)) if limit?
         end
+      end
+
+      def text_area_options
+        {
+          id: field_id(link_errors: true),
+          class: text_area_classes,
+          aria: { describedby: described_by(hint_id, error_id, supplemental_id, limit_description_id) },
+        }
       end
 
       # Provides an id for use by the textual description of character and word limits.

@@ -24,23 +24,23 @@ module GOVUKDesignSystemFormBuilder
 
         def html
           content_tag('div', class: %(#{brand}-radios__item)) do
-            safe_join(
-              [
-                @builder.radio_button(
-                  @attribute_name,
-                  @value,
-                  id: field_id(link_errors: @link_errors),
-                  aria: { describedby: hint_id },
-                  class: %w(radios__input).prefix(brand)
-                ),
-                label_element.html,
-                hint_element.html
-              ]
-            )
+            safe_join([radio, label_element.html, hint_element.html])
           end
         end
 
       private
+
+        def radio
+          @builder.radio_button(@attribute_name, @value, **radio_options)
+        end
+
+        def radio_options
+          {
+            id: field_id(link_errors: @link_errors),
+            aria: { describedby: hint_id },
+            class: %w(radios__input).prefix(brand)
+          }
+        end
 
         def hint_element
           @hint_element ||= Elements::Hint.new(@builder, @object_name, @attribute_name, @hint_text, @value, radio: true)

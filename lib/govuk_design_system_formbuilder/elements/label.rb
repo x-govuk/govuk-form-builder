@@ -29,21 +29,16 @@ module GOVUKDesignSystemFormBuilder
         return nil if [@content, @text].all?(&:blank?)
 
         if @tag.present?
-          content_tag(@tag, class: %(#{brand}-label-wrapper)) { build_label }
+          content_tag(@tag, class: %(#{brand}-label-wrapper)) { label }
         else
-          build_label
+          label
         end
       end
 
     private
 
-      def build_label
-        @builder.label(
-          @attribute_name,
-          value: @value,
-          for: field_id(link_errors: @link_errors),
-          class: %w(label).prefix(brand).push(@size_class, @weight_class, @radio_class, @checkbox_class).compact
-        ) do
+      def label
+        @builder.label(@attribute_name, label_options) do
           @content || safe_join([caption_element.html, @text])
         end
       end
@@ -56,6 +51,14 @@ module GOVUKDesignSystemFormBuilder
         else
           text
         end
+      end
+
+      def label_options
+        {
+          value: @value,
+          for: field_id(link_errors: @link_errors),
+          class: %w(label).prefix(brand).push(@size_class, @weight_class, @radio_class, @checkbox_class).compact
+        }
       end
 
       def radio_class(radio)

@@ -34,10 +34,10 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def legend_content
-        @legend_raw || build_legend
+        @legend_raw || legend
       end
 
-      def build_legend
+      def legend
         if legend_text.present?
           content_tag('legend', class: legend_classes) do
             content_tag(@legend_options.dig(:tag), class: legend_heading_classes) do

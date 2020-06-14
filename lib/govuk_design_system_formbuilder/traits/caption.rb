@@ -4,12 +4,11 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def caption_element
-        @caption_element ||= Elements::Caption.new(
-          @builder,
-          @object_name,
-          @attribute_name,
-          **{ text: nil }.merge({ text: caption_text, size: caption_size }.compact)
-        )
+        @caption_element ||= Elements::Caption.new(@builder, @object_name, @attribute_name, **caption_options)
+      end
+
+      def caption_options
+        { text: nil }.merge({ text: caption_text, size: caption_size }.compact)
       end
 
       def caption_text

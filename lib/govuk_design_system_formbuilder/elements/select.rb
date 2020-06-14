@@ -23,28 +23,17 @@ module GOVUKDesignSystemFormBuilder
 
       def html
         Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
-          safe_join(
-            [
-              label_element.html,
-              supplemental_content.html,
-              hint_element.html,
-              error_element.html,
-              @builder.collection_select(
-                @attribute_name,
-                @collection,
-                @value_method,
-                @text_method,
-                @options,
-                build_html_options
-              )
-            ]
-          )
+          safe_join([label_element.html, supplemental_content.html, hint_element.html, error_element.html, select])
         end
       end
 
     private
 
-      def build_html_options
+      def select
+        @builder.collection_select(@attribute_name, @collection, @value_method, @text_method, @options, select_options)
+      end
+
+      def select_options
         @html_options.deep_merge(
           id: field_id(link_errors: true),
           class: select_classes,

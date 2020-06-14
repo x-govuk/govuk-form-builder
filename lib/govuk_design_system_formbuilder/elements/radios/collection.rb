@@ -25,36 +25,37 @@ module GOVUKDesignSystemFormBuilder
         def html
           Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
             Containers::Fieldset.new(@builder, @object_name, @attribute_name, legend: @legend, caption: @caption, described_by: [error_id, hint_id, supplemental_id]).html do
-              safe_join(
-                [
-                  supplemental_content.html,
-                  hint_element.html,
-                  error_element.html,
-                  Containers::Radios.new(@builder, inline: @inline, small: @small, classes: @classes).html do
-                    safe_join(build_collection)
-                  end
-                ]
-              )
+              safe_join([supplemental_content.html, hint_element.html, error_element.html, radios])
             end
           end
         end
 
       private
 
-        def build_collection
-          @collection.map.with_index do |item, i|
-            Elements::Radios::CollectionRadioButton.new(
-              @builder,
-              @object_name,
-              @attribute_name,
-              item,
-              value_method: @value_method,
-              text_method: @text_method,
-              hint_method: @hint_method,
-              link_errors: has_errors? && i.zero?,
-              bold_labels: @bold_labels
-            ).html
+        def radios
+          Containers::Radios.new(@builder, inline: @inline, small: @small, classes: @classes).html do
+            safe_join(collection)
           end
+        end
+
+        def collection
+          @collection.map.with_index do |item, i|
+            Elements::Radios::CollectionRadioButton.new(@builder, @object_name, @attribute_name, item, **collection_options(i)).html
+          end
+        end
+
+        def collection_options(index)
+          {
+            value_method: @value_method,
+            text_method: @text_method,
+            hint_method: @hint_method,
+            link_errors: link_errors?(index),
+            bold_labels: @bold_labels
+          }
+        end
+
+        def link_errors?(index)
+          has_errors? && index.zero?
         end
       end
     end

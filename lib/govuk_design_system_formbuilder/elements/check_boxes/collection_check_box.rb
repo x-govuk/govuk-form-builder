@@ -10,30 +10,32 @@ module GOVUKDesignSystemFormBuilder
         def initialize(builder, object_name, attribute_name, checkbox, hint_method = nil, link_errors: false)
           super(builder, object_name, attribute_name)
 
-          @checkbox  = checkbox
-          @item      = checkbox.object
-          @value     = checkbox.value
-          @hint_text = retrieve(@item, hint_method)
+          @checkbox    = checkbox
+          @item        = checkbox.object
+          @value       = checkbox.value
+          @hint_text   = retrieve(@item, hint_method)
           @link_errors = link_errors
         end
 
         def html
           content_tag('div', class: %(#{brand}-checkboxes__item)) do
-            safe_join(
-              [
-                @checkbox.check_box(
-                  id: field_id(link_errors: @link_errors),
-                  class: %(#{brand}-checkboxes__input),
-                  aria: { describedby: hint_id }
-                ),
-                label_element.html,
-                hint_element.html
-              ]
-            )
+            safe_join([check_box, label_element.html, hint_element.html])
           end
         end
 
       private
+
+        def check_box
+          @checkbox.check_box(**check_box_options)
+        end
+
+        def check_box_options
+          {
+            id: field_id(link_errors: @link_errors),
+            class: %(#{brand}-checkboxes__input),
+            aria: { describedby: hint_id }
+          }
+        end
 
         def label_element
           @label_element ||= Label.new(@builder, @object_name, @attribute_name, @checkbox, value: @value, link_errors: @link_errors)

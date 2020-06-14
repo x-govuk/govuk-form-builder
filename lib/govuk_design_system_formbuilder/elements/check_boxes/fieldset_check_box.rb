@@ -24,41 +24,33 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def html
-          safe_join(
-            [
-              content_tag('div', class: %(#{brand}-checkboxes__item)) do
-                safe_join(
-                  [
-                    input,
-                    label_element.html,
-                    hint_element.html,
-                  ]
-                )
-              end,
-              @conditional_content
-            ]
-          )
+          safe_join([check_box, @conditional_content])
         end
 
       private
 
+        def check_box
+          content_tag('div', class: %(#{brand}-checkboxes__item)) do
+            safe_join([input, label_element.html, hint_element.html])
+          end
+        end
+
         def input
-          @builder.check_box(
-            @attribute_name,
-            {
-              id: field_id(link_errors: @link_errors),
-              class: check_box_classes,
-              multiple: @multiple,
-              aria: { describedby: hint_id },
-              data: { 'aria-controls' => @conditional_id }
-            },
-            @value,
-            false
-          )
+          @builder.check_box(@attribute_name, input_options, @value, false)
+        end
+
+        def input_options
+          {
+            id: field_id(link_errors: @link_errors),
+            class: check_box_classes,
+            multiple: @multiple,
+            aria: { describedby: hint_id },
+            data: { 'aria-controls' => @conditional_id }
+          }
         end
 
         def label_element
-          @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, checkbox: true, value: @value, link_errors: @link_errors, **label_args)
+          @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, checkbox: true, value: @value, link_errors: @link_errors, **label_options)
         end
 
         def hint_element

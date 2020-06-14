@@ -13,16 +13,17 @@ module GOVUKDesignSystemFormBuilder
         return nil unless has_errors?
 
         content_tag('span', class: %(#{brand}-error-message), id: error_id) do
-          safe_join(
-            [
-              tag.span('Error: ', class: %(#{brand}-visually-hidden)),
-              message
-            ]
-          )
+          safe_join([error_prefix, error_message])
         end
       end
 
-      def message
+    private
+
+      def error_prefix
+        tag.span('Error: ', class: %(#{brand}-visually-hidden))
+      end
+
+      def error_message
         @builder.object.errors.messages[@attribute_name]&.first
       end
     end
