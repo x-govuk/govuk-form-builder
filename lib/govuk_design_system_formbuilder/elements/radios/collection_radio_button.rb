@@ -24,7 +24,7 @@ module GOVUKDesignSystemFormBuilder
 
         def html
           content_tag('div', class: %(#{brand}-radios__item)) do
-            safe_join([radio, label_element.html, hint_element.html])
+            safe_join([radio, label_element, hint_element])
           end
         end
 

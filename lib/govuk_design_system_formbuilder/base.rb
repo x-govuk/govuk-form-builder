@@ -18,6 +18,11 @@ module GOVUKDesignSystemFormBuilder
       @block_content  = capture { block.call } if block_given?
     end
 
+    # objects that implement #to_s can be passed directly into #safe_join
+    def to_s
+      html || ''
+    end
+
   private
 
     def brand(override = nil)

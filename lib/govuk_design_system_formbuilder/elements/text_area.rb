@@ -24,13 +24,7 @@ module GOVUKDesignSystemFormBuilder
       def html
         Containers::CharacterCount.new(@builder, max_words: @max_words, max_chars: @max_chars, threshold: @threshold).html do
           Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
-            safe_join(
-              [
-                [label_element, supplemental_content, hint_element, error_element].map(&:html),
-                text_area,
-                limit_description
-              ]
-            )
+            safe_join([label_element, supplemental_content, hint_element, error_element, text_area, limit_description])
           end
         end
       end

@@ -41,7 +41,7 @@ module GOVUKDesignSystemFormBuilder
         if legend_text.present?
           content_tag('legend', class: legend_classes) do
             content_tag(@legend_options.dig(:tag), class: legend_heading_classes) do
-              safe_join([caption_element.html, legend_text])
+              safe_join([caption_element, legend_text])
             end
           end
         end
