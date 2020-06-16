@@ -18,16 +18,16 @@ module GOVUKDesignSystemFormBuilder
       def html
         Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
           Containers::Fieldset.new(@builder, @object_name, @attribute_name, legend: @legend, caption: @caption, described_by: [error_element.error_id, hint_element.hint_id]).html do
-            safe_join(
-              [
-                hint_element.html,
-                error_element.html,
-                Containers::CheckBoxes.new(@builder, small: @small, classes: @classes).html do
-                  @block_content
-                end
-              ]
-            )
+            safe_join([hint_element, error_element, checkboxes])
           end
+        end
+      end
+
+    private
+
+      def checkboxes
+        Containers::CheckBoxes.new(@builder, small: @small, classes: @classes).html do
+          @block_content
         end
       end
     end
