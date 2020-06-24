@@ -24,13 +24,21 @@ module GOVUKDesignSystemFormBuilder
 
         def html
           Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
-            Containers::Fieldset.new(@builder, @object_name, @attribute_name, legend: @legend, caption: @caption, described_by: [error_id, hint_id, supplemental_id]).html do
+            Containers::Fieldset.new(@builder, @object_name, @attribute_name, **fieldset_options).html do
               safe_join([supplemental_content, hint_element, error_element, radios])
             end
           end
         end
 
       private
+
+        def fieldset_options
+          {
+            legend: @legend,
+            caption: @caption,
+            described_by: [error_id, hint_id, supplemental_id]
+          }
+        end
 
         def radios
           Containers::Radios.new(@builder, inline: @inline, small: @small, classes: @classes).html do
