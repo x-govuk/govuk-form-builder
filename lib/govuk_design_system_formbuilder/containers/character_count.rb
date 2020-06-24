@@ -14,16 +14,17 @@ module GOVUKDesignSystemFormBuilder
       def html
         return yield unless limit?
 
-        content_tag(
-          'div',
-          class: %(#{brand}-character-count),
-          data: { module: %(#{brand}-character-count) }.merge(**limit, **threshold).compact
-        ) do
-          yield
-        end
+        content_tag('div', **character_count_options) { yield }
       end
 
     private
+
+      def character_count_options
+        {
+          class: %(#{brand}-character-count),
+          data: { module: %(#{brand}-character-count) }.merge(**limit, **threshold).compact
+        }
+      end
 
       def limit
         if @max_words
