@@ -18,25 +18,29 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        safe_join(
-          [
-            @builder.submit(
-              @text,
-              class: %w(button).prefix(brand).push(
-                warning_class,
-                secondary_class,
-                disabled_class,
-                @classes,
-                padding_class(@block_content.present?)
-              ).compact,
-              **extra_args
-            ),
-            @block_content
-          ]
-        )
+        safe_join([submit, @block_content])
       end
 
     private
+
+      def submit
+        @builder.submit(@text, class: submit_classes, **submit_options)
+      end
+
+      def submit_classes
+        %w(button).prefix(brand).push(warning_class, secondary_class, disabled_class, @classes, padding_class(@block_content.present?))
+      end
+
+      def submit_options
+        {
+          formnovalidate: !@validate,
+          disabled: @disabled,
+          data: {
+            module: %(#{brand}-button),
+            'prevent-double-click': @prevent_double_click
+          }.select { |_k, v| v.present? }
+        }
+      end
 
       def warning_class
         %(#{brand}-button--warning) if @warning
@@ -52,16 +56,6 @@ module GOVUKDesignSystemFormBuilder
 
       def disabled_class
         %(#{brand}-button--disabled) if @disabled
-      end
-
-      def extra_args
-        {
-          formnovalidate: !@validate,
-          disabled: @disabled,
-          data: {
-            module: %(#{brand}-button), 'prevent-double-click' => @prevent_double_click
-          }.select { |_k, v| v.present? }
-        }
       end
     end
   end
