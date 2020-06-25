@@ -28,7 +28,10 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def submit_classes
-        %w(button).prefix(brand).push(warning_class, secondary_class, disabled_class, @classes, padding_class(@block_content.present?))
+        %w(button)
+          .prefix(brand)
+          .push(warning_class, secondary_class, disabled_class, @classes, padding_class(@block_content.present?))
+          .compact
       end
 
       def submit_options

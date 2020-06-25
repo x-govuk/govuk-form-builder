@@ -7,6 +7,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     let(:args) { [method] }
     subject { builder.send(method, text) }
 
+    include_examples 'HTML formatting checks'
+
     it_behaves_like 'a field that supports custom branding'
 
     specify 'output should be a submit input' do

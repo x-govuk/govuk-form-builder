@@ -24,6 +24,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     let(:field_type) { 'input' }
     let(:aria_described_by_target) { 'fieldset' }
 
+    include_examples 'HTML formatting checks'
+
     it_behaves_like 'a field that supports hints'
 
     it_behaves_like 'a field that supports errors' do

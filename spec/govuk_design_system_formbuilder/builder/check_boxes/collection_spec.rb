@@ -17,6 +17,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
+    include_examples 'HTML formatting checks'
+
     it_behaves_like 'a field that supports a fieldset with legend' do
       let(:legend_text) { 'Which projects is this person assigned to?' }
     end

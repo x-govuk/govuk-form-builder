@@ -36,6 +36,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
   end
 
+  include_examples 'HTML formatting checks'
+
   it_behaves_like 'a field that accepts arbitrary blocks of HTML' do
     let(:described_element) { 'textarea' }
   end

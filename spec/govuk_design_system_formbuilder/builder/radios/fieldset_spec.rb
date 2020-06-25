@@ -24,6 +24,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       specify { expect { subject }.to raise_error(NoMethodError, /undefined method.*call/) }
     end
 
+    include_examples 'HTML formatting checks'
+
     it_behaves_like 'a field that supports errors' do
       let(:error_message) { /Choose a favourite colour/ }
       let(:error_class) { nil }

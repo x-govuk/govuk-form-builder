@@ -21,6 +21,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     subject { builder.send(*args, &example_block) }
 
+    include_examples 'HTML formatting checks'
+
     it_behaves_like 'a field that supports errors' do
       let(:error_message) { /Select at least one project/ }
       let(:error_class) { nil }

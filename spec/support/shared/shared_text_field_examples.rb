@@ -21,6 +21,8 @@ shared_examples 'a regular input' do |method_identifier, field_type|
   let(:field_type) { 'input' }
   let(:aria_described_by_target) { 'input' }
 
+  include_examples 'HTML formatting checks'
+
   it_behaves_like 'a field that supports labels'
   it_behaves_like 'a field that supports labels as procs'
   it_behaves_like 'a field that supports captions on the label'
