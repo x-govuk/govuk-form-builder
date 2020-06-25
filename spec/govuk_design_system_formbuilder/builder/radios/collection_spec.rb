@@ -23,6 +23,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
+    include_examples 'HTML formatting checks'
+
     it_behaves_like 'a field that supports custom branding'
 
     it_behaves_like 'a field that supports a fieldset with legend' do

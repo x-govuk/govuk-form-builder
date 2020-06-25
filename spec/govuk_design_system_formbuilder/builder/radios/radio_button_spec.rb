@@ -18,6 +18,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
+    include_examples 'HTML formatting checks'
+
     it_behaves_like 'a field that supports labels' do
       let(:label_text) { 'Red' }
       let(:field_type) { 'input' }

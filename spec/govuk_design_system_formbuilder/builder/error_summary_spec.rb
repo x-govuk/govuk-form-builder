@@ -10,6 +10,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     context 'when the object has errors' do
       before { object.valid? }
 
+      include_examples 'HTML formatting checks'
+
       specify 'the error summary should be present' do
         expect(subject).to have_tag('div', with: { class: 'govuk-error-summary' })
       end

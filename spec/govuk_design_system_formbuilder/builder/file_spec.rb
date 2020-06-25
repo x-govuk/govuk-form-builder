@@ -18,6 +18,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
+    include_examples 'HTML formatting checks'
+
     it_behaves_like 'a field that supports labels'
     it_behaves_like 'a field that supports labels as procs'
     it_behaves_like 'a field that supports captions on the label'

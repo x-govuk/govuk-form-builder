@@ -14,6 +14,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       builder.send(method, legend: legend_options, &example_block)
     end
 
+    include_examples 'HTML formatting checks'
+
     specify 'output should be a fieldset containing the block contents' do
       expect(subject).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
         expect(fs).to have_tag('legend', text: legend_text)
