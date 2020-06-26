@@ -11,14 +11,14 @@ module GOVUKDesignSystemFormBuilder
       def initialize(builder, object_name, attribute_name, hint_text:, label:, caption:, rows:, max_words:, max_chars:, threshold:, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
 
-        @label      = label
-        @caption    = caption
-        @hint_text  = hint_text
-        @attributes = kwargs
-        @max_words  = max_words
-        @max_chars  = max_chars
-        @threshold  = threshold
-        @rows       = rows
+        @label           = label
+        @caption         = caption
+        @hint_text       = hint_text
+        @max_words       = max_words
+        @max_chars       = max_chars
+        @threshold       = threshold
+        @rows            = rows
+        @html_attributes = kwargs
       end
 
       def html
@@ -36,7 +36,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def text_area
-        @builder.text_area(@attribute_name, **text_area_options, **@attributes.merge(rows: @rows))
+        @builder.text_area(@attribute_name, **text_area_options, **@html_attributes)
       end
 
       def text_area_classes
@@ -50,6 +50,7 @@ module GOVUKDesignSystemFormBuilder
         {
           id: field_id(link_errors: true),
           class: text_area_classes,
+          rows: @rows,
           aria: { describedby: described_by(hint_id, error_id, supplemental_id, limit_description_id) },
         }
       end

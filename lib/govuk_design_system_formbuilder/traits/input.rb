@@ -4,11 +4,11 @@ module GOVUKDesignSystemFormBuilder
       def initialize(builder, object_name, attribute_name, hint_text:, label:, caption:, width:, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
 
-        @width      = width
-        @attributes = kwargs
-        @label      = label
-        @caption    = caption
-        @hint_text  = hint_text
+        @width           = width
+        @label           = label
+        @caption         = caption
+        @hint_text       = hint_text
+        @html_attributes = kwargs
       end
 
       def html
@@ -20,7 +20,7 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def input
-        @builder.send(builder_method, @attribute_name, **input_options.merge(@attributes))
+        @builder.send(builder_method, @attribute_name, **input_options, **@html_attributes)
       end
 
       def input_options
