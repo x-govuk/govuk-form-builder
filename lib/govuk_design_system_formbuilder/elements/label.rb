@@ -39,7 +39,7 @@ module GOVUKDesignSystemFormBuilder
 
       def label
         @builder.label(@attribute_name, label_options) do
-          @content || safe_join([caption_html, @text])
+          @content || safe_join([caption, @text])
         end
       end
 
@@ -61,8 +61,8 @@ module GOVUKDesignSystemFormBuilder
         }
       end
 
-      def caption_html
-        caption_element.html if [@radio_class, @checkbox_class].all?(nil)
+      def caption
+        caption_element.html unless [@radio_class, @checkbox_class].any?
       end
 
       def radio_class(radio)
