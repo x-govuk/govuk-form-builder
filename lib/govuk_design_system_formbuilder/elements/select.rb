@@ -30,7 +30,7 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def select
-        @builder.collection_select(@attribute_name, @collection, @value_method, @text_method, @options, select_options)
+        @builder.collection_select(@attribute_name, @collection, @value_method, @text_method, @options, **select_options)
       end
 
       def select_options

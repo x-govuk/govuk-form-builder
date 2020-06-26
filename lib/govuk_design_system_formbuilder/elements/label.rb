@@ -38,7 +38,7 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def label
-        @builder.label(@attribute_name, label_options) do
+        @builder.label(@attribute_name, **label_options) do
           @content || safe_join([caption, @text])
         end
       end

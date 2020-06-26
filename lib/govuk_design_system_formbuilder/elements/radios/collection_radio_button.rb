@@ -47,7 +47,17 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def label_element
-          @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, text: @label_text, value: @value, radio: true, size: label_size, link_errors: @link_errors)
+          @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, **label_options)
+        end
+
+        def label_options
+          {
+            text: @label_text,
+            value: @value,
+            radio: true,
+            size: label_size,
+            link_errors: @link_errors
+          }
         end
 
         def label_size

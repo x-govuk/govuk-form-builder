@@ -53,6 +53,10 @@ module GOVUKDesignSystemFormBuilder
           @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, **label_content, **label_options)
         end
 
+        def label_options
+          { checkbox: true, value: @value, link_errors: @link_errors }
+        end
+
         def hint_element
           @hint_element ||= Elements::Hint.new(@builder, @object_name, @attribute_name, @hint_text, @value, checkbox: true)
         end
