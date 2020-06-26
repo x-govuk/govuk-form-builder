@@ -28,3 +28,13 @@ RSpec::Matchers.define(:have_no_leading_or_trailing_spaces) do
   end
   #:nocov:
 end
+
+RSpec::Matchers.define(:have_no_double_spaces) do
+  match { |string| string !~ %r(\s{2}) }
+
+  #:nocov:
+  failure_message do |failing_attribute|
+    %('#{failing_attribute}' has double spaces)
+  end
+  #:nocov:
+end
