@@ -39,7 +39,7 @@ module GOVUKDesignSystemFormBuilder
 
       def label
         @builder.label(@attribute_name, label_options) do
-          @content || safe_join([caption_element.html, @text])
+          @content || safe_join([caption_html, @text])
         end
       end
 
@@ -59,6 +59,10 @@ module GOVUKDesignSystemFormBuilder
           for: field_id(link_errors: @link_errors),
           class: %w(label).prefix(brand).push(@size_class, @weight_class, @radio_class, @checkbox_class).compact
         }
+      end
+
+      def caption_html
+        caption_element.html if [@radio_class, @checkbox_class].all?(nil)
       end
 
       def radio_class(radio)
