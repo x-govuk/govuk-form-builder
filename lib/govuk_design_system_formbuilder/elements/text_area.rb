@@ -66,6 +66,14 @@ module GOVUKDesignSystemFormBuilder
         @max_words || @max_chars
       end
 
+      def limit_quantity
+        @max_words || @max_chars
+      end
+
+      def limit_type
+        @max_words.present? ? 'words' : 'characters'
+      end
+
       def limit_description
         return nil unless limit?
 
@@ -76,14 +84,6 @@ module GOVUKDesignSystemFormBuilder
 
       def limit_description_classes
         %w(hint character-count__message).prefix(brand)
-      end
-
-      def limit_quantity
-        @max_words || @max_chars
-      end
-
-      def limit_type
-        @max_words.present? ? 'words' : 'characters'
       end
 
       def limit_description_id
