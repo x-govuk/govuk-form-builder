@@ -14,14 +14,14 @@ module GOVUKDesignSystemFormBuilder
         if content
           @content = content.call
         else
-          @value          = value # used by field_id
-          @text           = label_text(text, hidden)
-          @size_class     = label_size_class(size)
-          @radio_class    = radio_class(radio)
-          @checkbox_class = checkbox_class(checkbox)
-          @tag            = tag
-          @link_errors    = link_errors
-          @caption        = caption
+          @value       = value # used by field_id
+          @text        = label_text(text, hidden)
+          @size_class  = label_size_class(size)
+          @radio       = radio
+          @checkbox    = checkbox
+          @tag         = tag
+          @link_errors = link_errors
+          @caption     = caption
         end
       end
 
@@ -57,20 +57,20 @@ module GOVUKDesignSystemFormBuilder
         {
           value: @value,
           for: field_id(link_errors: @link_errors),
-          class: %w(label).prefix(brand).push(@size_class, @weight_class, @radio_class, @checkbox_class).compact
+          class: %w(label).prefix(brand).push(@size_class, @weight_class, radio_class, checkbox_class).compact
         }
       end
 
       def caption
-        caption_element.html unless [@radio_class, @checkbox_class].any?
+        caption_element.html unless [@radio, @checkbox].any?
       end
 
-      def radio_class(radio)
-        radio ? %(#{brand}-radios__label) : nil
+      def radio_class
+        @radio ? %(#{brand}-radios__label) : nil
       end
 
-      def checkbox_class(checkbox)
-        checkbox ? %(#{brand}-checkboxes__label) : nil
+      def checkbox_class
+        @checkbox ? %(#{brand}-checkboxes__label) : nil
       end
 
       def label_size_class(size)
