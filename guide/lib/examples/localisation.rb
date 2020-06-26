@@ -33,6 +33,9 @@ module Examples
     def contact_type_locale
       <<~LOCALE
         helpers:
+          caption:
+            person:
+              contact_type: Contacting you
           legend:
             person:
               contact_type: What is your preferred method of contact?
@@ -61,6 +64,9 @@ module Examples
     def department_check_boxes_locale
       <<~LOCALE
         helpers:
+          caption:
+            person:
+              department_ids: Departments
           legend:
             person:
               department_ids: Which department do you work in?
