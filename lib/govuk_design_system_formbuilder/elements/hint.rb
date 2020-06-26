@@ -24,7 +24,7 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def hint_text(supplied)
-        [supplied.presence, localised_text(:hint)].compact.first
+        supplied.presence || localised_text(:hint)
       end
 
       def hint_classes
