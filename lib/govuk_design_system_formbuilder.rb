@@ -14,6 +14,9 @@ module GOVUKDesignSystemFormBuilder
   # * +:brand+ sets the value used to prefix all classes, used to allow the
   #   builder to be branded for alternative (similar) design systems.
   #
+  # * +:default_caption_size+ controls the default size of caption text.
+  #   Can be either +xl+, +l+ or +m+.
+  #
   # * +:default_legend_size+ controls the default size of legend text.
   #   Can be either +xl+, +l+, +m+ or +s+.
   #
@@ -45,6 +48,7 @@ module GOVUKDesignSystemFormBuilder
 
     default_legend_size: 'm',
     default_legend_tag: 'h1',
+    default_caption_size: 'm',
     default_submit_button_text: 'Continue',
     default_radio_divider_text: 'or',
     default_error_summary_title: 'There is a problem',

@@ -22,7 +22,9 @@ RSpec::Matchers.define(:have_no_leading_or_trailing_spaces) do
     [string.start_with?(' '), string.end_with?(' ')].none?
   end
 
+  #:nocov:
   failure_message do |failing_attribute|
     %('#{failing_attribute}' has leading or trailing spaces)
   end
+  #:nocov:
 end

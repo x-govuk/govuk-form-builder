@@ -25,6 +25,14 @@ shared_examples 'a field that supports captions' do
         end
       end
 
+      context 'when the caption size is not provided' do
+        let(:caption_args) { { text: caption_text } }
+
+        specify 'should use the default size' do
+          expect(subject).to have_tag('span', text: caption_text, with: { class: 'govuk-caption-m' })
+        end
+      end
+
       context 'when the caption size is invalid' do
         let(:caption_size) { 'super-xxxl' }
 
