@@ -30,7 +30,7 @@ module GOVUKDesignSystemFormBuilder
       def submit_classes
         %w(button)
           .prefix(brand)
-          .push(warning_class, secondary_class, disabled_class, @classes, padding_class(@block_content.present?))
+          .push(warning_class, secondary_class, disabled_class, padding_class, @classes)
           .compact
       end
 
@@ -53,8 +53,8 @@ module GOVUKDesignSystemFormBuilder
         %(#{brand}-button--secondary) if @secondary
       end
 
-      def padding_class(content_present)
-        %(#{brand}-!-margin-right-1) if content_present
+      def padding_class
+        %(#{brand}-!-margin-right-1) if @block_content
       end
 
       def disabled_class
