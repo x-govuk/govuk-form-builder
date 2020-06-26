@@ -66,11 +66,15 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def radio_class
-        @radio ? %(#{brand}-radios__label) : nil
+        return nil unless @radio
+
+        %(#{brand}-radios__label)
       end
 
       def checkbox_class
-        @checkbox ? %(#{brand}-checkboxes__label) : nil
+        return nil unless @checkbox
+
+        %(#{brand}-checkboxes__label)
       end
 
       def label_size_class(size)
