@@ -64,7 +64,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def limit?
-        @max_words || @max_chars
+        limit_quantity.present?
       end
 
       def limit_quantity
