@@ -11,18 +11,18 @@ module GOVUKDesignSystemFormBuilder
       def initialize(builder, object_name, attribute_name, hint_text:, label:, caption:, rows:, max_words:, max_chars:, threshold:, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
 
-        @label      = label
-        @caption    = caption
-        @hint_text  = hint_text
-        @attributes = kwargs
-        @max_words  = max_words
-        @max_chars  = max_chars
-        @threshold  = threshold
-        @rows       = rows
+        @label           = label
+        @caption         = caption
+        @hint_text       = hint_text
+        @max_words       = max_words
+        @max_chars       = max_chars
+        @threshold       = threshold
+        @rows            = rows
+        @html_attributes = kwargs
       end
 
       def html
-        Containers::CharacterCount.new(@builder, max_words: @max_words, max_chars: @max_chars, threshold: @threshold).html do
+        Containers::CharacterCount.new(@builder, **character_count_options).html do
           Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
             safe_join([label_element, supplemental_content, hint_element, error_element, text_area, limit_description])
           end
@@ -31,8 +31,12 @@ module GOVUKDesignSystemFormBuilder
 
     private
 
+      def character_count_options
+        { max_words: @max_words, max_chars: @max_chars, threshold: @threshold }
+      end
+
       def text_area
-        @builder.text_area(@attribute_name, **text_area_options, **@attributes.merge(rows: @rows))
+        @builder.text_area(@attribute_name, **text_area_options, **@html_attributes)
       end
 
       def text_area_classes
@@ -46,6 +50,7 @@ module GOVUKDesignSystemFormBuilder
         {
           id: field_id(link_errors: true),
           class: text_area_classes,
+          rows: @rows,
           aria: { describedby: described_by(hint_id, error_id, supplemental_id, limit_description_id) },
         }
       end
@@ -59,7 +64,15 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def limit?
+        limit_quantity.present?
+      end
+
+      def limit_quantity
         @max_words || @max_chars
+      end
+
+      def limit_type
+        @max_words.present? ? 'words' : 'characters'
       end
 
       def limit_description
@@ -72,14 +85,6 @@ module GOVUKDesignSystemFormBuilder
 
       def limit_description_classes
         %w(hint character-count__message).prefix(brand)
-      end
-
-      def limit_quantity
-        @max_words || @max_chars
-      end
-
-      def limit_type
-        @max_words.present? ? 'words' : 'characters'
       end
 
       def limit_description_id

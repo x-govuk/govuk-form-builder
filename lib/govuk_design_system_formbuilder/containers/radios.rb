@@ -13,12 +13,19 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        content_tag('div', class: radios_classes, data: { module: %(#{brand}-radios) }) do
+        content_tag('div', **radios_options) do
           yield
         end
       end
 
     private
+
+      def radios_options
+        {
+          class: radios_classes,
+          data: { module: %(#{brand}-radios) }
+        }
+      end
 
       def radios_classes
         %w(radios).prefix(brand).tap do |c|

@@ -35,7 +35,11 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def label_element
-          @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, radio: true, value: @value, link_errors: @link_errors, **label_options)
+          @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, **label_content, **label_options)
+        end
+
+        def label_options
+          { radio: true, value: @value, link_errors: @link_errors }
         end
 
         def hint_element
@@ -43,7 +47,7 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def input
-          @builder.radio_button(@attribute_name, @value, input_options)
+          @builder.radio_button(@attribute_name, @value, **input_options)
         end
 
         def input_options

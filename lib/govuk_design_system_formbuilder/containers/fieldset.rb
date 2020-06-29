@@ -26,18 +26,29 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        content_tag('fieldset', class: fieldset_classes, aria: { describedby: @described_by }) do
-          safe_join([legend_content, (@block_content || yield)])
+        content_tag('fieldset', **fieldset_options) do
+          safe_join([legend, (@block_content || yield)])
         end
       end
 
     private
 
-      def legend_content
-        @legend_raw || legend
+      def fieldset_options
+        {
+          class: fieldset_classes,
+          aria: { describedby: @described_by }
+        }
+      end
+
+      def fieldset_classes
+        %w(fieldset).prefix(brand)
       end
 
       def legend
+        @legend_raw || legend_content
+      end
+
+      def legend_content
         if legend_text.present?
           content_tag('legend', class: legend_classes) do
             content_tag(@legend_options.dig(:tag), class: legend_heading_classes) do
@@ -48,18 +59,17 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def legend_text
-        [@legend_options.dig(:text), localised_text(:legend)].compact.first
+        @legend_options.dig(:text) || localised_text(:legend)
       end
 
-      def fieldset_classes
-        %w(fieldset).prefix(brand)
+      def legend_size
+        @legend_options.dig(:size).tap do |size|
+          fail "invalid size '#{size}', must be #{LEGEND_SIZES.join(', ')}" unless size.in?(LEGEND_SIZES)
+        end
       end
 
       def legend_classes
-        size = @legend_options.dig(:size)
-        fail "invalid size '#{size}', must be #{LEGEND_SIZES.join(', ')}" unless size.in?(LEGEND_SIZES)
-
-        [%(fieldset__legend), %(fieldset__legend--#{size})].prefix(brand).tap do |classes|
+        [%(fieldset__legend), %(fieldset__legend--#{legend_size})].prefix(brand).tap do |classes|
           classes.push(%(#{brand}-visually-hidden)) if @legend_options.dig(:hidden)
         end
       end

@@ -4,10 +4,10 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def label_element
-        @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, caption: @caption, **label_options)
+        @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, caption: @caption, **label_content)
       end
 
-      def label_options
+      def label_content
         case @label
         when Hash
           @label

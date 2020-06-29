@@ -10,9 +10,7 @@ module GOVUKDesignSystemFormBuilder
       def html
         return nil if @content.blank?
 
-        content_tag('div', id: supplemental_id) do
-          @content
-        end
+        content_tag('div', id: supplemental_id) { @content }
       end
 
       def supplemental_id

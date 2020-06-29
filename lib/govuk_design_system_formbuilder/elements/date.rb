@@ -21,13 +21,17 @@ module GOVUKDesignSystemFormBuilder
 
       def html
         Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
-          Containers::Fieldset.new(@builder, @object_name, @attribute_name, legend: @legend, caption: @caption, described_by: [error_id, hint_id, supplemental_id]).html do
+          Containers::Fieldset.new(@builder, @object_name, @attribute_name, **fieldset_options).html do
             safe_join([supplemental_content, hint_element, error_element, date])
           end
         end
       end
 
     private
+
+      def fieldset_options
+        { legend: @legend, caption: @caption, described_by: [error_id, hint_id, supplemental_id] }
+      end
 
       def date
         content_tag('div', class: %(#{brand}-date-input)) do
@@ -42,61 +46,63 @@ module GOVUKDesignSystemFormBuilder
       def day
         return nil if omit_day?
 
-        date_part_input(:day, link_errors: true)
+        date_part(:day, width: 2, link_errors: true)
       end
 
       def month
-        date_part_input(:month, link_errors: omit_day?)
+        date_part(:month, width: 2, link_errors: omit_day?)
       end
 
       def year
-        date_part_input(:year, width: 4)
+        date_part(:year, width: 4)
       end
 
-      def date_part_input(segment, width: 2, link_errors: false)
+      def date_part(segment, width:, link_errors: false)
         value = @builder.object.try(@attribute_name).try(segment)
 
         content_tag('div', class: %w(date-input__item).prefix(brand)) do
           content_tag('div', class: %w(form-group).prefix(brand)) do
-            safe_join(
-              [
-                tag.label(
-                  segment.capitalize,
-                  class: date_part_label_classes,
-                  for: date_part_attribute_id(segment, link_errors)
-                ),
-
-                tag.input(
-                  id: date_part_attribute_id(segment, link_errors),
-                  class: date_part_input_classes(width),
-                  name: date_part_attribute_name(segment),
-                  type: 'text',
-                  pattern: '[0-9]*',
-                  inputmode: 'numeric',
-                  value: value,
-                  autocomplete: date_of_birth_autocomplete_value(segment)
-                )
-              ]
-            )
+            safe_join([label(segment, link_errors), input(segment, link_errors, width, value)])
           end
         end
       end
 
-      def date_part_input_classes(width)
+      def label(segment, link_errors)
+        tag.label(
+          segment.capitalize,
+          class: label_classes,
+          for: input_id(segment, link_errors)
+        )
+      end
+
+      def input(segment, link_errors, width, value)
+        tag.input(
+          id: input_id(segment, link_errors),
+          class: input_classes(width),
+          name: input_name(segment),
+          type: 'text',
+          pattern: '[0-9]*',
+          inputmode: 'numeric',
+          value: value,
+          autocomplete: date_of_birth_autocomplete_value(segment)
+        )
+      end
+
+      def input_classes(width)
         %w(input date-input__input).prefix(brand).tap do |classes|
           classes.push(%(#{brand}-input--width-#{width}))
           classes.push(%(#{brand}-input--error)) if has_errors?
         end
       end
 
-      def date_part_label_classes
+      def label_classes
         %w(label date-input__label).prefix(brand)
       end
 
       # if the field has errors we want the govuk_error_summary to
       # be able to link to the day field. Otherwise, generate IDs
       # in the normal fashion
-      def date_part_attribute_id(segment, link_errors)
+      def input_id(segment, link_errors)
         if has_errors? && link_errors
           field_id(link_errors: link_errors)
         else
@@ -104,11 +110,11 @@ module GOVUKDesignSystemFormBuilder
         end
       end
 
-      def date_part_attribute_name(segment)
+      def input_name(segment)
         format(
-          "%<object_name>s[%<attribute_name>s(%<segment>s)]",
+          "%<object_name>s[%<input_name>s(%<segment>s)]",
           object_name: @object_name,
-          attribute_name: @attribute_name,
+          input_name: @attribute_name,
           segment: SEGMENTS.fetch(segment)
         )
       end
