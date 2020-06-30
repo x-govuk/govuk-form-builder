@@ -79,11 +79,11 @@ module GOVUKDesignSystemFormBuilder
 
       def label_size_class(size)
         case size
-        when 'xl'      then %(#{brand}-label--xl)
-        when 'l'       then %(#{brand}-label--l)
-        when 'm'       then %(#{brand}-label--m)
-        when 's'       then %(#{brand}-label--s)
-        when nil       then nil
+        when 'xl' then %(#{brand}-label--xl)
+        when 'l'  then %(#{brand}-label--l)
+        when 'm'  then %(#{brand}-label--m)
+        when 's'  then %(#{brand}-label--s)
+        when nil  then nil
         else
           fail "invalid size '#{size}', must be xl, l, m, s or nil"
         end
