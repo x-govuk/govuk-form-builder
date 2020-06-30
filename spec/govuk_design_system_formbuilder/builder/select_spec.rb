@@ -73,5 +73,15 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
     end
+
+    context 'preselecting an option' do
+      # options are colours in this order: red, blue, green, yellow
+      let(:selected_colour) { green_option }
+      subject { builder.send(*args, options: { selected: selected_colour.id }) }
+
+      specify %(should add a 'selected' attribute to the preselected option) do
+        expect(subject).to have_tag('option', text: selected_colour.name, with: { selected: 'selected', value: selected_colour.id })
+      end
+    end
   end
 end
