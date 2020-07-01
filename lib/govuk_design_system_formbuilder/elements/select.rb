@@ -1,8 +1,6 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class Select < Base
-      using PrefixableArray
-
       include Traits::Error
       include Traits::Label
       include Traits::Hint
@@ -42,9 +40,15 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def select_classes
-        %w(select).prefix(brand).tap do |classes|
-          classes.push(%(#{brand}-select--error)) if has_errors?
-        end
+        [%(#{brand}-select), select_error_class, select_custom_classes].flatten.compact
+      end
+
+      def select_error_class
+        %(#{brand}-select--error) if has_errors?
+      end
+
+      def select_custom_classes
+        @html_options.dig(:class)
       end
     end
   end
