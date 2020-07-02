@@ -13,6 +13,8 @@ module GOVUKDesignSystemFormBuilder
         content_tag('div', id: supplemental_id) { @content }
       end
 
+    private
+
       def supplemental_id
         build_id('supplemental')
       end

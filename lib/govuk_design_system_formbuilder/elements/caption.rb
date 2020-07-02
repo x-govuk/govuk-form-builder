@@ -16,6 +16,8 @@ module GOVUKDesignSystemFormBuilder
         tag.span(@text, class: @size_class)
       end
 
+    private
+
       def caption_text(override)
         override || localised_text(:caption)
       end
