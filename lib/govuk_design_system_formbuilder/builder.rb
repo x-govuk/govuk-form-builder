@@ -312,7 +312,10 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @param options [Hash] Options hash passed through to Rails' +collection_select+ helper
+    # @param html_options [Hash] HTML Options hash passed through to Rails' +collection_select+ helper
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
+    # @see https://api.rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html#method-i-collection_select Rails collection_select (called by govuk_collection_select)
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
     # @example A select box with hint

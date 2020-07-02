@@ -42,7 +42,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     specify 'output should be a form group containing a label and select box' do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-        expect(fg).to have_tag('select')
+        expect(fg).to have_tag('select', with: { class: 'govuk-select' })
       end
     end
 
@@ -71,6 +71,26 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         extract_args(extra_args, :output).each do |key, val|
           expect(select_tag[key]).to eql(val)
         end
+      end
+    end
+
+    context 'when custom classes are supplied via html_options' do
+      let(:custom_classes) { %w(fancy-select purple) }
+
+      subject { builder.send(*args, html_options: { class: custom_classes }) }
+
+      specify %(the select element should have the provided classes) do
+        expect(subject).to have_tag('select', with: { class: custom_classes.push('govuk-select') })
+      end
+    end
+
+    context 'preselecting an option' do
+      # options are colours in this order: red, blue, green, yellow
+      let(:selected_colour) { green_option }
+      subject { builder.send(*args, options: { selected: selected_colour.id }) }
+
+      specify %(should add a 'selected' attribute to the preselected option) do
+        expect(subject).to have_tag('option', text: selected_colour.name, with: { selected: 'selected', value: selected_colour.id })
       end
     end
   end
