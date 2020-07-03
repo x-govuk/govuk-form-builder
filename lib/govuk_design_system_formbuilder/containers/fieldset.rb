@@ -11,21 +11,21 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        content_tag('fieldset', **fieldset_options) do
+        content_tag('fieldset', **options) do
           safe_join([legend_element, (@block_content || yield)])
         end
       end
 
     private
 
-      def fieldset_options
+      def options
         {
-          class: fieldset_classes,
+          class: classes,
           aria: { describedby: @described_by }
         }
       end
 
-      def fieldset_classes
+      def classes
         %(#{brand}-fieldset)
       end
 

@@ -26,10 +26,10 @@ module GOVUKDesignSystemFormBuilder
       private
 
         def check_box
-          @checkbox.check_box(**check_box_options)
+          @checkbox.check_box(**options)
         end
 
-        def check_box_options
+        def options
           {
             id: field_id(link_errors: @link_errors),
             class: %(#{brand}-checkboxes__input),

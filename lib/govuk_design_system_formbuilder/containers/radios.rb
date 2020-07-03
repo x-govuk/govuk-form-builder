@@ -1,8 +1,6 @@
 module GOVUKDesignSystemFormBuilder
   module Containers
     class Radios < Base
-      using PrefixableArray
-
       include Traits::Hint
 
       def initialize(builder, inline:, small:, classes:)
@@ -13,26 +11,30 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        content_tag('div', **radios_options) do
+        content_tag('div', **options) do
           yield
         end
       end
 
     private
 
-      def radios_options
+      def options
         {
-          class: radios_classes,
+          class: classes,
           data: { module: %(#{brand}-radios) }
         }
       end
 
-      def radios_classes
-        %w(radios).prefix(brand).tap do |c|
-          c.push(%(#{brand}-radios--inline)) if @inline
-          c.push(%(#{brand}-radios--small))  if @small
-          c.push(@classes)                   if @classes
-        end
+      def classes
+        [%(#{brand}-radios), inline_class, small_class, @classes].compact
+      end
+
+      def inline_class
+        %(#{brand}-radios--inline) if @inline
+      end
+
+      def small_class
+        %(#{brand}-radios--small)  if @small
       end
     end
   end

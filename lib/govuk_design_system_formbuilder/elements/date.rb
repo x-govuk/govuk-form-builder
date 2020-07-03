@@ -71,15 +71,15 @@ module GOVUKDesignSystemFormBuilder
         tag.label(
           segment.capitalize,
           class: label_classes,
-          for: input_id(segment, link_errors)
+          for: id(segment, link_errors)
         )
       end
 
       def input(segment, link_errors, width, value)
         tag.input(
-          id: input_id(segment, link_errors),
-          class: input_classes(width),
-          name: input_name(segment),
+          id: id(segment, link_errors),
+          class: classes(width),
+          name: name(segment),
           type: 'text',
           pattern: '[0-9]*',
           inputmode: 'numeric',
@@ -88,21 +88,17 @@ module GOVUKDesignSystemFormBuilder
         )
       end
 
-      def input_classes(width)
+      def classes(width)
         %w(input date-input__input).prefix(brand).tap do |classes|
           classes.push(%(#{brand}-input--width-#{width}))
           classes.push(%(#{brand}-input--error)) if has_errors?
         end
       end
 
-      def label_classes
-        %w(label date-input__label).prefix(brand)
-      end
-
       # if the field has errors we want the govuk_error_summary to
       # be able to link to the day field. Otherwise, generate IDs
       # in the normal fashion
-      def input_id(segment, link_errors)
+      def id(segment, link_errors)
         if has_errors? && link_errors
           field_id(link_errors: link_errors)
         else
@@ -110,7 +106,7 @@ module GOVUKDesignSystemFormBuilder
         end
       end
 
-      def input_name(segment)
+      def name(segment)
         format(
           "%<object_name>s[%<input_name>s(%<segment>s)]",
           object_name: @object_name,
@@ -123,6 +119,10 @@ module GOVUKDesignSystemFormBuilder
         return nil unless @date_of_birth
 
         { day: 'bday-day', month: 'bday-month', year: 'bday-year' }.fetch(segment)
+      end
+
+      def label_classes
+        %w(label date-input__label).prefix(brand)
       end
     end
   end

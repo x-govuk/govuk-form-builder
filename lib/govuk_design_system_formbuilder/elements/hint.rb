@@ -10,7 +10,7 @@ module GOVUKDesignSystemFormBuilder
         super(builder, object_name, attribute_name)
 
         @value     = value
-        @hint_text = hint_text(text)
+        @hint_text = retrieve_text(text)
         @radio     = radio
         @checkbox  = checkbox
       end
@@ -18,16 +18,16 @@ module GOVUKDesignSystemFormBuilder
       def html
         return nil if @hint_text.blank?
 
-        tag.span(@hint_text, class: hint_classes, id: hint_id)
+        tag.span(@hint_text, class: classes, id: hint_id)
       end
 
     private
 
-      def hint_text(supplied)
+      def retrieve_text(supplied)
         supplied.presence || localised_text(:hint)
       end
 
-      def hint_classes
+      def classes
         %w(hint).prefix(brand).push(radio_class, checkbox_class).compact
       end
 

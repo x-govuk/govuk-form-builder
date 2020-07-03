@@ -9,14 +9,14 @@ module GOVUKDesignSystemFormBuilder
 
         case legend
         when Proc
-          @legend_raw = legend.call
+          @raw = legend.call
         when Hash
-          legend_defaults.merge(legend).tap do |l|
-            @text           = legend_text(l.dig(:text))
-            @hidden         = l.dig(:hidden)
-            @tag            = l.dig(:tag)
-            @size           = l.dig(:size)
-            @caption        = caption
+          defaults.merge(legend).tap do |l|
+            @text    = text(l.dig(:text))
+            @hidden  = l.dig(:hidden)
+            @tag     = l.dig(:tag)
+            @size    = l.dig(:size)
+            @caption = caption
           end
         else
           fail(ArgumentError, %(legend must be a Proc or Hash))
@@ -24,53 +24,49 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        @legend_raw || legend_content
+        @raw || content
       end
 
     private
 
-      def legend_content
+      def content
         if @text.present?
-          content_tag('legend', class: legend_classes) do
-            content_tag(@tag, class: legend_heading_classes) do
+          content_tag('legend', class: classes) do
+            content_tag(@tag, class: heading_classes) do
               safe_join([caption_element, @text])
             end
           end
         end
       end
 
-      def legend_text(supplied_text)
+      def text(supplied_text)
         supplied_text || localised_text(:legend)
       end
 
-      def legend_classes
-        [legend_class, legend_size_class, legend_visually_hidden_class].compact
+      def classes
+        [%(#{brand}-fieldset__legend), size_class, visually_hidden_class].compact
       end
 
-      def legend_class
-        %(#{brand}-fieldset__legend)
-      end
-
-      def legend_size_class
+      def size_class
         case @size
-        when 'xl'      then %(#{brand}-fieldset__legend--xl)
-        when 'l'       then %(#{brand}-fieldset__legend--l)
-        when 'm'       then %(#{brand}-fieldset__legend--m)
-        when 's'       then %(#{brand}-fieldset__legend--s)
+        when 'xl' then %(#{brand}-fieldset__legend--xl)
+        when 'l'  then %(#{brand}-fieldset__legend--l)
+        when 'm'  then %(#{brand}-fieldset__legend--m)
+        when 's'  then %(#{brand}-fieldset__legend--s)
         else
           fail "invalid size '#{@size}', must be xl, l, m or s"
         end
       end
 
-      def legend_visually_hidden_class
+      def visually_hidden_class
         %(#{brand}-visually-hidden) if @hidden
       end
 
-      def legend_heading_classes
+      def heading_classes
         %(#{brand}-fieldset__heading)
       end
 
-      def legend_defaults
+      def defaults
         {
           hidden: false,
           text: nil,
