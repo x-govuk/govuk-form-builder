@@ -31,10 +31,10 @@ module GOVUKDesignSystemFormBuilder
       private
 
         def radio
-          @builder.radio_button(@attribute_name, @value, **radio_options)
+          @builder.radio_button(@attribute_name, @value, **options)
         end
 
-        def radio_options
+        def options
           {
             id: field_id(link_errors: @link_errors),
             aria: { describedby: hint_id },

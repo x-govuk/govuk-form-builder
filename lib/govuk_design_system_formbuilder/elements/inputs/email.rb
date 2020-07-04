@@ -10,6 +10,8 @@ module GOVUKDesignSystemFormBuilder
         include Traits::Label
         include Traits::Supplemental
 
+      private
+
         def builder_method
           :email_field
         end

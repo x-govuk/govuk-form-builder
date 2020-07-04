@@ -14,12 +14,12 @@ module GOVUKDesignSystemFormBuilder
       def html
         return yield unless limit?
 
-        content_tag('div', **character_count_options) { yield }
+        content_tag('div', **options) { yield }
       end
 
     private
 
-      def character_count_options
+      def options
         {
           class: %(#{brand}-character-count),
           data: { module: %(#{brand}-character-count) }.merge(**limit, **threshold).compact

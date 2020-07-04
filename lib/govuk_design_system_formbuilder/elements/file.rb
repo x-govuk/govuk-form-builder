@@ -26,18 +26,18 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def file
-        @builder.file_field(@attribute_name, **file_options, **@extra_options)
+        @builder.file_field(@attribute_name, **options, **@extra_options)
       end
 
-      def file_options
+      def options
         {
           id: field_id(link_errors: true),
-          class: file_classes,
+          class: classes,
           aria: { describedby: described_by(hint_id, error_id, supplemental_id) }
         }
       end
 
-      def file_classes
+      def classes
         %w(file-upload).prefix(brand).tap do |c|
           c.push(%(#{brand}-file-upload--error)) if has_errors?
         end

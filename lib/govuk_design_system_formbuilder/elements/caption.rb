@@ -6,8 +6,8 @@ module GOVUKDesignSystemFormBuilder
       def initialize(builder, object_name, attribute_name, text:, size: nil)
         super(builder, object_name, attribute_name)
 
-        @text       = caption_text(text)
-        @size_class = caption_size_class(size)
+        @text       = text(text)
+        @size_class = size_class(size)
       end
 
       def html
@@ -16,11 +16,13 @@ module GOVUKDesignSystemFormBuilder
         tag.span(@text, class: @size_class)
       end
 
-      def caption_text(override)
+    private
+
+      def text(override)
         override || localised_text(:caption)
       end
 
-      def caption_size_class(size)
+      def size_class(size)
         case size || config.default_caption_size
         when 'xl' then %(#{brand}-caption-xl)
         when 'l'  then %(#{brand}-caption-l)

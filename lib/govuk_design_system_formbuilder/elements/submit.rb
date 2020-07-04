@@ -24,17 +24,17 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def submit
-        @builder.submit(@text, class: submit_classes, **submit_options)
+        @builder.submit(@text, class: classes, **options)
       end
 
-      def submit_classes
+      def classes
         %w(button)
           .prefix(brand)
           .push(warning_class, secondary_class, disabled_class, padding_class, @classes)
           .compact
       end
 
-      def submit_options
+      def options
         {
           formnovalidate: !@validate,
           disabled: @disabled,

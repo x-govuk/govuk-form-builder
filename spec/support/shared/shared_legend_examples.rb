@@ -58,7 +58,7 @@ shared_examples 'a field that supports a fieldset with legend' do
         subject { builder.send(*args, legend: { text: legend_text, size: size }) }
 
         specify 'should raise an error' do
-          expect { subject }.to raise_error("invalid size '#{size}', must be xl, l, m, s")
+          expect { subject }.to raise_error("invalid size '#{size}', must be xl, l, m or s")
         end
       end
     end

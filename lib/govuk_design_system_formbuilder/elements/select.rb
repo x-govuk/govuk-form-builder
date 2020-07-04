@@ -28,26 +28,26 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def select
-        @builder.collection_select(@attribute_name, @collection, @value_method, @text_method, @options, **select_options)
+        @builder.collection_select(@attribute_name, @collection, @value_method, @text_method, @options, **options)
       end
 
-      def select_options
+      def options
         @html_options.deep_merge(
           id: field_id(link_errors: true),
-          class: select_classes,
+          class: classes,
           aria: { describedby: described_by(hint_id, error_id, supplemental_id) }
         )
       end
 
-      def select_classes
-        [%(#{brand}-select), select_error_class, select_custom_classes].flatten.compact
+      def classes
+        [%(#{brand}-select), error_class, custom_classes].flatten.compact
       end
 
-      def select_error_class
+      def error_class
         %(#{brand}-select--error) if has_errors?
       end
 
-      def select_custom_classes
+      def custom_classes
         @html_options.dig(:class)
       end
     end

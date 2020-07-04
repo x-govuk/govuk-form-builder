@@ -24,29 +24,33 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def html
-          safe_join([check_box, @conditional_content])
+          safe_join([item, @conditional_content])
         end
 
       private
 
-        def check_box
+        def item
           content_tag('div', class: %(#{brand}-checkboxes__item)) do
-            safe_join([input, label_element, hint_element])
+            safe_join([check_box, label_element, hint_element])
           end
         end
 
-        def input
-          @builder.check_box(@attribute_name, input_options, @value, false)
+        def check_box
+          @builder.check_box(@attribute_name, options, @value, false)
         end
 
-        def input_options
+        def options
           {
             id: field_id(link_errors: @link_errors),
-            class: check_box_classes,
+            class: classes,
             multiple: @multiple,
             aria: { describedby: hint_id },
             data: { 'aria-controls' => @conditional_id }
           }
+        end
+
+        def classes
+          %w(checkboxes__input).prefix(brand)
         end
 
         def label_element
@@ -63,10 +67,6 @@ module GOVUKDesignSystemFormBuilder
 
         def conditional_classes
           %w(checkboxes__conditional checkboxes__conditional--hidden).prefix(brand)
-        end
-
-        def check_box_classes
-          %w(checkboxes__input).prefix(brand)
         end
       end
     end

@@ -36,20 +36,20 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def text_area
-        @builder.text_area(@attribute_name, **text_area_options, **@html_attributes)
+        @builder.text_area(@attribute_name, **options, **@html_attributes)
       end
 
-      def text_area_classes
+      def classes
         %w(textarea).prefix(brand).tap do |classes|
           classes.push(%(#{brand}-textarea--error)) if has_errors?
           classes.push(%(#{brand}-js-character-count)) if limit?
         end
       end
 
-      def text_area_options
+      def options
         {
           id: field_id(link_errors: true),
-          class: text_area_classes,
+          class: classes,
           rows: @rows,
           aria: { describedby: described_by(hint_id, error_id, supplemental_id, limit_description_id) },
         }

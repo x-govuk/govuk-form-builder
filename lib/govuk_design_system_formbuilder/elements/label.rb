@@ -15,8 +15,8 @@ module GOVUKDesignSystemFormBuilder
           @content = content.call
         else
           @value       = value # used by field_id
-          @text        = label_text(text, hidden)
-          @size_class  = label_size_class(size)
+          @text        = retrieve_text(text, hidden)
+          @size_class  = size_class(size)
           @radio       = radio
           @checkbox    = checkbox
           @tag         = tag
@@ -38,12 +38,12 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def label
-        @builder.label(@attribute_name, **label_options) do
+        @builder.label(@attribute_name, **options) do
           @content || safe_join([caption, @text])
         end
       end
 
-      def label_text(option_text, hidden)
+      def retrieve_text(option_text, hidden)
         text = [option_text, localised_text(:label), @attribute_name.capitalize].compact.first.to_s
 
         if hidden
@@ -53,7 +53,7 @@ module GOVUKDesignSystemFormBuilder
         end
       end
 
-      def label_options
+      def options
         {
           value: @value,
           for: field_id(link_errors: @link_errors),
@@ -77,13 +77,13 @@ module GOVUKDesignSystemFormBuilder
         %(#{brand}-checkboxes__label)
       end
 
-      def label_size_class(size)
+      def size_class(size)
         case size
-        when 'xl'      then %(#{brand}-label--xl)
-        when 'l'       then %(#{brand}-label--l)
-        when 'm'       then %(#{brand}-label--m)
-        when 's'       then %(#{brand}-label--s)
-        when nil       then nil
+        when 'xl' then %(#{brand}-label--xl)
+        when 'l'  then %(#{brand}-label--l)
+        when 'm'  then %(#{brand}-label--m)
+        when 's'  then %(#{brand}-label--s)
+        when nil  then nil
         else
           fail "invalid size '#{size}', must be xl, l, m, s or nil"
         end

@@ -1,8 +1,6 @@
 module GOVUKDesignSystemFormBuilder
   module Containers
     class CheckBoxes < Base
-      using PrefixableArray
-
       def initialize(builder, small:, classes: nil)
         @builder = builder
         @small   = small
@@ -10,25 +8,24 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        content_tag('div', **check_boxes_options) do
-          yield
-        end
+        content_tag('div', **options) { yield }
       end
 
     private
 
-      def check_boxes_options
+      def options
         {
-          class: check_boxes_classes,
+          class: classes,
           data: { module: %(#{brand}-checkboxes) }
         }
       end
 
-      def check_boxes_classes
-        %w(checkboxes).prefix(brand).tap do |c|
-          c.push(%(#{brand}-checkboxes--small)) if @small
-          c.push(@classes) if @classes
-        end
+      def classes
+        [%(#{brand}-checkboxes), small_class, @classes].compact
+      end
+
+      def small_class
+        %(#{brand}-checkboxes--small) if @small
       end
     end
   end
