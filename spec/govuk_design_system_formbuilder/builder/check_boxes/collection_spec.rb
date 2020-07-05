@@ -42,6 +42,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     it_behaves_like 'a field that supports custom branding'
+    it_behaves_like 'a field that contains a customisable form group'
 
     it_behaves_like 'a field that supports setting the legend via localisation'
     it_behaves_like 'a field that supports setting the legend caption via localisation'
