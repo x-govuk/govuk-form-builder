@@ -17,6 +17,7 @@ module GOVUKDesignSystemFormBuilder
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
+    # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -59,6 +60,7 @@ module GOVUKDesignSystemFormBuilder
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
+    # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -102,6 +104,7 @@ module GOVUKDesignSystemFormBuilder
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
+    # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -143,6 +146,7 @@ module GOVUKDesignSystemFormBuilder
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
+    # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -183,6 +187,7 @@ module GOVUKDesignSystemFormBuilder
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
+    # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -224,6 +229,7 @@ module GOVUKDesignSystemFormBuilder
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
+    # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -272,6 +278,7 @@ module GOVUKDesignSystemFormBuilder
     # @param threshold [Integer] only show the +max_words+ and +max_chars+ warnings once a threshold (percentage) is reached
     # @param rows [Integer] sets the initial number of rows
     # @option args [Hash] args additional arguments are applied as attributes to the +textarea+ element
+    # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/textarea/ GOV.UK text area component
@@ -314,6 +321,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @param options [Hash] Options hash passed through to Rails' +collection_select+ helper
     # @param html_options [Hash] HTML Options hash passed through to Rails' +collection_select+ helper
+    # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @see https://api.rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html#method-i-collection_select Rails collection_select (called by govuk_collection_select)
     # @return [ActiveSupport::SafeBuffer] HTML output
@@ -459,6 +467,7 @@ module GOVUKDesignSystemFormBuilder
     # @param caption [Hash] configures or sets the caption content which is inserted above the legend
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
+    # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
     # @param block [Block] a block of HTML that will be used to populate the fieldset
     # @param classes [String] Classes to add to the radio button container.
     # @see https://design-system.service.gov.uk/components/radios/ GOV.UK Radios
@@ -543,6 +552,7 @@ module GOVUKDesignSystemFormBuilder
     # @param caption [Hash] configures or sets the caption content which is inserted above the legend
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
+    # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
     # @param block [Block] any HTML passed in will be injected into the fieldset, after the hint and before the checkboxes
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
@@ -615,6 +625,7 @@ module GOVUKDesignSystemFormBuilder
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @param classes [String] Classes to add to the checkbox container.
+    # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
     # @param block [Block] a block of HTML that will be used to populate the fieldset
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
@@ -725,6 +736,7 @@ module GOVUKDesignSystemFormBuilder
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @param omit_day [Boolean] do not render a day input, only capture month and year
+    # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input group
     # @param date_of_birth [Boolean] if +true+ {https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete#Values birth date auto completion attributes}
     #   will be added to the inputs
@@ -803,6 +815,7 @@ module GOVUKDesignSystemFormBuilder
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
+    # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     #
     # @example A photo upload field with file type specifier and injected content
