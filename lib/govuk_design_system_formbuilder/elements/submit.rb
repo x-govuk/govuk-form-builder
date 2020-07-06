@@ -30,7 +30,8 @@ module GOVUKDesignSystemFormBuilder
       def classes
         %w(button)
           .prefix(brand)
-          .push(warning_class, secondary_class, disabled_class, padding_class, @classes)
+          .push(warning_class, secondary_class, disabled_class, padding_class, custom_classes)
+          .flatten
           .compact
       end
 
@@ -59,6 +60,10 @@ module GOVUKDesignSystemFormBuilder
 
       def disabled_class
         %(#{brand}-button--disabled) if @disabled
+      end
+
+      def custom_classes
+        Array.wrap(@classes)
       end
     end
   end

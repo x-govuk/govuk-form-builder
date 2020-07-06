@@ -33,6 +33,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     it_behaves_like 'a field that supports custom branding'
+    it_behaves_like 'a field that supports custom classes' do
+      let(:element) { 'div' }
+      let(:default_classes) { %w(govuk-radios) }
+    end
     it_behaves_like 'a field that contains a customisable form group'
 
     it_behaves_like 'a field that supports setting the hint via localisation'
@@ -119,16 +123,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
           specify "should not have the additional class 'govuk-radios--small'" do
             expect(parsed_subject.at_css('.govuk-radios')['class']).to eql('govuk-radios')
-          end
-        end
-      end
-
-      context 'radio button classes' do
-        context 'when extra css classes are specified in the options' do
-          subject { builder.send(*args, classes: 'foo', &example_block) }
-
-          specify "should have the additional class 'foo'" do
-            expect(subject).to have_tag('div', with: { class: %w(govuk-radios foo) })
           end
         end
       end

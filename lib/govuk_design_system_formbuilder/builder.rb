@@ -385,7 +385,7 @@ module GOVUKDesignSystemFormBuilder
     # @param inline [Boolean] controls whether the radio buttons are displayed inline or not
     # @param small [Boolean] controls whether small radio buttons are used instead of regular-sized ones
     # @param bold_labels [Boolean] controls whether the radio button labels are bold
-    # @param classes [String] Classes to add to the radio button container.
+    # @param classes [Array,String] Classes to add to the radio button container.
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
@@ -469,7 +469,7 @@ module GOVUKDesignSystemFormBuilder
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
     # @param block [Block] a block of HTML that will be used to populate the fieldset
-    # @param classes [String] Classes to add to the radio button container.
+    # @param classes [Array,String] Classes to add to the radio button container.
     # @see https://design-system.service.gov.uk/components/radios/ GOV.UK Radios
     # @see https://design-system.service.gov.uk/styles/typography/#headings-with-captions Headings with captions
     # @return [ActiveSupport::SafeBuffer] HTML output
@@ -543,7 +543,7 @@ module GOVUKDesignSystemFormBuilder
     #   When a +Proc+ is provided it must take a single argument that is a single member of the collection
     # @param hint_text [String] The content of the fieldset hint. No hint will be injected if left +nil+
     # @param small [Boolean] controls whether small check boxes are used instead of regular-sized ones
-    # @param classes [String] Classes to add to the checkbox container.
+    # @param classes [Array,String] Classes to add to the checkbox container.
     # @param legend [Hash,Proc] options for configuring the legend
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
@@ -624,7 +624,7 @@ module GOVUKDesignSystemFormBuilder
     # @param caption [Hash] configures or sets the caption content which is inserted above the legend
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
-    # @param classes [String] Classes to add to the checkbox container.
+    # @param classes [Array,String] Classes to add to the checkbox container.
     # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
     # @param block [Block] a block of HTML that will be used to populate the fieldset
     # @return [ActiveSupport::SafeBuffer] HTML output
@@ -695,7 +695,7 @@ module GOVUKDesignSystemFormBuilder
     # @param text [String] the button text
     # @param warning [Boolean] makes the button red ({https://design-system.service.gov.uk/components/button/#warning-buttons warning}) when true
     # @param secondary [Boolean] makes the button grey ({https://design-system.service.gov.uk/components/button/#secondary-buttons secondary}) when true
-    # @param classes [String] Classes to add to the submit button
+    # @param classes [Array,String] Classes to add to the submit button
     # @param prevent_double_click [Boolean] adds JavaScript to safeguard the
     #   form from being submitted more than once
     # @param validate [Boolean] adds the formnovalidate to the submit button when true, this disables all

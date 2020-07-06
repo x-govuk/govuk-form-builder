@@ -21,11 +21,15 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def classes
-        [%(#{brand}-checkboxes), small_class, @classes].compact
+        [%(#{brand}-checkboxes), small_class, custom_classes].flatten.compact
       end
 
       def small_class
         %(#{brand}-checkboxes--small) if @small
+      end
+
+      def custom_classes
+        Array.wrap(@classes)
       end
     end
   end

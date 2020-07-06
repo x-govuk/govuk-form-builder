@@ -30,6 +30,12 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     it_behaves_like 'a field that supports custom branding'
+
+    it_behaves_like 'a field that supports custom classes' do
+      let(:element) { 'div' }
+      let(:default_classes) { %w(govuk-checkboxes) }
+    end
+
     it_behaves_like 'a field that contains a customisable form group'
 
     it_behaves_like 'a field that supports setting the hint via localisation'
@@ -84,16 +90,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       specify 'output should contain check boxes' do
         expect(subject).to have_tag('div', with: { class: 'govuk-checkboxes', 'data-module' => 'govuk-checkboxes' }) do
           expect(subject).to have_tag('input', with: { type: 'checkbox' }, count: 3)
-        end
-      end
-
-      context 'check boxes classes' do
-        context 'when extra css classes are specified in the options' do
-          subject { builder.send(*args, classes: 'foo', &example_block) }
-
-          specify "should have the additional class 'foo'" do
-            expect(subject).to have_tag('div', with: { class: %w(govuk-checkboxes foo) })
-          end
         end
       end
 

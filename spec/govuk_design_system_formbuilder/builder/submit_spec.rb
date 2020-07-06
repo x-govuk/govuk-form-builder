@@ -11,6 +11,12 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     it_behaves_like 'a field that supports custom branding'
 
+    it_behaves_like 'a field that supports custom classes' do
+      let(:element) { 'input' }
+      let(:default_classes) { %w(govuk-button) }
+      let(:block_content) { -> { %(Example) } }
+    end
+
     specify 'output should be a submit input' do
       expect(subject).to have_tag('input', with: { type: 'submit' })
     end
@@ -61,7 +67,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       context 'classes' do
-        subject { builder.send(*args.push('Create'), classes: 'custom-class--one custom-class--two') }
+        subject { builder.send(*args.push('Create'), classes: %w(custom-class--one custom-class--two)) }
 
         specify 'button should have the custom class' do
           expect(subject).to have_tag('input', with: { class: %w(govuk-button custom-class--one custom-class--two) })

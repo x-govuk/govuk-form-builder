@@ -24,7 +24,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def classes
-        [%(#{brand}-radios), inline_class, small_class, @classes].compact
+        [%(#{brand}-radios), inline_class, small_class, custom_classes].flatten.compact
       end
 
       def inline_class
@@ -33,6 +33,10 @@ module GOVUKDesignSystemFormBuilder
 
       def small_class
         %(#{brand}-radios--small)  if @small
+      end
+
+      def custom_classes
+        Array.wrap(@classes)
       end
     end
   end

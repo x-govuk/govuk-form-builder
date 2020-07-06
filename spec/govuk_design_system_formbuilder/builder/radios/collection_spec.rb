@@ -27,6 +27,11 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     it_behaves_like 'a field that supports custom branding'
 
+    it_behaves_like 'a field that supports custom classes' do
+      let(:element) { 'div' }
+      let(:default_classes) { %w(govuk-radios) }
+    end
+
     it_behaves_like 'a field that supports a fieldset with legend' do
       let(:legend_text) { 'Pick your favourite colour' }
     end
@@ -203,16 +208,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         context 'when bold labels are not specified in the options' do
           specify 'no labels should be bold when hints are enabled' do
             expect(subject).not_to have_tag('label', with: { class: bold_label_class })
-          end
-        end
-      end
-
-      context 'radio button classes' do
-        context 'when extra css classes are specified in the options' do
-          subject { builder.send(*args, classes: 'foo') }
-
-          specify "should have the additional class 'foo'" do
-            expect(subject).to have_tag('div', with: { class: %w(govuk-radios foo) })
           end
         end
       end
