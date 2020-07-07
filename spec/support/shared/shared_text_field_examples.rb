@@ -119,7 +119,7 @@ shared_examples 'a regular input' do |method_identifier, field_type|
       specify 'the wrapper and prefix should be present' do
         expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
           with_tag('div', with: { class: 'govuk-input__wrapper' }) do
-            with_tag('span', with: { class: 'govuk-input__prefix' }, text: prefix_text)
+            with_tag('span', with: { class: 'govuk-input__prefix', 'aria-hidden': true }, text: prefix_text)
             with_tag('input')
           end
         end
@@ -130,7 +130,7 @@ shared_examples 'a regular input' do |method_identifier, field_type|
       specify 'the wrapper and suffix should be present' do
         expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
           with_tag('div', with: { class: 'govuk-input__wrapper' }) do
-            with_tag('span', with: { class: 'govuk-input__suffix' }, text: suffix_text)
+            with_tag('span', with: { class: 'govuk-input__suffix', 'aria-hidden': true }, text: suffix_text)
             with_tag('input')
           end
         end
