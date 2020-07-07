@@ -8,7 +8,8 @@ class Person
     :last_name,
     :job_title,
     :postcode,
-    :account_number
+    :account_number,
+    :price_per_kg
   )
 
   # width examples
