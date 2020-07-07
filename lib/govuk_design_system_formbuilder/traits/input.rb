@@ -1,18 +1,19 @@
 module GOVUKDesignSystemFormBuilder
   module Traits
     module Input
-      def initialize(builder, object_name, attribute_name, hint_text:, label:, caption:, width:, **kwargs, &block)
+      def initialize(builder, object_name, attribute_name, hint_text:, label:, caption:, width:, form_group_classes:, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
 
-        @width           = width
-        @label           = label
-        @caption         = caption
-        @hint_text       = hint_text
-        @html_attributes = kwargs
+        @width              = width
+        @label              = label
+        @caption            = caption
+        @hint_text          = hint_text
+        @html_attributes    = kwargs
+        @form_group_classes = form_group_classes
       end
 
       def html
-        Containers::FormGroup.new(@builder, @object_name, @attribute_name).html do
+        Containers::FormGroup.new(@builder, @object_name, @attribute_name, classes: @form_group_classes).html do
           safe_join([label_element, supplemental_content, hint_element, error_element, input])
         end
       end

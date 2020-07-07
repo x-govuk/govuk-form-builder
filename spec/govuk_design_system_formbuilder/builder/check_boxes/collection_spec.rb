@@ -43,6 +43,13 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     it_behaves_like 'a field that supports custom branding'
 
+    it_behaves_like 'a field that supports custom classes' do
+      let(:element) { 'div' }
+      let(:default_classes) { %w(govuk-checkboxes) }
+    end
+
+    it_behaves_like 'a field that contains a customisable form group'
+
     it_behaves_like 'a field that supports setting the legend via localisation'
     it_behaves_like 'a field that supports setting the legend caption via localisation'
     it_behaves_like 'a field that supports setting the hint via localisation'
@@ -73,16 +80,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
           specify "should not have the additional class 'govuk-checkboxes--small'" do
             expect(parsed_subject.at_css('.govuk-checkboxes')['class']).to eql('govuk-checkboxes')
-          end
-        end
-      end
-
-      context 'check box classes' do
-        context 'when extra css classes are specified in the options' do
-          subject { builder.send(*args, classes: 'foo') }
-
-          specify "should have the additional class 'foo'" do
-            expect(subject).to have_tag('div', with: { class: %w(govuk-checkboxes foo) })
           end
         end
       end

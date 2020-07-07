@@ -24,6 +24,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     it_behaves_like 'a field that supports labels as procs'
     it_behaves_like 'a field that supports captions on the label'
     it_behaves_like 'a field that supports custom branding'
+    it_behaves_like 'a field that contains a customisable form group'
 
     it_behaves_like 'a field that accepts arbitrary blocks of HTML' do
       let(:described_element) { 'input' }

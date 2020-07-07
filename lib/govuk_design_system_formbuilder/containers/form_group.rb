@@ -1,8 +1,10 @@
 module GOVUKDesignSystemFormBuilder
   module Containers
     class FormGroup < Base
-      def initialize(builder, object_name, attribute_name)
+      def initialize(builder, object_name, attribute_name, classes: nil)
         super(builder, object_name, attribute_name)
+
+        @classes = classes
       end
 
       def html
@@ -12,7 +14,7 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def classes
-        [form_group_class, error_class].compact
+        [form_group_class, error_class, custom_classes].flatten.compact
       end
 
       def form_group_class
@@ -21,6 +23,10 @@ module GOVUKDesignSystemFormBuilder
 
       def error_class
         %(#{brand}-form-group--error) if has_errors?
+      end
+
+      def custom_classes
+        Array.wrap(@classes)
       end
     end
   end
