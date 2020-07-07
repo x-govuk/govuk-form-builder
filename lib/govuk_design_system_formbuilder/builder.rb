@@ -26,6 +26,8 @@ module GOVUKDesignSystemFormBuilder
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
+    # @param prefix_text [String] the text placed before the input. No prefix will be added if left +nil+
+    # @param suffix_text [String] the text placed after the input. No suffix will be added if left +nil+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -76,6 +78,8 @@ module GOVUKDesignSystemFormBuilder
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
+    # @param prefix_text [String] the text placed before the input. No prefix will be added if left +nil+
+    # @param suffix_text [String] the text placed after the input. No suffix will be added if left +nil+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -127,6 +131,8 @@ module GOVUKDesignSystemFormBuilder
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
+    # @param prefix_text [String] the text placed before the input. No prefix will be added if left +nil+
+    # @param suffix_text [String] the text placed after the input. No suffix will be added if left +nil+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -176,6 +182,8 @@ module GOVUKDesignSystemFormBuilder
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
+    # @param prefix_text [String] the text placed before the input. No prefix will be added if left +nil+
+    # @param suffix_text [String] the text placed after the input. No suffix will be added if left +nil+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -224,6 +232,8 @@ module GOVUKDesignSystemFormBuilder
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
+    # @param prefix_text [String] the text placed before the input. No prefix will be added if left +nil+
+    # @param suffix_text [String] the text placed after the input. No suffix will be added if left +nil+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -273,6 +283,8 @@ module GOVUKDesignSystemFormBuilder
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
+    # @param prefix_text [String] the text placed before the input. No prefix will be added if left +nil+
+    # @param suffix_text [String] the text placed after the input. No suffix will be added if left +nil+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
