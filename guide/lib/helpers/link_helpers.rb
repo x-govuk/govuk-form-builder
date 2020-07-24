@@ -67,7 +67,7 @@ module Helpers
     end
 
     def haml_link
-      'http://haml.info'
+      'https://haml.info'
     end
 
     def version_supporting_design_system_v2
