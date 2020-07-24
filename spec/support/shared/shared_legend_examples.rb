@@ -39,26 +39,43 @@ shared_examples 'a field that supports a fieldset with legend' do
       end
     end
 
-    context 'when text is supplied with a custom size' do
-      context 'with a valid size' do
-        let(:size) { 'm' }
-        subject { builder.send(*args, legend: { text: legend_text, size: size }) }
+    context 'custom legend sizes' do
+      context 'valid sizes' do
+        %w(s m l xl).each do |size|
+          let(:size) { size }
+          context %(when the legend size is #{size}) do
+            subject { builder.send(*args, legend: { text: legend_text, size: size }) }
 
-        specify 'output fieldset should contain the specified tag' do
-          expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-            expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
-              expect(fs).to have_tag('h1', text: legend_text, class: "govuk-fieldset__legend--#{size}")
+            specify %(the legend size should be #{size}) do
+              expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
+                expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
+                  expect(fs).to have_tag('h1', text: legend_text, class: "govuk-fieldset__legend--#{size}")
+                end
+              end
             end
           end
         end
       end
 
       context 'with an invalid size' do
-        let(:size) { 'extra-medium' }
+        let(:size) { '3xl' }
         subject { builder.send(*args, legend: { text: legend_text, size: size }) }
 
         specify 'should raise an error' do
           expect { subject }.to raise_error("invalid size '#{size}', must be xl, l, m or s")
+        end
+      end
+
+      context 'when no size is provided' do
+        let(:expected_size) { 'm' }
+        subject { builder.send(*args, legend: { text: legend_text }) }
+
+        specify %(the legend size should be 'm') do
+          expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
+            with_tag('fieldset', with: { class: 'govuk-fieldset' }) do
+              with_tag('h1', text: legend_text, class: "govuk-fieldset__legend--#{expected_size}")
+            end
+          end
         end
       end
     end
