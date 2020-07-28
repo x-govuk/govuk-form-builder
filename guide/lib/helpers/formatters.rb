@@ -12,7 +12,7 @@ module Helpers
       beautify(
         CGI.unescapeHTML(
           CGI.unescapeHTML(
-            Slim::Template.new { raw }.render(OpenStruct.new(args))
+            Slim::Template.new(format: :html) { raw }.render(OpenStruct.new(args))
           )
         )
       )

@@ -5,7 +5,7 @@ compile '/index.slim' do
 end
 
 compile '/**/*.slim' do
-  filter :slim
+  filter :slim, format: :html
   filter :colorize_syntax, default_colorizer: :rouge
   filter :rubypants
   layout '/default.*'
