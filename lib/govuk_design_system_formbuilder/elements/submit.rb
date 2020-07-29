@@ -39,9 +39,16 @@ module GOVUKDesignSystemFormBuilder
         {
           formnovalidate: !@validate,
           disabled: @disabled,
+          name: @text.parameterize,
           data: {
             module: %(#{brand}-button),
-            'prevent-double-click': @prevent_double_click
+            'prevent-double-click': @prevent_double_click,
+
+            # this is an attempt to prevent Rails from adding a
+            # data-disable-with attr to the input element.
+            #
+            # it doesn't work (╯°□°）╯︵ ┻━┻
+            disable_with: false
           }.select { |_k, v| v.present? }
         }
       end

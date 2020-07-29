@@ -716,7 +716,7 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_submit "Proceed", prevent_double_click: true do
     #     = link_to 'Cancel', some_other_path, class: 'govuk-button__secondary'
     #
-    def govuk_submit(text = config.default_submit_button_text, warning: false, secondary: false, classes: nil, prevent_double_click: true, validate: false, disabled: false, &block)
+    def govuk_submit(text = config.default_submit_button_text, warning: false, secondary: false, classes: nil, prevent_double_click: false, validate: true, disabled: false, &block)
       Elements::Submit.new(self, text, warning: warning, secondary: secondary, classes: classes, prevent_double_click: prevent_double_click, validate: validate, disabled: disabled, &block).html
     end
 

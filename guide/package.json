@@ -12,6 +12,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "govuk-frontend": "^3.7.0"
+    "govuk-frontend": "github:alphagov/govuk-frontend#634eeca76ee6f4399cba54cc13a11bd38f5c450a"
   }
 }
