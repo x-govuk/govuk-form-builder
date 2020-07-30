@@ -12,7 +12,7 @@ module GOVUKDesignSystemFormBuilder
       def html
         return nil unless object_has_errors?
 
-        content_tag('div', class: summary_class, **summary_options) do
+        tag.div(class: summary_class, **summary_options) do
           safe_join([title, summary])
         end
       end
@@ -24,8 +24,8 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def summary
-        content_tag('div', class: summary_class('body')) do
-          content_tag('ul', class: [%(#{brand}-list), summary_class('list')]) do
+        tag.div(class: summary_class('body')) do
+          tag.ul(class: [%(#{brand}-list), summary_class('list')]) do
             safe_join(list)
           end
         end

@@ -90,14 +90,12 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             let(:object) { Person.new(favourite_colour: nil) }
             let(:identifier) { 'person-favourite-colour-field-error' }
             subject do
-              builder.capture do
-                builder.safe_join(
-                  [
-                    builder.govuk_error_summary,
-                    builder.govuk_collection_select(:favourite_colour, colours, :id, :name)
-                  ]
-                )
-              end
+              builder.safe_join(
+                [
+                  builder.govuk_error_summary,
+                  builder.govuk_collection_select(:favourite_colour, colours, :id, :name)
+                ]
+              )
             end
 
             specify "the error message should link directly to the govuk_collection_select field" do
@@ -111,14 +109,12 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             let(:identifier) { 'person-favourite-colour-field-error' }
             subject do
               builder.content_tag('div') do
-                builder.capture do
-                  builder.safe_join(
-                    [
-                      builder.govuk_error_summary,
-                      builder.govuk_collection_radio_buttons(:favourite_colour, colours, :id, :name)
-                    ]
-                  )
-                end
+                builder.safe_join(
+                  [
+                    builder.govuk_error_summary,
+                    builder.govuk_collection_radio_buttons(:favourite_colour, colours, :id, :name)
+                  ]
+                )
               end
             end
 
@@ -141,22 +137,20 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             let(:object) { Person.new(favourite_colour: nil) }
             let(:identifier) { 'person-favourite-colour-field-error' }
             subject do
-              builder.content_tag('div') do
-                builder.capture do
-                  builder.safe_join(
-                    [
-                      builder.govuk_error_summary,
-                      builder.govuk_radio_buttons_fieldset(:favourite_colour) do
-                        builder.safe_join(
-                          [
-                            builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label }, link_errors: true),
-                            builder.govuk_radio_button(:favourite_colour, :green, label: { text: green_label })
-                          ]
-                        )
-                      end
-                    ]
-                  )
-                end
+              builder.tag.div do
+                builder.safe_join(
+                  [
+                    builder.govuk_error_summary,
+                    builder.govuk_radio_buttons_fieldset(:favourite_colour) do
+                      builder.safe_join(
+                        [
+                          builder.govuk_radio_button(:favourite_colour, :red, label: { text: red_label }, link_errors: true),
+                          builder.govuk_radio_button(:favourite_colour, :green, label: { text: green_label })
+                        ]
+                      )
+                    end
+                  ]
+                )
               end
             end
 
@@ -179,15 +173,13 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             let(:object) { Person.new(projects: nil) }
             let(:identifier) { 'person-projects-field-error' }
             subject do
-              builder.content_tag('div') do
-                builder.capture do
-                  builder.safe_join(
-                    [
-                      builder.govuk_error_summary,
-                      builder.govuk_collection_check_boxes(:projects, projects, :id, :name)
-                    ]
-                  )
-                end
+              builder.tag.div do
+                builder.safe_join(
+                  [
+                    builder.govuk_error_summary,
+                    builder.govuk_collection_check_boxes(:projects, projects, :id, :name)
+                  ]
+                )
               end
             end
 
@@ -210,22 +202,20 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             let(:object) { Person.new }
             let(:identifier) { 'person-projects-field-error' }
             subject do
-              builder.content_tag('div') do
-                builder.capture do
-                  builder.safe_join(
-                    [
-                      builder.govuk_error_summary,
-                      builder.govuk_check_boxes_fieldset(:projects) do
-                        builder.safe_join(
-                          [
-                            builder.govuk_check_box(:projects, project_x.id, label: { text: project_x.name }, link_errors: true),
-                            builder.govuk_check_box(:projects, project_y.id, label: { text: project_y.name })
-                          ]
-                        )
-                      end
-                    ]
-                  )
-                end
+              builder.tag.div do
+                builder.safe_join(
+                  [
+                    builder.govuk_error_summary,
+                    builder.govuk_check_boxes_fieldset(:projects) do
+                      builder.safe_join(
+                        [
+                          builder.govuk_check_box(:projects, project_x.id, label: { text: project_x.name }, link_errors: true),
+                          builder.govuk_check_box(:projects, project_y.id, label: { text: project_y.name })
+                        ]
+                      )
+                    end
+                  ]
+                )
               end
             end
 
@@ -253,15 +243,13 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
               context "when omit_day is #{omit_day}" do
                 let(:first_date_segment_name) { "person[born_on(#{segment})]" }
                 subject do
-                  builder.content_tag('div') do
-                    builder.capture do
-                      builder.safe_join(
-                        [
-                          builder.govuk_error_summary,
-                          builder.govuk_date_field(:born_on, omit_day: omit_day)
-                        ]
-                      )
-                    end
+                  builder.tag.div do
+                    builder.safe_join(
+                      [
+                        builder.govuk_error_summary,
+                        builder.govuk_date_field(:born_on, omit_day: omit_day)
+                      ]
+                    )
                   end
                 end
 

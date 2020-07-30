@@ -12,7 +12,7 @@ module GOVUKDesignSystemFormBuilder
       def html
         return nil unless has_errors?
 
-        content_tag('span', class: %(#{brand}-error-message), id: error_id) do
+        tag.span(class: %(#{brand}-error-message), id: error_id) do
           safe_join([prefix, message])
         end
       end

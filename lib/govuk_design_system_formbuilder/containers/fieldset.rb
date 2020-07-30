@@ -11,7 +11,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        content_tag('fieldset', **options) do
+        tag.fieldset(**options) do
           safe_join([legend_element, (@block_content || yield)])
         end
       end

@@ -31,7 +31,7 @@ module GOVUKDesignSystemFormBuilder
 
       def content
         if @text.present?
-          content_tag('legend', class: classes) do
+          tag.legend(class: classes) do
             content_tag(@tag, class: heading_classes) do
               safe_join([caption_element, @text])
             end
