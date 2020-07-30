@@ -61,8 +61,8 @@ module GOVUKDesignSystemFormBuilder
       def date_part(segment, width:, link_errors: false)
         value = @builder.object.try(@attribute_name).try(segment)
 
-        tag.div(class: %w(date-input__item).prefix(brand)) do
-          tag.div(class: %w(form-group).prefix(brand)) do
+        tag.div(class: %(#{brand}-date-input__item)) do
+          tag.div(class: %(#{brand}-form-group)) do
             safe_join([label(segment, link_errors), input(segment, link_errors, width, value)])
           end
         end

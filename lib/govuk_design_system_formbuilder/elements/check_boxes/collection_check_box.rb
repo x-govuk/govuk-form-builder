@@ -2,8 +2,6 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     module CheckBoxes
       class CollectionCheckBox < Base
-        using PrefixableArray
-
         include Traits::CollectionItem
         include Traits::Hint
 

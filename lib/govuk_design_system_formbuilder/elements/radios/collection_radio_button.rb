@@ -2,8 +2,6 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     module Radios
       class CollectionRadioButton < Base
-        using PrefixableArray
-
         include Traits::Hint
         include Traits::CollectionItem
 
@@ -38,7 +36,7 @@ module GOVUKDesignSystemFormBuilder
           {
             id: field_id(link_errors: @link_errors),
             aria: { describedby: hint_id },
-            class: %w(radios__input).prefix(brand)
+            class: %(#{brand}-radios__input)
           }
         end
 

@@ -11,15 +11,15 @@ module GOVUKDesignSystemFormBuilder
       def initialize(builder, object_name, attribute_name, hint_text:, label:, caption:, rows:, max_words:, max_chars:, threshold:, form_group_classes:, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
 
-        @label           = label
-        @caption         = caption
-        @hint_text       = hint_text
-        @max_words       = max_words
-        @max_chars       = max_chars
-        @threshold       = threshold
-        @rows            = rows
+        @label              = label
+        @caption            = caption
+        @hint_text          = hint_text
+        @max_words          = max_words
+        @max_chars          = max_chars
+        @threshold          = threshold
+        @rows               = rows
         @form_group_classes = form_group_classes
-        @html_attributes = kwargs
+        @html_attributes    = kwargs
       end
 
       def html
@@ -42,7 +42,7 @@ module GOVUKDesignSystemFormBuilder
 
       def classes
         %w(textarea).prefix(brand).tap do |classes|
-          classes.push(%(#{brand}-textarea--error)) if has_errors?
+          classes.push(%(#{brand}-textarea--error))    if has_errors?
           classes.push(%(#{brand}-js-character-count)) if limit?
         end
       end

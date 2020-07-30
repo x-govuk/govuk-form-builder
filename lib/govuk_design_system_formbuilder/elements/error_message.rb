@@ -13,13 +13,13 @@ module GOVUKDesignSystemFormBuilder
         return nil unless has_errors?
 
         tag.span(class: %(#{brand}-error-message), id: error_id) do
-          safe_join([prefix, message])
+          safe_join([hidden_prefix, message])
         end
       end
 
     private
 
-      def prefix
+      def hidden_prefix
         tag.span('Error: ', class: %(#{brand}-visually-hidden))
       end
 

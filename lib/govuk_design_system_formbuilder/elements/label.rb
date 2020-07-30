@@ -47,7 +47,7 @@ module GOVUKDesignSystemFormBuilder
         text = [option_text, localised_text(:label), @attribute_name.capitalize].compact.first.to_s
 
         if hidden
-          tag.span(text, class: %w(visually-hidden).prefix(brand))
+          tag.span(text, class: %(#{brand}-visually-hidden))
         else
           text
         end
