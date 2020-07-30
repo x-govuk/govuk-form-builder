@@ -8,7 +8,7 @@ module GOVUKDesignSystemFormBuilder
   end
 
   class Base
-    delegate :content_tag, :safe_join, :tag, :raw, :link_to, to: :@builder
+    delegate :content_tag, :safe_join, :tag, :link_to, to: :@builder
     delegate :config, to: GOVUKDesignSystemFormBuilder
 
     def initialize(builder, object_name, attribute_name, &block)
