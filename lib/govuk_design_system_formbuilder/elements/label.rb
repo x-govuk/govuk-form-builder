@@ -44,7 +44,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def retrieve_text(option_text, hidden)
-        text = [option_text, localised_text(:label), @attribute_name.capitalize].compact.first.to_s
+        text = [option_text, localised_text(:label), @attribute_name.capitalize].compact.first
 
         if hidden
           tag.span(text, class: %(#{brand}-visually-hidden))
