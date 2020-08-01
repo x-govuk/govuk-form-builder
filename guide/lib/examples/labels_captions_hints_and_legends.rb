@@ -14,7 +14,9 @@ module Examples
     def text_field_with_label_proc
       <<~SNIPPET
         = f.govuk_text_field :favourite_shade_of_orange,
-          label: -> { %(<h2 class="govuk-header-m orange-underline">What's your favourite shade of orange?</h2>) }
+          label: -> do
+            h2.orange-underline.govuk-header-m
+              | What's your favourite shade of orange?
       SNIPPET
     end
 
@@ -50,7 +52,13 @@ module Examples
           primary_colours,
           :id,
           :name,
-          legend: -> { %(<h3 class="govuk-heading-l">Which <span class="ugly-gradient">colour</span> do you hate most?</h3>) }
+          legend: -> do
+            h3.govuk-heading-l
+              ' Which
+
+              span.ugly-gradient colour
+
+              ' do you hate most?
       SNIPPET
     end
   end
