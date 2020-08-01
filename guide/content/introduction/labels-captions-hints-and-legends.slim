@@ -79,9 +79,6 @@ section
           can enforce consistency between the label's <code>for</code> attribute
           and the associated form element.
 
-      p.govuk-body.important
-        | This example contains raw html but Rails' built-in tag helpers are fully-supported.
-
 section
 
   h2.govuk-heading-l Captions
@@ -200,7 +197,6 @@ section
 
     p.govuk-body
       | To take even more control of legends the content can be passed in using
-        a #{link_to('Ruby proc', ruby_proc_link).html_safe}.
-
-    p.govuk-body.important
-      | This example contains raw html but Rails' built-in tag helpers are fully-supported.
+        a #{link_to('Ruby proc', ruby_proc_link).html_safe}. In this example
+        we're using Slim but could just as easily call a helper method or
+        render a partial, component or string of HTML.

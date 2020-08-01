@@ -8,7 +8,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        content_tag('div', class: classes) { yield }
+        tag.div(class: classes) { yield }
       end
 
     private

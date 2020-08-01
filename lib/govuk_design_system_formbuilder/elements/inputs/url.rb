@@ -2,8 +2,6 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     module Inputs
       class URL < Base
-        using PrefixableArray
-
         include Traits::Input
         include Traits::Error
         include Traits::Hint

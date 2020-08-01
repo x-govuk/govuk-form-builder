@@ -11,7 +11,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        content_tag('div', **options) { yield }
+        tag.div(**options) { yield }
       end
 
     private

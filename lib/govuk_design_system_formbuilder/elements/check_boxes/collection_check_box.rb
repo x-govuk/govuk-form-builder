@@ -2,8 +2,6 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     module CheckBoxes
       class CollectionCheckBox < Base
-        using PrefixableArray
-
         include Traits::CollectionItem
         include Traits::Hint
 
@@ -18,7 +16,7 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def html
-          content_tag('div', class: %(#{brand}-checkboxes__item)) do
+          tag.div(class: %(#{brand}-checkboxes__item)) do
             safe_join([check_box, label_element, hint_element])
           end
         end

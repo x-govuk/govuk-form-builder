@@ -4,14 +4,12 @@ shared_examples 'an error summary linking directly to a form element' do |method
 
   let(:object) { Person.new(name: nil) }
   subject do
-    builder.capture do
-      builder.safe_join(
-        [
-          builder.govuk_error_summary,
-          builder.send(method, :name)
-        ]
-      )
-    end
+    builder.safe_join(
+      [
+        builder.govuk_error_summary,
+        builder.send(method, :name)
+      ]
+    )
   end
 
   specify "the error message should link directly to the #{method} field" do

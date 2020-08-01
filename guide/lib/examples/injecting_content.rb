@@ -6,17 +6,10 @@ module Examples
           departments,
           :id,
           :name,
-          legend: { text: "Who do you want to nominate for the Best Department award?" },
-          hint_text: "The department will not be notified they've been nominated for an award until the annual awards evening." do
+          legend: { text: "Which department do you want to nominate?" } do
 
-            .govuk-warning-text
-              span.govuk-warning-text__icon aria-hidden=true !
-              strong.govuk-warning-text__text
-                span.govuk-warning-text__assistive
-                  | Warning
-                | Unlike in previous years, nominations are not anonymous. The
-                  list of voters will be published after the prizes have been
-                  awarded.
+            p.final-decision-warning
+              | Your decision is final and cannot be edited later
       SNIPPET
     end
   end

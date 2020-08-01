@@ -30,7 +30,7 @@ module GOVUKDesignSystemFormBuilder
       private
 
         def item
-          content_tag('div', class: %(#{brand}-checkboxes__item)) do
+          tag.div(class: %(#{brand}-checkboxes__item)) do
             safe_join([check_box, label_element, hint_element])
           end
         end

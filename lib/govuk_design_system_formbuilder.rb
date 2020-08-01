@@ -88,7 +88,7 @@ module GOVUKDesignSystemFormBuilder
   end
 
   class FormBuilder < ActionView::Helpers::FormBuilder
-    delegate :content_tag, :tag, :safe_join, :safe_concat, :capture, :link_to, :raw, to: :@template
+    delegate :content_tag, :tag, :safe_join, :link_to, to: :@template
 
     include GOVUKDesignSystemFormBuilder::Builder
   end

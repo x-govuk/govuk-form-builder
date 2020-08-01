@@ -14,7 +14,7 @@ module GOVUKDesignSystemFormBuilder
       def html
         return yield unless limit?
 
-        content_tag('div', **options) { yield }
+        tag.div(**options) { yield }
       end
 
     private
