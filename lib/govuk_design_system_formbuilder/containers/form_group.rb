@@ -1,14 +1,15 @@
 module GOVUKDesignSystemFormBuilder
   module Containers
     class FormGroup < Base
-      def initialize(builder, object_name, attribute_name, classes: nil)
+      def initialize(builder, object_name, attribute_name, classes: nil, **kwargs)
         super(builder, object_name, attribute_name)
 
-        @classes = classes
+        @classes       = classes
+        @extra_options = kwargs
       end
 
       def html
-        tag.div(class: classes) { yield }
+        tag.div(class: classes, **@extra_options) { yield }
       end
 
     private
