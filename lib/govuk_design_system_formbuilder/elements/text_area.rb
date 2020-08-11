@@ -8,23 +8,23 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Label
       include Traits::Supplemental
 
-      def initialize(builder, object_name, attribute_name, hint_text:, label:, caption:, rows:, max_words:, max_chars:, threshold:, form_group_classes:, **kwargs, &block)
+      def initialize(builder, object_name, attribute_name, hint_text:, label:, caption:, rows:, max_words:, max_chars:, threshold:, form_group:, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
 
-        @label              = label
-        @caption            = caption
-        @hint_text          = hint_text
-        @max_words          = max_words
-        @max_chars          = max_chars
-        @threshold          = threshold
-        @rows               = rows
-        @form_group_classes = form_group_classes
-        @html_attributes    = kwargs
+        @label           = label
+        @caption         = caption
+        @hint_text       = hint_text
+        @max_words       = max_words
+        @max_chars       = max_chars
+        @threshold       = threshold
+        @rows            = rows
+        @form_group      = form_group
+        @html_attributes = kwargs
       end
 
       def html
         Containers::CharacterCount.new(@builder, **character_count_options).html do
-          Containers::FormGroup.new(@builder, @object_name, @attribute_name, classes: @form_group_classes).html do
+          Containers::FormGroup.new(@builder, @object_name, @attribute_name, **@form_group).html do
             safe_join([label_element, supplemental_content, hint_element, error_element, text_area, limit_description])
           end
         end

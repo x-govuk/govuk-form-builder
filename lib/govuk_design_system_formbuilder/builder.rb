@@ -17,7 +17,9 @@ module GOVUKDesignSystemFormBuilder
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
-    # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
+    # @param form_group [Hash] configures the form group
+    # @option form_group classes [Array,String] sets the form group's classes
+    # @option form_group args [Hash] additional attributes added to the form group
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -41,8 +43,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_text_field :callsign,
     #     label: -> { tag.h3('Call-sign') }
     #
-    def govuk_text_field(attribute_name, hint_text: nil, label: {}, caption: {}, width: nil, form_group_classes: nil, **args, &block)
-      Elements::Inputs::Text.new(self, object_name, attribute_name, hint_text: hint_text, label: label, caption: caption, width: width, form_group_classes: form_group_classes, **args, &block).html
+    def govuk_text_field(attribute_name, hint_text: nil, label: {}, caption: {}, width: nil, form_group: {}, **args, &block)
+      Elements::Inputs::Text.new(self, object_name, attribute_name, hint_text: hint_text, label: label, caption: caption, width: width, form_group: form_group, **args, &block).html
     end
 
     # Generates a input of type +tel+
@@ -60,7 +62,9 @@ module GOVUKDesignSystemFormBuilder
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
-    # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
+    # @param form_group [Hash] configures the form group
+    # @option form_group classes [Array,String] sets the form group's classes
+    # @option form_group args [Hash] additional attributes added to the form group
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -85,8 +89,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_phone_field :work_number,
     #     label: -> { tag.h3('Work number') }
     #
-    def govuk_phone_field(attribute_name, hint_text: nil, label: {}, caption: {}, width: nil, form_group_classes: nil, **args, &block)
-      Elements::Inputs::Phone.new(self, object_name, attribute_name, hint_text: hint_text, label: label, caption: caption, width: width, form_group_classes: form_group_classes, **args, &block).html
+    def govuk_phone_field(attribute_name, hint_text: nil, label: {}, caption: {}, width: nil, form_group: {}, **args, &block)
+      Elements::Inputs::Phone.new(self, object_name, attribute_name, hint_text: hint_text, label: label, caption: caption, width: width, form_group: form_group, **args, &block).html
     end
 
     # Generates a input of type +email+
@@ -104,7 +108,9 @@ module GOVUKDesignSystemFormBuilder
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
-    # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
+    # @param form_group [Hash] configures the form group
+    # @option form_group classes [Array,String] sets the form group's classes
+    # @option form_group args [Hash] additional attributes added to the form group
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -127,8 +133,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_email_field :personal_email,
     #     label: -> { tag.h3('Personal email address') }
     #
-    def govuk_email_field(attribute_name, hint_text: nil, label: {}, caption: {}, width: nil, form_group_classes: nil, **args, &block)
-      Elements::Inputs::Email.new(self, object_name, attribute_name, hint_text: hint_text, label: label, caption: caption, width: width, form_group_classes: form_group_classes, **args, &block).html
+    def govuk_email_field(attribute_name, hint_text: nil, label: {}, caption: {}, width: nil, form_group: {}, **args, &block)
+      Elements::Inputs::Email.new(self, object_name, attribute_name, hint_text: hint_text, label: label, caption: caption, width: width, form_group: form_group, **args, &block).html
     end
 
     # Generates a input of type +password+
@@ -146,7 +152,9 @@ module GOVUKDesignSystemFormBuilder
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
-    # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
+    # @param form_group [Hash] configures the form group
+    # @option form_group classes [Array,String] sets the form group's classes
+    # @option form_group args [Hash] additional attributes added to the form group
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -168,8 +176,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_password_field :passcode,
     #     label: -> { tag.h3('What is your secret pass code?') }
     #
-    def govuk_password_field(attribute_name, hint_text: nil, label: {}, width: nil, form_group_classes: nil, caption: {}, **args, &block)
-      Elements::Inputs::Password.new(self, object_name, attribute_name, hint_text: hint_text, label: label, caption: caption, width: width, form_group_classes: form_group_classes, **args, &block).html
+    def govuk_password_field(attribute_name, hint_text: nil, label: {}, width: nil, form_group: {}, caption: {}, **args, &block)
+      Elements::Inputs::Password.new(self, object_name, attribute_name, hint_text: hint_text, label: label, caption: caption, width: width, form_group: form_group, **args, &block).html
     end
 
     # Generates a input of type +url+
@@ -187,7 +195,9 @@ module GOVUKDesignSystemFormBuilder
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
-    # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
+    # @param form_group [Hash] configures the form group
+    # @option form_group classes [Array,String] sets the form group's classes
+    # @option form_group args [Hash] additional attributes added to the form group
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -210,8 +220,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_url_field :work_website,
     #     label: -> { tag.h3("Enter your company's website") }
     #
-    def govuk_url_field(attribute_name, hint_text: nil, label: {}, caption: {}, width: nil, form_group_classes: nil, **args, &block)
-      Elements::Inputs::URL.new(self, object_name, attribute_name, hint_text: hint_text, label: label, caption: caption, width: width, form_group_classes: form_group_classes, **args, &block).html
+    def govuk_url_field(attribute_name, hint_text: nil, label: {}, caption: {}, width: nil, form_group: {}, **args, &block)
+      Elements::Inputs::URL.new(self, object_name, attribute_name, hint_text: hint_text, label: label, caption: caption, width: width, form_group: form_group, **args, &block).html
     end
 
     # Generates a input of type +number+
@@ -229,7 +239,9 @@ module GOVUKDesignSystemFormBuilder
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
-    # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
+    # @param form_group [Hash] configures the form group
+    # @option form_group classes [Array,String] sets the form group's classes
+    # @option form_group args [Hash] additional attributes added to the form group
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -255,8 +267,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_url_field :personal_best_over_100m,
     #     label: -> { tag.h3("How many seconds does it take you to run 100m?") }
     #
-    def govuk_number_field(attribute_name, hint_text: nil, label: {}, caption: {}, width: nil, form_group_classes: nil, **args, &block)
-      Elements::Inputs::Number.new(self, object_name, attribute_name, hint_text: hint_text, label: label, caption: caption, width: width, form_group_classes: form_group_classes, **args, &block).html
+    def govuk_number_field(attribute_name, hint_text: nil, label: {}, caption: {}, width: nil, form_group: {}, **args, &block)
+      Elements::Inputs::Number.new(self, object_name, attribute_name, hint_text: hint_text, label: label, caption: caption, width: width, form_group: form_group, **args, &block).html
     end
 
     # Generates a +textarea+ element with a label, optional hint. Also offers
@@ -278,7 +290,9 @@ module GOVUKDesignSystemFormBuilder
     # @param threshold [Integer] only show the +max_words+ and +max_chars+ warnings once a threshold (percentage) is reached
     # @param rows [Integer] sets the initial number of rows
     # @option args [Hash] args additional arguments are applied as attributes to the +textarea+ element
-    # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
+    # @param form_group [Hash] configures the form group
+    # @option form_group classes [Array,String] sets the form group's classes
+    # @option form_group args [Hash] additional attributes added to the form group
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/textarea/ GOV.UK text area component
@@ -304,8 +318,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_text_area :instructions,
     #     label: -> { tag.h3("How do you set it up?") }
     #
-    def govuk_text_area(attribute_name, hint_text: nil, label: {}, caption: {}, max_words: nil, max_chars: nil, rows: 5, threshold: nil, form_group_classes: nil, **args, &block)
-      Elements::TextArea.new(self, object_name, attribute_name, hint_text: hint_text, label: label, caption: caption, max_words: max_words, max_chars: max_chars, rows: rows, threshold: threshold, form_group_classes: form_group_classes, **args, &block).html
+    def govuk_text_area(attribute_name, hint_text: nil, label: {}, caption: {}, max_words: nil, max_chars: nil, rows: 5, threshold: nil, form_group: {}, **args, &block)
+      Elements::TextArea.new(self, object_name, attribute_name, hint_text: hint_text, label: label, caption: caption, max_words: max_words, max_chars: max_chars, rows: rows, threshold: threshold, form_group: form_group, **args, &block).html
     end
 
     # Generates a +select+ element containing +option+ for each member in the provided collection
@@ -321,7 +335,9 @@ module GOVUKDesignSystemFormBuilder
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @param options [Hash] Options hash passed through to Rails' +collection_select+ helper
     # @param html_options [Hash] HTML Options hash passed through to Rails' +collection_select+ helper
-    # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
+    # @param form_group [Hash] configures the form group
+    # @option form_group classes [Array,String] sets the form group's classes
+    # @option form_group args [Hash] additional attributes added to the form group
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @see https://api.rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html#method-i-collection_select Rails collection_select (called by govuk_collection_select)
     # @return [ActiveSupport::SafeBuffer] HTML output
@@ -343,7 +359,7 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_collection_select(:team, @teams, :id, :name) do
     #     label: -> { tag.h3("Which team did you represent?") }
     #
-    def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, html_options: {}, hint_text: nil, label: {}, caption: {}, form_group_classes: nil, &block)
+    def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, html_options: {}, hint_text: nil, label: {}, caption: {}, form_group: {}, &block)
       Elements::Select.new(
         self,
         object_name,
@@ -356,7 +372,7 @@ module GOVUKDesignSystemFormBuilder
         caption: caption,
         options: options,
         html_options: html_options,
-        form_group_classes: form_group_classes,
+        form_group: form_group,
         &block
       ).html
     end
@@ -427,7 +443,7 @@ module GOVUKDesignSystemFormBuilder
     #    :name,
     #    legend: -> { tag.h3('Which category do you belong to?') }
     #
-    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: {}, caption: {}, inline: false, small: false, bold_labels: false, classes: nil, form_group_classes: nil, &block)
+    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: {}, caption: {}, inline: false, small: false, bold_labels: false, classes: nil, form_group: {}, &block)
       Elements::Radios::Collection.new(
         self,
         object_name,
@@ -443,7 +459,7 @@ module GOVUKDesignSystemFormBuilder
         small: small,
         bold_labels: bold_labels,
         classes: classes,
-        form_group_classes: form_group_classes,
+        form_group: form_group,
         &block
       ).html
     end
@@ -467,7 +483,9 @@ module GOVUKDesignSystemFormBuilder
     # @param caption [Hash] configures or sets the caption content which is inserted above the legend
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
-    # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
+    # @param form_group [Hash] configures the form group
+    # @option form_group classes [Array,String] sets the form group's classes
+    # @option form_group args [Hash] additional attributes added to the form group
     # @param block [Block] a block of HTML that will be used to populate the fieldset
     # @param classes [Array,String] Classes to add to the radio button container.
     # @see https://design-system.service.gov.uk/components/radios/ GOV.UK Radios
@@ -491,8 +509,8 @@ module GOVUKDesignSystemFormBuilder
     #      = f.govuk_radio_button :burger_id, :regular, label: { text: 'Hamburger' }, link_errors: true
     #      = f.govuk_radio_button :burger_id, :cheese, label: { text: 'Cheeseburger' }
     #
-    def govuk_radio_buttons_fieldset(attribute_name, hint_text: nil, legend: {}, caption: {}, inline: false, small: false, classes: nil, form_group_classes: nil, &block)
-      Containers::RadioButtonsFieldset.new(self, object_name, attribute_name, hint_text: hint_text, legend: legend, caption: caption, inline: inline, small: small, classes: classes, form_group_classes: form_group_classes, &block).html
+    def govuk_radio_buttons_fieldset(attribute_name, hint_text: nil, legend: {}, caption: {}, inline: false, small: false, classes: nil, form_group: {}, &block)
+      Containers::RadioButtonsFieldset.new(self, object_name, attribute_name, hint_text: hint_text, legend: legend, caption: caption, inline: inline, small: small, classes: classes, form_group: form_group, &block).html
     end
 
     # Generates a radio button
@@ -552,7 +570,9 @@ module GOVUKDesignSystemFormBuilder
     # @param caption [Hash] configures or sets the caption content which is inserted above the legend
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
-    # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
+    # @param form_group [Hash] configures the form group
+    # @option form_group classes [Array,String] sets the form group's classes
+    # @option form_group args [Hash] additional attributes added to the form group
     # @param block [Block] any HTML passed in will be injected into the fieldset, after the hint and before the checkboxes
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
@@ -589,7 +609,7 @@ module GOVUKDesignSystemFormBuilder
     #    :name,
     #    legend: -> { tag.h3('What kind of sandwich do you want?') }
     #
-    def govuk_collection_check_boxes(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: {}, caption: {}, small: false, classes: nil, form_group_classes: nil, &block)
+    def govuk_collection_check_boxes(attribute_name, collection, value_method, text_method, hint_method = nil, hint_text: nil, legend: {}, caption: {}, small: false, classes: nil, form_group: {}, &block)
       Elements::CheckBoxes::Collection.new(
         self,
         object_name,
@@ -603,7 +623,7 @@ module GOVUKDesignSystemFormBuilder
         caption: caption,
         small: small,
         classes: classes,
-        form_group_classes: form_group_classes,
+        form_group: form_group,
         &block
       ).html
     end
@@ -625,7 +645,9 @@ module GOVUKDesignSystemFormBuilder
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @param classes [Array,String] Classes to add to the checkbox container.
-    # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
+    # @param form_group [Hash] configures the form group
+    # @option form_group classes [Array,String] sets the form group's classes
+    # @option form_group args [Hash] additional attributes added to the form group
     # @param block [Block] a block of HTML that will be used to populate the fieldset
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
@@ -639,7 +661,7 @@ module GOVUKDesignSystemFormBuilder
     #    = f.govuk_check_box :desired_filling, :lemonade, label: { text: 'Lemonade' }, link_errors: true
     #    = f.govuk_check_box :desired_filling, :fizzy_orange, label: { text: 'Fizzy orange' }
     #
-    def govuk_check_boxes_fieldset(attribute_name, legend: {}, caption: {}, hint_text: {}, small: false, classes: nil, form_group_classes: nil, &block)
+    def govuk_check_boxes_fieldset(attribute_name, legend: {}, caption: {}, hint_text: {}, small: false, classes: nil, form_group: {}, &block)
       Containers::CheckBoxesFieldset.new(
         self,
         object_name,
@@ -649,7 +671,7 @@ module GOVUKDesignSystemFormBuilder
         caption: caption,
         small: small,
         classes: classes,
-        form_group_classes: form_group_classes,
+        form_group: form_group,
         &block
       ).html
     end
@@ -736,7 +758,9 @@ module GOVUKDesignSystemFormBuilder
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @param omit_day [Boolean] do not render a day input, only capture month and year
-    # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
+    # @param form_group [Hash] configures the form group
+    # @option form_group classes [Array,String] sets the form group's classes
+    # @option form_group args [Hash] additional attributes added to the form group
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input group
     # @param date_of_birth [Boolean] if +true+ {https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete#Values birth date auto completion attributes}
     #   will be added to the inputs
@@ -756,8 +780,8 @@ module GOVUKDesignSystemFormBuilder
     # @example A date input with legend supplied as a proc
     #  = f.govuk_date_field :finishes_on,
     #    legend: -> { tag.h3('Which category do you belong to?') }
-    def govuk_date_field(attribute_name, hint_text: nil, legend: {}, caption: {}, date_of_birth: false, omit_day: false, form_group_classes: nil, &block)
-      Elements::Date.new(self, object_name, attribute_name, hint_text: hint_text, legend: legend, caption: caption, date_of_birth: date_of_birth, omit_day: omit_day, form_group_classes: form_group_classes, &block).html
+    def govuk_date_field(attribute_name, hint_text: nil, legend: {}, caption: {}, date_of_birth: false, omit_day: false, form_group: {}, &block)
+      Elements::Date.new(self, object_name, attribute_name, hint_text: hint_text, legend: legend, caption: caption, date_of_birth: date_of_birth, omit_day: omit_day, form_group: form_group, &block).html
     end
 
     # Generates a summary of errors in the form, each linking to the corresponding
@@ -815,7 +839,9 @@ module GOVUKDesignSystemFormBuilder
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
-    # @param form_group_classes [Array,String] Classes to add to the surrounding +form-group+
+    # @param form_group [Hash] configures the form group
+    # @option form_group classes [Array,String] sets the form group's classes
+    # @option form_group args [Hash] additional attributes added to the form group
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     #
     # @example A photo upload field with file type specifier and injected content
@@ -834,8 +860,8 @@ module GOVUKDesignSystemFormBuilder
     # @note Remember to set +multipart: true+ when creating a form with file
     #   uploads, {https://guides.rubyonrails.org/form_helpers.html#uploading-files see
     #   the Rails documentation} for more information
-    def govuk_file_field(attribute_name, label: {}, caption: {}, hint_text: nil, form_group_classes: nil, **args, &block)
-      Elements::File.new(self, object_name, attribute_name, label: label, caption: caption, hint_text: hint_text, form_group_classes: form_group_classes, **args, &block).html
+    def govuk_file_field(attribute_name, label: {}, caption: {}, hint_text: nil, form_group: {}, **args, &block)
+      Elements::File.new(self, object_name, attribute_name, label: label, caption: caption, hint_text: hint_text, form_group: form_group, **args, &block).html
     end
   end
 end

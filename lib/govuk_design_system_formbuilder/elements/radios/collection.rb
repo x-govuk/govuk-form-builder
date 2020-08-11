@@ -6,25 +6,25 @@ module GOVUKDesignSystemFormBuilder
         include Traits::Hint
         include Traits::Supplemental
 
-        def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint_method:, hint_text:, legend:, caption:, inline:, small:, bold_labels:, classes:, form_group_classes:, &block)
+        def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint_method:, hint_text:, legend:, caption:, inline:, small:, bold_labels:, classes:, form_group:, &block)
           super(builder, object_name, attribute_name, &block)
 
-          @collection         = collection
-          @value_method       = value_method
-          @text_method        = text_method
-          @hint_method        = hint_method
-          @inline             = inline
-          @small              = small
-          @legend             = legend
-          @caption            = caption
-          @hint_text          = hint_text
-          @classes            = classes
-          @form_group_classes = form_group_classes
-          @bold_labels        = hint_method.present? || bold_labels
+          @collection   = collection
+          @value_method = value_method
+          @text_method  = text_method
+          @hint_method  = hint_method
+          @inline       = inline
+          @small        = small
+          @legend       = legend
+          @caption      = caption
+          @hint_text    = hint_text
+          @classes      = classes
+          @form_group   = form_group
+          @bold_labels  = hint_method.present? || bold_labels
         end
 
         def html
-          Containers::FormGroup.new(@builder, @object_name, @attribute_name, classes: @form_group_classes).html do
+          Containers::FormGroup.new(@builder, @object_name, @attribute_name, **@form_group).html do
             Containers::Fieldset.new(@builder, @object_name, @attribute_name, **fieldset_options).html do
               safe_join([supplemental_content, hint_element, error_element, radios])
             end
