@@ -122,7 +122,7 @@ shared_examples 'a field that supports setting the hint via localisation' do
     let(:expected_hint) { "It's quite a straightforward question!" }
 
     subject do
-      builder.send(*args, hint_text: expected_hint) { arbitrary_html_content }
+      builder.send(*args, hint: { text: expected_hint }) { arbitrary_html_content }
     end
 
     specify 'should use the supplied hint text' do

@@ -11,7 +11,7 @@ module GOVUKDesignSystemFormBuilder
           @checkbox    = checkbox
           @item        = checkbox.object
           @value       = checkbox.value
-          @hint_text   = retrieve(@item, hint_method)
+          @hint        = { text: retrieve(@item, hint_method) }
           @link_errors = link_errors
         end
 
@@ -40,7 +40,11 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def hint_element
-          @hint_element ||= Elements::Hint.new(@builder, @object_name, @attribute_name, @hint_text, @value, checkbox: true)
+          @hint_element ||= Elements::Hint.new(@builder, @object_name, @attribute_name, **hint_options, **@hint)
+        end
+
+        def hint_options
+          { value: @value, checkbox: true }
         end
       end
     end

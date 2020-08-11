@@ -3,22 +3,31 @@ module GOVUKDesignSystemFormBuilder
     class Hint < Base
       using PrefixableArray
 
-      include Traits::Hint
       include Traits::Localisation
 
-      def initialize(builder, object_name, attribute_name, text, value = nil, radio: false, checkbox: false)
+      def initialize(builder, object_name, attribute_name, value: nil, text: nil, radio: false, checkbox: false)
         super(builder, object_name, attribute_name)
 
-        @value     = value
-        @hint_text = retrieve_text(text)
-        @radio     = radio
-        @checkbox  = checkbox
+        @value    = value
+        @text     = retrieve_text(text)
+        @radio    = radio
+        @checkbox = checkbox
+      end
+
+      def active?
+        @text.present?
       end
 
       def html
-        return nil if @hint_text.blank?
+        return nil unless active?
 
-        tag.span(@hint_text, class: classes, id: hint_id)
+        tag.span(@text, class: classes, id: hint_id)
+      end
+
+      def hint_id
+        return nil unless active?
+
+        build_id('hint')
       end
 
     private

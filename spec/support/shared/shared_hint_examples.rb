@@ -1,6 +1,6 @@
 shared_examples 'a field that supports hints' do
   context 'when a hint is provided' do
-    subject { builder.send(*args, hint_text: hint_text) }
+    subject { builder.send(*args, hint: { text: hint_text }) }
 
     specify 'output should contain a hint' do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
