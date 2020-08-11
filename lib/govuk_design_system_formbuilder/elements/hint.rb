@@ -5,23 +5,27 @@ module GOVUKDesignSystemFormBuilder
 
       include Traits::Localisation
 
-      def initialize(builder, object_name, attribute_name, value: nil, text: nil, radio: false, checkbox: false)
+      def initialize(builder, object_name, attribute_name, value: nil, text: nil, radio: false, content: nil, checkbox: false)
         super(builder, object_name, attribute_name)
 
-        @value    = value
-        @text     = retrieve_text(text)
-        @radio    = radio
-        @checkbox = checkbox
+        if content
+          @content = content.call
+        else
+          @value    = value
+          @text     = retrieve_text(text)
+          @radio    = radio
+          @checkbox = checkbox
+        end
       end
 
       def active?
-        @text.present?
+        [@text, @content].any?(&:present?)
       end
 
       def html
         return nil unless active?
 
-        tag.span(@text, class: classes, id: hint_id)
+        content_tag(hint_tag, **hint_options) { hint_body }
       end
 
       def hint_id
@@ -31,6 +35,18 @@ module GOVUKDesignSystemFormBuilder
       end
 
     private
+
+      def hint_options
+        { class: classes, id: hint_id }
+      end
+
+      def hint_tag
+        @content.presence ? 'div' : 'span'
+      end
+
+      def hint_body
+        @content || @text
+      end
 
       def retrieve_text(supplied)
         supplied.presence || localised_text(:hint)

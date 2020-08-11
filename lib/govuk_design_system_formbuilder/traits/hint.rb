@@ -10,11 +10,18 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def hint_element
-        @hint_element ||= Elements::Hint.new(@builder, @object_name, @attribute_name, **hint_options)
+        @hint_element ||= Elements::Hint.new(@builder, @object_name, @attribute_name, **hint_content)
       end
 
-      def hint_options
-        @hint || {}
+      def hint_content
+        case @hint
+        when Hash
+          @hint
+        when Proc
+          { content: @hint }
+        else
+          fail(ArgumentError, %(hint must be a Proc or Hash))
+        end
       end
     end
   end
