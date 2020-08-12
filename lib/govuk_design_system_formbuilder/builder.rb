@@ -5,7 +5,11 @@ module GOVUKDesignSystemFormBuilder
     # Generates a input of type +text+
     #
     # @param attribute_name [Symbol] The name of the attribute
-    # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
+    # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
+    #   supplied the hint will be wrapped in a +div+ instead of a +span+
+    # @option hint text [String] the hint text
+    # @option hint args [Hash] additional arguments are applied as attributes to the hint
+    #
     # @param width [Integer,String] sets the width of the input, can be +2+, +3+ +4+, +5+, +10+ or +20+ characters
     #   or +one-quarter+, +one-third+, +one-half+, +two-thirds+ or +full+ width of the container
     # @param label [Hash,Proc] configures or sets the associated label content
@@ -28,7 +32,7 @@ module GOVUKDesignSystemFormBuilder
     # @example A required full name field with a placeholder
     #   = f.govuk_text_field :name,
     #     label: { text: 'Full name' },
-    #     hint_text: 'It says it on your birth certificate',
+    #     hint: { text: 'It says it on your birth certificate' },
     #     required: true,
     #     placeholder: 'Ralph Wiggum'
     #
@@ -50,7 +54,10 @@ module GOVUKDesignSystemFormBuilder
     # Generates a input of type +tel+
     #
     # @param attribute_name [Symbol] The name of the attribute
-    # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
+    # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
+    #   supplied the hint will be wrapped in a +div+ instead of a +span+
+    # @option hint text [String] the hint text
+    # @option hint args [Hash] additional arguments are applied as attributes to the hint
     # @param width [Integer,String] sets the width of the input, can be +2+, +3+ +4+, +5+, +10+ or +20+ characters
     #   or +one-quarter+, +one-third+, +one-half+, +two-thirds+ or +full+ width of the container
     # @param label [Hash,Proc] configures or sets the associated label content
@@ -74,7 +81,7 @@ module GOVUKDesignSystemFormBuilder
     # @example A required phone number field with a placeholder
     #   = f.govuk_phone_field :phone_number,
     #     label: { text: 'UK telephone number' },
-    #     hint_text: 'Include the dialling code',
+    #     hint: { text: 'Include the dialling code' },
     #     required: true,
     #     placeholder: '0123 456 789'
     #
@@ -96,7 +103,10 @@ module GOVUKDesignSystemFormBuilder
     # Generates a input of type +email+
     #
     # @param attribute_name [Symbol] The name of the attribute
-    # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
+    # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
+    #   supplied the hint will be wrapped in a +div+ instead of a +span+
+    # @option hint text [String] the hint text
+    # @option hint args [Hash] additional arguments are applied as attributes to the hint
     # @param width [Integer,String] sets the width of the input, can be +2+, +3+ +4+, +5+, +10+ or +20+ characters
     #   or +one-quarter+, +one-third+, +one-half+, +two-thirds+ or +full+ width of the container
     # @param label [Hash,Proc] configures or sets the associated label content
@@ -140,7 +150,10 @@ module GOVUKDesignSystemFormBuilder
     # Generates a input of type +password+
     #
     # @param attribute_name [Symbol] The name of the attribute
-    # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
+    # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
+    #   supplied the hint will be wrapped in a +div+ instead of a +span+
+    # @option hint text [String] the hint text
+    # @option hint args [Hash] additional arguments are applied as attributes to the hint
     # @param width [Integer,String] sets the width of the input, can be +2+, +3+ +4+, +5+, +10+ or +20+ characters
     #   or +one-quarter+, +one-third+, +one-half+, +two-thirds+ or +full+ width of the container
     # @param label [Hash,Proc] configures or sets the associated label content
@@ -183,7 +196,10 @@ module GOVUKDesignSystemFormBuilder
     # Generates a input of type +url+
     #
     # @param attribute_name [Symbol] The name of the attribute
-    # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
+    # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
+    #   supplied the hint will be wrapped in a +div+ instead of a +span+
+    # @option hint text [String] the hint text
+    # @option hint args [Hash] additional arguments are applied as attributes to the hint
     # @param width [Integer,String] sets the width of the input, can be +2+, +3+ +4+, +5+, +10+ or +20+ characters
     #   or +one-quarter+, +one-third+, +one-half+, +two-thirds+ or +full+ width of the container
     # @param label [Hash,Proc] configures or sets the associated label content
@@ -227,7 +243,10 @@ module GOVUKDesignSystemFormBuilder
     # Generates a input of type +number+
     #
     # @param attribute_name [Symbol] The name of the attribute
-    # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
+    # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
+    #   supplied the hint will be wrapped in a +div+ instead of a +span+
+    # @option hint text [String] the hint text
+    # @option hint args [Hash] additional arguments are applied as attributes to the hint
     # @param width [Integer,String] sets the width of the input, can be +2+, +3+ +4+, +5+, +10+ or +20+ characters
     #   or +one-quarter+, +one-third+, +one-half+, +two-thirds+ or +full+ width of the container
     # @param label [Hash,Proc] configures or sets the associated label content
@@ -276,7 +295,10 @@ module GOVUKDesignSystemFormBuilder
     # automatically
     #
     # @param attribute_name [Symbol] The name of the attribute
-    # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
+    # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
+    #   supplied the hint will be wrapped in a +div+ instead of a +span+
+    # @option hint text [String] the hint text
+    # @option hint args [Hash] additional arguments are applied as attributes to the hint
     # @param label [Hash,Proc] configures or sets the associated label content
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
@@ -328,7 +350,10 @@ module GOVUKDesignSystemFormBuilder
     # @param collection [Enumerable<Object>] Options to be added to the +select+ element
     # @param value_method [Symbol] The method called against each member of the collection to provide the value
     # @param text_method [Symbol] The method called against each member of the collection to provide the text
-    # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
+    # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
+    #   supplied the hint will be wrapped in a +div+ instead of a +span+
+    # @option hint text [String] the hint text
+    # @option hint args [Hash] additional arguments are applied as attributes to the hint
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
@@ -347,7 +372,7 @@ module GOVUKDesignSystemFormBuilder
     #     @grades,
     #     :id,
     #     :name,
-    #     hint_text: "If you took the test more than once enter your highest grade"
+    #     hint: { text: "If you took the test more than once enter your highest grade" }
     #
     # @example A select box with injected content
     #   = f.govuk_collection_select(:favourite_colour, @colours, :id, :name) do
@@ -396,7 +421,10 @@ module GOVUKDesignSystemFormBuilder
     # @param hint_method [Symbol, Proc, nil] The method called against each member of the collection to provide the hint text.
     #   When a +Proc+ is provided it must take a single argument that is a single member of the collection.
     #   When a +nil+ value is provided the hint text will be retrieved from the locale. This is the default and param can be omitted.
-    # @param hint_text [String] The content of the fieldset hint. No hint will be injected if left +nil+
+    # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
+    #   supplied the hint will be wrapped in a +div+ instead of a +span+
+    # @option hint text [String] the hint text
+    # @option hint args [Hash] additional arguments are applied as attributes to the hint
     # @param legend [Hash,Proc] options for configuring the legend
     # @param inline [Boolean] controls whether the radio buttons are displayed inline or not
     # @param small [Boolean] controls whether small radio buttons are used instead of regular-sized ones
@@ -424,7 +452,7 @@ module GOVUKDesignSystemFormBuilder
     #    ->(option) { option.name.upcase },
     #    :description,
     #    legend: { text: 'Pick your favourite colour', size: 'm' },
-    #    hint_text: 'If you cannot find the exact match choose something close',
+    #    hint: { text: 'If you cannot find the exact match choose something close' },
     #    inline: false
     #
     # @example A collection of radio buttons for grades with injected content
@@ -472,7 +500,10 @@ module GOVUKDesignSystemFormBuilder
     #   is set to +link_errors: true+
     #
     # @param attribute_name [Symbol] The name of the attribute
-    # @param hint_text [String] The content of the fieldset hint. No hint will be injected if left +nil+
+    # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
+    #   supplied the hint will be wrapped in a +div+ instead of a +span+
+    # @option hint text [String] the hint text
+    # @option hint args [Hash] additional arguments are applied as attributes to the hint
     # @param legend [Hash,Proc] options for configuring the legend
     # @param inline [Boolean] controls whether the radio buttons are displayed inline or not
     # @param small [Boolean] controls whether small radio buttons are used instead of regular-sized ones
@@ -517,7 +548,10 @@ module GOVUKDesignSystemFormBuilder
     #
     # @note This should only be used from within a {#govuk_radio_buttons_fieldset}
     # @param attribute_name [Symbol] The name of the attribute
-    # @param hint_text [String] the contents of the hint
+    # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
+    #   supplied the hint will be wrapped in a +div+ instead of a +span+
+    # @option hint text [String] the hint text
+    # @option hint args [Hash] additional arguments are applied as attributes to the hint
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
@@ -559,7 +593,10 @@ module GOVUKDesignSystemFormBuilder
     # @param text_method [Symbol] The method called against each member of the collection to provide the label text
     # @param hint_method [Symbol, Proc] The method called against each member of the collection to provide the hint text.
     #   When a +Proc+ is provided it must take a single argument that is a single member of the collection
-    # @param hint_text [String] The content of the fieldset hint. No hint will be injected if left +nil+
+    # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
+    #   supplied the hint will be wrapped in a +div+ instead of a +span+
+    # @option hint text [String] the hint text
+    # @option hint args [Hash] additional arguments are applied as attributes to the hint
     # @param small [Boolean] controls whether small check boxes are used instead of regular-sized ones
     # @param classes [Array,String] Classes to add to the checkbox container.
     # @param legend [Hash,Proc] options for configuring the legend
@@ -589,7 +626,7 @@ module GOVUKDesignSystemFormBuilder
     #    :name,
     #    :description,
     #    legend: { text: 'What do you want in your sandwich?', size: 'm' },
-    #    hint_text: "If it isn't listed here, tough luck",
+    #    hint: { text: "If it isn't listed here, tough luck" },
     #    inline: false,
     #    classes: 'app-overflow-scroll',
     #
@@ -634,7 +671,10 @@ module GOVUKDesignSystemFormBuilder
     #   is set to +link_errors: true+
     #
     # @param attribute_name [Symbol] The name of the attribute
-    # @param hint_text [String] The content of the fieldset hint. No hint will be injected if left +nil+
+    # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
+    #   supplied the hint will be wrapped in a +div+ instead of a +span+
+    # @option hint text [String] the hint text
+    # @option hint args [Hash] additional arguments are applied as attributes to the hint
     # @param small [Boolean] controls whether small check boxes are used instead of regular-sized ones
     # @param legend [Hash,Proc] options for configuring the legend
     # @option legend text [String] the fieldset legend's text content
@@ -680,7 +720,10 @@ module GOVUKDesignSystemFormBuilder
     #
     # @param attribute_name [Symbol] The name of the attribute
     # @param value [Boolean,String,Symbol,Integer] The value of the checkbox when it is checked
-    # @param hint_text [String] the contents of the hint
+    # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
+    #   supplied the hint will be wrapped in a +div+ instead of a +span+
+    # @option hint text [String] the hint text
+    # @option hint args [Hash] additional arguments are applied as attributes to the hint
     # @param link_errors [Boolean] controls whether this radio button should be linked to from {#govuk_error_summary}
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
@@ -696,7 +739,7 @@ module GOVUKDesignSystemFormBuilder
     #     multiple: false,
     #     link_errors: true,
     #     label: { text: 'Do you agree with our terms and conditions?' },
-    #     hint_text: 'You will not be able to proceed unless you do'
+    #     hint: { text: 'You will not be able to proceed unless you do' }
     #
     def govuk_check_box(attribute_name, value, hint: {}, label: {}, link_errors: false, multiple: true, &block)
       Elements::CheckBoxes::FieldsetCheckBox.new(
@@ -748,7 +791,10 @@ module GOVUKDesignSystemFormBuilder
     #   of {https://bugs.ruby-lang.org/issues/5988 this} bug, so incorrect dates like +2019-09-31+ will
     #   be 'rounded' up to +2019-10-01+.
     # @param attribute_name [Symbol] The name of the attribute
-    # @param hint_text [String] the contents of the hint
+    # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
+    #   supplied the hint will be wrapped in a +div+ instead of a +span+
+    # @option hint text [String] the hint text
+    # @option hint args [Hash] additional arguments are applied as attributes to the hint
     # @param legend [Hash,Proc] options for configuring the legend
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
@@ -772,7 +818,7 @@ module GOVUKDesignSystemFormBuilder
     # @example A regular date input with a legend, hint and injected content
     #   = f.govuk_date_field :starts_on,
     #     legend: { 'When does your event start?' },
-    #     hint_text: 'Leave this field blank if you don't know exactly' } do
+    #     hint: { text: 'Leave this field blank if you don't know exactly' } do
     #
     #       p.govuk-inset-text
     #         | If you don't fill this in you won't be eligable for a refund
@@ -837,7 +883,10 @@ module GOVUKDesignSystemFormBuilder
     # @param caption [Hash] configures or sets the caption content which is inserted above the label
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
-    # @param hint_text [String] The content of the hint. No hint will be injected if left +nil+
+    # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
+    #   supplied the hint will be wrapped in a +div+ instead of a +span+
+    # @option hint text [String] the hint text
+    # @option hint args [Hash] additional arguments are applied as attributes to the hint
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
