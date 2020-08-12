@@ -5,7 +5,7 @@ module GOVUKDesignSystemFormBuilder
 
       include Traits::Localisation
 
-      def initialize(builder, object_name, attribute_name, value: nil, text: nil, radio: false, content: nil, checkbox: false)
+      def initialize(builder, object_name, attribute_name, value: nil, text: nil, radio: false, content: nil, checkbox: false, **kwargs)
         super(builder, object_name, attribute_name)
 
         if content
@@ -16,6 +16,8 @@ module GOVUKDesignSystemFormBuilder
           @radio    = radio
           @checkbox = checkbox
         end
+
+        @html_attributes = kwargs
       end
 
       def active?
@@ -25,7 +27,7 @@ module GOVUKDesignSystemFormBuilder
       def html
         return nil unless active?
 
-        content_tag(hint_tag, **hint_options) { hint_body }
+        content_tag(hint_tag, **hint_options, **@html_attributes) { hint_body }
       end
 
       def hint_id

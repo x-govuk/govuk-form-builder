@@ -19,6 +19,17 @@ shared_examples 'a field that supports hints' do
       hint_id = parsed_subject.at_css('span.govuk-hint')['id']
       expect(input_aria_describedby).to include(hint_id)
     end
+
+    context 'extra attributes' do
+      let(:component_id) { 'xyz' }
+      let(:dir) { 'rtl' }
+
+      subject { builder.send(*args, hint: { text: hint_text, dir: dir, data: { component: component_id } }) }
+
+      specify 'the custom attributes should be set on the hint' do
+        expect(subject).to have_tag('span', with: { class: 'govuk-hint', 'data-component': component_id, dir: dir })
+      end
+    end
   end
 
   context 'when the hint is supplied as a proc' do
