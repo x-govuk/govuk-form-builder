@@ -7,7 +7,7 @@ module Examples
           :id,
           :name,
           legend: { text: 'Which department do you work for?' },
-          hint_text: 'There should be a sign near your desk'
+          hint: { text: 'There should be a sign near your desk' }
       SNIPPET
     end
 

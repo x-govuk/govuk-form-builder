@@ -32,7 +32,7 @@ module Examples
       <<~SNIPPET
         = f.govuk_text_field :favourite_shade_of_blue,
           label: { text: 'What is your favourite shade of blue?' },
-          hint_text: 'The shade you reach for first when painting the sky'
+          hint: { text: 'The shade you reach for first when painting the sky' }
       SNIPPET
     end
 

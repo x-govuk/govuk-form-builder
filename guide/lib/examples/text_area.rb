@@ -8,7 +8,7 @@ module Examples
       <<~SNIPPET
         = f.govuk_text_area :job_description,
           label: { text: 'Job description' },
-          hint_text: 'Describe your typical day',
+          hint: { text: 'Describe your typical day' },
           rows: 9
       SNIPPET
     end
