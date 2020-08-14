@@ -8,14 +8,14 @@ module GOVUKDesignSystemFormBuilder
   end
 
   class Base
-    delegate :content_tag, :safe_join, :tag, :link_to, to: :@builder
+    delegate :content_tag, :safe_join, :tag, :link_to, :capture, to: :@builder
     delegate :config, to: GOVUKDesignSystemFormBuilder
 
     def initialize(builder, object_name, attribute_name, &block)
       @builder        = builder
       @object_name    = object_name
       @attribute_name = attribute_name
-      @block_content  = block.call if block_given?
+      @block_content  = capture { block.call } if block_given?
     end
 
     # objects that implement #to_s can be passed directly into #safe_join
