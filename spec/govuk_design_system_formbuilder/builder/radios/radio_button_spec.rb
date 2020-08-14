@@ -33,7 +33,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     context 'radio button hints' do
       subject do
-        builder.govuk_radio_button(:favourite_colour, :red, hint_text: red_hint)
+        builder.govuk_radio_button(:favourite_colour, :red, hint: { text: red_hint })
       end
 
       specify 'should contain a hint with the correct text' do

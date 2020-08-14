@@ -41,7 +41,7 @@ module Examples
             :english,
             label: { text: "English" },
             link_errors: true,
-            hint_text: "Only select English if you have a GCSE at grade C or above"
+            hint: { text: "Only select English if you have a GCSE at grade C or above" }
 
           = f.govuk_check_box :languages,
             :welsh,

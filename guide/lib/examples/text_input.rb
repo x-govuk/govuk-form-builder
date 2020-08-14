@@ -4,7 +4,7 @@ module Examples
       <<~SNIPPET
         = f.govuk_text_field :first_name,
           label: { text: 'First name' },
-          hint_text: 'You can find it on your birth certificate'
+          hint: { text: 'You can find it on your birth certificate' }
       SNIPPET
     end
 

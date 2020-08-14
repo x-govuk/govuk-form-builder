@@ -2,7 +2,7 @@ module GOVUKDesignSystemFormBuilder
   module Traits
     module Hint
       def hint_id
-        return nil if @hint_text.blank?
+        return nil unless hint_element.active?
 
         build_id('hint')
       end
@@ -10,7 +10,18 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def hint_element
-        @hint_element ||= Elements::Hint.new(@builder, @object_name, @attribute_name, @hint_text)
+        @hint_element ||= Elements::Hint.new(@builder, @object_name, @attribute_name, **hint_content)
+      end
+
+      def hint_content
+        case @hint
+        when Hash
+          @hint
+        when Proc
+          { content: @hint }
+        else
+          fail(ArgumentError, %(hint must be a Proc or Hash))
+        end
       end
     end
   end

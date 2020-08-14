@@ -4,12 +4,12 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Error
       include Traits::Hint
 
-      def initialize(builder, object_name, attribute_name, hint_text:, legend:, caption:, small:, classes:, form_group:, &block)
+      def initialize(builder, object_name, attribute_name, hint:, legend:, caption:, small:, classes:, form_group:, &block)
         super(builder, object_name, attribute_name, &block)
 
         @legend        = legend
         @caption       = caption
-        @hint_text     = hint_text
+        @hint          = hint
         @small         = small
         @classes       = classes
         @form_group    = form_group

@@ -42,7 +42,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:hint_text) { project_x.description }
 
       subject do
-        builder.govuk_check_box(attribute, value, hint_text: hint_text)
+        builder.govuk_check_box(attribute, value, hint: { text: hint_text })
       end
 
       specify 'should contain a hint with the correct text' do

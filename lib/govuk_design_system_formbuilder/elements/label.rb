@@ -26,13 +26,17 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        return nil if [@content, @text].all?(&:blank?)
+        return nil unless active?
 
         if @tag.present?
           content_tag(@tag, class: %(#{brand}-label-wrapper)) { label }
         else
           label
         end
+      end
+
+      def active?
+        [@content, @text].any?(&:present?)
       end
 
     private
