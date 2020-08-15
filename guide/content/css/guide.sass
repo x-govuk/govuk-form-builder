@@ -87,6 +87,10 @@ figure.full-sample
     pre,.example-output
       @include light-grey-border
 
+    .govuk-tabs
+      pre,.example-output
+        border: none
+
     &:last-child
       margin-bottom: 0rem
 
@@ -99,6 +103,10 @@ pre
   > code.highlight
     font-family: FiraMono, monospace
     word-wrap: normal
+
+  > code.wrap
+    white-space: pre-wrap
+    word-wrap: break-word
 
   &.smaller > code.highlight
     font-size: 85%
