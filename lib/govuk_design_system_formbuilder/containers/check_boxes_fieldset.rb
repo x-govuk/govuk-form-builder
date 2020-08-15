@@ -13,7 +13,7 @@ module GOVUKDesignSystemFormBuilder
         @small         = small
         @classes       = classes
         @form_group    = form_group
-        @block_content = block.call
+        @block_content = capture { block.call }
       end
 
       def html
