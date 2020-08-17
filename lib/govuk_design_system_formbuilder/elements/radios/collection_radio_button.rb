@@ -41,7 +41,15 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def hint_element
-          @hint_element ||= Elements::Hint.new(@builder, @object_name, @attribute_name, value: @value, text: @hint_text, radio: true)
+          @hint_element ||= Elements::Hint.new(@builder, @object_name, @attribute_name, **hint_options, **hint_content)
+        end
+
+        def hint_content
+          { text: @hint_text }
+        end
+
+        def hint_options
+          { value: @value, radio: true }
         end
 
         def label_element

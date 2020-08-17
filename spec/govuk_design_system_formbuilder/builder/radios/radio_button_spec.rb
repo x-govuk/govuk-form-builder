@@ -6,6 +6,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
   describe '#govuk_radio_button' do
     let(:method) { :govuk_radio_button }
     let(:value) { 'red' }
+    let(:attribute) { :favourite_colour }
     let(:args) { [method, attribute, value] }
 
     subject { builder.send(*args) }
@@ -31,9 +32,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     it_behaves_like 'a field that supports setting the label via localisation'
 
-    context 'radio button hints' do
+    describe 'radio button hints' do
       subject do
-        builder.govuk_radio_button(:favourite_colour, :red, hint: { text: red_hint })
+        builder.govuk_radio_button(attribute, value, hint: { text: red_hint })
       end
 
       specify 'should contain a hint with the correct text' do
@@ -43,12 +44,24 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       specify 'the hint should have the correct classes' do
         expect(subject).to have_tag('span', with: { class: %w(govuk-hint govuk-radios__hint) })
       end
+
+      context 'when the hint is supplied in a proc' do
+        subject do
+          builder.govuk_radio_button(attribute, value, hint: -> { builder.tag.section(red_hint) })
+        end
+
+        specify 'the proc-supplied hint content should be present and contained in a div' do
+          expect(subject).to have_tag('div', with: { class: %w(govuk-hint govuk-radios__hint) }) do
+            with_tag('section', text: red_hint)
+          end
+        end
+      end
     end
 
     context 'conditionally revealing content' do
       context 'when a block is given' do
         subject do
-          builder.govuk_radio_button(:favourite_colour, :red) do
+          builder.govuk_radio_button(attribute, value) do
             builder.govuk_text_field(:favourite_colour_reason)
           end
         end
@@ -73,12 +86,12 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         specify 'conditional_id contains the object, attribute and value name' do
           expect(
             parsed_subject.at_css("input[type='radio']")['data-aria-controls']
-          ).to eql('person-favourite-colour-red-conditional')
+          ).to eql(%(person-favourite-colour-#{value}-conditional))
         end
       end
 
       context 'when no block is given' do
-        subject { builder.govuk_radio_button(:favourite_colour, :red) }
+        subject { builder.govuk_radio_button(attribute, value) }
 
         specify "the data-aria-controls attribute should be blank" do
           input_data_aria_controls = parsed_subject.at_css("input[type='radio']")['data-aria-controls']
