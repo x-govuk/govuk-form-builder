@@ -8,7 +8,7 @@ module GOVUKDesignSystemFormBuilder
         when Symbol, String
           item.send(method)
         when Proc
-          method.call(item)
+          capture { method.call(item) }
         end
       end
     end
