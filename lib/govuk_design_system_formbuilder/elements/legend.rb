@@ -9,7 +9,7 @@ module GOVUKDesignSystemFormBuilder
 
         case legend
         when Proc
-          @raw = legend.call
+          @raw = capture { legend.call }
         when Hash
           defaults.merge(legend).tap do |l|
             @text    = text(l.dig(:text))
