@@ -5,19 +5,19 @@ module GOVUKDesignSystemFormBuilder
 
       include Traits::Localisation
 
-      def initialize(builder, object_name, attribute_name, value: nil, text: nil, radio: false, content: nil, checkbox: false, **kwargs)
+      def initialize(builder, object_name, attribute_name, value: nil, text: nil, content: nil, radio: false, checkbox: false, **kwargs)
         super(builder, object_name, attribute_name)
+
+        @radio           = radio
+        @checkbox        = checkbox
+        @html_attributes = kwargs
 
         if content
           @content = content.call
         else
-          @value    = value
-          @text     = retrieve_text(text)
-          @radio    = radio
-          @checkbox = checkbox
+          @text  = retrieve_text(text)
+          @value = value
         end
-
-        @html_attributes = kwargs
       end
 
       def active?

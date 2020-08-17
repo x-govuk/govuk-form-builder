@@ -31,7 +31,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     it_behaves_like 'a field that supports setting the label via localisation'
 
-    context 'radio button hints' do
+    describe 'radio button hints' do
       subject do
         builder.govuk_radio_button(:favourite_colour, :red, hint: { text: red_hint })
       end
@@ -42,6 +42,18 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       specify 'the hint should have the correct classes' do
         expect(subject).to have_tag('span', with: { class: %w(govuk-hint govuk-radios__hint) })
+      end
+
+      context 'when the hint is supplied in a proc' do
+        subject do
+          builder.govuk_radio_button(:favourite_colour, :red, hint: -> { builder.tag.section(red_hint) })
+        end
+
+        specify 'the proc-supplied hint content should be present and contained in a div' do
+          expect(subject).to have_tag('div', with: { class: %w(govuk-hint govuk-radios__hint) }) do
+            with_tag('section', text: red_hint)
+          end
+        end
       end
     end
 

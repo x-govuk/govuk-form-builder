@@ -68,6 +68,18 @@ shared_examples 'a field that supports hints' do
     end
   end
 
+  context 'when a hint is omitted with nil' do
+    subject { builder.send(*args, hint: nil) }
+
+    specify 'no hint should be present' do
+      expect(subject).not_to have_tag('span', with: { class: 'govuk-hint' })
+    end
+
+    specify 'output should have no empty aria-describedby attribute' do
+      expect(parsed_subject.at_css(field_type)['aria-describedby']).not_to be_present
+    end
+  end
+
   context 'when a hint is not provided' do
     subject { builder.send(*args) }
 

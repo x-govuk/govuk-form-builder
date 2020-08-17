@@ -15,6 +15,8 @@ module GOVUKDesignSystemFormBuilder
 
       def hint_content
         case @hint
+        when NilClass
+          {}
         when Hash
           @hint
         when Proc

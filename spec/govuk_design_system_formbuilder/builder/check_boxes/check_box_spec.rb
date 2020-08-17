@@ -52,6 +52,18 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       specify 'the hint should have the correct classes' do
         expect(subject).to have_tag('span', with: { class: %w(govuk-hint govuk-checkboxes__hint) })
       end
+
+      context 'when the hint is supplied in a proc' do
+        subject do
+          builder.govuk_check_box(attribute, value, hint: -> { builder.tag.section(project_x.description) })
+        end
+
+        specify 'the proc-supplied hint content should be present and contained in a div' do
+          expect(subject).to have_tag('div', with: { class: %w(govuk-hint govuk-checkboxes__hint) }) do
+            with_tag('section', text: project_x.description)
+          end
+        end
+      end
     end
 
     context 'multiple' do
