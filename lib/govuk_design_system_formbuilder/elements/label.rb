@@ -12,7 +12,7 @@ module GOVUKDesignSystemFormBuilder
         # content is passed in directly via a proc and overrides
         # the other display options
         if content
-          @content = content.call
+          @content = capture { content.call }
         else
           @value       = value # used by field_id
           @text        = retrieve_text(text, hidden)
