@@ -13,7 +13,7 @@ module GOVUKDesignSystemFormBuilder
         @html_attributes = kwargs
 
         if content
-          @content = content.call
+          @content = capture { content.call }
         else
           @text  = retrieve_text(text)
           @value = value
