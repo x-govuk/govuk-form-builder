@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency("pry-byebug", "~> 3.9", ">= 3.9.0")
   s.add_development_dependency("rspec-html-matchers", "~> 0")
   s.add_development_dependency("rspec-rails", "~> 4.0")
-  s.add_development_dependency("simplecov", "~> 0.18.5")
+  s.add_development_dependency("simplecov", "~> 0.17.1")
 
   # Required for the guide
   s.add_development_dependency("htmlbeautifier", "~> 1.3.1")
