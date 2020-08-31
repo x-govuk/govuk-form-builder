@@ -50,7 +50,7 @@ shared_examples 'a field that supports captions on the legend' do
     let(:caption_container) { { legend: { text: legend_text, tag: caption_container_tag } } }
 
     context 'when no legend is present but a caption is' do
-      subject { builder.send(*args, caption: caption_args) }
+      subject { builder.send(*args, legend: nil, caption: caption_args) }
 
       specify 'no caption should be rendered' do
         expect(subject).not_to have_tag('span', with: { class: caption_class })
@@ -65,8 +65,6 @@ shared_examples 'a field that supports captions on the label' do
     let(:caption_container) { { label: { text: label_text, size: 'm' } } }
 
     context 'when no label is present but a caption is' do
-      # Unlike the legend, labels will fall back to their attribute name, so we
-      # can only test against an empty label
       subject { builder.send(*args, label: { text: '' }, caption: caption_args) }
 
       specify 'no caption should be rendered' do

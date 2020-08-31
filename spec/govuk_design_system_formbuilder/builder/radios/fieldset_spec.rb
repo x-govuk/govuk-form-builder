@@ -70,7 +70,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       context 'without a legend' do
-        let(:legend) { {} }
+        let(:legend) { nil }
 
         specify 'output should contain no caption at all' do
           expect(subject).not_to have_tag('span', with: { class: caption_class })

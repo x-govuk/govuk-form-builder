@@ -8,11 +8,13 @@ module GOVUKDesignSystemFormBuilder
         super(builder, object_name, attribute_name)
 
         case legend
+        when NilClass
+          @active = false
         when Proc
           @raw = capture { legend.call }
         when Hash
           defaults.merge(legend).tap do |l|
-            @text    = text(l.dig(:text))
+            @text    = retrieve_text(l.dig(:text))
             @hidden  = l.dig(:hidden)
             @tag     = l.dig(:tag)
             @size    = l.dig(:size)
@@ -29,8 +31,12 @@ module GOVUKDesignSystemFormBuilder
 
     private
 
+      def active?
+        [@text, @raw].any?(&:present?)
+      end
+
       def content
-        if @text.present?
+        if active?
           tag.legend(class: classes) do
             content_tag(@tag, class: heading_classes) do
               safe_join([caption_element, @text])
@@ -39,8 +45,8 @@ module GOVUKDesignSystemFormBuilder
         end
       end
 
-      def text(supplied_text)
-        supplied_text || localised_text(:legend)
+      def retrieve_text(supplied_text)
+        [supplied_text, localised_text(:legend), @attribute_name&.capitalize].compact.first
       end
 
       def classes
