@@ -39,7 +39,7 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def label_element
-          @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, **label_content, **label_options, **@label)
+          @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, **label_content, **label_options)
         end
 
         def label_options

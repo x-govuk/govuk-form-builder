@@ -26,9 +26,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     it_behaves_like 'a field that supports labels' do
       let(:label_text) { 'Project X' }
-      # the reason we're specifying the type is that
-      # Rails injects a hidden input in addition to the
-      # checkbox
       let(:field_type) { "input[type='checkbox']" }
 
       specify 'the label should have a check box label class' do
@@ -38,11 +35,28 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     it_behaves_like 'a field that supports setting the label via localisation'
 
+    context 'labels set via procs' do
+      let(:label_text) { 'Project Y' }
+      let(:label_proc) { -> { label_text } }
+      subject { builder.send(*args, label: label_proc) }
+
+      specify 'the label should have a check box label class' do
+        expect(subject).to have_tag('label', with: { class: 'govuk-checkboxes__label' })
+      end
+
+      specify %(the label's for attribute should match the checkbox's id) do
+        label_for = parsed_subject.at_css('label')['for']
+        checkbox_id = parsed_subject.at_css('input')['id']
+
+        expect(label_for).to eql(checkbox_id)
+      end
+    end
+
     context 'check box hints' do
       let(:hint_text) { project_x.description }
 
       subject do
-        builder.govuk_check_box(attribute, value, hint: { text: hint_text })
+        builder.send(*args, hint: { text: hint_text })
       end
 
       specify 'should contain a hint with the correct text' do
