@@ -425,7 +425,7 @@ module GOVUKDesignSystemFormBuilder
     #   supplied the hint will be wrapped in a +div+ instead of a +span+
     # @option hint text [String] the hint text
     # @option hint args [Hash] additional arguments are applied as attributes to the hint
-    # @param legend [Hash,Proc] options for configuring the legend
+    # @param legend [NilClass,Hash,Proc] options for configuring the legend. Legend will be omitted if +nil+.
     # @param inline [Boolean] controls whether the radio buttons are displayed inline or not
     # @param small [Boolean] controls whether small radio buttons are used instead of regular-sized ones
     # @param bold_labels [Boolean] controls whether the radio button labels are bold
@@ -504,7 +504,7 @@ module GOVUKDesignSystemFormBuilder
     #   supplied the hint will be wrapped in a +div+ instead of a +span+
     # @option hint text [String] the hint text
     # @option hint args [Hash] additional arguments are applied as attributes to the hint
-    # @param legend [Hash,Proc] options for configuring the legend
+    # @param legend [NilClass,Hash,Proc] options for configuring the legend. Legend will be omitted if +nil+.
     # @param inline [Boolean] controls whether the radio buttons are displayed inline or not
     # @param small [Boolean] controls whether small radio buttons are used instead of regular-sized ones
     # @option legend text [String] the fieldset legend's text content
@@ -599,7 +599,7 @@ module GOVUKDesignSystemFormBuilder
     # @option hint args [Hash] additional arguments are applied as attributes to the hint
     # @param small [Boolean] controls whether small check boxes are used instead of regular-sized ones
     # @param classes [Array,String] Classes to add to the checkbox container.
-    # @param legend [Hash,Proc] options for configuring the legend
+    # @param legend [NilClass,Hash,Proc] options for configuring the legend. Legend will be omitted if +nil+.
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
@@ -676,7 +676,7 @@ module GOVUKDesignSystemFormBuilder
     # @option hint text [String] the hint text
     # @option hint args [Hash] additional arguments are applied as attributes to the hint
     # @param small [Boolean] controls whether small check boxes are used instead of regular-sized ones
-    # @param legend [Hash,Proc] options for configuring the legend
+    # @param legend [NilClass,Hash,Proc] options for configuring the legend. Legend will be omitted if +nil+.
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
@@ -795,7 +795,7 @@ module GOVUKDesignSystemFormBuilder
     #   supplied the hint will be wrapped in a +div+ instead of a +span+
     # @option hint text [String] the hint text
     # @option hint args [Hash] additional arguments are applied as attributes to the hint
-    # @param legend [Hash,Proc] options for configuring the legend
+    # @param legend [NilClass,Hash,Proc] options for configuring the legend. Legend will be omitted if +nil+.
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
@@ -845,7 +845,7 @@ module GOVUKDesignSystemFormBuilder
 
     # Generates a fieldset containing the contents of the block
     #
-    # @param legend [Hash,Proc] options for configuring the legend
+    # @param legend [NilClass,Hash,Proc] options for configuring the legend. Legend will be omitted if +nil+.
     # @param described_by [Array<String>] the ids of the elements that describe this fieldset, usually hints and errors
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
