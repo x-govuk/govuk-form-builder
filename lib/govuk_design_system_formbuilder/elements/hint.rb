@@ -13,7 +13,7 @@ module GOVUKDesignSystemFormBuilder
         @html_attributes = kwargs
 
         if content
-          @content = capture { content.call }
+          @raw = capture { content.call }
         else
           @text  = retrieve_text(text)
           @value = value
@@ -21,7 +21,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def active?
-        [@text, @content].any?(&:present?)
+        [@text, @raw].any?(&:present?)
       end
 
       def html
@@ -43,11 +43,11 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def hint_tag
-        @content.presence ? 'div' : 'span'
+        @raw.presence ? 'div' : 'span'
       end
 
       def hint_body
-        @content || @text
+        @raw || @text
       end
 
       def retrieve_text(supplied)
