@@ -571,11 +571,12 @@ module GOVUKDesignSystemFormBuilder
     #   supplied the hint will be wrapped in a +div+ instead of a +span+
     # @option hint text [String] the hint text
     # @option hint args [Hash] additional arguments are applied as attributes to the hint
-    # @option legend text [String] the fieldset legend's text content
-    # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
-    # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
-    # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
-    # @option legend args [Hash] additional arguments are applied as attributes on the +legend+ element
+    # @param label [Hash,Proc] configures or sets the associated label content
+    # @option label text [String] the label text
+    # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
+    # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
+    # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @option label args [Hash] additional arguments are applied as attributes on the +label+ element
     # @see https://design-system.service.gov.uk/components/radios/ GOV.UK Radios
     # @see https://design-system.service.gov.uk/styles/typography/#headings-with-captions Headings with captions
     # @param block [Block] Any supplied HTML will be wrapped in a conditional
