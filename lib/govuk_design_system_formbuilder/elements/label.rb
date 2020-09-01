@@ -9,19 +9,20 @@ module GOVUKDesignSystemFormBuilder
       def initialize(builder, object_name, attribute_name, text: nil, value: nil, size: nil, hidden: false, radio: false, checkbox: false, tag: nil, link_errors: true, content: nil, caption: nil)
         super(builder, object_name, attribute_name)
 
+        @value       = value # used by field_id
+        @tag         = tag
+        @radio       = radio
+        @checkbox    = checkbox
+        @link_errors = link_errors
+
         # content is passed in directly via a proc and overrides
         # the other display options
         if content
           @content = capture { content.call }
         else
-          @value       = value # used by field_id
-          @text        = retrieve_text(text, hidden)
-          @size_class  = size_class(size)
-          @radio       = radio
-          @checkbox    = checkbox
-          @tag         = tag
-          @link_errors = link_errors
-          @caption     = caption
+          @text       = retrieve_text(text, hidden)
+          @size_class = size_class(size)
+          @caption    = caption
         end
       end
 

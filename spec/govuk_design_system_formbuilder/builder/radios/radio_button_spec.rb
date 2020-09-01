@@ -32,6 +32,23 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     it_behaves_like 'a field that supports setting the label via localisation'
 
+    context 'labels set via procs' do
+      let(:label_text) { 'Orange' }
+      let(:label_proc) { -> { label_text } }
+      subject { builder.send(*args, label: label_proc) }
+
+      specify 'the label should have a radio label class' do
+        expect(subject).to have_tag('label', with: { class: 'govuk-radios__label' })
+      end
+
+      specify %(the label's for attribute should match the radio button's id) do
+        label_for = parsed_subject.at_css('label')['for']
+        radio_id = parsed_subject.at_css('input')['id']
+
+        expect(label_for).to eql(radio_id)
+      end
+    end
+
     describe 'radio button hints' do
       subject do
         builder.govuk_radio_button(attribute, value, hint: { text: red_hint })
