@@ -6,14 +6,15 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Caption
       include Traits::Localisation
 
-      def initialize(builder, object_name, attribute_name, text: nil, value: nil, size: nil, hidden: false, radio: false, checkbox: false, tag: nil, link_errors: true, content: nil, caption: nil)
+      def initialize(builder, object_name, attribute_name, text: nil, value: nil, size: nil, hidden: false, radio: false, checkbox: false, tag: nil, link_errors: true, content: nil, caption: nil, **kwargs)
         super(builder, object_name, attribute_name)
 
-        @value       = value # used by field_id
-        @tag         = tag
-        @radio       = radio
-        @checkbox    = checkbox
-        @link_errors = link_errors
+        @value           = value # used by field_id
+        @tag             = tag
+        @radio           = radio
+        @checkbox        = checkbox
+        @link_errors     = link_errors
+        @html_attributes = kwargs
 
         # content is passed in directly via a proc and overrides
         # the other display options
@@ -43,7 +44,7 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def label
-        @builder.label(@attribute_name, **options) do
+        @builder.label(@attribute_name, **options, **@html_attributes) do
           @content || safe_join([caption, @text])
         end
       end

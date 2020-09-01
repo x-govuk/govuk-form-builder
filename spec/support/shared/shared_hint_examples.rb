@@ -20,14 +20,12 @@ shared_examples 'a field that supports hints' do
       expect(input_aria_describedby).to include(hint_id)
     end
 
-    context 'extra attributes' do
-      let(:component_id) { 'xyz' }
-      let(:dir) { 'rtl' }
+    context 'when additional HTML attributes are provided' do
+      let(:html_attributes) { { focusable: 'false', dir: 'rtl' } }
+      subject { builder.send(*args, hint: { text: hint_text }.merge(html_attributes)) }
 
-      subject { builder.send(*args, hint: { text: hint_text, dir: dir, data: { component: component_id } }) }
-
-      specify 'the custom attributes should be set on the hint' do
-        expect(subject).to have_tag('span', with: { class: 'govuk-hint', 'data-component': component_id, dir: dir })
+      specify 'the label should have the custom HTML attributes' do
+        expect(subject).to have_tag('.govuk-hint', with: html_attributes, text: hint_text)
       end
     end
   end

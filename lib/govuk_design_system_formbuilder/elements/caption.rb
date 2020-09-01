@@ -3,20 +3,25 @@ module GOVUKDesignSystemFormBuilder
     class Caption < Base
       include Traits::Localisation
 
-      def initialize(builder, object_name, attribute_name, text:, size: nil)
+      def initialize(builder, object_name, attribute_name, text: nil, size: nil, **kwargs)
         super(builder, object_name, attribute_name)
 
-        @text       = text(text)
-        @size_class = size_class(size)
+        @text            = text(text)
+        @size_class      = size_class(size)
+        @html_attributes = kwargs
       end
 
       def html
-        return nil if @text.blank?
+        return nil unless active?
 
-        tag.span(@text, class: @size_class)
+        tag.span(@text, class: @size_class, **@html_attributes)
       end
 
     private
+
+      def active?
+        @text.present?
+      end
 
       def text(override)
         override || localised_text(:caption)

@@ -8,15 +8,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def caption_options
-        { text: nil }.merge({ text: caption_text, size: caption_size }.compact)
-      end
-
-      def caption_text
-        @caption&.dig(:text)
-      end
-
-      def caption_size
-        @caption&.dig(:size)
+        @caption
       end
     end
   end
