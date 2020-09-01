@@ -17,9 +17,11 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @option label args [Hash] additional arguments are applied as attributes on the +label+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the label
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
+    # @option caption args [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
@@ -65,9 +67,11 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @option label args [Hash] additional arguments are applied as attributes on the +label+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the label
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
+    # @option caption args [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
@@ -114,9 +118,11 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @option label args [Hash] additional arguments are applied as attributes on the +label+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the label
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
+    # @option caption args [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
@@ -161,9 +167,11 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @option label args [Hash] additional arguments are applied as attributes on the +label+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the label
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
+    # @option caption args [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
@@ -207,9 +215,11 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @option label args [Hash] additional arguments are applied as attributes on the +label+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the label
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
+    # @option caption args [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
@@ -254,9 +264,11 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @option label args [Hash] additional arguments are applied as attributes on the +label+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the label
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
+    # @option caption args [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
@@ -304,9 +316,11 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @option label args [Hash] additional arguments are applied as attributes on the +label+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the label
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
+    # @option caption args [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @param max_words [Integer] adds the GOV.UK max word count
     # @param max_chars [Integer] adds the GOV.UK max characters count
     # @param threshold [Integer] only show the +max_words+ and +max_chars+ warnings once a threshold (percentage) is reached
@@ -358,6 +372,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @option label args [Hash] additional arguments are applied as attributes on the +label+ element
     # @param options [Hash] Options hash passed through to Rails' +collection_select+ helper
     # @param html_options [Hash] HTML Options hash passed through to Rails' +collection_select+ helper
     # @param form_group [Hash] configures the form group
@@ -434,9 +449,11 @@ module GOVUKDesignSystemFormBuilder
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
     # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
+    # @option legend args [Hash] additional arguments are applied as attributes on the +legend+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the legend
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
+    # @option caption args [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
     # @example A collection of radio buttons for favourite colours, labels capitalised via a proc
@@ -511,9 +528,11 @@ module GOVUKDesignSystemFormBuilder
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
     # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
+    # @option legend args [Hash] additional arguments are applied as attributes on the +legend+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the legend
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
+    # @option caption args [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group args [Hash] additional attributes added to the form group
@@ -556,6 +575,7 @@ module GOVUKDesignSystemFormBuilder
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
     # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
+    # @option legend args [Hash] additional arguments are applied as attributes on the +legend+ element
     # @see https://design-system.service.gov.uk/components/radios/ GOV.UK Radios
     # @see https://design-system.service.gov.uk/styles/typography/#headings-with-captions Headings with captions
     # @param block [Block] Any supplied HTML will be wrapped in a conditional
@@ -607,6 +627,7 @@ module GOVUKDesignSystemFormBuilder
     # @param caption [Hash] configures or sets the caption content which is inserted above the legend
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
+    # @option caption args [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group args [Hash] additional attributes added to the form group
@@ -681,9 +702,11 @@ module GOVUKDesignSystemFormBuilder
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
     # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
+    # @option legend args [Hash] additional arguments are applied as attributes on the +legend+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the legend
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
+    # @option caption args [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @param classes [Array,String] Classes to add to the checkbox container.
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
@@ -729,6 +752,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @option label args [Hash] additional arguments are applied as attributes on the +label+ element
     # @param multiple [Boolean] controls whether the check box is part of a collection or represents a single attribute
     # @param block [Block] any HTML passed in will form the contents of the fieldset
     # @return [ActiveSupport::SafeBuffer] HTML output
@@ -800,9 +824,11 @@ module GOVUKDesignSystemFormBuilder
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
     # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
+    # @option legend args [Hash] additional arguments are applied as attributes on the +legend+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the legend
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
+    # @option caption args [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @param omit_day [Boolean] do not render a day input, only capture month and year
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
@@ -851,9 +877,11 @@ module GOVUKDesignSystemFormBuilder
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
     # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
+    # @option legend args [Hash] additional arguments are applied as attributes on the +legend+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the label
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
+    # @option caption args [Hash] additional arguments are applied as attributes on the caption +span+ element
     #
     # @example A fieldset containing address fields
     #   = f.govuk_fieldset legend: { text: 'Address' }
@@ -880,9 +908,11 @@ module GOVUKDesignSystemFormBuilder
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @option label args [Hash] additional arguments are applied as attributes on the +label+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the label
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
+    # @option caption args [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
     #   supplied the hint will be wrapped in a +div+ instead of a +span+
     # @option hint text [String] the hint text
