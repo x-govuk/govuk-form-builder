@@ -2,6 +2,8 @@ require 'pry'
 require 'action_view'
 require 'active_model'
 require 'htmlbeautifier'
+require 'slim/erb_converter'
+
 Dir.glob(File.join('./lib', '**', '*.rb')).sort.each { |f| require f }
 
 $LOAD_PATH.unshift(File.expand_path("../../lib", "lib"))

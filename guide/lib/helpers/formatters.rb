@@ -5,7 +5,6 @@ module Helpers
     end
 
     def format_slim(raw, **args)
-      # FIXME: investigate pretty slim
       # FIXME: not sure why when we're several
       #        blocks deep we need to unescape more
       #        than once
@@ -15,6 +14,25 @@ module Helpers
             Slim::Template.new(format: :html) { raw }.render(OpenStruct.new(args))
           )
         )
+      )
+    end
+
+    def format_erb(raw)
+      # NOTE: this is many different kinds of bad. Thankfully we're
+      #       only using it for documentation purposes and it won't be
+      #       displayed by default
+      HtmlBeautifier.beautify(
+        Slim::ERBConverter.new(
+          disable_escape: true,
+          disable_capture: true,
+          generator: Temple::Generators::RailsOutputBuffer
+        )
+          .call(raw)
+          .gsub(/ _slim_controls[\d] =/, "=")        # remove _slim_controlsX assignment (where X is an integer)
+          .gsub(/do\n\s+%>/, "do %>")                # close blocks on the same line
+          .gsub(/%><%/, "%>\n<%")                    # ensure ERB tags are on separate lines
+          .gsub(/<%= _slim_controls[\d] %>/, '')     # remove _slim_controlsX var display, we've handled it above
+          .gsub(/,\n/, ', ')                         # don't leave newlines between args, it breaks indentation
       )
     end
 
