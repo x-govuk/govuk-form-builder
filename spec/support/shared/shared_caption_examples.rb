@@ -13,6 +13,15 @@ shared_examples 'a field that supports captions' do
       end
     end
 
+    context 'when additional HTML attributes are provided' do
+      let(:html_attributes) { { focusable: 'false', dir: 'rtl' } }
+      subject { builder.send(*args, **caption_container, caption: caption_args.merge(html_attributes)) }
+
+      specify 'the label should have the custom HTML attributes' do
+        expect(subject).to have_tag('span', with: { class: caption_class }.merge(html_attributes), text: caption_text)
+      end
+    end
+
     describe 'caption sizes' do
       %w(xl l m).each do |size|
         context %(when the caption size is #{size}) do

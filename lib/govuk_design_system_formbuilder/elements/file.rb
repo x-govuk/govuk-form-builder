@@ -11,11 +11,11 @@ module GOVUKDesignSystemFormBuilder
       def initialize(builder, object_name, attribute_name, hint:, label:, caption:, form_group:, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
 
-        @label         = label
-        @caption       = caption
-        @hint          = hint
-        @extra_options = kwargs
-        @form_group    = form_group
+        @label           = label
+        @caption         = caption
+        @hint            = hint
+        @html_attributes = kwargs
+        @form_group      = form_group
       end
 
       def html
@@ -27,7 +27,7 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def file
-        @builder.file_field(@attribute_name, **options, **@extra_options)
+        @builder.file_field(@attribute_name, **options, **@html_attributes)
       end
 
       def options

@@ -4,12 +4,12 @@ module GOVUKDesignSystemFormBuilder
       def initialize(builder, object_name, attribute_name, classes: nil, **kwargs)
         super(builder, object_name, attribute_name)
 
-        @classes       = classes
-        @extra_options = kwargs
+        @classes         = classes
+        @html_attributes = kwargs
       end
 
       def html
-        tag.div(class: classes, **@extra_options) { yield }
+        tag.div(class: classes, **@html_attributes) { yield }
       end
 
     private

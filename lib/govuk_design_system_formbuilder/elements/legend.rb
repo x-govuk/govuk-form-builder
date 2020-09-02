@@ -4,8 +4,10 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Caption
       include Traits::Localisation
 
-      def initialize(builder, object_name, attribute_name, legend:, caption:)
+      def initialize(builder, object_name, attribute_name, legend:, caption:, **kwargs)
         super(builder, object_name, attribute_name)
+
+        @html_attributes = kwargs
 
         case legend
         when NilClass
@@ -36,11 +38,11 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def content
-        if active?
-          tag.legend(class: classes) do
-            content_tag(@tag, class: heading_classes) do
-              safe_join([caption_element, @text])
-            end
+        return nil unless active?
+
+        tag.legend(class: classes, **@html_attributes) do
+          content_tag(@tag, class: heading_classes) do
+            safe_join([caption_element, @text])
           end
         end
       end

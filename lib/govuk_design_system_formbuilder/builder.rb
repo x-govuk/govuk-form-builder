@@ -8,7 +8,7 @@ module GOVUKDesignSystemFormBuilder
     # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
     #   supplied the hint will be wrapped in a +div+ instead of a +span+
     # @option hint text [String] the hint text
-    # @option hint args [Hash] additional arguments are applied as attributes to the hint
+    # @option hint kwargs [Hash] additional arguments are applied as attributes to the hint
     #
     # @param width [Integer,String] sets the width of the input, can be +2+, +3+ +4+, +5+, +10+ or +20+ characters
     #   or +one-quarter+, +one-third+, +one-half+, +two-thirds+ or +full+ width of the container
@@ -17,13 +17,15 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @option label kwargs [Hash] additional arguments are applied as attributes on the +label+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the label
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
-    # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
+    # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
+    # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
-    # @option form_group args [Hash] additional attributes added to the form group
+    # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -47,8 +49,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_text_field :callsign,
     #     label: -> { tag.h3('Call-sign') }
     #
-    def govuk_text_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, form_group: {}, **args, &block)
-      Elements::Inputs::Text.new(self, object_name, attribute_name, hint: hint, label: label, caption: caption, width: width, form_group: form_group, **args, &block).html
+    def govuk_text_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, form_group: {}, **kwargs, &block)
+      Elements::Inputs::Text.new(self, object_name, attribute_name, hint: hint, label: label, caption: caption, width: width, form_group: form_group, **kwargs, &block).html
     end
 
     # Generates a input of type +tel+
@@ -57,7 +59,7 @@ module GOVUKDesignSystemFormBuilder
     # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
     #   supplied the hint will be wrapped in a +div+ instead of a +span+
     # @option hint text [String] the hint text
-    # @option hint args [Hash] additional arguments are applied as attributes to the hint
+    # @option hint kwargs [Hash] additional arguments are applied as attributes to the hint
     # @param width [Integer,String] sets the width of the input, can be +2+, +3+ +4+, +5+, +10+ or +20+ characters
     #   or +one-quarter+, +one-third+, +one-half+, +two-thirds+ or +full+ width of the container
     # @param label [Hash,Proc] configures or sets the associated label content
@@ -65,13 +67,15 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @option label kwargs [Hash] additional arguments are applied as attributes on the +label+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the label
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
-    # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
+    # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
+    # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
-    # @option form_group args [Hash] additional attributes added to the form group
+    # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -96,8 +100,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_phone_field :work_number,
     #     label: -> { tag.h3('Work number') }
     #
-    def govuk_phone_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, form_group: {}, **args, &block)
-      Elements::Inputs::Phone.new(self, object_name, attribute_name, hint: hint, label: label, caption: caption, width: width, form_group: form_group, **args, &block).html
+    def govuk_phone_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, form_group: {}, **kwargs, &block)
+      Elements::Inputs::Phone.new(self, object_name, attribute_name, hint: hint, label: label, caption: caption, width: width, form_group: form_group, **kwargs, &block).html
     end
 
     # Generates a input of type +email+
@@ -106,7 +110,7 @@ module GOVUKDesignSystemFormBuilder
     # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
     #   supplied the hint will be wrapped in a +div+ instead of a +span+
     # @option hint text [String] the hint text
-    # @option hint args [Hash] additional arguments are applied as attributes to the hint
+    # @option hint kwargs [Hash] additional arguments are applied as attributes to the hint
     # @param width [Integer,String] sets the width of the input, can be +2+, +3+ +4+, +5+, +10+ or +20+ characters
     #   or +one-quarter+, +one-third+, +one-half+, +two-thirds+ or +full+ width of the container
     # @param label [Hash,Proc] configures or sets the associated label content
@@ -114,13 +118,15 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @option label kwargs [Hash] additional arguments are applied as attributes on the +label+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the label
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
-    # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
+    # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
+    # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
-    # @option form_group args [Hash] additional attributes added to the form group
+    # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -143,8 +149,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_email_field :personal_email,
     #     label: -> { tag.h3('Personal email address') }
     #
-    def govuk_email_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, form_group: {}, **args, &block)
-      Elements::Inputs::Email.new(self, object_name, attribute_name, hint: hint, label: label, caption: caption, width: width, form_group: form_group, **args, &block).html
+    def govuk_email_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, form_group: {}, **kwargs, &block)
+      Elements::Inputs::Email.new(self, object_name, attribute_name, hint: hint, label: label, caption: caption, width: width, form_group: form_group, **kwargs, &block).html
     end
 
     # Generates a input of type +password+
@@ -153,7 +159,7 @@ module GOVUKDesignSystemFormBuilder
     # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
     #   supplied the hint will be wrapped in a +div+ instead of a +span+
     # @option hint text [String] the hint text
-    # @option hint args [Hash] additional arguments are applied as attributes to the hint
+    # @option hint kwargs [Hash] additional arguments are applied as attributes to the hint
     # @param width [Integer,String] sets the width of the input, can be +2+, +3+ +4+, +5+, +10+ or +20+ characters
     #   or +one-quarter+, +one-third+, +one-half+, +two-thirds+ or +full+ width of the container
     # @param label [Hash,Proc] configures or sets the associated label content
@@ -161,13 +167,15 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @option label kwargs [Hash] additional arguments are applied as attributes on the +label+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the label
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
-    # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
+    # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
+    # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
-    # @option form_group args [Hash] additional attributes added to the form group
+    # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -189,8 +197,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_password_field :passcode,
     #     label: -> { tag.h3('What is your secret pass code?') }
     #
-    def govuk_password_field(attribute_name, hint: {}, label: {}, width: nil, form_group: {}, caption: {}, **args, &block)
-      Elements::Inputs::Password.new(self, object_name, attribute_name, hint: hint, label: label, caption: caption, width: width, form_group: form_group, **args, &block).html
+    def govuk_password_field(attribute_name, hint: {}, label: {}, width: nil, form_group: {}, caption: {}, **kwargs, &block)
+      Elements::Inputs::Password.new(self, object_name, attribute_name, hint: hint, label: label, caption: caption, width: width, form_group: form_group, **kwargs, &block).html
     end
 
     # Generates a input of type +url+
@@ -199,7 +207,7 @@ module GOVUKDesignSystemFormBuilder
     # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
     #   supplied the hint will be wrapped in a +div+ instead of a +span+
     # @option hint text [String] the hint text
-    # @option hint args [Hash] additional arguments are applied as attributes to the hint
+    # @option hint kwargs [Hash] additional arguments are applied as attributes to the hint
     # @param width [Integer,String] sets the width of the input, can be +2+, +3+ +4+, +5+, +10+ or +20+ characters
     #   or +one-quarter+, +one-third+, +one-half+, +two-thirds+ or +full+ width of the container
     # @param label [Hash,Proc] configures or sets the associated label content
@@ -207,13 +215,15 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @option label kwargs [Hash] additional arguments are applied as attributes on the +label+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the label
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
-    # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
+    # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
+    # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
-    # @option form_group args [Hash] additional attributes added to the form group
+    # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -236,8 +246,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_url_field :work_website,
     #     label: -> { tag.h3("Enter your company's website") }
     #
-    def govuk_url_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, form_group: {}, **args, &block)
-      Elements::Inputs::URL.new(self, object_name, attribute_name, hint: hint, label: label, caption: caption, width: width, form_group: form_group, **args, &block).html
+    def govuk_url_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, form_group: {}, **kwargs, &block)
+      Elements::Inputs::URL.new(self, object_name, attribute_name, hint: hint, label: label, caption: caption, width: width, form_group: form_group, **kwargs, &block).html
     end
 
     # Generates a input of type +number+
@@ -246,7 +256,7 @@ module GOVUKDesignSystemFormBuilder
     # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
     #   supplied the hint will be wrapped in a +div+ instead of a +span+
     # @option hint text [String] the hint text
-    # @option hint args [Hash] additional arguments are applied as attributes to the hint
+    # @option hint kwargs [Hash] additional arguments are applied as attributes to the hint
     # @param width [Integer,String] sets the width of the input, can be +2+, +3+ +4+, +5+, +10+ or +20+ characters
     #   or +one-quarter+, +one-third+, +one-half+, +two-thirds+ or +full+ width of the container
     # @param label [Hash,Proc] configures or sets the associated label content
@@ -254,13 +264,15 @@ module GOVUKDesignSystemFormBuilder
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @option label kwargs [Hash] additional arguments are applied as attributes on the +label+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the label
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
-    # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
+    # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
+    # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
-    # @option form_group args [Hash] additional attributes added to the form group
+    # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -286,8 +298,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_url_field :personal_best_over_100m,
     #     label: -> { tag.h3("How many seconds does it take you to run 100m?") }
     #
-    def govuk_number_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, form_group: {}, **args, &block)
-      Elements::Inputs::Number.new(self, object_name, attribute_name, hint: hint, label: label, caption: caption, width: width, form_group: form_group, **args, &block).html
+    def govuk_number_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, form_group: {}, **kwargs, &block)
+      Elements::Inputs::Number.new(self, object_name, attribute_name, hint: hint, label: label, caption: caption, width: width, form_group: form_group, **kwargs, &block).html
     end
 
     # Generates a +textarea+ element with a label, optional hint. Also offers
@@ -298,23 +310,25 @@ module GOVUKDesignSystemFormBuilder
     # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
     #   supplied the hint will be wrapped in a +div+ instead of a +span+
     # @option hint text [String] the hint text
-    # @option hint args [Hash] additional arguments are applied as attributes to the hint
+    # @option hint kwargs [Hash] additional arguments are applied as attributes to the hint
     # @param label [Hash,Proc] configures or sets the associated label content
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @option label kwargs [Hash] additional arguments are applied as attributes on the +label+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the label
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
+    # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @param max_words [Integer] adds the GOV.UK max word count
     # @param max_chars [Integer] adds the GOV.UK max characters count
     # @param threshold [Integer] only show the +max_words+ and +max_chars+ warnings once a threshold (percentage) is reached
     # @param rows [Integer] sets the initial number of rows
-    # @option args [Hash] args additional arguments are applied as attributes to the +textarea+ element
+    # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +textarea+ element
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
-    # @option form_group args [Hash] additional attributes added to the form group
+    # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/textarea/ GOV.UK text area component
@@ -340,8 +354,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_text_area :instructions,
     #     label: -> { tag.h3("How do you set it up?") }
     #
-    def govuk_text_area(attribute_name, hint: {}, label: {}, caption: {}, max_words: nil, max_chars: nil, rows: 5, threshold: nil, form_group: {}, **args, &block)
-      Elements::TextArea.new(self, object_name, attribute_name, hint: hint, label: label, caption: caption, max_words: max_words, max_chars: max_chars, rows: rows, threshold: threshold, form_group: form_group, **args, &block).html
+    def govuk_text_area(attribute_name, hint: {}, label: {}, caption: {}, max_words: nil, max_chars: nil, rows: 5, threshold: nil, form_group: {}, **kwargs, &block)
+      Elements::TextArea.new(self, object_name, attribute_name, hint: hint, label: label, caption: caption, max_words: max_words, max_chars: max_chars, rows: rows, threshold: threshold, form_group: form_group, **kwargs, &block).html
     end
 
     # Generates a +select+ element containing +option+ for each member in the provided collection
@@ -353,16 +367,17 @@ module GOVUKDesignSystemFormBuilder
     # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
     #   supplied the hint will be wrapped in a +div+ instead of a +span+
     # @option hint text [String] the hint text
-    # @option hint args [Hash] additional arguments are applied as attributes to the hint
+    # @option hint kwargs [Hash] additional arguments are applied as attributes to the hint
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @option label kwargs [Hash] additional arguments are applied as attributes on the +label+ element
     # @param options [Hash] Options hash passed through to Rails' +collection_select+ helper
     # @param html_options [Hash] HTML Options hash passed through to Rails' +collection_select+ helper
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
-    # @option form_group args [Hash] additional attributes added to the form group
+    # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @see https://api.rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html#method-i-collection_select Rails collection_select (called by govuk_collection_select)
     # @return [ActiveSupport::SafeBuffer] HTML output
@@ -424,7 +439,7 @@ module GOVUKDesignSystemFormBuilder
     # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
     #   supplied the hint will be wrapped in a +div+ instead of a +span+
     # @option hint text [String] the hint text
-    # @option hint args [Hash] additional arguments are applied as attributes to the hint
+    # @option hint kwargs [Hash] additional arguments are applied as attributes to the hint
     # @param legend [NilClass,Hash,Proc] options for configuring the legend. Legend will be omitted if +nil+.
     # @param inline [Boolean] controls whether the radio buttons are displayed inline or not
     # @param small [Boolean] controls whether small radio buttons are used instead of regular-sized ones
@@ -434,9 +449,11 @@ module GOVUKDesignSystemFormBuilder
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
     # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
+    # @option legend kwargs [Hash] additional arguments are applied as attributes on the +legend+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the legend
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
+    # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
     # @example A collection of radio buttons for favourite colours, labels capitalised via a proc
@@ -503,7 +520,7 @@ module GOVUKDesignSystemFormBuilder
     # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
     #   supplied the hint will be wrapped in a +div+ instead of a +span+
     # @option hint text [String] the hint text
-    # @option hint args [Hash] additional arguments are applied as attributes to the hint
+    # @option hint kwargs [Hash] additional arguments are applied as attributes to the hint
     # @param legend [NilClass,Hash,Proc] options for configuring the legend. Legend will be omitted if +nil+.
     # @param inline [Boolean] controls whether the radio buttons are displayed inline or not
     # @param small [Boolean] controls whether small radio buttons are used instead of regular-sized ones
@@ -511,12 +528,14 @@ module GOVUKDesignSystemFormBuilder
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
     # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
+    # @option legend kwargs [Hash] additional arguments are applied as attributes on the +legend+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the legend
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
+    # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
-    # @option form_group args [Hash] additional attributes added to the form group
+    # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param block [Block] a block of HTML that will be used to populate the fieldset
     # @param classes [Array,String] Classes to add to the radio button container.
     # @see https://design-system.service.gov.uk/components/radios/ GOV.UK Radios
@@ -551,11 +570,13 @@ module GOVUKDesignSystemFormBuilder
     # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
     #   supplied the hint will be wrapped in a +div+ instead of a +span+
     # @option hint text [String] the hint text
-    # @option hint args [Hash] additional arguments are applied as attributes to the hint
-    # @option legend text [String] the fieldset legend's text content
-    # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
-    # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
-    # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
+    # @option hint kwargs [Hash] additional arguments are applied as attributes to the hint
+    # @param label [Hash,Proc] configures or sets the associated label content
+    # @option label text [String] the label text
+    # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
+    # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
+    # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @option label kwargs [Hash] additional arguments are applied as attributes on the +label+ element
     # @see https://design-system.service.gov.uk/components/radios/ GOV.UK Radios
     # @see https://design-system.service.gov.uk/styles/typography/#headings-with-captions Headings with captions
     # @param block [Block] Any supplied HTML will be wrapped in a conditional
@@ -596,7 +617,7 @@ module GOVUKDesignSystemFormBuilder
     # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
     #   supplied the hint will be wrapped in a +div+ instead of a +span+
     # @option hint text [String] the hint text
-    # @option hint args [Hash] additional arguments are applied as attributes to the hint
+    # @option hint kwargs [Hash] additional arguments are applied as attributes to the hint
     # @param small [Boolean] controls whether small check boxes are used instead of regular-sized ones
     # @param classes [Array,String] Classes to add to the checkbox container.
     # @param legend [NilClass,Hash,Proc] options for configuring the legend. Legend will be omitted if +nil+.
@@ -607,9 +628,10 @@ module GOVUKDesignSystemFormBuilder
     # @param caption [Hash] configures or sets the caption content which is inserted above the legend
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
+    # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
-    # @option form_group args [Hash] additional attributes added to the form group
+    # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param block [Block] any HTML passed in will be injected into the fieldset, after the hint and before the checkboxes
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
@@ -674,20 +696,22 @@ module GOVUKDesignSystemFormBuilder
     # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
     #   supplied the hint will be wrapped in a +div+ instead of a +span+
     # @option hint text [String] the hint text
-    # @option hint args [Hash] additional arguments are applied as attributes to the hint
+    # @option hint kwargs [Hash] additional arguments are applied as attributes to the hint
     # @param small [Boolean] controls whether small check boxes are used instead of regular-sized ones
     # @param legend [NilClass,Hash,Proc] options for configuring the legend. Legend will be omitted if +nil+.
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
     # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
+    # @option legend kwargs [Hash] additional arguments are applied as attributes on the +legend+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the legend
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
+    # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @param classes [Array,String] Classes to add to the checkbox container.
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
-    # @option form_group args [Hash] additional attributes added to the form group
+    # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param block [Block] a block of HTML that will be used to populate the fieldset
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
@@ -723,12 +747,13 @@ module GOVUKDesignSystemFormBuilder
     # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
     #   supplied the hint will be wrapped in a +div+ instead of a +span+
     # @option hint text [String] the hint text
-    # @option hint args [Hash] additional arguments are applied as attributes to the hint
+    # @option hint kwargs [Hash] additional arguments are applied as attributes to the hint
     # @param link_errors [Boolean] controls whether this radio button should be linked to from {#govuk_error_summary}
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @option label kwargs [Hash] additional arguments are applied as attributes on the +label+ element
     # @param multiple [Boolean] controls whether the check box is part of a collection or represents a single attribute
     # @param block [Block] any HTML passed in will form the contents of the fieldset
     # @return [ActiveSupport::SafeBuffer] HTML output
@@ -794,19 +819,21 @@ module GOVUKDesignSystemFormBuilder
     # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
     #   supplied the hint will be wrapped in a +div+ instead of a +span+
     # @option hint text [String] the hint text
-    # @option hint args [Hash] additional arguments are applied as attributes to the hint
+    # @option hint kwargs [Hash] additional arguments are applied as attributes to the hint
     # @param legend [NilClass,Hash,Proc] options for configuring the legend. Legend will be omitted if +nil+.
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
     # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
+    # @option legend kwargs [Hash] additional arguments are applied as attributes on the +legend+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the legend
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
+    # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @param omit_day [Boolean] do not render a day input, only capture month and year
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
-    # @option form_group args [Hash] additional attributes added to the form group
+    # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input group
     # @param date_of_birth [Boolean] if +true+ {https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete#Values birth date auto completion attributes}
     #   will be added to the inputs
@@ -851,9 +878,11 @@ module GOVUKDesignSystemFormBuilder
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
     # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
+    # @option legend kwargs [Hash] additional arguments are applied as attributes on the +legend+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the label
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
+    # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
     #
     # @example A fieldset containing address fields
     #   = f.govuk_fieldset legend: { text: 'Address' }
@@ -880,17 +909,19 @@ module GOVUKDesignSystemFormBuilder
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @option label kwargs [Hash] additional arguments are applied as attributes on the +label+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the label
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
+    # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
     #   supplied the hint will be wrapped in a +div+ instead of a +span+
     # @option hint text [String] the hint text
-    # @option hint args [Hash] additional arguments are applied as attributes to the hint
-    # @option args [Hash] args additional arguments are applied as attributes to the +input+ element
+    # @option hint kwargs [Hash] additional arguments are applied as attributes to the hint
+    # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
-    # @option form_group args [Hash] additional attributes added to the form group
+    # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     #
     # @example A photo upload field with file type specifier and injected content
@@ -909,8 +940,8 @@ module GOVUKDesignSystemFormBuilder
     # @note Remember to set +multipart: true+ when creating a form with file
     #   uploads, {https://guides.rubyonrails.org/form_helpers.html#uploading-files see
     #   the Rails documentation} for more information
-    def govuk_file_field(attribute_name, label: {}, caption: {}, hint: {}, form_group: {}, **args, &block)
-      Elements::File.new(self, object_name, attribute_name, label: label, caption: caption, hint: hint, form_group: form_group, **args, &block).html
+    def govuk_file_field(attribute_name, label: {}, caption: {}, hint: {}, form_group: {}, **kwargs, &block)
+      Elements::File.new(self, object_name, attribute_name, label: label, caption: caption, hint: hint, form_group: form_group, **kwargs, &block).html
     end
   end
 end
