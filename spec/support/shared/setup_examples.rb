@@ -16,4 +16,10 @@ shared_context 'setup examples' do
 
   let(:projects) { [project_x, project_y, project_z] }
   let(:projects_with_descriptions) { projects.select { |p| p.description.present? } }
+
+  let(:department_it) { Department.new(code: :it, name: "Computers shenanigans") }
+  let(:department_finance) { Department.new(code: :finance, name: "Monies") }
+  let(:department_marketing) { Department.new(code: :marketing, name: "Flyer distribution") }
+  let(:department_sales) { Department.new(code: :sales, name: "Selling stuff") }
+  let(:departments) { [department_it, department_finance, department_marketing, department_sales] }
 end

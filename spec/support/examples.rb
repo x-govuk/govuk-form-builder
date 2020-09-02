@@ -14,7 +14,8 @@ class Being
     :projects,
     :project_responsibilities,
     :cv,
-    :photo
+    :photo,
+    :department
   )
 end
 
@@ -68,5 +69,14 @@ class Guest < Being
       cv: 'Basic vocabulary',
       born_on: Date.new(1974, 7, 1)
     )
+  end
+end
+
+class Department
+  attr_accessor :code, :name
+
+  def initialize(code:, name:)
+    self.code = code
+    self.name = name
   end
 end
