@@ -56,6 +56,16 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     it_behaves_like 'a field that supports setting the hint via localisation'
     it_behaves_like 'a field that supports setting the legend caption via localisation'
+
+    it_behaves_like 'a field that supports localised collection labels' do
+      let(:args) { [method, :department, departments, :code] }
+    end
+
+    it_behaves_like 'a field that supports localised collection hints' do
+      let(:hint_class) { 'govuk-radios__hint' }
+      let(:args) { [method, :department, departments, :code] }
+    end
+
     it_behaves_like 'a field that supports setting the legend via localisation'
     it_behaves_like 'a field that contains a customisable form group'
 

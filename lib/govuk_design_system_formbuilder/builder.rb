@@ -488,7 +488,7 @@ module GOVUKDesignSystemFormBuilder
     #    :name,
     #    legend: -> { tag.h3('Which category do you belong to?') }
     #
-    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method, hint_method = nil, hint: {}, legend: {}, caption: {}, inline: false, small: false, bold_labels: false, classes: nil, form_group: {}, &block)
+    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method = nil, hint_method = nil, hint: {}, legend: {}, caption: {}, inline: false, small: false, bold_labels: false, classes: nil, form_group: {}, &block)
       Elements::Radios::Collection.new(
         self,
         object_name,

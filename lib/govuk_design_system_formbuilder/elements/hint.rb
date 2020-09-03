@@ -8,6 +8,7 @@ module GOVUKDesignSystemFormBuilder
       def initialize(builder, object_name, attribute_name, value: nil, text: nil, content: nil, radio: false, checkbox: false, **kwargs)
         super(builder, object_name, attribute_name)
 
+        @value           = value
         @radio           = radio
         @checkbox        = checkbox
         @html_attributes = kwargs
@@ -15,8 +16,7 @@ module GOVUKDesignSystemFormBuilder
         if content
           @raw = capture { content.call }
         else
-          @text  = retrieve_text(text)
-          @value = value
+          @text = retrieve_text(text)
         end
       end
 
