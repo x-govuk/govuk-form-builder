@@ -677,7 +677,7 @@ module GOVUKDesignSystemFormBuilder
     #     label: { text: 'Do you agree with our terms and conditions?' },
     #     hint_text: 'You will not be able to proceed unless you do'
     #
-    def govuk_check_box(attribute_name, checked_value, unchecked_value = 0, hint_text: nil, label: {}, link_errors: false, multiple: true, &block)
+    def govuk_check_box(attribute_name, checked_value, unchecked_value = false, hint_text: nil, label: {}, link_errors: false, multiple: true, &block)
       Elements::CheckBoxes::FieldsetCheckBox.new(
         self,
         object_name,
