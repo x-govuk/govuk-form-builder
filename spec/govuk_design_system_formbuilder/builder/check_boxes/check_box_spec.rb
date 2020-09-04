@@ -54,6 +54,34 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
+    context 'generating a hidden field for the unchecked value' do
+      context 'when the unchecked_value is not provided' do
+        specify 'the hidden field should be present by default' do
+          expect(subject).to have_tag('input', with: { type: 'hidden', value: '0' })
+        end
+      end
+
+      context %(unchecked values) do
+        subject { builder.send(*args, '0') }
+
+        [0, -1, 'nope'].each do |uv|
+          context uv.to_s do
+            subject { builder.send(*args, uv) }
+            specify %(the hidden field value should be '#{uv}') do
+              expect(subject).to have_tag('input', with: { type: 'hidden', value: uv })
+            end
+          end
+        end
+      end
+
+      context 'when the unchecked_value is false' do
+        subject { builder.send(*args, false) }
+        specify %(the hidden field should not be present) do
+          expect(subject).not_to have_tag('input', with: { type: 'hidden' })
+        end
+      end
+    end
+
     context 'multiple' do
       context 'default to multiple' do
         specify 'check box name should allow multiple values' do
