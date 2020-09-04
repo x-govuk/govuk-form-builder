@@ -658,6 +658,7 @@ module GOVUKDesignSystemFormBuilder
     #
     # @param attribute_name [Symbol] The name of the attribute
     # @param value [Boolean,String,Symbol,Integer] The value of the checkbox when it is checked
+    # @param unchecked_value [Boolean,String,Symbol,Integer] The value of the checkbox when it is unchecked
     # @param hint_text [String] the contents of the hint
     # @param link_errors [Boolean] controls whether this radio button should be linked to from {#govuk_error_summary}
     # @option label text [String] the label text
@@ -676,12 +677,13 @@ module GOVUKDesignSystemFormBuilder
     #     label: { text: 'Do you agree with our terms and conditions?' },
     #     hint_text: 'You will not be able to proceed unless you do'
     #
-    def govuk_check_box(attribute_name, value, hint_text: nil, label: {}, link_errors: false, multiple: true, &block)
+    def govuk_check_box(attribute_name, checked_value, unchecked_value = 0, hint_text: nil, label: {}, link_errors: false, multiple: true, &block)
       Elements::CheckBoxes::FieldsetCheckBox.new(
         self,
         object_name,
         attribute_name,
-        value,
+        checked_value,
+        unchecked_value,
         hint_text: hint_text,
         label: label,
         link_errors: link_errors,
