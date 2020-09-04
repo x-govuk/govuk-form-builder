@@ -56,8 +56,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     context 'generating a hidden field for the unchecked value' do
       context 'when the unchecked_value is not provided' do
-        specify 'the hidden field should be present by default' do
-          expect(subject).to have_tag('input', with: { type: 'hidden', value: '0' })
+        specify 'the hidden field should not be present by default' do
+          expect(subject).not_to have_tag('input', with: { type: 'hidden' })
         end
       end
 
@@ -76,6 +76,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       context 'when the unchecked_value is false' do
         subject { builder.send(*args, false) }
+
         specify %(the hidden field should not be present) do
           expect(subject).not_to have_tag('input', with: { type: 'hidden' })
         end
