@@ -93,6 +93,14 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
 
+      specify 'there should be a hidden field to represent deselection' do
+        expected_name = %(#{object_name}[#{attribute}][])
+
+        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
+          expect(fg).to have_tag('input', with: { type: 'hidden', name: expected_name })
+        end
+      end
+
       context 'check box size' do
         context 'when small is specified in the options' do
           subject do
