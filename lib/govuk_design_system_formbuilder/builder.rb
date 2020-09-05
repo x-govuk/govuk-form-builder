@@ -744,6 +744,7 @@ module GOVUKDesignSystemFormBuilder
     #
     # @param attribute_name [Symbol] The name of the attribute
     # @param value [Boolean,String,Symbol,Integer] The value of the checkbox when it is checked
+    # @param unchecked_value [Boolean,String,Symbol,Integer] The value of the checkbox when it is unchecked
     # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
     #   supplied the hint will be wrapped in a +div+ instead of a +span+
     # @option hint text [String] the hint text
@@ -766,12 +767,13 @@ module GOVUKDesignSystemFormBuilder
     #     label: { text: 'Do you agree with our terms and conditions?' },
     #     hint: { text: 'You will not be able to proceed unless you do' }
     #
-    def govuk_check_box(attribute_name, value, hint: {}, label: {}, link_errors: false, multiple: true, &block)
+    def govuk_check_box(attribute_name, value, unchecked_value = false, hint: {}, label: {}, link_errors: false, multiple: true, &block)
       Elements::CheckBoxes::FieldsetCheckBox.new(
         self,
         object_name,
         attribute_name,
         value,
+        unchecked_value,
         hint: hint,
         label: label,
         link_errors: link_errors,
