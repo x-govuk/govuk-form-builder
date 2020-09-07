@@ -19,12 +19,20 @@ module GOVUKDesignSystemFormBuilder
       def html
         Containers::FormGroup.new(@builder, @object_name, @attribute_name, **@form_group).html do
           Containers::Fieldset.new(@builder, @object_name, @attribute_name, **fieldset_options).html do
-            safe_join([hint_element, error_element, checkboxes])
+            safe_join([hint_element, error_element, hidden_field, checkboxes])
           end
         end
       end
 
     private
+
+      def hidden_field
+        @builder.hidden_field(@attribute_name, value: "", name: hidden_field_name)
+      end
+
+      def hidden_field_name
+        format("%<object_name>s[%<attribute_name>s][]", object_name: @object_name, attribute_name: @attribute_name)
+      end
 
       def fieldset_options
         {
