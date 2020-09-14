@@ -6,6 +6,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     let(:attribute) { :projects }
     let(:method) { :govuk_check_boxes_fieldset }
     let(:field_type) { 'input' }
+    let(:kwargs) { {} }
     let(:aria_described_by_target) { 'fieldset' }
     let(:args) { [method, attribute] }
 
@@ -19,7 +20,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
-    subject { builder.send(*args, &example_block) }
+    subject { builder.send(*args, **kwargs, &example_block) }
 
     include_examples 'HTML formatting checks'
 
@@ -93,11 +94,23 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
 
-      specify 'there should be a hidden field to represent deselection' do
-        expected_name = %(#{object_name}[#{attribute}][])
+      context 'multiple options' do
+        specify 'there should be a hidden field to represent deselection' do
+          expected_name = %(#{object_name}[#{attribute}][])
 
-        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-          expect(fg).to have_tag('input', with: { type: 'hidden', name: expected_name })
+          expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
+            expect(fg).to have_tag('input', with: { type: 'hidden', name: expected_name })
+          end
+        end
+      end
+
+      context 'single option' do
+        let(:kwargs) { { multiple: false } }
+
+        specify 'no hidden field should be present' do
+          expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
+            expect(fg).not_to have_tag('input', with: { type: 'hidden' })
+          end
         end
       end
 
