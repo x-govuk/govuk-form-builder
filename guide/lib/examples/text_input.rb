@@ -39,5 +39,15 @@ module Examples
         = f.govuk_text_field :two,    width: 2
       SNIPPET
     end
+
+    def text_field_with_prefix_and_suffix
+      <<~SNIPPET
+        = f.govuk_text_field :price_per_kg,
+          width: 'one-quarter',
+          label: { text: 'Price per kilogram' },
+          prefix_text: '£',
+          suffix_text: 'per kg'
+      SNIPPET
+    end
   end
 end
