@@ -4,7 +4,7 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Error
       include Traits::Hint
 
-      def initialize(builder, object_name, attribute_name, hint:, legend:, caption:, small:, classes:, form_group:, &block)
+      def initialize(builder, object_name, attribute_name, hint:, legend:, caption:, small:, classes:, form_group:, multiple:, &block)
         super(builder, object_name, attribute_name, &block)
 
         @legend        = legend
@@ -13,6 +13,7 @@ module GOVUKDesignSystemFormBuilder
         @small         = small
         @classes       = classes
         @form_group    = form_group
+        @multiple      = multiple
         @block_content = capture { block.call }
       end
 
@@ -27,6 +28,8 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def hidden_field
+        return unless @multiple
+
         @builder.hidden_field(@attribute_name, value: "", name: hidden_field_name)
       end
 

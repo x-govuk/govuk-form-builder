@@ -722,6 +722,8 @@ module GOVUKDesignSystemFormBuilder
     # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @param classes [Array,String] Classes to add to the checkbox container.
     # @param form_group [Hash] configures the form group
+    # @param multiple [Boolean] when true adds a +[]+ suffix the +name+ of the automatically-generated hidden field
+    #   (ie. <code>project[invoice_attributes][]</code>). When false, no +[]+ suffix is added (ie. <code>project[accepted]</code>)
     # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param block [Block] a block of HTML that will be used to populate the fieldset
@@ -737,7 +739,7 @@ module GOVUKDesignSystemFormBuilder
     #    = f.govuk_check_box :desired_filling, :lemonade, label: { text: 'Lemonade' }, link_errors: true
     #    = f.govuk_check_box :desired_filling, :fizzy_orange, label: { text: 'Fizzy orange' }
     #
-    def govuk_check_boxes_fieldset(attribute_name, legend: {}, caption: {}, hint: {}, small: false, classes: nil, form_group: {}, &block)
+    def govuk_check_boxes_fieldset(attribute_name, legend: {}, caption: {}, hint: {}, small: false, classes: nil, form_group: {}, multiple: true, &block)
       Containers::CheckBoxesFieldset.new(
         self,
         object_name,
@@ -748,6 +750,7 @@ module GOVUKDesignSystemFormBuilder
         small: small,
         classes: classes,
         form_group: form_group,
+        multiple: multiple,
         &block
       ).html
     end
