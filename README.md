@@ -9,39 +9,30 @@
 [![GitHub license](https://img.shields.io/github/license/DFE-Digital/govuk_design_system_formbuilder)](https://github.com/DFE-Digital/govuk_design_system_formbuilder/blob/master/LICENSE)
 [![GOV.UK Design System Version](https://img.shields.io/badge/GOV.UK%20Design%20System-3.9.0-brightgreen)](https://design-system.service.gov.uk)
 
-This gem provides a easy-to-use form builder that generates forms that are
-fully-compliant with version 3.9.0 of the [GOV.UK Design System](https://design-system.service.gov.uk/),
-minimising the amount of markup you need to write.
+This library provides an easy-to-use form builder for the [GOV.UK Design System](https://design-system.service.gov.uk/).
 
-In addition to the basic markup, the more-advanced functionality of the Design
-System is exposed via the API. Adding [JavaScript-enhanced word count
-checking](https://govuk-form-builder.netlify.app/form-elements/text-area/)
-to text areas or [setting the size and weight of
-labels](https://govuk-form-builder.netlify.app/introduction/labels-hints-and-legends/)
-on text fields requires only a single argument.
+It is intended to make creating forms **quick**, **easy** and **familiar** for Ruby on Rails developers.
 
 ## Documentation 📚
 
 The gem comes with [a full guide](https://govuk-form-builder.netlify.app/) that
-covers most aspects of day-to-day use, along with code and output examples. The guide
-is generated from the builder itself so it will always be up to date.
-
-If you're still not sure what a form builder is or how it works, don't worry!
-[This screencast](https://www.youtube.com/watch?v=PhoFZ0qXAlA) should give you
-an idea of what's on offer and the official guide goes into a bit more depth on
-how everything works.
+covers most aspects of day-to-day use, along with code and output examples. The
+examples in the guide are generated from the builder itself so it will always
+be up to date.
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/d4c50b8d-6ca3-4797-9ab3-6e0731c72b44/deploy-status)](https://app.netlify.com/sites/govuk-form-builder/deploys)
 
 ## What's included 🧳
 
 * 100% compatibility with the GOV.UK Design System
-* Full control of labels, hints, fieldsets and legends
+* Full control of labels, legends, hints, captions and fieldsets
 * No overwriting of Rails' default form helpers
 * Automatic ARIA associations between hints, errors and inputs
 * Most helpers take blocks for arbitrary content
 * Additional params for programmatically adding hints to check box and radio
   button collections
+* Full I18n support
+* Automatic handling of ActiveRecord validation error messages
 * No external dependencies
 * An exhaustive test suite
 * [Extensive technical documentation](https://www.rubydoc.info/gems/govuk_design_system_formbuilder/GOVUKDesignSystemFormBuilder/Builder)
@@ -68,8 +59,9 @@ pre-configured template:
 
 ## Setup 🔧
 
-To use the form builder in an ad hoc basis you can specify it
-as an argument to `form_for` or `form_with`:
+To use the form builder in an ad hoc basis you can specify it as an argument to
+`form_for` or `form_with`. These examples are written in [Slim](https://slim-lang.com) but
+other templating languages like ERB and [Haml](https://haml.info/) work just as well.
 
 ```slim
 = form_for @some_object, builder: GOVUKDesignSystemFormBuilder::FormBuilder do |f|
@@ -99,16 +91,16 @@ Now we can get started!
     :name,
     :description,
     label: { text: "Which department do you work for?" },
-    hint_text: "If you don't know ask your manager" }
+    hint: { text: "If you don't know ask your manager" }
 
   = f.govuk_submit 'Away we go!'
 ```
 
 ## Developing and running the tests 👨🏻‍🏭
 
-The form builder is covered by RSpec, to run all the tests first ensure that
-all of the development and testing prerequisite gems are installed. At the root
-of a freshly-cloned repo run:
+The form builder is tested with RSpec. To run all the tests first ensure that
+the development and testing prerequisite gems are installed. At the root of a
+freshly-cloned repo run:
 
 ```sh
 bundle
@@ -117,7 +109,7 @@ bundle
 Now, if everything was successful, run RSpec:
 
 ```sh
-bundle exec rspec -fd
+bundle exec rspec
 ```
 
 ## Contributing 📦
