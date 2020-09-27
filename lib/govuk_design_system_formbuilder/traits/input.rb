@@ -1,38 +1,58 @@
 module GOVUKDesignSystemFormBuilder
   module Traits
     module Input
-      def initialize(builder, object_name, attribute_name, hint_text:, label:, caption:, width:, form_group_classes:, **kwargs, &block)
+      def initialize(builder, object_name, attribute_name, hint:, label:, caption:, prefix_text:, suffix_text:, width:, form_group:, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
 
-        @width              = width
-        @label              = label
-        @caption            = caption
-        @hint_text          = hint_text
-        @html_attributes    = kwargs
-        @form_group_classes = form_group_classes
+        @width           = width
+        @label           = label
+        @caption         = caption
+        @hint            = hint
+        @prefix_text     = prefix_text
+        @suffix_text     = suffix_text
+        @html_attributes = kwargs
+        @form_group      = form_group
       end
 
       def html
-        Containers::FormGroup.new(@builder, @object_name, @attribute_name, classes: @form_group_classes).html do
-          safe_join([label_element, supplemental_content, hint_element, error_element, input])
+        Containers::FormGroup.new(@builder, @object_name, @attribute_name, **@form_group).html do
+          safe_join([label_element, supplemental_content, hint_element, error_element, content])
         end
       end
 
     private
 
-      def input
-        @builder.send(builder_method, @attribute_name, **input_options, **@html_attributes)
+      def content
+        if affixed?
+          affixed_input
+        else
+          input
+        end
       end
 
-      def input_options
+      def affixed_input
+        content_tag('div', class: %(#{brand}-input__wrapper)) do
+          safe_join([prefix, input, suffix])
+        end
+      end
+
+      def input
+        @builder.send(builder_method, @attribute_name, **options, **@html_attributes)
+      end
+
+      def affixed?
+        [@prefix_text, @suffix_text].any?
+      end
+
+      def options
         {
           id: field_id(link_errors: true),
-          class: input_classes,
+          class: classes,
           aria: { describedby: described_by(hint_id, error_id, supplemental_id) }
         }
       end
 
-      def input_classes
+      def classes
         [%(#{brand}-input)].push(width_classes, error_classes).compact
       end
 
@@ -63,6 +83,22 @@ module GOVUKDesignSystemFormBuilder
 
         else fail(ArgumentError, "invalid width '#{@width}'")
         end
+      end
+
+      def prefix
+        return nil if @prefix_text.blank?
+
+        tag.span(@prefix_text, class: %(#{brand}-input__prefix), **affix_options)
+      end
+
+      def suffix
+        return nil if @suffix_text.blank?
+
+        tag.span(@suffix_text, class: %(#{brand}-input__suffix), **affix_options)
+      end
+
+      def affix_options
+        { aria: { hidden: true } }
       end
     end
   end

@@ -147,6 +147,11 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         let(:i18n_proc) { ->(item) { I18n.t("colours.#{item.name.downcase}") } }
         let(:args) { [method, attribute, colours, :id, :name].push(i18n_proc) }
       end
+
+      it_behaves_like 'a field that supports localised collection hints' do
+        let(:hint_class) { 'govuk-checkboxes__hint' }
+        let(:args) { [method, :department, departments, :code, :name] }
+      end
     end
   end
 end

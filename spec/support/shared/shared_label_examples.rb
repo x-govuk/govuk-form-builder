@@ -71,6 +71,15 @@ shared_examples 'a field that supports labels' do
     end
   end
 
+  context 'when additional HTML attributes are provided' do
+    let(:html_attributes) { { focusable: 'false', dir: 'rtl' } }
+    subject { builder.send(*args, label: { text: label_text }.merge(html_attributes)) }
+
+    specify 'the label should have the custom HTML attributes' do
+      expect(subject).to have_tag('.govuk-label', with: html_attributes, text: label_text)
+    end
+  end
+
   context 'when no label is provided' do
     subject { builder.send(*args) }
 

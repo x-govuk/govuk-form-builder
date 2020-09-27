@@ -8,13 +8,13 @@ module GOVUKDesignSystemFormBuilder
         include Traits::Hint
         include Traits::Conditional
 
-        def initialize(builder, object_name, attribute_name, value, unchecked_value, label:, hint_text:, link_errors:, multiple:, &block)
+        def initialize(builder, object_name, attribute_name, value, unchecked_value, label:, hint:, link_errors:, multiple:, &block)
           super(builder, object_name, attribute_name)
 
           @value           = value
           @unchecked_value = unchecked_value
           @label           = label
-          @hint_text       = hint_text
+          @hint            = hint
           @multiple        = multiple
           @link_errors     = link_errors
 
@@ -63,7 +63,11 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def hint_element
-          @hint_element ||= Elements::Hint.new(@builder, @object_name, @attribute_name, @hint_text, @value, checkbox: true)
+          @hint_element ||= Elements::Hint.new(@builder, @object_name, @attribute_name, **hint_options, **hint_content)
+        end
+
+        def hint_options
+          { checkbox: true }
         end
 
         def conditional_classes

@@ -9,6 +9,13 @@ helpers:
       projects_options:
         11: Eleven
       photo: Upload a recent passport photo
+      department: Department name
+      department_options:
+        it: Information technology
+        marketing: Marketing
+        finance: Finance
+        sales: Sales
+
   caption:
     person:
       name: Personal information
@@ -31,3 +38,8 @@ helpers:
       photo: Make sure your face is clear and you are looking at the camera
       born_on: Check your birth certificate or passport
       projects: If you cannot remember check with your teammates or manager
+      department_options:
+        it: Computers and stuff
+        marketing: Flyers, posters, etc
+        finance: What's worth doing is worth doing for money
+        # sales is intentionally missing

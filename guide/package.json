@@ -12,6 +12,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "govuk-frontend": "^3.8.1"
+    "govuk-frontend": "^3.9.1"
   }
 }

@@ -4,7 +4,7 @@ module Examples
       <<~SNIPPET
         = f.govuk_text_field :first_name,
           label: { text: 'First name' },
-          hint_text: 'You can find it on your birth certificate'
+          hint: { text: 'You can find it on your birth certificate' }
       SNIPPET
     end
 
@@ -37,6 +37,16 @@ module Examples
         = f.govuk_text_field :four,   width: 4
         = f.govuk_text_field :three,  width: 3
         = f.govuk_text_field :two,    width: 2
+      SNIPPET
+    end
+
+    def text_field_with_prefix_and_suffix
+      <<~SNIPPET
+        = f.govuk_text_field :price_per_kg,
+          width: 'one-quarter',
+          label: { text: 'Price per kilogram' },
+          prefix_text: '£',
+          suffix_text: 'per kg'
       SNIPPET
     end
   end

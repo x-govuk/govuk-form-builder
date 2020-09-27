@@ -122,7 +122,7 @@ shared_examples 'a field that supports setting the hint via localisation' do
     let(:expected_hint) { "It's quite a straightforward question!" }
 
     subject do
-      builder.send(*args, hint_text: expected_hint) { arbitrary_html_content }
+      builder.send(*args, hint: { text: expected_hint }) { arbitrary_html_content }
     end
 
     specify 'should use the supplied hint text' do
@@ -210,6 +210,48 @@ shared_examples 'a field that allows the hint to be localised via a proc' do
           )
         end
       end
+    end
+  end
+end
+
+shared_examples 'a field that supports localised collection labels' do
+  let(:localisations) { LOCALISATIONS }
+  let(:attribute) { :department }
+  subject { builder.send(*args) }
+
+  specify 'the labels should be set by localisation' do
+    with_localisations(localisations) do
+      departments.each do |department|
+        expected_label = I18n.translate(department.code, scope: 'helpers.label.person.department_options')
+        expect(subject).to have_tag('label', text: expected_label)
+      end
+    end
+  end
+end
+
+shared_examples 'a field that supports localised collection hints' do
+  let(:localisations) { LOCALISATIONS }
+  let(:attribute) { :department }
+  subject { builder.send(*args) }
+
+  specify 'the hints should be set by localisation' do
+    with_localisations(localisations) do
+      departments.each do |department|
+        expected_hint = I18n.translate(department.code, scope: 'helpers.hint.person.department_options', default: nil)
+
+        if expected_hint.present?
+          expect(subject).to have_tag('span', with: { class: %w(govuk-hint).append(hint_class) }, text: expected_hint)
+        end
+      end
+
+      # testing that the correct hint (sales) is missing is a bit 'involved',
+      # so now we've ensured that the ones we expect to be there are present
+      # let's make sure they're the only ones that are by counting them
+      departments_with_localised_hints = departments.count do |department|
+        I18n.translate(department.code, scope: 'helpers.hint.person.department_options', default: nil)
+      end
+
+      expect(subject).to have_tag('span', with: { class: %w(govuk-hint).append(hint_class) }, count: departments_with_localised_hints)
     end
   end
 end

@@ -17,10 +17,10 @@ shared_examples 'a field that supports a fieldset with legend' do
     context 'when no text is supplied' do
       subject { builder.send(*args, legend: { text: nil }) }
 
-      specify 'output should not contain a header' do
+      specify 'output should contain a header set to the attribute name' do
         expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
           expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
-            expect(fs).not_to have_tag('h1')
+            expect(fs).to have_tag('h1', class: 'govuk-fieldset__legend', text: attribute.capitalize)
           end
         end
       end
@@ -111,6 +111,8 @@ shared_examples 'a field that supports a fieldset with legend' do
   end
 
   context 'when no legend is supplied' do
+    subject { builder.send(*args, legend: nil) }
+
     specify 'legend tag should not be present' do
       expect(subject).not_to have_tag('legend')
     end

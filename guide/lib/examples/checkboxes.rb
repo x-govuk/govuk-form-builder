@@ -41,7 +41,7 @@ module Examples
             :english,
             label: { text: "English" },
             link_errors: true,
-            hint_text: "Only select English if you have a GCSE at grade C or above"
+            hint: { text: "Only select English if you have a GCSE at grade C or above" }
 
           = f.govuk_check_box :languages,
             :welsh,
@@ -64,6 +64,7 @@ module Examples
       <<~SNIPPET
 
         = f.govuk_check_boxes_fieldset :terms_and_conditions_agreed,
+          multiple: false,
           legend: { text: 'Terms and conditions', size: 'l' } do
 
           = f.hidden_field :terms_and_conditions_agreed, value: false
@@ -81,7 +82,7 @@ module Examples
             true,
             multiple: false,
             link_errors: true,
-            label: { text: 'I agree to the terms and conditions' }
+            label: { text: "I agree to the terms and conditions" }
       SNIPPET
     end
   end

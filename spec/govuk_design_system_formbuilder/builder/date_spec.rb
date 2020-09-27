@@ -48,7 +48,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         let(:paragraph) { 'A descriptive paragraph all about dates' }
 
         subject do
-          builder.send(*args, legend: { text: legend_text }, hint_text: hint_text) do
+          builder.send(*args, legend: { text: legend_text }, hint: { text: hint_text }) do
             builder.tag.p(paragraph, class: 'block-content')
           end
         end

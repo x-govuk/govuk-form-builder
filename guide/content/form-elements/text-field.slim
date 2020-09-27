@@ -129,6 +129,16 @@ section
         more details on the reasoning behind this decision in #{link_to("the accompanying blog post", input_types_for_numbers_link).html_safe}.
 
   == render('/partials/example-fig.*',
+    caption: "Inputs with prefixes and suffixes",
+    code: text_field_with_prefix_and_suffix,
+    hide_html_output: false) do
+
+    p.govuk-body
+      | Prefixes and suffixes are useful when you use symbols and abbreviations
+        that are commonly known and understood. Symbols and abbreviations should
+        be explained in the label or hint.
+
+  == render('/partials/example-fig.*',
     caption: "Generating text inputs with custom widths",
     code: text_field_with_custom_width,
     hide_html_output: true) do
