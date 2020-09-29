@@ -67,8 +67,6 @@ module Examples
           multiple: false,
           legend: { text: 'Terms and conditions', size: 'l' } do
 
-          = f.hidden_field :terms_and_conditions_agreed, value: false
-
           p.govuk-body
             | Our terms and conditions contain important information about:
 
@@ -79,7 +77,8 @@ module Examples
             li checking you're safe to work with children
 
           = f.govuk_check_box :terms_and_conditions_agreed,
-            true,
+            1,
+            0,
             multiple: false,
             link_errors: true,
             label: { text: "I agree to the terms and conditions" }
