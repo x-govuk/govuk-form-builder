@@ -11,7 +11,7 @@ module GOVUKDesignSystemFormBuilder
 
         case legend
         when NilClass
-          @active = false
+          # do nothing
         when Proc
           @raw = capture { legend.call }
         when Hash
@@ -23,7 +23,7 @@ module GOVUKDesignSystemFormBuilder
             @caption = caption
           end
         else
-          fail(ArgumentError, %(legend must be a Proc or Hash))
+          fail(ArgumentError, %(legend must be a NilClass, Proc or Hash))
         end
       end
 

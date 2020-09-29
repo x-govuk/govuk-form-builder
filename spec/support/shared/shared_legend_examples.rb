@@ -11,7 +11,7 @@ shared_examples 'a field that supports a fieldset with legend' do
     context 'when something other than a Proc or Hash is supplied' do
       subject { builder.send(*args, legend: "This should fail") }
 
-      specify { expect { subject }.to raise_error(ArgumentError, 'legend must be a Proc or Hash') }
+      specify { expect { subject }.to raise_error(ArgumentError, 'legend must be a NilClass, Proc or Hash') }
     end
 
     context 'when no text is supplied' do
