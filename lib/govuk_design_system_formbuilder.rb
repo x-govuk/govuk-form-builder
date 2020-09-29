@@ -21,7 +21,7 @@ module GOVUKDesignSystemFormBuilder
   #   Can be either +xl+, +l+, +m+ or +s+.
   #
   # * +:default_legend_tag+ controls the default tag that legends are
-  #   wrapped in. Defaults to +h1+.
+  #   wrapped in. Defaults to +nil+.
   #
   # * +:default_submit_button_text+ sets the value assigned to +govuk_submit+,
   #   defaults to 'Continue'.
@@ -47,7 +47,7 @@ module GOVUKDesignSystemFormBuilder
     brand: 'govuk',
 
     default_legend_size: 'm',
-    default_legend_tag: 'h1',
+    default_legend_tag: nil,
     default_caption_size: 'm',
     default_submit_button_text: 'Continue',
     default_radio_divider_text: 'or',
