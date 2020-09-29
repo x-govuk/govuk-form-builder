@@ -19,9 +19,7 @@ shared_examples 'a field that supports a fieldset with legend' do
 
       specify 'output should contain a header set to the attribute name' do
         expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-          expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
-            expect(fs).to have_tag('h1', class: 'govuk-fieldset__legend', text: attribute.capitalize)
-          end
+          expect(fg).to have_tag('fieldset', text: attribute.capitalize, with: { class: 'govuk-fieldset' })
         end
       end
     end
@@ -49,7 +47,7 @@ shared_examples 'a field that supports a fieldset with legend' do
             specify %(the legend size should be #{size}) do
               expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
                 expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
-                  expect(fs).to have_tag('h1', text: legend_text, class: "govuk-fieldset__legend--#{size}")
+                  expect(fs).to have_tag('legend', text: legend_text, class: "govuk-fieldset__legend--#{size}")
                 end
               end
             end
@@ -73,7 +71,7 @@ shared_examples 'a field that supports a fieldset with legend' do
         specify %(the legend size should be 'm') do
           expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
             with_tag('fieldset', with: { class: 'govuk-fieldset' }) do
-              with_tag('h1', text: legend_text, class: "govuk-fieldset__legend--#{expected_size}")
+              with_tag('legend', text: legend_text, class: "govuk-fieldset__legend--#{expected_size}")
             end
           end
         end

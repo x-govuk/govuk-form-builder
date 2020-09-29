@@ -144,9 +144,7 @@ shared_examples 'a field that supports setting the legend via localisation' do
     specify 'should set the legend from the locales' do
       with_localisations(localisations) do
         expect(subject).to have_tag('fieldset') do
-          with_tag('legend', with: { class: 'govuk-fieldset__legend' }) do
-            with_tag('h1', text: Regexp.new(expected_legend), with: { class: 'govuk-fieldset__heading' })
-          end
+          with_tag('legend', text: Regexp.new(expected_legend), with: { class: 'govuk-fieldset__legend' })
         end
       end
     end
@@ -159,9 +157,7 @@ shared_examples 'a field that supports setting the legend via localisation' do
     specify 'should set the legend from the locales' do
       with_localisations(localisations) do
         expect(subject).to have_tag('fieldset') do
-          with_tag('legend', with: { class: 'govuk-fieldset__legend' }) do
-            with_tag('h1', text: Regexp.new(expected_legend), with: { class: 'govuk-fieldset__heading' })
-          end
+          with_tag('legend', text: Regexp.new(expected_legend), with: { class: 'govuk-fieldset__legend' })
         end
       end
     end
