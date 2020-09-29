@@ -38,12 +38,18 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def content
-        return nil unless active?
+        return unless active?
 
-        tag.legend(class: classes, **@html_attributes) do
-          content_tag(@tag, class: heading_classes) do
-            safe_join([caption_element, @text])
-          end
+        tag.legend(legend_text, class: classes, **@html_attributes)
+      end
+
+      def legend_text
+        caption_and_text = safe_join([caption_element, @text])
+
+        if @tag.present?
+          content_tag(@tag, class: heading_classes) { caption_and_text }
+        else
+          caption_and_text
         end
       end
 
