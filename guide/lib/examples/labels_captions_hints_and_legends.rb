@@ -53,12 +53,13 @@ module Examples
           :id,
           :name,
           legend: -> do
-            h3.govuk-heading-l
-              ' Which
+            legend.govuk-fieldset__legend.govuk-fieldset__legend--l
+              h3.govuk-fieldset__heading
+                ' Which
 
-              span.ugly-gradient colour
+                span.ugly-gradient colour
 
-              ' do you hate most?
+                ' do you hate most?
       SNIPPET
     end
   end
