@@ -459,7 +459,7 @@ module GOVUKDesignSystemFormBuilder
     # @param classes [Array,String] Classes to add to the radio button container.
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
-    # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
+    # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+. If +tag+ is unset no caption will be rendered.
     # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
     # @option legend kwargs [Hash] additional arguments are applied as attributes on the +legend+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the legend
@@ -538,7 +538,7 @@ module GOVUKDesignSystemFormBuilder
     # @param small [Boolean] controls whether small radio buttons are used instead of regular-sized ones
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
-    # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
+    # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+. If +tag+ is unset no caption will be rendered.
     # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
     # @option legend kwargs [Hash] additional arguments are applied as attributes on the +legend+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the legend
@@ -635,7 +635,7 @@ module GOVUKDesignSystemFormBuilder
     # @param legend [NilClass,Hash,Proc] options for configuring the legend. Legend will be omitted if +nil+.
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
-    # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
+    # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+. If +tag+ is unset no caption will be rendered.
     # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
     # @param caption [Hash] configures or sets the caption content which is inserted above the legend
     # @option caption text [String] the caption text
@@ -713,7 +713,7 @@ module GOVUKDesignSystemFormBuilder
     # @param legend [NilClass,Hash,Proc] options for configuring the legend. Legend will be omitted if +nil+.
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
-    # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
+    # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+. If +tag+ is unset no caption will be rendered.
     # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
     # @option legend kwargs [Hash] additional arguments are applied as attributes on the +legend+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the legend
@@ -840,7 +840,7 @@ module GOVUKDesignSystemFormBuilder
     # @param legend [NilClass,Hash,Proc] options for configuring the legend. Legend will be omitted if +nil+.
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
-    # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
+    # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+. If +tag+ is unset no caption will be rendered.
     # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
     # @option legend kwargs [Hash] additional arguments are applied as attributes on the +legend+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the legend
@@ -893,7 +893,7 @@ module GOVUKDesignSystemFormBuilder
     # @param described_by [Array<String>] the ids of the elements that describe this fieldset, usually hints and errors
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
-    # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+
+    # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+. If +tag+ is unset no caption will be rendered.
     # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
     # @option legend kwargs [Hash] additional arguments are applied as attributes on the +legend+ element
     # @param caption [Hash] configures or sets the caption content which is inserted above the label
