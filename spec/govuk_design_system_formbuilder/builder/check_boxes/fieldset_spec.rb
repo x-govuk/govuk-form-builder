@@ -65,7 +65,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         let(:legend_text) { 'Favourite colour?' }
         let(:legend) { { text: legend_text } }
 
-        specify 'output should contain a correclty-positioned caption with the right content' do
+        specify 'output should contain a correctly-positioned caption with the right content' do
           expect(subject).to have_tag('fieldset', with: { class: %w(govuk-fieldset) }) do
             with_tag('span', text: caption_text, with: { class: caption_class })
           end
