@@ -15,8 +15,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       subject { builder.send(*args, legend: { text: legend_text }) }
 
       describe 'legend tag' do
-        specify 'the default tag should be h1' do
-          expect(GOVUKDesignSystemFormBuilder.config.default_legend_tag).to eql('h1')
+        specify 'the default tag should be nil' do
+          expect(GOVUKDesignSystemFormBuilder.config.default_legend_tag).to be_nil
         end
 
         context 'overriding with h6' do
