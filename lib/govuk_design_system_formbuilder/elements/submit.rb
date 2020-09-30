@@ -3,11 +3,11 @@ module GOVUKDesignSystemFormBuilder
     class Submit < Base
       using PrefixableArray
 
-      def initialize(builder, text, warning:, secondary:, classes:, prevent_double_click:, validate:, disabled:, &block)
+      def initialize(builder, content, warning:, secondary:, classes:, prevent_double_click:, validate:, disabled:, &block)
         fail ArgumentError, 'buttons can be warning or secondary' if warning && secondary
 
         @builder              = builder
-        @text                 = text
+        @content              = content
         @prevent_double_click = prevent_double_click
         @warning              = warning
         @secondary            = secondary
@@ -18,13 +18,21 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        safe_join([submit, @block_content])
+        safe_join([element, @block_content])
       end
 
     private
 
-      def submit
-        @builder.submit(@text, class: classes, **options)
+      def element
+        @content.is_a?(Proc) ? button : input
+      end
+
+      def input
+        @builder.submit(@content, class: classes, **options)
+      end
+
+      def button
+        tag.button(class: classes, **options) { @content.call }
       end
 
       def classes
