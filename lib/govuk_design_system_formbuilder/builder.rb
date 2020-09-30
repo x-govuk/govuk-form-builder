@@ -799,7 +799,8 @@ module GOVUKDesignSystemFormBuilder
 
     # Generates a submit button, green by default
     #
-    # @param text [String] the button text
+    # @param content [String,Proc] the submit input or button text. When a Proc is provided the contents will be rendered inside a +<button>+ tag instead
+    #   of an +<input type='submit'>+
     # @param warning [Boolean] makes the button red ({https://design-system.service.gov.uk/components/button/#warning-buttons warning}) when true
     # @param secondary [Boolean] makes the button grey ({https://design-system.service.gov.uk/components/button/#secondary-buttons secondary}) when true
     # @param classes [Array,String] Classes to add to the submit button
@@ -823,8 +824,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_submit "Proceed", prevent_double_click: true do
     #     = link_to 'Cancel', some_other_path, class: 'govuk-button__secondary'
     #
-    def govuk_submit(text = config.default_submit_button_text, warning: false, secondary: false, classes: nil, prevent_double_click: true, validate: false, disabled: false, &block)
-      Elements::Submit.new(self, text, warning: warning, secondary: secondary, classes: classes, prevent_double_click: prevent_double_click, validate: validate, disabled: disabled, &block).html
+    def govuk_submit(content = config.default_submit_button_text, warning: false, secondary: false, classes: nil, prevent_double_click: true, validate: false, disabled: false, &block)
+      Elements::Submit.new(self, content, warning: warning, secondary: secondary, classes: classes, prevent_double_click: prevent_double_click, validate: validate, disabled: disabled, &block).html
     end
 
     # Generates three inputs for the +day+, +month+ and +year+ components of a date

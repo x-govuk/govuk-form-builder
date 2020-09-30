@@ -91,6 +91,21 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
+    describe 'when content is a proc containing HTML' do
+      context 'when the button param is true' do
+        let(:button_text) { 'Create the thing' }
+        let(:button_content) { -> { builder.tag.strong(button_text) } }
+
+        subject { builder.send(*args.push(button_content)) }
+
+        specify 'should generate a button tag that contains the supplied HTML' do
+          expect(subject).to have_tag('button', with: { class: 'govuk-button' }) do
+            with_tag('strong', button_text)
+          end
+        end
+      end
+    end
+
     describe 'extra buttons passed in via a block' do
       let(:target) { '#' }
       let(:classes) { %w(govuk-button govuk-button--secondary) }
@@ -135,7 +150,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
-    describe 'disabling button' do
+    describe 'disabling the input' do
       context 'when disabled is false' do
         subject { builder.send(*args.push('Create')) }
 
