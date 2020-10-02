@@ -31,5 +31,13 @@ module Examples
             ' Safe as draft
       SNIPPET
     end
+
+    def button_containing_html
+      <<~SNIPPET
+        = f.govuk_submit -> do
+          div.large Submit
+          ' your application
+      SNIPPET
+    end
   end
 end

@@ -48,4 +48,14 @@ section
         passed in as a block will be rendered in-line with the primary submit
         button.
 
+  == render('/partials/example-fig.*',
+    caption: "A submit button containing HTML",
+    code: button_containing_html) do
+
+    p.govuk-body
+      | To add HTML content to a button pass in a proc instead of a string.
+        This will render the proc content wrapped in <code>button</code> tags
+        instead of the usual <code>input</code> and offer some additional styling
+        options.
+
 == render('/partials/related-info.*', links: submit_info)
