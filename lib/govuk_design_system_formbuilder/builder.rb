@@ -816,6 +816,8 @@ module GOVUKDesignSystemFormBuilder
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @note Only the first additional button or link (passed in via a block) will be given the
     #   correct left margin, subsequent buttons will need to be manually accounted for
+    # @note This helper always renders an +<input type='submit'>+ tag, HTML content is not supported inside. You
+    #   can place +<button>+ tags inside the form to have the same effect
     # @see https://design-system.service.gov.uk/components/button/#stop-users-from-accidentally-sending-information-more-than-once
     #   GOV.UK double click prevention
     #
