@@ -881,6 +881,9 @@ module GOVUKDesignSystemFormBuilder
     #
     # @param title [String] the error summary heading
     #
+    # @note Only the first error in the +#errors+ array for each attribute will
+    #   be included.
+    #
     # @example An error summary with a custom title
     #   = f.govuk_error_summary 'Uh-oh, spaghettios'
     #
@@ -904,13 +907,13 @@ module GOVUKDesignSystemFormBuilder
     # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
     #
     # @example A fieldset containing address fields
-    #   = f.govuk_fieldset legend: { text: 'Address' }
+    #   = f.govuk_fieldset legend: { text: 'Address' } do
     #     = f.govuk_text_field :street
     #     = f.govuk_text_field :town
     #     = f.govuk_text_field :city
     #
     # @example A fieldset with the legend as a proc
-    #   = f.govuk_fieldset legend: -> { tag.h3('Skills') }
+    #   = f.govuk_fieldset legend: -> { tag.h3('Skills') } do
     #     = f.govuk_text_area :physical
     #     = f.govuk_text_area :mental
     #
