@@ -1,8 +1,6 @@
 module Examples
   module ErrorHandling
-    def text_field_with_errors
-      object.valid?
-
+    def form_with_multiple_errors
       <<~SNIPPET
         = f.govuk_error_summary
 
@@ -28,6 +26,15 @@ module Examples
           :name,
           :description,
           legend: { text: 'What would you like for lunch on your first day?', size: 's' }
+      SNIPPET
+    end
+
+    def form_with_errors_on_object_base
+      <<~SNIPPET
+        = f.govuk_error_summary link_base_errors_to: :email_address
+
+        = f.govuk_email_field :email_address, label: { text: "Email address" }
+        = f.govuk_phone_field :telephone_number, label: { text: "Phone number" }
       SNIPPET
     end
   end

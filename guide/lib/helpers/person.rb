@@ -79,13 +79,23 @@ class Person
   attr_accessor(
     :welcome_pack_reference_number,
     :welcome_pack_received_on,
-    :welcome_lunch_choice
+    :welcome_lunch_choice,
+    :email_address,
+    :telephone_number
   )
 
-  validates :welcome_pack_reference_number, presence: { message: 'Enter the reference number you received in your welcome pack' }
-  validates :welcome_pack_received_on, presence: { message: 'Enter the date you received your welcome pack' }
-  validates :department_id, presence: { message: %(Select the department to which you've been assigned) }
-  validates :welcome_lunch_choice, presence: { message: 'Select a lunch choice for your first day' }
+  validates :welcome_pack_reference_number, presence: { message: 'Enter the reference number you received in your welcome pack' }, on: :fields
+  validates :welcome_pack_received_on, presence: { message: 'Enter the date you received your welcome pack' }, on: :fields
+  validates :department_id, presence: { message: %(Select the department to which you've been assigned) }, on: :fields
+  validates :welcome_lunch_choice, presence: { message: 'Select a lunch choice for your first day' }, on: :fields
+
+  validate :telephone_number_or_email_address_exists, on: :base_errors
+
+  def telephone_number_or_email_address_exists
+    if telephone_number.blank? && email_address.blank?
+      errors[:base] << "Enter a telephone number or email address"
+    end
+  end
 
   # fieldset
   attr_accessor(
