@@ -289,5 +289,27 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         expect { subject }.to raise_error(NoMethodError, /errors/)
       end
     end
+
+    describe 'when there are errors on the base object' do
+      let(:object) { Person.with_errors_on_base }
+      let(:error) { object.errors[:base].first }
+
+      context 'when an override is specified' do
+        let(:link_base_errors_to) { :name }
+        subject { builder.send(method, link_base_errors_to: link_base_errors_to) }
+
+        specify 'the override field should be linked to' do
+          expect(subject).to have_tag("a", text: error, with: { href: %(#person-#{link_base_errors_to}-field) })
+        end
+      end
+
+      context 'when no override is specified' do
+        subject { builder.send(method) }
+
+        specify 'the base field should be linked to' do
+          expect(subject).to have_tag("a", text: error, with: { href: %(#person-base-field-error) })
+        end
+      end
+    end
   end
 end
