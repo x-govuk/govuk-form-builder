@@ -23,10 +23,25 @@ p.govuk-body
     extra configuration.
 
 == render('/partials/example-fig.*',
-  caption: "A text field with an error",
-  code: text_field_with_errors,
+  caption: "A form with multiple errors",
+  code: form_with_multiple_errors,
   sample_data: departments_data_raw,
-  show_errors: true,
-  hide_data: true)
+  show_errors: :fields,
+  hide_data: true,
+  hide_html_output: true)
+
+== render('/partials/example-fig.*',
+  caption: "Linking errors on the base object to specific fields",
+  code: form_with_errors_on_object_base,
+  sample_data: departments_data_raw,
+  show_errors: :base,
+  hide_data: true,
+  hide_html_output: false) do
+
+  p.govuk-body
+    | Some errors don't apply to a specific field but the object as a whole.
+      The GOV.UK Design System guidelines suggest that in this case, the error
+      summary link should take the user to the first field. As the form builder
+      doesn't know the order in which fields will be rendered, it must be specified.
 
 == render('/partials/related-info.*', links: error_handling_info)

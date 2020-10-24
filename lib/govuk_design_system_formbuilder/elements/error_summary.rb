@@ -3,10 +3,11 @@ module GOVUKDesignSystemFormBuilder
     class ErrorSummary < Base
       include Traits::Error
 
-      def initialize(builder, object_name, title)
-        @builder = builder
-        @object_name = object_name
-        @title = title
+      def initialize(builder, object_name, title, link_base_errors_to:)
+        @builder             = builder
+        @object_name         = object_name
+        @title               = title
+        @link_base_errors_to = link_base_errors_to
       end
 
       def html
@@ -54,7 +55,11 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def field_id(attribute)
-        build_id('field-error', attribute_name: attribute)
+        if attribute.eql?(:base) && @link_base_errors_to.present?
+          build_id('field', attribute_name: @link_base_errors_to)
+        else
+          build_id('field-error', attribute_name: attribute)
+        end
       end
 
       def summary_title_id

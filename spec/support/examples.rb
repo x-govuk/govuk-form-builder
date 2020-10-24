@@ -41,6 +41,10 @@ class Person < Being
     )
   end
 
+  def self.with_errors_on_base
+    new.tap { |p| p.errors[:base].push("This person is always invalid") }
+  end
+
 private
 
   def born_on_must_be_in_the_past
