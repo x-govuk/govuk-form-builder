@@ -1,0 +1,9 @@
+helpers:
+  hint:
+    person:
+      projects_options:
+        11: Xanthous
+        22: Yellow
+      favourite_colour_options:
+        red: Maroon
+        green: Pea
