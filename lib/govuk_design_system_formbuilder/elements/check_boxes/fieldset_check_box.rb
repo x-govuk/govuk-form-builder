@@ -67,7 +67,7 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def hint_options
-          { checkbox: true }
+          { value: @value, checkbox: true }
         end
 
         def conditional_classes

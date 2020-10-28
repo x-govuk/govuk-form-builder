@@ -40,6 +40,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     it_behaves_like 'a field that contains a customisable form group'
 
     it_behaves_like 'a field that supports setting the hint via localisation'
+    it_behaves_like 'a field that supports localised fieldset hints' do
+      let(:localisation_key) { :projects_options }
+      let(:field_name_selector) { "projects" }
+    end
     it_behaves_like 'a field that supports setting the legend via localisation'
 
     it_behaves_like 'a field that accepts a plain ruby object' do
