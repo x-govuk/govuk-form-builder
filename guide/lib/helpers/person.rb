@@ -47,6 +47,8 @@ class Person
     :department_ids,
     :languages,
     :other_language,
+    :movie_genres,
+    :other_movie_genres,
     :terms_and_conditions_agreed
   )
 

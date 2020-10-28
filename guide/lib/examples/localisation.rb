@@ -83,6 +83,42 @@ module Examples
       LOCALE
     end
 
+    def movie_genre_check_boxes
+      <<~SNIPPET
+        = f.govuk_check_boxes_fieldset :movie_genres do
+          = f.govuk_check_box :movie_genres, :action, link_errors: true
+          = f.govuk_check_box :movie_genres, :comedy
+          = f.govuk_check_box :movie_genres, :horror
+          = f.govuk_check_box :movie_genres, :other do
+            = f.govuk_text_field :other_movie_genres
+      SNIPPET
+    end
+
+    def movie_genre_check_boxes_locale
+      <<~LOCALE
+        helpers:
+          legend:
+            person:
+              movie_genres: Which movie genres do you prefer?
+          hint:
+            person:
+              other_movie_genres: You can enter as many as you like
+              movie_genres: Select all that apply
+              movie_genres_options:
+                action: War, espionage, martial arts
+                comedy: Parody, dark comedy
+                horror: Zombies, slasher, found footage
+          label:
+            person:
+              other_movie_genres: Which additional movie genres do you like?
+              movie_genres_options:
+                action: Action
+                comedy: Comedy
+                horror: Horror
+                other: Other
+      LOCALE
+    end
+
     def role_name
       <<~SNIPPET
         = f.govuk_text_field :role, label: { size: 'm' }

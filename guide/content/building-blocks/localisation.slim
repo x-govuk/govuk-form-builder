@@ -58,6 +58,12 @@ p.govuk-body
     sample_data: departments_value_data_raw)
 
   == render('/partials/example-fig.*',
+    caption: "A more comprehensive example of localised check boxes",
+    localisation: movie_genre_check_boxes_locale,
+    code: movie_genre_check_boxes) do
+    == render('/partials/fieldset-warning.*', input_type: 'check box')
+
+  == render('/partials/example-fig.*',
     caption: "Customising locale structure",
     localisation: custom_locale,
     code: role_name,
