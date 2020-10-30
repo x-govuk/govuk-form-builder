@@ -25,7 +25,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        return nil unless active?
+        return unless active?
 
         content_tag(hint_tag, **hint_options, **@html_attributes) { hint_body }
       end

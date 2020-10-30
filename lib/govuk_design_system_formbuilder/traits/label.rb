@@ -4,7 +4,11 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def label_element
-        @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, caption: @caption, **label_content)
+        @label_element ||= if @label.nil?
+                             Elements::Null.new
+                           else
+                             Elements::Label.new(@builder, @object_name, @attribute_name, caption: @caption, **label_content)
+                           end
       end
 
       def label_content

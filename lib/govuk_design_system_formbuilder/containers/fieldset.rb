@@ -30,7 +30,11 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def legend_element
-        @legend_element ||= Elements::Legend.new(@builder, @object_name, @attribute_name, **legend_options)
+        @legend_element ||= if @legend.nil?
+                              Elements::Null.new
+                            else
+                              Elements::Legend.new(@builder, @object_name, @attribute_name, **legend_options)
+                            end
       end
 
       def legend_options
