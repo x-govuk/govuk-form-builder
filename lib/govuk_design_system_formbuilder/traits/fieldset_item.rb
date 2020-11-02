@@ -16,7 +16,11 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def hint_element
-        @hint_element ||= Elements::Hint.new(@builder, @object_name, @attribute_name, **hint_options, **hint_content)
+        @hint_element ||= if @hint.nil?
+                            Elements::Null.new
+                          else
+                            Elements::Hint.new(@builder, @object_name, @attribute_name, **hint_options, **hint_content)
+                          end
       end
 
       def hint_options

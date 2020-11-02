@@ -5,8 +5,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
   describe '#govuk_radio_button' do
     let(:method) { :govuk_radio_button }
-    let(:value) { 'red' }
-    let(:attribute) { :favourite_colour }
+    let(:value) { :ballpoint_pen }
+    let(:value_with_dashes) { underscores_to_dashes(value) }
+    let(:attribute) { :stationery }
     let(:args) { [method, attribute, value] }
 
     subject { builder.send(*args) }
@@ -31,6 +32,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     it_behaves_like 'a field that supports setting the label via localisation'
+    it_behaves_like 'a field that supports setting the hint via localisation'
 
     context 'labels set via procs' do
       let(:label_text) { 'Orange' }
@@ -79,7 +81,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       context 'when a block is given' do
         subject do
           builder.govuk_radio_button(attribute, value) do
-            builder.govuk_text_field(:favourite_colour_reason)
+            builder.govuk_text_field(:stationery_choice)
           end
         end
 
@@ -89,7 +91,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
         specify 'should include content provided in the block in a conditional div' do
           expect(subject).to have_tag('div', with: { class: 'govuk-radios__conditional govuk-radios__conditional--hidden' }) do |cd|
-            expect(cd).to have_tag('label', with: { class: 'govuk-label' }, text: 'Favourite_colour_reason')
+            expect(cd).to have_tag('label', with: { class: 'govuk-label' }, text: 'Stationery_choice')
             expect(cd).to have_tag('input', with: { type: 'text' })
           end
         end
@@ -103,7 +105,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         specify 'conditional_id contains the object, attribute and value name' do
           expect(
             parsed_subject.at_css("input[type='radio']")['data-aria-controls']
-          ).to eql(%(person-favourite-colour-#{value}-conditional))
+          ).to eql(%(person-stationery-#{value_with_dashes}-conditional))
         end
       end
 

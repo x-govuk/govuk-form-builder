@@ -4,16 +4,17 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
   describe '#govuk_check_box' do
     let(:method) { :govuk_check_box }
-    let(:attribute) { :projects }
-    let(:value) { project_x.id }
+    let(:attribute) { :stationery }
+    let(:value) { ballpoint_pen.id }
+    let(:value_with_dashes) { underscores_to_dashes(value) }
     let(:args) { [method, attribute, value] }
 
     subject { builder.send(*args) }
 
     specify 'output should contain a check box item group with a check box input' do
-      expect(subject).to have_tag('div', with: { class: 'govuk-checkboxes__item' }) do |ci|
-        expect(ci).to have_tag('input', with: {
-          id: "person-projects-#{value}-field",
+      expect(subject).to have_tag('div', with: { class: 'govuk-checkboxes__item' }) do
+        with_tag('input', with: {
+          id: "person-stationery-#{value_with_dashes}-field",
           type: 'checkbox',
           value: value
         })
@@ -25,7 +26,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     it_behaves_like 'a field that supports custom branding'
 
     it_behaves_like 'a field that supports labels' do
-      let(:label_text) { 'Project X' }
+      let(:label_text) { 'Writing implement' }
       let(:field_type) { "input[type='checkbox']" }
 
       specify 'the label should have a check box label class' do
@@ -34,6 +35,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     it_behaves_like 'a field that supports setting the label via localisation'
+    it_behaves_like 'a field that supports setting the hint via localisation'
 
     context 'labels set via procs' do
       let(:label_text) { 'Project Y' }
@@ -53,7 +55,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     context 'check box hints' do
-      let(:hint_text) { project_x.description }
+      let(:hint_text) { ballpoint_pen.description }
 
       subject do
         builder.send(*args, hint: { text: hint_text })
@@ -159,7 +161,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         specify 'conditional_id contains the object, attribute and value name' do
           expect(
             parsed_subject.at_css("input[type='checkbox']")['data-aria-controls']
-          ).to eql("#{object_name}-#{attribute}-#{value}-conditional")
+          ).to eql("#{object_name}-#{attribute}-#{value_with_dashes}-conditional")
         end
       end
 

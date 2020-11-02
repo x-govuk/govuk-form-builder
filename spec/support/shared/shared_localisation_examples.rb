@@ -145,7 +145,13 @@ shared_examples 'a field that supports setting the hint via localisation' do
   let(:localisations) { LOCALISATIONS }
 
   context 'localising when no text is supplied' do
-    let(:expected_hint) { I18n.translate("helpers.hint.person.#{attribute}") }
+    let(:expected_hint) do
+      if defined?(value) && value.present?
+        I18n.translate("helpers.hint.person.#{attribute}_options.#{value}")
+      else
+        I18n.translate("helpers.hint.person.#{attribute}")
+      end
+    end
 
     subject { builder.send(*args) { arbitrary_html_content } }
 
