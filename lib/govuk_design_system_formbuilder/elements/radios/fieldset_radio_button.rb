@@ -6,6 +6,7 @@ module GOVUKDesignSystemFormBuilder
 
         include Traits::Label
         include Traits::Hint
+        include Traits::FieldsetItem
         include Traits::Conditional
 
         def initialize(builder, object_name, attribute_name, value, label:, hint:, link_errors:, &block)
@@ -34,24 +35,8 @@ module GOVUKDesignSystemFormBuilder
           end
         end
 
-        def radio_options
+        def fieldset_options
           { radio: true }
-        end
-
-        def label_element
-          @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, **label_content, **label_options)
-        end
-
-        def label_options
-          { value: @value, link_errors: @link_errors }.merge(radio_options)
-        end
-
-        def hint_element
-          @hint_element ||= Elements::Hint.new(@builder, @object_name, @attribute_name, **hint_options, **hint_content)
-        end
-
-        def hint_options
-          { value: @value }.merge(radio_options)
         end
 
         def input

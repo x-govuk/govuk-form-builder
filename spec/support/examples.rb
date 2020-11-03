@@ -3,6 +3,11 @@ class Project
   attr_accessor(:id, :name, :description)
 end
 
+class Stationery
+  include ActiveModel::Model
+  attr_accessor(:id, :name, :description)
+end
+
 class Being
   attr_accessor(
     :name,
@@ -15,7 +20,9 @@ class Being
     :project_responsibilities,
     :cv,
     :photo,
-    :department
+    :department,
+    :stationery,
+    :stationery_choice
   )
 end
 

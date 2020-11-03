@@ -36,6 +36,18 @@ shared_examples 'a field that supports setting the label via localisation' do
       end
     end
   end
+
+  context 'allowing localised text to be suppressed' do
+    subject do
+      builder.send(*args, label: nil)
+    end
+
+    specify 'no label should be rendered' do
+      with_localisations(localisations) do
+        expect(subject).not_to have_tag('label')
+      end
+    end
+  end
 end
 
 shared_examples 'a field that supports setting the label caption via localisation' do
@@ -64,7 +76,21 @@ shared_examples 'a field that supports setting the label caption via localisatio
 
     specify 'should use the supplied caption text' do
       with_localisations(localisations) do
-        expect(subject).to have_tag('span', text: expected_caption)
+        expect(subject).to have_tag('span', text: expected_caption, with: { class: "govuk-caption-m" })
+      end
+    end
+  end
+
+  context 'allowing localised text to be suppressed' do
+    let(:expected_caption) { "Private data" }
+
+    subject do
+      builder.send(*args, caption: nil)
+    end
+
+    specify 'no caption should be rendered' do
+      with_localisations(localisations) do
+        expect(subject).not_to have_tag('span', with: { class: "govuk-caption-m" })
       end
     end
   end
@@ -100,6 +126,18 @@ shared_examples 'a field that supports setting the legend caption via localisati
       end
     end
   end
+
+  context 'allowing localised text to be suppressed via the legend' do
+    subject do
+      builder.send(*args, legend: nil)
+    end
+
+    specify 'no caption should be rendered' do
+      with_localisations(localisations) do
+        expect(subject).not_to have_tag('span', with: { class: "govuk-caption-m" })
+      end
+    end
+  end
 end
 
 shared_examples 'a field that supports setting the hint via localisation' do
@@ -107,7 +145,13 @@ shared_examples 'a field that supports setting the hint via localisation' do
   let(:localisations) { LOCALISATIONS }
 
   context 'localising when no text is supplied' do
-    let(:expected_hint) { I18n.translate("helpers.hint.person.#{attribute}") }
+    let(:expected_hint) do
+      if defined?(value) && value.present?
+        I18n.translate("helpers.hint.person.#{attribute}_options.#{value}")
+      else
+        I18n.translate("helpers.hint.person.#{attribute}")
+      end
+    end
 
     subject { builder.send(*args) { arbitrary_html_content } }
 
@@ -128,6 +172,18 @@ shared_examples 'a field that supports setting the hint via localisation' do
     specify 'should use the supplied hint text' do
       with_localisations(localisations) do
         expect(subject).to have_tag('span', text: expected_hint, with: { class: 'govuk-hint' })
+      end
+    end
+  end
+
+  context 'allowing localised text to be suppressed' do
+    subject do
+      builder.send(*args, hint: nil) { arbitrary_html_content }
+    end
+
+    specify 'no hint should be rendered' do
+      with_localisations(localisations) do
+        expect(subject).not_to have_tag('span', with: { class: 'govuk-hint' })
       end
     end
   end
@@ -159,6 +215,16 @@ shared_examples 'a field that supports setting the legend via localisation' do
         expect(subject).to have_tag('fieldset') do
           with_tag('legend', text: Regexp.new(expected_legend), with: { class: 'govuk-fieldset__legend' })
         end
+      end
+    end
+  end
+
+  context 'allowing localised text to be suppressed' do
+    subject { builder.send(*args, legend: nil) { arbitrary_html_content } }
+
+    specify 'no legend should be rendered' do
+      with_localisations(localisations) do
+        expect(subject).not_to have_tag('legend')
       end
     end
   end

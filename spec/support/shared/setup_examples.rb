@@ -22,4 +22,10 @@ shared_context 'setup examples' do
   let(:department_marketing) { Department.new(code: :marketing, name: "Flyer distribution") }
   let(:department_sales) { Department.new(code: :sales, name: "Selling stuff") }
   let(:departments) { [department_it, department_finance, department_marketing, department_sales] }
+
+  let(:pencil) { Stationery.new(id: :pencil, name: "Pencil") }
+  let(:ballpoint_pen) { Stationery.new(id: :ballpoint_pen, name: "Ballpoint pen", description: "A ballpoint pen dispenses ink over a metal ball at its point") }
+  let(:ruler) { Stationery.new(id: :ruler, name: "Ruler") }
+  let(:stapler) { Stationery.new(id: :stapler, name: "Stapler") }
+  let(:stationery_items) { [pencil, ballpoint_pen, ruler, stapler] }
 end

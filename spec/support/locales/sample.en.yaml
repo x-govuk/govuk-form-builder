@@ -15,6 +15,8 @@ helpers:
         marketing: Marketing
         finance: Finance
         sales: Sales
+      stationery_options:
+        ballpoint_pen: An ink-dispensing writing implement
 
   caption:
     person:
@@ -43,3 +45,7 @@ helpers:
         marketing: Flyers, posters, etc
         finance: What's worth doing is worth doing for money
         # sales is intentionally missing
+      stationery_options:
+        ballpoint_pen: |-
+          A ballpoint pen, also known as a biro or ball pen, is a pen that
+          dispenses ink (usually in paste form) over a metal ball at its point.

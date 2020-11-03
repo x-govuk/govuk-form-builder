@@ -10,13 +10,15 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def hint_element
-        @hint_element ||= Elements::Hint.new(@builder, @object_name, @attribute_name, **hint_content)
+        @hint_element ||= if @hint.nil?
+                            Elements::Null.new
+                          else
+                            Elements::Hint.new(@builder, @object_name, @attribute_name, **hint_content)
+                          end
       end
 
       def hint_content
         case @hint
-        when NilClass
-          {}
         when Hash
           @hint
         when Proc
