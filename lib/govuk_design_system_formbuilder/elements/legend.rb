@@ -4,46 +4,39 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Caption
       include Traits::Localisation
 
-      def initialize(builder, object_name, attribute_name, legend:, caption:, **kwargs)
+      def initialize(builder, object_name, attribute_name, text: nil, size: config.default_legend_size, hidden: false, tag: config.default_legend_tag, caption: nil, content: nil, **kwargs)
         super(builder, object_name, attribute_name)
 
-        @html_attributes = kwargs
-
-        case legend
-        when NilClass
-          # do nothing
-        when Proc
-          @raw = capture { legend.call }
-        when Hash
-          defaults.merge(legend).tap do |l|
-            @text    = retrieve_text(l.dig(:text))
-            @hidden  = l.dig(:hidden)
-            @tag     = l.dig(:tag)
-            @size    = l.dig(:size)
-            @caption = caption
-          end
+        if content
+          @content = capture { content.call }
         else
-          fail(ArgumentError, %(legend must be a NilClass, Proc or Hash))
+          @text            = retrieve_text(text)
+          @tag             = tag
+          @size_class      = size_class(size)
+          @tag             = tag
+          @caption         = caption
+          @hidden          = hidden
+          @html_attributes = kwargs
         end
       end
 
       def html
-        @raw || content
+        @content || legend
       end
 
     private
 
       def active?
-        [@text, @raw].any?(&:present?)
+        [@text, @content].any?(&:present?)
       end
 
-      def content
+      def legend
         return unless active?
 
-        tag.legend(legend_text, class: classes, **@html_attributes)
+        tag.legend(legend_content, class: classes, **@html_attributes)
       end
 
-      def legend_text
+      def legend_content
         caption_and_text = safe_join([caption_element, @text])
 
         if @tag.present?
@@ -58,17 +51,14 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def classes
-        [%(#{brand}-fieldset__legend), size_class, visually_hidden_class].compact
+        [%(#{brand}-fieldset__legend), @size_class, visually_hidden_class].compact
       end
 
-      def size_class
-        case @size
-        when 'xl' then %(#{brand}-fieldset__legend--xl)
-        when 'l'  then %(#{brand}-fieldset__legend--l)
-        when 'm'  then %(#{brand}-fieldset__legend--m)
-        when 's'  then %(#{brand}-fieldset__legend--s)
+      def size_class(size)
+        if size.in?(%w(xl l m s))
+          %(#{brand}-fieldset__legend--#{size})
         else
-          fail "invalid size '#{@size}', must be xl, l, m or s"
+          fail "invalid size '#{size}', must be xl, l, m or s"
         end
       end
 
@@ -78,15 +68,6 @@ module GOVUKDesignSystemFormBuilder
 
       def heading_classes
         %(#{brand}-fieldset__heading)
-      end
-
-      def defaults
-        {
-          hidden: false,
-          text: nil,
-          tag:  config.default_legend_tag,
-          size: config.default_legend_size
-        }
       end
     end
   end

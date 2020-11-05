@@ -38,7 +38,14 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def legend_options
-        { legend: @legend, caption: @caption }
+        case @legend
+        when Hash
+          @legend.merge(caption: @caption)
+        when Proc
+          { content: @legend }
+        else
+          fail(ArgumentError, %(legend must be a Proc or Hash))
+        end
       end
     end
   end
