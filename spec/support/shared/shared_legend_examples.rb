@@ -11,7 +11,7 @@ shared_examples 'a field that supports a fieldset with legend' do
     context 'when something other than a Proc or Hash is supplied' do
       subject { builder.send(*args, legend: "This should fail") }
 
-      specify { expect { subject }.to raise_error(ArgumentError, 'legend must be a NilClass, Proc or Hash') }
+      specify { expect { subject }.to raise_error(ArgumentError, 'legend must be a Proc or Hash') }
     end
 
     context 'when no text is supplied' do
@@ -74,6 +74,15 @@ shared_examples 'a field that supports a fieldset with legend' do
               with_tag('legend', text: legend_text, class: "govuk-fieldset__legend--#{expected_size}")
             end
           end
+        end
+      end
+
+      context 'when additional HTML attributes are provided' do
+        let(:html_attributes) { { focusable: 'false', lang: 'fr' } }
+        subject { builder.send(*args, legend: { text: legend_text }.merge(html_attributes)) }
+
+        specify 'the legend should have the custom HTML attributes' do
+          expect(subject).to have_tag('.govuk-fieldset__legend', with: html_attributes, text: legend_text)
         end
       end
     end
