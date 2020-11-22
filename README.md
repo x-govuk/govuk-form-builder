@@ -1,6 +1,6 @@
 # GOV.UK Design System Form Builder for Rails
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/dfe-digital/govuk_design_system_formbuilder/tests)](https://github.com/DFE-Digital/govuk_design_system_formbuilder/actions)
+[![Tests](https://github.com/DFE-Digital/govuk_design_system_formbuilder/workflows/Testing/badge.svg)](https://github.com/DFE-Digital/govuk_design_system_formbuilder/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/fde73b5dc9476197281b/maintainability)](https://codeclimate.com/github/DFE-Digital/govuk_design_system_formbuilder/maintainability)
 [![Gem Version](https://badge.fury.io/rb/govuk_design_system_formbuilder.svg)](https://badge.fury.io/rb/govuk_design_system_formbuilder)
 [![Gem](https://img.shields.io/gem/dt/govuk_design_system_formbuilder?logo=rubygems)](https://rubygems.org/gems/govuk_design_system_formbuilder)
