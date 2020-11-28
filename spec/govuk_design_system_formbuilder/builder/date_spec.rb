@@ -211,5 +211,18 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
     end
+
+    describe "wildcards" do
+      subject { builder.send(*args, wildcards: true) }
+
+      specify %(the date and month input patterns contain an X) do
+        expect(subject).to have_tag('input', with: { id: day_identifier, pattern: "[0-9X]*" })
+        expect(subject).to have_tag('input', with: { id: month_identifier, pattern: "[0-9X]*" })
+      end
+
+      specify %(the year pattern doesn't contain an X) do
+        expect(subject).to have_tag('input', with: { id: year_identifier, pattern: "[0-9]*" })
+      end
+    end
   end
 end

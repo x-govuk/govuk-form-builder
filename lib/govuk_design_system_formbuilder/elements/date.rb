@@ -9,7 +9,7 @@ module GOVUKDesignSystemFormBuilder
 
       SEGMENTS = { day: '3i', month: '2i', year: '1i' }.freeze
 
-      def initialize(builder, object_name, attribute_name, legend:, caption:, hint:, date_of_birth: false, omit_day:, form_group:, &block)
+      def initialize(builder, object_name, attribute_name, legend:, caption:, hint:, date_of_birth: false, omit_day:, form_group:, wildcards:, &block)
         super(builder, object_name, attribute_name, &block)
 
         @legend        = legend
@@ -18,6 +18,7 @@ module GOVUKDesignSystemFormBuilder
         @date_of_birth = date_of_birth
         @omit_day      = omit_day
         @form_group    = form_group
+        @wildcards     = wildcards
       end
 
       def html
@@ -82,11 +83,17 @@ module GOVUKDesignSystemFormBuilder
           class: classes(width),
           name: name(segment),
           type: 'text',
-          pattern: '[0-9]*',
+          pattern: pattern(segment),
           inputmode: 'numeric',
           value: value,
           autocomplete: date_of_birth_autocomplete_value(segment)
         )
+      end
+
+      def pattern(segment)
+        return '[0-9X]*' if @wildcards && segment.in?(%i(day month))
+
+        '[0-9]*'
       end
 
       def classes(width)
