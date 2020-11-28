@@ -850,7 +850,7 @@ module GOVUKDesignSystemFormBuilder
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @param omit_day [Boolean] do not render a day input, only capture month and year
-    # @param wildcards [Boolean] add an 'X' to the date wildcards so users can add approximate dates
+    # @param wildcards [Boolean] add an 'X' to the day and month patterns so users can add approximate dates
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
