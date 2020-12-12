@@ -10,7 +10,7 @@ jobs:
       fail-fast: false
       matrix:
         ruby: ['2.5.8', '2.6.6', '2.7.2']
-        rails: ['5.2.4', '6.0.3']
+        rails: ['5.2.4', '6.0.3', '6.1.0']
     runs-on: ubuntu-20.04
     name: Ruby ${{ matrix.ruby }} / Rails ${{ matrix.rails }}
     steps:
@@ -32,7 +32,7 @@ jobs:
         run: make ruby-lint
 
       - name: Download CodeClimate reporter
-        if: ${{ matrix.ruby == '2.7.2' && matrix.rails == '6.0.3' }}
+        if: ${{ matrix.ruby == '2.7.2' && matrix.rails == '6.1.0' }}
         run: |
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
           chmod +x ./cc-test-reporter
@@ -42,7 +42,7 @@ jobs:
         run: make rspec
 
       - name: Report coverage to CodeClimate
-        if: ${{ matrix.ruby == '2.7.2' && matrix.rails == '6.0.3' }}
+        if: ${{ matrix.ruby == '2.7.2' && matrix.rails == '6.1.0' }}
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
           GIT_BRANCH: ${{ steps.extract_branch.outputs.branch }}
@@ -50,5 +50,5 @@ jobs:
         run: ./cc-test-reporter after-build -t simplecov
 
       - name: Run Nanoc Check
-        if: ${{ matrix.ruby == '2.7.2' && matrix.rails == '6.0.3' }}
+        if: ${{ matrix.ruby == '2.7.2' && matrix.rails == '6.1.0' }}
         run: make nanoc-check-all
