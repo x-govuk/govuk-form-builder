@@ -36,7 +36,7 @@ module Setup
     end
 
     def helper
-      ActionView::Base.new(action_view_context)
+      ActionView::Base.new(action_view_context, {}, nil)
     end
 
   private
