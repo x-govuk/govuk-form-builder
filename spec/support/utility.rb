@@ -13,3 +13,11 @@ end
 def underscores_to_dashes(val)
   val.to_s.tr('_', '-')
 end
+
+def rails_version
+  ENV.fetch('RAILS_VERSION') { '6.1.0' }
+end
+
+def rails_version_later_than_6_1_0?
+  rails_version >= '6.1.0'
+end

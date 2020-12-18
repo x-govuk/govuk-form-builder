@@ -48,8 +48,14 @@ class Person < Being
     )
   end
 
-  def self.with_errors_on_base
-    new.tap { |p| p.errors[:base].push("This person is always invalid") }
+  def self.with_errors_on_base(msg = "This person is always invalid")
+    new.tap do |person|
+      if rails_version_later_than_6_1_0?
+        person.errors.add(:base, msg)
+      else
+        person.errors[:base].push(msg)
+      end
+    end
   end
 
 private
