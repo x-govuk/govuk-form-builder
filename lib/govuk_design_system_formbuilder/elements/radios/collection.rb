@@ -6,27 +6,28 @@ module GOVUKDesignSystemFormBuilder
         include Traits::Hint
         include Traits::Supplemental
 
-        def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint_method:, hint:, legend:, caption:, inline:, small:, bold_labels:, classes:, form_group:, &block)
+        def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint_method:, hint:, legend:, caption:, inline:, small:, bold_labels:, classes:, form_group:, include_hidden:, &block)
           super(builder, object_name, attribute_name, &block)
 
-          @collection   = collection
-          @value_method = value_method
-          @text_method  = text_method
-          @hint_method  = hint_method
-          @inline       = inline
-          @small        = small
-          @legend       = legend
-          @caption      = caption
-          @hint         = hint
-          @classes      = classes
-          @form_group   = form_group
-          @bold_labels  = hint_method.present? || bold_labels
+          @collection     = collection
+          @value_method   = value_method
+          @text_method    = text_method
+          @hint_method    = hint_method
+          @inline         = inline
+          @small          = small
+          @legend         = legend
+          @caption        = caption
+          @hint           = hint
+          @classes        = classes
+          @form_group     = form_group
+          @include_hidden = include_hidden
+          @bold_labels    = hint_method.present? || bold_labels
         end
 
         def html
           Containers::FormGroup.new(@builder, @object_name, @attribute_name, **@form_group).html do
             Containers::Fieldset.new(@builder, @object_name, @attribute_name, **fieldset_options).html do
-              safe_join([supplemental_content, hint_element, error_element, radios])
+              safe_join([hidden_field, supplemental_content, hint_element, error_element, radios])
             end
           end
         end
@@ -45,6 +46,12 @@ module GOVUKDesignSystemFormBuilder
           Containers::Radios.new(@builder, inline: @inline, small: @small, classes: @classes).html do
             safe_join(collection)
           end
+        end
+
+        def hidden_field
+          return unless @include_hidden
+
+          @builder.hidden_field(@attribute_name, value: "")
         end
 
         def collection

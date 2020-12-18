@@ -73,9 +73,13 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:described_element) { ['input', { with: { type: 'radio' }, count: colours.size }] }
     end
 
-    context 'radio buttons' do
+    describe 'radio buttons' do
       specify 'each radio button should have the correct classes' do
         expect(subject).to have_tag('input', with: { class: %w(govuk-radios__input) }, count: colours.size)
+      end
+
+      specify %(shouldn't have a hidden field by default) do
+        expect(subject).not_to have_tag('input', with: { type: 'hidden' })
       end
 
       specify 'each label should have the correct classes' do
@@ -218,6 +222,16 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         context 'when bold labels are not specified in the options' do
           specify 'no labels should be bold when hints are enabled' do
             expect(subject).not_to have_tag('label', with: { class: bold_label_class })
+          end
+        end
+      end
+
+      context 'generating a hidden field' do
+        subject { builder.send(*args, include_hidden: true) }
+
+        specify "the hidden field should be present within the fieldset" do
+          expect(subject).to have_tag('fieldset') do
+            with_tag('input', with: { type: 'hidden', name: "#{object_name}[#{attribute}]" })
           end
         end
       end
