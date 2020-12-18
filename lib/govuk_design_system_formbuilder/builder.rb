@@ -456,6 +456,7 @@ module GOVUKDesignSystemFormBuilder
     # @param inline [Boolean] controls whether the radio buttons are displayed inline or not
     # @param small [Boolean] controls whether small radio buttons are used instead of regular-sized ones
     # @param bold_labels [Boolean] controls whether the radio button labels are bold
+    # @param include_hidden [Boolean] controls whether a hidden field is inserted to allow for empty submissions
     # @param classes [Array,String] Classes to add to the radio button container.
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
@@ -500,7 +501,7 @@ module GOVUKDesignSystemFormBuilder
     #    :name,
     #    legend: -> { tag.h3('Which category do you belong to?') }
     #
-    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method = nil, hint_method = nil, hint: {}, legend: {}, caption: {}, inline: false, small: false, bold_labels: false, classes: nil, form_group: {}, &block)
+    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method = nil, hint_method = nil, hint: {}, legend: {}, caption: {}, inline: false, small: false, bold_labels: false, classes: nil, include_hidden: false, form_group: {}, &block)
       Elements::Radios::Collection.new(
         self,
         object_name,
@@ -517,6 +518,7 @@ module GOVUKDesignSystemFormBuilder
         bold_labels: bold_labels,
         classes: classes,
         form_group: form_group,
+        include_hidden: include_hidden,
         &block
       ).html
     end
