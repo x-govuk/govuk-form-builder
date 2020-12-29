@@ -30,4 +30,4 @@ jobs:
         uses: dawidd6/action-publish-gem@v1
         with:
           api_key: ${{ secrets.RUBYGEMS_API_KEY }}
-          github_token: ${{ secrets.GH_PACKAGES_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
