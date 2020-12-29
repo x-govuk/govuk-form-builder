@@ -6,7 +6,9 @@ require 'active_support'
 require 'pry'
 require 'simplecov'
 
-SimpleCov.start
+if ENV.fetch('SIMPLECOV') { '1' } == '1'
+  SimpleCov.start
+end
 
 Dir[File.join('./spec', 'support', '**', '*.rb')].sort.each { |file| require file }
 

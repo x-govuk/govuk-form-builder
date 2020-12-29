@@ -1,4 +1,4 @@
-name: Testing
+name: Tests
 on:
   push:
     branches:
@@ -12,7 +12,7 @@ jobs:
         ruby: ['2.5.8', '2.6.6', '2.7.2']
         rails: ['5.2.4', '6.0.3', '6.1.0']
     runs-on: ubuntu-20.04
-    name: Ruby ${{ matrix.ruby }} / Rails ${{ matrix.rails }}
+    name: Testing with Ruby ${{ matrix.ruby }} and Rails ${{ matrix.rails }}
     steps:
       - uses: actions/checkout@v2
 
@@ -28,21 +28,44 @@ jobs:
           gem install bundler
           bundle install --jobs 4 --retry 3
 
+      - name: Run RSpec
+        env:
+          SIMPLECOV: '0'
+        run: make rspec
+
+  quality_checks:
+    runs-on: ubuntu-20.04
+    name: Code quality, test coverage and documentation checks
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.7.2'
+
+      - name: Install gems
+        env:
+          RAILS_VERSION: '6.1.0'
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+
       - name: Run Rubocop
         run: make ruby-lint
 
       - name: Download CodeClimate reporter
-        if: ${{ matrix.ruby == '2.7.2' && matrix.rails == '6.1.0' }}
         run: |
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
           chmod +x ./cc-test-reporter
           ./cc-test-reporter before-build
 
       - name: Run RSpec
+        env:
+          SIMPLECOV: '1'
         run: make rspec
 
       - name: Report coverage to CodeClimate
-        if: ${{ matrix.ruby == '2.7.2' && matrix.rails == '6.1.0' }}
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
           GIT_BRANCH: ${{ steps.extract_branch.outputs.branch }}
@@ -50,5 +73,4 @@ jobs:
         run: ./cc-test-reporter after-build -t simplecov
 
       - name: Run Nanoc Check
-        if: ${{ matrix.ruby == '2.7.2' && matrix.rails == '6.1.0' }}
         run: make nanoc-check-all
