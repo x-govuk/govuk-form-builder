@@ -10,8 +10,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: ['2.5.8', '2.6.6', '2.7.2']
-        rails: ['5.2.4', '6.0.3', '6.1.1']
+        ruby: ['2.6.6', '2.7.2', '3.0.0']
+        rails: ['5.2.4', '6.0.3', '6.1.0']
     runs-on: ubuntu-20.04
     name: Testing with Ruby ${{ matrix.ruby }} and Rails ${{ matrix.rails }}
     steps:
@@ -43,7 +43,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.7.2'
+          ruby-version: '3.0.0'
 
       - name: Install gems
         env:
