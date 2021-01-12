@@ -21,6 +21,8 @@ Style/TrailingCommaInArrayLiteral:
   Enabled: false
 Naming/MethodParameterName:
   Enabled: false
+Naming/VariableNumber:
+  Enabled: false
 Style/PercentLiteralDelimiters:
   Enabled: false
 Layout/HashAlignment:
@@ -31,3 +33,11 @@ Style/AsciiComments:
   Enabled: false
 Style/FormatString:
   EnforcedStyle: format
+Style/StringConcatenation:
+  Enabled: false
+Lint/MissingSuper:
+  Exclude:
+    - spec/**/*
+Style/OptionalBooleanParameter:
+  Exclude:
+    - lib/govuk_design_system_formbuilder/builder.rb

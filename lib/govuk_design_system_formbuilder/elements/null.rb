@@ -1,6 +1,6 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
-    class Null < Base
+    class Null
       def initialize; end
 
       def html

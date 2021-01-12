@@ -74,7 +74,7 @@ figure.full-sample
 
     h4.govuk-heading-s.example-subheading.output Rendered output
     div.example-output
-      == format_slim(code, f: builder(display_errors), **form_data)
+      == format_slim(code, f: builder(errors: display_errors), **form_data)
 
   - unless defined?(hide_html_output) && hide_html_output
     section
@@ -83,7 +83,7 @@ figure.full-sample
         code.highlight.language-html
           - if defined?(sample_data)
             - eval(sample_data)
-          = format_slim(code, f: builder(display_errors), **form_data)
+          = format_slim(code, f: builder(errors: display_errors), **form_data)
 
 
 - if defined?(custom_config)

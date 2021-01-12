@@ -6,7 +6,7 @@ module GOVUKDesignSystemFormBuilder
         include Traits::Hint
         include Traits::Supplemental
 
-        def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint_method: nil, hint:, legend:, caption:, small:, classes:, form_group:, &block)
+        def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint:, legend:, caption:, small:, classes:, form_group:, hint_method: nil, &block)
           super(builder, object_name, attribute_name, &block)
 
           @collection   = collection

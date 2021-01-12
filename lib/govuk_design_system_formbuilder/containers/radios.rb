@@ -4,14 +4,16 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Hint
 
       def initialize(builder, inline:, small:, classes:)
+        super(builder, nil, nil)
+
         @builder = builder
         @inline  = inline
         @small   = small
         @classes = classes
       end
 
-      def html
-        tag.div(**options) { yield }
+      def html(&block)
+        tag.div(**options, &block)
       end
 
     private

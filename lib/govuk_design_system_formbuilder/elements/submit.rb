@@ -6,7 +6,8 @@ module GOVUKDesignSystemFormBuilder
       def initialize(builder, text, warning:, secondary:, classes:, prevent_double_click:, validate:, disabled:, &block)
         fail ArgumentError, 'buttons can be warning or secondary' if warning && secondary
 
-        @builder              = builder
+        super(builder, nil, nil)
+
         @text                 = text
         @prevent_double_click = prevent_double_click
         @warning              = warning

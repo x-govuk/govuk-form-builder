@@ -1,6 +1,6 @@
 module Setup
   module FormBuilderObjects
-    def builder(errors = false)
+    def builder(errors: false)
       case errors
       when :fields
         builder_with_field_errors

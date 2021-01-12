@@ -30,7 +30,10 @@ Gem::Specification.new do |s|
     s.add_dependency(*VersionFormatter.new(lib, rails_version, exact_rails_version).to_a)
   end
 
-  s.add_development_dependency("rubocop-govuk", "= 3.17.2")
+  s.add_development_dependency("rubocop", "~> 1.7")
+  s.add_development_dependency("rubocop-rake", "~> 0.5.1")
+  s.add_development_dependency("rubocop-rails", "~> 2.9.1")
+  s.add_development_dependency("rubocop-rspec", "~> 2.1.0")
   s.add_development_dependency("pry", "~> 0.13.0")
   s.add_development_dependency("pry-byebug", "~> 3.9", ">= 3.9.0")
   s.add_development_dependency("rspec-html-matchers", "~> 0")
@@ -40,6 +43,7 @@ Gem::Specification.new do |s|
   # Required for the guide
   s.add_development_dependency("htmlbeautifier", "~> 1.3.1")
   s.add_development_dependency("nanoc", "~> 4.11")
+  s.add_development_dependency("puma", "~> 5.1.1")
   s.add_development_dependency("rouge", "~> 3.26.0")
   s.add_development_dependency("rubypants", "~> 0.7.0")
   s.add_development_dependency("sassc", "~> 2.4.0")

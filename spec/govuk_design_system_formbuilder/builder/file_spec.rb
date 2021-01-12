@@ -48,7 +48,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     it_behaves_like 'a field that supports setting the hint via localisation'
 
     it_behaves_like 'a field that accepts a plain ruby object' do
-      let(:described_element) { ['input', with: { type: 'file' }] }
+      let(:described_element) { ['input', { with: { type: 'file' } }] }
     end
 
     describe 'additional attributes' do

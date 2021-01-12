@@ -9,7 +9,7 @@ module GOVUKDesignSystemFormBuilder
 
       SEGMENTS = { day: '3i', month: '2i', year: '1i' }.freeze
 
-      def initialize(builder, object_name, attribute_name, legend:, caption:, hint:, date_of_birth: false, omit_day:, form_group:, wildcards:, &block)
+      def initialize(builder, object_name, attribute_name, legend:, caption:, hint:, omit_day:, form_group:, wildcards:, date_of_birth: false, &block)
         super(builder, object_name, attribute_name, &block)
 
         @legend        = legend
