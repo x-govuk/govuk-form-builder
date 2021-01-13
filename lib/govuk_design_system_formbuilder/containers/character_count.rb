@@ -11,10 +11,10 @@ module GOVUKDesignSystemFormBuilder
         @threshold = threshold
       end
 
-      def html
+      def html(&block)
         return yield unless limit?
 
-        tag.div(**options) { yield }
+        tag.div(**options, &block)
       end
 
     private

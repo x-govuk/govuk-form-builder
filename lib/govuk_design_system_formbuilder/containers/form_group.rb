@@ -8,8 +8,8 @@ module GOVUKDesignSystemFormBuilder
         @html_attributes = kwargs
       end
 
-      def html
-        tag.div(class: classes, **@html_attributes) { yield }
+      def html(&block)
+        tag.div(class: classes, **@html_attributes, &block)
       end
 
     private
