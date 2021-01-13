@@ -53,7 +53,7 @@ module GOVUKDesignSystemFormBuilder
     def has_errors?
       @builder.object.respond_to?(:errors) &&
         @builder.object.errors.any? &&
-        @builder.object.errors.messages.dig(@attribute_name).present?
+        @builder.object.errors.messages[@attribute_name].present?
     end
 
     def described_by(*ids)

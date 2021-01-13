@@ -49,7 +49,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def custom_classes
-        @html_options.dig(:class)
+        @html_options[:class]
       end
     end
   end
