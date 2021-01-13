@@ -4,7 +4,8 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Hint
 
       def initialize(builder, inline:, small:, classes:)
-        @builder = builder
+        super(builder, nil, nil)
+
         @inline  = inline
         @small   = small
         @classes = classes

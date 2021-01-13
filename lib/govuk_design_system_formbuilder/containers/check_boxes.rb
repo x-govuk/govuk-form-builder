@@ -2,7 +2,8 @@ module GOVUKDesignSystemFormBuilder
   module Containers
     class CheckBoxes < Base
       def initialize(builder, small:, classes: nil)
-        @builder = builder
+        super(builder, nil, nil)
+
         @small   = small
         @classes = classes
       end

@@ -2,7 +2,7 @@ module GOVUKDesignSystemFormBuilder
   module Containers
     class CharacterCount < Base
       def initialize(builder, max_words:, max_chars:, threshold:)
-        @builder = builder
+        super(builder, nil, nil)
 
         fail ArgumentError, 'limit can be words or chars' if max_words && max_chars
 
