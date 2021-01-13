@@ -5,10 +5,6 @@ module GOVUKDesignSystemFormBuilder
 
       include Traits::Error
 
-      def initialize(builder, object_name, attribute_name)
-        super(builder, object_name, attribute_name)
-      end
-
       def html
         return nil unless has_errors?
 
