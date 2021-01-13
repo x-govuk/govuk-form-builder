@@ -4,8 +4,8 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Error
 
       def initialize(builder, object_name, title, link_base_errors_to:)
-        @builder             = builder
-        @object_name         = object_name
+        super(builder, object_name, nil)
+
         @title               = title
         @link_base_errors_to = link_base_errors_to
       end

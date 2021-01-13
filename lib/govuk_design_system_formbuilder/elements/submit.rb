@@ -4,9 +4,10 @@ module GOVUKDesignSystemFormBuilder
       using PrefixableArray
 
       def initialize(builder, text, warning:, secondary:, classes:, prevent_double_click:, validate:, disabled:, &block)
+        super(builder, nil, nil)
+
         fail ArgumentError, 'buttons can be warning or secondary' if warning && secondary
 
-        @builder              = builder
         @text                 = text
         @prevent_double_click = prevent_double_click
         @warning              = warning

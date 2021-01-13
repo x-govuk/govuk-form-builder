@@ -2,13 +2,14 @@ module GOVUKDesignSystemFormBuilder
   module Containers
     class CheckBoxes < Base
       def initialize(builder, small:, classes: nil)
-        @builder = builder
+        super(builder, nil, nil)
+
         @small   = small
         @classes = classes
       end
 
-      def html
-        tag.div(**options) { yield }
+      def html(&block)
+        tag.div(**options, &block)
       end
 
     private
