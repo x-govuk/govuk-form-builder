@@ -16,7 +16,7 @@ module GOVUKDesignSystemFormBuilder
 
         def html
           @checkbox.label(for: field_id(link_errors: @link_errors), class: label_classes) do
-            [localised_text(:label), @checkbox.text, @value].compact.first
+            [localised_text(:label), @checkbox.text, @value].compact.first.to_s
           end
         end
 
