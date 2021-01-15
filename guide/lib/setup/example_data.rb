@@ -72,7 +72,7 @@ module Setup
 
     def laptops_data_raw
       <<~DATA
-        laptops = %i(thinkpad xps macbook_pro zenbook)
+        laptops = %w(thinkpad xps macbook_pro zenbook)
       DATA
     end
 
