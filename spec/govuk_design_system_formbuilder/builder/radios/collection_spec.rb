@@ -125,6 +125,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         let(:args) { [method, attribute, colours, :id, i18n_proc] }
       end
 
+      it_behaves_like 'a collection field that supports setting the value via a proc'
+
       context 'radio button hints' do
         let(:colours_with_descriptions) { colours.select { |c| c.description.present? } }
         let(:colours_without_descriptions) { colours.reject { |c| c.description.present? } }

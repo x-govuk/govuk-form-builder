@@ -152,6 +152,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         let(:hint_class) { 'govuk-checkboxes__hint' }
         let(:args) { [method, :department, departments, :code, :name] }
       end
+
+      it_behaves_like 'a collection field that supports setting the value via a proc' do
+        let(:attribute) { :favourite_colour }
+      end
     end
   end
 end

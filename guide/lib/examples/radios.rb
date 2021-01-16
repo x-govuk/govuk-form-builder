@@ -87,8 +87,8 @@ module Examples
         = f.govuk_collection_radio_buttons :laptop,
           laptops,
           ->(option) { option },
-          ->(option) { I18n.t('laptops.names.' + option.to_s) },
-          ->(option) { I18n.t('laptops.descriptions.' + option.to_s) },
+          ->(option) { I18n.t('laptops.names.' + option) },
+          ->(option) { I18n.t('laptops.descriptions.' + option) },
           legend: { text: "Which laptop would you like to use?" }
       SNIPPET
     end
