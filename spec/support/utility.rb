@@ -15,7 +15,7 @@ def underscores_to_dashes(val)
 end
 
 def rails_version
-  ENV.fetch('RAILS_VERSION') { '6.1.0' }
+  ENV.fetch('RAILS_VERSION') { '6.1.1' }
 end
 
 def rails_version_later_than_6_1_0?
