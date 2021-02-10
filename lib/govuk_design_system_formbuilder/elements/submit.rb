@@ -19,10 +19,18 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        safe_join([submit, @block_content])
+        @block_content.present? ? button_group : buttons
       end
 
     private
+
+      def buttons
+        safe_join([submit, @block_content])
+      end
+
+      def button_group
+        Containers::ButtonGroup.new(@builder, buttons).html
+      end
 
       def submit
         @builder.submit(@text, class: classes, **options)
@@ -31,7 +39,7 @@ module GOVUKDesignSystemFormBuilder
       def classes
         %w(button)
           .prefix(brand)
-          .push(warning_class, secondary_class, disabled_class, padding_class, custom_classes)
+          .push(warning_class, secondary_class, disabled_class, custom_classes)
           .flatten
           .compact
       end
@@ -53,10 +61,6 @@ module GOVUKDesignSystemFormBuilder
 
       def secondary_class
         %(#{brand}-button--secondary) if @secondary
-      end
-
-      def padding_class
-        %(#{brand}-!-margin-right-1) if @block_content
       end
 
       def disabled_class

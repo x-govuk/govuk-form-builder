@@ -92,11 +92,12 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     describe 'extra buttons passed in via a block' do
-      let(:target) { '#' }
+      let(:text) { 'Cancel' }
+      let(:target) { '/some-amazing-page' }
       let(:classes) { %w(govuk-button govuk-button--secondary) }
       subject do
         builder.send(method) do
-          builder.link_to('Cancel', target, class: classes)
+          builder.link_to(text, target, class: classes)
         end
       end
 
@@ -104,8 +105,11 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         expect(subject).to have_tag('a', with: { href: target, class: classes })
       end
 
-      specify 'should add an extra margin class to the submit' do
-        expect(subject).to have_tag('input', with: { class: 'govuk-\!-margin-right-1' })
+      specify 'should wrap the buttons and extra content in a button group' do
+        expect(subject).to have_tag('div', with: { class: 'govuk-button-group' }) do
+          with_tag('input', value: text)
+          with_tag('a', with: { href: target })
+        end
       end
     end
 
