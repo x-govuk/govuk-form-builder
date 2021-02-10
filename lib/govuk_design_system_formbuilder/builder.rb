@@ -811,9 +811,9 @@ module GOVUKDesignSystemFormBuilder
     #   client-side validation provided by the browser. This is to provide a more consistent and accessible user
     #   experience
     # @param disabled [Boolean] makes the button disabled when true
-    # @param block [Block] Any supplied HTML will be inserted immediately after
-    #   the submit button. It is intended for other buttons directly related to
-    #   the form's operation, such as 'Cancel' or 'Safe draft'
+    # @param block [Block] When content is passed in via a block the submit element and the block content will
+    #   be wrapped in a +<div class="govuk-button-group">+ which will space the buttons and links within
+    #   evenly.
     # @raise [ArgumentError] raised if both +warning+ and +secondary+ are true
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @note Only the first additional button or link (passed in via a block) will be given the
