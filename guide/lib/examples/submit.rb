@@ -29,6 +29,9 @@ module Examples
         = f.govuk_submit 'Save and continue' do
           a.govuk-button.govuk-button--secondary href='/#'
             ' Safe as draft
+          button.govuk-button.govuk-button--warning Delete and start again
+          a.govuk-link href="#"
+            ' View recent changes
       SNIPPET
     end
   end
