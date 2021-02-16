@@ -66,6 +66,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
 
+      specify 'a hidden field is present by default' do
+        expect(subject).to have_tag('input', with: { type: 'hidden', name: "#{object_name}[#{attribute}][]" })
+      end
+
       context 'check box size' do
         context 'when small is specified in the options' do
           subject { builder.send(*args, small: true) }
@@ -155,6 +159,14 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       it_behaves_like 'a collection field that supports setting the value via a proc' do
         let(:attribute) { :favourite_colour }
+      end
+
+      context 'suppressing the hidden field' do
+        subject { builder.send(*args, include_hidden: false) }
+
+        specify "the hidden field should be present within the fieldset" do
+          expect(subject).not_to have_tag('input', with: { type: 'hidden' })
+        end
       end
     end
   end

@@ -6,19 +6,20 @@ module GOVUKDesignSystemFormBuilder
         include Traits::Hint
         include Traits::Supplemental
 
-        def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint:, legend:, caption:, small:, classes:, form_group:, hint_method: nil, &block)
+        def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint:, legend:, caption:, small:, classes:, form_group:, include_hidden:, hint_method: nil, &block)
           super(builder, object_name, attribute_name, &block)
 
-          @collection   = collection
-          @value_method = value_method
-          @text_method  = text_method
-          @hint_method  = hint_method
-          @small        = small
-          @legend       = legend
-          @caption      = caption
-          @hint         = hint
-          @classes      = classes
-          @form_group   = form_group
+          @collection     = collection
+          @value_method   = value_method
+          @text_method    = text_method
+          @hint_method    = hint_method
+          @small          = small
+          @legend         = legend
+          @caption        = caption
+          @hint           = hint
+          @classes        = classes
+          @form_group     = form_group
+          @include_hidden = include_hidden
         end
 
         def html
@@ -56,7 +57,7 @@ module GOVUKDesignSystemFormBuilder
         def collection
           link_errors = has_errors?
 
-          @builder.collection_check_boxes(@attribute_name, @collection, @value_method, @text_method) do |check_box|
+          @builder.collection_check_boxes(@attribute_name, @collection, @value_method, @text_method, include_hidden: @include_hidden) do |check_box|
             Elements::CheckBoxes::CollectionCheckBox.new(
               @builder,
               @object_name,
