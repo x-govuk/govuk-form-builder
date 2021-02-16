@@ -45,6 +45,7 @@ module GOVUKDesignSystemFormBuilder
   # ===
   DEFAULTS = {
     brand: 'govuk',
+    default_form_novalidate: false,
 
     default_legend_size: 'm',
     default_legend_tag: nil,
@@ -95,4 +96,31 @@ module GOVUKDesignSystemFormBuilder
 
   # Disable Rails' div.field_with_error wrapper
   ActionView::Base.field_error_proc = ->(html_tag, _instance) { html_tag }
+
+  # Ensure forms generated with #form_for or #form_with have a novalidate
+  # attribute set when config.default_form_novalidate is true
+  #
+  # Because this monkeypatches Rails' form_for/form_with and we don't want
+  # to drag half of Rails into the specs, this isn't covered by the specs
+  # yet. Consider this an experimental feature.
+  #
+  # :nocov:
+  if GOVUKDesignSystemFormBuilder.default_form_novalidate
+    module ActionView::Helpers
+      def form_for(record, options = {}, &block)
+        super(record, novalidate_opts.deep_merge(options), &block)
+      end
+
+      def form_with(model: nil, scope: nil, url: nil, format: nil, **options)
+        super(model: model, scope: scope, url: url, format: format, **novalidate_opts.deep_merge(options))
+      end
+
+    private
+
+      def novalidate_opts
+        { html: { novalidate: true } }
+      end
+    end
+  end
+  # :nocov:
 end

@@ -24,6 +24,12 @@ module GOVUKDesignSystemFormBuilder
 
     private
 
+      def form_no_validate?
+        return false if config.default_form_novalidate
+
+        !@validate
+      end
+
       def buttons
         safe_join([submit, @block_content])
       end
@@ -46,7 +52,7 @@ module GOVUKDesignSystemFormBuilder
 
       def options
         {
-          formnovalidate: !@validate,
+          formnovalidate: form_no_validate?,
           disabled: @disabled,
           data: {
             module: %(#{brand}-button),

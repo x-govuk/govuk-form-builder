@@ -5,6 +5,31 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
   describe 'configuration' do
     after { GOVUKDesignSystemFormBuilder.reset! }
 
+    describe 'form validation' do
+      let(:method) { :govuk_submit }
+      let(:args) { Array.wrap(method) }
+      subject { builder.send(*args) }
+
+      context 'when default_form_novalidate is unset' do
+        specify "submit input should have a formnovalidate attribute" do
+          expect(subject).to have_tag('input', with: { type: 'submit', formnovalidate: 'formnovalidate' })
+        end
+      end
+
+      context 'when default_form_novalidate is set to true' do
+        before do
+          GOVUKDesignSystemFormBuilder.configure do |conf|
+            conf.default_form_novalidate = true
+          end
+        end
+
+        specify "submit input should have no formnovalidate attribute" do
+          expect(subject).to have_tag('input', with: { type: 'submit' })
+          expect(parsed_subject.at_css('input').attributes.keys).not_to include("formnovalidate")
+        end
+      end
+    end
+
     describe 'legend config' do
       include_context 'setup radios'
       let(:method) { :govuk_collection_radio_buttons }
