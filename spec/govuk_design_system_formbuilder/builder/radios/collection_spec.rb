@@ -79,7 +79,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       specify %(shouldn't have a hidden field by default) do
-        expect(subject).not_to have_tag('input', with: { type: 'hidden' })
+        expect(subject).to have_tag('fieldset') do
+          with_tag('input', with: { type: 'hidden', name: "#{object_name}[#{attribute}]" })
+        end
       end
 
       specify 'each label should have the correct classes' do
@@ -229,12 +231,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       context 'generating a hidden field' do
-        subject { builder.send(*args, include_hidden: true) }
+        subject { builder.send(*args, include_hidden: false) }
 
         specify "the hidden field should be present within the fieldset" do
-          expect(subject).to have_tag('fieldset') do
-            with_tag('input', with: { type: 'hidden', name: "#{object_name}[#{attribute}]" })
-          end
+          expect(subject).not_to have_tag('input', with: { type: 'hidden' })
         end
       end
     end

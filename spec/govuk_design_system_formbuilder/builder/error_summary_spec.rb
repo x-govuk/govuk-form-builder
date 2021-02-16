@@ -124,7 +124,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             end
 
             specify 'the radio button linked to should be first' do
-              expect(parsed_subject.css('input').first['id']).to eql(identifier)
+              expect(parsed_subject.css('input[type="radio"]').first['id']).to eql(identifier)
               expect(parsed_subject.css('label').first['for']).to eql(identifier)
             end
 
