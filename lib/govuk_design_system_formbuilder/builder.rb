@@ -501,7 +501,7 @@ module GOVUKDesignSystemFormBuilder
     #    :name,
     #    legend: -> { tag.h3('Which category do you belong to?') }
     #
-    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method = nil, hint_method = nil, hint: {}, legend: {}, caption: {}, inline: false, small: false, bold_labels: false, classes: nil, include_hidden: false, form_group: {}, &block)
+    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method = nil, hint_method = nil, hint: {}, legend: {}, caption: {}, inline: false, small: false, bold_labels: false, classes: nil, include_hidden: config.default_collection_radio_buttons_include_hidden, form_group: {}, &block)
       Elements::Radios::Collection.new(
         self,
         object_name,
@@ -646,6 +646,7 @@ module GOVUKDesignSystemFormBuilder
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
+    # @param include_hidden [Boolean] controls whether a hidden field is inserted to allow for empty submissions
     # @param block [Block] any HTML passed in will be injected into the fieldset, after the hint and before the checkboxes
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
@@ -682,7 +683,7 @@ module GOVUKDesignSystemFormBuilder
     #    :name,
     #    legend: -> { tag.h3('What kind of sandwich do you want?') }
     #
-    def govuk_collection_check_boxes(attribute_name, collection, value_method, text_method, hint_method = nil, hint: {}, legend: {}, caption: {}, small: false, classes: nil, form_group: {}, &block)
+    def govuk_collection_check_boxes(attribute_name, collection, value_method, text_method, hint_method = nil, hint: {}, legend: {}, caption: {}, small: false, classes: nil, form_group: {}, include_hidden: config.default_collection_check_boxes_include_hidden, &block)
       Elements::CheckBoxes::Collection.new(
         self,
         object_name,
@@ -697,6 +698,7 @@ module GOVUKDesignSystemFormBuilder
         small: small,
         classes: classes,
         form_group: form_group,
+        include_hidden: include_hidden,
         &block
       ).html
     end
