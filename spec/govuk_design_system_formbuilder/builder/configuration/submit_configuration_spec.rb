@@ -5,35 +5,65 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
   after { GOVUKDesignSystemFormBuilder.reset! }
 
   describe 'submit config' do
-    specify %(the default should be 'Continue') do
-      expect(GOVUKDesignSystemFormBuilder.config.default_submit_button_text).to eql('Continue')
-    end
+    let(:method) { :govuk_submit }
+    let(:args) { [method] }
+    let(:kwargs) { {} }
+    subject { builder.send(*args, **kwargs) }
 
-    context 'overriding with custom text' do
-      let(:method) { :govuk_submit }
-      let(:args) { [method] }
-      let(:default_submit_button_text) { 'Make it so, number one' }
+    describe 'button text' do
+      specify %(the default should be 'Continue') do
+        expect(GOVUKDesignSystemFormBuilder.config.default_submit_button_text).to eql('Continue')
+      end
 
-      subject { builder.send(*args) }
+      context 'setting a new default' do
+        let(:default_submit_button_text) { 'Make it so, number one' }
 
-      before do
-        GOVUKDesignSystemFormBuilder.configure do |conf|
-          conf.default_submit_button_text = default_submit_button_text
+        before do
+          GOVUKDesignSystemFormBuilder.configure do |conf|
+            conf.default_submit_button_text = default_submit_button_text
+          end
+        end
+
+        specify 'should use the default value when no override supplied' do
+          expect(subject).to have_tag('input', with: { type: 'submit', value: default_submit_button_text })
+        end
+
+        context %(overriding with 'Engage') do
+          let(:submit_button_text) { 'Engage' }
+          let(:args) { [method, submit_button_text] }
+
+          specify 'should use supplied value when overridden' do
+            expect(subject).to have_tag('input', with: { type: 'submit', value: submit_button_text })
+          end
         end
       end
+    end
 
-      specify 'should use the default value when no override supplied' do
-        expect(subject).to have_tag('input', with: { type: 'submit', value: default_submit_button_text })
+    describe 'validation' do
+      # NOTE:
+      #  `validate: false` = formnovalidate attribute present
+      #  `validate: true`  = formnovalidate attribute absent
+      specify %(the default should be false) do
+        expect(GOVUKDesignSystemFormBuilder.config.default_submit_validate).to be(false)
       end
 
-      context %(overriding with 'Engage') do
-        let(:submit_button_text) { 'Engage' }
-        let(:args) { [method, submit_button_text] }
+      context 'setting the default to true' do
+        before do
+          GOVUKDesignSystemFormBuilder.configure do |conf|
+            conf.default_submit_validate = true
+          end
+        end
 
-        subject { builder.send(*args) }
+        specify 'should have no formnovalidate attribute' do
+          expect(parsed_subject.at_css('input').attributes.keys).not_to include('formnovalidate')
+        end
 
-        specify 'should use supplied value when overridden' do
-          expect(subject).to have_tag('input', with: { type: 'submit', value: submit_button_text })
+        context %(overriding with false) do
+          let(:kwargs) { { validate: false } }
+
+          specify 'should have a formnovalidate attribute' do
+            expect(subject).to have_tag('input', with: { type: 'submit', formnovalidate: 'formnovalidate' })
+          end
         end
       end
     end
