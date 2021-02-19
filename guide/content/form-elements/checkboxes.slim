@@ -53,14 +53,6 @@ section
         the results. Using smaller checkboxes lets users see and change search
         filters without distracting them from the main content.
 
-    blockquote
-      p.govuk-body
-        | If a checkbox is unchecked when its form is submitted, there is no value
-          submitted to the server to represent its unchecked state
-
-      footer
-        == link_to('Mozilla Developer Network Documentation', 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#Value')
-
     p.govuk-body
       | To address the empty submission problem outlined above, Rails generates hidden fields with no
         value to represent the unchecked state. This is taken care of by default when using <code>govuk_collection_check_boxes</code>
@@ -81,10 +73,19 @@ section
         buttons. This ensures the user has understood the question and is
         actively selecting the appropriate answer.
 
-    p.govuk-body.important
-      | Note that the <code>multiple</code> keyword on
-        <code>govuk_check_boxes_fieldset</code> changes the hidden field's
-        <code>name</code> attribute to the Rails' single attribute syntax. It is
-        required to prevent unnecessary hidden fields from being generated.
+    p.govuk-body
+      | Note that <code>multiple: false</code> is passed to both the
+        <code>#govuk_check_boxes_fieldset</code> and
+        <code>#govuk_check_box</code> helpers. They're required to
+        ensure only a single hidden field is rendered and its <code>name</code>
+        matches that of the single checkbox.
+
+    blockquote
+      p.govuk-body
+        | When no corresponding hidden field is present, an unchecked check box
+          will result in no value being submitted to the server.
+
+      footer
+        == link_to("Mozilla Developer Network Documentation", mdn_checkbox_value_link)
 
 == render('/partials/related-info.*', links: checkbox_info)
