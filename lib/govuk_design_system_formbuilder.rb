@@ -60,6 +60,7 @@ module GOVUKDesignSystemFormBuilder
     default_error_summary_title: 'There is a problem',
     default_collection_check_boxes_include_hidden: true,
     default_collection_radio_buttons_include_hidden: true,
+    default_submit_validate: false,
 
     localisation_schema_fallback: %i(helpers __context__),
     localisation_schema_label: nil,
