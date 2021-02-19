@@ -89,9 +89,5 @@ module Helpers
     def nhs_design_system_link
       'https://service-manual.nhs.uk/design-system'
     end
-
-    def mdn_checkbox_value_link
-      'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#Value'
-    end
   end
 end
