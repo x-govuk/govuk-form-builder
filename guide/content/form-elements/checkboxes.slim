@@ -5,16 +5,17 @@ title: Check boxes
 h1.govuk-heading-xl Checkboxes
 
 p.govuk-body
-  | The checkboxes component allows users to:
+  | Checkboxes allow users to:
 
 ul.govuk-list.govuk-list--bullet
   li #{link_to("select multiple options from a list", "#generating-a-collection-of-checkboxes").html_safe}
   li #{link_to("toggle a single option on or off", "#generating-a-single-checkbox").html_safe}
 
 p.govuk-body
-  | By default the form builder will automatically inject hidden inputs into
-    checkbox fieldsets. This ensures that a parameter is submitted with the form
-    even if no checkboxes have been checked.
+  | By default the form builder's checkbox helpers will automatically inject a
+    hidden field. The hidden field ensures that a parameter is always submitted
+    with the form, even when no checkboxes have been checked, allowing options
+    #{link_to("to be deselected", rails_checkbox_gotcha_link).html_safe}.
  
 section
 
@@ -76,7 +77,7 @@ section
 
       p.govuk-body
         | They're required to ensure the both checkbox's and hidden field's
-          <code>name</code> is generated in the format that Rails expects for a
-          single attribute.
+          <code>name</code> attribute is generated in the format that Rails
+          expects for a single field.
 
 == render('/partials/related-info.*', links: checkbox_info)
