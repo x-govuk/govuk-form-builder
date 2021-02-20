@@ -89,5 +89,9 @@ module Helpers
     def nhs_design_system_link
       'https://service-manual.nhs.uk/design-system'
     end
+
+    def rails_checkbox_gotcha_link
+      'https://api.rubyonrails.org/v6.1/classes/ActionView/Helpers/FormHelper.html#method-i-check_box-label-Gotcha'
+    end
   end
 end

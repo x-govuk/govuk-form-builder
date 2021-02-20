@@ -4,16 +4,19 @@ title: Check boxes
 
 h1.govuk-heading-xl Checkboxes
 
-p.govuk-body-l
-  | The checkboxes component allows users to select one or more options.
+p.govuk-body
+  | Checkboxes allow users to:
+
+ul.govuk-list.govuk-list--bullet
+  li #{link_to("select multiple options from a list", "#generating-a-collection-of-checkboxes").html_safe}
+  li #{link_to("toggle a single option on or off", "#generating-a-single-checkbox").html_safe}
 
 p.govuk-body
-  | Use the checkboxes component when you need to help users:
-
-  ul.govuk-list.govuk-list--bullet
-    li select multiple options from a list
-    li == link_to("toggle a single option on or off", "#generating-a-single-checkbox")
-
+  | By default the form builder's checkbox helpers will automatically inject a
+    hidden field. The hidden field ensures that a parameter is always submitted
+    with the form, even when no checkboxes have been checked, allowing options
+    #{link_to("to be deselected", rails_checkbox_gotcha_link).html_safe}.
+ 
 section
 
   == render('/partials/example-fig.*',
@@ -53,38 +56,28 @@ section
         the results. Using smaller checkboxes lets users see and change search
         filters without distracting them from the main content.
 
-    blockquote
-      p.govuk-body
-        | If a checkbox is unchecked when its form is submitted, there is no value
-          submitted to the server to represent its unchecked state
-
-      footer
-        == link_to('Mozilla Developer Network Documentation', 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#Value')
-
-    p.govuk-body
-      | To address the empty submission problem outlined above, Rails generates hidden fields with no
-        value to represent the unchecked state. This is taken care of by default when using <code>govuk_collection_check_boxes</code>
-        and <code>govuk_collection_check_boxes</code> for multiple values. When using <code>govuk_collection_check_boxes</code> for a single value,
-        usually a boolean toggle or confirmation, we need to take an exta step and pass in <code>multiple: false</code>.
-
   == render('/partials/example-fig.*',
     caption: "Generating a single checkbox",
     code: single_checkbox) do
 
     p.govuk-body
-      | Single checkboxes can be used to toggle boolean fields. This pattern
-        is most-commonly used for accepting terms and conditions or changing
-        settings.
+      | Single checkboxes are usually used for boolean fields like accepting
+        terms and conditions or toggling a setting.
 
     p.govuk-body
       | When asking users questions, favour the use of 'Yes' and 'No' radio
         buttons. This ensures the user has understood the question and is
         actively selecting the appropriate answer.
 
-    p.govuk-body.important
-      | Note that the <code>multiple</code> keyword on
-        <code>govuk_check_boxes_fieldset</code> changes the hidden field's
-        <code>name</code> attribute to the Rails' single attribute syntax. It is
-        required to prevent unnecessary hidden fields from being generated.
+    div.important
+      p.govuk-body
+        | Note that in this example <code>multiple: false</code> is passed to
+          both the <code>#govuk_check_boxes_fieldset</code> and
+          <code>#govuk_check_box</code> helpers. 
+
+      p.govuk-body
+        | They're required to ensure the both checkbox's and hidden field's
+          <code>name</code> attribute is generated in the format that Rails
+          expects for a single field.
 
 == render('/partials/related-info.*', links: checkbox_info)
