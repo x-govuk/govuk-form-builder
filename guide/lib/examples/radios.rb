@@ -49,7 +49,7 @@ module Examples
       <<~SNIPPET
         = f.govuk_radio_buttons_fieldset(:old_department_id, legend: { size: 'm', text: 'Which department do you work in?' }) do
           = f.govuk_radio_button :old_department_id, 'it', label: { text: 'Information Technology' }, link_errors: true
-          = f.govuk_radio_button :old_department_id, 'marketing', label: { text: 'Marketing' }
+          = f.govuk_radio_button :old_department_id, 'marketing', label: { text: 'Marketing' }, hint: { text: 'Includes Sales and Digital Marketing' }
           = f.govuk_radio_divider
           = f.govuk_radio_button :old_department_id, 'other', label: { text: 'Other' } do
             = f.govuk_text_field :old_department_description,
