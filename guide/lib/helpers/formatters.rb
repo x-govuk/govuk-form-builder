@@ -28,11 +28,11 @@ module Helpers
           generator: Temple::Generators::RailsOutputBuffer
         )
           .call(raw)
-          .gsub(/ _slim_controls[\d] =/, "=")        # remove _slim_controlsX assignment (where X is an integer)
-          .gsub(/do\n\s+%>/, "do %>")                # close blocks on the same line
-          .gsub(/%><%/, "%>\n<%")                    # ensure ERB tags are on separate lines
-          .gsub(/<%= _slim_controls[\d] %>/, '')     # remove _slim_controlsX var display, we've handled it above
-          .gsub(/,\n/, ', ')                         # don't leave newlines between args, it breaks indentation
+          .gsub(/ _slim_controls\d =/, "=")    # remove _slim_controlsX assignment (where X is an integer)
+          .gsub(/do\n\s+%>/, "do %>")          # close blocks on the same line
+          .gsub(/%><%/, "%>\n<%")              # ensure ERB tags are on separate lines
+          .gsub(/<%= _slim_controls\d %>/, '') # remove _slim_controlsX var display, we've handled it above
+          .gsub(/,\n/, ', ')                   # don't leave newlines between args, it breaks indentation
       )
     end
 
@@ -47,7 +47,7 @@ module Helpers
           html
             .gsub(">", ">\n")
             .gsub("\<\/", "\n\<\/")
-            .gsub(/\>\s+\<\/textarea\>/, "></textarea>")
+            .gsub(/>\s+<\/textarea>/, "></textarea>")
             .strip
         )
     end
