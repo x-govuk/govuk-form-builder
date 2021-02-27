@@ -13,7 +13,7 @@ class Being
     :name,
     :born_on,
     :gender,
-    :over_18,
+    :over18,
     :favourite_colour,
     :favourite_colour_reason,
     :projects,
@@ -24,6 +24,10 @@ class Being
     :stationery,
     :stationery_choice
   )
+
+  def initialize(_args = nil)
+    # do nothing
+  end
 end
 
 class Person < Being
@@ -76,6 +80,8 @@ class Guest < Being
     self.projects         = projects
     self.cv               = cv
     self.born_on          = born_on
+
+    super
   end
 
   def self.example
