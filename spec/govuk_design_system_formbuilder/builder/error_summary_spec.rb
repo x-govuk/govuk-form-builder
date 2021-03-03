@@ -136,6 +136,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           describe 'radio button fieldsets' do
             let(:object) { Person.new(favourite_colour: nil) }
             let(:identifier) { 'person-favourite-colour-field-error' }
+            let(:second_radio_identifier) { 'person-favourite-colour-green-field' }
             subject do
               builder.tag.div do
                 builder.safe_join(
@@ -166,6 +167,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
             specify 'there should be a label associated with the error link target' do
               expect(subject).to have_tag('label', with: { for: identifier }, count: 1)
+            end
+
+            specify 'the second radio button should have a regular id' do
+              expect(subject).to have_tag('input', with: { id: second_radio_identifier })
             end
           end
 
@@ -201,6 +206,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           describe 'check box fieldsets' do
             let(:object) { Person.new }
             let(:identifier) { 'person-projects-field-error' }
+            let(:second_checkbox_identifier) { %(person-projects-#{project_y.id}-field) }
             subject do
               builder.tag.div do
                 builder.safe_join(
@@ -231,6 +237,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
             specify 'there should be a label associated with the error link target' do
               expect(subject).to have_tag('label', with: { for: identifier }, count: 1)
+            end
+
+            specify 'the second radio button should have a regular id' do
+              expect(subject).to have_tag('input', with: { id: second_checkbox_identifier })
             end
           end
 
