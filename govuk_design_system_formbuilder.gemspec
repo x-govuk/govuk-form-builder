@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
     s.add_dependency(*VersionFormatter.new(lib, rails_version, exact_rails_version).to_a)
   end
 
-  s.add_development_dependency("rubocop-govuk", "= 3.17.2")
+  s.add_development_dependency("rubocop-govuk", "= 4.0.0.pre.1")
   s.add_development_dependency("pry", "~> 0.13.0")
   s.add_development_dependency("pry-byebug", "~> 3.9", ">= 3.9.0")
   s.add_development_dependency("rspec-html-matchers", "~> 0")
@@ -45,4 +45,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency("sassc", "~> 2.4.0")
   s.add_development_dependency("sass")
   s.add_development_dependency("slim", "~> 4.1.0")
+  s.add_development_dependency("puma", "~> 5.2")
 end
