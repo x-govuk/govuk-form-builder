@@ -3,7 +3,7 @@ module GOVUKDesignSystemFormBuilder
     class Caption < Base
       include Traits::Localisation
 
-      def initialize(builder, object_name, attribute_name, text: nil, size: nil, **kwargs)
+      def initialize(builder, object_name, attribute_name, text: nil, size: config.default_caption_size, **kwargs)
         super(builder, object_name, attribute_name)
 
         @text            = text(text)
@@ -28,7 +28,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def size_class(size)
-        case size || config.default_caption_size
+        case size
         when 'xl' then %(#{brand}-caption-xl)
         when 'l'  then %(#{brand}-caption-l)
         when 'm'  then %(#{brand}-caption-m)
