@@ -86,13 +86,13 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def prefix
-        return nil if @prefix_text.blank?
+        return if @prefix_text.blank?
 
         tag.span(@prefix_text, class: %(#{brand}-input__prefix), **affix_options)
       end
 
       def suffix
-        return nil if @suffix_text.blank?
+        return if @suffix_text.blank?
 
         tag.span(@suffix_text, class: %(#{brand}-input__suffix), **affix_options)
       end

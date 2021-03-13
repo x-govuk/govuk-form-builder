@@ -8,7 +8,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        return nil if @content.blank?
+        return if @content.blank?
 
         tag.div(id: supplemental_id) { @content }
       end

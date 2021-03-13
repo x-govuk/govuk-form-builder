@@ -28,7 +28,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        return nil unless active?
+        return unless active?
 
         if @tag.present?
           content_tag(@tag, class: %(#{brand}-label-wrapper)) { label }
@@ -72,13 +72,13 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def radio_class
-        return nil unless @radio
+        return unless @radio
 
         %(#{brand}-radios__label)
       end
 
       def checkbox_class
-        return nil unless @checkbox
+        return unless @checkbox
 
         %(#{brand}-checkboxes__label)
       end

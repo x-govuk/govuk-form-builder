@@ -12,7 +12,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        return nil unless active?
+        return unless active?
 
         tag.span(@text, class: @size_class, **@html_attributes)
       end

@@ -6,7 +6,7 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Error
 
       def html
-        return nil unless has_errors?
+        return unless has_errors?
 
         tag.span(class: %(#{brand}-error-message), id: error_id) do
           safe_join([hidden_prefix, message])

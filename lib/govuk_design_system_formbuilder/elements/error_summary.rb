@@ -13,7 +13,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        return nil unless object_has_errors?
+        return unless object_has_errors?
 
         tag.div(**attributes(@html_attributes)) do
           safe_join([title, summary])

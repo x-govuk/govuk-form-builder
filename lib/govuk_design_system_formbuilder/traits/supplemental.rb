@@ -2,7 +2,7 @@ module GOVUKDesignSystemFormBuilder
   module Traits
     module Supplemental
       def supplemental_id
-        return nil if @block_content.blank?
+        return if @block_content.blank?
 
         build_id('supplemental')
       end

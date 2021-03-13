@@ -2,7 +2,7 @@ module GOVUKDesignSystemFormBuilder
   module Traits
     module Error
       def error_id
-        return nil unless has_errors?
+        return unless has_errors?
 
         build_id('error')
       end

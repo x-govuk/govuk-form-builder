@@ -2,7 +2,7 @@ module GOVUKDesignSystemFormBuilder
   module Traits
     module Hint
       def hint_id
-        return nil unless hint_element.active?
+        return unless hint_element.active?
 
         build_id('hint')
       end
