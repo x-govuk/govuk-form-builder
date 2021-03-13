@@ -39,11 +39,9 @@ module GOVUKDesignSystemFormBuilder
       def legend_content
         caption_and_text = safe_join([caption_element, @text])
 
-        if @tag.present?
-          content_tag(@tag, class: heading_classes) { caption_and_text }
-        else
-          caption_and_text
-        end
+        return caption_and_text if @tag.blank?
+
+        content_tag(@tag, class: heading_classes) { caption_and_text }
       end
 
       def retrieve_text(supplied_text)
