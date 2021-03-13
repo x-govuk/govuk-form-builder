@@ -31,7 +31,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def affixed_input
-        content_tag('div', class: %(#{brand}-input__wrapper)) do
+        tag.div(class: %(#{brand}-input__wrapper)) do
           safe_join([prefix, input, suffix])
         end
       end
