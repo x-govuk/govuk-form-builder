@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.description = "A Rails form builder that generates form inputs adhering to the GOV.UK Design System"
   s.license     = "MIT"
   s.metadata    = METADATA
-  s.files = Dir["{app,lib}/**/*", "MIT-LICENSE", "README.md"]
+  s.files       = Dir["{app,lib}/**/*", "LICENSE", "README.md"]
 
   exact_rails_version = ENV.has_key?("RAILS_VERSION")
   rails_version = ENV.fetch("RAILS_VERSION") { "5.2.3" }
