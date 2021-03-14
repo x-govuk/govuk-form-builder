@@ -25,7 +25,7 @@ module GOVUKDesignSystemFormBuilder
 
       def html
         Containers::CharacterCount.new(@builder, **character_count_options).html do
-          Containers::FormGroup.new(@builder, @object_name, @attribute_name, **@form_group).html do
+          Containers::FormGroup.new(*bound, **@form_group).html do
             safe_join([label_element, supplemental_content, hint_element, error_element, text_area, limit_description])
           end
         end

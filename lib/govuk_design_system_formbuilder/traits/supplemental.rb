@@ -10,7 +10,7 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def supplemental_content
-        @supplemental_content ||= Containers::Supplemental.new(@builder, @object_name, @attribute_name, @block_content)
+        @supplemental_content ||= Containers::Supplemental.new(*bound, @block_content)
       end
     end
   end

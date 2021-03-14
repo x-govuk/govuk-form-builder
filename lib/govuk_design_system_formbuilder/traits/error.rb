@@ -10,7 +10,7 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def error_element
-        @error_element ||= Elements::ErrorMessage.new(@builder, @object_name, @attribute_name)
+        @error_element ||= Elements::ErrorMessage.new(*bound)
       end
     end
   end
