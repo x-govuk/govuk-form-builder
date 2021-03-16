@@ -813,6 +813,7 @@ module GOVUKDesignSystemFormBuilder
     #   client-side validation provided by the browser. This is to provide a more consistent and accessible user
     #   experience
     # @param disabled [Boolean] makes the button disabled when true
+    # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     # @param block [Block] When content is passed in via a block the submit element and the block content will
     #   be wrapped in a +<div class="govuk-button-group">+ which will space the buttons and links within
     #   evenly.
@@ -829,8 +830,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_submit "Proceed", prevent_double_click: true do
     #     = link_to 'Cancel', some_other_path, class: 'govuk-button__secondary'
     #
-    def govuk_submit(text = config.default_submit_button_text, warning: false, secondary: false, classes: nil, prevent_double_click: true, validate: config.default_submit_validate, disabled: false, &block)
-      Elements::Submit.new(self, text, warning: warning, secondary: secondary, classes: classes, prevent_double_click: prevent_double_click, validate: validate, disabled: disabled, &block).html
+    def govuk_submit(text = config.default_submit_button_text, warning: false, secondary: false, classes: nil, prevent_double_click: true, validate: config.default_submit_validate, disabled: false, **kwargs, &block)
+      Elements::Submit.new(self, text, warning: warning, secondary: secondary, classes: classes, prevent_double_click: prevent_double_click, validate: validate, disabled: disabled, **kwargs, &block).html
     end
 
     # Generates three inputs for the +day+, +month+ and +year+ components of a date
@@ -858,6 +859,7 @@ module GOVUKDesignSystemFormBuilder
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
+    # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input group
     # @param date_of_birth [Boolean] if +true+ {https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete#Values birth date auto completion attributes}
     #   will be added to the inputs
@@ -877,8 +879,8 @@ module GOVUKDesignSystemFormBuilder
     # @example A date input with legend supplied as a proc
     #  = f.govuk_date_field :finishes_on,
     #    legend: -> { tag.h3('Which category do you belong to?') }
-    def govuk_date_field(attribute_name, hint: {}, legend: {}, caption: {}, date_of_birth: false, omit_day: false, form_group: {}, wildcards: false, &block)
-      Elements::Date.new(self, object_name, attribute_name, hint: hint, legend: legend, caption: caption, date_of_birth: date_of_birth, omit_day: omit_day, form_group: form_group, wildcards: wildcards, &block).html
+    def govuk_date_field(attribute_name, hint: {}, legend: {}, caption: {}, date_of_birth: false, omit_day: false, form_group: {}, wildcards: false, **kwargs, &block)
+      Elements::Date.new(self, object_name, attribute_name, hint: hint, legend: legend, caption: caption, date_of_birth: date_of_birth, omit_day: omit_day, form_group: form_group, wildcards: wildcards, **kwargs, &block).html
     end
 
     # Generates a summary of errors in the form, each linking to the corresponding
@@ -912,6 +914,7 @@ module GOVUKDesignSystemFormBuilder
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
+    # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     #
     # @example A fieldset containing address fields
     #   = f.govuk_fieldset legend: { text: 'Address' } do
@@ -927,8 +930,8 @@ module GOVUKDesignSystemFormBuilder
     # @see https://design-system.service.gov.uk/components/fieldset/ GOV.UK fieldset
     # @see https://design-system.service.gov.uk/styles/typography/#headings-with-captions Headings with captions
     # @return [ActiveSupport::SafeBuffer] HTML output
-    def govuk_fieldset(legend: { text: 'Fieldset heading' }, caption: {}, described_by: nil, &block)
-      Containers::Fieldset.new(self, legend: legend, caption: caption, described_by: described_by, &block).html
+    def govuk_fieldset(legend: { text: 'Fieldset heading' }, caption: {}, described_by: nil, **kwargs, &block)
+      Containers::Fieldset.new(self, legend: legend, caption: caption, described_by: described_by, **kwargs, &block).html
     end
 
     # Generates an input of type +file+

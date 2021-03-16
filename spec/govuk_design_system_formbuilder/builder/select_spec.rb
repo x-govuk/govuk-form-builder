@@ -61,7 +61,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:extra_args) do
         {
           required: { provided: true, output: 'required' },
-          autofocus: { provided: true, output: 'autofocus' }
+          autofocus: { provided: true, output: 'autofocus' },
+          data: { test: 'abc' }
         }
       end
 
@@ -70,7 +71,13 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       specify 'select tag should have the extra attributes' do
         select_tag = parsed_subject.at_css('select')
         extract_args(extra_args, :output).each do |key, val|
-          expect(select_tag[key]).to eql(val)
+          if key == 'data' && val.respond_to?('each')
+            val.each do |dataKey, dataVal|
+              expect(select_tag[%(data-#{key})]).to eql(dataVal)
+            end
+          else
+            expect(select_tag[key]).to eql(val)
+          end
         end
       end
     end

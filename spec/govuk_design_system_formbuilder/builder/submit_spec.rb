@@ -157,5 +157,18 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
     end
+
+    describe 'extra arguments' do
+      subject { builder.send(*args.push('Create'), data: { test: 'abc' }) }
+
+      specify 'should add the extra attributes to the submit' do
+        expect(subject).to have_tag(
+          'input',
+          with: {
+            'data-test': 'abc'
+          }
+        )
+      end
+    end
   end
 end

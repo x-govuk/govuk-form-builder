@@ -3,7 +3,7 @@ module GOVUKDesignSystemFormBuilder
     class Submit < Base
       using PrefixableArray
 
-      def initialize(builder, text, warning:, secondary:, classes:, prevent_double_click:, validate:, disabled:, &block)
+      def initialize(builder, text, warning:, secondary:, classes:, prevent_double_click:, validate:, disabled:, **kwargs, &block)
         super(builder, nil, nil)
 
         fail ArgumentError, 'buttons can be warning or secondary' if warning && secondary
@@ -15,6 +15,7 @@ module GOVUKDesignSystemFormBuilder
         @classes              = classes
         @validate             = validate
         @disabled             = disabled
+        @html_attributes      = kwargs
         @block_content        = capture { block.call } if block_given?
       end
 
@@ -33,7 +34,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def submit
-        @builder.submit(@text, class: classes, **options)
+        @builder.submit(@text, class: classes, **options, **@html_attributes)
       end
 
       def classes

@@ -52,12 +52,13 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     describe 'additional attributes' do
-      subject { builder.send(method, attribute, accept: 'image/*', multiple: true) }
+      subject { builder.send(method, attribute, accept: 'image/*', multiple: true, data: { test: 'abc' }) }
 
       specify 'input should have additional attributes' do
         expect(subject).to have_tag('input', with: {
           accept: 'image/*',
-          multiple: 'multiple'
+          multiple: 'multiple',
+          'data-test': 'abc'
         })
       end
     end
