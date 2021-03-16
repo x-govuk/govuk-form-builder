@@ -224,5 +224,13 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         expect(subject).to have_tag('input', with: { id: year_identifier, pattern: "[0-9]*" })
       end
     end
+
+    describe "additional attributes" do
+      subject { builder.send(*args, data: { test: "abc" }) }
+
+      specify "should have additional attributes" do
+        expect(subject).to have_tag('div', with: { 'data-test': 'abc' })
+      end
+    end
   end
 end

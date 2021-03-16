@@ -193,14 +193,15 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
   describe 'extra arguments' do
     let(:placeholder) { 'Once upon a time…' }
-    subject { builder.send(*args, placeholder: placeholder, required: true) }
+    subject { builder.send(*args, placeholder: placeholder, required: true, data: { test: 'abc' }) }
 
     specify 'should add the extra attributes to the textarea' do
       expect(subject).to have_tag(
         'textarea',
         with: {
           placeholder: placeholder,
-          required: 'required'
+          required: 'required',
+          'data-test': 'abc'
         }
       )
     end

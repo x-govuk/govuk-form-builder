@@ -9,20 +9,21 @@ module GOVUKDesignSystemFormBuilder
 
       SEGMENTS = { day: '3i', month: '2i', year: '1i' }.freeze
 
-      def initialize(builder, object_name, attribute_name, legend:, caption:, hint:, omit_day:, form_group:, wildcards:, date_of_birth: false, &block)
+      def initialize(builder, object_name, attribute_name, legend:, caption:, hint:, omit_day:, form_group:, wildcards:, date_of_birth: false, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
 
-        @legend        = legend
-        @caption       = caption
-        @hint          = hint
-        @date_of_birth = date_of_birth
-        @omit_day      = omit_day
-        @form_group    = form_group
-        @wildcards     = wildcards
+        @legend          = legend
+        @caption         = caption
+        @hint            = hint
+        @date_of_birth   = date_of_birth
+        @omit_day        = omit_day
+        @form_group      = form_group
+        @wildcards       = wildcards
+        @html_attributes = kwargs
       end
 
       def html
-        Containers::FormGroup.new(@builder, @object_name, @attribute_name, **@form_group).html do
+        Containers::FormGroup.new(@builder, @object_name, @attribute_name, **@form_group, **@html_attributes).html do
           Containers::Fieldset.new(@builder, @object_name, @attribute_name, **fieldset_options).html do
             safe_join([supplemental_content, hint_element, error_element, date])
           end

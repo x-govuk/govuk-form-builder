@@ -116,5 +116,17 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
     end
+
+    context 'additional attributes' do
+      subject do
+        builder.send(method, data: { test: 'abc' }) do
+          builder.govuk_text_field(:name)
+        end
+      end
+
+      specify 'field should have additional attributes' do
+        expect(subject).to have_tag('fieldset', with: { 'data-test': 'abc' })
+      end
+    end
   end
 end
