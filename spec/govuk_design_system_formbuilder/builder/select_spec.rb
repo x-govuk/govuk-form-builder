@@ -34,7 +34,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     it_behaves_like 'a field that allows extra HTML attributes to be set' do
-      let(:element) { 'select' }
+      let(:described_element) { 'select' }
+      let(:expected_class) { 'govuk-select' }
     end
 
     it_behaves_like 'a field that supports setting the label via localisation'
@@ -58,16 +59,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     specify 'select box should contain the correct values and entries' do
       colours.each do |colour|
         expect(subject).to have_tag('select > option', text: colour.name, with: { value: colour.id })
-      end
-    end
-
-    context 'when custom classes are supplied via html_options' do
-      let(:custom_classes) { %w(fancy-select purple) }
-
-      subject { builder.send(*args, html_options: { class: custom_classes }) }
-
-      specify %(the select element should have the provided classes) do
-        expect(subject).to have_tag('select', with: { class: custom_classes.push('govuk-select') })
       end
     end
 

@@ -67,7 +67,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
   it_behaves_like 'a field that supports setting the hint via localisation'
 
   it_behaves_like 'a field that allows extra HTML attributes to be set' do
-    let(:element) { 'textarea' }
+    let(:described_element) { 'textarea' }
+    let(:expected_class) { 'govuk-textarea' }
   end
 
   it_behaves_like 'a field that accepts a plain ruby object' do

@@ -51,7 +51,8 @@ shared_examples 'a regular input' do |method_identifier, field_type|
   end
 
   it_behaves_like 'a field that allows extra HTML attributes to be set' do
-    let(:element) { 'input' }
+    let(:described_element) { 'input' }
+    let(:expected_class) { 'govuk-input' }
   end
 
   describe 'width' do

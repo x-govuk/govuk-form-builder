@@ -20,7 +20,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     include_examples 'HTML formatting checks'
 
     it_behaves_like 'a field that allows extra HTML attributes to be set' do
-      let(:element) { 'fieldset' }
+      let(:described_element) { 'fieldset' }
+      let(:expected_class) { 'govuk-fieldset' }
     end
 
     specify 'output should be a fieldset containing the block contents' do

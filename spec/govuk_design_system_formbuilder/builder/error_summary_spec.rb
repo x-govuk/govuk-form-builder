@@ -327,7 +327,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       before { object.valid? }
 
       it_behaves_like 'a field that allows extra HTML attributes to be set' do
-        let(:element) { 'div' }
+        let(:described_element) { 'div' }
+        let(:expected_class) { 'govuk-error-summary' }
       end
     end
   end

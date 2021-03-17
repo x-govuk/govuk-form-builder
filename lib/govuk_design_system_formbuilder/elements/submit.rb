@@ -35,7 +35,19 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def submit
-        @builder.submit(@text, class: classes, **attributes(@html_attributes))
+        @builder.submit(@text, **attributes(@html_attributes))
+      end
+
+      def options
+        {
+          formnovalidate: !@validate,
+          disabled: @disabled,
+          class: classes,
+          data: {
+            module: %(#{brand}-button),
+            'prevent-double-click': @prevent_double_click
+          }.select { |_k, v| v.present? }
+        }
       end
 
       def classes
@@ -44,17 +56,6 @@ module GOVUKDesignSystemFormBuilder
           .push(warning_class, secondary_class, disabled_class, custom_classes)
           .flatten
           .compact
-      end
-
-      def options
-        {
-          formnovalidate: !@validate,
-          disabled: @disabled,
-          data: {
-            module: %(#{brand}-button),
-            'prevent-double-click': @prevent_double_click
-          }.select { |_k, v| v.present? }
-        }
       end
 
       def warning_class

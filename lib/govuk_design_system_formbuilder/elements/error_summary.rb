@@ -15,7 +15,7 @@ module GOVUKDesignSystemFormBuilder
       def html
         return nil unless object_has_errors?
 
-        tag.div(class: summary_class, **attributes(@html_attributes)) do
+        tag.div(**attributes(@html_attributes)) do
           safe_join([title, summary])
         end
       end
@@ -48,6 +48,10 @@ module GOVUKDesignSystemFormBuilder
         '#'.concat(target)
       end
 
+      def classes
+        Array.wrap(summary_class)
+      end
+
       def summary_class(part = nil)
         if part
           %(#{brand}-error-summary).concat('__', part)
@@ -74,6 +78,7 @@ module GOVUKDesignSystemFormBuilder
 
       def options
         {
+          class: classes,
           tabindex: -1,
           role: 'alert',
           data: {

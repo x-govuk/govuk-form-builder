@@ -7,6 +7,7 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Hint
       include Traits::Label
       include Traits::Supplemental
+      include Traits::HTMLAttributes
 
       def initialize(builder, object_name, attribute_name, hint:, label:, caption:, form_group:, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
@@ -27,7 +28,7 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def file
-        @builder.file_field(@attribute_name, **options, **@html_attributes)
+        @builder.file_field(@attribute_name, attributes(@html_attributes))
       end
 
       def options

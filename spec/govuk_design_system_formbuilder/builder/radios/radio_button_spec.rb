@@ -32,7 +32,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     it_behaves_like 'a field that allows extra HTML attributes to be set' do
-      let(:element) { 'input' }
+      let(:described_element) { 'input' }
+      let(:expected_class) { 'govuk-radios__input' }
     end
 
     it_behaves_like 'a field that supports setting the label via localisation'

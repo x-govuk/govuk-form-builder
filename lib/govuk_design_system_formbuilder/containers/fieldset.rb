@@ -14,7 +14,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        tag.fieldset(attributes(@html_attributes)) do
+        tag.fieldset(**attributes(@html_attributes)) do
           safe_join([legend_element, (@block_content || yield)])
         end
       end
@@ -29,7 +29,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def classes
-        %(#{brand}-fieldset)
+        [%(#{brand}-fieldset)]
       end
 
       def legend_element
