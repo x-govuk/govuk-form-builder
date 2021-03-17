@@ -1,4 +1,5 @@
 # .rubocop.yml
+---
 inherit_gem:
   rubocop-govuk:
     - config/default.yml
@@ -34,6 +35,8 @@ Style/AsciiComments:
 Style/OptionalBooleanParameter:
   Enabled: false
 Style/CommentAnnotation:
+  Enabled: false
+Style/EmptyCaseCondition:
   Enabled: false
 Style/FormatString:
   EnforcedStyle: format
