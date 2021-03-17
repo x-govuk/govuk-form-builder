@@ -10,11 +10,18 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     let(:example_block) { proc { builder.tag.span(inner_text) } }
 
+    let(:args) { [method] }
+    let(:kwargs) { { legend: legend_options } }
+
     subject do
-      builder.send(method, legend: legend_options, &example_block)
+      builder.send(*args, **kwargs, &example_block)
     end
 
     include_examples 'HTML formatting checks'
+
+    it_behaves_like 'a field that allows extra HTML attributes to be set' do
+      let(:element) { 'fieldset' }
+    end
 
     specify 'output should be a fieldset containing the block contents' do
       expect(subject).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
@@ -114,18 +121,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         specify 'output should contain no caption at all' do
           expect(subject).not_to have_tag('span', with: { class: caption_class })
         end
-      end
-    end
-
-    context 'additional attributes' do
-      subject do
-        builder.send(method, data: { test: 'abc' }) do
-          builder.govuk_text_field(:name)
-        end
-      end
-
-      specify 'field should have additional attributes' do
-        expect(subject).to have_tag('fieldset', with: { 'data-test': 'abc' })
       end
     end
   end

@@ -1,6 +1,8 @@
 module GOVUKDesignSystemFormBuilder
   module Containers
     class Fieldset < Base
+      include Traits::HTMLAttributes
+
       def initialize(builder, object_name = nil, attribute_name = nil, legend: {}, caption: {}, described_by: nil, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
 
@@ -12,7 +14,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        tag.fieldset(**options, **@html_attributes) do
+        tag.fieldset(attributes(@html_attributes)) do
           safe_join([legend_element, (@block_content || yield)])
         end
       end

@@ -8,10 +8,12 @@ shared_examples 'a field that allows extra HTML attributes to be set' do
   }
 
   let(:custom_attributes) { custom_attributes }
+
+  let(:example_block) { proc { builder.tag.span('block text') } }
   special_keys = %i(data aria)
 
   subject do
-    builder.send(*args, **extract_args(custom_attributes, :provided))
+    builder.send(*args, **extract_args(custom_attributes, :provided), &example_block)
   end
 
   describe 'input tag should have the extra attributes:' do
