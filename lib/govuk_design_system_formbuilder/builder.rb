@@ -598,6 +598,7 @@ module GOVUKDesignSystemFormBuilder
     #   container and only revealed when the radio button is picked
     # @param link_errors [Boolean] controls whether this radio button should be linked to from {#govuk_error_summary}
     #   from the error summary. <b>Should only be set to +true+ for the first radio button in a fieldset</b>
+    # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
     # @example A single radio button for our new favourite colour
@@ -605,8 +606,8 @@ module GOVUKDesignSystemFormBuilder
     #  = f.govuk_radio_buttons_fieldset :favourite_colour do
     #    = f.govuk_radio_button :favourite_colour, :red, label: { text: 'Red' }
     #
-    def govuk_radio_button(attribute_name, value, hint: {}, label: {}, link_errors: false, &block)
-      Elements::Radios::FieldsetRadioButton.new(self, object_name, attribute_name, value, hint: hint, label: label, link_errors: link_errors, &block).html
+    def govuk_radio_button(attribute_name, value, hint: {}, label: {}, link_errors: false, **kwargs, &block)
+      Elements::Radios::FieldsetRadioButton.new(self, object_name, attribute_name, value, hint: hint, label: label, link_errors: link_errors, **kwargs, &block).html
     end
 
     # Inserts a text divider into a list of radio buttons
@@ -776,6 +777,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @option label kwargs [Hash] additional arguments are applied as attributes on the +label+ element
     # @param multiple [Boolean] controls whether the check box is part of a collection or represents a single attribute
+    # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     # @param block [Block] any HTML passed in will form the contents of the fieldset
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
@@ -787,7 +789,7 @@ module GOVUKDesignSystemFormBuilder
     #     label: { text: 'Do you agree with our terms and conditions?' },
     #     hint: { text: 'You will not be able to proceed unless you do' }
     #
-    def govuk_check_box(attribute_name, value, unchecked_value = false, hint: {}, label: {}, link_errors: false, multiple: true, &block)
+    def govuk_check_box(attribute_name, value, unchecked_value = false, hint: {}, label: {}, link_errors: false, multiple: true, **kwargs, &block)
       Elements::CheckBoxes::FieldsetCheckBox.new(
         self,
         object_name,
@@ -798,6 +800,7 @@ module GOVUKDesignSystemFormBuilder
         label: label,
         link_errors: link_errors,
         multiple: multiple,
+        **kwargs,
         &block
       ).html
     end
