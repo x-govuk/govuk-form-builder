@@ -2,18 +2,20 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     class ErrorSummary < Base
       include Traits::Error
+      include Traits::HTMLAttributes
 
-      def initialize(builder, object_name, title, link_base_errors_to:)
+      def initialize(builder, object_name, title, link_base_errors_to:, **kwargs)
         super(builder, object_name, nil)
 
         @title               = title
         @link_base_errors_to = link_base_errors_to
+        @html_attributes     = kwargs
       end
 
       def html
         return nil unless object_has_errors?
 
-        tag.div(class: summary_class, **summary_options) do
+        tag.div(class: summary_class, **attributes(@html_attributes)) do
           safe_join([title, summary])
         end
       end
@@ -70,7 +72,7 @@ module GOVUKDesignSystemFormBuilder
         @builder.object.errors.any?
       end
 
-      def summary_options
+      def options
         {
           tabindex: -1,
           role: 'alert',

@@ -890,6 +890,7 @@ module GOVUKDesignSystemFormBuilder
     # @param title [String] the error summary heading
     # @param link_base_errors_to [Symbol,String] set the field that errors on +:base+ are linked
     #   to, as there won't be a field representing the object base.
+    # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the error summary +div+ element
     #
     # @note Only the first error in the +#errors+ array for each attribute will
     #   be included.
@@ -898,8 +899,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_error_summary 'Uh-oh, spaghettios'
     #
     # @see https://design-system.service.gov.uk/components/error-summary/ GOV.UK error summary
-    def govuk_error_summary(title = config.default_error_summary_title, link_base_errors_to: nil)
-      Elements::ErrorSummary.new(self, object_name, title, link_base_errors_to: link_base_errors_to).html
+    def govuk_error_summary(title = config.default_error_summary_title, link_base_errors_to: nil, **kwargs)
+      Elements::ErrorSummary.new(self, object_name, title, link_base_errors_to: link_base_errors_to, **kwargs).html
     end
 
     # Generates a fieldset containing the contents of the block

@@ -5,7 +5,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
   let(:method) { :govuk_error_summary }
 
   describe '#govuk_error_summary' do
-    subject { builder.send(method) }
+    let(:args) { [method] }
+    subject { builder.send(*args) }
 
     context 'when the object has errors' do
       before { object.valid? }
@@ -319,6 +320,14 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         specify 'the base field should be linked to' do
           expect(subject).to have_tag("a", text: error, with: { href: %(#person-base-field-error) })
         end
+      end
+    end
+
+    context 'extra attributes' do
+      before { object.valid? }
+
+      it_behaves_like 'a field that allows extra HTML attributes to be set' do
+        let(:element) { 'div' }
       end
     end
   end
