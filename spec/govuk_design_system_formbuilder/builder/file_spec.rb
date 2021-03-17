@@ -47,20 +47,12 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     it_behaves_like 'a field that supports setting the label caption via localisation'
     it_behaves_like 'a field that supports setting the hint via localisation'
 
-    it_behaves_like 'a field that accepts a plain ruby object' do
-      let(:described_element) { ['input', { with: { type: 'file' } }] }
+    it_behaves_like 'a field that allows extra HTML attributes to be set' do
+      let(:element) { 'input' }
     end
 
-    describe 'additional attributes' do
-      subject { builder.send(method, attribute, accept: 'image/*', multiple: true, data: { test: 'abc' }) }
-
-      specify 'input should have additional attributes' do
-        expect(subject).to have_tag('input', with: {
-          accept: 'image/*',
-          multiple: 'multiple',
-          'data-test': 'abc'
-        })
-      end
+    it_behaves_like 'a field that accepts a plain ruby object' do
+      let(:described_element) { ['input', { with: { type: 'file' } }] }
     end
   end
 end
