@@ -33,6 +33,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:described_element) { 'select' }
     end
 
+    it_behaves_like 'a field that allows extra HTML attributes to be set' do
+      let(:element) { 'select' }
+    end
+
     it_behaves_like 'a field that supports setting the label via localisation'
     it_behaves_like 'a field that supports setting the label caption via localisation'
     it_behaves_like 'a field that supports setting the hint via localisation'
@@ -54,31 +58,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     specify 'select box should contain the correct values and entries' do
       colours.each do |colour|
         expect(subject).to have_tag('select > option', text: colour.name, with: { value: colour.id })
-      end
-    end
-
-    context 'extra attributes' do
-      let(:extra_args) do
-        {
-          required: { provided: true, output: 'required' },
-          autofocus: { provided: true, output: 'autofocus' },
-          data: { test: 'abc' }
-        }
-      end
-
-      subject { builder.send(*args, html_options: extract_args(extra_args, :provided)) }
-
-      specify 'select tag should have the extra attributes' do
-        select_tag = parsed_subject.at_css('select')
-        extract_args(extra_args, :output).each do |key, val|
-          if key == 'data' && val.respond_to?('each')
-            val.each do |dataKey, dataVal|
-              expect(select_tag[%(data-#{key})]).to eql(dataVal)
-            end
-          else
-            expect(select_tag[key]).to eql(val)
-          end
-        end
       end
     end
 

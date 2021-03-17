@@ -412,7 +412,7 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_collection_select(:team, @teams, :id, :name) do
     #     label: -> { tag.h3("Which team did you represent?") }
     #
-    def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, html_options: {}, hint: {}, label: {}, caption: {}, form_group: {}, &block)
+    def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, hint: {}, label: {}, caption: {}, form_group: {}, **kwargs, &block)
       Elements::Select.new(
         self,
         object_name,
@@ -424,8 +424,8 @@ module GOVUKDesignSystemFormBuilder
         label: label,
         caption: caption,
         options: options,
-        html_options: html_options,
         form_group: form_group,
+        **kwargs,
         &block
       ).html
     end
