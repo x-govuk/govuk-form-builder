@@ -387,7 +387,6 @@ module GOVUKDesignSystemFormBuilder
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @option label kwargs [Hash] additional arguments are applied as attributes on the +label+ element
     # @param options [Hash] Options hash passed through to Rails' +collection_select+ helper
-    # @param html_options [Hash] HTML Options hash passed through to Rails' +collection_select+ helper
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
