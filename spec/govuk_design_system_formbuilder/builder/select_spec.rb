@@ -71,5 +71,18 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         expect(subject).to have_tag('option', text: selected_colour.name, with: { selected: 'selected', value: selected_colour.id })
       end
     end
+
+    # FIXME temporary only, ensure deprecation message is properly logged
+    context 'when legacy html_options argument is provided' do
+      subject { builder.send(*args, html_options: { data: { magic: true } }) }
+      let(:logger) { Logger.new($stdout) }
+
+      before { allow(Rails).to receive_message_chain(:logger, :warn) }
+      before { subject }
+
+      specify do
+        expect(Rails.logger).to have_received(:warn).with(/html_options has been deprecated/)
+      end
+    end
   end
 end

@@ -19,6 +19,12 @@ module GOVUKDesignSystemFormBuilder
         @hint            = hint
         @form_group      = form_group
         @html_attributes = kwargs
+
+        # FIXME remove this soon, worth informing people who miss the release notes that the
+        #       args have changed though.
+        if :html_options.in?(kwargs.keys)
+          Rails.logger.warn("GOVUKDesignSystemFormBuilder: html_options has been deprecated, use keyword arguments instead")
+        end
       end
 
       def html
