@@ -8,8 +8,9 @@ module GOVUKDesignSystemFormBuilder
         include Traits::Hint
         include Traits::FieldsetItem
         include Traits::Conditional
+        include Traits::HTMLAttributes
 
-        def initialize(builder, object_name, attribute_name, value, unchecked_value, label:, hint:, link_errors:, multiple:, &block)
+        def initialize(builder, object_name, attribute_name, value, unchecked_value, label:, hint:, link_errors:, multiple:, **kwargs, &block)
           super(builder, object_name, attribute_name)
 
           @value           = value
@@ -18,6 +19,7 @@ module GOVUKDesignSystemFormBuilder
           @hint            = hint
           @multiple        = multiple
           @link_errors     = link_errors
+          @html_attributes = kwargs
 
           if block_given?
             @conditional_content = wrap_conditional(block)
@@ -38,7 +40,7 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def check_box
-          @builder.check_box(@attribute_name, options, @value, @unchecked_value)
+          @builder.check_box(@attribute_name, attributes(@html_attributes), @value, @unchecked_value)
         end
 
         def options

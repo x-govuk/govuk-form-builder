@@ -33,6 +33,11 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:described_element) { 'select' }
     end
 
+    it_behaves_like 'a field that allows extra HTML attributes to be set' do
+      let(:described_element) { 'select' }
+      let(:expected_class) { 'govuk-select' }
+    end
+
     it_behaves_like 'a field that supports setting the label via localisation'
     it_behaves_like 'a field that supports setting the label caption via localisation'
     it_behaves_like 'a field that supports setting the hint via localisation'
@@ -57,34 +62,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
-    context 'extra attributes' do
-      let(:extra_args) do
-        {
-          required: { provided: true, output: 'required' },
-          autofocus: { provided: true, output: 'autofocus' }
-        }
-      end
-
-      subject { builder.send(*args, html_options: extract_args(extra_args, :provided)) }
-
-      specify 'select tag should have the extra attributes' do
-        select_tag = parsed_subject.at_css('select')
-        extract_args(extra_args, :output).each do |key, val|
-          expect(select_tag[key]).to eql(val)
-        end
-      end
-    end
-
-    context 'when custom classes are supplied via html_options' do
-      let(:custom_classes) { %w(fancy-select purple) }
-
-      subject { builder.send(*args, html_options: { class: custom_classes }) }
-
-      specify %(the select element should have the provided classes) do
-        expect(subject).to have_tag('select', with: { class: custom_classes.push('govuk-select') })
-      end
-    end
-
     context 'preselecting an option' do
       # options are colours in this order: red, blue, green, yellow
       let(:selected_colour) { green_option }
@@ -92,6 +69,19 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       specify %(should add a 'selected' attribute to the preselected option) do
         expect(subject).to have_tag('option', text: selected_colour.name, with: { selected: 'selected', value: selected_colour.id })
+      end
+    end
+
+    # FIXME temporary only, ensure deprecation message is properly logged
+    context 'when legacy html_options argument is provided' do
+      subject { builder.send(*args, html_options: { data: { magic: true } }) }
+      let(:logger) { Logger.new($stdout) }
+
+      before { allow(Rails).to receive_message_chain(:logger, :warn) }
+      before { subject }
+
+      specify do
+        expect(Rails.logger).to have_received(:warn).with(/html_options has been deprecated/)
       end
     end
   end

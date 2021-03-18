@@ -37,7 +37,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def input
-        @builder.send(builder_method, @attribute_name, **options, **@html_attributes)
+        @builder.send(builder_method, @attribute_name, **attributes(@html_attributes))
       end
 
       def affixed?

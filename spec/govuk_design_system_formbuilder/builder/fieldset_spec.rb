@@ -10,11 +10,19 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     let(:example_block) { proc { builder.tag.span(inner_text) } }
 
+    let(:args) { [method] }
+    let(:kwargs) { { legend: legend_options } }
+
     subject do
-      builder.send(method, legend: legend_options, &example_block)
+      builder.send(*args, **kwargs, &example_block)
     end
 
     include_examples 'HTML formatting checks'
+
+    it_behaves_like 'a field that allows extra HTML attributes to be set' do
+      let(:described_element) { 'fieldset' }
+      let(:expected_class) { 'govuk-fieldset' }
+    end
 
     specify 'output should be a fieldset containing the block contents' do
       expect(subject).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|

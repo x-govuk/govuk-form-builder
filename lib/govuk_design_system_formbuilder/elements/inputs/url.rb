@@ -7,6 +7,7 @@ module GOVUKDesignSystemFormBuilder
         include Traits::Hint
         include Traits::Label
         include Traits::Supplemental
+        include Traits::HTMLAttributes
 
         def builder_method
           :url_field

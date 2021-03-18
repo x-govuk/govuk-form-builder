@@ -1,3 +1,4 @@
+require 'deep_merge/rails_compat'
 require 'active_support/configurable'
 
 [%w(traits *.rb), %w(*.rb), %w(elements ** *.rb), %w(containers ** *.rb)]

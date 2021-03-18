@@ -66,6 +66,11 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
   it_behaves_like 'a field that supports setting the label caption via localisation'
   it_behaves_like 'a field that supports setting the hint via localisation'
 
+  it_behaves_like 'a field that allows extra HTML attributes to be set' do
+    let(:described_element) { 'textarea' }
+    let(:expected_class) { 'govuk-textarea' }
+  end
+
   it_behaves_like 'a field that accepts a plain ruby object' do
     let(:described_element) { 'textarea' }
   end
@@ -188,21 +193,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       specify 'should have the overriden number of rows' do
         expect(subject).to have_tag('textarea', with: { rows: rows })
       end
-    end
-  end
-
-  describe 'extra arguments' do
-    let(:placeholder) { 'Once upon a time…' }
-    subject { builder.send(*args, placeholder: placeholder, required: true) }
-
-    specify 'should add the extra attributes to the textarea' do
-      expect(subject).to have_tag(
-        'textarea',
-        with: {
-          placeholder: placeholder,
-          required: 'required'
-        }
-      )
     end
   end
 end

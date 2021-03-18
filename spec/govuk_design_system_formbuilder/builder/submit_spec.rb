@@ -17,6 +17,11 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:block_content) { -> { %(Example) } }
     end
 
+    it_behaves_like 'a field that allows extra HTML attributes to be set' do
+      let(:described_element) { 'input' }
+      let(:expected_class) { 'govuk-button' }
+    end
+
     specify 'output should be a submit input' do
       expect(subject).to have_tag('input', with: { type: 'submit' })
     end

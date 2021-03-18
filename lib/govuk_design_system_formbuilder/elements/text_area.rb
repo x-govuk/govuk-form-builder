@@ -7,6 +7,7 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Hint
       include Traits::Label
       include Traits::Supplemental
+      include Traits::HTMLAttributes
 
       def initialize(builder, object_name, attribute_name, hint:, label:, caption:, rows:, max_words:, max_chars:, threshold:, form_group:, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
@@ -37,7 +38,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def text_area
-        @builder.text_area(@attribute_name, **options, **@html_attributes)
+        @builder.text_area(@attribute_name, **attributes(@html_attributes))
       end
 
       def classes

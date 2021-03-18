@@ -50,27 +50,9 @@ shared_examples 'a regular input' do |method_identifier, field_type|
     let(:described_element) { 'input' }
   end
 
-  context 'extra attributes' do
-    let(:regular_args) { { label: { text: 'What should we call you?' } } }
-
-    let(:extra_args) do
-      {
-        required: { provided: true, output: 'required' },
-        autocomplete: { provided: false, output: 'false' },
-        placeholder: { provided: 'Seymour Skinner', output: 'Seymour Skinner' }
-      }
-    end
-
-    subject do
-      builder.send(*args, **regular_args.merge(extract_args(extra_args, :provided)))
-    end
-
-    specify 'input tag should have the extra attributes' do
-      input_tag = parsed_subject.at_css('input')
-      extract_args(extra_args, :output).each do |key, val|
-        expect(input_tag[key]).to eql(val)
-      end
-    end
+  it_behaves_like 'a field that allows extra HTML attributes to be set' do
+    let(:described_element) { 'input' }
+    let(:expected_class) { 'govuk-input' }
   end
 
   describe 'width' do

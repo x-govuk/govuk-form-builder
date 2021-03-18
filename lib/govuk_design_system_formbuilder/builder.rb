@@ -341,6 +341,7 @@ module GOVUKDesignSystemFormBuilder
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
+    # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +textarea+ element
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/textarea/ GOV.UK text area component
@@ -411,7 +412,7 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_collection_select(:team, @teams, :id, :name) do
     #     label: -> { tag.h3("Which team did you represent?") }
     #
-    def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, html_options: {}, hint: {}, label: {}, caption: {}, form_group: {}, &block)
+    def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, hint: {}, label: {}, caption: {}, form_group: {}, **kwargs, &block)
       Elements::Select.new(
         self,
         object_name,
@@ -423,8 +424,8 @@ module GOVUKDesignSystemFormBuilder
         label: label,
         caption: caption,
         options: options,
-        html_options: html_options,
         form_group: form_group,
+        **kwargs,
         &block
       ).html
     end
@@ -597,6 +598,7 @@ module GOVUKDesignSystemFormBuilder
     #   container and only revealed when the radio button is picked
     # @param link_errors [Boolean] controls whether this radio button should be linked to from {#govuk_error_summary}
     #   from the error summary. <b>Should only be set to +true+ for the first radio button in a fieldset</b>
+    # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
     # @example A single radio button for our new favourite colour
@@ -604,8 +606,8 @@ module GOVUKDesignSystemFormBuilder
     #  = f.govuk_radio_buttons_fieldset :favourite_colour do
     #    = f.govuk_radio_button :favourite_colour, :red, label: { text: 'Red' }
     #
-    def govuk_radio_button(attribute_name, value, hint: {}, label: {}, link_errors: false, &block)
-      Elements::Radios::FieldsetRadioButton.new(self, object_name, attribute_name, value, hint: hint, label: label, link_errors: link_errors, &block).html
+    def govuk_radio_button(attribute_name, value, hint: {}, label: {}, link_errors: false, **kwargs, &block)
+      Elements::Radios::FieldsetRadioButton.new(self, object_name, attribute_name, value, hint: hint, label: label, link_errors: link_errors, **kwargs, &block).html
     end
 
     # Inserts a text divider into a list of radio buttons
@@ -775,6 +777,7 @@ module GOVUKDesignSystemFormBuilder
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @option label kwargs [Hash] additional arguments are applied as attributes on the +label+ element
     # @param multiple [Boolean] controls whether the check box is part of a collection or represents a single attribute
+    # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     # @param block [Block] any HTML passed in will form the contents of the fieldset
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
@@ -786,7 +789,7 @@ module GOVUKDesignSystemFormBuilder
     #     label: { text: 'Do you agree with our terms and conditions?' },
     #     hint: { text: 'You will not be able to proceed unless you do' }
     #
-    def govuk_check_box(attribute_name, value, unchecked_value = false, hint: {}, label: {}, link_errors: false, multiple: true, &block)
+    def govuk_check_box(attribute_name, value, unchecked_value = false, hint: {}, label: {}, link_errors: false, multiple: true, **kwargs, &block)
       Elements::CheckBoxes::FieldsetCheckBox.new(
         self,
         object_name,
@@ -797,6 +800,7 @@ module GOVUKDesignSystemFormBuilder
         label: label,
         link_errors: link_errors,
         multiple: multiple,
+        **kwargs,
         &block
       ).html
     end
@@ -813,6 +817,7 @@ module GOVUKDesignSystemFormBuilder
     #   client-side validation provided by the browser. This is to provide a more consistent and accessible user
     #   experience
     # @param disabled [Boolean] makes the button disabled when true
+    # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     # @param block [Block] When content is passed in via a block the submit element and the block content will
     #   be wrapped in a +<div class="govuk-button-group">+ which will space the buttons and links within
     #   evenly.
@@ -829,8 +834,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_submit "Proceed", prevent_double_click: true do
     #     = link_to 'Cancel', some_other_path, class: 'govuk-button__secondary'
     #
-    def govuk_submit(text = config.default_submit_button_text, warning: false, secondary: false, classes: nil, prevent_double_click: true, validate: config.default_submit_validate, disabled: false, &block)
-      Elements::Submit.new(self, text, warning: warning, secondary: secondary, classes: classes, prevent_double_click: prevent_double_click, validate: validate, disabled: disabled, &block).html
+    def govuk_submit(text = config.default_submit_button_text, warning: false, secondary: false, classes: nil, prevent_double_click: true, validate: config.default_submit_validate, disabled: false, **kwargs, &block)
+      Elements::Submit.new(self, text, warning: warning, secondary: secondary, classes: classes, prevent_double_click: prevent_double_click, validate: validate, disabled: disabled, **kwargs, &block).html
     end
 
     # Generates three inputs for the +day+, +month+ and +year+ components of a date
@@ -858,6 +863,7 @@ module GOVUKDesignSystemFormBuilder
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
+    # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input group
     # @param date_of_birth [Boolean] if +true+ {https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete#Values birth date auto completion attributes}
     #   will be added to the inputs
@@ -877,8 +883,8 @@ module GOVUKDesignSystemFormBuilder
     # @example A date input with legend supplied as a proc
     #  = f.govuk_date_field :finishes_on,
     #    legend: -> { tag.h3('Which category do you belong to?') }
-    def govuk_date_field(attribute_name, hint: {}, legend: {}, caption: {}, date_of_birth: false, omit_day: false, form_group: {}, wildcards: false, &block)
-      Elements::Date.new(self, object_name, attribute_name, hint: hint, legend: legend, caption: caption, date_of_birth: date_of_birth, omit_day: omit_day, form_group: form_group, wildcards: wildcards, &block).html
+    def govuk_date_field(attribute_name, hint: {}, legend: {}, caption: {}, date_of_birth: false, omit_day: false, form_group: {}, wildcards: false, **kwargs, &block)
+      Elements::Date.new(self, object_name, attribute_name, hint: hint, legend: legend, caption: caption, date_of_birth: date_of_birth, omit_day: omit_day, form_group: form_group, wildcards: wildcards, **kwargs, &block).html
     end
 
     # Generates a summary of errors in the form, each linking to the corresponding
@@ -887,6 +893,7 @@ module GOVUKDesignSystemFormBuilder
     # @param title [String] the error summary heading
     # @param link_base_errors_to [Symbol,String] set the field that errors on +:base+ are linked
     #   to, as there won't be a field representing the object base.
+    # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the error summary +div+ element
     #
     # @note Only the first error in the +#errors+ array for each attribute will
     #   be included.
@@ -895,8 +902,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_error_summary 'Uh-oh, spaghettios'
     #
     # @see https://design-system.service.gov.uk/components/error-summary/ GOV.UK error summary
-    def govuk_error_summary(title = config.default_error_summary_title, link_base_errors_to: nil)
-      Elements::ErrorSummary.new(self, object_name, title, link_base_errors_to: link_base_errors_to).html
+    def govuk_error_summary(title = config.default_error_summary_title, link_base_errors_to: nil, **kwargs)
+      Elements::ErrorSummary.new(self, object_name, title, link_base_errors_to: link_base_errors_to, **kwargs).html
     end
 
     # Generates a fieldset containing the contents of the block
@@ -912,6 +919,7 @@ module GOVUKDesignSystemFormBuilder
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
+    # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     #
     # @example A fieldset containing address fields
     #   = f.govuk_fieldset legend: { text: 'Address' } do
@@ -927,8 +935,8 @@ module GOVUKDesignSystemFormBuilder
     # @see https://design-system.service.gov.uk/components/fieldset/ GOV.UK fieldset
     # @see https://design-system.service.gov.uk/styles/typography/#headings-with-captions Headings with captions
     # @return [ActiveSupport::SafeBuffer] HTML output
-    def govuk_fieldset(legend: { text: 'Fieldset heading' }, caption: {}, described_by: nil, &block)
-      Containers::Fieldset.new(self, legend: legend, caption: caption, described_by: described_by, &block).html
+    def govuk_fieldset(legend: { text: 'Fieldset heading' }, caption: {}, described_by: nil, **kwargs, &block)
+      Containers::Fieldset.new(self, legend: legend, caption: caption, described_by: described_by, **kwargs, &block).html
     end
 
     # Generates an input of type +file+

@@ -5,19 +5,26 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Label
       include Traits::Hint
       include Traits::Supplemental
+      include Traits::HTMLAttributes
 
-      def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint:, label:, caption:, form_group:, options: {}, html_options: {}, &block)
+      def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint:, label:, caption:, form_group:, options: {}, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
 
-        @collection   = collection
-        @value_method = value_method
-        @text_method  = text_method
-        @options      = options
-        @html_options = html_options
-        @label        = label
-        @caption      = caption
-        @hint         = hint
-        @form_group   = form_group
+        @collection      = collection
+        @value_method    = value_method
+        @text_method     = text_method
+        @options         = options
+        @label           = label
+        @caption         = caption
+        @hint            = hint
+        @form_group      = form_group
+        @html_attributes = kwargs
+
+        # FIXME remove this soon, worth informing people who miss the release notes that the
+        #       args have changed though.
+        if :html_options.in?(kwargs.keys)
+          Rails.logger.warn("GOVUKDesignSystemFormBuilder: html_options has been deprecated, use keyword arguments instead")
+        end
       end
 
       def html
@@ -29,27 +36,23 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def select
-        @builder.collection_select(@attribute_name, @collection, @value_method, @text_method, @options, **options)
+        @builder.collection_select(@attribute_name, @collection, @value_method, @text_method, @options, **attributes(@html_attributes))
       end
 
       def options
-        @html_options.deep_merge(
+        {
           id: field_id(link_errors: true),
           class: classes,
           aria: { describedby: described_by(hint_id, error_id, supplemental_id) }
-        )
+        }
       end
 
       def classes
-        [%(#{brand}-select), error_class, custom_classes].flatten.compact
+        [%(#{brand}-select), error_class].flatten.compact
       end
 
       def error_class
         %(#{brand}-select--error) if has_errors?
-      end
-
-      def custom_classes
-        @html_options[:class]
       end
     end
   end

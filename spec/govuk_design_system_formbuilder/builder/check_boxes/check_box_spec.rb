@@ -34,6 +34,11 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
+    it_behaves_like 'a field that allows extra HTML attributes to be set' do
+      let(:described_element) { 'input' }
+      let(:expected_class) { 'govuk-checkboxes__input' }
+    end
+
     it_behaves_like 'a field that supports setting the label via localisation'
     it_behaves_like 'a field that supports setting the hint via localisation'
 

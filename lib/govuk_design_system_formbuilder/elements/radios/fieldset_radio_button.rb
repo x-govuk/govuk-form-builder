@@ -8,14 +8,16 @@ module GOVUKDesignSystemFormBuilder
         include Traits::Hint
         include Traits::FieldsetItem
         include Traits::Conditional
+        include Traits::HTMLAttributes
 
-        def initialize(builder, object_name, attribute_name, value, label:, hint:, link_errors:, &block)
+        def initialize(builder, object_name, attribute_name, value, label:, hint:, link_errors:, **kwargs, &block)
           super(builder, object_name, attribute_name)
 
-          @value       = value
-          @label       = label
-          @hint        = hint
-          @link_errors = has_errors? && link_errors
+          @value           = value
+          @label           = label
+          @hint            = hint
+          @link_errors     = has_errors? && link_errors
+          @html_attributes = kwargs
 
           if block_given?
             @conditional_content = wrap_conditional(block)
@@ -40,7 +42,7 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def input
-          @builder.radio_button(@attribute_name, @value, **options)
+          @builder.radio_button(@attribute_name, @value, **attributes(@html_attributes))
         end
 
         def options
