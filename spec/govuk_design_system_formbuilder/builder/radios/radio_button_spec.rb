@@ -104,20 +104,25 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         specify "the data-aria-controls attribute should match the conditional block's id" do
           input_data_aria_controls = parsed_subject.at_css("input[type='radio']")['data-aria-controls']
           conditional_id = parsed_subject.at_css('div.govuk-radios__conditional')['id']
+
           expect(input_data_aria_controls).to eql(conditional_id)
         end
 
         specify 'conditional_id contains the object, attribute and value name' do
-          expect(
-            parsed_subject.at_css("input[type='radio']")['data-aria-controls']
-          ).to eql(%(person-stationery-#{value_with_dashes}-conditional))
+          expect(subject).to have_tag(
+            'input',
+            with: {
+              type: 'radio',
+              'data-aria-controls' => %(person-stationery-#{value_with_dashes}-conditional)
+            }
+          )
         end
       end
 
       context 'when no block is given' do
         subject { builder.govuk_radio_button(attribute, value) }
 
-        specify "the data-aria-controls attribute should be blank" do
+        specify "the data-aria-controls attribute should not be present" do
           input_data_aria_controls = parsed_subject.at_css("input[type='radio']")['data-aria-controls']
           expect(input_data_aria_controls).to be_nil
         end

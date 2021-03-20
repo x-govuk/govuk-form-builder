@@ -160,13 +160,18 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         specify "the data-aria-controls attribute should match the conditional block's id" do
           input_data_aria_controls = parsed_subject.at_css("input[type='checkbox']")['data-aria-controls']
           conditional_id = parsed_subject.at_css('div.govuk-checkboxes__conditional')['id']
+
           expect(input_data_aria_controls).to eql(conditional_id)
         end
 
         specify 'conditional_id contains the object, attribute and value name' do
-          expect(
-            parsed_subject.at_css("input[type='checkbox']")['data-aria-controls']
-          ).to eql("#{object_name}-#{attribute}-#{value_with_dashes}-conditional")
+          expect(subject).to have_tag(
+            'input',
+            with: {
+              'type' => 'checkbox',
+              'data-aria-controls' => %(#{object_name}-#{attribute}-#{value_with_dashes}-conditional)
+            }
+          )
         end
       end
 
@@ -175,6 +180,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
         specify "the data-aria-controls attribute should be blank" do
           input_data_aria_controls = parsed_subject.at_css("input[type='checkbox']")['data-aria-controls']
+
           expect(input_data_aria_controls).to be_nil
         end
 
