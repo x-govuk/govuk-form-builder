@@ -14,8 +14,9 @@ ul.govuk-list.govuk-list--bullet
 p.govuk-body
   | By default the form builder's checkbox helpers will automatically inject a
     hidden field. The hidden field ensures that a parameter is always submitted
-    with the form, even when no checkboxes have been checked, allowing options
-    #{link_to("to be deselected", rails_checkbox_gotcha_link).html_safe}.
+    with the form even when no checkboxes have been checked, allowing options
+    #{link_to("to be deselected", rails_checkbox_gotcha_link).html_safe}. The
+    hidden field can be toggled using the <code>multiple</code> keyword argument.
  
 section
 
