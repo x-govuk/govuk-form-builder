@@ -15,7 +15,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        Containers::FormGroup.new(@builder, @object_name, @attribute_name, **@form_group).html do
+        Containers::FormGroup.new(*bound, **@form_group).html do
           safe_join([label_element, supplemental_content, hint_element, error_element, content])
         end
       end
@@ -31,7 +31,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def affixed_input
-        content_tag('div', class: %(#{brand}-input__wrapper)) do
+        tag.div(class: %(#{brand}-input__wrapper)) do
           safe_join([prefix, input, suffix])
         end
       end
@@ -86,13 +86,13 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def prefix
-        return nil if @prefix_text.blank?
+        return if @prefix_text.blank?
 
         tag.span(@prefix_text, class: %(#{brand}-input__prefix), **affix_options)
       end
 
       def suffix
-        return nil if @suffix_text.blank?
+        return if @suffix_text.blank?
 
         tag.span(@suffix_text, class: %(#{brand}-input__suffix), **affix_options)
       end

@@ -21,17 +21,17 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        @block_content.present? ? button_group : buttons
+        @block_content.present? ? button_group : submit
       end
 
     private
 
-      def buttons
-        safe_join([submit, @block_content])
-      end
-
       def button_group
         Containers::ButtonGroup.new(@builder, buttons).html
+      end
+
+      def buttons
+        safe_join([submit, @block_content])
       end
 
       def submit

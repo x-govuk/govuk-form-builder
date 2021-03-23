@@ -125,12 +125,15 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             end
 
             specify 'the radio button linked to should be first' do
-              expect(parsed_subject.css('input[type="radio"]').first['id']).to eql(identifier)
-              expect(parsed_subject.css('label').first['for']).to eql(identifier)
+              first_radio = parsed_subject.css('input').find { |e| e['type'] == 'radio' }
+
+              expect(first_radio['id']).to eql(identifier)
             end
 
             specify 'there should be a label associated with the error link target' do
-              expect(subject).to have_tag('label', with: { for: identifier }, count: 1)
+              first_label = parsed_subject.css('label').first
+
+              expect(first_label['for']).to eql(identifier)
             end
           end
 
@@ -162,12 +165,15 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             end
 
             specify 'the radio button linked to should be first' do
-              expect(parsed_subject.css('input').first['id']).to eql(identifier)
-              expect(parsed_subject.css('label').first['for']).to eql(identifier)
+              first_radio = parsed_subject.css('input').find { |e| e['type'] == 'radio' }
+
+              expect(first_radio['id']).to eql(identifier)
             end
 
             specify 'there should be a label associated with the error link target' do
-              expect(subject).to have_tag('label', with: { for: identifier }, count: 1)
+              first_label = parsed_subject.css('label').first
+
+              expect(first_label['for']).to eql(identifier)
             end
 
             specify 'the second radio button should have a regular id' do
@@ -195,12 +201,15 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             end
 
             specify 'the check box linked to should be first' do
-              expect(parsed_subject.css("input[type='checkbox']").first['id']).to eql(identifier)
-              expect(parsed_subject.css('label').first['for']).to eql(identifier)
+              first_checkbox = parsed_subject.css('input').find { |e| e['type'] == 'checkbox' }
+
+              expect(first_checkbox['id']).to eql(identifier)
             end
 
             specify 'there should be a label associated with the error link target' do
-              expect(subject).to have_tag('label', with: { for: identifier }, count: 1)
+              first_label = parsed_subject.css('label').first
+
+              expect(first_label['for']).to eql(identifier)
             end
           end
 
@@ -231,13 +240,16 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
               expect(subject).to have_tag('input', with: { type: 'checkbox', id: identifier }, count: 1)
             end
 
-            specify 'the radio button linked to should be first' do
-              expect(parsed_subject.css(%(input[type='checkbox'])).first['id']).to eql(identifier)
-              expect(parsed_subject.css('label').first['for']).to eql(identifier)
+            specify 'the checkbox button linked to should be first' do
+              first_checkbox = parsed_subject.css('input').find { |e| e['type'] == 'checkbox' }
+
+              expect(first_checkbox['id']).to eql(identifier)
             end
 
             specify 'there should be a label associated with the error link target' do
-              expect(subject).to have_tag('label', with: { for: identifier }, count: 1)
+              first_label = parsed_subject.css('label').first
+
+              expect(first_label['for']).to eql(identifier)
             end
 
             specify 'the second radio button should have a regular id' do

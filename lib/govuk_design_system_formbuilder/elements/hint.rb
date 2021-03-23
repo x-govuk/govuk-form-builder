@@ -31,7 +31,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def hint_id
-        return nil unless active?
+        return unless active?
 
         build_id('hint')
       end

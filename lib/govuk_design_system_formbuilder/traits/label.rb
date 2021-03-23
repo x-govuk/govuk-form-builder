@@ -7,7 +7,7 @@ module GOVUKDesignSystemFormBuilder
         @label_element ||= if @label.nil?
                              Elements::Null.new
                            else
-                             Elements::Label.new(@builder, @object_name, @attribute_name, caption: @caption, **label_content)
+                             Elements::Label.new(*bound, caption: @caption, **label_content)
                            end
       end
 

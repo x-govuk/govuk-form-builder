@@ -7,8 +7,7 @@ shared_examples 'a regular input' do |method_identifier, field_type|
   subject { builder.send(*args, label: { text: label_text }) }
 
   specify "output should have the correct type of #{field_type}" do
-    input_type = parsed_subject.at_css('input')['type']
-    expect(input_type).to eql(field_type)
+    expect(subject).to have_tag('input', with: { type: field_type })
   end
 
   specify 'output should be form group containing a label and input' do

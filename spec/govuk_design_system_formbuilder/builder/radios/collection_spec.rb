@@ -108,9 +108,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       specify 'radio buttons should have the correct name' do
-        parsed_subject.css('input').each do |input|
-          expect(input['name']).to eql('person[favourite_colour]')
-        end
+        names = parsed_subject.css('input').map { |e| e['name'] }
+
+        expect(names).to all(eql('person[favourite_colour]'))
       end
 
       specify 'radio buttons should be associated with corresponding labels' do

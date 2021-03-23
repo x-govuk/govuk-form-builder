@@ -25,6 +25,15 @@ module GOVUKDesignSystemFormBuilder
 
   private
 
+    # returns the attributes bound to the object that are
+    # required to build all contained elements
+    #
+    # @return [GOVUKDesignSystemFormBuilder::FormBuilder, Symbol, Symbol] an array containing the
+    #   builder, object name and attribute name
+    def bound
+      [@builder, @object_name, @attribute_name]
+    end
+
     def brand(override = nil)
       override || config.brand
     end

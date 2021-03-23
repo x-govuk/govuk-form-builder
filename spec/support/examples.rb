@@ -57,7 +57,9 @@ class Person < Being
       if rails_version_later_than_6_1_0?
         person.errors.add(:base, msg)
       else
+        # :nocov:
         person.errors[:base].push(msg)
+        # :nocov:
       end
     end
   end

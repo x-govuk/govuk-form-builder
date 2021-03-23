@@ -18,8 +18,8 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        Containers::FormGroup.new(@builder, @object_name, @attribute_name, **@form_group).html do
-          Containers::Fieldset.new(@builder, @object_name, @attribute_name, **fieldset_options).html do
+        Containers::FormGroup.new(*bound, **@form_group).html do
+          Containers::Fieldset.new(*bound, **fieldset_options).html do
             safe_join([hint_element, error_element, hidden_field, checkboxes])
           end
         end

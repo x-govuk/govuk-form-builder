@@ -2,7 +2,7 @@ module GOVUKDesignSystemFormBuilder
   module Traits
     module Hint
       def hint_id
-        return nil unless hint_element.active?
+        return unless hint_element.active?
 
         build_id('hint')
       end
@@ -13,7 +13,7 @@ module GOVUKDesignSystemFormBuilder
         @hint_element ||= if @hint.nil?
                             Elements::Null.new
                           else
-                            Elements::Hint.new(@builder, @object_name, @attribute_name, **hint_content)
+                            Elements::Hint.new(*bound, **hint_content)
                           end
       end
 

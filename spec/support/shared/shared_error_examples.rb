@@ -34,9 +34,9 @@ shared_examples 'a field that supports errors' do
           object.errors.clear
           error_messages.each { |m| object.errors.add(attribute, m) }
         else
-          allow(object.errors.messages).to(
-            receive(:[]).and_return(error_messages)
-          )
+          # :nocov:
+          allow(object.errors.messages).to(receive(:[]).and_return(error_messages))
+          # :nocov:
         end
       end
 

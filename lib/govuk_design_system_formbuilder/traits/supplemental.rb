@@ -2,7 +2,7 @@ module GOVUKDesignSystemFormBuilder
   module Traits
     module Supplemental
       def supplemental_id
-        return nil if @block_content.blank?
+        return if @block_content.blank?
 
         build_id('supplemental')
       end
@@ -10,7 +10,7 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def supplemental_content
-        @supplemental_content ||= Containers::Supplemental.new(@builder, @object_name, @attribute_name, @block_content)
+        @supplemental_content ||= Containers::Supplemental.new(*bound, @block_content)
       end
     end
   end

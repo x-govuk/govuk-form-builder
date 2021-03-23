@@ -7,7 +7,7 @@ module GOVUKDesignSystemFormBuilder
         @caption_element ||= if @caption.nil?
                                Elements::Null.new
                              else
-                               Elements::Caption.new(@builder, @object_name, @attribute_name, **@caption)
+                               Elements::Caption.new(*bound, **@caption)
                              end
       end
     end

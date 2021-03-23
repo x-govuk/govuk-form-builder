@@ -23,8 +23,8 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        Containers::FormGroup.new(@builder, @object_name, @attribute_name, **@form_group, **@html_attributes).html do
-          Containers::Fieldset.new(@builder, @object_name, @attribute_name, **fieldset_options).html do
+        Containers::FormGroup.new(*bound, **@form_group, **@html_attributes).html do
+          Containers::Fieldset.new(*bound, **fieldset_options).html do
             safe_join([supplemental_content, hint_element, error_element, date])
           end
         end
@@ -47,7 +47,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def day
-        return nil if omit_day?
+        return if omit_day?
 
         date_part(:day, width: 2, link_errors: true)
       end
@@ -125,7 +125,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def date_of_birth_autocomplete_value(segment)
-        return nil unless @date_of_birth
+        return unless @date_of_birth
 
         { day: 'bday-day', month: 'bday-month', year: 'bday-year' }.fetch(segment)
       end

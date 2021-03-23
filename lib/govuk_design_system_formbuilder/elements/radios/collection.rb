@@ -25,8 +25,8 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def html
-          Containers::FormGroup.new(@builder, @object_name, @attribute_name, **@form_group).html do
-            Containers::Fieldset.new(@builder, @object_name, @attribute_name, **fieldset_options).html do
+          Containers::FormGroup.new(*bound, **@form_group).html do
+            Containers::Fieldset.new(*bound, **fieldset_options).html do
               safe_join([hidden_field, supplemental_content, hint_element, error_element, radios])
             end
           end
@@ -56,7 +56,7 @@ module GOVUKDesignSystemFormBuilder
 
         def collection
           @collection.map.with_index do |item, i|
-            Elements::Radios::CollectionRadioButton.new(@builder, @object_name, @attribute_name, item, **collection_options(i)).html
+            Elements::Radios::CollectionRadioButton.new(*bound, item, **collection_options(i)).html
           end
         end
 

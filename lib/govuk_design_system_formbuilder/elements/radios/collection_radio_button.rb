@@ -41,7 +41,7 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def hint_element
-          @hint_element ||= Elements::Hint.new(@builder, @object_name, @attribute_name, **hint_options, **hint_content)
+          @hint_element ||= Elements::Hint.new(*bound, **hint_options, **hint_content)
         end
 
         def hint_content
@@ -53,7 +53,7 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def label_element
-          @label_element ||= Elements::Label.new(@builder, @object_name, @attribute_name, **label_options)
+          @label_element ||= Elements::Label.new(*bound, **label_options)
         end
 
         def label_options
