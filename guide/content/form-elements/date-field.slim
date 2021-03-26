@@ -9,6 +9,20 @@ p.govuk-body
     of an event.
 
 p.govuk-body
+  | The date field's parameters match those used by Rails' <code>date_select</code> 
+    helper. To access the parameters in your controller you should just need to permit
+    the attribute, for example:
+
+.code-sample
+  pre
+    code.highlight.language-ruby
+      | # in UsersController
+
+        def user_params
+          params.require(:user).permit(:date_of_birth, ...)
+        end
+
+p.govuk-body
   | Three inputs for day, month and year respectively are used to
     capture the dates rather than a date picker. This is because:
 
