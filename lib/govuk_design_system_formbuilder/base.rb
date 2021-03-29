@@ -15,21 +15,6 @@ module GOVUKDesignSystemFormBuilder
       html || ''
     end
 
-  private
-
-    # returns the attributes bound to the object that are
-    # required to build all contained elements
-    #
-    # @return [GOVUKDesignSystemFormBuilder::FormBuilder, Symbol, Symbol] an array containing the
-    #   builder, object name and attribute name
-    def bound
-      [@builder, @object_name, @attribute_name]
-    end
-
-    def brand(override = nil)
-      override || config.brand
-    end
-
     # returns the id value used for the input
     #
     # @note field_id is overridden so that the error summary can link to the
@@ -49,6 +34,21 @@ module GOVUKDesignSystemFormBuilder
       else
         build_id('field')
       end
+    end
+
+  private
+
+    # returns the attributes bound to the object that are
+    # required to build all contained elements
+    #
+    # @return [GOVUKDesignSystemFormBuilder::FormBuilder, Symbol, Symbol] an array containing the
+    #   builder, object name and attribute name
+    def bound
+      [@builder, @object_name, @attribute_name]
+    end
+
+    def brand(override = nil)
+      override || config.brand
     end
 
     def has_errors?
