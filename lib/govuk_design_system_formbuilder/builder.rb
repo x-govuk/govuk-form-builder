@@ -842,6 +842,7 @@ module GOVUKDesignSystemFormBuilder
     # @note When using this input be aware that Rails's multiparam time and date handling falls foul
     #   of {https://bugs.ruby-lang.org/issues/5988 this} bug, so incorrect dates like +2019-09-31+ will
     #   be 'rounded' up to +2019-10-01+.
+    # @note When using this input values will be retrieved from the attribute if it is a Date object or a multiparam date hash
     # @param attribute_name [Symbol] The name of the attribute
     # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
     #   supplied the hint will be wrapped in a +div+ instead of a +span+
