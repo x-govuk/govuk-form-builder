@@ -8,6 +8,7 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Supplemental
 
       SEGMENTS = { day: '3i', month: '2i', year: '1i' }.freeze
+      MULTIPARAMETER_KEY = { day: 3, month: 2, year: 1 }.freeze
 
       def initialize(builder, object_name, attribute_name, legend:, caption:, hint:, omit_day:, form_group:, wildcards:, date_of_birth: false, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
@@ -61,13 +62,17 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def date_part(segment, width:, link_errors: false)
-        value = @builder.object.try(@attribute_name).try(segment)
-
         tag.div(class: %(#{brand}-date-input__item)) do
           tag.div(class: %(#{brand}-form-group)) do
-            safe_join([label(segment, link_errors), input(segment, link_errors, width, value)])
+            safe_join([label(segment, link_errors), input(segment, link_errors, width, value(segment))])
           end
         end
+      end
+
+      def value(segment)
+        attribute = @builder.object.try(@attribute_name)
+
+        attribute.try(segment) || attribute.try(:[], MULTIPARAMETER_KEY[segment])
       end
 
       def label(segment, link_errors)

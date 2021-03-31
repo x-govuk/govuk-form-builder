@@ -166,32 +166,65 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:birth_day) { 3 }
       let(:birth_month) { 2 }
       let(:birth_year) { 1970 }
-      let(:object) do
-        Person.new(
-          name: 'Joey',
-          born_on: Date.new(birth_year, birth_month, birth_day)
-        )
+
+      context "when the attribute is a `Date` object" do
+        let(:object) do
+          Person.new(
+            name: 'Joey',
+            born_on: Date.new(birth_year, birth_month, birth_day)
+          )
+        end
+
+        specify 'should set the day value correctly' do
+          expect(subject).to have_tag('input', with: {
+            id: day_identifier,
+            value: birth_day
+          })
+        end
+
+        specify 'should set the month value correctly' do
+          expect(subject).to have_tag('input', with: {
+            id: month_identifier,
+            value: birth_month
+          })
+        end
+
+        specify 'should set the year value correctly' do
+          expect(subject).to have_tag('input', with: {
+            id: year_identifier,
+            value: birth_year
+          })
+        end
       end
 
-      specify 'should set the day value correctly' do
-        expect(subject).to have_tag('input', with: {
-          id: day_identifier,
-          value: birth_day
-        })
-      end
+      context "when the attribute is a multiparameter hash object" do
+        let(:object) do
+          Person.new(
+            name: 'Joey',
+            born_on: { 3 => birth_day, 2 => birth_month, 1 => birth_year }
+          )
+        end
 
-      specify 'should set the month value correctly' do
-        expect(subject).to have_tag('input', with: {
-          id: month_identifier,
-          value: birth_month
-        })
-      end
+        specify 'should set the day value correctly' do
+          expect(subject).to have_tag('input', with: {
+            id: day_identifier,
+            value: birth_day
+          })
+        end
 
-      specify 'should set the year value correctly' do
-        expect(subject).to have_tag('input', with: {
-          id: year_identifier,
-          value: birth_year
-        })
+        specify 'should set the month value correctly' do
+          expect(subject).to have_tag('input', with: {
+            id: month_identifier,
+            value: birth_month
+          })
+        end
+
+        specify 'should set the year value correctly' do
+          expect(subject).to have_tag('input', with: {
+            id: year_identifier,
+            value: birth_year
+          })
+        end
       end
     end
 
