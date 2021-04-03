@@ -4,6 +4,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
   let(:field_type) { 'select' }
   let(:aria_described_by_target) { 'select' }
+  let(:described_element) { 'select' }
+  let(:expected_class) { 'govuk-select' }
 
   describe '#govuk_collection_select' do
     let(:attribute) { :favourite_colour }
@@ -29,14 +31,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:error_class) { 'govuk-select--error' }
     end
 
-    it_behaves_like 'a field that accepts arbitrary blocks of HTML' do
-      let(:described_element) { 'select' }
-    end
-
-    it_behaves_like 'a field that allows extra HTML attributes to be set' do
-      let(:described_element) { 'select' }
-      let(:expected_class) { 'govuk-select' }
-    end
+    it_behaves_like 'a field that accepts arbitrary blocks of HTML'
+    it_behaves_like 'a field that allows extra HTML attributes to be set'
+    it_behaves_like 'a field that allows nested HTML attributes to be set'
 
     it_behaves_like 'a field that supports setting the label via localisation'
     it_behaves_like 'a field that supports setting the label caption via localisation'
@@ -116,9 +113,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     it_behaves_like 'a field that supports setting the label caption via localisation'
     it_behaves_like 'a field that supports setting the hint via localisation'
 
-    it_behaves_like 'a field that accepts a plain ruby object' do
-      let(:described_element) { 'select' }
-    end
+    it_behaves_like 'a field that accepts a plain ruby object'
+    it_behaves_like 'a field that allows extra HTML attributes to be set'
+    it_behaves_like 'a field that allows nested HTML attributes to be set'
 
     specify 'a select element is rendered' do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do

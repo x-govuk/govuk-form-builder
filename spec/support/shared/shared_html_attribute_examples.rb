@@ -66,7 +66,7 @@ shared_examples 'a field that allows extra HTML attributes to be set' do
   end
 end
 
-shared_examples 'a field that allow nested HTML attributes to be set' do
+shared_examples 'a field that allows nested HTML attributes to be set' do
   let(:example_block) { proc { builder.tag.span('block text') } }
 
   context 'when aria-describedby is provided as a string' do

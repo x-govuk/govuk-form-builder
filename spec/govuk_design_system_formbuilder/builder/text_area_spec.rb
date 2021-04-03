@@ -71,6 +71,11 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     let(:expected_class) { 'govuk-textarea' }
   end
 
+  it_behaves_like 'a field that allows nested HTML attributes to be set' do
+    let(:described_element) { 'textarea' }
+    let(:expected_class) { 'govuk-textarea' }
+  end
+
   it_behaves_like 'a field that accepts a plain ruby object' do
     let(:described_element) { 'textarea' }
   end
