@@ -24,7 +24,7 @@ module GOVUKDesignSystemFormBuilder
       def options
         {
           class: classes,
-          aria: { describedby: @described_by }
+          aria: { describedby: [@described_by] }
         }
       end
 

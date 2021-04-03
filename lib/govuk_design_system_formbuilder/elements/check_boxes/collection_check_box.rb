@@ -31,7 +31,7 @@ module GOVUKDesignSystemFormBuilder
           {
             id: field_id(link_errors: @link_errors),
             class: %(#{brand}-checkboxes__input),
-            aria: { describedby: hint_id }
+            aria: { describedby: [hint_id] }
           }
         end
 

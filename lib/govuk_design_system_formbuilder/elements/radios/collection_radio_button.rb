@@ -35,7 +35,7 @@ module GOVUKDesignSystemFormBuilder
         def options
           {
             id: field_id(link_errors: @link_errors),
-            aria: { describedby: hint_id },
+            aria: { describedby: [hint_id] },
             class: %(#{brand}-radios__input)
           }
         end
