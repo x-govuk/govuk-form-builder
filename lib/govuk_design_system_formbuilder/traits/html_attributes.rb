@@ -1,45 +1,50 @@
 module GOVUKDesignSystemFormBuilder
   module Traits
     module HTMLAttributes
-      class Parser
-        # target any element where the content is a string that represents a
-        # list of things separated by a space, e.g.,
-        #
-        # <span class="red spots">xyz</span>
-        #
-        # could be respresented as
-        #
-        # = span(class: %w(red spots)) { "xyz" }
-        TARGETS = [%i(class), %i(aria describedby)].freeze
-
-        def initialize(attributes)
-          @attributes = parse(attributes)
+      # Attributes eases working with default and custom attributes by
+      # * deeply merging them so both the default (required) attributes are
+      #   present
+      # * joins the arrays into strings to maintain Rails 6.0.3 compatibility
+      class Attributes
+        def initialize(defaults, custom)
+          @merged = defaults.deeper_merge(deep_split_values(custom))
         end
 
         def to_h
-          @attributes
+          deep_join_values(@merged)
         end
 
       private
 
-        def parse(attributes)
-          attributes.tap do |a|
-            a[:class]              = a[:class].split              if has_class_string?(a)
-            a[:aria][:describedby] = a[:aria][:describedby].split if has_aria_describedby_string?(attributes)
+        def deep_split_values(hash)
+          hash.each.with_object({}) do |(key, value), result|
+            result[key] = case value
+                          when Hash
+                            deep_split_values(value)
+                          when String
+                            value.split
+                          else
+                            value
+                          end
           end
         end
 
-        def has_class_string?(attributes)
-          attributes.key?(:class) && attributes[:class].is_a?(String)
-        end
-
-        def has_aria_describedby_string?(attributes)
-          attributes.dig(:aria, :describedby)&.is_a?(String)
+        def deep_join_values(hash)
+          hash.each.with_object({}) do |(key, value), result|
+            result[key] = case value
+                          when Hash
+                            deep_join_values(value)
+                          when Array
+                            value.uniq.join(' ').presence
+                          else
+                            value
+                          end
+          end
         end
       end
 
       def attributes(html_attributes = {})
-        options.deeper_merge(Parser.new(html_attributes).to_h)
+        Attributes.new(options, html_attributes).to_h
       end
     end
   end

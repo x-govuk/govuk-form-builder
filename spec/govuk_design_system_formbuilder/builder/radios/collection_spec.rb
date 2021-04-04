@@ -148,7 +148,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           end
         end
 
-        specify 'radio buttons without hints shouldn not have aria-describedby attributes' do
+        specify 'radio buttons without hints should not have aria-describedby attributes' do
           colours_without_descriptions.each do |cwd|
             "person-favourite_colour-#{cwd.id}-hint".tap do |association|
               expect(subject).not_to have_tag('input', with: { "aria-describedby" => association })
