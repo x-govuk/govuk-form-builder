@@ -127,5 +127,23 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     specify 'the select element has the right options' do
       colour_names.each { |cn| expect(subject).to have_tag('select > option', with: { value: cn }, text: cn) }
     end
+
+    context 'when a block of options is passed in' do
+      let(:items) { %w(LemonChiffon PaleTurquoise FloralWhite Bisque) }
+
+      let(:sample_block) do
+        helper.safe_join(items.map { |web_colour| helper.tag.option(web_colour, value: web_colour) })
+      end
+
+      subject do
+        builder.send(method, attribute) { sample_block }
+      end
+
+      specify 'the block content should be rendered inside the select element' do
+        items.each do |web_colour|
+          expect(subject).to have_tag('select > option', text: web_colour, with: { value: web_colour })
+        end
+      end
+    end
   end
 end

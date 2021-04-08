@@ -8,7 +8,10 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Select
 
       def initialize(builder, object_name, attribute_name, choices, options:, form_group:, label:, hint:, caption:, **kwargs, &block)
-        super(builder, object_name, attribute_name, &block)
+        # assign the block to an variable rather than passing to super so
+        # we can send it through to #select
+        super(builder, object_name, attribute_name)
+        @block           = block
 
         @form_group      = form_group
         @hint            = hint
@@ -28,7 +31,7 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def select
-        @builder.select(@attribute_name, (@choices || @block_content), @options, **attributes(@html_attributes))
+        @builder.select(@attribute_name, @choices, @options, attributes(@html_attributes), &@block)
       end
 
       def options
