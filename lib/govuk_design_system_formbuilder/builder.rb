@@ -412,7 +412,7 @@ module GOVUKDesignSystemFormBuilder
     #     label: -> { tag.h3("Which team did you represent?") }
     #
     def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, hint: {}, label: {}, caption: {}, form_group: {}, **kwargs, &block)
-      Elements::Select.new(
+      Elements::CollectionSelect.new(
         self,
         object_name,
         attribute_name,

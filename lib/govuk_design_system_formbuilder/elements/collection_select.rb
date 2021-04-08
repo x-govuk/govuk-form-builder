@@ -1,6 +1,6 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
-    class Select < Base
+    class CollectionSelect < Base
       include Traits::Error
       include Traits::Label
       include Traits::Hint
@@ -29,13 +29,13 @@ module GOVUKDesignSystemFormBuilder
 
       def html
         Containers::FormGroup.new(*bound, **@form_group).html do
-          safe_join([label_element, supplemental_content, hint_element, error_element, select])
+          safe_join([label_element, supplemental_content, hint_element, error_element, collection_select])
         end
       end
 
     private
 
-      def select
+      def collection_select
         @builder.collection_select(@attribute_name, @collection, @value_method, @text_method, @options, **attributes(@html_attributes))
       end
 
