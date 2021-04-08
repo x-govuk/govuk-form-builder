@@ -429,6 +429,10 @@ module GOVUKDesignSystemFormBuilder
       ).html
     end
 
+    def govuk_select(attribute_name, choices, options: {}, label: {}, hint: {}, form_group: {}, caption: {}, **kwargs, &block)
+      Elements::Select.new(self, object_name, attribute_name, choices, options: options, label: label, hint: hint, form_group: form_group, caption: caption, **kwargs, &block).html
+    end
+
     # Generates a radio button for each item in the supplied collection
     #
     # @note Unlike the Rails +#collection_radio_buttons+ helper, this version can also insert

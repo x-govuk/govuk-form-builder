@@ -6,6 +6,7 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Hint
       include Traits::Supplemental
       include Traits::HTMLAttributes
+      include Traits::Select
 
       def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint:, label:, caption:, form_group:, options: {}, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
@@ -35,10 +36,6 @@ module GOVUKDesignSystemFormBuilder
 
     private
 
-      def collection_select
-        @builder.collection_select(@attribute_name, @collection, @value_method, @text_method, @options, **attributes(@html_attributes))
-      end
-
       def options
         {
           id: field_id(link_errors: true),
@@ -47,12 +44,8 @@ module GOVUKDesignSystemFormBuilder
         }
       end
 
-      def classes
-        [%(#{brand}-select), error_class].flatten.compact
-      end
-
-      def error_class
-        %(#{brand}-select--error) if has_errors?
+      def collection_select
+        @builder.collection_select(@attribute_name, @collection, @value_method, @text_method, @options, **attributes(@html_attributes))
       end
     end
   end

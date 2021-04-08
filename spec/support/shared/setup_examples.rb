@@ -4,6 +4,7 @@ shared_context 'setup examples' do
   let(:green_option) { OpenStruct.new(id: 'green', name: 'Green') }
   let(:yellow_option) { OpenStruct.new(id: 'yellow', name: 'Yellow') }
   let(:colours) { [red_option, blue_option, green_option, yellow_option] }
+  let(:colour_names) { colours.map(&:name) }
 
   let(:red_label) { 'Rosso' }
   let(:green_label) { 'Verde' }

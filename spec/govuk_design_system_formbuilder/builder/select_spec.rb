@@ -2,6 +2,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
   include_context 'setup builder'
   include_context 'setup examples'
 
+  let(:field_type) { 'select' }
+  let(:aria_described_by_target) { 'select' }
+
   describe '#govuk_collection_select' do
     let(:attribute) { :favourite_colour }
     let(:label_text) { 'Cherished shade' }
@@ -9,9 +12,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     let(:method) { :govuk_collection_select }
     let(:args) { [method, attribute, colours, :id, :name] }
     subject { builder.send(*args) }
-
-    let(:field_type) { 'select' }
-    let(:aria_described_by_target) { 'select' }
 
     include_examples 'HTML formatting checks'
 
@@ -83,6 +83,49 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       specify do
         expect(Rails.logger).to have_received(:warn).with(/html_options has been deprecated/)
       end
+    end
+  end
+
+  describe "#govuk_select" do
+    let(:attribute) { :favourite_colour }
+    let(:label_text) { 'Prized tint' }
+    let(:hint_text) { 'The colour of your favourite cravat' }
+    let(:method) { :govuk_select }
+    let(:options_for_select) { colour_names }
+
+    let(:args) { [method, attribute, options_for_select] }
+    subject { builder.send(*args) }
+
+    include_examples 'HTML formatting checks'
+
+    it_behaves_like 'a field that supports labels'
+    it_behaves_like 'a field that supports captions on the label'
+    it_behaves_like 'a field that supports labels as procs'
+
+    it_behaves_like 'a field that supports errors' do
+      let(:error_message) { /Choose a favourite colour/ }
+      let(:error_identifier) { 'person-favourite-colour-error' }
+      let(:error_class) { 'govuk-select--error' }
+    end
+
+    it_behaves_like 'a field that supports setting the label via localisation'
+    it_behaves_like 'a field that supports setting the label caption via localisation'
+    it_behaves_like 'a field that supports setting the hint via localisation'
+
+    it_behaves_like 'a field that supports setting the label via localisation'
+    it_behaves_like 'a field that supports setting the label caption via localisation'
+    it_behaves_like 'a field that supports setting the hint via localisation'
+
+    it_behaves_like 'a field that accepts a plain ruby object' do
+      let(:described_element) { 'select' }
+    end
+
+    specify 'a select element is rendered' do
+      expect(subject).to have_tag('select', with: { class: "govuk-select" })
+    end
+
+    specify 'the select element has the right options' do
+      colour_names.each { |cn| expect(subject).to have_tag('select > option', with: { value: cn }, text: cn) }
     end
   end
 end
