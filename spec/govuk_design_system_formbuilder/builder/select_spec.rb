@@ -128,7 +128,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       colour_names.each { |cn| expect(subject).to have_tag('select > option', with: { value: cn }, text: cn) }
     end
 
-    context 'when a block of options is passed in' do
+    context 'blocks' do
       let(:items) { %w(LemonChiffon PaleTurquoise FloralWhite Bisque) }
 
       let(:sample_block) do
@@ -142,6 +142,49 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       specify 'the block content should be rendered inside the select element' do
         items.each do |web_colour|
           expect(subject).to have_tag('select > option', text: web_colour, with: { value: web_colour })
+        end
+      end
+    end
+
+    context 'options_for_select' do
+      let(:items) { %w(Firebrick Peachpuff Honeydew Orhid) }
+
+      let(:options_for_select) do
+        helper.options_for_select(items.map { |web_colour| [web_colour, web_colour.downcase] })
+      end
+
+      subject do
+        builder.send(method, attribute, options_for_select)
+      end
+
+      specify 'the options should be present in the select element' do
+        items.each do |web_colour|
+          expect(subject).to have_tag('select > option', text: web_colour, with: { value: web_colour.downcase })
+        end
+      end
+    end
+
+    context 'grouped_options_for_select' do
+      let(:items) do
+        {
+          "Reds" => [%w(Tomato tomato), %w(Crimson crimson)],
+          "Blues" => [%w(Navy navy), %w(PowderBlue powderblue)],
+        }
+      end
+
+      let(:grouped_options_for_select) do
+        helper.grouped_options_for_select(items)
+      end
+
+      subject do
+        builder.send(method, attribute, grouped_options_for_select)
+      end
+
+      specify 'the options should be grouped in the correct optgroup' do
+        items.each do |group, colours|
+          expect(subject).to have_tag('select > optgroup', with: { label: group }) do
+            colours.each { |name, value| with_tag('option', text: name, with: { value: value }) }
+          end
         end
       end
     end
