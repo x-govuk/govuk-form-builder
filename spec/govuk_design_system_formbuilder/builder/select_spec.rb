@@ -164,6 +164,37 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
+    context 'options_for_select with custom attributes' do
+      let(:custom_data_attribute) { :hex }
+      let(:options_for_select_with_attributes) do
+        [
+          ["PapayaWhip", "pw",  { data: { custom_data_attribute => "#ffefd5" } }],
+          ["Chocolate", "choc", { data: { custom_data_attribute => "#d2691e" } }],
+        ]
+      end
+
+      let(:options_for_select) { helper.options_for_select(options_for_select_with_attributes) }
+
+      subject do
+        builder.send(method, attribute, options_for_select_with_attributes)
+      end
+
+      specify 'the options with their custom attributes should be present in the select element' do
+        expect(subject).to have_tag('select') do
+          options_for_select_with_attributes.each do |colour_name, value, custom_attributes|
+            with_tag(
+              'option',
+              text: colour_name,
+              with: {
+                :value => value,
+                %(data-#{custom_data_attribute}) => custom_attributes.dig(:data, custom_data_attribute)
+              }
+            )
+          end
+        end
+      end
+    end
+
     context 'grouped_options_for_select' do
       let(:items) do
         {
