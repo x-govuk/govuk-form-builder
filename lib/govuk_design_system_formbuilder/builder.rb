@@ -381,6 +381,7 @@ module GOVUKDesignSystemFormBuilder
     #   supplied the hint will be wrapped in a +div+ instead of a +span+
     # @option hint text [String] the hint text
     # @option hint kwargs [Hash] additional arguments are applied as attributes to the hint
+    # @param label [Hash,Proc] configures or sets the associated label content
     # @option label text [String] the label text
     # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
     # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
@@ -429,6 +430,38 @@ module GOVUKDesignSystemFormBuilder
       ).html
     end
 
+    # Generates a +select+ element containing an +option+ for every choice provided
+    #
+    # @param attribute_name [Symbol] The name of the attribute
+    # @param choices [Array,Hash] The +option+ values, usually provided via
+    #   the +options_for_select+ or +grouped_options_for_select+ helpers.
+    # @param options [Hash] Options hash passed through to Rails' +select+ helper
+    # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
+    #   supplied the hint will be wrapped in a +div+ instead of a +span+
+    # @option hint text [String] the hint text
+    # @option hint kwargs [Hash] additional arguments are applied as attributes to the hint
+    # @param label [Hash,Proc] configures or sets the associated label content
+    # @option label text [String] the label text
+    # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
+    # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
+    # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @option label kwargs [Hash] additional arguments are applied as attributes on the +label+ element
+    # @param form_group [Hash] configures the form group
+    # @option form_group classes [Array,String] sets the form group's classes
+    # @option form_group kwargs [Hash] additional attributes added to the form group
+    # @param block [Block] build the contents of the select element manually for exact control
+    # @see https://api.rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html#method-i-select Rails select (called by govuk_collection_select)
+    # @return [ActiveSupport::SafeBuffer] HTML output
+    #
+    # @example A select box with custom data attributes
+    #
+    #   @colours = [
+    #     ["PapayaWhip", "pw",  { data: { hex: "#ffefd5" } }],
+    #     ["Chocolate", "choc", { data: { hex: "#d2691e" } }],
+    #   ]
+    #
+    #   = f.govuk_select :hat_colour, options_for_select(@colours)
+    #
     def govuk_select(attribute_name, choices = nil, options: {}, label: {}, hint: {}, form_group: {}, caption: {}, **kwargs, &block)
       Elements::Select.new(self, object_name, attribute_name, choices, options: options, label: label, hint: hint, form_group: form_group, caption: caption, **kwargs, &block).html
     end
