@@ -121,7 +121,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     specify 'a select element is rendered' do
-      expect(subject).to have_tag('select', with: { class: "govuk-select" })
+      expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
+        with_tag('select', with: { class: "govuk-select" })
+      end
     end
 
     specify 'the select element has the right options' do
