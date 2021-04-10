@@ -72,7 +72,15 @@ module GOVUKDesignSystemFormBuilder
       def value(segment)
         attribute = @builder.object.try(@attribute_name)
 
-        attribute.try(segment) || attribute.try(:[], MULTIPARAMETER_KEY[segment])
+        return unless attribute
+
+        if attribute.respond_to?(segment)
+          attribute.send(segment)
+        elsif attribute.respond_to?(:fetch)
+          attribute.fetch(MULTIPARAMETER_KEY[segment])
+        else
+          fail(ArgumentError, "invalid Date-like object: must be a Date, Time, DateTime or Hash in MULTIPARAMETER_KEY format")
+        end
       end
 
       def label(segment, link_errors)
