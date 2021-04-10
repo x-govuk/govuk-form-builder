@@ -3,6 +3,7 @@ require 'action_controller'
 require 'action_view'
 require 'active_model'
 require 'active_support'
+require 'active_support/core_ext/string'
 require 'pry'
 require 'simplecov'
 

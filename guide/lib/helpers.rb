@@ -1,6 +1,7 @@
 require 'pry'
 require 'action_view'
 require 'active_model'
+require 'active_support/core_ext/string'
 require 'htmlbeautifier'
 require 'slim/erb_converter'
 

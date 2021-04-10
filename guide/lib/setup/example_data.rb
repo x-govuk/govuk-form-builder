@@ -48,6 +48,15 @@ module Setup
       DATA
     end
 
+    def grouped_lunch_options_raw
+      <<~DATA
+        grouped_lunch_options = {
+          "Sandwiches" => { "Ploughman's lunch" => :pl, "Tuna mayo" => :tm },
+          "Salads" => { "Greek salad" => :gs, "Tabbouleh" => :tb }
+        }
+      DATA
+    end
+
     def primary_colours_raw
       <<~DATA
         primary_colours = [
@@ -106,6 +115,10 @@ module Setup
       eval(lunch_options_raw)
     end
 
+    def grouped_lunch_options
+      eval(grouped_lunch_options_raw)
+    end
+
     def primary_colours
       eval(primary_colours_raw)
     end
@@ -125,6 +138,7 @@ module Setup
         departments_collection: departments_collection,
         contact_types: contact_types,
         lunch_options: lunch_options,
+        grouped_lunch_options: grouped_lunch_options,
         primary_colours: primary_colours,
         laptops: laptops
       }

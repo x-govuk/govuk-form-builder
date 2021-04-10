@@ -4,55 +4,42 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Error
       include Traits::Label
       include Traits::Hint
-      include Traits::Supplemental
       include Traits::HTMLAttributes
+      include Traits::Select
 
-      def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint:, label:, caption:, form_group:, options: {}, **kwargs, &block)
-        super(builder, object_name, attribute_name, &block)
+      def initialize(builder, object_name, attribute_name, choices, options:, form_group:, label:, hint:, caption:, **kwargs, &block)
+        # assign the block to an variable rather than passing to super so
+        # we can send it through to #select
+        super(builder, object_name, attribute_name)
+        @block           = block
 
-        @collection      = collection
-        @value_method    = value_method
-        @text_method     = text_method
-        @options         = options
+        @form_group      = form_group
+        @hint            = hint
         @label           = label
         @caption         = caption
-        @hint            = hint
-        @form_group      = form_group
+        @choices         = choices
+        @options         = options
         @html_attributes = kwargs
-
-        # FIXME remove this soon, worth informing people who miss the release notes that the
-        #       args have changed though.
-        if :html_options.in?(kwargs.keys)
-          Rails.logger.warn("GOVUKDesignSystemFormBuilder: html_options has been deprecated, use keyword arguments instead")
-        end
       end
 
       def html
         Containers::FormGroup.new(*bound, **@form_group).html do
-          safe_join([label_element, supplemental_content, hint_element, error_element, select])
+          safe_join([label_element, hint_element, error_element, select])
         end
       end
 
     private
 
       def select
-        @builder.collection_select(@attribute_name, @collection, @value_method, @text_method, @options, **attributes(@html_attributes))
+        @builder.select(@attribute_name, @choices, @options, attributes(@html_attributes), &@block)
       end
 
       def options
         {
           id: field_id(link_errors: true),
           class: classes,
-          aria: { describedby: described_by(hint_id, error_id, supplemental_id) }
+          aria: { describedby: described_by(hint_id, error_id) }
         }
-      end
-
-      def classes
-        [%(#{brand}-select), error_class].flatten.compact
-      end
-
-      def error_class
-        %(#{brand}-select--error) if has_errors?
       end
     end
   end
