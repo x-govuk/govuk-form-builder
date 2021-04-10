@@ -5,14 +5,15 @@ title: Select boxes
 h1.govuk-heading-xl Select field
 
 p.govuk-body
-  | The select component allows users to choose an option from a long list.
+  | The select and collection select components allow users to choose an option
+    from a long list.
 
 p.govuk-body
-  | Before using the select component try asking users questions which will
+  | Before using a select component try asking users questions which will
     allow you to present them with fewer options.
 
 p.govuk-body
-  | Asking questions means you’re less likely to need to use the select
+  | Asking questions means you're less likely to need to use the select
     component and can consider using a different solution, such as radios.
 
 section
@@ -21,5 +22,28 @@ section
     caption: "Select field with a label and hint",
     code: select_field_with_label_and_hint,
     sample_data: departments_data_raw)
+
+  == render('/partials/example-fig.*',
+    caption: "Taking greater control over the options",
+    code: select_field_with_grouped_options,
+    sample_data: grouped_lunch_options_raw) do
+
+    p.govuk-body
+      | The <code>#govuk_select</code> helper offers extra control over the
+        contents of a <code>select</code> element. Like its Rails counterpart,
+        <code>#select</code> the options can be set in a number of ways:
+
+      ul.govuk-list.govuk-list--bullet
+        li
+          | #{link_to('<code>options_for_select</code>', rails_option_for_select_link).html_safe}
+        li
+          | #{link_to('<code>grouped_options_for_select</code>', rails_grouped_option_for_select_link).html_safe}
+        li
+          | #{link_to('<code>options_from_collection_for_select</code>', rails_options_from_collection_for_select_link).html_safe}
+        li
+          | #{link_to('<code>option_groups_from_collection_for_select</code>', rails_option_groups_from_collection_for_select_link).html_safe}
+        li
+          | manually specifying the options using a block of HTML
+          
 
 == render('/partials/related-info.*', links: select_info)
