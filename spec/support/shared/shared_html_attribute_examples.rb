@@ -94,4 +94,15 @@ shared_examples 'a field that allows nested HTML attributes to be set' do
       expect(parsed_subject).to contain_element(described_element).with_attribute("aria-describedby").that_has_values(custom_aria_described_by, generated_hint_id)
     end
   end
+
+  context 'when an empty string is provided' do
+    let(:data_attribute) { 'importance' }
+    subject do
+      builder.send(*args, data: { data_attribute => "" })
+    end
+
+    specify 'no attribute should be present' do
+      expect(parsed_subject.at_css(described_element).attributes).not_to have_key("data-#{data_attribute}")
+    end
+  end
 end
