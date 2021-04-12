@@ -77,7 +77,11 @@ module GOVUKDesignSystemFormBuilder
         if attribute.respond_to?(segment)
           attribute.send(segment)
         elsif attribute.respond_to?(:fetch)
-          attribute.fetch(MULTIPARAMETER_KEY[segment])
+          attribute.fetch(MULTIPARAMETER_KEY[segment]) do
+            Rails.logger.warn("No key '#{segment}' found in MULTIPARAMETER_KEY hash. Expected to find #{MULTIPARAMETER_KEY.values}")
+
+            nil
+          end
         else
           fail(ArgumentError, "invalid Date-like object: must be a Date, Time, DateTime or Hash in MULTIPARAMETER_KEY format")
         end

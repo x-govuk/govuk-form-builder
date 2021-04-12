@@ -274,5 +274,22 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         expect { subject }.to raise_error(ArgumentError, /invalid Date-like object/)
       end
     end
+
+    describe "hashes without the right keys" do
+      let(:wrong_hash) { { d: 20, m: 3, y: 2009 } }
+      before { object.born_on = wrong_hash }
+      before { allow(Rails).to receive_message_chain(:logger, :warn) }
+      before { subject }
+
+      specify "logs an appropriate warning" do
+        expect(Rails.logger).to have_received(:warn).with(/No key '.*' found in MULTIPARAMETER_KEY hash/).exactly(wrong_hash.length).times
+      end
+
+      specify "doesn't generate inputs with values" do
+        parsed_subject.css('input').each do |element|
+          expect(element.attributes.keys).not_to include('value')
+        end
+      end
+    end
   end
 end
