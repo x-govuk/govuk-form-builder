@@ -24,7 +24,7 @@ module GOVUKDesignSystemFormBuilder
         # FIXME remove this soon, worth informing people who miss the release notes that the
         #       args have changed though.
         if :html_options.in?(kwargs.keys)
-          Rails.logger.warn("GOVUKDesignSystemFormBuilder: html_options has been deprecated, use keyword arguments instead")
+          warn("GOVUKDesignSystemFormBuilder: html_options has been deprecated, use keyword arguments instead")
         end
       end
 
