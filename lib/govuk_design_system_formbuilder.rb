@@ -49,6 +49,9 @@ module GOVUKDesignSystemFormBuilder
   # * +:localisation_schema_legend+, +:localisation_schema_hint+ and
   #   +:localisation_schema_label+ each override the schema root for their
   #   particular context, allowing them to be independently customised.
+  #
+  # * +:enable_logger+ controls whether or not the library will emit log
+  #   messages via Rails.logger.warn, defaults to +true+
   # ===
   DEFAULTS = {
     brand: 'govuk',
@@ -67,7 +70,9 @@ module GOVUKDesignSystemFormBuilder
     localisation_schema_label: nil,
     localisation_schema_hint: nil,
     localisation_schema_legend: nil,
-    localisation_schema_caption: nil
+    localisation_schema_caption: nil,
+
+    enable_logger: true
   }.freeze
 
   DEFAULTS.each_key { |k| config_accessor(k) { DEFAULTS[k] } }

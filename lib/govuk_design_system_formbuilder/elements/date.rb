@@ -78,7 +78,7 @@ module GOVUKDesignSystemFormBuilder
           attribute.send(segment)
         elsif attribute.respond_to?(:fetch)
           attribute.fetch(MULTIPARAMETER_KEY[segment]) do
-            Rails.logger.warn("No key '#{segment}' found in MULTIPARAMETER_KEY hash. Expected to find #{MULTIPARAMETER_KEY.values}")
+            warn("No key '#{segment}' found in MULTIPARAMETER_KEY hash. Expected to find #{MULTIPARAMETER_KEY.values}")
 
             nil
           end

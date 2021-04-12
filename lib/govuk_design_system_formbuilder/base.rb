@@ -96,5 +96,11 @@ module GOVUKDesignSystemFormBuilder
         .parameterize
         .tr(replace, delimiter)
     end
+
+    def warn(message)
+      return unless config.enable_logger
+
+      Rails.logger.warn(message)
+    end
   end
 end
