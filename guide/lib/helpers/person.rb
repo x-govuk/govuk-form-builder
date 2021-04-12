@@ -24,6 +24,7 @@ class Person
     :three_quarters,
     :one_half,
     :one_third,
+    :two_thirds,
     :one_quarter
   )
 
