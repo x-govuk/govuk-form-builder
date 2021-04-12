@@ -71,7 +71,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     it_behaves_like 'a field that supports a fieldset with legend'
     it_behaves_like 'a field that supports captions on the legend'
 
-    it_behaves_like 'a field that accepts a plain ruby object' do
+    it_behaves_like 'a date field that accepts a plain ruby object' do
       let(:described_element) { ['input', { count: 3 }] }
     end
 
@@ -263,6 +263,32 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       specify "should have additional attributes" do
         expect(subject).to have_tag('div', with: { 'data-test': 'abc' })
+      end
+    end
+
+    describe "invalid date-like objects" do
+      let(:wrong_date) { WrongDate.new(nil, nil, nil) }
+      before { object.born_on = wrong_date }
+
+      specify "fails with an appropriate error message" do
+        expect { subject }.to raise_error(ArgumentError, /invalid Date-like object/)
+      end
+    end
+
+    describe "hashes without the right keys" do
+      let(:wrong_hash) { { d: 20, m: 3, y: 2009 } }
+      before { object.born_on = wrong_hash }
+      before { allow(Rails).to receive_message_chain(:logger, :warn) }
+      before { subject }
+
+      specify "logs an appropriate warning" do
+        expect(Rails.logger).to have_received(:warn).with(/No key '.*' found in MULTIPARAMETER_KEY hash/).exactly(wrong_hash.length).times
+      end
+
+      specify "doesn't generate inputs with values" do
+        parsed_subject.css('input').each do |element|
+          expect(element.attributes.keys).not_to include('value')
+        end
       end
     end
   end

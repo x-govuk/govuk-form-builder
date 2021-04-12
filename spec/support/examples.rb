@@ -105,3 +105,5 @@ class Department
     self.name = name
   end
 end
+
+WrongDate = Struct.new(:d, :m, :y)
