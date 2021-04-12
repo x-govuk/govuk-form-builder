@@ -24,6 +24,7 @@ module Examples
 
         = f.govuk_text_field :full,           width: 'full'
         = f.govuk_text_field :three_quarters, width: 'three-quarters'
+        = f.govuk_text_field :two_thirds,     width: 'two-thirds'
         = f.govuk_text_field :one_half,       width: 'one-half'
         = f.govuk_text_field :one_third,      width: 'one-third'
         = f.govuk_text_field :one_quarter,    width: 'one-quarter'
