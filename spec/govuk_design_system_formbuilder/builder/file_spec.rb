@@ -52,6 +52,11 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:expected_class) { 'govuk-file-upload' }
     end
 
+    it_behaves_like 'a field that allows nested HTML attributes to be set' do
+      let(:described_element) { 'input' }
+      let(:expected_class) { 'govuk-input' }
+    end
+
     it_behaves_like 'a field that accepts a plain ruby object' do
       let(:described_element) { ['input', { with: { type: 'file' } }] }
     end

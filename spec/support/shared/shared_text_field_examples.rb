@@ -54,6 +54,11 @@ shared_examples 'a regular input' do |method_identifier, field_type|
     let(:expected_class) { 'govuk-input' }
   end
 
+  it_behaves_like 'a field that allows nested HTML attributes to be set' do
+    let(:described_element) { 'input' }
+    let(:expected_class) { 'govuk-input' }
+  end
+
   describe 'width' do
     context 'custom widths' do
       {
