@@ -96,7 +96,7 @@ class Person
 
   def telephone_number_or_email_address_exists
     if telephone_number.blank? && email_address.blank?
-      errors[:base] << "Enter a telephone number or email address"
+      errors.add(:base, "Enter a telephone number or email address")
     end
   end
 
