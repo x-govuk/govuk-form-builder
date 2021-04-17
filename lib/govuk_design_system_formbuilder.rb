@@ -1,13 +1,9 @@
 require 'deep_merge/rails_compat'
-require 'rails/engine'
 require 'active_support/configurable'
 
 [%w(refinements *.rb), %w(traits *.rb), %w(*.rb), %w(elements ** *.rb), %w(containers ** *.rb)]
   .flat_map { |matcher| Dir.glob(File.join(__dir__, 'govuk_design_system_formbuilder', *matcher)) }
   .each { |file| require file }
-
-require 'govuk_design_system_formbuilder/builder_helper'
-require 'govuk_design_system_formbuilder/engine'
 
 module GOVUKDesignSystemFormBuilder
   include ActiveSupport::Configurable
