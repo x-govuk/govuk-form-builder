@@ -9,6 +9,8 @@ nanoc-check: nanoc-check-all
 
 ruby-lint:
 	${prefix} rubocop lib spec guide/lib util
+slim-lint:
+	${prefix} slim-lint guide
 rspec:
 	${prefix} rspec --format progress
 npm-install:
