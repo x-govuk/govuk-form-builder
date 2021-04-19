@@ -78,3 +78,6 @@ jobs:
 
       - name: Run Nanoc Check
         run: make nanoc-check-all
+
+      - name: Run Guide Check
+        run: make slim-lint
