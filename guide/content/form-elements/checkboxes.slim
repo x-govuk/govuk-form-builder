@@ -17,7 +17,7 @@ p.govuk-body
     with the form even when no checkboxes have been checked, allowing options
     #{link_to("to be deselected", rails_checkbox_gotcha_link).html_safe}. The
     hidden field can be toggled using the <code>multiple</code> keyword argument.
- 
+
 section
 
   == render('/partials/example-fig.*',
@@ -70,11 +70,11 @@ section
         buttons. This ensures the user has understood the question and is
         actively selecting the appropriate answer.
 
-    div.important
+    .important
       p.govuk-body
         | Note that in this example <code>multiple: false</code> is passed to
           both the <code>#govuk_check_boxes_fieldset</code> and
-          <code>#govuk_check_box</code> helpers. 
+          <code>#govuk_check_box</code> helpers.
 
       p.govuk-body
         | They're required to ensure the both checkbox's and hidden field's
