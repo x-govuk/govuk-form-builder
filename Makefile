@@ -4,11 +4,13 @@ nanoc_default_port=3006
 nanoc_internal_checks=internal_links stale mixed_content
 nanoc_external_checks=external_links
 
-check: ruby-lint rspec nanoc-check
+check: ruby-lint slim-lint rspec nanoc-check
 nanoc-check: nanoc-check-all
 
 ruby-lint:
 	${prefix} rubocop lib spec guide/lib util
+slim-lint:
+	${prefix} slim-lint guide
 rspec:
 	${prefix} rspec --format progress
 npm-install:
