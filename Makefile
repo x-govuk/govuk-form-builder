@@ -4,7 +4,7 @@ nanoc_default_port=3006
 nanoc_internal_checks=internal_links stale mixed_content
 nanoc_external_checks=external_links
 
-check: ruby-lint rspec nanoc-check
+check: ruby-lint slim-lint rspec nanoc-check
 nanoc-check: nanoc-check-all
 
 ruby-lint:
