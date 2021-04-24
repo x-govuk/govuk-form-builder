@@ -72,7 +72,8 @@ module GOVUKDesignSystemFormBuilder
     localisation_schema_legend: nil,
     localisation_schema_caption: nil,
 
-    enable_logger: true
+    enable_logger: true,
+    enable_log_on_invalid_date: false
   }.freeze
 
   DEFAULTS.each_key { |k| config_accessor(k) { DEFAULTS[k] } }

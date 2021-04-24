@@ -82,6 +82,10 @@ module GOVUKDesignSystemFormBuilder
 
             nil
           end
+        elsif config.enable_log_on_invalid_date
+          warn("invalid Date-like object: should be a Date, Time, DateTime or Hash in MULTIPARAMETER_KEY format")
+
+          nil
         else
           fail(ArgumentError, "invalid Date-like object: must be a Date, Time, DateTime or Hash in MULTIPARAMETER_KEY format")
         end
