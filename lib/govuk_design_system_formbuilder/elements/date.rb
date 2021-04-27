@@ -70,19 +70,18 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def value(segment)
-        attribute = @builder.object.try(@attribute_name)
+        return unless (attribute = @builder.object.try(@attribute_name))
 
-        return unless attribute
-
-        if attribute.respond_to?(segment)
+        case
+        when attribute.respond_to?(segment)
           attribute.send(segment)
-        elsif attribute.respond_to?(:fetch)
+        when attribute.respond_to?(:fetch)
           attribute.fetch(MULTIPARAMETER_KEY[segment]) do
             warn("No key '#{segment}' found in MULTIPARAMETER_KEY hash. Expected to find #{MULTIPARAMETER_KEY.values}")
 
             nil
           end
-        elsif config.enable_log_on_invalid_date
+        when config.enable_log_on_invalid_date
           warn("invalid Date-like object: should be a Date, Time, DateTime or Hash in MULTIPARAMETER_KEY format")
 
           nil
