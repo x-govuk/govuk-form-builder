@@ -73,6 +73,7 @@ class Person
     :favourite_shade_of_red,
     :favourite_shade_of_orange,
     :favourite_shade_of_blue,
+    :favourite_shade_of_purple,
     :favourite_shade_of_grey,
     :favourite_primary_colour,
     :least_favourite_colour

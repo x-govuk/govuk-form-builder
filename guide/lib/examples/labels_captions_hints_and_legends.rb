@@ -36,6 +36,18 @@ module Examples
       SNIPPET
     end
 
+    def text_field_with_hint_proc
+      <<~SNIPPET
+        = f.govuk_text_field :favourite_shade_of_purple,
+          label: { text: 'What is your favourite shade of purple?' },
+          hint: -> do
+            p
+              ' If in doubt, choose
+              span.indigo-underline Indigo
+
+      SNIPPET
+    end
+
     def radios_with_legend
       <<~SNIPPET
         = f.govuk_collection_radio_buttons :favourite_colour,
