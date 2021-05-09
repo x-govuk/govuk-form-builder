@@ -1,0 +1,2 @@
+# Lots of eval in example_data but it's required to build the guide
+guide/lib/setup/example_data.rb
