@@ -83,14 +83,9 @@ module GOVUKDesignSystemFormBuilder
     #   build_id('hint') #=> "person-name-hint"
     def build_id(id_type, delimiter = '-', replace = '_', segment: nil, attribute_name: nil, include_value: true)
       attribute = attribute_name || @attribute_name
-      value     = include_value && @value || nil
-      [
-        @object_name,
-        attribute,
-        segment,
-        value,
-        id_type
-      ]
+      value     = (include_value && @value) || nil
+
+      [@object_name, attribute, segment, value, id_type]
         .compact
         .join(delimiter)
         .parameterize
