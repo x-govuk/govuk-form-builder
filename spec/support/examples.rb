@@ -30,8 +30,21 @@ class Being
   end
 end
 
+class Pseudonym
+  include ActiveModel::Model
+  include ActiveModel::Attributes
+
+  attribute :name, :string
+
+  validates :name,
+            presence: { message: 'Enter a pseudonym' },
+            length: { minimum: 3 }
+end
+
 class Person < Being
   include ActiveModel::Model
+
+  attr_accessor :pseudonym
 
   validates :name,
             presence: { message: 'Enter a name' },
@@ -42,6 +55,10 @@ class Person < Being
 
   validate :born_on_must_be_in_the_past, if: -> { born_on.present? }
   validate :photo_must_be_jpeg, if: -> { photo.present? }
+
+  def set_pseudonym(name)
+    self.pseudonym = Pseudonym.new(name)
+  end
 
   def self.valid_example
     new(
