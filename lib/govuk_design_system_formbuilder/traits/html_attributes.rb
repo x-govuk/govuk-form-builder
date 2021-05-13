@@ -22,7 +22,11 @@ module GOVUKDesignSystemFormBuilder
                           when Hash
                             deep_split_values(value)
                           when String
-                            value.split
+                            if key == :value
+                              value
+                            else
+                              value.split
+                            end
                           else
                             value
                           end
