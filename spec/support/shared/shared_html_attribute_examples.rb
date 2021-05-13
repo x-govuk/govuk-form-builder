@@ -7,9 +7,18 @@ shared_examples 'a field that allows extra HTML attributes to be set' do
       autocomplete: { provided: false,                   expected: 'false' },
       placeholder:  { provided: 'Seymour Skinner',       expected: 'Seymour Skinner' },
       data:         { provided: { a: 'b' },              expected: { 'data-a' => 'b' } },
-      aria:         { provided: { c: 'd' },              expected: { 'aria-c' => 'd' } },
       class:        { provided: %w(red spots),           expected: %w(red spots) },
-      value:        { provided: 'Montgomery Montgomery', expected: 'Montgomery Montgomery' }
+      value:        { provided: 'Montgomery Montgomery', expected: 'Montgomery Montgomery' },
+
+      # aria-label is a special case, along with value it should not be treated
+      # like a list when deep merging
+      aria: {
+        provided: {
+          c: 'd',
+          label: 'Burns Burns'
+        },
+        expected: { 'aria-c' => 'd', 'aria-label' => 'Burns Burns' }
+      },
     }
 
     let(:custom_attributes) { custom_attributes }
