@@ -3,12 +3,22 @@ shared_examples 'a field that allows extra HTML attributes to be set' do
 
   context 'with args in the expected formats' do
     custom_attributes = {
-      required:     { provided: true,              expected: 'required' },
-      autocomplete: { provided: false,             expected: 'false' },
-      placeholder:  { provided: 'Seymour Skinner', expected: 'Seymour Skinner' },
-      data:         { provided: { a: 'b' },        expected: { 'data-a' => 'b' } },
-      aria:         { provided: { c: 'd' },        expected: { 'aria-c' => 'd' } },
-      class:        { provided: %w(red spots),     expected: %w(red spots) }
+      required:     { provided: true,                    expected: 'required' },
+      autocomplete: { provided: false,                   expected: 'false' },
+      placeholder:  { provided: 'Seymour Skinner',       expected: 'Seymour Skinner' },
+      data:         { provided: { a: 'b' },              expected: { 'data-a' => 'b' } },
+      class:        { provided: %w(red spots),           expected: %w(red spots) },
+      value:        { provided: 'Montgomery Montgomery', expected: 'Montgomery Montgomery' },
+
+      # aria-label is a special case, along with value it should not be treated
+      # like a list when deep merging
+      aria: {
+        provided: {
+          c: 'd',
+          label: 'Burns Burns'
+        },
+        expected: { 'aria-c' => 'd', 'aria-label' => 'Burns Burns' }
+      },
     }
 
     let(:custom_attributes) { custom_attributes }
@@ -22,6 +32,14 @@ shared_examples 'a field that allows extra HTML attributes to be set' do
     describe 'input tag should have the extra attributes:' do
       extract_args(custom_attributes, :expected).each do |key, val|
         case
+        when key == :value
+          specify "#{key} has classes #{val}" do
+            if described_element == "textarea"
+              expect(subject).to have_tag(described_element, text: /#{val}/)
+            else
+              expect(subject).to have_tag(described_element, with: { key => val })
+            end
+          end
 
         # class is dealt with as a special case because we want to ensure that whatever
         # extra classes we provide are *added* to the pre-existing one (expected_class)
