@@ -6,16 +6,11 @@ module GOVUKDesignSystemFormBuilder
       #   present
       # * joins the arrays into strings to maintain Rails 6.0.3 compatibility
       class Attributes
-        # Don't try to deep merge these fields, when we remove duplicates
-        # whilst merging the resulting values later, repeating words are lost
-        SKIP = [
-          %i(id),
-          %i(value),
-          %i(title),
-          %i(alt),
-          %i(href),
-          %i(aria label)
-        ].freeze
+        # Rather than attempt to combine these attributes, just overwrite the
+        # form internally-generated values with those that are passed in. This
+        # prevents the merge/unique value logic from affecting the content
+        # (i.e. by remvoving duplicated words).
+        UNMERGEABLE = [%i(id), %i(value), %i(title), %i(alt), %i(href), %i(aria label)].freeze
 
         def initialize(defaults, custom)
           @merged = defaults.deeper_merge(deep_split_values(custom))
@@ -33,19 +28,17 @@ module GOVUKDesignSystemFormBuilder
                           when Hash
                             deep_split_values(value, key)
                           when String
-                            split_list_values(key, value, parent)
+                            split_mergeable(key, value, parent)
                           else
                             value
                           end
           end
         end
 
-        def split_list_values(key, value, parent = nil)
-          if [parent, key].compact.in?(SKIP)
-            value
-          else
-            value.split
-          end
+        def split_mergeable(key, value, parent = nil)
+          return value if [parent, key].compact.in?(UNMERGEABLE)
+
+          value.split
         end
 
         def deep_join_values(hash)
