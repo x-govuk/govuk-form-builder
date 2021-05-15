@@ -13,10 +13,7 @@ shared_examples 'a field that allows extra HTML attributes to be set' do
       # aria-label is a special case, along with value it should not be treated
       # like a list when deep merging
       aria: {
-        provided: {
-          c: 'd',
-          label: 'Burns Burns'
-        },
+        provided: { c: 'd', label: 'Burns Burns' },
         expected: { 'aria-c' => 'd', 'aria-label' => 'Burns Burns' }
       },
     }
