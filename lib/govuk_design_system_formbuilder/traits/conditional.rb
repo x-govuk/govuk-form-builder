@@ -9,7 +9,7 @@ module GOVUKDesignSystemFormBuilder
 
       def wrap_conditional(block)
         tag.div(class: conditional_classes, id: conditional_id) do
-          capture { block.call }
+          capture { block.call || return }
         end
       end
     end
