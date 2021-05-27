@@ -179,6 +179,14 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             }
           )
         end
+
+        context 'with no content' do
+          subject { builder.send(*args) {} }
+
+          specify 'should not generate conditional div' do
+            expect(subject).not_to have_tag('div', with: { class: 'govuk-checkboxes__conditional' })
+          end
+        end
       end
 
       context 'when no block is given' do
