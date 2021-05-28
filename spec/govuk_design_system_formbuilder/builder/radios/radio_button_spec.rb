@@ -125,8 +125,23 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
 
+      context 'when an empty block is given' do
+        subject do
+          builder.send(*args) { "" }
+        end
+
+        specify "the data-aria-controls attribute should not be present" do
+          input_data_aria_controls = parsed_subject.at_css("input[type='radio']")['data-aria-controls']
+          expect(input_data_aria_controls).to be_nil
+        end
+
+        specify "the conditional container should not be present" do
+          expect(subject).not_to have_tag('.govuk-radios__conditional')
+        end
+      end
+
       context 'when no block is given' do
-        subject { builder.govuk_radio_button(attribute, value) }
+        subject { builder.send(*args) }
 
         specify "the data-aria-controls attribute should not be present" do
           input_data_aria_controls = parsed_subject.at_css("input[type='radio']")['data-aria-controls']
