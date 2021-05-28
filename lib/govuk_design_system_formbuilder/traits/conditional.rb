@@ -7,9 +7,9 @@ module GOVUKDesignSystemFormBuilder
         build_id('conditional')
       end
 
-      def wrap_conditional(block)
+      def wrap_conditional(content)
         tag.div(class: conditional_classes, id: conditional_id) do
-          capture { block.call || return }
+          capture { content }
         end
       end
     end

@@ -19,8 +19,8 @@ module GOVUKDesignSystemFormBuilder
           @link_errors     = has_errors? && link_errors
           @html_attributes = kwargs
 
-          if block_given?
-            @conditional_content = wrap_conditional(block)
+          if (conditional_block_content = block_given? && block.call.presence)
+            @conditional_content = wrap_conditional(conditional_block_content)
             @conditional_id      = conditional_id
           end
         end
