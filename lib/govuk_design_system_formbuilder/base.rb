@@ -1,12 +1,4 @@
 module GOVUKDesignSystemFormBuilder
-  module PrefixableArray
-    refine Array do
-      def prefix(text, delimiter: '-')
-        map { |item| text + delimiter + item }
-      end
-    end
-  end
-
   class Base
     delegate :content_tag, :safe_join, :tag, :link_to, :capture, to: :@builder
     delegate :config, to: GOVUKDesignSystemFormBuilder
