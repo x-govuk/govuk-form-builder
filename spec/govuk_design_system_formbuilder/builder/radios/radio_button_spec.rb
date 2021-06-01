@@ -45,6 +45,17 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     it_behaves_like 'a field that supports setting the label via localisation'
     it_behaves_like 'a field that supports setting the hint via localisation'
 
+    it_behaves_like 'a fieldset item that can conditionally-reveal content' do
+      subject do
+        builder.send(*args) do
+          builder.govuk_text_field(:stationery_choice)
+        end
+      end
+
+      let(:fieldset_item_type) { 'radios' }
+      let(:fieldset_item_type_single) { 'radio' }
+    end
+
     context 'labels set via procs' do
       let(:label_text) { 'Orange' }
       let(:label_proc) { -> { label_text } }
@@ -84,72 +95,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           expect(subject).to have_tag('div', with: { class: %w(govuk-hint govuk-radios__hint) }) do
             with_tag('section', text: red_hint)
           end
-        end
-      end
-    end
-
-    context 'conditionally revealing content' do
-      context 'when a block is given' do
-        subject do
-          builder.govuk_radio_button(attribute, value) do
-            builder.govuk_text_field(:stationery_choice)
-          end
-        end
-
-        specify 'should place the conditional content at the same level as the radio button container' do
-          expect(parsed_subject).to have_root_element_with_class('govuk-radios__conditional')
-        end
-
-        specify 'should include content provided in the block in a conditional div' do
-          expect(subject).to have_tag('div', with: { class: 'govuk-radios__conditional govuk-radios__conditional--hidden' }) do |cd|
-            expect(cd).to have_tag('label', with: { class: 'govuk-label' }, text: 'Stationery_choice')
-            expect(cd).to have_tag('input', with: { type: 'text' })
-          end
-        end
-
-        specify "the data-aria-controls attribute should match the conditional block's id" do
-          input_data_aria_controls = parsed_subject.at_css("input[type='radio']")['data-aria-controls']
-          conditional_id = parsed_subject.at_css('div.govuk-radios__conditional')['id']
-
-          expect(input_data_aria_controls).to eql(conditional_id)
-        end
-
-        specify 'conditional_id contains the object, attribute and value name' do
-          expect(subject).to have_tag(
-            'input',
-            with: {
-              type: 'radio',
-              'data-aria-controls' => %(person-stationery-#{value_with_dashes}-conditional)
-            }
-          )
-        end
-      end
-
-      context 'when an empty block is given' do
-        subject do
-          builder.send(*args) { "" }
-        end
-
-        specify "the data-aria-controls attribute should not be present" do
-          input_data_aria_controls = parsed_subject.at_css("input[type='radio']")['data-aria-controls']
-          expect(input_data_aria_controls).to be_nil
-        end
-
-        specify "the conditional container should not be present" do
-          expect(subject).not_to have_tag('.govuk-radios__conditional')
-        end
-      end
-
-      context 'when no block is given' do
-        subject { builder.send(*args) }
-
-        specify "the data-aria-controls attribute should not be present" do
-          input_data_aria_controls = parsed_subject.at_css("input[type='radio']")['data-aria-controls']
-          expect(input_data_aria_controls).to be_nil
-        end
-
-        specify "the conditional container should not be present" do
-          expect(subject).not_to have_tag('.govuk-radios__conditional')
         end
       end
     end

@@ -2,13 +2,10 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     module Radios
       class FieldsetRadioButton < Base
-        using PrefixableArray
-
         include Traits::Label
         include Traits::Hint
-        include Traits::FieldsetItem
-        include Traits::Conditional
         include Traits::HTMLAttributes
+        include Traits::FieldsetItem
 
         def initialize(builder, object_name, attribute_name, value, label:, hint:, link_errors:, **kwargs, &block)
           super(builder, object_name, attribute_name)
@@ -19,43 +16,21 @@ module GOVUKDesignSystemFormBuilder
           @link_errors     = has_errors? && link_errors
           @html_attributes = kwargs
 
-          if (conditional_block_content = block_given? && block.call.presence)
-            @conditional_content = wrap_conditional(conditional_block_content)
-            @conditional_id      = conditional_id
-          end
-        end
-
-        def html
-          safe_join([radio, @conditional_content])
+          conditional_content(&block)
         end
 
       private
 
-        def radio
-          tag.div(class: %(#{brand}-radios__item)) do
-            safe_join([input, label_element, hint_element])
-          end
-        end
-
-        def fieldset_options
-          { radio: true }
+        def input_type
+          :radios
         end
 
         def input
           @builder.radio_button(@attribute_name, @value, **attributes(@html_attributes))
         end
 
-        def options
-          {
-            id: field_id(link_errors: @link_errors),
-            aria: { describedby: [hint_id] },
-            data: { 'aria-controls' => @conditional_id },
-            class: %w(radios__input).prefix(brand)
-          }
-        end
-
-        def conditional_classes
-          %w(radios__conditional radios__conditional--hidden).prefix(brand)
+        def fieldset_options
+          { radio: true }
         end
       end
     end
