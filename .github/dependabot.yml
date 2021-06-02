@@ -1,11 +1,17 @@
+---
 version: 2
 updates:
-- package-ecosystem: bundler
-  directory: "/"
-  schedule:
-    interval: monthly
-  open-pull-requests-limit: 10
-  ignore:
-  - dependency-name: simplecov
-    versions:
-    - "> 0.17.1, < 1"
+  - package-ecosystem: bundler
+    directory: "/"
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: simplecov
+        versions:
+          - "> 0.17.1, < 1"
+  - package-ecosystem: npm
+    directory: "/guide"
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 10
