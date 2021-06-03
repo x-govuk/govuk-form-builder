@@ -62,7 +62,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def conditional_content(&block)
-        if (conditional_block_content = block_given? && block.call.presence)
+        if (conditional_block_content = block_given? && (capture { block.call }).presence)
           @conditional    = conditional_container(conditional_block_content)
           @conditional_id = conditional_id
         end
@@ -70,7 +70,7 @@ module GOVUKDesignSystemFormBuilder
 
       def conditional_container(content)
         tag.div(class: conditional_classes, id: conditional_id) do
-          capture { content }
+          content
         end
       end
 
