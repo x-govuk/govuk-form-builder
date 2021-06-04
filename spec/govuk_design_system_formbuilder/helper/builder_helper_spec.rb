@@ -10,9 +10,9 @@ describe GOVUKDesignSystemFormBuilder::BuilderHelper, type: :helper do
   let(:args) { [object, :person, attribute] }
   let(:helper) { Dummy.new }
 
-  describe '#govuk_design_system_formbuilder_field_id' do
+  describe '#govuk_field_id' do
     context %(given a person object's name attribute) do
-      subject { helper.govuk_design_system_formbuilder_field_id(*args) }
+      subject { helper.govuk_field_id(*args) }
 
       it { is_expected.to eql(%(#{object_name}-#{attribute}-field)) }
 
@@ -27,7 +27,7 @@ describe GOVUKDesignSystemFormBuilder::BuilderHelper, type: :helper do
     describe %(given a person object's project attribute (multiple, identified by value)) do
       let(:attribute) { :projects }
       let(:value) { 123 }
-      subject { helper.govuk_design_system_formbuilder_field_id(*args, value: value) }
+      subject { helper.govuk_field_id(*args, value: value) }
 
       it { is_expected.to eql(%(#{object_name}-#{attribute}-#{value}-field)) }
 
@@ -41,7 +41,7 @@ describe GOVUKDesignSystemFormBuilder::BuilderHelper, type: :helper do
 
         context 'and link_errors is false' do
           let(:kwargs) { { value: value, link_errors: false } }
-          subject { helper.govuk_design_system_formbuilder_field_id(*args, **kwargs) }
+          subject { helper.govuk_field_id(*args, **kwargs) }
 
           it { is_expected.to eql(%(#{object_name}-#{attribute}-#{value}-field)) }
         end
