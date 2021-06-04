@@ -108,6 +108,8 @@ module GOVUKDesignSystemFormBuilder
     include GOVUKDesignSystemFormBuilder::Builder
   end
 
+  class FormBuilderProxy < FormBuilder; end
+
   # Disable Rails' div.field_with_error wrapper
   ActionView::Base.field_error_proc = ->(html_tag, _instance) { html_tag }
 end
