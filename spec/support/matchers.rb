@@ -39,6 +39,34 @@ RSpec::Matchers.define(:have_no_double_spaces) do
   #:nocov:
 end
 
+RSpec::Matchers.define(:render_an_error_summary) do
+  match do |html|
+    expect(html).to have_tag("div", with: { class: "govuk-error-summary" }) do
+      with_tag('ul', with: { class: 'govuk-error-summary__list' }) do
+        if @count.present?
+          with_tag('li', count: @count)
+        end
+      end
+    end
+  end
+
+  #:nocov:
+  description do
+    if @count.present?
+      "render an error summary with #{@count} errors"
+    else
+      "render an error summary"
+    end
+  end
+
+  chain(:with) do |count|
+    @count = count
+  end
+
+  chain(:errors) {}
+  #:nocov:
+end
+
 RSpec::Matchers.define(:contain_element) do |selector|
   match do |nokogiri_fragment|
     @actual_values = nokogiri_fragment

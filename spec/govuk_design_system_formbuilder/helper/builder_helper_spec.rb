@@ -64,13 +64,7 @@ describe GOVUKDesignSystemFormBuilder::BuilderHelper, type: :helper do
 
     subject { helper.govuk_error_summary(*args, **kwargs) }
 
-    specify 'renders an error summary with the right number of errors' do
-      expect(subject).to have_tag("div", with: { class: "govuk-error-summary" }) do
-        with_tag('ul', with: { class: 'govuk-error-summary__list' }) do
-          with_tag('li', count: object.errors.size)
-        end
-      end
-    end
+    it { is_expected.to render_an_error_summary.with(object.errors.size).errors }
 
     context 'when extra arguments are provided' do
       let(:custom_title) { "Something went terribly wrong" }
@@ -84,6 +78,15 @@ describe GOVUKDesignSystemFormBuilder::BuilderHelper, type: :helper do
 
       specify "the custom class is present" do
         expect(subject).to have_tag("div", with: { class: [custom_class, "govuk-error-summary"] })
+      end
+    end
+
+    context 'when no object_name is provided' do
+      let(:args) { [object] }
+      subject { helper.govuk_error_summary(*args) }
+
+      specify "the object name is inferred from the object" do
+        is_expected.to render_an_error_summary.with(object.errors.size).errors
       end
     end
   end
