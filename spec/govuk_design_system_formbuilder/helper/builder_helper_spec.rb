@@ -15,7 +15,7 @@ describe GOVUKDesignSystemFormBuilder::BuilderHelper, type: :helper do
   let(:object) { Person.new(name: 'Joey') }
   let(:object_name) { :person }
   let(:attribute) { :name }
-  let(:args) { [object, :person, attribute] }
+  let(:args) { [object, attribute, :person] }
   let(:helper) { Dummy.new }
 
   describe '#govuk_field_id' do
@@ -28,7 +28,18 @@ describe GOVUKDesignSystemFormBuilder::BuilderHelper, type: :helper do
         let(:object) { Person.new }
         before { object.valid? }
 
-        it { is_expected.to eql(%(#{object_name}-#{attribute}-field-error)) }
+        specify "the id is built using the object name and attribute" do
+          expect(subject).to eql(%(#{object_name}-#{attribute}-field-error))
+        end
+      end
+
+      context 'when no object_name is provided' do
+        let(:args) { [object, attribute] }
+        subject { helper.govuk_field_id(*args) }
+
+        specify "the object name is inferred from the object" do
+          expect(subject).to eql(%(#{object_name}-#{attribute}-field))
+        end
       end
     end
 
@@ -37,21 +48,27 @@ describe GOVUKDesignSystemFormBuilder::BuilderHelper, type: :helper do
       let(:value) { 123 }
       subject { helper.govuk_field_id(*args, value: value) }
 
-      it { is_expected.to eql(%(#{object_name}-#{attribute}-#{value}-field)) }
+      specify "the id is built using the object name, attribute and value" do
+        expect(subject).to eql(%(#{object_name}-#{attribute}-#{value}-field))
+      end
 
       context 'when the project is invalid' do
         let(:object) { Person.new }
         before { object.valid? }
 
         context 'and link_errors is true (default)' do
-          it { is_expected.to eql(%(#{object_name}-#{attribute}-field-error)) }
+          specify "the id is built using the object name, attribute, value and error status" do
+            expect(subject).to eql(%(#{object_name}-#{attribute}-field-error))
+          end
         end
 
         context 'and link_errors is false' do
           let(:kwargs) { { value: value, link_errors: false } }
           subject { helper.govuk_field_id(*args, **kwargs) }
 
-          it { is_expected.to eql(%(#{object_name}-#{attribute}-#{value}-field)) }
+          specify "does not include the error status in the generated id" do
+            expect(subject).to eql(%(#{object_name}-#{attribute}-#{value}-field))
+          end
         end
       end
     end

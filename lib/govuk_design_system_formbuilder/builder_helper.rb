@@ -23,7 +23,9 @@ module GOVUKDesignSystemFormBuilder
     # @param link_errors [Boolean] toggles whether or not to override the field id with the
     #   error id when there are errors on the +object+. Only relevant for radio buttons
     #   and check boxes.
-    def govuk_field_id(object, object_name, attribute_name, value: nil, link_errors: true)
+    def govuk_field_id(object, attribute_name, object_name = nil, value: nil, link_errors: true)
+      (object_name = retrieve_object_name(object)) if object_name.nil?
+
       proxy_base(object, object_name, attribute_name, value: value).field_id(link_errors: link_errors)
     end
 
@@ -41,7 +43,7 @@ module GOVUKDesignSystemFormBuilder
     #
     # @see https://design-system.service.gov.uk/components/error-summary/ GOV.UK error summary
     def govuk_error_summary(object, object_name = nil, *args, **kwargs)
-      (object_name = object.to_model.model_name.singular) if object_name.nil?
+      (object_name = retrieve_object_name(object)) if object_name.nil?
 
       proxy_builder(object, object_name, self, {}).govuk_error_summary(*args, **kwargs)
     end
@@ -54,6 +56,10 @@ module GOVUKDesignSystemFormBuilder
 
     def proxy_builder(object, object_name, template, options)
       GOVUKDesignSystemFormBuilder::FormBuilderProxy.new(object_name, object, template, options)
+    end
+
+    def retrieve_object_name(object)
+      object.to_model.model_name.singular
     end
   end
 end
