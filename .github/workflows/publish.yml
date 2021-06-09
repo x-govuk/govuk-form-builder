@@ -21,7 +21,7 @@ jobs:
 
       - name: Install gems
         env:
-          RAILS_VERSION: '6.1.3.1'
+          RAILS_VERSION: '6.0.3.7'
         run: |
           gem install bundler
           bundle install --jobs 4 --retry 3
