@@ -292,6 +292,82 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             end
           end
         end
+
+        describe "custom sort order" do
+          let(:actual_order) do
+            parsed_subject
+              .css('li > a')
+              .map { |element| element['href'] }
+              .map { |href| href.match(%r[#{object_name}-(?<attribute_name>.*)-field-error])[:attribute_name] }
+              .map { |attribute| dashes_to_underscores(attribute) }
+          end
+
+          context "by default" do
+            # the object here is Person, defined in spec/support/examples.rb
+            #
+            # the validation order is: name, favourite colour, projects, cv
+            #
+            # name is present on the object
+            specify "errors are displayed in the order they're defined in the model" do
+              expect(object.name).to be_present
+
+              expect(actual_order).to eql(%w(favourite_colour projects cv))
+            end
+          end
+
+          describe "overriding" do
+            let(:overridden_order) { object.error_order.map(&:to_s) }
+
+            context "when the object has no overridden ordering" do
+              let(:object) { OrderedErrors.new }
+              let(:expected_order) { %w(a b c d e) }
+
+              # there's no error_order method on the object, ensure nothing blows up
+              specify "the error messages are displayed in the order they were defined in the model" do
+                expect(actual_order).to eql(expected_order)
+              end
+            end
+
+            context "when all attributes are named in the ordering" do
+              let(:object) { OrderedErrorsWithCustomOrder.new }
+
+              # the default validation order is (:a, :b, :c, :d, :e)
+              #
+              # the overridden order is (:e, :d, :c, :b, :a)
+              specify "the error messages are displayed in the overridden order" do
+                expect(actual_order).to eql(overridden_order)
+              end
+            end
+
+            context "when there are attributes with errors that aren't named in the ordering" do
+              let(:object) { OrderedErrorsWithCustomOrderAndExtraAttributes.new }
+
+              # the default validation order is (:a, :b, :c, :d, :e)
+              #
+              # the overridden order is (:e, :d, :c, :b, :a)
+              #
+              # the extra attributes (:g, :h, :i) validation order is (:i, :h, :g)
+              specify "the errors for attributes with overridden ordering are first" do
+                expect(actual_order).to start_with(overridden_order)
+              end
+
+              specify "the errors for extra attributes appear last, in the order they were defined in the model" do
+                expect(actual_order).to end_with(%w(i h g))
+              end
+            end
+
+            context "when the ordering specifies attributes that aren't present on the object" do
+              let(:object) { OrderedErrorsWithCustomOrderAndInvalidAttributes.new }
+              let(:expected_order) { %w(a b c d e) }
+
+              # there's no error_order method, ensure it doesn't blow up. it shouldn't
+              # because #index will return nil
+              specify "the error messages are displayed in the order they were defined in the model" do
+                expect(actual_order).to eql(expected_order)
+              end
+            end
+          end
+        end
       end
     end
 

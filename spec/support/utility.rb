@@ -14,6 +14,10 @@ def underscores_to_dashes(val)
   val.to_s.tr('_', '-')
 end
 
+def dashes_to_underscores(val)
+  val.to_s.tr('-', '_')
+end
+
 def rails_version
   ENV.fetch('RAILS_VERSION') { '6.1.1' }
 end

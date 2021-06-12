@@ -35,9 +35,29 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def list
-        @builder.object.errors.messages.map do |attribute, messages|
+        error_messages.map do |attribute, messages|
           list_item(attribute, messages.first)
         end
+      end
+
+      def error_messages
+        messages = @builder.object.errors.messages
+
+        if reorder_errors?
+          return messages.sort_by.with_index(1) do |(attr, _val), i|
+            error_order.index(attr) || (i + messages.size)
+          end
+        end
+
+        @builder.object.errors.messages
+      end
+
+      def reorder_errors?
+        @builder.object.respond_to?(:error_order) && @builder.object.error_order.present?
+      end
+
+      def error_order
+        @builder.object.error_order
       end
 
       def list_item(attribute, message)

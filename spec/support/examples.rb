@@ -33,6 +33,8 @@ end
 class Person < Being
   include ActiveModel::Model
 
+  attr_accessor :error_order
+
   validates :name,
             presence: { message: 'Enter a name' },
             length: { minimum: 2, message: 'Name should be longer than 1' }
@@ -108,3 +110,42 @@ class Department
 end
 
 WrongDate = Struct.new(:d, :m, :y)
+
+class OrderedErrors
+  include ActiveModel::Model
+  include ActiveModel::Attributes
+
+  attribute :a, :string
+  attribute :b, :string
+  attribute :c, :string
+  attribute :d, :string
+  attribute :e, :string
+
+  validates :a, presence: true, length: { minimum: 3 }
+  validates :b, presence: true, length: { minimum: 3 }
+  validates :c, presence: true, length: { minimum: 3 }
+  validates :d, presence: true, length: { minimum: 3 }
+  validates :e, presence: true, length: { minimum: 3 }
+end
+
+class OrderedErrorsWithCustomOrder < OrderedErrors
+  def error_order
+    %i(a b c d e).reverse
+  end
+end
+
+class OrderedErrorsWithCustomOrderAndInvalidAttributes < OrderedErrors
+  def error_order
+    %i(x y z)
+  end
+end
+
+class OrderedErrorsWithCustomOrderAndExtraAttributes < OrderedErrorsWithCustomOrder
+  attribute :g, :string
+  attribute :h, :string
+  attribute :i, :string
+
+  validates :i, presence: true, length: { minimum: 3 }
+  validates :h, presence: true, length: { minimum: 3 }
+  validates :g, presence: true, length: { minimum: 3 }
+end
