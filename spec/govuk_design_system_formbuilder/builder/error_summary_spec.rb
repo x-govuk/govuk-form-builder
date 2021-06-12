@@ -39,7 +39,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       describe 'error messages' do
         subject! { builder.send(method) }
 
-        context 'there are multiple errors each with one error message' do
+        context 'when there are multiple errors each with one error message' do
           let(:object) { Person.new(favourite_colour: nil, projects: []) }
 
           specify 'the error summary should contain a list with one error message per field' do
@@ -50,7 +50,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           end
         end
 
-        context 'there are multiple errors and one has multiple error messages' do
+        context 'when there are multiple errors and one has multiple error messages' do
           let(:object) { Person.new(name: nil, favourite_colour: nil) }
 
           specify 'the error summary should contain a list with one error message per field' do
