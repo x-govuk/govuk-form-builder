@@ -33,14 +33,15 @@ end
 class Person < Being
   include ActiveModel::Model
 
-  validates :name, presence: { message: 'Enter a name' }
+  validates :name,
+            presence: { message: 'Enter a name' },
+            length: { minimum: 2, message: 'Name should be longer than 1' }
   validates :favourite_colour, presence: { message: 'Choose a favourite colour' }
   validates :projects, presence: { message: 'Select at least one project' }
   validates :cv, length: { maximum: 30 }, presence: true
 
   validate :born_on_must_be_in_the_past, if: -> { born_on.present? }
   validate :photo_must_be_jpeg, if: -> { photo.present? }
-  validates :name, length: { minimum: 2, message: 'Name should be longer than 1' }
 
   def self.valid_example
     new(
