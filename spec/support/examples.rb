@@ -33,8 +33,6 @@ end
 class Person < Being
   include ActiveModel::Model
 
-  attr_accessor :error_order
-
   validates :name,
             presence: { message: 'Enter a name' },
             length: { minimum: 2, message: 'Name should be longer than 1' }
@@ -130,23 +128,11 @@ end
 
 class OrderedErrorsWithCustomOrder < OrderedErrors
   def error_order
-    %i(a b c d e).reverse
+    %i(e d c b a)
   end
 end
 
-class OrderedErrorsWithCustomOrderAndInvalidAttributes < OrderedErrors
-  def error_order
-    %i(x y z)
-  end
-end
-
-class OrderedErrorsWithCustomOrderMethod < OrderedErrors
-  def sort_my_errors_in_the_following_manner_please
-    %i(c e d a b)
-  end
-end
-
-class OrderedErrorsWithCustomOrderAndExtraAttributes < OrderedErrorsWithCustomOrder
+class OrderedErrorsWithCustomOrderAndExtraAttributes < OrderedErrors
   attribute :g, :string
   attribute :h, :string
   attribute :i, :string

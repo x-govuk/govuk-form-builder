@@ -311,21 +311,12 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           end
 
           describe "overriding" do
-            let(:overridden_order) { object.error_order.map(&:to_s) }
-
-            context "when the object has no overridden ordering" do
-              let(:object) { OrderedErrors.new }
-              let(:expected_order) { %w(a b c d e) }
-
-              # there's no error_order method on the object, ensure nothing blows up
-              specify "the error messages are displayed in the order they were defined in the model" do
-                expect(actual_order).to eql(expected_order)
-              end
-            end
+            let(:object) { OrderedErrors.new }
+            let(:overridden_order) { %w(e d c b a) }
+            let(:overridden_order_symbols) { overridden_order.map(&:to_sym) }
+            let(:kwargs) { { order: overridden_order_symbols } }
 
             context "when all attributes are named in the ordering" do
-              let(:object) { OrderedErrorsWithCustomOrder.new }
-
               # the default validation order is (:a, :b, :c, :d, :e)
               #
               # the overridden order is (:e, :d, :c, :b, :a)
@@ -352,23 +343,12 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             end
 
             context "when the ordering specifies attributes that aren't present on the object" do
-              let(:object) { OrderedErrorsWithCustomOrderAndInvalidAttributes.new }
-              let(:expected_order) { %w(a b c d e) }
+              let(:kwargs) { { order: overridden_order_symbols.append(%i(x y z)) } }
 
               # there's no error_order method, ensure it doesn't blow up. it shouldn't
               # because #index will return nil
               specify "the error messages are displayed in the order they were defined in the model" do
-                expect(actual_order).to eql(expected_order)
-              end
-            end
-
-            context "setting the order via the :order argument" do
-              let(:object) { OrderedErrors.new }
-              let(:overridden_order) { %i(d e b a c) }
-              let(:kwargs) { { order: overridden_order } }
-
-              specify "the error messages are displayed in the overridden order" do
-                expect(actual_order).to eql(overridden_order.map(&:to_s))
+                expect(actual_order).to eql(overridden_order)
               end
             end
           end

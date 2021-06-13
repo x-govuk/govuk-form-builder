@@ -66,7 +66,7 @@ module GOVUKDesignSystemFormBuilder
     default_submit_button_text: 'Continue',
     default_radio_divider_text: 'or',
     default_error_summary_title: 'There is a problem',
-    default_error_summary_error_order_method: :error_order,
+    default_error_summary_error_order_method: nil,
     default_collection_check_boxes_include_hidden: true,
     default_collection_radio_buttons_include_hidden: true,
     default_submit_validate: false,
