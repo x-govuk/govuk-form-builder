@@ -140,6 +140,12 @@ class OrderedErrorsWithCustomOrderAndInvalidAttributes < OrderedErrors
   end
 end
 
+class OrderedErrorsWithCustomOrderMethod < OrderedErrors
+  def sort_my_errors_in_the_following_manner_please
+    %i(c e d a b)
+  end
+end
+
 class OrderedErrorsWithCustomOrderAndExtraAttributes < OrderedErrorsWithCustomOrder
   attribute :g, :string
   attribute :h, :string

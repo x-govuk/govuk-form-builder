@@ -56,11 +56,19 @@ module GOVUKDesignSystemFormBuilder
       def reorder_errors?
         object = @builder.object
 
-        @order || (object.respond_to?(:error_order) && object.error_order.present?)
+        @order || (error_order_method &&
+                   object.respond_to?(error_order_method) &&
+                   object.send(error_order_method).present?)
       end
 
       def error_order
-        @order || @builder.object.error_order
+        @order || @builder.object.send(config.default_error_summary_error_order_method)
+      end
+
+      # this method will be called on the bound object to see if custom error ordering
+      # has been enabled
+      def error_order_method
+        config.default_error_summary_error_order_method
       end
 
       def list_item(attribute, message)

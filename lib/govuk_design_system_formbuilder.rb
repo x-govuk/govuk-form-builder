@@ -41,6 +41,10 @@ module GOVUKDesignSystemFormBuilder
   # * +:default_collection_radio_buttons_include_hidden+ controls whether or not
   #   a hidden field is added when rendering a collection of radio buttons
   #
+  # * +:default_error_summary_error_order_method+ is the method that the library
+  #   will check for on the bound object to see whether or not to try ordering the
+  #   error messages
+  #
   # * +:localisation_schema_fallback+ sets the prefix elements for the array
   #   used to build the localisation string. The final two elements are always
   #   are the object name and attribute name. The _special_ value +__context__+,
@@ -62,6 +66,7 @@ module GOVUKDesignSystemFormBuilder
     default_submit_button_text: 'Continue',
     default_radio_divider_text: 'or',
     default_error_summary_title: 'There is a problem',
+    default_error_summary_error_order_method: :error_order,
     default_collection_check_boxes_include_hidden: true,
     default_collection_radio_buttons_include_hidden: true,
     default_submit_validate: false,
