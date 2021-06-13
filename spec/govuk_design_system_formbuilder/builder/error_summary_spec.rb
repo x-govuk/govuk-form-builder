@@ -295,13 +295,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
 
         describe "custom sort order" do
-          let(:actual_order) do
-            parsed_subject
-              .css('li > a')
-              .map { |element| element['href'] }
-              .map { |href| href.match(%r[#{object_name}-(?<attribute_name>.*)-field-error])[:attribute_name] }
-              .map { |attribute| dashes_to_underscores(attribute) }
-          end
+          let(:actual_order) { extract_field_names_from_errors_summary_list(parsed_subject) }
 
           context "by default" do
             # the object here is Person, defined in spec/support/examples.rb
