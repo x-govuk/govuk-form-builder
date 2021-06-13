@@ -4,12 +4,13 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Error
       include Traits::HTMLAttributes
 
-      def initialize(builder, object_name, title, link_base_errors_to:, **kwargs)
+      def initialize(builder, object_name, title, link_base_errors_to:, order:, **kwargs)
         super(builder, object_name, nil)
 
         @title               = title
         @link_base_errors_to = link_base_errors_to
         @html_attributes     = kwargs
+        @order               = order
       end
 
       def html
@@ -53,11 +54,13 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def reorder_errors?
-        @builder.object.respond_to?(:error_order) && @builder.object.error_order.present?
+        object = @builder.object
+
+        @order || (object.respond_to?(:error_order) && object.error_order.present?)
       end
 
       def error_order
-        @builder.object.error_order
+        @order || @builder.object.error_order
       end
 
       def list_item(attribute, message)

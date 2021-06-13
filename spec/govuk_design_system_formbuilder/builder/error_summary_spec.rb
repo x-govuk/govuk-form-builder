@@ -37,7 +37,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       describe 'error messages' do
-        subject! { builder.send(method) }
+        let(:kwargs) { {} }
+        subject! { builder.send(*args, **kwargs) }
 
         context 'when there are multiple errors each with one error message' do
           let(:object) { Person.new(favourite_colour: nil, projects: []) }
@@ -364,6 +365,16 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
               # because #index will return nil
               specify "the error messages are displayed in the order they were defined in the model" do
                 expect(actual_order).to eql(expected_order)
+              end
+            end
+
+            context "setting the order via the :order argument" do
+              let(:object) { OrderedErrors.new }
+              let(:overridden_order) { %i(d e b a c) }
+              let(:kwargs) { { order: overridden_order } }
+
+              specify "the error messages are displayed in the overridden order" do
+                expect(actual_order).to eql(overridden_order.map(&:to_s))
               end
             end
           end
