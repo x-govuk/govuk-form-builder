@@ -4,8 +4,8 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Error
       include Traits::HTMLAttributes
 
-      def initialize(builder, object_name, title, link_base_errors_to:, order:, **kwargs)
-        super(builder, object_name, nil)
+      def initialize(builder, object_name, title, link_base_errors_to:, order:, **kwargs, &block)
+        super(builder, object_name, nil, &block)
 
         @title               = title
         @link_base_errors_to = link_base_errors_to
@@ -28,16 +28,12 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def summary
-        tag.div(class: summary_class('body')) do
-          tag.ul(class: [%(#{brand}-list), summary_class('list')]) do
-            safe_join(list)
-          end
-        end
+        tag.div(class: summary_class('body')) { safe_join([@block_content, list]) }
       end
 
       def list
-        error_messages.map do |attribute, messages|
-          list_item(attribute, messages.first)
+        tag.ul(class: [%(#{brand}-list), summary_class('list')]) do
+          safe_join(error_messages.map { |attribute, messages| list_item(attribute, messages.first) })
         end
       end
 

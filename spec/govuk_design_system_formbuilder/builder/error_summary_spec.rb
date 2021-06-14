@@ -404,5 +404,25 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         let(:expected_class) { 'govuk-error-summary' }
       end
     end
+
+    context 'when a block of html is supplied' do
+      let(:custom_content_tag) { :marquee }
+      let(:custom_content_text) { "Fix the things below" }
+      subject do
+        builder.send(*args) do
+          builder.content_tag(custom_content_tag, custom_content_text)
+        end
+      end
+
+      before { object.valid? }
+
+      specify "the custom content should be present in the error summary" do
+        expect(subject).to have_tag("div", with: { class: "govuk-error-summary" }) do
+          with_tag("div", with: { class: "govuk-error-summary__body" }) do
+            with_tag(custom_content_tag, text: custom_content_text)
+          end
+        end
+      end
+    end
   end
 end

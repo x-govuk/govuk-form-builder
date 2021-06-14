@@ -934,6 +934,7 @@ module GOVUKDesignSystemFormBuilder
     #   attributes will appear first and unordered ones will be last, sorted in the default manner (in
     #   which they were defined on the model).
     # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the error summary +div+ element
+    # @param block [Block] arbitrary HTML that will be rendered between title and error message list
     #
     # @note Only the first error in the +#errors+ array for each attribute will
     #   be included.
@@ -942,8 +943,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_error_summary 'Uh-oh, spaghettios'
     #
     # @see https://design-system.service.gov.uk/components/error-summary/ GOV.UK error summary
-    def govuk_error_summary(title = config.default_error_summary_title, link_base_errors_to: nil, order: nil, **kwargs)
-      Elements::ErrorSummary.new(self, object_name, title, link_base_errors_to: link_base_errors_to, order: order, **kwargs).html
+    def govuk_error_summary(title = config.default_error_summary_title, link_base_errors_to: nil, order: nil, **kwargs, &block)
+      Elements::ErrorSummary.new(self, object_name, title, link_base_errors_to: link_base_errors_to, order: order, **kwargs, &block).html
     end
 
     # Generates a fieldset containing the contents of the block
