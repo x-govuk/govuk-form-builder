@@ -22,7 +22,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       expect(subject).to have_tag('h2', text: default_error_summary_title, with: { class: 'govuk-error-summary__title' })
     end
 
-    context %(overriding with 'Engage') do
+    context %(overriding with custom text) do
       let(:error_summary_title) { %(We've been hit!) }
       let(:args) { [method, error_summary_title] }
 

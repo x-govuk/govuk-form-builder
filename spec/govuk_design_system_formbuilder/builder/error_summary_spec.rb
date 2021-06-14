@@ -37,9 +37,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       describe 'error messages' do
-        subject! { builder.send(method) }
+        let(:kwargs) { {} }
+        subject! { builder.send(*args, **kwargs) }
 
-        context 'there are multiple errors each with one error message' do
+        context 'when there are multiple errors each with one error message' do
           let(:object) { Person.new(favourite_colour: nil, projects: []) }
 
           specify 'the error summary should contain a list with one error message per field' do
@@ -50,7 +51,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           end
         end
 
-        context 'there are multiple errors and one has multiple error messages' do
+        context 'when there are multiple errors and one has multiple error messages' do
           let(:object) { Person.new(name: nil, favourite_colour: nil) }
 
           specify 'the error summary should contain a list with one error message per field' do
@@ -288,6 +289,66 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
                 specify 'the targetted input should be the day field' do
                   expect(parsed_subject.at_css('#' + identifier).attribute('name').value).to eql(first_date_segment_name)
                 end
+              end
+            end
+          end
+        end
+
+        describe "custom sort order" do
+          let(:actual_order) { extract_field_names_from_errors_summary_list(parsed_subject) }
+
+          context "by default" do
+            # the object here is Person, defined in spec/support/examples.rb
+            #
+            # the validation order is: name, favourite colour, projects, cv
+            #
+            # name is present on the object
+            specify "errors are displayed in the order they're defined in the model" do
+              expect(object.name).to be_present
+
+              expect(actual_order).to eql(%w(favourite_colour projects cv))
+            end
+          end
+
+          describe "overriding" do
+            let(:object) { OrderedErrors.new }
+            let(:overridden_order) { %w(e d c b a) }
+            let(:overridden_order_symbols) { overridden_order.map(&:to_sym) }
+            let(:kwargs) { { order: overridden_order_symbols } }
+
+            context "when all attributes are named in the ordering" do
+              # the default validation order is (:a, :b, :c, :d, :e)
+              #
+              # the overridden order is (:e, :d, :c, :b, :a)
+              specify "the error messages are displayed in the overridden order" do
+                expect(actual_order).to eql(overridden_order)
+              end
+            end
+
+            context "when there are attributes with errors that aren't named in the ordering" do
+              let(:object) { OrderedErrorsWithCustomOrderAndExtraAttributes.new }
+
+              # the default validation order is (:a, :b, :c, :d, :e)
+              #
+              # the overridden order is (:e, :d, :c, :b, :a)
+              #
+              # the extra attributes (:g, :h, :i) validation order is (:i, :h, :g)
+              specify "the errors for attributes with overridden ordering are first" do
+                expect(actual_order).to start_with(overridden_order)
+              end
+
+              specify "the errors for extra attributes appear last, in the order they were defined in the model" do
+                expect(actual_order).to end_with(%w(i h g))
+              end
+            end
+
+            context "when the ordering specifies attributes that aren't present on the object" do
+              let(:kwargs) { { order: overridden_order_symbols.append(%i(x y z)) } }
+
+              # there's no error_order method, ensure it doesn't blow up. it shouldn't
+              # because #index will return nil
+              specify "the error messages are displayed in the order they were defined in the model" do
+                expect(actual_order).to eql(overridden_order)
               end
             end
           end

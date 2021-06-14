@@ -33,14 +33,15 @@ end
 class Person < Being
   include ActiveModel::Model
 
-  validates :name, presence: { message: 'Enter a name' }
+  validates :name,
+            presence: { message: 'Enter a name' },
+            length: { minimum: 2, message: 'Name should be longer than 1' }
   validates :favourite_colour, presence: { message: 'Choose a favourite colour' }
   validates :projects, presence: { message: 'Select at least one project' }
   validates :cv, length: { maximum: 30 }, presence: true
 
   validate :born_on_must_be_in_the_past, if: -> { born_on.present? }
   validate :photo_must_be_jpeg, if: -> { photo.present? }
-  validates :name, length: { minimum: 2, message: 'Name should be longer than 1' }
 
   def self.valid_example
     new(
@@ -107,3 +108,36 @@ class Department
 end
 
 WrongDate = Struct.new(:d, :m, :y)
+
+class OrderedErrors
+  include ActiveModel::Model
+  include ActiveModel::Attributes
+
+  attribute :a, :string
+  attribute :b, :string
+  attribute :c, :string
+  attribute :d, :string
+  attribute :e, :string
+
+  validates :a, presence: true, length: { minimum: 3 }
+  validates :b, presence: true, length: { minimum: 3 }
+  validates :c, presence: true, length: { minimum: 3 }
+  validates :d, presence: true, length: { minimum: 3 }
+  validates :e, presence: true, length: { minimum: 3 }
+end
+
+class OrderedErrorsWithCustomOrder < OrderedErrors
+  def error_order
+    %i(e d c b a)
+  end
+end
+
+class OrderedErrorsWithCustomOrderAndExtraAttributes < OrderedErrors
+  attribute :g, :string
+  attribute :h, :string
+  attribute :i, :string
+
+  validates :i, presence: true, length: { minimum: 3 }
+  validates :h, presence: true, length: { minimum: 3 }
+  validates :g, presence: true, length: { minimum: 3 }
+end

@@ -14,10 +14,22 @@ def underscores_to_dashes(val)
   val.to_s.tr('_', '-')
 end
 
+def dashes_to_underscores(val)
+  val.to_s.tr('-', '_')
+end
+
 def rails_version
   ENV.fetch('RAILS_VERSION') { '6.1.1' }
 end
 
 def rails_version_later_than_6_1_0?
   rails_version >= '6.1.0'
+end
+
+def extract_field_names_from_errors_summary_list(document)
+  document
+    .css('li > a')
+    .map { |element| element['href'] }
+    .map { |href| href.match(%r[#{object_name}-(?<attribute_name>.*)-field-error])[:attribute_name] }
+    .map { |attribute| dashes_to_underscores(attribute) }
 end

@@ -4,12 +4,13 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Error
       include Traits::HTMLAttributes
 
-      def initialize(builder, object_name, title, link_base_errors_to:, **kwargs)
+      def initialize(builder, object_name, title, link_base_errors_to:, order:, **kwargs)
         super(builder, object_name, nil)
 
         @title               = title
         @link_base_errors_to = link_base_errors_to
         @html_attributes     = kwargs
+        @order               = order
       end
 
       def html
@@ -35,9 +36,39 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def list
-        @builder.object.errors.messages.map do |attribute, messages|
+        error_messages.map do |attribute, messages|
           list_item(attribute, messages.first)
         end
+      end
+
+      def error_messages
+        messages = @builder.object.errors.messages
+
+        if reorder_errors?
+          return messages.sort_by.with_index(1) do |(attr, _val), i|
+            error_order.index(attr) || (i + messages.size)
+          end
+        end
+
+        @builder.object.errors.messages
+      end
+
+      def reorder_errors?
+        object = @builder.object
+
+        @order || (error_order_method &&
+                   object.respond_to?(error_order_method) &&
+                   object.send(error_order_method).present?)
+      end
+
+      def error_order
+        @order || @builder.object.send(config.default_error_summary_error_order_method)
+      end
+
+      # this method will be called on the bound object to see if custom error ordering
+      # has been enabled
+      def error_order_method
+        config.default_error_summary_error_order_method
       end
 
       def list_item(attribute, message)
