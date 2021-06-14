@@ -42,10 +42,10 @@ module GOVUKDesignSystemFormBuilder
     #   = govuk_error_summary(@registration)
     #
     # @see https://design-system.service.gov.uk/components/error-summary/ GOV.UK error summary
-    def govuk_error_summary(object, object_name = nil, *args, **kwargs)
+    def govuk_error_summary(object, object_name = nil, *args, **kwargs, &block)
       (object_name = retrieve_object_name(object)) if object_name.nil?
 
-      proxy_builder(object, object_name, self, {}).govuk_error_summary(*args, **kwargs)
+      proxy_builder(object, object_name, self, {}).govuk_error_summary(*args, **kwargs, &block)
     end
 
   private

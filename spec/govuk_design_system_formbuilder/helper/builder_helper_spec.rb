@@ -106,5 +106,21 @@ describe GOVUKDesignSystemFormBuilder::BuilderHelper, type: :helper do
         is_expected.to render_an_error_summary.with(object.errors.size).errors
       end
     end
+
+    context 'when a block is provided' do
+      let(:custom_content_text) { "Fix the things below" }
+
+      subject do
+        helper.govuk_error_summary(*args) do
+          custom_content_text
+        end
+      end
+
+      specify "the custom content should be present in the error summary" do
+        expect(subject).to have_tag("div", with: { class: "govuk-error-summary" }) do
+          with_tag("div", with: { class: "govuk-error-summary__body" }, text: Regexp.new(custom_content_text))
+        end
+      end
+    end
   end
 end
