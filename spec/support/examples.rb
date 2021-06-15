@@ -132,7 +132,7 @@ class OrderedErrorsWithCustomOrder < OrderedErrors
   end
 end
 
-class OrderedErrorsWithCustomOrderAndExtraAttributes < OrderedErrors
+class OrderedErrorsWithExtraAttributes < OrderedErrors
   attribute :g, :string
   attribute :h, :string
   attribute :i, :string

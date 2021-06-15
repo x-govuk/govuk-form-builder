@@ -296,6 +296,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
         describe "custom sort order" do
           let(:actual_order) { extract_field_names_from_errors_summary_list(parsed_subject) }
+          let(:overridden_order_symbols) { overridden_order.map(&:to_sym) }
 
           context "by default" do
             # the object here is Person, defined in spec/support/examples.rb
@@ -313,7 +314,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           describe "overriding" do
             let(:object) { OrderedErrors.new }
             let(:overridden_order) { %w(e d c b a) }
-            let(:overridden_order_symbols) { overridden_order.map(&:to_sym) }
             let(:kwargs) { { order: overridden_order_symbols } }
 
             context "when all attributes are named in the ordering" do
@@ -326,7 +326,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             end
 
             context "when there are attributes with errors that aren't named in the ordering" do
-              let(:object) { OrderedErrorsWithCustomOrderAndExtraAttributes.new }
+              let(:object) { OrderedErrorsWithExtraAttributes.new }
 
               # the default validation order is (:a, :b, :c, :d, :e)
               #
@@ -349,6 +349,24 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
               # because #index will return nil
               specify "the error messages are displayed in the order they were defined in the model" do
                 expect(actual_order).to eql(overridden_order)
+              end
+            end
+
+            context "when there are more entries in the custom order than errors on the object" do
+              let(:object) { OrderedErrorsWithExtraAttributes.new }
+              let(:overridden_order_existing_attributes) { %w(a d c e b) }
+              let(:overridden_order) { ("m".."z").to_a.concat(overridden_order_existing_attributes) }
+              let(:kwargs) { { order: overridden_order_symbols } }
+
+              # the default validation order is (:a, :b, :c, :d, :e)
+              #
+              # the overridden order is :m..:z, :a, :d, :c, :e, :b)
+              #
+              # the counter used in ordering *should not* allow 'extra' attributes
+              # to come before ones specified in the override, such as in this
+              # contrived example where the index of our known fields are at the end
+              specify "the error messages are displayed in the order they were defined in the model" do
+                expect(actual_order).to start_with(overridden_order_existing_attributes)
               end
             end
           end

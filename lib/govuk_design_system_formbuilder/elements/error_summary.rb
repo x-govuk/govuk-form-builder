@@ -41,8 +41,10 @@ module GOVUKDesignSystemFormBuilder
         messages = @builder.object.errors.messages
 
         if reorder_errors?
-          return messages.sort_by.with_index(1) do |(attr, _val), i|
-            error_order.index(attr) || (i + messages.size)
+          adjustment = error_order.size + messages.size
+
+          return messages.sort_by.with_index do |(attr, _val), i|
+            error_order.index(attr) || (i + adjustment)
           end
         end
 
