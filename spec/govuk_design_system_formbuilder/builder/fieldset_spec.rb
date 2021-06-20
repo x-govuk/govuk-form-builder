@@ -25,9 +25,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     specify 'output should be a fieldset containing the block contents' do
-      expect(subject).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
-        expect(fs).to have_tag('legend', text: legend_text)
-        expect(fs).to have_tag('span', text: inner_text)
+      expect(subject).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do
+        with_tag('legend', text: legend_text)
+        with_tag('span', text: inner_text)
       end
     end
 
@@ -35,9 +35,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:legend_options) { { text: legend_text, size: 'm', tag: 'h3', hidden: true } }
 
       specify 'output should have classes according to size and visibility' do
-        expect(subject).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
-          expect(fs).to have_tag('legend', with: { class: 'govuk-fieldset__legend--m govuk-visually-hidden' }) do |lg|
-            expect(lg).to have_tag('h3', text: legend_text)
+        expect(subject).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do
+          with_tag('legend', with: { class: 'govuk-fieldset__legend--m govuk-visually-hidden' }) do
+            with_tag('h3', text: legend_text)
           end
         end
       end
@@ -51,10 +51,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       specify 'inner inputs should be contained in the fieldset' do
-        expect(subject).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
-          expect(fs).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-            expect(fg).to have_tag('label')
-            expect(fg).to have_tag('input')
+        expect(subject).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do
+          with_tag('div', with: { class: 'govuk-form-group' }) do
+            with_tag('label')
+            with_tag('input')
           end
         end
       end

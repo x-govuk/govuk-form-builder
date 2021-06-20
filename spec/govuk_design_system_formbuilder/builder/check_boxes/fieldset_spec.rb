@@ -87,8 +87,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     context 'when a block containing check boxes is supplied' do
       specify 'output should be a form group containing a form group and fieldset' do
-        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-          expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' })
+        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
+          with_tag('fieldset', with: { class: 'govuk-fieldset' })
         end
       end
 
@@ -102,8 +102,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         specify 'there should be a hidden field to represent deselection' do
           expected_name = %(#{object_name}[#{attribute}][])
 
-          expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-            expect(fg).to have_tag('input', with: { type: 'hidden', name: expected_name })
+          expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
+            with_tag('input', with: { type: 'hidden', name: expected_name })
           end
         end
       end
@@ -112,8 +112,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         let(:kwargs) { { multiple: false } }
 
         specify 'no hidden field should be present' do
-          expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-            expect(fg).not_to have_tag('input', with: { type: 'hidden' })
+          expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
+            without_tag('input', with: { type: 'hidden' })
           end
         end
       end

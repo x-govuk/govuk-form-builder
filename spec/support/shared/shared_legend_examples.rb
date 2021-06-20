@@ -18,8 +18,8 @@ shared_examples 'a field that supports a fieldset with legend' do
       subject { builder.send(*args, legend: { text: nil }) }
 
       specify 'output should contain a header set to the attribute name' do
-        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-          expect(fg).to have_tag('fieldset', text: attribute.capitalize, with: { class: 'govuk-fieldset' })
+        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
+          with_tag('fieldset', text: attribute.capitalize, with: { class: 'govuk-fieldset' })
         end
       end
     end
@@ -29,9 +29,9 @@ shared_examples 'a field that supports a fieldset with legend' do
       subject { builder.send(*args, legend: { text: legend_text, tag: tag }) }
 
       specify 'output fieldset should contain the specified tag' do
-        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-          expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
-            expect(fs).to have_tag(tag, text: legend_text)
+        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
+          with_tag('fieldset', with: { class: 'govuk-fieldset' }) do
+            with_tag(tag, text: legend_text)
           end
         end
       end
@@ -45,9 +45,9 @@ shared_examples 'a field that supports a fieldset with legend' do
             subject { builder.send(*args, legend: { text: legend_text, size: size }) }
 
             specify %(the legend size should be #{size}) do
-              expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-                expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
-                  expect(fs).to have_tag('legend', text: legend_text, class: "govuk-fieldset__legend--#{size}")
+              expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
+                with_tag('fieldset', with: { class: 'govuk-fieldset' }) do
+                  with_tag('legend', text: legend_text, class: "govuk-fieldset__legend--#{size}")
                 end
               end
             end
@@ -107,10 +107,10 @@ shared_examples 'a field that supports a fieldset with legend' do
       subject { builder.send(*args, legend: legend) }
 
       specify 'output fieldset should contain the specified tag' do
-        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-          expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
-            expect(fs).to have_tag('span', class: caption_classes, text: caption)
-            expect(fs).to have_tag('h1', class: heading_classes, text: heading)
+        expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
+          with_tag('fieldset', with: { class: 'govuk-fieldset' }) do
+            with_tag('span', class: caption_classes, text: caption)
+            with_tag('h1', class: heading_classes, text: heading)
           end
         end
       end

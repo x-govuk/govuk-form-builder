@@ -3,14 +3,14 @@ shared_examples 'a field that supports hints' do
     subject { builder.send(*args, hint: { text: hint_text }) }
 
     specify 'output should contain a hint in a span tag' do
-      expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-        expect(fg).to have_tag('span', text: hint_text, with: { class: 'govuk-hint' })
+      expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
+        with_tag('span', text: hint_text, with: { class: 'govuk-hint' })
       end
     end
 
     specify 'output should also contain the label and field elements' do
-      expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-        ['label', field_type].each { |element| expect(fg).to have_tag(element) }
+      expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
+        ['label', field_type].each { |element| with_tag(element) }
       end
     end
 
@@ -43,8 +43,8 @@ shared_examples 'a field that supports hints' do
     subject { builder.send(*args, hint: hint) }
 
     specify 'output should contain a hint in a div tag' do
-      expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-        expect(fg).to have_tag('div', with: { class: 'govuk-hint' })
+      expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
+        with_tag('div', with: { class: 'govuk-hint' })
       end
     end
 

@@ -19,10 +19,10 @@ shared_examples 'a field that accepts arbitrary blocks of HTML' do
     end
 
     specify 'should include block content wrapped in a div with correct supplemental id' do
-      expect(subject).to have_tag('div', with: { id: supplemental_id }) do |sup|
-        expect(sup).to have_tag('h1', text: block_h1)
-        expect(sup).to have_tag('h2', text: block_h2)
-        expect(sup).to have_tag('p', text: block_p)
+      expect(subject).to have_tag('div', with: { id: supplemental_id }) do
+        with_tag('h1', text: block_h1)
+        with_tag('h2', text: block_h2)
+        with_tag('p', text: block_p)
       end
     end
   end
