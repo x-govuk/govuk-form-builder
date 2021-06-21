@@ -31,8 +31,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
   end
 
   specify 'should output a form group containing a textarea' do
-    expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-      expect(fg).to have_tag('textarea')
+    expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
+      with_tag('textarea')
     end
   end
 

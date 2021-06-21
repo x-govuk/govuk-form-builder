@@ -17,8 +17,8 @@ shared_examples 'a field that supports labels' do
       subject { builder.send(*args, label: { text: label_text, tag: wrapping_tag }) }
 
       specify 'the label should be wrapped in by the wrapping tag' do
-        expect(subject).to have_tag(wrapping_tag, with: { class: %w(govuk-label-wrapper) }) do |wt|
-          expect(wt).to have_tag('label', text: label_text)
+        expect(subject).to have_tag(wrapping_tag, with: { class: %w(govuk-label-wrapper) }) do
+          with_tag('label', text: label_text)
         end
       end
     end
@@ -115,10 +115,10 @@ shared_examples 'a field that supports labels as procs' do
   subject { builder.send(*args, label: label) }
 
   specify 'output fieldset should contain the specified tag' do
-    expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-      expect(fg).to have_tag('label', with: { class: 'govuk-label' }) do |fs|
-        expect(fs).to have_tag('span', class: caption_classes, text: caption)
-        expect(fs).to have_tag('h1', class: heading_classes, text: heading)
+    expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
+      with_tag('label', with: { class: 'govuk-label' }) do
+        with_tag('span', class: caption_classes, text: caption)
+        with_tag('h1', class: heading_classes, text: heading)
       end
     end
   end

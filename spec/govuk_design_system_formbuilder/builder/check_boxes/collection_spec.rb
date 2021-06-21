@@ -12,8 +12,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     subject { builder.send(*args) }
 
     specify 'output should be a form group containing a form group and fieldset' do
-      expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-        expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' })
+      expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
+        with_tag('fieldset', with: { class: 'govuk-fieldset' })
       end
     end
 
@@ -60,9 +60,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     describe 'check boxes' do
       specify 'output should contain the correct number of check boxes' do
-        expect(subject).to have_tag('div', with: { 'data-module' => 'govuk-checkboxes' }) do |cb|
-          expect(cb).to have_tag('input', count: projects.size, with: { type: 'checkbox' })
-          expect(cb).to have_tag('label', count: projects.size)
+        expect(subject).to have_tag('div', with: { 'data-module' => 'govuk-checkboxes' }) do
+          with_tag('input', count: projects.size, with: { type: 'checkbox' })
+          with_tag('label', count: projects.size)
         end
       end
 

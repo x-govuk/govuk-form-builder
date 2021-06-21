@@ -11,9 +11,9 @@ shared_examples 'a regular input' do |method_identifier, field_type|
   end
 
   specify 'output should be form group containing a label and input' do
-    expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-      expect(fg).to have_tag('label', text: label_text)
-      expect(fg).to have_tag('input')
+    expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
+      with_tag('label', text: label_text)
+      with_tag('input')
     end
   end
 

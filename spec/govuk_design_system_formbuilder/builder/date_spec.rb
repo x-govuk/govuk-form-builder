@@ -76,11 +76,11 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     specify 'should output a form group with fieldset, date group and 3 inputs and labels' do
-      expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-        expect(fg).to have_tag('fieldset', with: { class: 'govuk-fieldset' }) do |fs|
-          expect(fs).to have_tag('div', with: { class: 'govuk-date-input' }) do |di|
-            expect(di).to have_tag('input', with: { type: 'text' }, count: 3)
-            expect(di).to have_tag('label', count: 3)
+      expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
+        with_tag('fieldset', with: { class: 'govuk-fieldset' }) do
+          with_tag('div', with: { class: 'govuk-date-input' }) do
+            with_tag('input', with: { type: 'text' }, count: 3)
+            with_tag('label', count: 3)
           end
         end
       end
@@ -88,9 +88,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     context 'separate date part inputs' do
       specify 'inputs should have the correct labels' do
-        expect(subject).to have_tag('div', with: { class: 'govuk-date-input' }) do |di|
+        expect(subject).to have_tag('div', with: { class: 'govuk-date-input' }) do
           %w(Day Month Year).each do |label_text|
-            expect(di).to have_tag('label', text: label_text)
+            with_tag('label', text: label_text)
           end
         end
       end

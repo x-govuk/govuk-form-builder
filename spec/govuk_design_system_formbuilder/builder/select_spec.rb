@@ -44,8 +44,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     specify 'output should be a form group containing a label and select box' do
-      expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do |fg|
-        expect(fg).to have_tag('select', with: { class: 'govuk-select' })
+      expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
+        with_tag('select', with: { class: 'govuk-select' })
       end
     end
 
