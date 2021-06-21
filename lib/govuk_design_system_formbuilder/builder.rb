@@ -843,7 +843,7 @@ module GOVUKDesignSystemFormBuilder
 
     # Generates a submit button, green by default
     #
-    # @param text [String] the button text
+    # @param text [String,Proc] the button text. When a +Proc+ is provided its contents will be rendered within the button element
     # @param warning [Boolean] makes the button red ({https://design-system.service.gov.uk/components/button/#warning-buttons warning}) when true
     # @param secondary [Boolean] makes the button grey ({https://design-system.service.gov.uk/components/button/#secondary-buttons secondary}) when true
     # @param classes [Array,String] Classes to add to the submit button
@@ -853,7 +853,7 @@ module GOVUKDesignSystemFormBuilder
     #   client-side validation provided by the browser. This is to provide a more consistent and accessible user
     #   experience
     # @param disabled [Boolean] makes the button disabled when true
-    # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
+    # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +button+ element
     # @param block [Block] When content is passed in via a block the submit element and the block content will
     #   be wrapped in a +<div class="govuk-button-group">+ which will space the buttons and links within
     #   evenly.
@@ -861,8 +861,9 @@ module GOVUKDesignSystemFormBuilder
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @note Only the first additional button or link (passed in via a block) will be given the
     #   correct left margin, subsequent buttons will need to be manually accounted for
-    # @note This helper always renders an +<input type='submit'>+ tag, HTML content is not supported inside. You
-    #   can place +<button>+ tags inside the form to have the same effect
+    # @note This helper always renders an +<button type='submit'>+ tag. Previous versions of this gem rendered
+    #   a +`<input type='submit'>' tag instead, but there is a {https://github.com/alphagov/govuk_elements/issues/545 longstanding bug}
+    #   with this approach where the top few pixels don't initiate a submission when clicked.
     # @see https://design-system.service.gov.uk/components/button/#stop-users-from-accidentally-sending-information-more-than-once
     #   GOV.UK double click prevention
     #
