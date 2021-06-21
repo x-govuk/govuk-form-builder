@@ -25,7 +25,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
 
         specify 'should use the default value when no override supplied' do
-          expect(subject).to have_tag('input', with: { type: 'submit', value: default_submit_button_text })
+          expect(subject).to have_tag('button', with: { type: 'submit' }, text: default_submit_button_text)
         end
 
         context %(overriding with 'Engage') do
@@ -33,7 +33,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           let(:args) { [method, submit_button_text] }
 
           specify 'should use supplied value when overridden' do
-            expect(subject).to have_tag('input', with: { type: 'submit', value: submit_button_text })
+            expect(subject).to have_tag('button', with: { type: 'submit' }, text: submit_button_text)
           end
         end
       end
@@ -55,14 +55,14 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
 
         specify 'should have no formnovalidate attribute' do
-          expect(parsed_subject.at_css('input').attributes.keys).not_to include('formnovalidate')
+          expect(parsed_subject.at_css('button').attributes.keys).not_to include('formnovalidate')
         end
 
         context %(overriding with false) do
           let(:kwargs) { { validate: false } }
 
           specify 'should have a formnovalidate attribute' do
-            expect(subject).to have_tag('input', with: { type: 'submit', formnovalidate: 'formnovalidate' })
+            expect(subject).to have_tag('button', with: { type: 'submit', formnovalidate: 'formnovalidate' })
           end
         end
       end

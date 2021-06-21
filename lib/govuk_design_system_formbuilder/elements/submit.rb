@@ -35,11 +35,12 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def submit
-        @builder.submit(@text, **attributes(@html_attributes))
+        @builder.tag.button(@text, **attributes(@html_attributes))
       end
 
       def options
         {
+          type: 'submit',
           formnovalidate: !@validate,
           disabled: @disabled,
           class: classes,
