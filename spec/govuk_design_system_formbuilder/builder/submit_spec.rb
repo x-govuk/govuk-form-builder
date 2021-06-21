@@ -162,5 +162,27 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
     end
+
+    describe 'setting the button content with a proc' do
+      let(:custom_text) { "Click me!" }
+      let(:custom_wrapper) { :strong }
+      let(:custom_content) { builder.content_tag(custom_wrapper, custom_text) }
+
+      subject { builder.send(*args, custom_content) }
+
+      specify "renders the custom content inside the button element" do
+        expect(subject).to have_tag("button") do
+          with_tag(custom_wrapper, text: custom_text)
+        end
+      end
+
+      context "when the button content is invalid" do
+        subject { builder.send(*args, Date.today) }
+
+        specify "fails with an appropriate error message" do
+          expect { subject }.to raise_error(ArgumentError, /text must be a String or Proc/)
+        end
+      end
+    end
   end
 end

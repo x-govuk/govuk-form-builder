@@ -9,7 +9,7 @@ module GOVUKDesignSystemFormBuilder
 
         fail ArgumentError, 'buttons can be warning or secondary' if warning && secondary
 
-        @text                 = text
+        @text                 = build_text(text)
         @prevent_double_click = prevent_double_click
         @warning              = warning
         @secondary            = secondary
@@ -25,6 +25,17 @@ module GOVUKDesignSystemFormBuilder
       end
 
     private
+
+      def build_text(text)
+        case text
+        when String
+          text
+        when Proc
+          capture { text.call }
+        else
+          fail(ArgumentError, %(text must be a String or Proc))
+        end
+      end
 
       def button_group
         Containers::ButtonGroup.new(@builder, buttons).html
