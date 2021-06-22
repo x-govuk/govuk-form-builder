@@ -166,7 +166,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     describe 'setting the button content with a proc' do
       let(:custom_text) { "Click me!" }
       let(:custom_wrapper) { :strong }
-      let(:custom_content) { builder.content_tag(custom_wrapper, custom_text) }
+      let(:custom_content) { -> { builder.content_tag(custom_wrapper, custom_text) } }
 
       subject { builder.send(*args, custom_content) }
 
