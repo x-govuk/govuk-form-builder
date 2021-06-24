@@ -7,7 +7,7 @@ module GOVUKDesignSystemFormBuilder
         include Traits::HTMLAttributes
         include Traits::FieldsetItem
 
-        def initialize(builder, object_name, attribute_name, value, unchecked_value, label:, hint:, link_errors:, multiple:, **kwargs, &block)
+        def initialize(builder, object_name, attribute_name, value, unchecked_value, label:, hint:, link_errors:, multiple:, exclusive:, **kwargs, &block)
           super(builder, object_name, attribute_name)
 
           @value           = value
@@ -17,6 +17,7 @@ module GOVUKDesignSystemFormBuilder
           @multiple        = multiple
           @link_errors     = link_errors
           @html_attributes = kwargs
+          @exclusive       = exclusive
 
           conditional_content(&block)
         end
@@ -28,11 +29,17 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def input
-          @builder.check_box(@attribute_name, attributes(@html_attributes), @value, @unchecked_value)
+          @builder.check_box(@attribute_name, attributes(@html_attributes.deep_merge(exclusive_options)), @value, @unchecked_value)
         end
 
         def fieldset_options
           { checkbox: true }
+        end
+
+        def exclusive_options
+          return {} unless @exclusive
+
+          { data: { behaviour: 'exclusive' } }
         end
       end
     end

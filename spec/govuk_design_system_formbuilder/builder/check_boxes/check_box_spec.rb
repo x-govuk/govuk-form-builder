@@ -133,7 +133,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
-    context 'multiple' do
+    describe 'multiple' do
       context 'default to multiple' do
         specify 'check box name should allow multiple values' do
           expect(subject).to have_tag('input', with: {
@@ -151,6 +151,37 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             type: 'checkbox',
             name: "#{object_name}[#{attribute}]"
           })
+        end
+      end
+    end
+
+    describe 'exclusive' do
+      context 'default to non-exclusive' do
+        specify 'check box should have no data behaviour attribute' do
+          expect(subject).not_to have_tag('input', with: { type: 'checkbox', 'data-behaviour' => 'exclusive' })
+        end
+      end
+
+      context 'when overriden to exclusive' do
+        subject { builder.send(*args, exclusive: true) }
+
+        specify %(check box should has a data behaviour attribute of 'exclusive') do
+          expect(subject).to have_tag('input', with: { type: 'checkbox', 'data-behaviour' => 'exclusive' })
+        end
+      end
+
+      context 'not clashing with other data attributes' do
+        subject { builder.send(*args, exclusive: true, data: { index: '1234' }) }
+
+        specify %(check box should has a data behaviour attribute of 'exclusive') do
+          expect(subject).to have_tag(
+            'input',
+            with: {
+              type: 'checkbox',
+              'data-behaviour' => 'exclusive',
+              'data-index' => '1234'
+            }
+          )
         end
       end
     end

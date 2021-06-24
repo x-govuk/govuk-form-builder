@@ -813,6 +813,8 @@ module GOVUKDesignSystemFormBuilder
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @option label kwargs [Hash] additional arguments are applied as attributes on the +label+ element
     # @param multiple [Boolean] controls whether the check box is part of a collection or represents a single attribute
+    # @param exclusive [Boolean] sets the checkbox so that when checked none of its siblings can be too. Usually
+    #   used for the 'None of these apply to me' option found beneath a {#govuk_check_box_divider}.
     # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     # @param block [Block] any HTML passed in will form the contents of the fieldset
     # @return [ActiveSupport::SafeBuffer] HTML output
@@ -825,7 +827,7 @@ module GOVUKDesignSystemFormBuilder
     #     label: { text: 'Do you agree with our terms and conditions?' },
     #     hint: { text: 'You will not be able to proceed unless you do' }
     #
-    def govuk_check_box(attribute_name, value, unchecked_value = false, hint: {}, label: {}, link_errors: false, multiple: true, **kwargs, &block)
+    def govuk_check_box(attribute_name, value, unchecked_value = false, hint: {}, label: {}, link_errors: false, multiple: true, exclusive: false, **kwargs, &block)
       Elements::CheckBoxes::FieldsetCheckBox.new(
         self,
         object_name,
@@ -836,6 +838,7 @@ module GOVUKDesignSystemFormBuilder
         label: label,
         link_errors: link_errors,
         multiple: multiple,
+        exclusive: exclusive,
         **kwargs,
         &block
       ).html
