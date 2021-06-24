@@ -151,6 +151,31 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           end
         end
       end
+
+      context 'dividers' do
+        subject do
+          builder.send(*args) do
+            builder.govuk_check_box_divider
+          end
+        end
+
+        specify "should output a 'or' divider by default" do
+          expect(subject).to have_tag('div', text: 'or', with: { class: %w(govuk-checkboxes__divider) })
+        end
+
+        context 'when divider text overridden' do
+          let(:other_text) { 'alternatively' }
+          subject do
+            builder.send(method, attribute) do
+              builder.govuk_check_box_divider(other_text)
+            end
+          end
+
+          specify "should output a divider containing the supplied text" do
+            expect(subject).to have_tag('div', text: other_text, with: { class: %w(govuk-checkboxes__divider) })
+          end
+        end
+      end
     end
   end
 end

@@ -841,6 +841,18 @@ module GOVUKDesignSystemFormBuilder
       ).html
     end
 
+    # Inserts a text divider into a list of check boxes
+    #
+    # @param text [String] The divider text
+    # @note This should only be used from within a {#govuk_check_boxes_fieldset}
+    # @see https://design-system.service.gov.uk/components/checkboxes/#add-an-option-for-none- GOV.UK check boxes with a text divider
+    # @return [ActiveSupport::SafeBuffer] HTML output
+    # @example A custom divider
+    #   = govuk_check_box_divider 'On the other hand'
+    def govuk_check_box_divider(text = config.default_check_box_divider_text)
+      tag.div(text, class: %w(govuk-checkboxes__divider))
+    end
+
     # Generates a submit button, green by default
     #
     # @param text [String,Proc] the button text. When a +Proc+ is provided its contents will be rendered within the button element
