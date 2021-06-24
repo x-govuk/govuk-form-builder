@@ -9,6 +9,8 @@ module GOVUKDesignSystemFormBuilder
         include Traits::Supplemental
         include Traits::HTMLAttributes
 
+      private
+
         def builder_method
           :text_field
         end
