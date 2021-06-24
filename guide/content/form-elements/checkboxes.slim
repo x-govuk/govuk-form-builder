@@ -81,4 +81,24 @@ section
           <code>name</code> attribute is generated in the format that Rails
           expects for a single field.
 
+  == render('/partials/example-fig.*',
+    caption: "Adding an option for 'none of the above'",
+    code: checkbox_field_with_exclusive_option) do
+
+    p.govuk-body
+      | Sometimes none of the checkbox options apply, but leaving them
+        all blank isn't always intuitive for users.
+
+    p.govuk-body
+      | Check boxes created with <code>exclusive: true</code> have special
+        behaviour that:
+
+    ul.govuk-list.govuk-list--bullet
+      li unchecks all other check boxes in the fieldset when they are checked
+      li unchecks them when any other check boxes in the fieldset are checked
+
+    p.govuk-body
+      | It usually makes sense to separate exclusive check boxes from the
+        others with a divider.
+
 == render('/partials/related-info.*', links: checkbox_info)
