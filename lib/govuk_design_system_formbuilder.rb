@@ -27,6 +27,12 @@ module GOVUKDesignSystemFormBuilder
   # * +:default_submit_button_text+ sets the value assigned to +govuk_submit+,
   #   defaults to 'Continue'.
   #
+  # * +:default_radio_divider_text+ sets the text automatically added to the
+  #   radio button divider, defaults to 'or'
+  #
+  # * +:default_check_box_divider_text+ sets the text automatically added to the
+  #   checkbox divider, defaults to 'or'
+  #
   # * +:default_submit_button_text+ sets the text used to divide the last radio
   #   button in radio button fieldsets. As per the GOV.UK Design System spec,
   #   it defaults to 'or'.
@@ -65,6 +71,7 @@ module GOVUKDesignSystemFormBuilder
     default_caption_size: 'm',
     default_submit_button_text: 'Continue',
     default_radio_divider_text: 'or',
+    default_check_box_divider_text: 'or',
     default_error_summary_title: 'There is a problem',
     default_error_summary_error_order_method: nil,
     default_collection_check_boxes_include_hidden: true,

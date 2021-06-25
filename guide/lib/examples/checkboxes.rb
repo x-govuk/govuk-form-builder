@@ -84,5 +84,31 @@ module Examples
             label: { text: "I agree to the terms and conditions" }
       SNIPPET
     end
+
+    def checkbox_field_with_exclusive_option
+      <<~SNIPPET
+        = f.govuk_check_boxes_fieldset :countries, legend: { text: "Will you be travelling to any of these countries?", size: "m" } do
+
+          = f.govuk_check_box :countries,
+            :france,
+            label: { text: "France" },
+            link_errors: true
+
+          = f.govuk_check_box :languages,
+            :portugal,
+            label: { text: "Portugal" }
+
+          = f.govuk_check_box :languages,
+            :spain,
+            label: { text: "Spain" }
+
+          = f.govuk_check_box_divider
+
+          = f.govuk_check_box :languages,
+            :none,
+            exclusive: true,
+            label: { text: "No, I will not be travelling to any of these countries " }
+      SNIPPET
+    end
   end
 end
