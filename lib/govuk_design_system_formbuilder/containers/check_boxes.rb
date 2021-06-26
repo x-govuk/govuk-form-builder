@@ -22,7 +22,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def classes
-        [%(#{brand}-checkboxes), small_class, custom_classes].flatten.compact
+        combine_references(%(#{brand}-checkboxes), small_class, custom_classes)
       end
 
       def small_class

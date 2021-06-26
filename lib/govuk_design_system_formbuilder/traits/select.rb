@@ -4,7 +4,7 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def classes
-        [%(#{brand}-select), error_class].flatten.compact
+        combine_references(%(#{brand}-select), error_class)
       end
 
       def error_class
