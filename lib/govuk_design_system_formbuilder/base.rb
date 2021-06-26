@@ -57,7 +57,7 @@ module GOVUKDesignSystemFormBuilder
         @builder.object.errors.messages[@attribute_name].present?
     end
 
-    def described_by(*ids)
+    def combine_references(*ids)
       ids.flatten.compact
     end
 

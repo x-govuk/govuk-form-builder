@@ -8,7 +8,7 @@ module GOVUKDesignSystemFormBuilder
 
         @legend          = legend
         @caption         = caption
-        @described_by    = described_by(described_by)
+        @described_by    = combine_references(described_by)
         @attribute_name  = attribute_name
         @html_attributes = kwargs
       end
