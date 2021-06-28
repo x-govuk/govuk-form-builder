@@ -53,7 +53,7 @@ module GOVUKDesignSystemFormBuilder
           id: field_id(link_errors: true),
           class: classes,
           rows: @rows,
-          aria: { describedby: described_by(hint_id, error_id, supplemental_id, limit_description_id) },
+          aria: { describedby: combine_references(hint_id, error_id, supplemental_id, limit_description_id) },
         }
       end
 

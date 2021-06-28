@@ -40,7 +40,7 @@ module GOVUKDesignSystemFormBuilder
         {
           id: field_id(link_errors: true),
           class: classes,
-          aria: { describedby: described_by(hint_id, error_id, supplemental_id) }
+          aria: { describedby: combine_references(hint_id, error_id, supplemental_id) }
         }
       end
 

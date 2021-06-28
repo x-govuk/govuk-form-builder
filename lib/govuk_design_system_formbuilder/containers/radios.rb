@@ -25,7 +25,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def classes
-        [%(#{brand}-radios), inline_class, small_class, custom_classes].flatten.compact
+        combine_references(%(#{brand}-radios), inline_class, small_class, custom_classes)
       end
 
       def inline_class

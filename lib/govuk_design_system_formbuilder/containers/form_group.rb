@@ -15,7 +15,7 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def classes
-        [form_group_class, error_class, custom_classes].flatten.compact
+        combine_references(form_group_class, error_class, custom_classes)
       end
 
       def form_group_class
