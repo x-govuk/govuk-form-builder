@@ -959,8 +959,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_error_summary 'Uh-oh, spaghettios'
     #
     # @see https://design-system.service.gov.uk/components/error-summary/ GOV.UK error summary
-    def govuk_error_summary(title = config.default_error_summary_title, link_base_errors_to: nil, order: nil, **kwargs, &block)
-      Elements::ErrorSummary.new(self, object_name, title, link_base_errors_to: link_base_errors_to, order: order, **kwargs, &block).html
+    def govuk_error_summary(title = config.default_error_summary_title, link_base_errors_to: nil, order: nil, presenter: nil, **kwargs, &block)
+      Elements::ErrorSummary.new(self, object_name, title, link_base_errors_to: link_base_errors_to, order: order, presenter: presenter, **kwargs, &block).html
     end
 
     # Generates a fieldset containing the contents of the block
