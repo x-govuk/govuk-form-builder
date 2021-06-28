@@ -4,13 +4,14 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Error
       include Traits::HTMLAttributes
 
-      def initialize(builder, object_name, title, link_base_errors_to:, order:, **kwargs, &block)
+      def initialize(builder, object_name, title, link_base_errors_to:, order:, presenter:, **kwargs, &block)
         super(builder, object_name, nil, &block)
 
         @title               = title
         @link_base_errors_to = link_base_errors_to
         @html_attributes     = kwargs
         @order               = order
+        @presenter           = presenter
       end
 
       def html
@@ -28,12 +29,14 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def summary
-        tag.div(class: summary_class('body')) { safe_join([@block_content, list]) }
+        tag.div(class: summary_class('body')) do
+          safe_join([@block_content, list])
+        end
       end
 
       def list
         tag.ul(class: [%(#{brand}-list), summary_class('list')]) do
-          safe_join(error_messages.map { |attribute, messages| list_item(attribute, messages.first) })
+          safe_join(list_items)
         end
       end
 
@@ -67,6 +70,18 @@ module GOVUKDesignSystemFormBuilder
       # has been enabled
       def error_order_method
         config.default_error_summary_error_order_method
+      end
+
+      def list_items
+        error_messages.map do |attribute, messages|
+          message = if @presenter.respond_to?(:summary_error_for)
+                      @presenter.summary_error_for(attribute)
+                    else
+                      messages.first
+                    end
+
+          list_item(attribute, message)
+        end
       end
 
       def list_item(attribute, message)
