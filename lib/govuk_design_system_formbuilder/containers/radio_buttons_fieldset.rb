@@ -5,6 +5,8 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Error
 
       def initialize(builder, object_name, attribute_name, hint:, legend:, caption:, inline:, small:, classes:, form_group:, &block)
+        raise LocalJumpError, 'no block given' unless block_given?
+
         super(builder, object_name, attribute_name)
 
         @inline        = inline

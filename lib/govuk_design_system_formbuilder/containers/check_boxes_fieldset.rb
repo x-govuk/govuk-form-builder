@@ -5,7 +5,9 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Hint
 
       def initialize(builder, object_name, attribute_name, hint:, legend:, caption:, small:, classes:, form_group:, multiple:, &block)
-        super(builder, object_name, attribute_name, &block)
+        raise LocalJumpError, 'no block given' unless block_given?
+
+        super(builder, object_name, attribute_name)
 
         @legend        = legend
         @caption       = caption

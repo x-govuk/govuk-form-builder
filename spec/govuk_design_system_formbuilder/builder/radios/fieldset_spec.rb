@@ -21,7 +21,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     context 'when no block is supplied' do
       subject { builder.send(*args) }
-      specify { expect { subject }.to raise_error(NoMethodError, /undefined method.*call/) }
+      specify { expect { subject }.to raise_error(LocalJumpError, /no block given/) }
     end
 
     include_examples 'HTML formatting checks'
