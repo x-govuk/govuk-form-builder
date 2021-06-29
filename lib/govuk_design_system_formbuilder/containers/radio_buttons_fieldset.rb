@@ -14,7 +14,6 @@ module GOVUKDesignSystemFormBuilder
         @hint          = hint
         @classes       = classes
         @form_group    = form_group
-        @block_content = capture { block.call }
       end
 
       def html
