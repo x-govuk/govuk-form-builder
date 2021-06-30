@@ -19,7 +19,7 @@ module GOVUKDesignSystemFormBuilder
           @html_attributes = kwargs
           @exclusive       = exclusive
 
-          conditional_content(&block)
+          conditional_content(@block_content)
         end
 
       private

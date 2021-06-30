@@ -16,7 +16,7 @@ module GOVUKDesignSystemFormBuilder
           @link_errors     = has_errors? && link_errors
           @html_attributes = kwargs
 
-          conditional_content(&block)
+          conditional_content(@block_content)
         end
 
       private
