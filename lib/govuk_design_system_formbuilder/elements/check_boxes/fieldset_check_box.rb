@@ -8,7 +8,7 @@ module GOVUKDesignSystemFormBuilder
         include Traits::FieldsetItem
 
         def initialize(builder, object_name, attribute_name, value, unchecked_value, label:, hint:, link_errors:, multiple:, exclusive:, **kwargs, &block)
-          super(builder, object_name, attribute_name)
+          super(builder, object_name, attribute_name, &block)
 
           @value           = value
           @unchecked_value = unchecked_value
