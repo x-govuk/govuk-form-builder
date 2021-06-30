@@ -19,10 +19,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     subject { builder.send(*args, &example_block) }
 
-    context 'when no block is supplied' do
-      subject { builder.send(*args) }
-      specify { expect { subject }.to raise_error(LocalJumpError, /no block given/) }
-    end
+    it_behaves_like 'a fieldset that expects arbitrary blocks of HTML'
 
     include_examples 'HTML formatting checks'
 

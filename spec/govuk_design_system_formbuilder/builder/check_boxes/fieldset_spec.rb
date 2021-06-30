@@ -50,10 +50,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:described_element) { 'fieldset' }
     end
 
-    context 'when no block is supplied' do
-      subject { builder.send(*args) }
-      specify { expect { subject }.to raise_error(LocalJumpError, /no block given/) }
-    end
+    it_behaves_like 'a fieldset that expects arbitrary blocks of HTML'
 
     context 'when a caption is supplied' do
       let(:caption_text) { 'Personal preferences' }
