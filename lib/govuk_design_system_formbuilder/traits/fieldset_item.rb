@@ -4,7 +4,7 @@ module GOVUKDesignSystemFormBuilder
       using PrefixableArray
 
       def html
-        safe_join([item, @conditional])
+        safe_join([item, @conditional_content])
       end
 
     private
@@ -61,9 +61,9 @@ module GOVUKDesignSystemFormBuilder
         build_id('conditional')
       end
 
-      def conditional_content(&block)
-        if (conditional_block_content = block_given? && (capture { block.call }).presence)
-          @conditional    = conditional_container(conditional_block_content)
+      def conditional_content(block_content)
+        if block_content.present?
+          @conditional_content = conditional_container(block_content)
           @conditional_id = conditional_id
         end
       end

@@ -8,7 +8,7 @@ module GOVUKDesignSystemFormBuilder
         include Traits::FieldsetItem
 
         def initialize(builder, object_name, attribute_name, value, label:, hint:, link_errors:, **kwargs, &block)
-          super(builder, object_name, attribute_name)
+          super(builder, object_name, attribute_name, &block)
 
           @value           = value
           @label           = label
@@ -16,7 +16,7 @@ module GOVUKDesignSystemFormBuilder
           @link_errors     = has_errors? && link_errors
           @html_attributes = kwargs
 
-          conditional_content(&block)
+          conditional_content(@block_content)
         end
 
       private

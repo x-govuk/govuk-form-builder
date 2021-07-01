@@ -39,3 +39,29 @@ shared_examples 'a field that accepts arbitrary blocks of HTML' do
     end
   end
 end
+
+shared_examples 'a fieldset that expects arbitrary blocks of HTML' do
+  context 'when no block is supplied' do
+    subject { builder.send(*args) }
+
+    specify { expect { subject }.to raise_error(LocalJumpError, /no block given/) }
+  end
+
+  context 'when block is supplied' do
+    subject { builder.send(*args, &example_block) }
+
+    let(:example_block) { proc { '<b>some content</b>' } }
+
+    specify { expect { subject }.not_to raise_error }
+    specify { expect { |b| builder.send(*args, &b) }.to yield_control.once }
+
+    context 'with render' do
+      let(:example_block) { proc { helper.render(html: '<b>rendered</b>') } }
+
+      before { allow(helper).to receive(:render) }
+      before { subject }
+
+      specify { expect(helper).to have_received(:render).once }
+    end
+  end
+end
