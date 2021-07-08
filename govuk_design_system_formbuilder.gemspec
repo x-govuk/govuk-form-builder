@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.add_dependency("deep_merge", "~> 1.2.1")
 
   exact_rails_version = ENV.has_key?("RAILS_VERSION")
-  rails_version = ENV.fetch("RAILS_VERSION") { "6.0.3" }
+  rails_version = ENV.fetch("RAILS_VERSION") { "6.0.4" }
 
   %w(actionview activemodel activesupport).each do |lib|
     s.add_dependency(*VersionFormatter.new(lib, rails_version, exact_rails_version).to_a)

@@ -4,7 +4,7 @@ module GOVUKDesignSystemFormBuilder
       # Attributes eases working with default and custom attributes by:
       # * deeply merging them so both the default (required) attributes are
       #   present
-      # * joins the arrays into strings to maintain Rails 6.0.3 compatibility
+      # * joins the arrays into strings to maintain Rails 6.0.* compatibility
       class Attributes
         # Rather than attempt to combine these attributes, just overwrite the
         # form internally-generated values with those that are passed in. This
