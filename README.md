@@ -1,12 +1,11 @@
 # GOV.UK Design System Form Builder for Rails
 
-[![Tests](https://github.com/DFE-Digital/govuk_design_system_formbuilder/workflows/Tests/badge.svg)](https://github.com/DFE-Digital/govuk_design_system_formbuilder/actions)
-[![Maintainability](https://api.codeclimate.com/v1/badges/fde73b5dc9476197281b/maintainability)](https://codeclimate.com/github/DFE-Digital/govuk_design_system_formbuilder/maintainability)
+[![Tests](https://github.com/DFE-Digital/govuk-formbuilder/workflows/Tests/badge.svg)](https://github.com/DFE-Digital/govuk-formbuilder/actions)
+[![Maintainability](https://api.codeclimate.com/v1/badges/fde73b5dc9476197281b/maintainability)](https://codeclimate.com/github/DFE-Digital/govuk-formbuilder/maintainability)
 [![Gem Version](https://badge.fury.io/rb/govuk_design_system_formbuilder.svg)](https://badge.fury.io/rb/govuk_design_system_formbuilder)
 [![Gem](https://img.shields.io/gem/dt/govuk_design_system_formbuilder?logo=rubygems)](https://rubygems.org/gems/govuk_design_system_formbuilder)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/fde73b5dc9476197281b/test_coverage)](https://codeclimate.com/github/DFE-Digital/govuk_design_system_formbuilder/test_coverage)
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=DFE-Digital/govuk_design_system_formbuilder)](https://dependabot.com)
-[![GitHub license](https://img.shields.io/github/license/DFE-Digital/govuk_design_system_formbuilder)](https://github.com/DFE-Digital/govuk_design_system_formbuilder/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/DFE-Digital/govuk_design_system_formbuilder)](https://github.com/DFE-Digital/govuk-formbuilder/blob/master/LICENSE)
 [![GOV.UK Design System Version](https://img.shields.io/badge/GOV.UK%20Design%20System-3.13.0-brightgreen)](https://design-system.service.gov.uk)
 [![Rails](https://img.shields.io/badge/Ruby-2.6.7%20%E2%95%B1%202.7.3%20%E2%95%B1%203.0.1-E16D6D)](https://www.ruby-lang.org/en/downloads/)
 [![Ruby](https://img.shields.io/badge/Rails-6.0.4%20%E2%95%B1%206.1.3.2-E16D6D)](https://weblog.rubyonrails.org/releases/)

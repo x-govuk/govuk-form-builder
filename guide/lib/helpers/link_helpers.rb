@@ -27,7 +27,7 @@ module Helpers
     end
 
     def github_link
-      'https://github.com/DFE-Digital/govuk_design_system_formbuilder'
+      'https://github.com/DFE-Digital/govuk-formbuilder'
     end
 
     def design_system_link
@@ -83,7 +83,7 @@ module Helpers
     end
 
     def project_new_issue_link
-      'https://github.com/DFE-Digital/govuk_design_system_formbuilder/issues'
+      'https://github.com/DFE-Digital/govuk-formbuilder/issues'
     end
 
     def nhs_design_system_link
