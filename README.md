@@ -128,6 +128,21 @@ To help keep the logs clean and tidy, please configure git to use your full name
 git config --global user.name "Julius Hibbert"
 ```
 
+## Services using this library
+
+Approximately [40 services use this library](https://github.com/DFE-Digital/govuk-formbuilder/network/dependents),
+here are a few from the <abbr title="Department for Education">DfE</abbr>, <abbr title="Ministry of Justice">MoJ</abbr>, and
+<abbr title="Department for Business, Energy & Industrial Strategy">BEIS</abbr>.
+
+ * [Apply for teacher training](https://www.github.com/DFE-Digital/apply-for-teacher-training)
+ * [Teaching Vacancies](https://www.github.com/DFE-Digital/teaching-vacancies)
+ * [Get a teacher training adviser](https://www.github.com/DFE-Digital/get-teacher-training-adviser-service/)
+ * [Claim for crown court defence](https://www.github.com/ministryofjustice/Claim-for-Crown-Court-Defence)
+ * [Appeal to the tax tribunal](https://www.github.com/ministryofjustice/tax-tribunals-datacapture)
+ * [Apply to court about child arrangements](https://www.github.com/ministryofjustice/c100-application)
+ * [Trade Tariff duty calculator](https://www.github.com/trade-tariff/trade-tariff-duty-calculator)
+ * [Report your official development assistance](https://www.github.com/UKGovernmentBEIS/beis-report-official-development-assistance)
+
 ## Thanks 👩🏽‍⚖️
 
 This project was inspired by [Ministry of Justice's GovukElementsFormBuilder](https://github.com/ministryofjustice/govuk_elements_form_builder),
