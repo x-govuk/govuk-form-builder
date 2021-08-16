@@ -16,7 +16,7 @@ module GOVUKDesignSystemFormBuilder
 
         def html
           @checkbox.label(for: field_id(link_errors: @link_errors), class: label_classes) do
-            [localised_text(:label), @checkbox.text, @value].compact.first.to_s
+            label_content.to_s
           end
         end
 
@@ -24,6 +24,10 @@ module GOVUKDesignSystemFormBuilder
 
         def label_classes
           %w(label checkboxes__label).prefix(brand)
+        end
+
+        def label_content
+          [localised_text(:label), @checkbox.text, @value].find(&:presence)
         end
       end
     end

@@ -45,7 +45,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def retrieve_text(supplied_text)
-        [supplied_text, localised_text(:legend), @attribute_name&.capitalize].compact.first
+        [supplied_text, localised_text(:legend), @attribute_name&.capitalize].find(&:presence)
       end
 
       def classes
