@@ -442,5 +442,26 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
     end
+
+    context 'when a presenter is specified' do
+      subject { builder.send(*args, presenter: error_presenter.new) }
+
+      let(:error_presenter) do
+        Class.new do
+          def summary_error_for(attribute)
+            "#{attribute} is foobar!"
+          end
+        end
+      end
+
+      before { object.validate }
+
+      specify 'the presenter custom messages should be present in the error summary' do
+        expect(subject).to have_tag('ul', with: { class: %w(govuk-list govuk-error-summary__list) }) do
+          expect(subject).to have_tag('li', text: 'favourite_colour is foobar!')
+          expect(subject).to have_tag('li', text: 'projects is foobar!')
+        end
+      end
+    end
   end
 end
