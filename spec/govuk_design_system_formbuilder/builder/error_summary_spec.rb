@@ -414,7 +414,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
-    context 'extra attributes' do
+    context 'when extra attributes are supplied' do
       before { object.valid? }
 
       it_behaves_like 'a field that allows extra HTML attributes to be set' do
