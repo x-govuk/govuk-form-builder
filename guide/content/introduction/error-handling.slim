@@ -44,4 +44,27 @@ p.govuk-body
       summary link should take the user to the first field. As the form builder
       doesn't know the order in which fields will be rendered, it must be specified.
 
+== render('/partials/example-fig.*',
+  caption: "Custom summary error presenter injection",
+  code: form_with_presenter_injection,
+  sample_data: departments_data_raw,
+  show_errors: :presenters,
+  hide_data: true,
+  hide_html_output: true) do
+
+  p.govuk-body
+    | Although the #{link_to('GDS design system recommends', 'https://design-system.service.gov.uk/components/error-summary/', target: '_blank').html_safe} that you use the same summary error message as that on the field there may be situations in which the summary level wording can be used to provide more or less context. Forms containing repeatable nested fields, for example, could use the summary message to clearly point to an attribute error instance.
+
+  p.govuk-body
+    | In such cases a custom error presenter that responds to "summary_error_for(attribute)"
+      can be supplied.
+
+    pre.example-input
+      code.highlight.language-ruby
+        | class ErrorPresenter
+            def summary_error_for(attribute)
+              "Custom summary error for \#{attribute}!"
+            end
+          end
+
 == render('/partials/related-info.*', links: error_handling_info)
