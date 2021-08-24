@@ -89,6 +89,9 @@ class Person
     :telephone_number
   )
 
+  validates :name, presence: { message: %(Enter a name) }, on: :presenters
+  validates :date_of_birth, presence: { message: %(Enter a valid date of birth) }, on: :presenters
+
   validates :welcome_pack_reference_number, presence: { message: 'Enter the reference number you received in your welcome pack' }, on: :fields
   validates :welcome_pack_received_on, presence: { message: 'Enter the date you received your welcome pack' }, on: :fields
   validates :department_id, presence: { message: %(Select the department to which you've been assigned) }, on: :fields
