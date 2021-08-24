@@ -20,6 +20,14 @@ figure.full-sample
         code.highlight.language-ruby
           | #{sample_data}
 
+  - if defined?(controller_code)
+    section
+      h4.govuk-heading-s.example-subheading.data Setup
+
+      pre.example-input
+        code.highlight.language-ruby
+          | #{controller_code}
+
   - if defined?(raw_config)
     section
       h4.govuk-heading-s.example-subheading.locale Configuration
