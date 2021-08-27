@@ -446,10 +446,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     context 'when a presenter is specified' do
       subject { builder.send(*args, presenter: error_presenter.new) }
 
-      context 'with summary_error_for method' do
+      context 'with summary_message_for method' do
         let(:error_presenter) do
           Class.new do
-            def summary_error_for(attribute)
+            def summary_message_for(attribute)
               "#{attribute} is foobar!"
             end
           end
@@ -457,7 +457,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
         before { object.validate }
 
-        specify 'the presenter custom messages should be present in the error summary' do
+        specify 'the presenter custom error messages should be present in the error summary' do
           expect(subject).to have_tag('ul', with: { class: %w(govuk-list govuk-error-summary__list) }) do
             expect(subject).to have_tag('li', text: 'favourite_colour is foobar!')
             expect(subject).to have_tag('li', text: 'projects is foobar!')
@@ -465,7 +465,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
 
-      context 'without summary_error_for method' do
+      context 'without summary_message_for method' do
         let(:error_presenter) do
           Class.new do
             def not_a_duck(attribute)

@@ -74,8 +74,8 @@ module GOVUKDesignSystemFormBuilder
 
       def list_items
         error_messages.map do |attribute, messages|
-          message = if @presenter.respond_to?(:summary_error_for)
-                      @presenter.summary_error_for(attribute)
+          message = if @presenter.respond_to?(:summary_message_for)
+                      @presenter.summary_message_for(attribute)
                     else
                       messages.first
                     end
