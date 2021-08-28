@@ -42,7 +42,7 @@ module Examples
       <<~SNIPPET
         ruby:
           # In controller typically
-          @error_presenter = ErrorPresenter.new
+          @error_presenter = ErrorSummaryPresenter.new
 
         = f.govuk_error_summary(presenter: @error_presenter)
 

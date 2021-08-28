@@ -1,7 +1,7 @@
 require 'deep_merge/rails_compat'
 require 'active_support/configurable'
 
-[%w(refinements *.rb), %w(traits *.rb), %w(*.rb), %w(elements ** *.rb), %w(containers ** *.rb)]
+[%w(refinements *.rb), %w(traits *.rb), %w(*.rb), %w(elements ** *.rb), %w(containers ** *.rb), %w(presenters ** *.rb)]
   .flat_map { |matcher| Dir.glob(File.join(__dir__, 'govuk_design_system_formbuilder', *matcher)) }
   .each { |file| require file }
 

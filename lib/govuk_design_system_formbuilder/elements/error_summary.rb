@@ -11,7 +11,7 @@ module GOVUKDesignSystemFormBuilder
         @link_base_errors_to = link_base_errors_to
         @html_attributes     = kwargs
         @order               = order
-        @presenter           = presenter
+        @presenter           = presenter || Presenters::ErrorSummary.new
       end
 
       def html
@@ -74,12 +74,7 @@ module GOVUKDesignSystemFormBuilder
 
       def list_items
         error_messages.map do |attribute, messages|
-          message = if @presenter.respond_to?(:summary_message_for)
-                      @presenter.summary_message_for(attribute)
-                    else
-                      messages.first
-                    end
-
+          message = @presenter.message_for(attribute, messages)
           list_item(attribute, message)
         end
       end

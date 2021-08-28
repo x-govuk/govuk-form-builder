@@ -444,12 +444,27 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     context 'when a presenter is specified' do
-      subject { builder.send(*args, presenter: error_presenter.new) }
+      subject { builder.send(*args, presenter: presenter) }
 
-      context 'with summary_message_for method' do
-        let(:error_presenter) do
+      context 'with nil presenter' do
+        let(:presenter) { nil }
+
+        before { object.validate }
+
+        specify 'the default summary error messages should be present in the error summary' do
+          expect(subject).to have_tag('ul', with: { class: %w(govuk-list govuk-error-summary__list) }) do
+            expect(subject).to have_tag('li', text: 'Choose a favourite colour')
+            expect(subject).to have_tag('li', text: 'Select at least one project')
+          end
+        end
+      end
+
+      context 'with presenter that implements message_for method correctly' do
+        let(:presenter) { presenter_class.new }
+
+        let(:presenter_class) do
           Class.new do
-            def summary_message_for(attribute)
+            def message_for(attribute, _messages)
               "#{attribute} is foobar!"
             end
           end
@@ -465,8 +480,26 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
 
-      context 'without summary_message_for method' do
-        let(:error_presenter) do
+      context 'with presenter that implements message_for method but wrong number of arguments' do
+        let(:presenter) { presenter_class.new }
+
+        let(:presenter_class) do
+          Class.new do
+            def message_for(attribute)
+              "#{attribute} is foobar!"
+            end
+          end
+        end
+
+        before { object.validate }
+
+        specify { expect { subject }.to raise_error(ArgumentError, /wrong number of arguments.*/) }
+      end
+
+      context 'with presenter that does not implement message_for method' do
+        let(:presenter) { presenter_class.new }
+
+        let(:presenter_class) do
           Class.new do
             def not_a_duck(attribute)
               "#{attribute} is foobar!"
@@ -476,12 +509,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
         before { object.validate }
 
-        specify 'the default summary error messages should be present in the error summary' do
-          expect(subject).to have_tag('ul', with: { class: %w(govuk-list govuk-error-summary__list) }) do
-            expect(subject).to have_tag('li', text: 'Choose a favourite colour')
-            expect(subject).to have_tag('li', text: 'Select at least one project')
-          end
-        end
+        specify { expect { subject }.to raise_error(NoMethodError, /undefined method .message_for.*/) }
       end
     end
   end

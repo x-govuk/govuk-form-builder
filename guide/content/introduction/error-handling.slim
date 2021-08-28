@@ -56,14 +56,14 @@ p.govuk-body
     | Although the #{link_to('GDS design system recommends', 'https://design-system.service.gov.uk/components/error-summary/', target: '_blank').html_safe} that you use the same summary error message as that on the field there may be situations in which the summary level wording can be used to provide more or less context. Forms containing repeatable nested fields, for example, could use the summary message to clearly point to an attribute error instance.
 
   p.govuk-body
-    | In such cases a custom error presenter that responds to "summary_message_for(attribute)"
+    | In such cases a custom error summary presenter that responds to "message_for(attribute, messages)"
       can be supplied.
 
     pre.example-input
       code.highlight.language-ruby
-        | class ErrorPresenter
-            def summary_message_for(attribute)
-              "Custom summary error for \#{attribute}!"
+        | class ErrorSummaryPresenter
+            def message_for(attribute, messages)
+              "Custom error for \#{attribute} is \#{messages.first.downcase}!"
             end
           end
 
