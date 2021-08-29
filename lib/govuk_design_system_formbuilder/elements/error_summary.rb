@@ -38,8 +38,17 @@ module GOVUKDesignSystemFormBuilder
         end
       end
 
+      # If the provided @presenter is a class, instantiate it with the sorted
+      # error_messages from our object. Otherwise (if it's any other object),
+      # treat it like a presenter
       def presenter
-        @presenter.new(error_messages)
+        return @presenter.new(error_messages) if @presenter.is_a?(Class)
+
+        unless @presenter.respond_to?(:formatted_error_messages)
+          fail(ArgumentError, "error summary presenter doesn't implement #formatted_error_messages")
+        end
+
+        @presenter
       end
 
       def error_messages
