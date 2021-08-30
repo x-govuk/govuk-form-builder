@@ -4,7 +4,7 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Error
       include Traits::HTMLAttributes
 
-      def initialize(builder, object_name, title, link_base_errors_to:, order:, presenter: Presenters::ErrorSummaryPresenter, **kwargs, &block)
+      def initialize(builder, object_name, title, link_base_errors_to:, order:, presenter:, **kwargs, &block)
         super(builder, object_name, nil, &block)
 
         @title               = title

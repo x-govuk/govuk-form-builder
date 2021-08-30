@@ -951,6 +951,13 @@ module GOVUKDesignSystemFormBuilder
     #   which they were defined on the model).
     # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the error summary +div+ element
     # @param block [Block] arbitrary HTML that will be rendered between title and error message list
+    # @param presenter [Class,Object] the class or object that is responsible for formatting a list of error
+    #   messages that will be renderd in the summary.
+    #
+    #   * When a class is specified it will be instantiated with the object's errors in the +object.errors.messages+ format.
+    #   * When an object is specified it will be used as-is.
+    #
+    #   The object must implement +#formatted_error_messages+, see {Presenters::ErrorSummaryPresenter} for more details.
     #
     # @note Only the first error in the +#errors+ array for each attribute will
     #   be included.
@@ -959,8 +966,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_error_summary 'Uh-oh, spaghettios'
     #
     # @see https://design-system.service.gov.uk/components/error-summary/ GOV.UK error summary
-    def govuk_error_summary(title = config.default_error_summary_title, link_base_errors_to: nil, order: nil, **kwargs, &block)
-      Elements::ErrorSummary.new(self, object_name, title, link_base_errors_to: link_base_errors_to, order: order, **kwargs, &block).html
+    def govuk_error_summary(title = config.default_error_summary_title, presenter: config.default_error_summary_presenter, link_base_errors_to: nil, order: nil, **kwargs, &block)
+      Elements::ErrorSummary.new(self, object_name, title, link_base_errors_to: link_base_errors_to, order: order, presenter: presenter, **kwargs, &block).html
     end
 
     # Generates a fieldset containing the contents of the block
