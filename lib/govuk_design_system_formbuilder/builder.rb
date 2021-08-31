@@ -952,7 +952,7 @@ module GOVUKDesignSystemFormBuilder
     # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the error summary +div+ element
     # @param block [Block] arbitrary HTML that will be rendered between title and error message list
     # @param presenter [Class,Object] the class or object that is responsible for formatting a list of error
-    #   messages that will be renderd in the summary.
+    #   messages that will be rendered in the summary.
     #
     #   * When a class is specified it will be instantiated with the object's errors in the +object.errors.messages+ format.
     #   * When an object is specified it will be used as-is.
