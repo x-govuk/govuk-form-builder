@@ -472,6 +472,15 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             end
           end
         end
+
+        context "when the custom presenter is an class that doesn't implement #formatted_error_messages" do
+          let(:non_presenter) { OpenStruct }
+          subject { builder.send(*args, presenter: non_presenter) }
+
+          specify "fails with an appropriate error message" do
+            expect { subject }.to raise_error(ArgumentError, "error summary presenter doesn't implement #formatted_error_messages")
+          end
+        end
       end
 
       context "as an instance" do
@@ -484,14 +493,14 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             end
           end
         end
-      end
 
-      context "when the custom presenter doesn't implement #formatted_error_messages" do
-        let(:non_presenter) { "totally not a presenter" }
-        subject { builder.send(*args, presenter: non_presenter) }
+        context "when the custom presenter is an instance that doesn't implement #formatted_error_messages" do
+          let(:non_presenter) { "totally not a presenter" }
+          subject { builder.send(*args, presenter: non_presenter) }
 
-        specify "fails with an appropriate error message" do
-          expect { subject }.to raise_error(ArgumentError, "error summary presenter doesn't implement #formatted_error_messages")
+          specify "fails with an appropriate error message" do
+            expect { subject }.to raise_error(ArgumentError, "error summary presenter doesn't implement #formatted_error_messages")
+          end
         end
       end
     end
