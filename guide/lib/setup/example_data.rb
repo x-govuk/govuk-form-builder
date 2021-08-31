@@ -94,6 +94,22 @@ module Setup
       CONFIG
     end
 
+    def custom_error_presenter_raw
+      <<~CODE
+        class ErrorSummaryUpperCasePresenter
+          def initialize(error_messages)
+            @error_messages = error_messages
+          end
+
+          def formatted_error_messages
+            @error_messages.map { |attribute, messages| [attribute, messages.first.upcase] }
+          end
+        end
+
+        custom_error_presenter = ErrorSummaryUpperCasePresenter
+      CODE
+    end
+
     # Yes, eval is bad, but when you want to display code in documentation as
     # well as run it, it's kind of necessary. Not considering this a security
     # threat as it's only used in the guide 👮
@@ -130,6 +146,10 @@ module Setup
     def custom_locale_config
       eval(custom_locale_config_raw)
     end
+
+    def custom_error_presenter
+      eval(custom_error_presenter_raw)
+    end
     # rubocop:enable Security/Eval
 
     def form_data
@@ -140,7 +160,8 @@ module Setup
         lunch_options: lunch_options,
         grouped_lunch_options: grouped_lunch_options,
         primary_colours: primary_colours,
-        laptops: laptops
+        laptops: laptops,
+        custom_error_presenter: custom_error_presenter,
       }
     end
   end

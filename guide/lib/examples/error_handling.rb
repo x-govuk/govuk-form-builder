@@ -37,5 +37,20 @@ module Examples
         = f.govuk_phone_field :telephone_number, label: { text: "Phone number" }
       SNIPPET
     end
+
+    def form_with_presenter_injection
+      <<~SNIPPET
+        = f.govuk_error_summary(presenter: custom_error_presenter)
+
+        = f.govuk_text_field :name,
+          label: { text: 'Name' },
+          hint: { text: 'You can find it on your birth certificate' }
+
+        = f.govuk_date_field :date_of_birth,
+          date_of_birth: true,
+          legend: { text: 'Enter your date of birth' },
+          hint: { text: 'For example, 31 3 1980' }
+      SNIPPET
+    end
   end
 end

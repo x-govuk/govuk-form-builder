@@ -4,13 +4,14 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Error
       include Traits::HTMLAttributes
 
-      def initialize(builder, object_name, title, link_base_errors_to:, order:, **kwargs, &block)
+      def initialize(builder, object_name, title, link_base_errors_to:, order:, presenter:, **kwargs, &block)
         super(builder, object_name, nil, &block)
 
         @title               = title
         @link_base_errors_to = link_base_errors_to
         @html_attributes     = kwargs
         @order               = order
+        @presenter           = presenter
       end
 
       def html
@@ -33,8 +34,21 @@ module GOVUKDesignSystemFormBuilder
 
       def list
         tag.ul(class: [%(#{brand}-list), summary_class('list')]) do
-          safe_join(error_messages.map { |attribute, messages| list_item(attribute, messages.first) })
+          safe_join(presenter.formatted_error_messages.map { |args| list_item(*args) })
         end
+      end
+
+      # If the provided @presenter is a class, instantiate it with the sorted
+      # error_messages from our object. Otherwise (if it's any other object),
+      # treat it like a presenter
+      def presenter
+        return @presenter.new(error_messages) if @presenter.is_a?(Class)
+
+        unless @presenter.respond_to?(:formatted_error_messages)
+          fail(ArgumentError, "error summary presenter doesn't implement #formatted_error_messages")
+        end
+
+        @presenter
       end
 
       def error_messages

@@ -442,5 +442,58 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
     end
+
+    context "when a custom presenter is supplied" do
+      before { object.valid? }
+
+      let(:custom_presenter) do
+        Class.new do
+          def initialize(error_messages)
+            @error_messages = error_messages
+          end
+
+          def formatted_error_messages
+            @error_messages.map { |attribute, messages| [attribute, messages.first.upcase] }
+          end
+        end
+      end
+
+      let(:expected_error_messages) do
+        object.errors.messages.each.with_object({}) { |(k, v), h| h[k.to_s] = v.first.upcase }
+      end
+
+      context "as a class that upcases the error messages" do
+        subject { builder.send(*args, presenter: custom_presenter) }
+
+        specify "uses the presenter to display error messages in the desired format" do
+          expect(subject).to have_tag("ul", with: { class: "govuk-error-summary__list" }) do
+            expected_error_messages.each do |attr, error_message|
+              with_tag("a", with: { href: underscores_to_dashes(%(#person-#{attr}-field-error)) }, text: error_message)
+            end
+          end
+        end
+      end
+
+      context "as an instance" do
+        subject { builder.send(*args, presenter: custom_presenter.new(object.errors.messages)) }
+
+        specify "uses the presenter to display error messages in the desired format" do
+          expect(subject).to have_tag("ul", with: { class: "govuk-error-summary__list" }) do
+            expected_error_messages.each do |attr, error_message|
+              with_tag("a", with: { href: underscores_to_dashes(%(#person-#{attr}-field-error)) }, text: error_message)
+            end
+          end
+        end
+      end
+
+      context "when the custom presenter doesn't implement #formatted_error_messages" do
+        let(:non_presenter) { "totally not a presenter" }
+        subject { builder.send(*args, presenter: non_presenter) }
+
+        specify "fails with an appropriate error message" do
+          expect { subject }.to raise_error(ArgumentError, "error summary presenter doesn't implement #formatted_error_messages")
+        end
+      end
+    end
   end
 end

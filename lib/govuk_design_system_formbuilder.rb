@@ -1,7 +1,7 @@
 require 'deep_merge/rails_compat'
 require 'active_support/configurable'
 
-[%w(refinements *.rb), %w(traits *.rb), %w(*.rb), %w(elements ** *.rb), %w(containers ** *.rb)]
+[%w(presenters *.rb), %w(refinements *.rb), %w(traits *.rb), %w(*.rb), %w(elements ** *.rb), %w(containers ** *.rb)]
   .flat_map { |matcher| Dir.glob(File.join(__dir__, 'govuk_design_system_formbuilder', *matcher)) }
   .each { |file| require file }
 
@@ -37,15 +37,18 @@ module GOVUKDesignSystemFormBuilder
   #   button in radio button fieldsets. As per the GOV.UK Design System spec,
   #   it defaults to 'or'.
   #
-  # * +:default_error_summary_title+ sets the text used in error summary
-  #   blocks. As per the GOV.UK Design System spec, it defaults to
-  #   'There is a problem'.
-  #
   # * +:default_collection_check_boxes_include_hidden+ controls whether or not
   #   a hidden field is added when rendering a collection of check boxes
   #
   # * +:default_collection_radio_buttons_include_hidden+ controls whether or not
   #   a hidden field is added when rendering a collection of radio buttons
+  #
+  # * +:default_error_summary_title+ sets the text used in error summary
+  #   blocks. As per the GOV.UK Design System spec, it defaults to
+  #   'There is a problem'.
+  #
+  # * +:default_error_summary_presenter+ the class that's instantiated when
+  #   rendering an error summary and formats the messages for each attribute
   #
   # * +:default_error_summary_error_order_method+ is the method that the library
   #   will check for on the bound object to see whether or not to try ordering the
@@ -73,6 +76,7 @@ module GOVUKDesignSystemFormBuilder
     default_radio_divider_text: 'or',
     default_check_box_divider_text: 'or',
     default_error_summary_title: 'There is a problem',
+    default_error_summary_presenter: Presenters::ErrorSummaryPresenter,
     default_error_summary_error_order_method: nil,
     default_collection_check_boxes_include_hidden: true,
     default_collection_radio_buttons_include_hidden: true,
