@@ -18,6 +18,8 @@ module Presenters
     # Converts +@error_messages+ into an array of argument arrays that will be
     # passed into {GOVUKDesignSystemFormBuilder::Elements::ErrorSummary#list_item}.
     #
+    # @return [Array<Array(Symbol, String)>] array of attribute and message arrays
+    #
     # @example Output format given the input above:
     #   [[:attribute_one, "first error"], [:attribute_two, "third error"]]
     def formatted_error_messages
