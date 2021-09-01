@@ -11,7 +11,7 @@ module GOVUKDesignSystemFormBuilder
         @link_base_errors_to = link_base_errors_to
         @html_attributes     = kwargs
         @order               = order
-        @presenter           = setup_presenter(presenter)
+        @presenter           = presenter
       end
 
       def html
@@ -34,15 +34,15 @@ module GOVUKDesignSystemFormBuilder
 
       def list
         tag.ul(class: [%(#{brand}-list), summary_class('list')]) do
-          safe_join(@presenter.formatted_error_messages.map { |args| list_item(*args) })
+          safe_join(presenter.formatted_error_messages.map { |args| list_item(*args) })
         end
       end
 
       # If the provided @presenter is a class, instantiate it with the sorted
       # error_messages from our object. Otherwise (if it's any other object),
       # treat it like a presenter
-      def setup_presenter(presenter)
-        (presenter.is_a?(Class) ? presenter.new(error_messages) : presenter).tap do |p|
+      def presenter
+        (@presenter.is_a?(Class) ? @presenter.new(error_messages) : @presenter).tap do |p|
           fail(ArgumentError, "error summary presenter doesn't implement #formatted_error_messages") unless
             p.respond_to?(:formatted_error_messages)
         end
