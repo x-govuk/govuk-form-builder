@@ -42,13 +42,10 @@ module GOVUKDesignSystemFormBuilder
       # error_messages from our object. Otherwise (if it's any other object),
       # treat it like a presenter
       def presenter
-        return @presenter.new(error_messages) if @presenter.is_a?(Class)
-
-        unless @presenter.respond_to?(:formatted_error_messages)
-          fail(ArgumentError, "error summary presenter doesn't implement #formatted_error_messages")
+        (@presenter.is_a?(Class) ? @presenter.new(error_messages) : @presenter).tap do |p|
+          fail(ArgumentError, "error summary presenter doesn't implement #formatted_error_messages") unless
+            p.respond_to?(:formatted_error_messages)
         end
-
-        @presenter
       end
 
       def error_messages
