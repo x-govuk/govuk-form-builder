@@ -473,7 +473,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           end
         end
 
-        context "when the custom presenter is an class that doesn't implement #formatted_error_messages" do
+        context "when the custom presenter is a class that doesn't implement #formatted_error_messages" do
           let(:non_presenter) { OpenStruct }
           subject { builder.send(*args, presenter: non_presenter) }
 
