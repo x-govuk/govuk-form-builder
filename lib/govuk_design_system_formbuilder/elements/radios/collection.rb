@@ -21,7 +21,11 @@ module GOVUKDesignSystemFormBuilder
           @classes        = classes
           @form_group     = form_group
           @include_hidden = include_hidden
-          @bold_labels    = hint_method.present? || bold_labels
+          @bold_labels    = if bold_labels.nil?
+                              hint_method.present?
+                            else
+                              bold_labels
+                            end
         end
 
         def html

@@ -471,9 +471,9 @@ module GOVUKDesignSystemFormBuilder
     # @note Unlike the Rails +#collection_radio_buttons+ helper, this version can also insert
     #   hints per item in the collection by supplying a +:hint_method+
     #
-    # @note +:bold_labels+, while false by default, is set to true when a
-    #   +:hint_method+ is provided. This is done to make the label stand out more
-    #   from the hint.
+    # @note +:bold_labels+, is +nil+ (falsy) by default. When a +:hint_method+
+    #       is provided it will become +true+ to make the label stand out more
+    #       from the hint. The choice can be overridden with +true+ or +false+.
     #
     # @param attribute_name [Symbol] The name of the attribute
     # @param collection [Enumerable<Object>] Options to be added to the +select+ element
@@ -538,7 +538,7 @@ module GOVUKDesignSystemFormBuilder
     #    :name,
     #    legend: -> { tag.h3('Which category do you belong to?') }
     #
-    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method = nil, hint_method = nil, hint: {}, legend: {}, caption: {}, inline: false, small: false, bold_labels: false, classes: nil, include_hidden: config.default_collection_radio_buttons_include_hidden, form_group: {}, &block)
+    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method = nil, hint_method = nil, hint: {}, legend: {}, caption: {}, inline: false, small: false, bold_labels: nil, classes: nil, include_hidden: config.default_collection_radio_buttons_include_hidden, form_group: {}, &block)
       Elements::Radios::Collection.new(
         self,
         object_name,
