@@ -212,19 +212,41 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       context 'bold labels' do
         let(:bold_label_class) { 'govuk-label--s' }
+        let(:bold_labels) { nil }
+        let(:hint_method) { nil }
 
-        context 'when bold labels are specified in the options' do
-          subject do
-            builder.send(*args.push(:description), bold_labels: true)
+        subject do
+          builder.send(*args.push(hint_method), bold_labels: bold_labels)
+        end
+
+        context 'when bold_labels: nil' do
+          context 'when a hint method is present' do
+            let(:hint_method) { :description }
+
+            specify 'labels should be bold to help them stand out from hints' do
+              expect(subject).to have_tag('label', with: { class: bold_label_class }, count: colours.size)
+            end
           end
+
+          context 'when no hint method is present' do
+            specify 'no labels should be set to bold' do
+              expect(subject).not_to have_tag('label', with: { class: bold_label_class })
+            end
+          end
+        end
+
+        context 'when bold_labels: true' do
+          let(:bold_labels) { true }
 
           specify 'all labels should be bold when hints are enabled' do
             expect(subject).to have_tag('label', with: { class: bold_label_class }, count: colours.size)
           end
         end
 
-        context 'when bold labels are not specified in the options' do
-          specify 'no labels should be bold when hints are enabled' do
+        context 'when bold_labels: false' do
+          let(:bold_labels) { false }
+
+          specify 'no labels should be set to bold' do
             expect(subject).not_to have_tag('label', with: { class: bold_label_class })
           end
         end
