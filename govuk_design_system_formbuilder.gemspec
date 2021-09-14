@@ -9,7 +9,7 @@ METADATA = {
   "documentation_uri" => "https://www.rubydoc.info/gems/govuk_design_system_formbuilder/GOVUKDesignSystemFormBuilder/Builder",
   "homepage_uri"      => "https://govuk-form-builder.netlify.app",
   "source_code_uri"   => "https://github.com/DFE-Digital/govuk_design_system_formbuilder",
-  "github_repo"       => "git@github.com:DFE-Digital/govuk_design_system_formbuilder.git"
+  "github_repo"       => "https://github.com/DFE-Digital/govuk_design_system_formbuilder"
 }.freeze
 
 Gem::Specification.new do |s|
