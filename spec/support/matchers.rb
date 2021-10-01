@@ -10,11 +10,11 @@ RSpec::Matchers.define(:have_root_element_with_class) do |class_name|
     !nokogiri_fragment.xpath(%(./*[contains(concat(" ", @class, " "), " #{class_name} ")])).empty?
   end
 
-  #:nocov:
+  # :nocov:
   failure_message do |nokogiri_fragment|
     "expected that #{class_name} would be a class of a root element in fragment: #{nokogiri_fragment}"
   end
-  #:nocov:
+  # :nocov:
 end
 
 RSpec::Matchers.define(:have_no_leading_or_trailing_spaces) do
@@ -22,21 +22,21 @@ RSpec::Matchers.define(:have_no_leading_or_trailing_spaces) do
     [string.start_with?(' '), string.end_with?(' ')].none?
   end
 
-  #:nocov:
+  # :nocov:
   failure_message do |failing_attribute|
     %('#{failing_attribute}' has leading or trailing spaces)
   end
-  #:nocov:
+  # :nocov:
 end
 
 RSpec::Matchers.define(:have_no_double_spaces) do
   match { |string| string !~ %r(\s{2}) }
 
-  #:nocov:
+  # :nocov:
   failure_message do |failing_attribute|
     %('#{failing_attribute}' has double spaces)
   end
-  #:nocov:
+  # :nocov:
 end
 
 RSpec::Matchers.define(:render_an_error_summary) do
@@ -50,7 +50,7 @@ RSpec::Matchers.define(:render_an_error_summary) do
     end
   end
 
-  #:nocov:
+  # :nocov:
   description do
     if @count.present?
       "render an error summary with #{@count} errors"
@@ -64,7 +64,7 @@ RSpec::Matchers.define(:render_an_error_summary) do
   end
 
   chain(:errors) {}
-  #:nocov:
+  # :nocov:
 end
 
 RSpec::Matchers.define(:contain_element) do |selector|
