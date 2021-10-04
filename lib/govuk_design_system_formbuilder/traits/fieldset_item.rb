@@ -24,7 +24,7 @@ module GOVUKDesignSystemFormBuilder
           id: field_id(link_errors: @link_errors),
           class: classes,
           multiple: @multiple,
-          aria: { describedby: [hint_id] },
+          aria: { describedby: [hint_id.presence] },
           data: { 'aria-controls' => @conditional_id }
         }
       end
