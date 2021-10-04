@@ -6,11 +6,17 @@ module GOVUKDesignSystemFormBuilder
       #   present
       # * joins the arrays into strings to maintain Rails 6.0.* compatibility
       class Attributes
-        # Rather than attempt to combine these attributes, just overwrite the
-        # form internally-generated values with those that are passed in. This
-        # prevents the merge/unique value logic from affecting the content
-        # (i.e. by remvoving duplicated words).
-        UNMERGEABLE = [%i(id), %i(value), %i(title), %i(alt), %i(href), %i(aria label)].freeze
+        # Only try to combine and merge these attributes that contain a list of
+        # values separated by a space. All other values should be merged in a
+        # regular fashion (where the custom value overrides the default)
+        MERGEABLE = [
+          %i(class),
+          %i(aria controls),
+          %i(aria describedby),
+          %i(aria flowto),
+          %i(aria labelledby),
+          %i(aria owns),
+        ].freeze
 
         def initialize(defaults, custom)
           @merged = defaults.deeper_merge(deep_split_values(custom))
@@ -36,7 +42,7 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def split_mergeable(key, value, parent = nil)
-          return value if [parent, key].compact.in?(UNMERGEABLE)
+          return value.presence unless [parent, key].compact.in?(MERGEABLE)
 
           value.split
         end
