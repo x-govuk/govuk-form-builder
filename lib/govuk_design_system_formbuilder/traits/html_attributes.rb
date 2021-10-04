@@ -28,7 +28,12 @@ module GOVUKDesignSystemFormBuilder
                           when Hash
                             deep_split_values(value, key)
                           when String
-                            split_mergeable(key, value, parent)
+                            begin
+                              JSON.parse(value)
+                              value
+                            rescue JSON::ParserError => e
+                              split_mergeable(key, value, parent)
+                            end
                           else
                             value
                           end
