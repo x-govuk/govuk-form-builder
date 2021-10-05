@@ -125,7 +125,7 @@ module GOVUKDesignSystemFormBuilder
             module: %(#{brand}-error-summary)
           },
           aria: {
-            labelledby: summary_title_id
+            labelledby: [summary_title_id.presence]
           }
         }
       end
