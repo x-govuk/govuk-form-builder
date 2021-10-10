@@ -56,7 +56,7 @@ To get up and running quickly and easily try kickstarting your project with a
 pre-configured template:
 
 * [DfE Boilerplate](https://github.com/DFE-Digital/govuk-rails-boilerplate)
-* [MoJ Rails Template](https://github.com/ministryofjustice/moj_rails_template)
+* [DEFRA Ruby Template](https://github.com/DEFRA/defra-ruby-template)
 
 ## Setup 🔧
 
