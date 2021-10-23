@@ -81,7 +81,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def list_item(attribute, message)
-        tag.li(link_to(message, same_page_link(field_id(attribute)), data: { turbolinks: false }))
+        tag.li(link_to(message, same_page_link(field_id(attribute)), **link_options))
       end
 
       def same_page_link(target)
@@ -128,6 +128,12 @@ module GOVUKDesignSystemFormBuilder
             labelledby: [summary_title_id.presence]
           }
         }
+      end
+
+      def link_options(turbo_prefix: config.default_error_summary_turbo_prefix)
+        return {} unless turbo_prefix
+
+        { data: { turbo_prefix => false } }
       end
     end
   end
