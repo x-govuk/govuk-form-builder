@@ -27,11 +27,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     specify 'there should be no data attribute present on the error links' do
-      parsed_subject.css('a').map(&:attributes).each do |link_attrs|
-        link_attrs.each_key do |link_attr|
-          expect(link_attr).not_to start_with('data')
-        end
-      end
+      attributes = parsed_subject.css('a').map(&:attributes).flat_map(&:keys).uniq
+
+      expect(attributes).to contain_none_that(start_with('data'))
     end
   end
 end

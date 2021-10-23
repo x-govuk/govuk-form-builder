@@ -29,6 +29,8 @@ RSpec::Matchers.define(:have_no_leading_or_trailing_spaces) do
   # :nocov:
 end
 
+RSpec::Matchers.define_negated_matcher :contain_none_that, :include
+
 RSpec::Matchers.define(:have_no_double_spaces) do
   match { |string| string !~ %r(\s{2}) }
 
