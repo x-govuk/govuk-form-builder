@@ -8,6 +8,7 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Label
       include Traits::Supplemental
       include Traits::HTMLAttributes
+      include Traits::HTMLClasses
 
       def initialize(builder, object_name, attribute_name, hint:, label:, caption:, rows:, max_words:, max_chars:, threshold:, form_group:, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
@@ -42,10 +43,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def classes
-        %w(textarea).prefix(brand).tap do |classes|
-          classes.push(%(#{brand}-textarea--error))    if has_errors?
-          classes.push(%(#{brand}-js-character-count)) if limit?
-        end
+        build_classes(%(textarea), %(textarea--error) => has_errors?, %(js-character-count) => limit?).prefix(brand)
       end
 
       def options
@@ -86,7 +84,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def limit_description_classes
-        %w(hint character-count__message).prefix(brand)
+        build_classes(%(hint), %(character-count__message)).prefix(brand)
       end
 
       def limit_description_id
