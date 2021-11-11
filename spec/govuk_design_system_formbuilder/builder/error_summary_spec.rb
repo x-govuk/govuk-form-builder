@@ -64,8 +64,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
         specify 'the error message list should contain the correct messages' do
           object.errors.messages.each do |_attribute, message_list|
-            expect(subject).to have_tag('li', text: message_list.first) do
-            end
+            expect(subject).to have_tag('li', text: message_list.first)
           end
         end
 
