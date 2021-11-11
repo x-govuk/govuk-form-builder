@@ -292,6 +292,36 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
               end
             end
           end
+
+          context "when the presenter provides a path/URL for the attribute" do
+            subject { builder.send(*args, presenter: custom_presenter) }
+
+            let(:custom_presenter) do
+              Class.new do
+                def initialize(error_messages)
+                  @error_messages = error_messages
+                end
+
+                def formatted_error_messages
+                  @error_messages.map do |attribute, messages|
+                    [
+                      attribute,
+                      {
+                        message: messages.first,
+                        url: "/deep-link/#{attribute}",
+                      },
+                    ]
+                  end
+                end
+              end
+            end
+
+            specify "uses the URLs from the presenter as the error message link href" do
+              object.errors.messages.each do |attribute, _msg|
+                expect(subject).to have_tag("a", with: { href: "/deep-link/#{attribute}" })
+              end
+            end
+          end
         end
 
         describe "custom sort order" do

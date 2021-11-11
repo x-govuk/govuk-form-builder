@@ -81,7 +81,16 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def list_item(attribute, message)
-        tag.li(link_to(message, same_page_link(field_id(attribute)), data: { turbolinks: false }))
+        if message.is_a?(Hash)
+          options = message
+          message = options.delete(:message)
+        else
+          options = {}
+        end
+
+        url = options[:url] || same_page_link(field_id(attribute))
+
+        tag.li(link_to(message, url, data: { turbolinks: false }))
       end
 
       def same_page_link(target)
