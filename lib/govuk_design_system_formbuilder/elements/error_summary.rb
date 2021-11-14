@@ -80,8 +80,8 @@ module GOVUKDesignSystemFormBuilder
         config.default_error_summary_error_order_method
       end
 
-      def list_item(attribute, message)
-        tag.li(link_to(message, same_page_link(field_id(attribute)), **link_options))
+      def list_item(attribute, message, url = nil)
+        tag.li(link_to(message, url || same_page_link(field_id(attribute)), **link_options))
       end
 
       def same_page_link(target)
