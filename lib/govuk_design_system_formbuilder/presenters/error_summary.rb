@@ -19,9 +19,13 @@ module Presenters
     # passed into {GOVUKDesignSystemFormBuilder::Elements::ErrorSummary#list_item}.
     #
     # @return [Array<Array(Symbol, String)>] array of attribute and message arrays
+    # @return [Array<Array(Symbol, String, String)>] array of attribute, message and URL arrays.
     #
     # @example Output format given the input above:
     #   [[:attribute_one, "first error"], [:attribute_two, "third error"]]
+    #
+    # @example Output with hard-coded URLs
+    #   [[:attribute_one, "first error", "https://example.com/attribute-one"], [:attribute_two, "third error", "https://example.com/attribute-two"]]
     def formatted_error_messages
       @error_messages.map { |attribute, messages| [attribute, messages.first] }
     end

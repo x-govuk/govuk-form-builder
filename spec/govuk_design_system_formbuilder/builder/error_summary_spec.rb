@@ -503,6 +503,28 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           end
         end
       end
+
+      context "when the third item in the error messages array is present" do
+        let(:presenter_with_external_links) do
+          Class.new do
+            def initialize(error_messages)
+              @error_messages = error_messages
+            end
+
+            def formatted_error_messages
+              @error_messages.map { |attribute, messages| [attribute, messages.first, %(https://www.errors.com/#{attribute})] }
+            end
+          end
+        end
+
+        subject { builder.send(*args, presenter: presenter_with_external_links) }
+
+        specify "the third argument forms the hyperlink" do
+          object.errors.messages.transform_values(&:first).each do |attr, message|
+            expect(subject).to have_tag("a", with: { href: "https://www.errors.com/#{attr}" }, text: message)
+          end
+        end
+      end
     end
   end
 end
