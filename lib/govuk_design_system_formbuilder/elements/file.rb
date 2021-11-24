@@ -8,6 +8,7 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Label
       include Traits::Supplemental
       include Traits::HTMLAttributes
+      include Traits::HTMLClasses
 
       def initialize(builder, object_name, attribute_name, hint:, label:, caption:, form_group:, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
@@ -40,9 +41,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def classes
-        %w(file-upload).prefix(brand).tap do |c|
-          c.push(%(#{brand}-file-upload--error)) if has_errors?
-        end
+        build_classes(%(file-upload), %(file-upload--error) => has_errors?).prefix(brand)
       end
     end
   end

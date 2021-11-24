@@ -6,6 +6,7 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Error
       include Traits::Hint
       include Traits::Supplemental
+      include Traits::HTMLClasses
 
       SEGMENTS = { day: '3i', month: '2i', year: '1i' }.freeze
       MULTIPARAMETER_KEY = { day: 3, month: 2, year: 1 }.freeze
@@ -115,10 +116,12 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def classes(width)
-        %w(input date-input__input).prefix(brand).tap do |classes|
-          classes.push(%(#{brand}-input--width-#{width}))
-          classes.push(%(#{brand}-input--error)) if has_errors?
-        end
+        build_classes(
+          %(input),
+          %(date-input__input),
+          %(input--width-#{width}),
+          %(input--error) => has_errors?,
+        ).prefix(brand)
       end
 
       # if the field has errors we want the govuk_error_summary to
@@ -148,7 +151,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def label_classes
-        %w(label date-input__label).prefix(brand)
+        build_classes(%(label), %(date-input__label)).prefix(brand)
       end
     end
   end
