@@ -11,17 +11,18 @@ module GOVUKDesignSystemFormBuilder
       SEGMENTS = { day: '3i', month: '2i', year: '1i' }.freeze
       MULTIPARAMETER_KEY = { day: 3, month: 2, year: 1 }.freeze
 
-      def initialize(builder, object_name, attribute_name, legend:, caption:, hint:, omit_day:, form_group:, wildcards:, date_of_birth: false, **kwargs, &block)
+      def initialize(builder, object_name, attribute_name, legend:, caption:, hint:, omit_day:, maxlength_enabled:, form_group:, wildcards:, date_of_birth: false, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
 
-        @legend          = legend
-        @caption         = caption
-        @hint            = hint
-        @date_of_birth   = date_of_birth
-        @omit_day        = omit_day
-        @form_group      = form_group
-        @wildcards       = wildcards
-        @html_attributes = kwargs
+        @legend            = legend
+        @caption           = caption
+        @hint              = hint
+        @date_of_birth     = date_of_birth
+        @omit_day          = omit_day
+        @maxlength_enabled = maxlength_enabled
+        @form_group        = form_group
+        @wildcards         = wildcards
+        @html_attributes   = kwargs
       end
 
       def html
@@ -48,24 +49,40 @@ module GOVUKDesignSystemFormBuilder
         @omit_day
       end
 
+      def maxlength_enabled?
+        @maxlength_enabled
+      end
+
       def day
         return if omit_day?
 
-        date_part(:day, width: 2, link_errors: true)
+        if maxlength_enabled?
+          date_part(:day, width: 2, link_errors: true, maxlength: 2)
+        else
+          date_part(:day, width: 2, link_errors: true)
+        end
       end
 
       def month
-        date_part(:month, width: 2, link_errors: omit_day?)
+        if maxlength_enabled?
+          date_part(:month, width: 2, link_errors: omit_day?, maxlength: 2)
+        else
+          date_part(:month, width: 2, link_errors: omit_day?)
+        end
       end
 
       def year
-        date_part(:year, width: 4)
+        if maxlength_enabled?
+          date_part(:year, width: 4, maxlength: 4)
+        else
+          date_part(:year, width: 4)
+        end
       end
 
-      def date_part(segment, width:, link_errors: false)
+      def date_part(segment, width:, link_errors: false, maxlength: nil)
         tag.div(class: %(#{brand}-date-input__item)) do
           tag.div(class: %(#{brand}-form-group)) do
-            safe_join([label(segment, link_errors), input(segment, link_errors, width, value(segment))])
+            safe_join([label(segment, link_errors), input(segment, link_errors, width, value(segment), maxlength)])
           end
         end
       end
@@ -96,7 +113,7 @@ module GOVUKDesignSystemFormBuilder
         )
       end
 
-      def input(segment, link_errors, width, value)
+      def input(segment, link_errors, width, value, maxlength)
         tag.input(
           id: id(segment, link_errors),
           class: classes(width),
@@ -105,7 +122,8 @@ module GOVUKDesignSystemFormBuilder
           pattern: pattern(segment),
           inputmode: 'numeric',
           value: value,
-          autocomplete: date_of_birth_autocomplete_value(segment)
+          autocomplete: date_of_birth_autocomplete_value(segment),
+          maxlength: maxlength,
         )
       end
 

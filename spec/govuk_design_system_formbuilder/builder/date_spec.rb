@@ -162,6 +162,38 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
+    context 'not restricting chars with maxlength' do
+      subject { builder.send(*args, maxlength_enabled: false) }
+
+      specify 'there should be a day maxlength attribute' do
+        expect(subject).not_to have_tag('input', with: { name: "#{object_name}[#{attribute}(#{day_multiparam_attribute})]", maxlength: '2' })
+      end
+
+      specify 'there should be a month maxlength attribute' do
+        expect(subject).not_to have_tag('input', with: { name: "#{object_name}[#{attribute}(#{month_multiparam_attribute})]", maxlength: '2' })
+      end
+
+      specify 'there should be a year maxlength attribute' do
+        expect(subject).not_to have_tag('input', with: { name: "#{object_name}[#{attribute}(#{year_multiparam_attribute})]", maxlength: '4' })
+      end
+    end
+
+    context 'restricting chars with maxlength' do
+      subject { builder.send(*args, maxlength_enabled: true) }
+
+      specify 'there should be a day maxlength attribute' do
+        expect(subject).to have_tag('input', with: { name: "#{object_name}[#{attribute}(#{day_multiparam_attribute})]", maxlength: '2' })
+      end
+
+      specify 'there should be a month maxlength attribute' do
+        expect(subject).to have_tag('input', with: { name: "#{object_name}[#{attribute}(#{month_multiparam_attribute})]", maxlength: '2' })
+      end
+
+      specify 'there should be a year maxlength attribute' do
+        expect(subject).to have_tag('input', with: { name: "#{object_name}[#{attribute}(#{year_multiparam_attribute})]", maxlength: '4' })
+      end
+    end
+
     context 'default values' do
       let(:birth_day) { 3 }
       let(:birth_month) { 2 }

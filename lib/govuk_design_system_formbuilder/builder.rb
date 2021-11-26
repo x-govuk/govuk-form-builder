@@ -912,6 +912,7 @@ module GOVUKDesignSystemFormBuilder
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @param omit_day [Boolean] do not render a day input, only capture month and year
+    # @param maxlength_enabled [Boolean] adds maxlength attribute to day, month and year inputs (2, 2, and 4, respectively)
     # @param wildcards [Boolean] add an 'X' to the day and month patterns so users can add approximate dates
     # @param form_group [Hash] configures the form group
     # @option form_group classes [Array,String] sets the form group's classes
@@ -936,8 +937,8 @@ module GOVUKDesignSystemFormBuilder
     # @example A date input with legend supplied as a proc
     #  = f.govuk_date_field :finishes_on,
     #    legend: -> { tag.h3('Which category do you belong to?') }
-    def govuk_date_field(attribute_name, hint: {}, legend: {}, caption: {}, date_of_birth: false, omit_day: false, form_group: {}, wildcards: false, **kwargs, &block)
-      Elements::Date.new(self, object_name, attribute_name, hint: hint, legend: legend, caption: caption, date_of_birth: date_of_birth, omit_day: omit_day, form_group: form_group, wildcards: wildcards, **kwargs, &block).html
+    def govuk_date_field(attribute_name, hint: {}, legend: {}, caption: {}, date_of_birth: false, omit_day: false, maxlength_enabled: false, form_group: {}, wildcards: false, **kwargs, &block)
+      Elements::Date.new(self, object_name, attribute_name, hint: hint, legend: legend, caption: caption, date_of_birth: date_of_birth, omit_day: omit_day, maxlength_enabled: maxlength_enabled, form_group: form_group, wildcards: wildcards, **kwargs, &block).html
     end
 
     # Generates a summary of errors in the form, each linking to the corresponding
