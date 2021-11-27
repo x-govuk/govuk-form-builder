@@ -71,6 +71,10 @@ module GOVUKDesignSystemFormBuilder
   #
   # * +:enable_logger+ controls whether or not the library will emit log
   #   messages via Rails.logger.warn, defaults to +true+
+  #
+  # * +:trust_error_messages+ call html_safe on error messages before they're
+  #   rendered. This allows formatting markup to be used to change the display
+  #   of the error message. Defaults to +false+
   # ===
   DEFAULTS = {
     brand: 'govuk',
@@ -95,7 +99,8 @@ module GOVUKDesignSystemFormBuilder
     localisation_schema_legend: nil,
     localisation_schema_caption: nil,
 
-    enable_logger: true
+    enable_logger: true,
+    trust_error_messages: false,
   }.freeze
 
   DEFAULTS.each_key { |k| config_accessor(k) { DEFAULTS[k] } }
