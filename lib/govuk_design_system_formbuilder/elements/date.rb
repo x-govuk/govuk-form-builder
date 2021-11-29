@@ -56,33 +56,21 @@ module GOVUKDesignSystemFormBuilder
       def day
         return if omit_day?
 
-        if maxlength_enabled?
-          date_part(:day, width: 2, link_errors: true, maxlength: 2)
-        else
-          date_part(:day, width: 2, link_errors: true)
-        end
+        date_part(:day, width: 2, link_errors: true)
       end
 
       def month
-        if maxlength_enabled?
-          date_part(:month, width: 2, link_errors: omit_day?, maxlength: 2)
-        else
-          date_part(:month, width: 2, link_errors: omit_day?)
-        end
+        date_part(:month, width: 2, link_errors: omit_day?)
       end
 
       def year
-        if maxlength_enabled?
-          date_part(:year, width: 4, maxlength: 4)
-        else
-          date_part(:year, width: 4)
-        end
+        date_part(:year, width: 4)
       end
 
-      def date_part(segment, width:, link_errors: false, maxlength: nil)
+      def date_part(segment, width:, link_errors: false)
         tag.div(class: %(#{brand}-date-input__item)) do
           tag.div(class: %(#{brand}-form-group)) do
-            safe_join([label(segment, link_errors), input(segment, link_errors, width, value(segment), maxlength)])
+            safe_join([label(segment, link_errors), input(segment, link_errors, width, value(segment))])
           end
         end
       end
@@ -113,7 +101,7 @@ module GOVUKDesignSystemFormBuilder
         )
       end
 
-      def input(segment, link_errors, width, value, maxlength)
+      def input(segment, link_errors, width, value)
         tag.input(
           id: id(segment, link_errors),
           class: classes(width),
@@ -123,7 +111,7 @@ module GOVUKDesignSystemFormBuilder
           inputmode: 'numeric',
           value: value,
           autocomplete: date_of_birth_autocomplete_value(segment),
-          maxlength: maxlength,
+          maxlength: (width if maxlength_enabled?),
         )
       end
 
