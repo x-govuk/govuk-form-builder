@@ -81,6 +81,8 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def list_item(attribute, message, url = nil)
+        message = config.trust_error_messages ? message.html_safe : message
+
         tag.li(link_to(message, url || same_page_link(field_id(attribute)), **link_options))
       end
 
