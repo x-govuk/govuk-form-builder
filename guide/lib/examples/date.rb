@@ -17,5 +17,14 @@ module Examples
           hint: { text: 'For example, 3 2014' }
       SNIPPET
     end
+
+    def maxlength_enabled_field
+      <<~SNIPPET
+        = f.govuk_date_field :date_of_trade,
+          maxlength_enabled: true,
+          legend: { text: 'When are you planning to trade the goods?' },
+          hint: { text: 'Use the format day, month, year, for example 27 3 2021' }
+      SNIPPET
+    end
   end
 end

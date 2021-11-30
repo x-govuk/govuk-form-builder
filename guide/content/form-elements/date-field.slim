@@ -63,4 +63,15 @@ section
         should be taken into account when displaying the data or using it for
         analysis.
 
+  == render('/partials/example-fig.*',
+    caption: 'Specifying client side length restrictions on date inputs with maxlength',
+    code: maxlength_enabled_field,
+    hide_html_output: true) do
+
+    p.govuk-body
+      | To enable client side restrictions on the number of characters each
+        input requires, you can use the <code>maxlength_enabled</code> parameter.
+        This will default the day and month inputs to 2 characters and the year
+        input to 4 characters.
+
 == render('/partials/related-info.*', links: date_info)

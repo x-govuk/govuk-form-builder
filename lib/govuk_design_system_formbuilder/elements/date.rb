@@ -11,17 +11,18 @@ module GOVUKDesignSystemFormBuilder
       SEGMENTS = { day: '3i', month: '2i', year: '1i' }.freeze
       MULTIPARAMETER_KEY = { day: 3, month: 2, year: 1 }.freeze
 
-      def initialize(builder, object_name, attribute_name, legend:, caption:, hint:, omit_day:, form_group:, wildcards:, date_of_birth: false, **kwargs, &block)
+      def initialize(builder, object_name, attribute_name, legend:, caption:, hint:, omit_day:, maxlength_enabled:, form_group:, wildcards:, date_of_birth: false, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
 
-        @legend          = legend
-        @caption         = caption
-        @hint            = hint
-        @date_of_birth   = date_of_birth
-        @omit_day        = omit_day
-        @form_group      = form_group
-        @wildcards       = wildcards
-        @html_attributes = kwargs
+        @legend            = legend
+        @caption           = caption
+        @hint              = hint
+        @date_of_birth     = date_of_birth
+        @omit_day          = omit_day
+        @maxlength_enabled = maxlength_enabled
+        @form_group        = form_group
+        @wildcards         = wildcards
+        @html_attributes   = kwargs
       end
 
       def html
@@ -46,6 +47,10 @@ module GOVUKDesignSystemFormBuilder
 
       def omit_day?
         @omit_day
+      end
+
+      def maxlength_enabled?
+        @maxlength_enabled
       end
 
       def day
@@ -105,7 +110,8 @@ module GOVUKDesignSystemFormBuilder
           pattern: pattern(segment),
           inputmode: 'numeric',
           value: value,
-          autocomplete: date_of_birth_autocomplete_value(segment)
+          autocomplete: date_of_birth_autocomplete_value(segment),
+          maxlength: (width if maxlength_enabled?),
         )
       end
 
