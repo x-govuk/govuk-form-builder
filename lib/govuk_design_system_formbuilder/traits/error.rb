@@ -12,6 +12,10 @@ module GOVUKDesignSystemFormBuilder
       def error_element
         @error_element ||= Elements::ErrorMessage.new(*bound)
       end
+
+      def set_message_safety(message)
+        config.trust_error_messages ? message.html_safe : message
+      end
     end
   end
 end

@@ -20,7 +20,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def message
-        @builder.object.errors.messages[@attribute_name]&.first
+        set_message_safety(@builder.object.errors.messages[@attribute_name]&.first)
       end
     end
   end

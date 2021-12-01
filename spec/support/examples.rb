@@ -22,7 +22,8 @@ class Being
     :photo,
     :department,
     :stationery,
-    :stationery_choice
+    :stationery_choice,
+    :hairstyle,
   )
 
   def initialize(_args = nil)
@@ -42,6 +43,8 @@ class Person < Being
 
   validate :born_on_must_be_in_the_past, if: -> { born_on.present? }
   validate :photo_must_be_jpeg, if: -> { photo.present? }
+
+  validates :hairstyle, presence: { message: 'Describe your <br/> hairstyle' }, on: :trust_error_messages
 
   def self.valid_example
     new(
