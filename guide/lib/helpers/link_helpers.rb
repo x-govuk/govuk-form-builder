@@ -30,6 +30,10 @@ module Helpers
       'https://github.com/DFE-Digital/govuk-formbuilder'
     end
 
+    def github_release_2_8_0
+      'https://github.com/DFE-Digital/govuk-formbuilder/releases/tag/v2.8.0'
+    end
+
     def design_system_link
       'https://design-system.service.gov.uk'
     end
