@@ -7,8 +7,8 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/110136fb22341d3ba646/test_coverage)](https://codeclimate.com/github/DFE-Digital/govuk-formbuilder/test_coverage)
 [![GitHub license](https://img.shields.io/github/license/DFE-Digital/govuk_design_system_formbuilder)](https://github.com/DFE-Digital/govuk-formbuilder/blob/master/LICENSE)
 [![GOV.UK Design System Version](https://img.shields.io/badge/GOV.UK%20Design%20System-3.14.0-brightgreen)](https://design-system.service.gov.uk)
-[![Rails](https://img.shields.io/badge/Rails-6.0.4.1%20%E2%95%B1%206.1.4.1-E16D6D)](https://weblog.rubyonrails.org/releases/)
-[![Ruby](https://img.shields.io/badge/Ruby-2.6.8%20%E2%95%B1%202.7.4%20%E2%95%B1%203.0.2-E16D6D)](https://www.ruby-lang.org/en/downloads/)
+[![Rails](https://img.shields.io/badge/Rails-6.1.4.4%20%E2%95%B1%207.0.0-E16D6D)](https://weblog.rubyonrails.org/releases/)
+[![Ruby](https://img.shields.io/badge/Ruby-2.7.5%20%20%E2%95%B1%203.0.3-E16D6D)](https://www.ruby-lang.org/en/downloads/)
 
 This library provides an easy-to-use form builder for the [GOV.UK Design System](https://design-system.service.gov.uk/).
 
