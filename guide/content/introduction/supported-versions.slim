@@ -8,7 +8,18 @@ p.govuk-body
   | The form builder is actively maintained and will continue support the
     latest stable versions of the GOV.UK Design System, Ruby and Rails.
 
+h2.govuk-heading-m Full support
+
 dl.govuk-summary-list
+  .govuk-summary-list__row
+    dt.govuk-summary-list__key
+      == link_to('GOV.UK Form Builder', '/')
+    dl.govuk-summary-list__value
+      ul.govuk-list
+        li
+          span.govuk-tag.govuk-tag-blue
+            = GOVUKDesignSystemFormBuilder::VERSION
+
   .govuk-summary-list__row
     dt.govuk-summary-list__key
       == link_to('GOV.UK Design System', design_system_link)
@@ -16,7 +27,7 @@ dl.govuk-summary-list
       ul.govuk-list
         li
           span.govuk-tag.govuk-tag-govuk
-            | Version 3.14.0
+            | Version 4.0.0
 
   .govuk-summary-list__row
     dt.govuk-summary-list__key
@@ -25,13 +36,10 @@ dl.govuk-summary-list
       ul.govuk-list
         li
           span.govuk-tag.govuk-tag-red
-            | 3.0.2
+            | 3.0.3
         li
           span.govuk-tag.govuk-tag-red
-            | 2.7.4
-        li
-          span.govuk-tag.govuk-tag-red
-            | 2.6.8
+            | 2.7.5
 
   .govuk-summary-list__row
     dt.govuk-summary-list__key
@@ -40,7 +48,22 @@ dl.govuk-summary-list
       ul.govuk-list
         li
           span.govuk-tag.govuk-tag-red
-            | 6.1.4.1
+            | 7.0.0
         li
           span.govuk-tag.govuk-tag-red
-            | 6.0.4.1
+            | 6.1.4.4
+
+h2.govuk-heading-m Partial support
+
+p.govuk-body
+  | If you're using older versions of the GOV.UK Design System, Ruby or Rails, use
+    #{link_to("version 2.8.0", github_release_2_8_0).html_safe}. It supports:
+
+ul.govuk-list.govuk-list--bullet
+  li GOV.UK Design System 3.14.0
+  li Rails 6.0.4.4
+  li Ruby 2.6.9
+
+p.govuk-body
+  | No new features will be added to version 2.8.X series but <strong>bugs and
+    security fixes will be addressed</strong>.
