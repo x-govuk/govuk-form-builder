@@ -8,7 +8,7 @@ module GOVUKDesignSystemFormBuilder
       def html
         return unless has_errors?
 
-        tag.span(class: %(#{brand}-error-message), id: error_id) do
+        tag.p(class: %(#{brand}-error-message), id: error_id) do
           safe_join([hidden_prefix, message])
         end
       end
