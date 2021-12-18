@@ -115,7 +115,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
           specify 'hints should contain the correct content' do
             projects.map(&:description).compact.each do |hint_text|
-              expect(subject).to have_tag('span', text: hint_text, with: { class: %w(govuk-hint govuk-checkboxes__hint) })
+              expect(subject).to have_tag('div', text: hint_text, with: { class: %w(govuk-hint govuk-checkboxes__hint) })
             end
           end
 
@@ -131,17 +131,17 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           end
 
           specify 'only items with descriptions should have hints' do
-            expect(subject).to have_tag('span', with: { class: 'govuk-hint' }, count: projects_with_descriptions.size)
+            expect(subject).to have_tag('div', with: { class: 'govuk-hint' }, count: projects_with_descriptions.size)
           end
 
           specify 'hints should have the correct classes' do
-            expect(subject).to have_tag('span', with: { class: %w(govuk-hint govuk-checkboxes__hint) })
+            expect(subject).to have_tag('div', with: { class: %w(govuk-hint govuk-checkboxes__hint) })
           end
         end
 
         context 'when no hint method is provided' do
           specify 'the hint tag should never be present' do
-            expect(subject).not_to have_tag('span', with: { class: 'govuk-hint' })
+            expect(subject).not_to have_tag('div', with: { class: 'govuk-hint' })
           end
         end
       end

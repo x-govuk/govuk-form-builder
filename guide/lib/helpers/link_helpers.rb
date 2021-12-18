@@ -91,7 +91,7 @@ module Helpers
     end
 
     def rails_checkbox_gotcha_link
-      'https://api.rubyonrails.org/v6.1/classes/ActionView/Helpers/FormHelper.html#method-i-check_box-label-Gotcha'
+      'https://edgeapi.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html#method-i-check_box-label-Gotcha'
     end
 
     def rails_option_for_select_link

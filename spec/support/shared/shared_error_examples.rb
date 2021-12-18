@@ -3,7 +3,7 @@ shared_examples 'a field that supports errors' do
     before { object.valid? }
 
     specify 'an error message should be displayed' do
-      expect(subject).to have_tag('span', with: { class: 'govuk-error-message' }, text: error_message)
+      expect(subject).to have_tag('p', with: { class: 'govuk-error-message' }, text: error_message)
     end
 
     specify 'the form group should have the correct error classes' do
@@ -18,7 +18,7 @@ shared_examples 'a field that supports errors' do
 
     specify 'the error message should be associated with the correct element' do
       expect(subject).to have_tag(aria_described_by_target, with: { 'aria-describedby' => error_identifier })
-      expect(subject).to have_tag('span', with: {
+      expect(subject).to have_tag('p', with: {
         class: 'govuk-error-message',
         id: error_identifier
       })
@@ -41,18 +41,18 @@ shared_examples 'a field that supports errors' do
       end
 
       specify 'the first error should be included' do
-        expect(subject).to have_tag('span', text: Regexp.new(first_error))
+        expect(subject).to have_tag('p', text: Regexp.new(first_error))
       end
 
       specify 'the second error should not be included' do
-        expect(subject).not_to have_tag('span', text: Regexp.new(second_error))
+        expect(subject).not_to have_tag('p', text: Regexp.new(second_error))
       end
     end
   end
 
   context 'when the attribute has no errors' do
     specify 'no error messages should be displayed' do
-      expect(subject).not_to have_tag('span', with: { class: 'govuk-error-message' })
+      expect(subject).not_to have_tag('p', with: { class: 'govuk-error-message' })
     end
   end
 

@@ -59,7 +59,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
         specify 'should use the configured localisation schema for hints' do
           with_localisations(localisations) do
-            expect(subject).to have_tag('span', text: hint_text, with: { class: 'govuk-hint' })
+            expect(subject).to have_tag('div', text: hint_text, with: { class: 'govuk-hint' })
           end
         end
       end
