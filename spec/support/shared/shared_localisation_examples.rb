@@ -157,7 +157,7 @@ shared_examples 'a field that supports setting the hint via localisation' do
 
     specify 'should set the hint from the locales' do
       with_localisations(localisations) do
-        expect(subject).to have_tag('span', text: expected_hint, with: { class: 'govuk-hint' })
+        expect(subject).to have_tag('div', text: expected_hint, with: { class: 'govuk-hint' })
       end
     end
   end
@@ -171,7 +171,7 @@ shared_examples 'a field that supports setting the hint via localisation' do
 
     specify 'should use the supplied hint text' do
       with_localisations(localisations) do
-        expect(subject).to have_tag('span', text: expected_hint, with: { class: 'govuk-hint' })
+        expect(subject).to have_tag('div', text: expected_hint, with: { class: 'govuk-hint' })
       end
     end
   end
@@ -183,7 +183,7 @@ shared_examples 'a field that supports setting the hint via localisation' do
 
     specify 'no hint should be rendered' do
       with_localisations(localisations) do
-        expect(subject).not_to have_tag('span', with: { class: 'govuk-hint' })
+        expect(subject).not_to have_tag('div', with: { class: 'govuk-hint' })
       end
     end
   end
@@ -266,7 +266,7 @@ shared_examples 'a field that allows the hint to be localised via a proc' do
       with_localisations({ locale => localisations }, locale: locale) do
         colours.each do |c|
           expect(subject).to have_tag(
-            'span',
+            'div',
             text: localisations.dig("colours", c.name.downcase),
             with: { class: 'govuk-hint' }
           )
@@ -302,7 +302,7 @@ shared_examples 'a field that supports localised collection hints' do
         expected_hint = I18n.translate(department.code, scope: 'helpers.hint.person.department_options', default: nil)
 
         if expected_hint.present?
-          expect(subject).to have_tag('span', with: { class: %w(govuk-hint).append(hint_class) }, text: expected_hint)
+          expect(subject).to have_tag('div', with: { class: %w(govuk-hint).append(hint_class) }, text: expected_hint)
         end
       end
 
@@ -313,7 +313,7 @@ shared_examples 'a field that supports localised collection hints' do
         I18n.translate(department.code, scope: 'helpers.hint.person.department_options', default: nil)
       end
 
-      expect(subject).to have_tag('span', with: { class: %w(govuk-hint).append(hint_class) }, count: departments_with_localised_hints)
+      expect(subject).to have_tag('div', with: { class: %w(govuk-hint).append(hint_class) }, count: departments_with_localised_hints)
     end
   end
 end
@@ -326,7 +326,7 @@ shared_examples 'a field that supports localised fieldset hints' do
     with_localisations(localisations) do
       expected_hints.each do |id, hint|
         expected_id = ["person", field_name_selector, id, "hint"].join("-")
-        expect(subject).to have_tag("span", with: { id: expected_id }, text: hint)
+        expect(subject).to have_tag("div", with: { id: expected_id }, text: hint)
       end
     end
   end

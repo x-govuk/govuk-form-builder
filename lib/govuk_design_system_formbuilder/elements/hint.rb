@@ -27,7 +27,7 @@ module GOVUKDesignSystemFormBuilder
       def html
         return unless active?
 
-        content_tag(hint_tag, **hint_options, **@html_attributes) { hint_body }
+        tag.div(**hint_options, **@html_attributes) { hint_body }
       end
 
       def hint_id
@@ -40,10 +40,6 @@ module GOVUKDesignSystemFormBuilder
 
       def hint_options
         { class: classes, id: hint_id }
-      end
-
-      def hint_tag
-        @raw.presence ? 'div' : 'span'
       end
 
       def hint_body

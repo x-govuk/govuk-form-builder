@@ -81,11 +81,11 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       specify 'should contain a hint with the correct text' do
-        expect(subject).to have_tag('span', text: red_hint)
+        expect(subject).to have_tag('div', text: red_hint)
       end
 
       specify 'the hint should have the correct classes' do
-        expect(subject).to have_tag('span', with: { class: %w(govuk-hint govuk-radios__hint) })
+        expect(subject).to have_tag('div', with: { class: %w(govuk-hint govuk-radios__hint) })
       end
 
       context 'when the hint is supplied in a proc' do

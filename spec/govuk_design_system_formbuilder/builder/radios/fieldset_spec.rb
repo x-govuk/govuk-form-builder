@@ -170,7 +170,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         %i[red green].each do |value|
           hint_id = "person-favourite-colour-#{value}-hint"
           expect(subject).to have_tag('input', with: { "aria-describedby" => hint_id })
-          expect(subject).to have_tag('span', with: { class: 'govuk-hint', id: hint_id })
+          expect(subject).to have_tag('div', with: { class: 'govuk-hint', id: hint_id })
         end
       end
     end
