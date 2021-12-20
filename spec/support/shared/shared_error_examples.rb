@@ -30,14 +30,8 @@ shared_examples 'a field that supports errors' do
       let(:error_messages) { [first_error, second_error] }
 
       before do
-        if rails_version_later_than_6_1_0?
-          object.errors.clear
-          error_messages.each { |m| object.errors.add(attribute, m) }
-        else
-          # :nocov:
-          allow(object.errors.messages).to(receive(:[]).and_return(error_messages))
-          # :nocov:
-        end
+        object.errors.clear
+        error_messages.each { |m| object.errors.add(attribute, m) }
       end
 
       specify 'the first error should be included' do
