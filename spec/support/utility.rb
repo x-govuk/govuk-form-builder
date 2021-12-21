@@ -22,10 +22,6 @@ def rails_version
   ENV.fetch('RAILS_VERSION') { '6.1.1' }
 end
 
-def rails_version_later_than_6_1_0?
-  rails_version >= '6.1.0'
-end
-
 def extract_field_names_from_errors_summary_list(document)
   document
     .css('li > a')

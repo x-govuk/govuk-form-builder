@@ -57,15 +57,7 @@ class Person < Being
   end
 
   def self.with_errors_on_base(msg = "This person is always invalid")
-    new.tap do |person|
-      if rails_version_later_than_6_1_0?
-        person.errors.add(:base, msg)
-      else
-        # :nocov:
-        person.errors[:base].push(msg)
-        # :nocov:
-      end
-    end
+    new.tap { |person| person.errors.add(:base, msg) }
   end
 
 private
