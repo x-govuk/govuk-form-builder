@@ -14,7 +14,6 @@ use_helper Nanoc::Helpers::Rendering
 use_helper Nanoc::Helpers::LinkTo
 
 use_helper Helpers::Formatters
-use_helper Helpers::GOVUKLinkToHelpers
 use_helper Helpers::LinkHelpers
 use_helper Helpers::RelatedInfo
 use_helper Helpers::TitleAnchorHelpers

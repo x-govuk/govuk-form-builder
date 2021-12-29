@@ -2,50 +2,46 @@
 title: Submit button
 ---
 
-h1.govuk-heading-xl Submit button
-
 p.govuk-body
   | Submit buttons submit the contents of the form
 
 p.govuk-body
   | By default
     #{link_to('double click prevention', prevent_double_click_link).html_safe}
-      is enabled to make applications easier to use by people using slow internet
-      connections or suffering from motor impairments.
+    is enabled to make applications easier to use by people using slow internet
+    connections or suffering from motor impairments.
 
-section
+== render('/partials/example.*',
+  caption: 'Generating a submit button using the default parameters',
+  code: submit_button)
 
-  == render('/partials/example-fig.*',
-    caption: "Generating a submit button using the default parameters",
-    code: submit_button)
+== render('/partials/example.*',
+  caption: 'Generating a secondary submit button',
+  code: secondary_button)
 
-  == render('/partials/example-fig.*',
-    caption: "Generating a secondary submit button",
-    code: secondary_button)
+== render('/partials/example.*',
+  caption: 'Generating a warning submit button',
+  code: warning_button)
 
-  == render('/partials/example-fig.*',
-    caption: "Generating a warning submit button",
-    code: warning_button)
+== render('/partials/example.*',
+  caption: 'Generating a submit button with custom class',
+  code: custom_classes_button)
 
-  == render('/partials/example-fig.*',
-    caption: "Generating a submit button with custom class",
-    code: custom_classes_button)
+== render('/partials/example.*',
+  caption: 'Generating a submit button without double click prevention',
+  code: submit_button_without_double_click_prevention)
 
-  == render('/partials/example-fig.*',
-    caption: "Generating a submit button without double click prevention",
-    code: submit_button_without_double_click_prevention)
+== render('/partials/example.*',
+  caption: 'Generating a disabled submit button',
+  code: submit_button_disabled)
 
-  == render('/partials/example-fig.*',
-    caption: "Generating a disabled submit button",
-    code: submit_button_disabled)
+== render('/partials/example.*',
+  caption: 'A group of buttons',
+  code: multiple_buttons) do
 
-  == render('/partials/example-fig.*',
-    caption: "A group of buttons",
-    code: multiple_buttons) do
-
-    p.govuk-body
-      | Some forms have secondary as well as primary functions. Any content
-        passed in as a block will be rendered in-line with the primary submit
-        button.
+  p.govuk-body
+    | Some forms have secondary as well as primary functions. Any content
+      passed in as a block will be rendered in-line with the primary submit
+      button.
 
 == render('/partials/related-info.*', links: submit_info)

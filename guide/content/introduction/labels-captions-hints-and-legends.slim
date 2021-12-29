@@ -2,215 +2,207 @@
 title: Labels, captions, hints and legends
 ---
 
-h1.govuk-heading-xl Labels, captions, hints and legends
+h2.govuk-heading-l Labels
 
-section
+p.govuk-body
+  | All form helpers that generate a single input element
+    automatically associate it with a corresponding <code>label</code>.
 
-  h2.govuk-heading-l Labels
+p.govuk-body
+  | By default, the label text is set to the capitalised name of the
+    attribute. If the attribute contains underscores they will be left
+    in. This is intentional behaviour to prompt the developer to add
+    some more suitable text.
 
+== render('/partials/example.*',
+  caption: 'An unconfigured label',
+  code: text_field_with_no_label)
+
+p.govuk-body
+  | Labels are customised by passing in a hash of options with the
+    following keys:
+
+dl.govuk-summary-list
+  .govuk-summary-list__row
+    dt.govuk-summary-list__key
+      code text
+
+    dd.govuk-summary-list__value
+      | The actual text that forms the label
+
+  .govuk-summary-list__row
+    dt.govuk-summary-list__key
+      code tag
+
+    dd.govuk-summary-list__value
+      | The HTML tag that the label will be wrapped in. This is useful
+        on pages where the label is also the main header where the tag
+        should be <code>h1</code>
+
+  .govuk-summary-list__row
+    dt.govuk-summary-list__key
+      code size
+
+    dd.govuk-summary-list__value
+      | The label size which follows the usual GOV.UK pattern of
+        <code>xl</code>, <code>l</code>, <code>m</code> and <code>s</code>
+
+  .govuk-summary-list__row
+    dt.govuk-summary-list__key
+      code hidden
+
+    dd.govuk-summary-list__value
+      | Labels can be visually hidden when their presence would complicate
+        the form. This is a common pattern when asking for multiple lines
+        of address where a single label or legend will suffice. The hidden
+        value defaults to <code>false</code> and can be overridden with
+        <code>true</code>
+
+== render('/partials/example.*',
+  caption: 'A fully-configured label',
+  code: text_field_with_configured_label)
+
+== render('/partials/example.*',
+  caption: 'Setting label content with a proc',
+  code: text_field_with_label_proc) do
+    p.govuk-body
+      | Label content can be customised further using a
+        #{link_to('Ruby proc', ruby_proc_link).html_safe}. Note that the content
+        of the proc is rendered <em>inside the label</em> so the form builder
+        can enforce consistency between the label's <code>for</code> attribute
+        and the associated form element.
+
+hr.govuk-section-break.govuk-section-break--xl.govuk-section-break--visible
+
+h2.govuk-heading-l Captions
+
+p.govuk-body
+  | Sometimes you may need to make it clear that a heading is part of a
+    larger section or group. To do this, you can use a heading with a caption.
+
+p.govuk-body
+  | Captions are supported by all helpers that have labels or legends and can
+    be configured with the following options:
+
+dl.govuk-summary-list
+  .govuk-summary-list__row
+    dt.govuk-summary-list__key
+      code text
+
+    dd.govuk-summary-list__value
+      | The caption text
+
+  .govuk-summary-list__row
+    dt.govuk-summary-list__key
+      code size
+
+    dd.govuk-summary-list__value
+      | The caption size, either <code>xl</code>, <code>l</code> or <code>m</code>
+
+.govuk-inset-text
   p.govuk-body
-    | All form helpers that generate a single input element
-      automatically associate it with a corresponding <code>label</code>.
-
-  p.govuk-body
-    | By default, the label text is set to the capitalised name of the
-      attribute. If the attribute contains underscores they will be left
-      in. This is intentional behaviour to prompt the developer to add
-      some more suitable text.
-
-  == render('/partials/example-fig.*',
-    caption: "An unconfigured label",
-    code: text_field_with_no_label,
-    hide_html_output: true)
-
-  p.govuk-body
-    | Labels are customised by passing in a hash of options with the
-      following keys:
-
-  dl.govuk-summary-list
-    .govuk-summary-list__row
-      dt.govuk-summary-list__key
-        code text
-
-      dd.govuk-summary-list__value
-        | The actual text that forms the label
-
-    .govuk-summary-list__row
-      dt.govuk-summary-list__key
-        code tag
-
-      dd.govuk-summary-list__value
-        | The HTML tag that the label will be wrapped in. This is useful
-          on pages where the label is also the main header where the tag
-          should be <code>h1</code>
-
-    .govuk-summary-list__row
-      dt.govuk-summary-list__key
-        code size
-
-      dd.govuk-summary-list__value
-        | The label size which follows the usual GOV.UK pattern of
-          <code>xl</code>, <code>l</code>, <code>m</code> and <code>s</code>
-
-    .govuk-summary-list__row
-      dt.govuk-summary-list__key
-        code hidden
-
-      dd.govuk-summary-list__value
-        | Labels can be visually hidden when their presence would complicate
-          the form. This is a common pattern when asking for multiple lines
-          of address where a single label or legend will suffice. The hidden
-          value defaults to <code>false</code> and can be overridden with
-          <code>true</code>
-
-  == render('/partials/example-fig.*',
-    caption: "A fully-configured label",
-    code: text_field_with_configured_label,
-    hide_html_output: false)
-
-  == render('/partials/example-fig.*',
-    caption: "Setting label content with a proc",
-    code: text_field_with_label_proc,
-    hide_html_output: false) do
-      p.govuk-body
-        | Label content can be customised further using a
-          #{link_to('Ruby proc', ruby_proc_link).html_safe}. Note that the content
-          of the proc is rendered <em>inside the label</em> so the form builder
-          can enforce consistency between the label's <code>for</code> attribute
-          and the associated form element.
-
-section
-
-  h2.govuk-heading-l Captions
-
-  p.govuk-body
-    | Sometimes you may need to make it clear that a heading is part of a
-      larger section or group. To do this, you can use a heading with a caption.
-
-  p.govuk-body
-    | Captions are supported by all helpers that have labels or legends and can
-      be configured with the following options:
-
-  dl.govuk-summary-list
-    .govuk-summary-list__row
-      dt.govuk-summary-list__key
-        code text
-
-      dd.govuk-summary-list__value
-        | The caption text
-
-    .govuk-summary-list__row
-      dt.govuk-summary-list__key
-        code size
-
-      dd.govuk-summary-list__value
-        | The caption size, either <code>xl</code>, <code>l</code> or <code>m</code>
-
-  p.govuk-body.important
     | If you want to place the caption <em>outside</em> of the label's tag you can
       do this by #{link_to('setting the label content with a proc', '#setting-label-content-with-a-proc').html_safe}.
 
-  == render('/partials/example-fig.*',
-    caption: "A label with a caption",
-    code: text_field_with_caption,
-    hide_html_output: false)
+== render('/partials/example.*',
+  caption: 'A label with a caption',
+  code: text_field_with_caption)
 
-section
+hr.govuk-section-break.govuk-section-break--xl.govuk-section-break--visible
 
-  h2.govuk-heading-l Hints
+h2.govuk-heading-l Hints
+
+p.govuk-body
+  | Hints are used to provide extra information that's relevant to the
+    majority of users, like how their information will be used, or where to
+    find it.
+
+p.govuk-body
+  | Hints can be customised using a #{link_to('procs', ruby_proc_link).html_safe}.
+    When content is provided using a proc, the content will be rendered
+    inside a <code>div</code> rather than the usual <code>span</code>.
+
+p.govuk-body
+  | To accomodate screenreaders and users of other assistive technology,
+    <strong>hints must be associated with inputs</strong> via the
+    <code>aria-describedby</code> attribute. The form builder does this
+    automatically.
+
+== render('/partials/example.*',
+  caption: 'A text field with hint',
+  code: text_field_with_hint)
+
+== render('/partials/example.*',
+  caption: 'Setting hint content with a proc',
+  code: text_field_with_hint_proc)
+
+hr.govuk-section-break.govuk-section-break--xl.govuk-section-break--visible
+
+h2.govuk-heading-l Legends
+
+p.govuk-body
+  | Legends look, act and work in a similar fashion to labels but they
+    describe a <em>group of inputs</em>.
+
+p.govuk-body
+  | The GOV.UK Design System uses legends to describe radio button, check box
+    and date fields but any group of related fields can be wrapped in a
+    fieldset.
+
+p.govuk-body
+  | Legends are customised by passing in a hash of options with the
+    following keys:
+
+dl.govuk-summary-list
+  .govuk-summary-list__row
+    dt.govuk-summary-list__key
+      code text
+
+    dd.govuk-summary-list__value
+      | The actual text that forms the legend
+
+  .govuk-summary-list__row
+    dt.govuk-summary-list__key
+      code tag
+
+    dd.govuk-summary-list__value
+      | The HTML tag that the legend will be wrapped in. This is useful
+        on pages where the label is also the main header. In cases like
+        this, it should be set to <code>h1</code>
+
+  .govuk-summary-list__row
+    dt.govuk-summary-list__key
+      code size
+
+    dd.govuk-summary-list__value
+      | The legend size which follows the usual GOV.UK pattern of
+        <code>xl</code>, <code>l</code>, <code>m</code> and <code>s</code>
+
+  .govuk-summary-list__row
+    dt.govuk-summary-list__key
+      code hidden
+
+    dd.govuk-summary-list__value
+      | Legends can be visually hidden when their presence would complicate
+        the form. The hidden value defaults to <code>false</code> and can be
+        overridden with <code>true</code>
+
+== render('/partials/example.*',
+  caption: 'Radio buttons with a fully-customised legend',
+  code: radios_with_legend)
+
+== render('/partials/example.*',
+  caption: 'Fully customising legends with procs',
+  code: radios_with_legend_proc) do
 
   p.govuk-body
-    | Hints are used to provide extra information that's relevant to the
-      majority of users, like how their information will be used, or where to
-      find it.
+    | To take even more control of legends the content can be passed in using
+      a #{link_to('Ruby proc', ruby_proc_link).html_safe}. In this example
+      we're using Slim but could just as easily call a helper method or
+      render a partial, component or string of HTML.
 
-  p.govuk-body
-    | Hints can be customised using a #{link_to('procs', ruby_proc_link).html_safe}.
-      When content is provided using a proc, the content will be rendered
-      inside a <code>div</code> rather than the usual <code>span</code>.
-
-  p.govuk-body
-    | To accomodate screenreaders and users of other assistive technology,
-      <strong>hints must be associated with inputs</strong> via the
-      <code>aria-describedby</code> attribute. The form builder does this
-      automatically.
-
-  == render('/partials/example-fig.*',
-    caption: "A text field with hint",
-    code: text_field_with_hint)
-
-  == render('/partials/example-fig.*',
-    caption: "Setting hint content with a proc",
-    code: text_field_with_hint_proc)
-
-section
-
-  h2.govuk-heading-l Legends
-
-  p.govuk-body
-    | Legends look, act and work in a similar fashion to labels but they
-      describe a <em>group of inputs</em>.
-
-  p.govuk-body
-    | The GOV.UK Design System uses legends to describe radio button, check box
-      and date fields but any group of related fields can be wrapped in a
-      fieldset.
-
-  p.govuk-body
-    | Legends are customised by passing in a hash of options with the
-      following keys:
-
-  dl.govuk-summary-list
-    .govuk-summary-list__row
-      dt.govuk-summary-list__key
-        code text
-
-      dd.govuk-summary-list__value
-        | The actual text that forms the legend
-
-    .govuk-summary-list__row
-      dt.govuk-summary-list__key
-        code tag
-
-      dd.govuk-summary-list__value
-        | The HTML tag that the legend will be wrapped in. This is useful
-          on pages where the label is also the main header. In cases like
-          this, it should be set to <code>h1</code>
-
-    .govuk-summary-list__row
-      dt.govuk-summary-list__key
-        code size
-
-      dd.govuk-summary-list__value
-        | The legend size which follows the usual GOV.UK pattern of
-          <code>xl</code>, <code>l</code>, <code>m</code> and <code>s</code>
-
-    .govuk-summary-list__row
-      dt.govuk-summary-list__key
-        code hidden
-
-      dd.govuk-summary-list__value
-        | Legends can be visually hidden when their presence would complicate
-          the form. The hidden value defaults to <code>false</code> and can be
-          overridden with <code>true</code>
-
-  == render('/partials/example-fig.*',
-    caption: "Radio buttons with a fully-customised legend",
-    code: radios_with_legend,
-    hide_html_output: false)
-
-  == render('/partials/example-fig.*',
-    caption: "Fully customising legends with procs",
-    code: radios_with_legend_proc,
-    hide_html_output: true) do
-
+  .govuk-inset-text
     p.govuk-body
-      | To take even more control of legends the content can be passed in using
-        a #{link_to('Ruby proc', ruby_proc_link).html_safe}. In this example
-        we're using Slim but could just as easily call a helper method or
-        render a partial, component or string of HTML.
-
-    p.govuk-body.important
       | Procs allow for complete control of the legend's HTML, including the
         legend element itself. This means that the legend element needs to be
         added manually and it should wrap all of the fieldset's heading text.

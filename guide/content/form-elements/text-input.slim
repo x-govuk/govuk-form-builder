@@ -1,16 +1,14 @@
 ---
-title: Text fields
+title: Text input
 ---
 
-h1.govuk-heading-xl Text fields
+p.govuk-body
+  | Text inputs allow users to enter text that’s no longer than a single line.
 
 p.govuk-body
-  | Text fields allow users to enter text that's no longer than a single line.
-
-p.govuk-body
-  | In addition to <code>#govuk_text_field</code>, the form builder supports various
-    other methods that take the same parameters and produce inputs for particular
-    data types:
+  | In addition to <code>#govuk_text_field</code>, the form builder supports 
+    various other methods that take the same parameters and produce inputs for 
+    particular data types:
 
   table.govuk-table
     caption.govuk-table__caption Input types supported by the form builder
@@ -108,49 +106,43 @@ p.govuk-body
     browsers will present a different keyboard depending on the
     <code>type</code> attribute.
 
-section
+== render('/partials/example.*',
+  caption: 'Generating a text input with a custom label and hint',
+  code: text_field_with_label_and_hint)
 
-  == render('/partials/example-fig.*',
-    caption: "Generating a text input with a custom label and hint",
-    code: text_field_with_label_and_hint)
+== render('/partials/example.*',
+  caption: 'Numeric text inputs',
+  code: text_field_with_numeric_attributes) do
 
-  == render('/partials/example-fig.*',
-    caption: "Numeric text fields",
-    code: text_field_with_numeric_attributes) do
+  p.govuk-body
+    | All values passed into the form helper that aren’t among its named
+      parameters will be set as HTML attributes.
 
-    p.govuk-body
-      | All values passed into the form helper that aren't among its
-        named parameters will be set as HTML attributes.
+  p.govuk-body
+    | This feature is useful when requesting non-quantity values like
+      account numbers, payment card numbers and sort codes. There are
+      more details on the reasoning behind this decision in #{link_to('the accompanying blog post', input_types_for_numbers_link).html_safe}.
 
-    p.govuk-body
-      | This feature is useful when requesting non-quantity values like
-        account numbers, payment card numbers and sort codes. There are
-        more details on the reasoning behind this decision in #{link_to("the accompanying blog post", input_types_for_numbers_link).html_safe}.
+== render('/partials/example.*',
+  caption: 'Inputs with prefixes and suffixes',
+  code: text_field_with_prefix_and_suffix) do
 
-  == render('/partials/example-fig.*',
-    caption: "Inputs with prefixes and suffixes",
-    code: text_field_with_prefix_and_suffix,
-    hide_html_output: false) do
+  p.govuk-body
+    | Prefixes and suffixes are useful when you use symbols and abbreviations
+      that are commonly known and understood. Symbols and abbreviations should
+      be explained in the label or hint.
 
-    p.govuk-body
-      | Prefixes and suffixes are useful when you use symbols and abbreviations
-        that are commonly known and understood. Symbols and abbreviations should
-        be explained in the label or hint.
+== render('/partials/example.*',
+  caption: 'Generating text inputs with custom widths',
+  code: text_field_with_custom_width) do
 
-  == render('/partials/example-fig.*',
-    caption: "Generating text inputs with custom widths",
-    code: text_field_with_custom_width,
-    hide_html_output: true) do
+  p.govuk-body
+    | By default, inputs will expand to fill their container. When no
+      <code>width</code> parameter is passed in no width class will be added.
 
-    p.govuk-body
-      | By default, inputs will expand to fill their container. When
-        no <code>width</code> parameter is passed in no width class
-        will be added.
-
-    p.govuk-body
-      | Custom widths help users understand the length of the value
-        they are intended to enter. For example, a telephone number
-        field needn't be the full width of the page when it might
-        only be 11 digits long.
+  p.govuk-body
+    | Custom widths help users understand the length of the value they are
+      intended to enter. For example, a telephone number input needn’t be the
+      full width of the page when it might only be 11 digits long.
 
 == render('/partials/related-info.*', links: text_field_info)

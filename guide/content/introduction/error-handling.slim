@@ -2,56 +2,51 @@
 title: Error handling
 ---
 
-h1.govuk-heading-xl Error handling
-
 p.govuk-body
-  ' When a form is submitted and there is a problem, communicating that problem
+  | When a form is submitted and there is a problem, communicating that problem
     in a clear and concise manner is imperative. The form builder provides two
     ways to do this.
 
 p.govuk-body
-  ' Error messages are displayed immediately above the offending field.
+  | Error messages are displayed immediately above the offending field.
     They should tell the user how to fix the problem.
 
 p.govuk-body
-  ' Additionally a summary of all the problems with the submission should be
+  | Additionally a summary of all the problems with the submission should be
     displayed at the top of the page. Every error in the summary is a hyperlink
     that when followed focusses on the problematic field.
 
 p.govuk-body
-  ' This behaviour is provided by the form builder without any need for
+  | This behaviour is provided by the form builder without any need for
     extra configuration.
 
-== render('/partials/example-fig.*',
-  caption: "A form with multiple errors",
+== render('/partials/example.*',
+  caption: 'A form with multiple errors',
   code: form_with_multiple_errors,
   sample_data: departments_data_raw,
   show_errors: :fields,
-  hide_data: true,
-  hide_html_output: true)
+  hide_data: true)
 
-== render('/partials/example-fig.*',
-  caption: "Linking errors on the base object to specific fields",
+== render('/partials/example.*',
+  caption: 'Linking errors on the base object to specific fields',
   code: form_with_errors_on_object_base,
   sample_data: departments_data_raw,
   show_errors: :base,
-  hide_data: true,
-  hide_html_output: false) do
+  hide_data: true) do
 
   p.govuk-body
-    | Some errors don't apply to a specific field but the object as a whole.
+    | Some errors don’t apply to a specific field but the object as a whole.
       The GOV.UK Design System guidelines suggest that in this case, the error
       summary link should take the user to the first field. As the form builder
-      doesn't know the order in which fields will be rendered, it must be specified.
+      doesn’t know the order in which fields will be rendered, it must be specified.
 
-== render('/partials/example-fig.*',
-  caption: "Custom summary error presenter injection",
+== render('/partials/example.*',
+  caption: 'Custom summary error presenter injection',
   code: form_with_presenter_injection,
   sample_data: departments_data_raw,
   show_errors: :presenters,
   hide_data: true,
-  controller_code: custom_error_presenter_raw,
-  hide_html_output: true) do
+  controller_code: custom_error_presenter_raw) do
 
   p.govuk-body
     | Although the #{link_to('GDS design system recommends', 'https://design-system.service.gov.uk/components/error-summary/', target: '_blank').html_safe}
@@ -62,8 +57,10 @@ p.govuk-body
       attribute error instance.
 
   p.govuk-body
-    | In such cases a custom error presenter that responds to <code>#formatted_error_messages</code>
-      can be supplied. When a presenter object is provided it will be used directly, when a class
-      is provided it will be instantiated with the associated object's <code>#errors.messages</code>.
+    | In such cases a custom error presenter that responds to   
+      <code>#formatted_error_messages</code> can be supplied. When a presenter 
+      object is provided it will be used directly, when a class is provided it 
+      will be instantiated with the associated object’s
+      <code>#errors.messages</code>.
 
 == render('/partials/related-info.*', links: error_handling_info)
