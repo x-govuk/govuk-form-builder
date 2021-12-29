@@ -124,10 +124,9 @@ section
       majority of users, like how their information will be used, or where to
       find it.
 
-  p.govuk-body
-    | Hints can be customised using a #{link_to('procs', ruby_proc_link).html_safe}.
-      When content is provided using a proc, the content will be rendered
-      inside a <code>div</code> rather than the usual <code>span</code>.
+  p.govuk-body.important
+    | Hints contents be customised further by passing in a #{link_to('procs', ruby_proc_link).html_safe}
+      instead of a string.
 
   p.govuk-body
     | To accomodate screenreaders and users of other assistive technology,
