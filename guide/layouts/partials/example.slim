@@ -30,9 +30,10 @@ figure.app-example
     h4.govuk-heading-s.locale Configuration
 
     .govuk-inset-text
-      | Place your configuration in an
-        #{link_to('initializer', rails_initializer_link).html_safe} to ensure
-        it's loaded every time you start your Rails application.
+      p.govuk-body
+        | Place your configuration in an
+          #{link_to('initializer', rails_initializer_link).html_safe} to ensure
+          it's loaded every time you start your Rails application.
 
     pre
       code.highlight.language-ruby

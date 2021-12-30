@@ -10,12 +10,12 @@
 
   .govuk-tabs__panel {
     pre {
-      margin-top: -10px;
+      margin-top: govuk-spacing(-2);
     }
-  }
 
-  pre:last-child {
-    margin-bottom: -10px
+    pre:last-child {
+      margin-bottom: govuk-spacing(-2)
+    }
   }
 
   .ugly-gradient {
