@@ -80,7 +80,7 @@ figure.app-example
       li.govuk-tabs__list-item
         a.govuk-tabs__tab href=%(#output-html-#{anchor_id(caption)})
           | HTML
-  
+
     .govuk-tabs__panel id=%(output-rendered-#{anchor_id(caption)})
       == format_slim(code, f: builder(display_errors), **form_data)
 
