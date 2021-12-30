@@ -8,26 +8,24 @@ h3 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-top-8" id=anchor_i
     == content
 
 figure.app-example
-  figcaption
-
   - display_data = defined?(hide_data) && hide_data
 
   - if defined?(sample_data) && !display_data
-    h4.govuk-heading-s.data Data
+    h4.govuk-heading-s Data
 
     pre
       code.highlight.language-ruby
         | #{sample_data}
 
   - if defined?(controller_code)
-    h4.govuk-heading-s.data Setup
+    h4.govuk-heading-s Setup
 
     pre
       code.highlight.language-ruby
         | #{controller_code}
 
   - if defined?(raw_config)
-    h4.govuk-heading-s.locale Configuration
+    h4.govuk-heading-s Configuration
 
     .govuk-inset-text
       p.govuk-body
@@ -42,14 +40,14 @@ figure.app-example
   - if defined?(localisation)
     - I18n.backend.store_translations(:en, YAML.safe_load(localisation))
 
-    h4.govuk-heading-s.locale Localisation data
+    h4.govuk-heading-s Localisation data
 
     pre
       code.highlight.language-yaml
         | #{localisation}
 
-  .govuk-tabs data-module='govuk-tabs'
-    h4.govuk-heading-s.govuk-tabs--title.input Input
+  .govuk-tabs data-module="govuk-tabs"
+    h4.govuk-heading-s.govuk-tabs--title Input
 
     ul.govuk-tabs__list
       li.govuk-tabs__list-item.govuk-tabs__list-item--selected
@@ -71,8 +69,8 @@ figure.app-example
 
   - display_errors = defined?(show_errors) && show_errors
 
-  .govuk-tabs data-module='govuk-tabs'
-    h4.govuk-heading-s.govuk-tabs--title.input Output
+  .govuk-tabs data-module="govuk-tabs"
+    h4.govuk-heading-s.govuk-tabs--title Output
 
     ul.govuk-tabs__list
       li.govuk-tabs__list-item.govuk-tabs__list-item--selected
@@ -86,7 +84,7 @@ figure.app-example
       == format_slim(code, f: builder(display_errors), **form_data)
 
     .govuk-tabs__panel id=%(output-html-#{anchor_id(caption)})
-      pre.example-html
+      pre
         code.highlight.language-html
           - if defined?(sample_data)
             - eval(sample_data)
