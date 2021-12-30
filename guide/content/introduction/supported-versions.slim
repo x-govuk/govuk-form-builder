@@ -2,56 +2,39 @@
 title: Supported versions
 ---
 
-h1.govuk-heading-xl Supported versions
-
 p.govuk-body
   | The form builder is actively maintained and will continue support the
     latest stable versions of the GOV.UK Design System, Ruby and Rails.
 
 h2.govuk-heading-m Full support
 
-dl.govuk-summary-list
-  .govuk-summary-list__row
-    dt.govuk-summary-list__key
-      == link_to('GOV.UK Form Builder', '/')
-    dl.govuk-summary-list__value
-      ul.govuk-list
-        li
-          span.govuk-tag.govuk-tag-blue
-            = GOVUKDesignSystemFormBuilder::VERSION
+p.govuk-body
+  | Version #{GOVUKDesignSystemFormBuilder::VERSION} of the form builder
+    supports:
 
+dl.govuk-summary-list
   .govuk-summary-list__row
     dt.govuk-summary-list__key
       == link_to('GOV.UK Design System', design_system_link)
     dl.govuk-summary-list__value
       ul.govuk-list
-        li
-          span.govuk-tag.govuk-tag-govuk
-            | Version 4.0.0
+        li 3.14.0
 
   .govuk-summary-list__row
     dt.govuk-summary-list__key
       == link_to('Ruby', 'https://www.ruby-lang.org')
     dl.govuk-summary-list__value
       ul.govuk-list
-        li
-          span.govuk-tag.govuk-tag-red
-            | 3.0.3
-        li
-          span.govuk-tag.govuk-tag-red
-            | 2.7.5
+        li 3.0.3
+        li 2.7.5
 
   .govuk-summary-list__row
     dt.govuk-summary-list__key
       == link_to('Ruby on Rails', 'https://rubyonrails.org/')
     dl.govuk-summary-list__value
       ul.govuk-list
-        li
-          span.govuk-tag.govuk-tag-red
-            | 7.0.0
-        li
-          span.govuk-tag.govuk-tag-red
-            | 6.1.4.4
+        li 7.0.0
+        li 6.1.4.4
 
 h2.govuk-heading-m Partial support
 

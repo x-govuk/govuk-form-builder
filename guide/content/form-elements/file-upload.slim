@@ -1,0 +1,17 @@
+---
+title: File upload
+---
+
+p.govuk-body
+  | The file upload allows users to upload files.
+
+.govuk-inset-text
+  p.govuk-body
+    | You should only ask users to upload something if it’s critical to the
+      delivery of your service.
+
+== render('/partials/example.*',
+  caption: 'File upload with label and hint',
+  code: file_upload)
+
+== render('/partials/related-info.*', links: file_info)

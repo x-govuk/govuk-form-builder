@@ -2,16 +2,13 @@
 title: Localisation
 ---
 
-h1.govuk-heading-xl Localisation
-
 p.govuk-body
   | The simplest way of adding textual information like labels and hints to
     forms is to provide strings as arguments to the form helpers.
 
-.code-sample
-  pre
-    code.highlight.language-ruby
-      | = f.govuk_text_field :name, label: { text: "Your full name" }
+pre.app-code--block
+  code.highlight.language-ruby
+    | = f.govuk_text_field :name, label: { text: 'Your full name' }
 
 p.govuk-body
   | On larger, more-complex projects, copy is spread throughout the application
@@ -20,67 +17,65 @@ p.govuk-body
 
 p.govuk-body
   | Many teams approach this problem by making use of
-    #{link_to("Rails' excellent localisation functionality", rails_localisation_link).html_safe},
+    #{link_to('Rails’ excellent localisation functionality', rails_localisation_link).html_safe},
     allowing text to be stored in locale dictionaries. This allows editors to
     make changes without the risk of breaking templates and having to learn
     templating languages and hunt down content.
 
 p.govuk-body
-  | You can use HTML in locales if you append the suffix <code>_html</code> to the key.
+  | You can use HTML in locales if you append the suffix <code>_html</code> to 
+    the key.
 
-section
+== render('/partials/example.*',
+  caption: 'Populating label, caption and hint text from the localisation data',
+  localisation: favourite_kind_of_hat_locale,
+  code: favourite_kind_of_hat) do
 
-  == render('/partials/example-fig.*',
-    caption: "Populating label, caption and hint text from the localisation data",
-    localisation: favourite_kind_of_hat_locale,
-    code: favourite_kind_of_hat) do
-
-    p.govuk-body
-      | Note that despite the <code>text</code> attribute being omitted from
-        the label options hash, the other display and formatting parameters
-        can be supplied and work in the normal manner.
+  p.govuk-body
+    | Note that despite the <code>text</code> attribute being omitted from
+      the label options hash, the other display and formatting parameters
+      can be supplied and work in the normal manner.
 
 p.govuk-body
-  | Radio and check box labels use a special key in the locale dictionary composed from the
-    attribute name and the suffix <code>_options</code>. This makes it possible to localise
-    the fieldset legend and each of the individual choices separately.
+  | Radio and check box labels use a special key in the locale dictionary 
+    composed from the attribute name and the suffix <code>_options</code>. This 
+    makes it possible to localise the fieldset legend and each of the 
+    individual choices separately.
 
-  == render('/partials/example-fig.*',
-    caption: "Populating radio labels from the localisation data",
+  == render('/partials/example.*',
+    caption: 'Populating radio labels from the localisation data',
     localisation: contact_type_locale,
     code: contact_type,
     sample_data: contact_types_data_raw)
 
-  == render('/partials/example-fig.*',
-    caption: "Populating check box labels from the localisation data",
+  == render('/partials/example.*',
+    caption: 'Populating check box labels from the localisation data',
     localisation: department_check_boxes_locale,
     code: department_check_boxes,
     sample_data: departments_value_data_raw)
 
-  == render('/partials/example-fig.*',
-    caption: "A more comprehensive example of localised check boxes",
+  == render('/partials/example.*',
+    caption: 'A more comprehensive example of localised check boxes',
     localisation: movie_genre_check_boxes_locale,
     code: movie_genre_check_boxes) do
-    == render('/partials/fieldset-warning.*', input_type: 'check box')
+    == render('/partials/fieldset-warning.*', input_type: 'checkbox')
 
-  == render('/partials/example-fig.*',
-    caption: "Customising locale structure",
+  == render('/partials/example.*',
+    caption: 'Customising locale structure',
     localisation: custom_locale,
     code: role_name,
     custom_config: custom_locale_config,
-    raw_config: custom_locale_config_raw,
-    hide_html_output: true) do
+    raw_config: custom_locale_config_raw) do
 
     p.govuk-body
-      | There are many approaches to organising localisation data and while the default
-        will work for most projects, sometimes a different approach can be beneficial. This
-        is especially true when working with external localisation agencies or when dealing
-        with large volumes of copy.
+      | There are many approaches to organising localisation data and while the 
+        default will work for most projects, sometimes a different approach can 
+        be beneficial. This is especially true when working with external 
+        localisation agencies or when dealing with large volumes of copy.
 
     p.govuk-body
       | To customise the location of our localisation strings, we can
-        #{link_to('configure', '/introduction/configuration').html_safe} the schema as
-        part of the application's initialisation process.
+        #{link_to('configure', '/introduction/configuration').html_safe} the schema as part of the application’s initialisation process.
 
     h4.govuk-heading-s Contexts
 
@@ -93,16 +88,14 @@ p.govuk-body
     p.govuk-body
       | The special value <code>__context__</code> is used to represent the
         current translation context. It will automatically be replaced with
-        either <em>label</em>, <em>legend</em>, <em>caption</em> or <em>hint</em>
-        when the translation key is generated.
+        either <em>label</em>, <em>legend</em>, <em>caption</em> or <em>hint</em> when the translation key is generated.
 
     p.govuk-body
       | When retrieving a localised string the builder first checks whether
-        a contextual schema has been set for the context. If there hasn't,
-        the <code>localisation_schema_fallback</code> key will be used. <strong>It is
-        the only schema set by default</strong>.
+        a contextual schema has been set for the context. If there hasn’t,
+        the <code>localisation_schema_fallback</code> key will be used. <strong>It is the only schema set by default</strong>.
 
-    p.govuk-body.important
-      | Captions are rendered inside the corresponding <code>label</code> or
-        <code>legend</code> tag. If the label or legend is hidden or not rendered,
-        the caption won't be either.
+    .govuk-inset-text
+      p.govuk-body
+        | Captions are rendered inside the corresponding <code>label</code> or
+          <code>legend</code> tag. If the label or legend is hidden or not rendered, the caption won’t be either.

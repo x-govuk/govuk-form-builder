@@ -1,12 +1,4 @@
 module Helpers
-  module GOVUKLinkToHelpers
-    def link_to(*args, **kwargs)
-      return super if kwargs.key?('class')
-
-      super(*args, **kwargs.merge(class: 'govuk-link'))
-    end
-  end
-
   module TitleAnchorHelpers
     def anchor_id(caption)
       caption.parameterize
