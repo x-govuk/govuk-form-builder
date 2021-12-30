@@ -12,8 +12,27 @@
   h6,
   p,
   ul:not(.govuk-tabs__list),
-  ol{
+  ol,
+  .app-table--constrained {
     max-width: 38em;
+  }
+
+  dl {
+    @include govuk-font($size: 19);
+    @include govuk-text-colour;
+    @include govuk-responsive-margin(4, "bottom");
+  }
+
+  dt {
+    font-weight: bold;
+  }
+
+  dd {
+    margin-left: 0;
+  }
+
+  dd + dt {
+    margin-top: govuk-spacing(2);
   }
 
   code {

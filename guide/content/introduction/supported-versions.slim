@@ -3,50 +3,43 @@ title: Supported versions
 ---
 
 p.govuk-body
-  | The form builder is actively maintained and will continue support the
-    latest stable versions of the GOV.UK Design System, Ruby and Rails.
-
-h2.govuk-heading-m Full support
+  | GOV.UK Form Builder is actively maintained and supports the
+    latest stable versions of the #{link_to('GOV.UK Design System', design_system_link).html_safe}, #{link_to('Ruby on Rails', 'https://rubyonrails.org/').html_safe} and #{link_to('Ruby', 'https://www.ruby-lang.org').html_safe}.
 
 p.govuk-body
-  | Version #{GOVUKDesignSystemFormBuilder::VERSION} of the form builder
-    supports:
+  | If you’re using older versions of the GOV.UK Design System or Ruby or 
+    Rails, use #{link_to("version 2.8.0", github_release_2_8_0).html_safe}. No 
+    new features will be added to version 2.8.x series, but bugs and security 
+    fixes will be addressed.
 
-dl.govuk-summary-list
-  .govuk-summary-list__row
-    dt.govuk-summary-list__key
-      == link_to('GOV.UK Design System', design_system_link)
-    dl.govuk-summary-list__value
-      ul.govuk-list
-        li 3.14.0
-
-  .govuk-summary-list__row
-    dt.govuk-summary-list__key
-      == link_to('Ruby', 'https://www.ruby-lang.org')
-    dl.govuk-summary-list__value
-      ul.govuk-list
-        li 3.0.3
-        li 2.7.5
-
-  .govuk-summary-list__row
-    dt.govuk-summary-list__key
-      == link_to('Ruby on Rails', 'https://rubyonrails.org/')
-    dl.govuk-summary-list__value
-      ul.govuk-list
-        li 7.0.0
-        li 6.1.4.4
-
-h2.govuk-heading-m Partial support
-
-p.govuk-body
-  | If you're using older versions of the GOV.UK Design System, Ruby or Rails, use
-    #{link_to("version 2.8.0", github_release_2_8_0).html_safe}. It supports:
-
-ul.govuk-list.govuk-list--bullet
-  li GOV.UK Design System 3.14.0
-  li Rails 6.0.4.4
-  li Ruby 2.6.9
-
-p.govuk-body
-  | No new features will be added to version 2.8.X series but <strong>bugs and
-    security fixes will be addressed</strong>.
+table.govuk-table.app-table--constrained
+  thead.govuk-table__head
+    tr.govuk-table__row
+      th class="govuk-table__header govuk-!-width-one-third"
+        | GOV.UK Form Builder
+      th class="govuk-table__header govuk-!-width-one-third govuk-table__header--numeric" scope="col"
+        | #{GOVUKDesignSystemFormBuilder::VERSION}
+      th class="govuk-table__header govuk-!-width-one-third govuk-table__header--numeric" scope="col"
+        | 2.8.0
+  tbody.govuk-table__body
+    tr.govuk-table__row
+      th.govuk-table__header scope="row"
+        | GOV.UK Design System
+      td.govuk-table__cell.govuk-table__cell--numeric
+        | 3.14
+      td.govuk-table__cell.govuk-table__cell--numeric
+        | 3.14
+    tr.govuk-table__row
+      th.govuk-table__header scope="row"
+        | Ruby on Rails
+      td.govuk-table__cell.govuk-table__cell--numeric
+        | 7.0.0<br>6.1.4.4
+      td.govuk-table__cell.govuk-table__cell--numeric
+        | 6.0.4.4
+    tr.govuk-table__row
+      th.govuk-table__header scope="row"
+        | Ruby
+      td.govuk-table__cell.govuk-table__cell--numeric
+        | 3.0.3
+      td.govuk-table__cell.govuk-table__cell--numeric
+        | 2.6.9
