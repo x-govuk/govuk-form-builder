@@ -15,7 +15,7 @@ module Examples
       <<~SNIPPET
         = f.govuk_text_field :favourite_shade_of_orange,
           label: -> do
-            h2.orange-underline.govuk-header-m
+            h2.orange-background.govuk-header-m
               | What's your favourite shade of orange?
       SNIPPET
     end
@@ -43,7 +43,7 @@ module Examples
           hint: -> do
             p
               ' If in doubt, choose
-              span.indigo-underline Indigo
+              span.purple-background Indigo
 
       SNIPPET
     end
@@ -69,7 +69,7 @@ module Examples
               h3.govuk-fieldset__heading
                 ' Which
 
-                span.ugly-gradient colour
+                span.gradient-background colour
 
                 ' do you hate most?
       SNIPPET
