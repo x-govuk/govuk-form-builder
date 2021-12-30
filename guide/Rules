@@ -14,8 +14,7 @@ end
 
 ignore '/**/_*.scss'
 compile '/**/*.scss' do
-  filter :sassc, style: :compressed, load_paths: ['node_modules/govuk-frontend', 'content/stylesheets/']
-  snapshot :css
+  filter :sass, syntax: :scss, style: :compact, load_paths: ['node_modules/govuk-frontend', 'content/stylesheets/']
   write item.identifier.without_ext + '.css'
 end
 
