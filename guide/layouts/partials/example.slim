@@ -1,7 +1,7 @@
 - if defined?(custom_config)
   - custom_config
 
-h3.govuk-heading-m id=anchor_id(caption)
+h3 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-top-8" id=anchor_id(caption)
   == link_to caption, "#".concat(anchor_id(caption)), class: "header-anchor"
 
   - if block_given? && (content = yield)
