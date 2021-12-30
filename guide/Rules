@@ -12,9 +12,9 @@ compile '/**/*.slim' do
   write item.identifier.without_ext + '/index.html'
 end
 
-ignore '/**/_*.sass'
-compile '/**/*.sass' do
-  filter :sassc, syntax: :sass, style: :compressed, load_paths: ['node_modules/govuk-frontend', 'content/stylesheets/']
+ignore '/**/_*.scss'
+compile '/**/*.scss' do
+  filter :sassc, style: :compressed, load_paths: ['node_modules/govuk-frontend', 'content/stylesheets/']
   snapshot :css
   write item.identifier.without_ext + '.css'
 end
