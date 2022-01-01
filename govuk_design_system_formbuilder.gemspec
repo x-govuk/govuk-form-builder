@@ -41,7 +41,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency("simplecov", "~> 0.20")
 
   # Required for the guide
-  s.add_development_dependency("htmlbeautifier", "~> 1.3.1")
+  s.add_development_dependency("htmlbeautifier", "~> 1.4.1")
   s.add_development_dependency("nanoc", "~> 4.11")
   s.add_development_dependency("rouge", "~> 3.26.0")
   s.add_development_dependency("rubypants", "~> 0.7.0")
