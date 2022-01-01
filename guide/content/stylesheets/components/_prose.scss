@@ -37,7 +37,7 @@
 
   code {
     background-color: govuk-colour("light-grey");
-    color: govuk-colour("red");
+    color: govuk-shade(govuk-colour("red"), 10%);
     font-family: ui-monospace, monospace;
     font-size: 1rem;
     padding: 2px govuk-spacing(1);

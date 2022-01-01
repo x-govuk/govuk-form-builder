@@ -2,16 +2,18 @@
 // for additional contrast
 //
 // https://design-system.service.gov.uk/styles/colour/
-$orange: darken(#f47738, 20%);
-$blue: #1d70b8;
-$dark-blue: #003078;
-$pink: darken(#d53880, 10%);
-$text: #0b0c0c;
-$green: #00703c;
-$light-grey: #f3f2f1;
-$light-pink: lighten(#f499be, 20%);
-$red: #d4351c;
-$dark-green: #365e07;
+$orange: govuk-shade(govuk-colour('orange'), 30%);
+$blue: govuk-colour('blue');
+$dark-blue: govuk-colour('dark-blue');
+$pink: govuk-shade(govuk-colour('pink'), 10%);
+$green: govuk-colour('green');
+$light-grey: govuk-colour('light-grey');
+$light-pink: govuk-colour('light-pink');
+$red: govuk-colour('red');
+$turquoise: govuk-shade(govuk-colour('turquoise'), 30%);
+$bright-purple: govuk-colour('bright-purple');
+
+$text: $govuk-text-colour;
 
 pre > code {
   &.highlight {
@@ -34,7 +36,7 @@ pre > code {
     }
 
     .no {
-      color: #0e5e5e;
+      color: $green;
     }
 
     .kp {
@@ -43,7 +45,7 @@ pre > code {
 
     // comments
     .c1 {
-      color: $dark-green;
+      color: $turquoise;
       font-style: italic;
     }
   }
