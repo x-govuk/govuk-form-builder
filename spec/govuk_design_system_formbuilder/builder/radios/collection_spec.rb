@@ -136,14 +136,14 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         subject { builder.send(*args.push(:description)) }
 
         specify 'the radio buttons with hints should contain hint text' do
-          expect(subject).to have_tag('span', count: colours_with_descriptions.size, with: { class: 'govuk-hint govuk-radios__hint' })
+          expect(subject).to have_tag('div', count: colours_with_descriptions.size, with: { class: 'govuk-hint govuk-radios__hint' })
         end
 
         specify 'the hint should be associated with the correct radio button' do
           colours_with_descriptions.each do |cwd|
             "person-favourite-colour-#{cwd.id}-hint".tap do |association|
               expect(subject).to have_tag('input', with: { "aria-describedby" => association })
-              expect(subject).to have_tag('span', with: { class: 'govuk-hint', id: association })
+              expect(subject).to have_tag('div', with: { class: 'govuk-hint', id: association })
             end
           end
         end

@@ -1,104 +1,101 @@
 ---
-title: Check boxes
+title: Checkboxes
 ---
-
-h1.govuk-heading-xl Checkboxes
 
 p.govuk-body
   | Checkboxes allow users to:
 
 ul.govuk-list.govuk-list--bullet
-  li #{link_to("select multiple options from a list", "#generating-a-collection-of-checkboxes").html_safe}
-  li #{link_to("toggle a single option on or off", "#generating-a-single-checkbox").html_safe}
+  li #{link_to('select multiple options from a list', '#generating-a-collection-of-checkboxes').html_safe}
+  li #{link_to('toggle a single option on or off', '#generating-a-single-checkbox').html_safe}
 
 p.govuk-body
-  | By default the form builder's checkbox helpers will automatically inject a
+  | By default the form builder’s checkbox helpers will automatically inject a
     hidden field. The hidden field ensures that a parameter is always submitted
     with the form even when no checkboxes have been checked, allowing options
-    #{link_to("to be deselected", rails_checkbox_gotcha_link).html_safe}. The
-    hidden field can be toggled using the <code>multiple</code> keyword argument.
+    #{link_to('to be deselected', rails_checkbox_gotcha_link).html_safe}. The
+    hidden field can be toggled using the <code>multiple</code> keyword
+    argument.
 
-section
+== render('/partials/example.*',
+  caption: 'Generating a collection of checkboxes',
+  code: checkbox_field,
+  sample_data: departments_data_raw)
 
-  == render('/partials/example-fig.*',
-    caption: "Generating a collection of checkboxes",
-    code: checkbox_field,
-    sample_data: departments_data_raw)
+== render('/partials/example.*',
+  caption: 'Generating a collection of checkboxes with hints',
+  code: checkbox_field_with_hints,
+  sample_data: lunch_options_raw)
 
-  == render('/partials/example-fig.*',
-    caption: "Generating a collection of checkboxes with hints",
-    code: checkbox_field_with_hints,
-    sample_data: lunch_options_raw)
+== render('/partials/example.*',
+  caption: 'Generating checkboxes with a conditionally-revealed text field',
+  code: checkbox_field_with_custom_options) do
 
-  == render('/partials/example-fig.*',
-    caption: "Generating checkboxes with a conditionally-revealed text field",
-    code: checkbox_field_with_custom_options) do
+  == render('/partials/fieldset-warning.*', input_type: 'checkbox')
 
-    == render('/partials/fieldset-warning.*', input_type: 'check box')
+  p.govuk-body
+    | When more advanced functionality like conditional fields is required,
+      the <code>govuk_check_boxes_fieldset</code> helper is recommended. Any
+      content passed in via the block will be conditionally revealed when
+      the box is checked.
+
+== render('/partials/example.*',
+  caption: 'Small checkboxes',
+  code: small_checkboxes,
+  sample_data: lunch_options_raw) do
+
+  p.govuk-body
+    | Use standard-sized checkboxes in nearly all cases. However, smaller
+      versions work well on pages where it’s helpful to make them less visually
+      prominent.
+
+  p.govuk-body
+    | For example, on a page of search results, the primary user need is to see
+      the results. Using smaller checkboxes lets users see and change search
+      filters without distracting them from the main content.
+
+== render('/partials/example.*',
+  caption: 'Generating a single checkbox',
+  code: single_checkbox) do
+
+  p.govuk-body
+    | Single checkboxes are usually used for boolean fields like accepting
+      terms and conditions or toggling a setting.
+
+  p.govuk-body
+    | When asking users questions, favour the use of ‘Yes’ and ‘No’ radio
+      buttons. This ensures the user has understood the question and is
+      actively selecting the appropriate answer.
+
+  .govuk-inset-text
+    p.govuk-body
+      | Note that in this example <code>multiple: false</code> is passed to
+        both the <code>#govuk_check_boxes_fieldset</code> and
+        <code>#govuk_check_box</code> helpers.
 
     p.govuk-body
-      | When more advanced functionality like conditional fields is required,
-        the <code>govuk_check_boxes_fieldset</code> helper is recommended. Any
-        content passed in via the block will be conditionally revealed when
-        the box is checked.
+      | They’re required to ensure the both checkbox’s and hidden field’s
+        <code>name</code> attribute is generated in the format that Rails
+        expects for a single field.
 
-  == render('/partials/example-fig.*',
-    caption: "Small checkboxes",
-    code: small_checkboxes,
-    sample_data: lunch_options_raw) do
+== render('/partials/example.*',
+  caption: 'Adding an option for ‘none of the above’',
+  code: checkbox_field_with_exclusive_option) do
 
-    p.govuk-body
-      | Use standard-sized checkboxes in nearly all cases. However, smaller
-        versions work well on pages where it’s helpful to make them less visually
-        prominent.
+  p.govuk-body
+    | Sometimes none of the checkbox options apply, but leaving them
+      all blank isn’t always intuitive for users.
 
-    p.govuk-body
-      | For example, on a page of search results, the primary user need is to see
-        the results. Using smaller checkboxes lets users see and change search
-        filters without distracting them from the main content.
+  p.govuk-body
+    | Checkboxes created with <code>exclusive: true</code> have special
+      behaviour that:
 
-  == render('/partials/example-fig.*',
-    caption: "Generating a single checkbox",
-    code: single_checkbox) do
+  ul.govuk-list.govuk-list--bullet
+    li unchecks all other checkboxes in the fieldset when they are checked
+    li unchecks them when any other checkboxes in the fieldset are checked
 
-    p.govuk-body
-      | Single checkboxes are usually used for boolean fields like accepting
-        terms and conditions or toggling a setting.
-
-    p.govuk-body
-      | When asking users questions, favour the use of 'Yes' and 'No' radio
-        buttons. This ensures the user has understood the question and is
-        actively selecting the appropriate answer.
-
-    .important
-      p.govuk-body
-        | Note that in this example <code>multiple: false</code> is passed to
-          both the <code>#govuk_check_boxes_fieldset</code> and
-          <code>#govuk_check_box</code> helpers.
-
-      p.govuk-body
-        | They're required to ensure the both checkbox's and hidden field's
-          <code>name</code> attribute is generated in the format that Rails
-          expects for a single field.
-
-  == render('/partials/example-fig.*',
-    caption: "Adding an option for 'none of the above'",
-    code: checkbox_field_with_exclusive_option) do
-
-    p.govuk-body
-      | Sometimes none of the checkbox options apply, but leaving them
-        all blank isn't always intuitive for users.
-
-    p.govuk-body
-      | Check boxes created with <code>exclusive: true</code> have special
-        behaviour that:
-
-    ul.govuk-list.govuk-list--bullet
-      li unchecks all other check boxes in the fieldset when they are checked
-      li unchecks them when any other check boxes in the fieldset are checked
-
-    p.govuk-body
-      | It usually makes sense to separate exclusive check boxes from the
-        others with a divider.
+  p.govuk-body
+    | It usually makes sense to separate exclusive checkboxes from the others
+      with a divider.
 
 == render('/partials/related-info.*', links: checkbox_info)

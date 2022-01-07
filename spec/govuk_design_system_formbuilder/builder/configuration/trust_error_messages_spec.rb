@@ -16,7 +16,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     let(:message_text) { parsed_subject.at_css('.govuk-error-message').text }
 
     specify 'displays the error message safely by default' do
-      expect(subject).to have_tag('span', with: { class: 'govuk-error-message' }) do
+      expect(subject).to have_tag('p', with: { class: 'govuk-error-message' }) do
         without_tag('br')
       end
 
@@ -31,7 +31,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       specify 'any markup in the string becomes HTML elements' do
-        expect(subject).to have_tag('span', with: { class: 'govuk-error-message' }) do
+        expect(subject).to have_tag('p', with: { class: 'govuk-error-message' }) do
           with_tag('br')
         end
       end

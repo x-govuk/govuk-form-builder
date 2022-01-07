@@ -1,12 +1,4 @@
 module Helpers
-  module GOVUKLinkToHelpers
-    def link_to(*args, **kwargs)
-      return super if kwargs.key?('class')
-
-      super(*args, **kwargs.merge(class: 'govuk-link'))
-    end
-  end
-
   module TitleAnchorHelpers
     def anchor_id(caption)
       caption.parameterize
@@ -28,6 +20,10 @@ module Helpers
 
     def github_link
       'https://github.com/DFE-Digital/govuk-formbuilder'
+    end
+
+    def github_release_2_8_0
+      'https://github.com/DFE-Digital/govuk-formbuilder/releases/tag/v2.8.0'
     end
 
     def design_system_link
@@ -91,7 +87,7 @@ module Helpers
     end
 
     def rails_checkbox_gotcha_link
-      'https://api.rubyonrails.org/v6.1/classes/ActionView/Helpers/FormHelper.html#method-i-check_box-label-Gotcha'
+      'https://edgeapi.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html#method-i-check_box-label-Gotcha'
     end
 
     def rails_option_for_select_link

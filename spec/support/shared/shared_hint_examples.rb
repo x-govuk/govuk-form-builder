@@ -2,9 +2,9 @@ shared_examples 'a field that supports hints' do
   context 'when a hint is provided as a string' do
     subject { builder.send(*args, hint: { text: hint_text }) }
 
-    specify 'output should contain a hint in a span tag' do
+    specify 'output should contain a hint' do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
-        with_tag('span', text: hint_text, with: { class: 'govuk-hint' })
+        with_tag('div', text: hint_text, with: { class: 'govuk-hint' })
       end
     end
 
@@ -16,7 +16,7 @@ shared_examples 'a field that supports hints' do
 
     specify 'the hint should be associated with the input' do
       input_aria_describedby = parsed_subject.at_css(aria_described_by_target)['aria-describedby'].split
-      hint_id = parsed_subject.at_css('span.govuk-hint')['id']
+      hint_id = parsed_subject.at_css('div.govuk-hint')['id']
       expect(input_aria_describedby).to include(hint_id)
     end
 
@@ -42,7 +42,7 @@ shared_examples 'a field that supports hints' do
 
     subject { builder.send(*args, hint: hint) }
 
-    specify 'output should contain a hint in a div tag' do
+    specify 'output should contain a hint' do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
         with_tag('div', with: { class: 'govuk-hint' })
       end
@@ -70,7 +70,7 @@ shared_examples 'a field that supports hints' do
     subject { builder.send(*args, hint: nil) }
 
     specify 'no hint should be present' do
-      expect(subject).not_to have_tag('span', with: { class: 'govuk-hint' })
+      expect(subject).not_to have_tag('div', with: { class: 'govuk-hint' })
     end
 
     specify 'output should have no empty aria-describedby attribute' do
@@ -82,7 +82,7 @@ shared_examples 'a field that supports hints' do
     subject { builder.send(*args) }
 
     specify 'no hint should be present' do
-      expect(subject).not_to have_tag('span', with: { class: 'govuk-hint' })
+      expect(subject).not_to have_tag('div', with: { class: 'govuk-hint' })
     end
 
     specify 'output should have no empty aria-describedby attribute' do

@@ -39,9 +39,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     it_behaves_like 'a field that accepts arbitrary blocks of HTML' do
       let(:described_element) { 'fieldset' }
 
-      # the block content (p) should be between the hint (span) and the input container (div)
+      # the block content should be before the hint and date inputs
       context 'ordering' do
-        let(:hint_span_selector) { 'span.govuk-hint' }
+        let(:hint_div_selector) { 'div.govuk-hint' }
         let(:block_paragraph_selector) { 'p.block-content' }
         let(:govuk_date_selector) { 'div.govuk-date-input' }
 
@@ -53,10 +53,11 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           end
         end
 
-        specify 'the block content should be between the hint and the date inputs' do
-          expect(
-            parsed_subject.css([hint_span_selector, block_paragraph_selector, govuk_date_selector].join(',')).map(&:name)
-          ).to eql(%w(p span div))
+        specify 'the block content should be before the hint and the date inputs' do
+          actual = parsed_subject.css([hint_div_selector, block_paragraph_selector, govuk_date_selector].join(",")).flat_map(&:classes)
+          expected = %w(block-content govuk-hint govuk-date-input)
+
+          expect(actual).to eql(expected)
         end
       end
     end

@@ -1,0 +1,41 @@
+// GOV.UK Frontend options
+$govuk-global-styles: true;
+$govuk-assets-path: "/assets/";
+
+// Import GOV.UK Frontend
+@import "govuk/all";
+
+// Application components
+@import "components/button";
+@import "components/example";
+@import "components/header";
+@import "components/highlight";
+@import "components/masthead";
+@import "components/prose";
+
+// Classes used in examples
+.gradient-background {
+  background: linear-gradient(90deg, rgba(184,255,255,1) 0%, rgba(255,152,255,1) 50%, rgba(255,255,108,1) 100%);
+  display: inline-block;
+  padding: 2px govuk-spacing(1);
+}
+
+.purple-background {
+  background: govuk-tint(govuk-colour("purple"), 80);
+  display: inline-block;
+  padding: 2px govuk-spacing(1);
+}
+
+.orange-background {
+  background: govuk-tint(govuk-colour("orange"), 70);
+  display: inline-block;
+  padding: 2px govuk-spacing(1);
+}
+
+.final-decision-warning {
+  @include govuk-font($size: 16, $weight: "bold");
+  background: govuk-tint(govuk-colour("pink"), 80);
+  color: govuk-shade(govuk-colour("pink"), 40);
+  display: inline-block;
+  padding: govuk-spacing(2) govuk-spacing(3);
+}
