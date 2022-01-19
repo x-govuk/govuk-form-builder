@@ -73,7 +73,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           object.errors.messages.each do |attribute, _msg|
             expect(subject).to have_tag('a', with: {
               href: "#person-#{underscores_to_dashes(attribute)}-field-error",
-              'data-turbolinks' => false
+              'data-turbo' => false
             })
           end
         end

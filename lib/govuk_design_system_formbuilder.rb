@@ -57,8 +57,8 @@ module GOVUKDesignSystemFormBuilder
   # * +:default_error_summary_turbo_prefix+ is used to disable turbo/turbolinks from
   #   handling clicks on links in the error summary. When it's a string (eg,
   #   turbo), that will result in links with the attribute 'data-turbo=false'.
-  #   When nil, no data attribute will be added. Defaults to 'turbolinks' for
-  #   compatibilitiy's sake; this will change to 'turbo' when Rails 7 is released
+  #   When nil, no data attribute will be added. Defaults to turbo since Rails 7,
+  #   change to 'turbolinks' for Rails 6.1
   #
   # * +:localisation_schema_fallback+ sets the prefix elements for the array
   #   used to build the localisation string. The final two elements are always
@@ -88,7 +88,7 @@ module GOVUKDesignSystemFormBuilder
     default_error_summary_title: 'There is a problem',
     default_error_summary_presenter: Presenters::ErrorSummaryPresenter,
     default_error_summary_error_order_method: nil,
-    default_error_summary_turbo_prefix: 'turbolinks',
+    default_error_summary_turbo_prefix: 'turbo',
     default_collection_check_boxes_include_hidden: true,
     default_collection_radio_buttons_include_hidden: true,
     default_submit_validate: false,
