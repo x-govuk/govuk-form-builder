@@ -38,5 +38,7 @@ Style/CommentAnnotation:
   Enabled: false
 Style/EmptyCaseCondition:
   Enabled: false
+Style/HashSyntax:
+  Enabled: false
 Style/FormatString:
   EnforcedStyle: format
