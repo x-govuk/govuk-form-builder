@@ -121,7 +121,6 @@ module GOVUKDesignSystemFormBuilder
       def options
         {
           class: classes,
-          tabindex: -1,
           role: 'alert',
           data: {
             module: %(#{brand}-error-summary)
