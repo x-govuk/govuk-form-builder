@@ -16,3 +16,5 @@ checks:
       # ruby doc sometimes fails because the docs are built when the request is
       # made which nano reports as failure (202)
       - '^https?://www.rubydoc.info/'
+
+base_url: https://govuk-form-builder.netlify.app

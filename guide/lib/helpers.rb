@@ -12,6 +12,7 @@ require 'govuk_design_system_formbuilder'
 
 use_helper Nanoc::Helpers::Rendering
 use_helper Nanoc::Helpers::LinkTo
+use_helper Nanoc::Helpers::XMLSitemap
 
 use_helper Helpers::Formatters
 use_helper Helpers::LinkHelpers
