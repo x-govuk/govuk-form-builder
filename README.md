@@ -130,7 +130,7 @@ git config --global user.name "Julius Hibbert"
 
 ## Services using this library
 
-Approximately [40 services use this library](https://github.com/DFE-Digital/govuk-formbuilder/network/dependents),
+Approximately [70 services use this library](https://github.com/DFE-Digital/govuk-formbuilder/network/dependents),
 here are a few from the <abbr title="Department for Education">DfE</abbr>, <abbr title="Ministry of Justice">MoJ</abbr>, and
 <abbr title="Department for Business, Energy & Industrial Strategy">BEIS</abbr>.
 
