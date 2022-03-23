@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.metadata    = METADATA
   s.files       = Dir["{app,lib}/**/*", "LICENSE", "README.md"]
 
-  s.add_dependency("deep_merge", "~> 1.2.1")
+  s.add_dependency("html-attributes-utils", "~> 0.9.0")
 
   exact_rails_version = ENV.key?("RAILS_VERSION")
   rails_version = ENV.fetch("RAILS_VERSION") { "6.1.5" }
