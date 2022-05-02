@@ -1,5 +1,5 @@
-require 'deep_merge/rails_compat'
 require 'active_support/configurable'
+require 'html_attributes_utils'
 
 [%w(presenters *.rb), %w(refinements *.rb), %w(traits *.rb), %w(*.rb), %w(elements ** *.rb), %w(containers ** *.rb)]
   .flat_map { |matcher| Dir.glob(File.join(__dir__, 'govuk_design_system_formbuilder', *matcher)) }
