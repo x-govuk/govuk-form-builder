@@ -102,14 +102,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
 
-      context 'input attributes' do
-        specify 'inputs should have a pattern that restricts entries to numbers' do
-          expect(subject).to have_tag('input', with: { pattern: '[0-9]*' })
-        end
-
-        specify 'inputs should have an inputmode of numeric' do
-          expect(subject).to have_tag('input', with: { inputmode: 'numeric' })
-        end
+      specify 'inputs should have an inputmode of numeric' do
+        expect(subject).to have_tag('input', with: { inputmode: 'numeric' })
       end
 
       specify 'labels should be associated with inputs' do
@@ -275,19 +269,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         specify "year field should have autocomplete attribute with value 'bday-year'" do
           expect(subject).to have_tag('input', with: { autocomplete: 'bday-year' })
         end
-      end
-    end
-
-    describe "wildcards" do
-      subject { builder.send(*args, wildcards: true) }
-
-      specify %(the date and month input patterns contain an X) do
-        expect(subject).to have_tag('input', with: { id: day_identifier, pattern: "[0-9X]*" })
-        expect(subject).to have_tag('input', with: { id: month_identifier, pattern: "[0-9X]*" })
-      end
-
-      specify %(the year pattern doesn't contain an X) do
-        expect(subject).to have_tag('input', with: { id: year_identifier, pattern: "[0-9]*" })
       end
     end
 
