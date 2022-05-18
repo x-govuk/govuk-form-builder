@@ -11,7 +11,7 @@ module GOVUKDesignSystemFormBuilder
       SEGMENTS = { day: '3i', month: '2i', year: '1i' }.freeze
       MULTIPARAMETER_KEY = { day: 3, month: 2, year: 1 }.freeze
 
-      def initialize(builder, object_name, attribute_name, legend:, caption:, hint:, omit_day:, maxlength_enabled:, form_group:, wildcards:, date_of_birth: false, **kwargs, &block)
+      def initialize(builder, object_name, attribute_name, legend:, caption:, hint:, omit_day:, maxlength_enabled:, form_group:, date_of_birth: false, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
 
         @legend            = legend
@@ -21,7 +21,6 @@ module GOVUKDesignSystemFormBuilder
         @omit_day          = omit_day
         @maxlength_enabled = maxlength_enabled
         @form_group        = form_group
-        @wildcards         = wildcards
         @html_attributes   = kwargs
       end
 
@@ -107,18 +106,11 @@ module GOVUKDesignSystemFormBuilder
           class: classes(width),
           name: name(segment),
           type: 'text',
-          pattern: pattern(segment),
           inputmode: 'numeric',
           value: value,
           autocomplete: date_of_birth_autocomplete_value(segment),
           maxlength: (width if maxlength_enabled?),
         )
-      end
-
-      def pattern(segment)
-        return '[0-9X]*' if @wildcards && segment.in?(%i(day month))
-
-        '[0-9]*'
       end
 
       def classes(width)
