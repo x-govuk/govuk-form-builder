@@ -78,7 +78,7 @@ module GOVUKDesignSystemFormBuilder
       def limit_description
         return unless limit?
 
-        tag.span(id: limit_id, class: limit_description_classes, aria: { live: 'polite' }) do
+        tag.span(id: limit_id, class: limit_description_classes) do
           "You can enter up to #{limit_quantity} #{limit_type}"
         end
       end
