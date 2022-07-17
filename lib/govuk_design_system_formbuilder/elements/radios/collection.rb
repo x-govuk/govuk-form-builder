@@ -21,11 +21,7 @@ module GOVUKDesignSystemFormBuilder
           @classes        = classes
           @form_group     = form_group
           @include_hidden = include_hidden
-          @bold_labels    = if bold_labels.nil?
-                              hint_method.present?
-                            else
-                              bold_labels
-                            end
+          @bold_labels    = (bold_labels.nil? && auto_bold_labels?) || bold_labels
         end
 
         def html
@@ -37,6 +33,11 @@ module GOVUKDesignSystemFormBuilder
         end
 
       private
+
+        def auto_bold_labels?
+          (config.default_collection_radio_buttons_auto_bold_labels &&
+            @hint_method.present?)
+        end
 
         def fieldset_options
           {

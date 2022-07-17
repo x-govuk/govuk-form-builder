@@ -43,6 +43,11 @@ module GOVUKDesignSystemFormBuilder
   # * +:default_collection_radio_buttons_include_hidden+ controls whether or not
   #   a hidden field is added when rendering a collection of radio buttons
   #
+  # * +:default_collection_radio_buttons_auto_bold_labels+ will automatically
+  #   make labels on {#govuk_collection_radio_buttons} bold when a +:hint_method+
+  #   is present. The default can be overridden using the +bold_labels:+ argument.
+  #   The default value is 'true'.
+  #
   # * +:default_error_summary_title+ sets the text used in error summary
   #   blocks. As per the GOV.UK Design System spec, it defaults to
   #   'There is a problem'.
@@ -91,6 +96,7 @@ module GOVUKDesignSystemFormBuilder
     default_error_summary_turbo_prefix: 'turbo',
     default_collection_check_boxes_include_hidden: true,
     default_collection_radio_buttons_include_hidden: true,
+    default_collection_radio_buttons_auto_bold_labels: true,
     default_submit_validate: false,
 
     localisation_schema_fallback: %i(helpers __context__),
