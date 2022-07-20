@@ -281,11 +281,12 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
                   expect(subject).to have_tag('input', with: { id: identifier }, count: 1)
                 end
 
-                specify 'the targetted input should be the first field' do
-                  expect(parsed_subject.css("input").first).to eql(parsed_subject.at_css('#' + identifier))
+                specify 'the targeted input should be the first non-hidden field' do
+                  inputs = parsed_subject.css('input').reject { |el| el.attributes['type'].value == 'hidden' }
+                  expect(inputs.first).to eql(parsed_subject.at_css('#' + identifier))
                 end
 
-                specify 'the targetted input should be the day field' do
+                specify 'the targeted input should be the day field' do
                   expect(parsed_subject.at_css('#' + identifier).attribute('name').value).to eql(first_date_segment_name)
                 end
               end

@@ -53,7 +53,14 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def day
-        return if omit_day?
+        if omit_day?
+          return tag.input(
+            id: id(:day, false),
+            name: name(:day),
+            type: 'hidden',
+            value: value(:day) || 1,
+          )
+        end
 
         date_part(:day, width: 2, link_errors: true)
       end

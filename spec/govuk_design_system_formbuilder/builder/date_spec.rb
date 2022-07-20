@@ -139,12 +139,14 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     context 'showing only month and year inputs' do
       subject { builder.send(*args, omit_day: true) }
 
-      specify 'there should only be month and year inputs' do
-        expect(subject).to have_tag('input', count: 2)
+      specify 'there should only be month and year text inputs' do
+        expect(subject).to have_tag('input', count: 3)
 
         [month_multiparam_attribute, year_multiparam_attribute].each do |mpa|
-          expect(subject).to have_tag('input', with: { name: "#{object_name}[#{attribute}(#{mpa})]" })
+          expect(subject).to have_tag('input', with: { name: "#{object_name}[#{attribute}(#{mpa})]", type: 'text' })
         end
+
+        expect(subject).to have_tag('input', with: { name: "#{object_name}[#{attribute}(#{day_multiparam_attribute})]", type: 'hidden' })
       end
 
       specify 'there be no day label' do
