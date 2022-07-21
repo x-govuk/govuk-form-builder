@@ -24,6 +24,7 @@ class Being
     :stationery,
     :stationery_choice,
     :hairstyle,
+    :favourite_shape,
   )
 
   def initialize(_args = nil)
