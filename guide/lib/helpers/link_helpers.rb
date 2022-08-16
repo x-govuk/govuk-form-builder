@@ -46,8 +46,8 @@ module Helpers
       'https://technology.blog.gov.uk/2020/02/24/why-the-gov-uk-design-system-team-changed-the-input-type-for-numbers/'
     end
 
-    def dfe_rails_boilerplate_link
-      'https://github.com/DFE-Digital/govuk-rails-boilerplate'
+    def dfe_rails_template_link
+      'https://github.com/DFE-Digital/rails-template'
     end
 
     def rails_initializer_link
