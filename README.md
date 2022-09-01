@@ -61,7 +61,7 @@ pre-configured template:
 ## Setup 🔧
 
 To use the form builder in an ad hoc basis you can specify it as an argument to
-`form_for` or `form_with`. These examples are written in [Slim](https://slim-lang.com) but
+`form_for` or `form_with`. These examples are written in [Slim](https://github.com/slim-template/slim) but
 other templating languages like ERB and [Haml](https://haml.info/) work just as well.
 
 ```slim

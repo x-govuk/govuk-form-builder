@@ -55,7 +55,7 @@ module Helpers
     end
 
     def slim_link
-      'https://slim-lang.com'
+      'https://github.com/slim-template/slim'
     end
 
     def erb_link
