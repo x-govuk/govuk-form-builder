@@ -48,6 +48,23 @@ shared_examples 'a field that supports setting the label via localisation' do
       end
     end
   end
+
+  context 'when the localised field is nested' do
+    let(:attribute) { :number_and_street }
+
+    subject do
+      builder.fields_for(:address, builder: described_class) { |af| af.send(*args) }
+    end
+
+    let(:localisations) { { en: YAML.load_file('spec/support/locales/sample.en.yaml') } }
+    let(:expected_text) { I18n.translate("number_and_street", scope: "helpers.label.person.address") }
+
+    specify "finds the correct nested localisation" do
+      with_localisations(localisations) do
+        expect(subject).to have_tag("label", text: expected_text, with: { class: "govuk-label" })
+      end
+    end
+  end
 end
 
 shared_examples 'a field that supports setting the label caption via localisation' do

@@ -17,6 +17,9 @@ helpers:
         sales: Sales
       stationery_options:
         ballpoint_pen: An ink-dispensing writing implement
+      address:
+        number_and_street: "Enter your street address"
+        postcode: "Enter your postcode"
 
   caption:
     person:
