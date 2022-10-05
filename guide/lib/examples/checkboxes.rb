@@ -94,17 +94,17 @@ module Examples
             label: { text: "France" },
             link_errors: true
 
-          = f.govuk_check_box :languages,
+          = f.govuk_check_box :countries,
             :portugal,
             label: { text: "Portugal" }
 
-          = f.govuk_check_box :languages,
+          = f.govuk_check_box :countries,
             :spain,
             label: { text: "Spain" }
 
           = f.govuk_check_box_divider
 
-          = f.govuk_check_box :languages,
+          = f.govuk_check_box :countries,
             :none,
             exclusive: true,
             label: { text: "No, I will not be travelling to any of these countries " }
