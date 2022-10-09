@@ -45,8 +45,15 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:expected_class) { 'govuk-input' }
     end
 
-    it_behaves_like 'a field that supports setting the label via localisation'
-    it_behaves_like 'a field that supports setting the hint via localisation'
+    it_behaves_like 'a field that supports setting the label via localisation' do
+      let(:attribute_override) { 'one-something-street' }
+      let(:scope_override) { 'helpers.label.person.address.number_and_street_options' }
+    end
+
+    it_behaves_like 'a field that supports setting the hint via localisation' do
+      let(:attribute_override) { 'one-something-street' }
+      let(:scope_override) { 'helpers.hint.person.address.number_and_street_options' }
+    end
 
     it_behaves_like 'a fieldset item that can conditionally-reveal content' do
       subject do

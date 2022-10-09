@@ -50,14 +50,26 @@ shared_examples 'a field that supports setting the label via localisation' do
   end
 
   context 'when the localised field is nested' do
+    let(:value) { attribute_override }
     let(:attribute) { :number_and_street }
 
     subject do
       builder.fields_for(:address, builder: described_class) { |af| af.send(*args) }
     end
 
-    let(:localisations) { { en: YAML.load_file('spec/support/locales/sample.en.yaml') } }
-    let(:expected_text) { I18n.translate("number_and_street", scope: "helpers.label.person.address") }
+    let(:localisations) do
+      # remove captions as they interfere with label content
+      { en: YAML.load_file('spec/support/locales/sample.en.yaml') }.tap do |h|
+        h[:en]['helpers'].delete('caption')
+      end
+    end
+
+    let(:expected_text) do
+      ao = defined?(attribute_override) ? attribute_override : "number_and_street"
+      so = defined?(scope_override) ? scope_override : "helpers.label.person.address"
+
+      I18n.translate(ao, scope: so)
+    end
 
     specify "finds the correct nested localisation" do
       with_localisations(localisations) do
@@ -111,6 +123,30 @@ shared_examples 'a field that supports setting the label caption via localisatio
       end
     end
   end
+
+  context 'when the localised field is nested' do
+    let(:value) { attribute_override }
+    let(:attribute) { :number_and_street }
+
+    subject do
+      builder.fields_for(:address, builder: described_class) { |af| af.send(*args) }
+    end
+
+    let(:localisations) { { en: YAML.load_file('spec/support/locales/sample.en.yaml') } }
+
+    let(:expected_text) do
+      ao = defined?(attribute_override) ? attribute_override : "number_and_street"
+      so = defined?(scope_override) ? scope_override : "helpers.caption.person.address"
+
+      I18n.translate(ao, scope: so)
+    end
+
+    specify "finds the correct nested localisation" do
+      with_localisations(localisations) do
+        expect(subject).to have_tag("span", text: expected_text, with: { class: "govuk-caption-m" })
+      end
+    end
+  end
 end
 
 shared_examples 'a field that supports setting the legend caption via localisation' do
@@ -155,10 +191,32 @@ shared_examples 'a field that supports setting the legend caption via localisati
       end
     end
   end
+
+  context 'when the localised field is nested' do
+    let(:localisations) { LOCALISATIONS }
+    let(:value) { attribute_override }
+    let(:attribute) { :number_and_street }
+
+    subject do
+      builder.fields_for(:address, builder: described_class) { |af| af.send(*args) { arbitrary_html_content } }
+    end
+
+    let(:expected_text) do
+      ao = defined?(attribute_override) ? attribute_override : "number_and_street"
+      so = defined?(scope_override) ? scope_override : "helpers.caption.person.address"
+
+      I18n.translate(ao, scope: so)
+    end
+
+    specify "finds the correct nested localisation" do
+      with_localisations(localisations) do
+        expect(subject).to have_tag("span", text: expected_text, with: { class: "govuk-caption-m" })
+      end
+    end
+  end
 end
 
 shared_examples 'a field that supports setting the hint via localisation' do
-  let(:arbitrary_html_content) { builder.tag.p("a wild paragraph has appeared") }
   let(:localisations) { LOCALISATIONS }
 
   context 'localising when no text is supplied' do
@@ -204,10 +262,31 @@ shared_examples 'a field that supports setting the hint via localisation' do
       end
     end
   end
+
+  context 'when the localised field is nested' do
+    let(:value) { attribute_override }
+    let(:attribute) { :number_and_street }
+
+    subject do
+      builder.fields_for(:address, builder: described_class) { |af| af.send(*args) { arbitrary_html_content } }
+    end
+
+    let(:expected_text) do
+      ao = defined?(attribute_override) ? attribute_override : "number_and_street"
+      so = defined?(scope_override) ? scope_override : "helpers.hint.person.address"
+
+      I18n.translate(ao, scope: so)
+    end
+
+    specify "finds the correct nested localisation" do
+      with_localisations(localisations) do
+        expect(subject).to have_tag("div", text: expected_text, with: { class: %w(govuk-hint) })
+      end
+    end
+  end
 end
 
 shared_examples 'a field that supports setting the legend via localisation' do
-  let(:arbitrary_html_content) { builder.tag.p("a wild paragraph has appeared") }
   let(:localisations) { LOCALISATIONS }
 
   context 'localising when no text is supplied' do
@@ -242,6 +321,34 @@ shared_examples 'a field that supports setting the legend via localisation' do
     specify 'no legend should be rendered' do
       with_localisations(localisations) do
         expect(subject).not_to have_tag('legend')
+      end
+    end
+  end
+
+  context 'when the localised field is nested' do
+    let(:value) { attribute_override }
+    let(:attribute) { :number_and_street }
+
+    subject do
+      builder.fields_for(:address, builder: described_class) { |af| af.send(*args) { arbitrary_html_content } }
+    end
+
+    let(:localisations) do
+      { en: YAML.load_file('spec/support/locales/sample.en.yaml') }.tap do |h|
+        h[:en]['helpers'].delete('caption')
+      end
+    end
+
+    let(:expected_text) do
+      ao = defined?(attribute_override) ? attribute_override : "number_and_street"
+      so = defined?(scope_override) ? scope_override : "helpers.legend.person.address"
+
+      I18n.translate(ao, scope: so)
+    end
+
+    specify "finds the correct nested localisation" do
+      with_localisations(localisations) do
+        expect(subject).to have_tag("legend", text: expected_text, with: { class: "govuk-fieldset__legend" })
       end
     end
   end
