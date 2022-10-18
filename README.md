@@ -14,7 +14,7 @@ This library provides an easy-to-use form builder for the [GOV.UK Design System]
 
 It is intended to make creating forms **quick**, **easy** and **familiar** for Ruby on Rails developers.
 
-## Documentation 📚
+## Documentation
 
 The gem comes with [a full guide](https://govuk-form-builder.netlify.app/) that
 covers most aspects of day-to-day use, along with code and output examples. The
@@ -23,7 +23,7 @@ be up to date.
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/d4c50b8d-6ca3-4797-9ab3-6e0731c72b44/deploy-status)](https://app.netlify.com/sites/govuk-form-builder/deploys)
 
-## What's included 🧳
+## What's included
 
 * 100% compatibility with the GOV.UK Design System
 * Full control of labels, legends, hints, captions and fieldsets
@@ -38,7 +38,7 @@ be up to date.
 * An exhaustive test suite
 * [Extensive technical documentation](https://www.rubydoc.info/gems/govuk_design_system_formbuilder/GOVUKDesignSystemFormBuilder/Builder)
 
-## Installation 🏗
+## Installation
 
 You can install the form builder gem by running the `gem install
 govuk_design_system_formbuilder` or by adding the following line
@@ -58,7 +58,7 @@ pre-configured template:
 * [DfE Rails Template](https://github.com/DFE-Digital/rails-template)
 * [DEFRA Ruby Template](https://github.com/DEFRA/defra-ruby-template)
 
-## Setup 🔧
+## Setup
 
 To use the form builder in an ad hoc basis you can specify it as an argument to
 `form_for` or `form_with`. These examples are written in [Slim](https://github.com/slim-template/slim) but
@@ -97,7 +97,7 @@ Now we can get started!
   = f.govuk_submit 'Away we go!'
 ```
 
-## Developing and running the tests 👨🏻‍🏭
+## Developing and running the tests
 
 The form builder is tested with RSpec. To run all the tests first ensure that
 the development and testing prerequisite gems are installed. At the root of a
@@ -113,7 +113,7 @@ Now, if everything was successful, run RSpec:
 bundle exec rspec
 ```
 
-## Contributing 📦
+## Contributing
 
 Bug reports and feature requests are most welcome, please raise an issue or
 submit a pull request.
@@ -143,7 +143,7 @@ here are a few from the <abbr title="Department for Education">DfE</abbr>, <abbr
  * [Trade Tariff duty calculator](https://www.github.com/trade-tariff/trade-tariff-duty-calculator)
  * [Report your official development assistance](https://www.github.com/UKGovernmentBEIS/beis-report-official-development-assistance)
 
-## Thanks 👩🏽‍⚖️
+## Thanks
 
 This project was inspired by [Ministry of Justice's GovukElementsFormBuilder](https://github.com/ministryofjustice/govuk_elements_form_builder),
 but is leaner, more modular and written in a more idiomatic style.
