@@ -4,6 +4,12 @@ module Helpers
       block.call
     end
 
+    def link_to_in_new_tab(*args, **kwargs, &block)
+      new_tab_args = { rel: "noreferrer noopener", target: "_blank" }
+
+      link_to(*args, **new_tab_args.merge(kwargs), &block)
+    end
+
     def format_slim(raw, **args)
       # FIXME: not sure why when we're several
       #        blocks deep we need to unescape more

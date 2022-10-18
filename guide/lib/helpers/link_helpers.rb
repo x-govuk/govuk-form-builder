@@ -105,5 +105,13 @@ module Helpers
     def rails_options_from_collection_for_select_link
       'https://edgeapi.rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html#method-i-options_from_collection_for_select'
     end
+
+    def govuk_forms_link
+      "https://www.forms.service.gov.uk/"
+    end
+
+    def moj_forms_link
+      "https://moj-forms.service.justice.gov.uk/"
+    end
   end
 end

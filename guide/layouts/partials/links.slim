@@ -8,6 +8,12 @@
         | Every component of the form builder is designed to produce accessible
           HTML that meet all of the design system’s requirements without having
           to spend time reinventing the wheel.
+      p.govuk-inset-text
+        | This tool is aimed at developers. If you need a service that
+          lets you build forms without writing any code, you can
+          use one of the platforms that wrap this library like
+          #{link_to_in_new_tab("GOV.UK Forms", govuk_forms_link).html_safe} or
+          #{link_to_in_new_tab("MoJ Forms", moj_forms_link).html_safe}.
 
   nav class="govuk-grid-row govuk-!-margin-bottom-4"
     .govuk-grid-column-one-third
@@ -27,7 +33,6 @@
         li== link_to 'Injecting content', '/building-blocks/injecting-content'
         li== link_to 'Fieldsets', '/building-blocks/fieldsets'
         li== link_to 'Localisation', '/building-blocks/localisation'
-        / li== link_to 'Other design systems', '/building-blocks/other-design-systems'
 
     .govuk-grid-column-one-third
       h2.govuk-heading-m Form elements
