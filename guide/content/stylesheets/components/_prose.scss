@@ -1,3 +1,6 @@
+$app-code-bg: govuk-tint(govuk-colour("light-grey"), 30%);
+$app-code-fg: govuk-shade(govuk-colour("pink"), 10%);
+
 .app-prose {
   h2 {
     max-width: 20em;
@@ -36,8 +39,8 @@
   }
 
   code {
-    background-color: govuk-colour("light-grey");
-    color: govuk-shade(govuk-colour("red"), 10%);
+    background-color: $app-code-bg;
+    color: $app-code-fg;
     font-family: ui-monospace, monospace;
     font-size: 1rem;
     padding: 2px govuk-spacing(1);
@@ -46,7 +49,7 @@
   pre {
     @include govuk-responsive-margin(4, "bottom");
     @include govuk-font($size: 16);
-    background-color: govuk-colour("light-grey");
+    background-color: $app-code-bg;
     line-height: 1.4;
     overflow: auto;
     padding: govuk-spacing(4);
@@ -59,11 +62,6 @@
     + .govuk-heading-m,
     + .govuk-heading-s {
       padding-top: govuk-spacing(2)
-    }
-
-    code {
-      background: none;
-      padding: 0;
     }
   }
 
