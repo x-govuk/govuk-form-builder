@@ -29,7 +29,11 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def schema_path
-        base_object_name = @object_name.to_s.scan(BASE_NAME_REGEXP).join(".")
+        base_object_name = if config.enable_nested_localisation
+                             @object_name.to_s.scan(BASE_NAME_REGEXP).join(".")
+                           else
+                             @object_name
+                           end
 
         if @value.present?
           [base_object_name, "#{@attribute_name}_options", @value]
