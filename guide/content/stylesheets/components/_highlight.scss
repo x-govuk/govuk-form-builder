@@ -15,38 +15,42 @@ $bright-purple: govuk-colour('bright-purple');
 
 $text: $govuk-text-colour;
 
-pre > code {
-  &.highlight {
-    color: $text;
+.app-prose {
+  pre > code {
+    background-color: transparent;
 
-    .s,.s1,.s2,.vi,.sx {
-      color: $pink;
-    }
+    &.highlight {
+      color: $text;
 
-    .nt,.nf,.nc {
-      color: $orange;
+      .s,.s1,.s2,.vi,.sx {
+        color: $pink;
       }
 
-    .n,.p,.k,.mi,.n,.o,.na,.ss {
-      color: $dark-blue;
-    }
+      .nt,.nf,.nc {
+        color: $orange;
+        }
 
-    .k {
-      font-weight: 600;
-    }
+      .n,.p,.k,.mi,.n,.o,.na,.ss {
+        color: $dark-blue;
+      }
 
-    .no {
-      color: $green;
-    }
+      .k {
+        font-weight: 600;
+      }
 
-    .kp {
-      color: $green;
-    }
+      .no {
+        color: $green;
+      }
 
-    // comments
-    .c1 {
-      color: $turquoise;
-      font-style: italic;
+      .kp {
+        color: $green;
+      }
+
+      // comments
+      .c1 {
+        color: $turquoise;
+        font-style: italic;
+      }
     }
   }
 }
