@@ -36,7 +36,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency("pry", "~> 0.14.1")
   s.add_development_dependency("pry-byebug", "~> 3.9", ">= 3.9.0")
   s.add_development_dependency("rspec-html-matchers", "~> 0")
-  s.add_development_dependency("rspec-rails", "~> 5.0")
+  s.add_development_dependency("rspec-rails", "~> 6.0")
   s.add_development_dependency("rubocop-govuk", "~> 4.7.0")
   s.add_development_dependency("simplecov", "~> 0.20")
 
