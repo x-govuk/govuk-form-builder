@@ -5,6 +5,8 @@ module GOVUKDesignSystemFormBuilder
 
       include Traits::Caption
       include Traits::Localisation
+      include Traits::HTMLAttributes
+      include Traits::HTMLClasses
 
       def initialize(builder, object_name, attribute_name, text: nil, value: nil, size: nil, hidden: false, radio: false, checkbox: false, tag: nil, link_errors: true, content: nil, caption: nil, **kwargs)
         super(builder, object_name, attribute_name)
@@ -44,7 +46,7 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def label
-        @builder.label(@attribute_name, **options, **@html_attributes) do
+        @builder.label(@attribute_name, **attributes(@html_attributes)) do
           @content || safe_join([caption, @text])
         end
       end
@@ -63,7 +65,7 @@ module GOVUKDesignSystemFormBuilder
         {
           value: @value,
           for: field_id(link_errors: @link_errors),
-          class: %w(label).prefix(brand).push(@size_class, @weight_class, radio_class, checkbox_class).compact
+          class: classes
         }
       end
 
@@ -71,28 +73,22 @@ module GOVUKDesignSystemFormBuilder
         caption_element.html unless [@radio, @checkbox].any?
       end
 
-      def radio_class
-        return unless @radio
-
-        %(#{brand}-radios__label)
-      end
-
-      def checkbox_class
-        return unless @checkbox
-
-        %(#{brand}-checkboxes__label)
+      def classes
+        build_classes(
+          %(label),
+          @size_class,
+          @weight_class,
+          %(radios__label) => @radio,
+          %(checkboxes__label) => @checkbox,
+        ).prefix(brand)
       end
 
       def size_class(size)
-        case size
-        when 'xl' then %(#{brand}-label--xl)
-        when 'l'  then %(#{brand}-label--l)
-        when 'm'  then %(#{brand}-label--m)
-        when 's'  then %(#{brand}-label--s)
-        when nil  then nil
-        else
-          fail "invalid size '#{size}', must be xl, l, m, s or nil"
-        end
+        return nil if size.blank?
+
+        fail "invalid size '#{size}', must be xl, l, m, s or nil" unless size.in?(%w(xl l m s))
+
+        %(label--#{size})
       end
     end
   end
