@@ -13,6 +13,15 @@ shared_examples 'a field that supports captions' do |captioned_element|
       end
     end
 
+    context 'when additional classes are provided' do
+      let(:classes) { %w(foo bar) }
+      subject { builder.send(*args, caption: { text: caption_text }.merge(class: classes)) }
+
+      specify 'the caption should have the custom classes' do
+        expect(subject).to have_tag('.govuk-caption-m', with: { class: classes }, text: caption_text)
+      end
+    end
+
     context 'when additional HTML attributes are provided' do
       let(:html_attributes) { { focusable: 'false', dir: 'rtl' } }
       subject { builder.send(*args, **caption_container, caption: caption_args.merge(html_attributes)) }

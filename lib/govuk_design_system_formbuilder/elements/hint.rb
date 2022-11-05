@@ -4,6 +4,8 @@ module GOVUKDesignSystemFormBuilder
       using PrefixableArray
 
       include Traits::Localisation
+      include Traits::HTMLAttributes
+      include Traits::HTMLClasses
 
       def initialize(builder, object_name, attribute_name, value: nil, text: nil, content: nil, radio: false, checkbox: false, **kwargs)
         super(builder, object_name, attribute_name)
@@ -27,7 +29,7 @@ module GOVUKDesignSystemFormBuilder
       def html
         return unless active?
 
-        tag.div(**hint_options, **@html_attributes) { hint_body }
+        tag.div(**attributes(@html_attributes)) { hint_body }
       end
 
       def hint_id
@@ -38,7 +40,7 @@ module GOVUKDesignSystemFormBuilder
 
     private
 
-      def hint_options
+      def options
         { class: classes, id: hint_id }
       end
 

@@ -20,11 +20,20 @@ shared_examples 'a field that supports hints' do
       expect(input_aria_describedby).to include(hint_id)
     end
 
+    context 'when additional classes are provided' do
+      let(:classes) { %w(foo bar) }
+      subject { builder.send(*args, hint: { text: hint_text }.merge(class: classes)) }
+
+      specify 'the hint should have the custom classes' do
+        expect(subject).to have_tag('.govuk-hint', with: { class: classes }, text: hint_text)
+      end
+    end
+
     context 'when additional HTML attributes are provided' do
       let(:html_attributes) { { focusable: 'false', dir: 'rtl' } }
       subject { builder.send(*args, hint: { text: hint_text }.merge(html_attributes)) }
 
-      specify 'the label should have the custom HTML attributes' do
+      specify 'the hint should have the custom HTML attributes' do
         expect(subject).to have_tag('.govuk-hint', with: html_attributes, text: hint_text)
       end
     end

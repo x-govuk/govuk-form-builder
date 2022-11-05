@@ -84,7 +84,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def size_class(size)
-        return nil if size.blank?
+        return if size.blank?
 
         fail "invalid size '#{size}', must be xl, l, m, s or nil" unless size.in?(%w(xl l m s))
 
