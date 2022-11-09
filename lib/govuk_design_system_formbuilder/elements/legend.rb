@@ -1,8 +1,12 @@
 module GOVUKDesignSystemFormBuilder
   module Elements
     class Legend < Base
+      using PrefixableArray
+
       include Traits::Caption
       include Traits::Localisation
+      include Traits::HTMLAttributes
+      include Traits::HTMLClasses
 
       def initialize(builder, object_name, attribute_name, text: nil, size: config.default_legend_size, hidden: false, tag: config.default_legend_tag, caption: nil, content: nil, **kwargs)
         super(builder, object_name, attribute_name)
@@ -33,7 +37,19 @@ module GOVUKDesignSystemFormBuilder
       def legend
         return unless active?
 
-        tag.legend(legend_content, class: classes, **@html_attributes)
+        tag.legend(legend_content, **attributes(@html_attributes))
+      end
+
+      def options
+        { class: classes }
+      end
+
+      def classes
+        build_classes(
+          %(fieldset__legend),
+          @size_class,
+          %(visually-hidden) => @hidden
+        ).prefix(brand)
       end
 
       def legend_content
@@ -48,20 +64,10 @@ module GOVUKDesignSystemFormBuilder
         [supplied_text, localised_text(:legend), @attribute_name&.capitalize].find(&:presence)
       end
 
-      def classes
-        [%(#{brand}-fieldset__legend), @size_class, visually_hidden_class].compact
-      end
-
       def size_class(size)
-        if size.in?(%w(xl l m s))
-          %(#{brand}-fieldset__legend--#{size})
-        else
-          fail "invalid size '#{size}', must be xl, l, m or s"
-        end
-      end
+        fail "invalid size '#{size}', must be xl, l, m or s" unless size.in?(%w(xl l m s))
 
-      def visually_hidden_class
-        %(#{brand}-visually-hidden) if @hidden
+        %(fieldset__legend--#{size})
       end
 
       def heading_classes

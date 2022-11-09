@@ -77,6 +77,15 @@ shared_examples 'a field that supports a fieldset with legend' do
         end
       end
 
+      context 'when additional classes are provided' do
+        let(:classes) { %w(foo bar) }
+        subject { builder.send(*args, legend: { text: legend_text }.merge(class: classes)) }
+
+        specify 'the legend should have the custom classes' do
+          expect(subject).to have_tag('.govuk-fieldset__legend', with: { class: classes }, text: legend_text)
+        end
+      end
+
       context 'when additional HTML attributes are provided' do
         let(:html_attributes) { { focusable: 'false', lang: 'fr' } }
         subject { builder.send(*args, legend: { text: legend_text }.merge(html_attributes)) }
