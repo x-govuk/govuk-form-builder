@@ -18,14 +18,16 @@ module GOVUKDesignSystemFormBuilder
         return unless object_has_errors?
 
         tag.div(**attributes(@html_attributes)) do
-          safe_join([title, summary])
+          tag.div(role: "alert") do
+            safe_join([title, summary])
+          end
         end
       end
 
     private
 
       def title
-        tag.h2(@title, id: summary_title_id, class: summary_class('title'))
+        tag.h2(@title, class: summary_class('title'))
       end
 
       def summary
@@ -110,10 +112,6 @@ module GOVUKDesignSystemFormBuilder
         end
       end
 
-      def summary_title_id
-        'error-summary-title'
-      end
-
       def object_has_errors?
         @builder.object.errors.any?
       end
@@ -121,13 +119,9 @@ module GOVUKDesignSystemFormBuilder
       def options
         {
           class: classes,
-          role: 'alert',
           data: {
             module: %(#{brand}-error-summary)
           },
-          aria: {
-            labelledby: [summary_title_id.presence]
-          }
         }
       end
 
