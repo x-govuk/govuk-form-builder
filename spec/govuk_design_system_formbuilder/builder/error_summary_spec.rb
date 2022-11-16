@@ -20,19 +20,18 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       specify 'the error summary should have a title' do
         expect(subject).to have_tag(
           'h2',
-          with: { id: 'error-summary-title', class: 'govuk-error-summary__title' }
+          with: { class: 'govuk-error-summary__title' }
         )
       end
 
       specify 'the error summary should have the correct accessibility attributes' do
-        expect(subject).to have_tag(
-          'div',
-          with: {
-            class: 'govuk-error-summary',
-            role: 'alert',
-            'data-module' => 'govuk-error-summary'
-          }
-        )
+        expected_attributes = { class: 'govuk-error-summary', 'data-module' => 'govuk-error-summary' }
+
+        expect(subject).to have_tag('div', with: expected_attributes) do
+          with_tag('div', with: { role: 'alert' }) do
+            with_tag('ul', with: { class: 'govuk-error-summary__list' })
+          end
+        end
       end
 
       describe 'error messages' do
