@@ -7,4 +7,5 @@ shared_context 'setup builder' do
   let(:object_name) { :person }
   let(:builder) { described_class.new(object_name, object, helper, {}) }
   let(:parsed_subject) { Nokogiri::HTML::DocumentFragment.parse(subject) }
+  let(:arbitrary_html_content) { builder.tag.p("a wild paragraph has appeared") }
 end

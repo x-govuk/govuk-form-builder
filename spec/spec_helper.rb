@@ -5,6 +5,7 @@ require 'active_model'
 require 'active_support'
 require 'active_support/core_ext/string'
 require 'pry'
+require 'pry-byebug'
 require 'simplecov'
 
 if ENV.fetch('SIMPLECOV') { '1' } == '1'

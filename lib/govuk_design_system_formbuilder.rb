@@ -80,6 +80,10 @@ module GOVUKDesignSystemFormBuilder
   # * +:trust_error_messages+ call html_safe on error messages before they're
   #   rendered. This allows formatting markup to be used to change the display
   #   of the error message. Defaults to +false+
+  #
+  # * +:enable_nested_localisation+ scan the object name before building the
+  #   localisation schema path to see if it's nested or not. The old behaviour
+  #   can be restored by setting this option to +false+. Defaults to +true+
   # ===
   DEFAULTS = {
     brand: 'govuk',
@@ -107,6 +111,10 @@ module GOVUKDesignSystemFormBuilder
 
     enable_logger: true,
     trust_error_messages: false,
+
+    # temporarily allow the new nested localisation functionality to be
+    # disabled
+    enable_nested_localisation: true,
   }.freeze
 
   DEFAULTS.each_key { |k| config_accessor(k) { DEFAULTS[k] } }

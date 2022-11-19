@@ -17,6 +17,12 @@ helpers:
         sales: Sales
       stationery_options:
         ballpoint_pen: An ink-dispensing writing implement
+      address:
+        number_and_street: "Enter your street address"
+        number_and_street_options:
+          one-something-street: "One Something Street"
+          two-something-street: "Two Something Street"
+        postcode: "Enter your postcode"
 
   caption:
     person:
@@ -26,11 +32,15 @@ helpers:
       cv: Background information
       born_on: Required data
       projects: Workplace data
+      address:
+        number_and_street: "Work address"
   legend:
     person:
       favourite_colour: To which colours are you most partial?
       born_on: What is your date of birth?
       projects: What do you do all day at work?
+      address:
+        number_and_street: Building number and street name
   hint:
     person:
       name: Enter your full name including middle names, nicknames and aliases
@@ -49,3 +59,8 @@ helpers:
         ballpoint_pen: |-
           A ballpoint pen, also known as a biro or ball pen, is a pen that
           dispenses ink (usually in paste form) over a metal ball at its point.
+      address:
+        number_and_street: "Enter your home address"
+        number_and_street_options:
+          one-something-street: "The first place you lived"
+          two-something-street: "The second place you lived"

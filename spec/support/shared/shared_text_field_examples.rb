@@ -3,7 +3,7 @@ shared_examples 'a regular input' do |method_identifier, field_type|
   let(:label_text) { 'Full name' }
   let(:hint_text) { 'It says it on your passport' }
   let(:method) { "govuk_#{method_identifier}_field".to_sym }
-  let(:args) { [method, :name] }
+  let(:args) { [method, attribute] }
   subject { builder.send(*args, label: { text: label_text }) }
 
   specify "output should have the correct type of #{field_type}" do
