@@ -12,7 +12,6 @@ module Examples
       <<~SNIPPET
         = f.govuk_text_field :account_number,
         label: { text: "Account number" },
-        pattern: "[0-9]*",
         inputmode: "numeric"
       SNIPPET
     end
