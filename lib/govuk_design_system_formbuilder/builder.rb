@@ -24,7 +24,6 @@ module GOVUKDesignSystemFormBuilder
     # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     # @param form_group [Hash] configures the form group
-    # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param prefix_text [String] the text placed before the input. No prefix will be added if left +nil+
     # @param suffix_text [String] the text placed after the input. No suffix will be added if left +nil+
@@ -76,7 +75,6 @@ module GOVUKDesignSystemFormBuilder
     # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     # @param form_group [Hash] configures the form group
-    # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param prefix_text [String] the text placed before the input. No prefix will be added if left +nil+
     # @param suffix_text [String] the text placed after the input. No suffix will be added if left +nil+
@@ -129,7 +127,6 @@ module GOVUKDesignSystemFormBuilder
     # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     # @param form_group [Hash] configures the form group
-    # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param prefix_text [String] the text placed before the input. No prefix will be added if left +nil+
     # @param suffix_text [String] the text placed after the input. No suffix will be added if left +nil+
@@ -180,7 +177,6 @@ module GOVUKDesignSystemFormBuilder
     # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     # @param form_group [Hash] configures the form group
-    # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param prefix_text [String] the text placed before the input. No prefix will be added if left +nil+
     # @param suffix_text [String] the text placed after the input. No suffix will be added if left +nil+
@@ -230,7 +226,6 @@ module GOVUKDesignSystemFormBuilder
     # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     # @param form_group [Hash] configures the form group
-    # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param prefix_text [String] the text placed before the input. No prefix will be added if left +nil+
     # @param suffix_text [String] the text placed after the input. No suffix will be added if left +nil+
@@ -281,7 +276,6 @@ module GOVUKDesignSystemFormBuilder
     # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     # @param form_group [Hash] configures the form group
-    # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param prefix_text [String] the text placed before the input. No prefix will be added if left +nil+
     # @param suffix_text [String] the text placed after the input. No suffix will be added if left +nil+
@@ -339,7 +333,6 @@ module GOVUKDesignSystemFormBuilder
     # @param rows [Integer] sets the initial number of rows
     # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +textarea+ element
     # @param form_group [Hash] configures the form group
-    # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +textarea+ element
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
@@ -389,7 +382,6 @@ module GOVUKDesignSystemFormBuilder
     # @option label kwargs [Hash] additional arguments are applied as attributes on the +label+ element
     # @param options [Hash] Options hash passed through to Rails' +collection_select+ helper
     # @param form_group [Hash] configures the form group
-    # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @see https://api.rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html#method-i-collection_select Rails collection_select (called by govuk_collection_select)
@@ -447,7 +439,6 @@ module GOVUKDesignSystemFormBuilder
     # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
     # @option label kwargs [Hash] additional arguments are applied as attributes on the +label+ element
     # @param form_group [Hash] configures the form group
-    # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param block [Block] build the contents of the select element manually for exact control
     # @see https://api.rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html#method-i-select Rails select (called by govuk_collection_select)
@@ -494,7 +485,6 @@ module GOVUKDesignSystemFormBuilder
     # @param small [Boolean] controls whether small radio buttons are used instead of regular-sized ones
     # @param bold_labels [Boolean] controls whether the radio button labels are bold
     # @param include_hidden [Boolean] controls whether a hidden field is inserted to allow for empty submissions
-    # @param classes [Array,String] Classes to add to the radio button container.
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
     # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+.
@@ -538,7 +528,7 @@ module GOVUKDesignSystemFormBuilder
     #    :name,
     #    legend: -> { tag.h3('Which category do you belong to?') }
     #
-    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method = nil, hint_method = nil, hint: {}, legend: {}, caption: {}, inline: false, small: false, bold_labels: nil, classes: nil, include_hidden: config.default_collection_radio_buttons_include_hidden, form_group: {}, &block)
+    def govuk_collection_radio_buttons(attribute_name, collection, value_method, text_method = nil, hint_method = nil, hint: {}, legend: {}, caption: {}, inline: false, small: false, bold_labels: nil, include_hidden: config.default_collection_radio_buttons_include_hidden, form_group: {}, **kwargs, &block)
       Elements::Radios::Collection.new(
         self,
         object_name,
@@ -553,9 +543,9 @@ module GOVUKDesignSystemFormBuilder
         inline: inline,
         small: small,
         bold_labels: bold_labels,
-        classes: classes,
         form_group: form_group,
         include_hidden: include_hidden,
+        **kwargs,
         &block
       ).html
     end
@@ -585,10 +575,8 @@ module GOVUKDesignSystemFormBuilder
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @param form_group [Hash] configures the form group
-    # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param block [Block] a block of HTML that will be used to populate the fieldset
-    # @param classes [Array,String] Classes to add to the radio button container.
     # @see https://design-system.service.gov.uk/components/radios/ GOV.UK Radios
     # @see https://design-system.service.gov.uk/styles/typography/#headings-with-captions Headings with captions
     # @return [ActiveSupport::SafeBuffer] HTML output
@@ -610,8 +598,8 @@ module GOVUKDesignSystemFormBuilder
     #      = f.govuk_radio_button :burger_id, :regular, label: { text: 'Hamburger' }, link_errors: true
     #      = f.govuk_radio_button :burger_id, :cheese, label: { text: 'Cheeseburger' }
     #
-    def govuk_radio_buttons_fieldset(attribute_name, hint: {}, legend: {}, caption: {}, inline: false, small: false, classes: nil, form_group: {}, &block)
-      Containers::RadioButtonsFieldset.new(self, object_name, attribute_name, hint: hint, legend: legend, caption: caption, inline: inline, small: small, classes: classes, form_group: form_group, &block).html
+    def govuk_radio_buttons_fieldset(attribute_name, hint: {}, legend: {}, caption: {}, inline: false, small: false, form_group: {}, **kwargs, &block)
+      Containers::RadioButtonsFieldset.new(self, object_name, attribute_name, hint: hint, legend: legend, caption: caption, inline: inline, small: small, form_group: form_group, **kwargs, &block).html
     end
 
     # Generates a radio button
@@ -671,7 +659,6 @@ module GOVUKDesignSystemFormBuilder
     # @option hint text [String] the hint text
     # @option hint kwargs [Hash] additional arguments are applied as attributes to the hint
     # @param small [Boolean] controls whether small check boxes are used instead of regular-sized ones
-    # @param classes [Array,String] Classes to add to the checkbox container.
     # @param legend [NilClass,Hash,Proc] options for configuring the legend. Legend will be omitted if +nil+.
     # @option legend text [String] the fieldset legend's text content
     # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
@@ -682,7 +669,6 @@ module GOVUKDesignSystemFormBuilder
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
     # @param form_group [Hash] configures the form group
-    # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param include_hidden [Boolean] controls whether a hidden field is inserted to allow for empty submissions
     # @param block [Block] any HTML passed in will be injected into the fieldset, after the hint and before the checkboxes
@@ -703,7 +689,7 @@ module GOVUKDesignSystemFormBuilder
     #    legend: { text: 'What do you want in your sandwich?', size: 'm' },
     #    hint: { text: "If it isn't listed here, tough luck" },
     #    inline: false,
-    #    classes: 'app-overflow-scroll',
+    #    class: 'app-overflow-scroll',
     #
     # @example A collection of check boxes for types of bread
     #  = f.govuk_collection_check_boxes :bread,
@@ -721,7 +707,7 @@ module GOVUKDesignSystemFormBuilder
     #    :name,
     #    legend: -> { tag.h3('What kind of sandwich do you want?') }
     #
-    def govuk_collection_check_boxes(attribute_name, collection, value_method, text_method, hint_method = nil, hint: {}, legend: {}, caption: {}, small: false, classes: nil, form_group: {}, include_hidden: config.default_collection_check_boxes_include_hidden, &block)
+    def govuk_collection_check_boxes(attribute_name, collection, value_method, text_method, hint_method = nil, hint: {}, legend: {}, caption: {}, small: false, form_group: {}, include_hidden: config.default_collection_check_boxes_include_hidden, **kwargs, &block)
       Elements::CheckBoxes::Collection.new(
         self,
         object_name,
@@ -734,9 +720,9 @@ module GOVUKDesignSystemFormBuilder
         legend: legend,
         caption: caption,
         small: small,
-        classes: classes,
         form_group: form_group,
         include_hidden: include_hidden,
+        **kwargs,
         &block
       ).html
     end
@@ -762,11 +748,9 @@ module GOVUKDesignSystemFormBuilder
     # @option caption text [String] the caption text
     # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
     # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
-    # @param classes [Array,String] Classes to add to the checkbox container.
     # @param form_group [Hash] configures the form group
     # @param multiple [Boolean] when true adds a +[]+ suffix the +name+ of the automatically-generated hidden field
     #   (ie. <code>project[invoice_attributes][]</code>). When false, no +[]+ suffix is added (ie. <code>project[accepted]</code>)
-    # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param block [Block] a block of HTML that will be used to populate the fieldset
     # @return [ActiveSupport::SafeBuffer] HTML output
@@ -781,7 +765,7 @@ module GOVUKDesignSystemFormBuilder
     #    = f.govuk_check_box :desired_filling, :lemonade, label: { text: 'Lemonade' }, link_errors: true
     #    = f.govuk_check_box :desired_filling, :fizzy_orange, label: { text: 'Fizzy orange' }
     #
-    def govuk_check_boxes_fieldset(attribute_name, legend: {}, caption: {}, hint: {}, small: false, classes: nil, form_group: {}, multiple: true, &block)
+    def govuk_check_boxes_fieldset(attribute_name, legend: {}, caption: {}, hint: {}, small: false, form_group: {}, multiple: true, **kwargs, &block)
       Containers::CheckBoxesFieldset.new(
         self,
         object_name,
@@ -790,9 +774,9 @@ module GOVUKDesignSystemFormBuilder
         legend: legend,
         caption: caption,
         small: small,
-        classes: classes,
         form_group: form_group,
         multiple: multiple,
+        **kwargs,
         &block
       ).html
     end
@@ -861,7 +845,6 @@ module GOVUKDesignSystemFormBuilder
     # @param text [String,Proc] the button text. When a +Proc+ is provided its contents will be rendered within the button element
     # @param warning [Boolean] makes the button red ({https://design-system.service.gov.uk/components/button/#warning-buttons warning}) when true
     # @param secondary [Boolean] makes the button grey ({https://design-system.service.gov.uk/components/button/#secondary-buttons secondary}) when true
-    # @param classes [Array,String] Classes to add to the submit button
     # @param prevent_double_click [Boolean] adds JavaScript to safeguard the
     #   form from being submitted more than once
     # @param validate [Boolean] adds the formnovalidate to the submit button when true, this disables all
@@ -886,8 +869,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_submit "Proceed", prevent_double_click: true do
     #     = link_to 'Cancel', some_other_path, class: 'govuk-button__secondary'
     #
-    def govuk_submit(text = config.default_submit_button_text, warning: false, secondary: false, classes: nil, prevent_double_click: true, validate: config.default_submit_validate, disabled: false, **kwargs, &block)
-      Elements::Submit.new(self, text, warning: warning, secondary: secondary, classes: classes, prevent_double_click: prevent_double_click, validate: validate, disabled: disabled, **kwargs, &block).html
+    def govuk_submit(text = config.default_submit_button_text, warning: false, secondary: false, prevent_double_click: true, validate: config.default_submit_validate, disabled: false, **kwargs, &block)
+      Elements::Submit.new(self, text, warning: warning, secondary: secondary, prevent_double_click: prevent_double_click, validate: validate, disabled: disabled, **kwargs, &block).html
     end
 
     # Generates three inputs for the +day+, +month+ and +year+ components of a date
@@ -914,7 +897,6 @@ module GOVUKDesignSystemFormBuilder
     # @param omit_day [Boolean] do not render a day input, only capture month and year
     # @param maxlength_enabled [Boolean] adds maxlength attribute to day, month and year inputs (2, 2, and 4, respectively)
     # @param form_group [Hash] configures the form group
-    # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input group
@@ -1021,7 +1003,6 @@ module GOVUKDesignSystemFormBuilder
     # @option hint kwargs [Hash] additional arguments are applied as attributes to the hint
     # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     # @param form_group [Hash] configures the form group
-    # @option form_group classes [Array,String] sets the form group's classes
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     #

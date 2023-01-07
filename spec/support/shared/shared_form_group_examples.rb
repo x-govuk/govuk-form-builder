@@ -5,7 +5,7 @@ shared_examples 'a field that contains a customisable form group' do
     let(:default_class) { %w(govuk-form-group) }
 
     subject do
-      builder.send(*args, form_group: { classes: custom_classes }) { builder.tag.span(block_content) }
+      builder.send(*args, form_group: { class: custom_classes }) { builder.tag.span(block_content) }
     end
 
     context 'classes passed in as an array' do

@@ -72,7 +72,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       context 'classes' do
-        subject { builder.send(*args.push('Create'), classes: %w(custom-class--one custom-class--two)) }
+        subject { builder.send(*args.push('Create'), class: %w(custom-class--one custom-class--two)) }
 
         specify 'button should have the custom class' do
           expect(subject).to have_tag('button', with: { class: %w(govuk-button custom-class--one custom-class--two) })

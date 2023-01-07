@@ -1,15 +1,18 @@
 module GOVUKDesignSystemFormBuilder
   module Containers
     class CheckBoxes < Base
-      def initialize(builder, small:, classes: nil)
+      include Traits::HTMLClasses
+      include Traits::HTMLAttributes
+
+      def initialize(builder, small:, **kwargs)
         super(builder, nil, nil)
 
-        @small   = small
-        @classes = classes
+        @small = small
+        @html_attributes = kwargs
       end
 
       def html(&block)
-        tag.div(**options, &block)
+        tag.div(**attributes(@html_attributes), &block)
       end
 
     private
@@ -22,15 +25,10 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def classes
-        combine_references(%(#{brand}-checkboxes), small_class, custom_classes)
-      end
-
-      def small_class
-        %(#{brand}-checkboxes--small) if @small
-      end
-
-      def custom_classes
-        Array.wrap(@classes)
+        build_classes(
+          %(#{brand}-checkboxes),
+          %(#{brand}-checkboxes--small) => @small,
+        )
       end
     end
   end
