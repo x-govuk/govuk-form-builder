@@ -43,3 +43,14 @@ $x-govuk-brand-colour: #28a;
   display: inline-block;
   padding: govuk-spacing(2) govuk-spacing(3);
 }
+
+.big-purple-button {
+  background: govuk-colour("purple");
+  border-radius: .3em;
+  padding: .4em 2em;
+  font-weight: bold;
+
+  &:hover {
+    background: govuk-tint(govuk-colour("purple"), 10%);
+  }
+}
