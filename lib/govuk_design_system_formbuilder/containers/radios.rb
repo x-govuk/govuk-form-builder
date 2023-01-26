@@ -2,17 +2,19 @@ module GOVUKDesignSystemFormBuilder
   module Containers
     class Radios < Base
       include Traits::Hint
+      include Traits::HTMLAttributes
+      include Traits::HTMLClasses
 
-      def initialize(builder, inline:, small:, classes:)
+      def initialize(builder, inline:, small:, **kwargs)
         super(builder, nil, nil)
 
-        @inline  = inline
-        @small   = small
-        @classes = classes
+        @inline          = inline
+        @small           = small
+        @html_attributes = kwargs
       end
 
       def html(&block)
-        tag.div(**options, &block)
+        tag.div(**attributes(@html_attributes), &block)
       end
 
     private
@@ -25,19 +27,11 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def classes
-        combine_references(%(#{brand}-radios), inline_class, small_class, custom_classes)
-      end
-
-      def inline_class
-        %(#{brand}-radios--inline) if @inline
-      end
-
-      def small_class
-        %(#{brand}-radios--small)  if @small
-      end
-
-      def custom_classes
-        Array.wrap(@classes)
+        build_classes(
+          %(#{brand}-radios),
+          %(#{brand}-radios--inline) => @inline,
+          %(#{brand}-radios--small) => @small,
+        )
       end
     end
   end

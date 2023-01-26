@@ -4,18 +4,18 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Hint
       include Traits::Error
 
-      def initialize(builder, object_name, attribute_name, hint:, legend:, caption:, inline:, small:, classes:, form_group:, &block)
+      def initialize(builder, object_name, attribute_name, hint:, legend:, caption:, inline:, small:, form_group:, **kwargs, &block)
         fail LocalJumpError, 'no block given' unless block_given?
 
         super(builder, object_name, attribute_name, &block)
 
-        @inline        = inline
-        @small         = small
-        @legend        = legend
-        @caption       = caption
-        @hint          = hint
-        @classes       = classes
-        @form_group    = form_group
+        @inline          = inline
+        @small           = small
+        @legend          = legend
+        @caption         = caption
+        @hint            = hint
+        @form_group      = form_group
+        @html_attributes = kwargs
       end
 
       def html
@@ -37,7 +37,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def radios
-        Containers::Radios.new(@builder, inline: @inline, small: @small, classes: @classes).html do
+        Containers::Radios.new(@builder, inline: @inline, small: @small, **@html_attributes).html do
           @block_content
         end
       end

@@ -6,22 +6,22 @@ module GOVUKDesignSystemFormBuilder
         include Traits::Hint
         include Traits::Supplemental
 
-        def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint_method:, hint:, legend:, caption:, inline:, small:, bold_labels:, classes:, form_group:, include_hidden:, &block)
+        def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint_method:, hint:, legend:, caption:, inline:, small:, bold_labels:, form_group:, include_hidden:, **kwargs, &block)
           super(builder, object_name, attribute_name, &block)
 
-          @collection     = collection
-          @value_method   = value_method
-          @text_method    = text_method
-          @hint_method    = hint_method
-          @inline         = inline
-          @small          = small
-          @legend         = legend
-          @caption        = caption
-          @hint           = hint
-          @classes        = classes
-          @form_group     = form_group
-          @include_hidden = include_hidden
-          @bold_labels    = (bold_labels.nil? && auto_bold_labels?) || bold_labels
+          @collection      = collection
+          @value_method    = value_method
+          @text_method     = text_method
+          @hint_method     = hint_method
+          @inline          = inline
+          @small           = small
+          @legend          = legend
+          @caption         = caption
+          @hint            = hint
+          @form_group      = form_group
+          @include_hidden  = include_hidden
+          @bold_labels     = (bold_labels.nil? && auto_bold_labels?) || bold_labels
+          @html_attributes = kwargs
         end
 
         def html
@@ -48,7 +48,7 @@ module GOVUKDesignSystemFormBuilder
         end
 
         def radios
-          Containers::Radios.new(@builder, inline: @inline, small: @small, classes: @classes).html do
+          Containers::Radios.new(@builder, inline: @inline, small: @small, **@html_attributes).html do
             safe_join(collection)
           end
         end

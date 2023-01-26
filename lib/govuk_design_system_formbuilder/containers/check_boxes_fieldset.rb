@@ -4,18 +4,18 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Error
       include Traits::Hint
 
-      def initialize(builder, object_name, attribute_name, hint:, legend:, caption:, small:, classes:, form_group:, multiple:, &block)
+      def initialize(builder, object_name, attribute_name, hint:, legend:, caption:, small:, form_group:, multiple:, **kwargs, &block)
         fail LocalJumpError, 'no block given' unless block_given?
 
         super(builder, object_name, attribute_name, &block)
 
-        @legend        = legend
-        @caption       = caption
-        @hint          = hint
-        @small         = small
-        @classes       = classes
-        @form_group    = form_group
-        @multiple      = multiple
+        @legend          = legend
+        @caption         = caption
+        @hint            = hint
+        @small           = small
+        @form_group      = form_group
+        @multiple        = multiple
+        @html_attributes = kwargs
       end
 
       def html
@@ -47,7 +47,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def checkboxes
-        Containers::CheckBoxes.new(@builder, small: @small, classes: @classes).html do
+        Containers::CheckBoxes.new(@builder, small: @small, **@html_attributes).html do
           @block_content
         end
       end

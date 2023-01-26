@@ -1,33 +1,28 @@
 module GOVUKDesignSystemFormBuilder
   module Containers
     class FormGroup < Base
-      def initialize(builder, object_name, attribute_name, classes: nil, **kwargs)
+      include Traits::HTMLAttributes
+      include Traits::HTMLClasses
+
+      def initialize(builder, object_name, attribute_name, **kwargs)
         super(builder, object_name, attribute_name)
 
-        @classes         = classes
         @html_attributes = kwargs
       end
 
       def html(&block)
-        tag.div(class: classes, **@html_attributes, &block)
+        tag.div(**attributes(@html_attributes), &block)
       end
 
     private
 
-      def classes
-        combine_references(form_group_class, error_class, custom_classes)
-      end
-
-      def form_group_class
-        %(#{brand}-form-group)
-      end
-
-      def error_class
-        %(#{brand}-form-group--error) if has_errors?
-      end
-
-      def custom_classes
-        Array.wrap(@classes)
+      def options
+        {
+          class: build_classes(
+            %(#{brand}-form-group),
+            %(#{brand}-form-group--error) => has_errors?
+          )
+        }
       end
     end
   end

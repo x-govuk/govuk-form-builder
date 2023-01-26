@@ -1,6 +1,6 @@
 shared_examples 'a field that supports custom classes' do
   let(:block_content) { -> { %(You there, fill it up with petroleum distillate, and re-vulcanize my tires, post-haste!) } }
-  subject { builder.send(*args, classes: custom_classes, &block_content) }
+  subject { builder.send(*args, class: custom_classes, &block_content) }
 
   context 'when classes are supplied in an array' do
     let(:custom_classes) { %w(custom-class--one custom-class--two) }

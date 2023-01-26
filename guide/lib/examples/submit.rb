@@ -13,7 +13,7 @@ module Examples
     end
 
     def custom_classes_button
-      "= f.govuk_submit 'Special button', classes: 'special-button-class'"
+      "= f.govuk_submit 'Big purple button', class: 'big-purple-button'"
     end
 
     def submit_button_without_double_click_prevention
