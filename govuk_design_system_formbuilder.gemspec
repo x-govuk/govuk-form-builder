@@ -49,5 +49,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency("sassc", "~> 2.4.0")
   s.add_development_dependency("slim", "~> 4.1.0")
   s.add_development_dependency("slim_lint", "~> 0.22.0")
-  s.add_development_dependency("webrick", "~> 1.7.0")
+  s.add_development_dependency("webrick", "~> 1.8.1")
 end
