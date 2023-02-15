@@ -54,39 +54,3 @@ $x-govuk-brand-colour: #28a;
     background: govuk-tint(govuk-colour("purple"), 10%);
   }
 }
-
-h1 {
-  border: 1px dashed red;
-  &:after {
-    content: "h1";
-    color: red !important;
-    font-size: small;
-  }
-}
-
-h2 {
-  border: 1px dashed blue;
-  &:after {
-    content: "h2";
-    color: blue !important;
-    font-size: small;
-  }
-}
-
-h3 {
-  border: 1px dashed orange;
-  &:after {
-    content: "h3";
-    color: orange !important;
-    font-size: small;
-  }
-}
-
-h4 {
-  border: 1px dashed magenta;
-  &:after {
-    content: "h4";
-    color: magenta !important;
-    font-size: small;
-  }
-}
