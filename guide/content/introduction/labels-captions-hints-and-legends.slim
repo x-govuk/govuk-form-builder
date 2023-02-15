@@ -2,7 +2,8 @@
 title: Labels, captions, hints and legends
 ---
 
-h2.govuk-heading-l Labels
+*header(level: 2, classes: "govuk-heading-l")
+  | Labels
 
 p.govuk-body
   | All form helpers that generate a single input element
@@ -16,7 +17,8 @@ p.govuk-body
 
 == render('/partials/example.*',
   caption: 'An unconfigured label',
-  code: text_field_with_no_label)
+  code: text_field_with_no_label,
+  start_headings_at_level: 3)
 
 p.govuk-body
   | Labels are customised by passing in a hash of options with the
@@ -60,11 +62,13 @@ dl.govuk-summary-list
 
 == render('/partials/example.*',
   caption: 'A fully-configured label',
-  code: text_field_with_configured_label)
+  code: text_field_with_configured_label,
+  start_headings_at_level: 3)
 
 == render('/partials/example.*',
   caption: 'Setting label content with a proc',
-  code: text_field_with_label_proc) do
+  code: text_field_with_label_proc,
+  start_headings_at_level: 3) do
     p.govuk-body
       | Label content can be customised further using a
         #{link_to('Ruby proc', ruby_proc_link).html_safe}. Note that the content
@@ -106,7 +110,8 @@ dl.govuk-summary-list
 
 == render('/partials/example.*',
   caption: 'A label with a caption',
-  code: text_field_with_caption)
+  code: text_field_with_caption,
+  start_headings_at_level: 3)
 
 hr.govuk-section-break.govuk-section-break--xl.govuk-section-break--visible
 
@@ -129,11 +134,13 @@ p.govuk-body
 
 == render('/partials/example.*',
   caption: 'A text field with hint',
-  code: text_field_with_hint)
+  code: text_field_with_hint,
+  start_headings_at_level: 3)
 
 == render('/partials/example.*',
   caption: 'Setting hint content with a proc',
-  code: text_field_with_hint_proc)
+  code: text_field_with_hint_proc,
+  start_headings_at_level: 3)
 
 hr.govuk-section-break.govuk-section-break--xl.govuk-section-break--visible
 
@@ -188,11 +195,13 @@ dl.govuk-summary-list
 
 == render('/partials/example.*',
   caption: 'Radio buttons with a fully-customised legend',
-  code: radios_with_legend)
+  code: radios_with_legend,
+  start_headings_at_level: 3)
 
 == render('/partials/example.*',
   caption: 'Fully customising legends with procs',
-  code: radios_with_legend_proc) do
+  code: radios_with_legend_proc,
+  start_headings_at_level: 3) do
 
   p.govuk-body
     | To take even more control of legends the content can be passed in using

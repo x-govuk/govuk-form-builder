@@ -1,31 +1,37 @@
 - if defined?(custom_config)
   - custom_config
 
-h3 class="govuk-heading-m govuk-!-font-size-27 govuk-!-margin-top-8" id=anchor_id(caption)
+- start_heading_level = defined?(start_headings_at_level) ? start_headings_at_level : 2
+
+*header(level: start_heading_level, id: anchor_id(caption), classes: "govuk-heading-m govuk-!-font-size-27 govuk-!-margin-top-8")
+
   == link_to caption, "#".concat(anchor_id(caption)), class: "header-anchor"
 
-  - if block_given? && (content = yield)
-    == content
+- if block_given? && (content = yield)
+  == content
 
 figure.app-example
   - display_data = defined?(hide_data) && hide_data
 
   - if defined?(sample_data) && !display_data
-    h4.govuk-heading-s Data
+    *header(level: start_heading_level + 1, classes: "govuk-heading-s")
+      | Data
 
     pre
       code.highlight.language-ruby
         | #{sample_data}
 
   - if defined?(controller_code)
-    h4.govuk-heading-s Setup
+    *header(level: start_heading_level + 1, classes: "govuk-heading-s")
+      | Setup
 
     pre
       code.highlight.language-ruby
         | #{controller_code}
 
   - if defined?(raw_config)
-    h4.govuk-heading-s Configuration
+    *header(level: start_heading_level + 1, classes: "govuk-heading-s")
+      | Configuration
 
     .govuk-inset-text
       p.govuk-body
@@ -40,14 +46,16 @@ figure.app-example
   - if defined?(localisation)
     - I18n.backend.store_translations(:en, YAML.safe_load(localisation))
 
-    h4.govuk-heading-s Localisation data
+    *header(level: start_heading_level + 1, classes: "govuk-heading-s")
+      | Localisation data
 
     pre
       code.highlight.language-yaml
         | #{localisation}
 
   .govuk-tabs data-module="govuk-tabs"
-    h4.govuk-heading-s.govuk-tabs--title Input
+    *header(level: start_heading_level + 1, classes: "govuk-heading-s")
+      | Input
 
     ul.govuk-tabs__list
       li.govuk-tabs__list-item.govuk-tabs__list-item--selected
@@ -70,7 +78,8 @@ figure.app-example
   - display_errors = defined?(show_errors) && show_errors
 
   .govuk-tabs data-module="govuk-tabs"
-    h4.govuk-heading-s.govuk-tabs--title Output
+    *header(level: start_heading_level + 1, classes: "govuk-heading-s")
+      | Output
 
     ul.govuk-tabs__list
       li.govuk-tabs__list-item.govuk-tabs__list-item--selected
