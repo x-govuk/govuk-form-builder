@@ -18,6 +18,7 @@ use_helper Helpers::Formatters
 use_helper Helpers::LinkHelpers
 use_helper Helpers::RelatedInfo
 use_helper Helpers::TitleAnchorHelpers
+use_helper Helpers::HeaderHelper
 
 use_helper Examples::TextInput
 use_helper Examples::TextArea
