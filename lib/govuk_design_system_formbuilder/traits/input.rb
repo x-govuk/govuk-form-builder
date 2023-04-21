@@ -1,17 +1,18 @@
 module GOVUKDesignSystemFormBuilder
   module Traits
     module Input
-      def initialize(builder, object_name, attribute_name, hint:, label:, caption:, prefix_text:, suffix_text:, width:, form_group:, **kwargs, &block)
+      def initialize(builder, object_name, attribute_name, hint:, label:, caption:, prefix_text:, suffix_text:, width:, extra_letter_spacing:, form_group:, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
 
-        @width           = width
-        @label           = label
-        @caption         = caption
-        @hint            = hint
-        @prefix_text     = prefix_text
-        @suffix_text     = suffix_text
-        @html_attributes = kwargs
-        @form_group      = form_group
+        @width                = width
+        @label                = label
+        @caption              = caption
+        @hint                 = hint
+        @prefix_text          = prefix_text
+        @suffix_text          = suffix_text
+        @html_attributes      = kwargs
+        @form_group           = form_group
+        @extra_letter_spacing = extra_letter_spacing
       end
 
       def html
@@ -53,11 +54,15 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def classes
-        [%(#{brand}-input)].push(width_classes, error_classes).compact
+        [%(#{brand}-input)].push(width_classes, error_classes, extra_letter_spacing_classes).compact
       end
 
       def error_classes
         %(#{brand}-input--error) if has_errors?
+      end
+
+      def extra_letter_spacing_classes
+        %(#{brand}-input--extra-letter-spacing) if @extra_letter_spacing
       end
 
       def width_classes

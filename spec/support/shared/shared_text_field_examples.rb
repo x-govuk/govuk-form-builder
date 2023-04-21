@@ -97,6 +97,14 @@ shared_examples 'a regular input' do |method_identifier, field_type|
     end
   end
 
+  describe 'extra letter spacing' do
+    subject { builder.send(method, :name, extra_letter_spacing: true) }
+
+    specify 'has extra letter spacing class on the input element' do
+      expect(subject).to have_tag('input', with: { class: 'govuk-input--extra-letter-spacing' })
+    end
+  end
+
   describe 'affixes' do
     let(:prefix_text) { '£' }
     let(:suffix_text) { 'per item' }
