@@ -9,7 +9,9 @@ class Person
     :job_title,
     :postcode,
     :account_number,
-    :price_per_kg
+    :price_per_kg,
+    :national_insurance_number_with_spacing,
+    :national_insurance_number_without_spacing,
   )
 
   # width examples
