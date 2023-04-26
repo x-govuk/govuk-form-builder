@@ -145,4 +145,13 @@ p.govuk-body
       intended to enter. For example, a telephone number input needn’t be the
       full width of the page when it might only be 11 digits long.
 
+== render('/partials/example.*',
+  caption: "Inputs with extra spacing between letters",
+  code: text_field_with_extra_letter_spacing) do
+
+  p.govuk-body
+    | When asking for long codes, references or phone numbers we can make the
+      text in the field more readable by adding some extra spacing between
+      characters.
+
 == render('/partials/related-info.*', links: text_field_info)

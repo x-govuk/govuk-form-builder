@@ -49,5 +49,23 @@ module Examples
           suffix_text: 'per kg'
       SNIPPET
     end
+
+    def text_field_with_extra_letter_spacing
+      <<~SNIPPET
+        = f.govuk_text_field :national_insurance_number_without_spacing,
+          label: { size: 'm', text: 'What is your National Insurance number?' },
+          caption: { text: 'Without extra letter spacing' },
+          width: 10,
+          value: 'QQ123456A',
+          extra_letter_spacing: false
+
+        = f.govuk_text_field :national_insurance_number_with_spacing,
+          label: { size: 'm', text: 'What is your National Insurance number?' },
+          caption: { text: 'With extra letter spacing' },
+          width: 10,
+          value: 'QQ123456A',
+          extra_letter_spacing: true
+      SNIPPET
+    end
   end
 end
