@@ -857,6 +857,7 @@ module GOVUKDesignSystemFormBuilder
     # @param text [String,Proc] the button text. When a +Proc+ is provided its contents will be rendered within the button element
     # @param warning [Boolean] makes the button red ({https://design-system.service.gov.uk/components/button/#warning-buttons warning}) when true
     # @param secondary [Boolean] makes the button grey ({https://design-system.service.gov.uk/components/button/#secondary-buttons secondary}) when true
+    # @param inverse [Boolean] inverts the colours of the button. Note this isn't yet part of the design system.
     # @param prevent_double_click [Boolean] adds JavaScript to safeguard the
     #   form from being submitted more than once
     # @param validate [Boolean] adds the formnovalidate to the submit button when true, this disables all
@@ -881,8 +882,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_submit "Proceed", prevent_double_click: true do
     #     = link_to 'Cancel', some_other_path, class: 'govuk-button__secondary'
     #
-    def govuk_submit(text = config.default_submit_button_text, warning: false, secondary: false, prevent_double_click: true, validate: config.default_submit_validate, disabled: false, **kwargs, &block)
-      Elements::Submit.new(self, text, warning: warning, secondary: secondary, prevent_double_click: prevent_double_click, validate: validate, disabled: disabled, **kwargs, &block).html
+    def govuk_submit(text = config.default_submit_button_text, warning: false, secondary: false, inverse: false, prevent_double_click: true, validate: config.default_submit_validate, disabled: false, **kwargs, &block)
+      Elements::Submit.new(self, text, warning: warning, secondary: secondary, inverse: inverse, prevent_double_click: prevent_double_click, validate: validate, disabled: disabled, **kwargs, &block).html
     end
 
     # Generates three inputs for the +day+, +month+ and +year+ components of a date

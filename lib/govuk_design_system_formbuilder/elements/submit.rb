@@ -5,7 +5,7 @@ module GOVUKDesignSystemFormBuilder
       include Traits::HTMLClasses
       include Traits::HTMLAttributes
 
-      def initialize(builder, text, warning:, secondary:, prevent_double_click:, validate:, disabled:, **kwargs, &block)
+      def initialize(builder, text, warning:, secondary:, inverse:, prevent_double_click:, validate:, disabled:, **kwargs, &block)
         super(builder, nil, nil)
 
         fail ArgumentError, 'buttons can be warning or secondary' if warning && secondary
@@ -14,6 +14,7 @@ module GOVUKDesignSystemFormBuilder
         @prevent_double_click = prevent_double_click
         @warning              = warning
         @secondary            = secondary
+        @inverse              = inverse
         @validate             = validate
         @disabled             = disabled
         @html_attributes      = kwargs
@@ -68,6 +69,7 @@ module GOVUKDesignSystemFormBuilder
           "button--warning" => @warning,
           "button--secondary" => @secondary,
           "button--disabled" => @disabled,
+          "button--inverse" => @inverse,
         ).prefix(brand)
       end
     end
