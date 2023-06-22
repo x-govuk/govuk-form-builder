@@ -4,12 +4,12 @@ require "govuk_design_system_formbuilder/version"
 require_relative "util/version_formatter"
 
 METADATA = {
-  "bug_tracker_uri"   => "https://github.com/DFE-Digital/govuk-formbuilder/issues",
-  "changelog_uri"     => "https://github.com/DFE-Digital/govuk-formbuilder/releases",
+  "bug_tracker_uri"   => "https://github.com/x-govuk/govuk-formbuilder/issues",
+  "changelog_uri"     => "https://github.com/x-govuk/govuk-formbuilder/releases",
   "documentation_uri" => "https://www.rubydoc.info/gems/govuk_design_system_formbuilder/GOVUKDesignSystemFormBuilder/Builder",
   "homepage_uri"      => "https://govuk-form-builder.netlify.app",
-  "source_code_uri"   => "https://github.com/DFE-Digital/govuk-formbuilder",
-  "github_repo"       => "https://github.com/DFE-Digital/govuk-formbuilder"
+  "source_code_uri"   => "https://github.com/x-govuk/govuk-formbuilder",
+  "github_repo"       => "https://github.com/x-govuk/govuk-formbuilder"
 }.freeze
 
 Gem::Specification.new do |s|
