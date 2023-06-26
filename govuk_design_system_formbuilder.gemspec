@@ -18,8 +18,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Peter Yates"]
   s.email       = ["peter.yates@graphia.co.uk"]
   s.homepage    = "https://govuk-form-builder.netlify.app"
-  s.summary     = "GOV.UK-compliant Rails form builder"
-  s.description = "A Rails form builder that generates form inputs adhering to the GOV.UK Design System"
+  s.summary     = "GOV.UK Form Builder for Ryby on Rails"
+  s.description = "This library provides view components for the GOV.UK Design System. It makes creating services more familiar for Ruby on Rails developers."
   s.license     = "MIT"
   s.metadata    = METADATA
   s.files       = Dir["{app,lib}/**/*", "LICENSE", "README.md"]
