@@ -9,6 +9,7 @@ $govuk-brand-colour: #28a;
 @import "govuk/all";
 
 // Application components
+@import "components/breadcrumb";
 @import "components/button";
 @import "components/example";
 @import "components/header";
