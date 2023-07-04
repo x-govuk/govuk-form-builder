@@ -7,7 +7,7 @@ module Helpers
 
   module LinkHelpers
     def code_climate_report_link
-      'https://codeclimate.com/github/x-govuk/govuk-formbuilder'
+      'https://codeclimate.com/github/x-govuk/govuk-form-builder'
     end
 
     def documentation_link
@@ -19,11 +19,11 @@ module Helpers
     end
 
     def github_link
-      'https://github.com/x-govuk/govuk-formbuilder'
+      'https://github.com/x-govuk/govuk-form-builder'
     end
 
     def github_release_2_8_0
-      'https://github.com/x-govuk/govuk-formbuilder/releases/tag/v2.8.0'
+      'https://github.com/x-govuk/govuk-form-builder/releases/tag/v2.8.0'
     end
 
     def design_system_link
@@ -79,7 +79,7 @@ module Helpers
     end
 
     def project_new_issue_link
-      'https://github.com/x-govuk/govuk-formbuilder/issues'
+      'https://github.com/x-govuk/govuk-form-builder/issues'
     end
 
     def nhs_design_system_link

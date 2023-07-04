@@ -1,11 +1,11 @@
 # GOV.UK Form Builder for Ruby on Rails
 
-[![Tests](https://github.com/x-govuk/govuk-formbuilder/workflows/Tests/badge.svg)](https://github.com/x-govuk/govuk-formbuilder/actions)
-[![Maintainability](https://api.codeclimate.com/v1/badges/110136fb22341d3ba646/maintainability)](https://codeclimate.com/github/x-govuk/govuk-formbuilder/maintainability)
-[![Gem version](https://badge.fury.io/rb/govuk_design_system_formbuilder.svg)](https://badge.fury.io/rb/govuk_design_system_formbuilder)
+[![Tests](https://github.com/x-govuk/govuk-form-builder/workflows/Tests/badge.svg)](https://github.com/x-govuk/govuk-form-builder/actions)
+[![Maintainability](https://api.codeclimate.com/v1/badges/110136fb22341d3ba646/maintainability)](https://codeclimate.com/github/x-govuk/govuk-form-builder/maintainability)
+[![Gem version](https://img.shields.io/gem/dt/govuk_design_system_formbuilder?logo=rubygems)](https://rubygems.org/gems/govuk_design_system_formbuilder)
 [![Gem](https://img.shields.io/gem/dt/govuk_design_system_formbuilder?logo=rubygems)](https://rubygems.org/gems/govuk_design_system_formbuilder)
-[![Test coverage](https://api.codeclimate.com/v1/badges/110136fb22341d3ba646/test_coverage)](https://codeclimate.com/github/x-govuk/govuk-formbuilder/test_coverage)
-[![Licence](https://img.shields.io/github/license/x-govuk/govuk_design_system_formbuilder)](https://github.com/x-govuk/govuk-formbuilder/blob/main/LICENSE.txt)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/110136fb22341d3ba646/test_coverage)](https://codeclimate.com/github/x-govuk/govuk-form-builder/test_coverage)
+[![GitHub license](https://img.shields.io/github/license/x-govuk/govuk-form-builder)](https://github.com/x-govuk/govuk-form-builder/blob/main/LICENSE)
 [![GOV.UK Design System version](https://img.shields.io/badge/GOV.UK%20Design%20System-4.6.0-brightgreen)](https://design-system.service.gov.uk)
 [![Rails](https://img.shields.io/badge/Rails-6.1.7%20%E2%95%B1%207.0.4-E16D6D)](https://weblog.rubyonrails.org/releases/)
 [![Ruby](https://img.shields.io/badge/Ruby-3.0.5%20%20%E2%95%B1%203.1.3%20%20%E2%95%B1%203.2.0-E16D6D)](https://www.ruby-lang.org/en/downloads/)
@@ -114,7 +114,8 @@ git config --global user.name "Julius Hibbert"
 
 ## Services using this library
 
-Approximately [100 services use this library](https://github.com/x-govuk/govuk-formbuilder/network/dependents), here are a few from the <abbr title="Department for Education">DfE</abbr>, <abbr title="Ministry of Justice">MoJ</abbr>, and
+Approximately [100 services use this library](https://github.com/x-govuk/govuk-form-builder/network/dependents),
+here are a few from the <abbr title="Department for Education">DfE</abbr>, <abbr title="Ministry of Justice">MoJ</abbr>, and
 <abbr title="Department for Business, Energy & Industrial Strategy">BEIS</abbr>.
 
 * [Apply for teacher training](https://www.github.com/x-govuk/apply-for-teacher-training)
