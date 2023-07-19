@@ -25,7 +25,7 @@ module GOVUKDesignSystemFormBuilder
           class: classes,
           multiple: @multiple,
           aria: { describedby: [hint_id.presence] },
-          data: { 'aria-controls' => @conditional_id }
+          data: { aria_controls: @conditional_id },
         }
       end
 
