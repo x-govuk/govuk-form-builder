@@ -2,7 +2,7 @@
 
 [![Tests](https://github.com/x-govuk/govuk-form-builder/workflows/Tests/badge.svg)](https://github.com/x-govuk/govuk-form-builder/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/110136fb22341d3ba646/maintainability)](https://codeclimate.com/github/x-govuk/govuk-form-builder/maintainability)
-[![Gem version](https://img.shields.io/gem/dt/govuk_design_system_formbuilder?logo=rubygems)](https://rubygems.org/gems/govuk_design_system_formbuilder)
+[![Gem version](https://badge.fury.io/rb/govuk_design_system_formbuilder.svg)](https://badge.fury.io/rb/govuk_design_system_formbuilder)
 [![Gem](https://img.shields.io/gem/dt/govuk_design_system_formbuilder?logo=rubygems)](https://rubygems.org/gems/govuk_design_system_formbuilder)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/110136fb22341d3ba646/test_coverage)](https://codeclimate.com/github/x-govuk/govuk-form-builder/test_coverage)
 [![GitHub license](https://img.shields.io/github/license/x-govuk/govuk-form-builder)](https://github.com/x-govuk/govuk-form-builder/blob/main/LICENSE)
