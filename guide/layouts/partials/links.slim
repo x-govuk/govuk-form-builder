@@ -16,34 +16,11 @@
             #{link_to_in_new_tab("GOV.UK Forms", govuk_forms_link).html_safe} or
             #{link_to_in_new_tab("MoJ Forms", moj_forms_link).html_safe}.
 
-    nav class="govuk-grid-row govuk-!-margin-bottom-4"
-      .govuk-grid-column-one-third
-        h2.govuk-heading-m Introduction
-
-        ul.govuk-list
-          li== link_to 'Get started', '/introduction/get-started'
-          li== link_to 'Configuration', '/introduction/configuration'
-          li== link_to 'Supported versions', '/introduction/supported-versions'
-          li== link_to 'Labels, captions, hints and legends', '/introduction/labels-captions-hints-and-legends'
-          li== link_to 'Error handling', '/introduction/error-handling'
-
-      .govuk-grid-column-one-third
-        h2.govuk-heading-m Building blocks
-
-        ul.govuk-list
-          li== link_to 'Injecting content', '/building-blocks/injecting-content'
-          li== link_to 'Fieldsets', '/building-blocks/fieldsets'
-          li== link_to 'Localisation', '/building-blocks/localisation'
-
-      .govuk-grid-column-one-third
-        h2.govuk-heading-m Form elements
-
-        ul.govuk-list
-          li== link_to 'Checkboxes', '/form-elements/checkboxes'
-          li== link_to 'Date input', '/form-elements/date-input'
-          li== link_to 'File upload', '/form-elements/file-upload'
-          li== link_to 'Radios', '/form-elements/radios'
-          li== link_to 'Select', '/form-elements/select'
-          li== link_to 'Submit button', '/form-elements/submit'
-          li== link_to 'Textareas', '/form-elements/textarea'
-          li== link_to 'Text input', '/form-elements/text-input'
+    nav.govuk-grid-row
+      - navigation_links.each do |theme, links|
+        .govuk-grid-column-one-third
+          h2.govuk-heading-m
+            | #{theme}
+          ul.govuk-list
+            - links.each do |name, path|
+              li== link_to(name, path)

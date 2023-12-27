@@ -6,6 +6,33 @@ module Helpers
   end
 
   module LinkHelpers
+    def navigation_links
+      {
+        "Introduction" => {
+          "Get started" => "/introduction/get-started/",
+          "Configuration" => "/introduction/configuration/",
+          "Labels, captions, hints and legends" => "/introduction/labels-captions-hints-and-legends/",
+          "Error handling" => "/introduction/error-handling/",
+          "Supported versions" => "/introduction/supported-versions/",
+        },
+        "Building blocks" => {
+          "Injecting content" => "/building-blocks/injecting-content/",
+          "Fieldsets" => "/building-blocks/fieldsets/",
+          "Localisation" => "/building-blocks/localisation/",
+        },
+        "Form elements" => {
+          "Checkboxes" => "/form-elements/checkboxes/",
+          "Date input" => "/form-elements/date-input/",
+          "File upload" => "/form-elements/file-upload/",
+          "Radios" => "/form-elements/radios/",
+          "Select" => "/form-elements/select/",
+          "Submit button" => "/form-elements/submit/",
+          "Textarea" => "/form-elements/textarea/",
+          "Text input" => "/form-elements/text-input/",
+        }
+      }
+    end
+
     def code_climate_report_link
       'https://codeclimate.com/github/x-govuk/govuk-form-builder'
     end
