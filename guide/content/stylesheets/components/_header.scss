@@ -1,4 +1,9 @@
 .app-header {
+  // Remove bottom border on header, i.e. when masthead appears below it
+  &--no-border {
+    border-bottom: 0;
+  }
+
   .govuk-header__logo {
     width: auto;
   }
