@@ -3,10 +3,26 @@ title: Get started
 ---
 
 p.govuk-body
-  | The form builder is suitable for use with any Rails application that
-    uses the GOV.UK Design System. If you’re starting from scratch, the
+  | GOV.UK Form Builder is suitable for use with any Rails application that
+    uses the GOV.UK Design System.
+
+p.govuk-body
+  | Every component is designed to produce accessible HTML that meets all of
+    the design system’s requirements without having to spend time reinventing
+    the wheel.
+
+p.govuk-inset-text
+  | This tool is aimed at developers. If you want to build forms without
+    writing code, use a service like
+    #{link_to_in_new_tab("GOV.UK Forms", govuk_forms_link).html_safe} or
+    #{link_to_in_new_tab("MoJ Forms", moj_forms_link).html_safe}.
+
+p.govuk-body
+  | If you’re starting from scratch, the
     easiest way to hit the ground running is to use the DfE’s
     #{link_to('Rails template', dfe_rails_template_link).html_safe}.
+
+h2.govuk-heading-m Installation
 
 p.govuk-body
   | Once your application is working, simply add the following line to your
