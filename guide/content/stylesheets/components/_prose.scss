@@ -43,6 +43,9 @@ $app-code-fg: govuk-shade(govuk-colour("pink"), 10%);
     color: $app-code-fg;
     font-family: ui-monospace, monospace;
     font-size: 1rem;
+  }
+
+  p > code {
     padding: 2px govuk-spacing(1);
   }
 
