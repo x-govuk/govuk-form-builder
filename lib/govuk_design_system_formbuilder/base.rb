@@ -3,10 +3,11 @@ module GOVUKDesignSystemFormBuilder
     delegate :content_tag, :safe_join, :tag, :link_to, :capture, to: :@builder
     delegate :config, to: GOVUKDesignSystemFormBuilder
 
-    def initialize(builder, object_name, attribute_name, &block)
+    def initialize(builder, object_name, attribute_name, on_date_field: false, &block)
       @builder        = builder
       @object_name    = object_name
       @attribute_name = attribute_name
+      @on_date_field  = on_date_field
       @block_content  = capture { block.call } if block_given?
     end
 
@@ -51,10 +52,28 @@ module GOVUKDesignSystemFormBuilder
       override || config.brand
     end
 
+    def object_has_errors?
+      @builder.object.respond_to?(:errors) && @builder.object.errors.any?
+    end
+
+    def attribute_has_errors?
+      return unless object_has_errors?
+
+      @builder.object.errors.key?(@attribute_name)
+    end
+
+    def attribute_has_date_segment_error_on?(segment)
+      return unless object_has_errors?
+
+      @builder.object.errors.key?(%(#{@attribute_name}_#{segment}))
+    end
+
+    def attribute_has_date_segment_errors?
+      date_segment_names.any? { |segment| attribute_has_date_segment_error_on?(segment) }
+    end
+
     def has_errors?
-      @builder.object.respond_to?(:errors) &&
-        @builder.object.errors.any? &&
-        @builder.object.errors.messages[@attribute_name].present?
+      attribute_has_errors? || attribute_has_date_segment_errors?
     end
 
     def combine_references(*ids)
@@ -93,6 +112,10 @@ module GOVUKDesignSystemFormBuilder
       return unless config.enable_logger
 
       Rails.logger.warn(message)
+    end
+
+    def date_segment_names
+      Elements::Date::SEGMENTS.keys
     end
   end
 end

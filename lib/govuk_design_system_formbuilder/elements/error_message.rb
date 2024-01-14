@@ -20,7 +20,17 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def message
-        set_message_safety(@builder.object.errors.messages[@attribute_name]&.first)
+        set_message_safety(all_messages&.first)
+      end
+
+      def all_messages
+        @builder.object.errors.messages[@attribute_name].dup.tap do |messages|
+          if @on_date_field
+            date_segment_names.each do |segment|
+              messages.concat(@builder.object.errors.messages[%(#{@attribute_name}_#{segment}).to_sym])
+            end
+          end
+        end
       end
     end
   end

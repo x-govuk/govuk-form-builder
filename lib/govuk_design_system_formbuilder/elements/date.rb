@@ -25,9 +25,9 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        Containers::FormGroup.new(*bound, **@form_group, **@html_attributes).html do
+        Containers::FormGroup.new(*bound, **@form_group, **@html_attributes, on_date_field: true).html do
           Containers::Fieldset.new(*bound, **fieldset_options).html do
-            safe_join([supplemental_content, hint_element, error_element, date])
+            safe_join([supplemental_content, hint_element, error_element(on_date_field: true), date])
           end
         end
       end
@@ -110,7 +110,7 @@ module GOVUKDesignSystemFormBuilder
       def input(segment, link_errors, width, value)
         tag.input(
           id: id(segment, link_errors),
-          class: classes(width),
+          class: classes(segment, width),
           name: name(segment),
           type: 'text',
           inputmode: 'numeric',
@@ -120,13 +120,17 @@ module GOVUKDesignSystemFormBuilder
         )
       end
 
-      def classes(width)
+      def classes(segment, width)
         build_classes(
           %(input),
           %(date-input__input),
           %(input--width-#{width}),
-          %(input--error) => has_errors?,
+          %(input--error) => segment_has_errors?(segment)
         ).prefix(brand)
+      end
+
+      def segment_has_errors?(segment)
+        attribute_has_errors? || attribute_has_date_segment_error_on?(segment)
       end
 
       # if the field has errors we want the govuk_error_summary to
