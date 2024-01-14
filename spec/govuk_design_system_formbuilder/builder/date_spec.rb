@@ -307,5 +307,90 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
     end
+
+    describe "errors specific to a date part" do
+      let(:day_attributes) { { name: "person[born_on(3i)]", class: "govuk-input" } }
+      let(:month_attributes) { { name: "person[born_on(2i)]", class: "govuk-input" } }
+      let(:year_attributes) { { name: "person[born_on(1i)]", class: "govuk-input" } }
+
+      describe "when there is a problem with the day" do
+        let(:error_message) { "must be between 1 and 31" }
+        before { object.errors.add(:born_on_day, error_message) }
+
+        specify "the form group has an error class" do
+          expect(subject).to have_tag("div", with: { class: %w(govuk-form-group govuk-form-group--error) })
+        end
+
+        specify "the error message is displayed" do
+          expect(subject).to have_tag("p", with: { class: "govuk-error-message" }, text: "Error: #{error_message}")
+        end
+
+        specify "the day field has error classes" do
+          expect(subject).to have_tag("input", with: { name: "person[born_on(3i)]", class: "govuk-input--error" })
+        end
+
+        specify "the month and year fields don't have error classes" do
+          expect(subject).to have_tag("input", with: month_attributes)
+          expect(subject).to have_tag("input", with: year_attributes)
+          expect(subject).not_to have_tag("input", with: { **month_attributes, class: "govuk-input--error" })
+          expect(subject).not_to have_tag("input", with: { **year_attributes, class: "govuk-input--error" })
+        end
+
+        specify "the ID of the input with the error matches the href in the error summary"
+      end
+
+      describe "when there is a problem with the month" do
+        let(:error_message) { "must be between 1 and 12" }
+        before { object.errors.add(:born_on_month, error_message) }
+
+        specify "the form group has an error class" do
+          expect(subject).to have_tag("div", with: { class: %w(govuk-form-group govuk-form-group--error) })
+        end
+
+        specify "the error message is displayed" do
+          expect(subject).to have_tag("p", with: { class: "govuk-error-message" }, text: "Error: #{error_message}")
+        end
+
+        specify "the month field has error classes" do
+          expect(subject).to have_tag("input", with: { name: "person[born_on(2i)]", class: "govuk-input--error" })
+        end
+
+        specify "the day and year fields don't have error classes" do
+          expect(subject).to have_tag("input", with: day_attributes)
+          expect(subject).to have_tag("input", with: year_attributes)
+          expect(subject).not_to have_tag("input", with: { **day_attributes, class: "govuk-input--error" })
+          expect(subject).not_to have_tag("input", with: { **year_attributes, class: "govuk-input--error" })
+        end
+
+        specify "the ID of the input with the error matches the href in the error summary"
+      end
+
+      describe "when there is a problem with the year" do
+        let(:error_message) { "must be greater than 1900" }
+        before { object.errors.add(:born_on_year, error_message) }
+
+        specify "the form group has an error class" do
+          expect(subject).to have_tag("div", with: { class: %w(govuk-form-group govuk-form-group--error) })
+        end
+
+        specify "the year field has error classes" do
+          expect(subject).to have_tag("input", with: { name: "person[born_on(1i)]", class: "govuk-input--error" })
+        end
+
+        specify "the day and month fields don't have error classes" do
+          expect(subject).to have_tag("input", with: day_attributes)
+          expect(subject).to have_tag("input", with: month_attributes)
+          expect(subject).not_to have_tag("input", with: { **day_attributes, class: "govuk-input--error" })
+          expect(subject).not_to have_tag("input", with: { **month_attributes, class: "govuk-input--error" })
+        end
+
+        specify "the ID of the input with the error matches the href in the error summary"
+      end
+
+      describe "when there are multiple date segment errors" do
+        specify "only the first one is shown"
+        specify "the ID of the input with the error matches the href in the error summary"
+      end
+    end
   end
 end
