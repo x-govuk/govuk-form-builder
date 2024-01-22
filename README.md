@@ -120,7 +120,7 @@ here are a few from the <abbr title="Department for Education">DfE</abbr>, <abbr
 
 * [Apply for teacher training](https://www.github.com/x-govuk/apply-for-teacher-training)
 * [Teaching Vacancies](https://www.github.com/x-govuk/teaching-vacancies)
-* [Get a teacher training adviser](https://www.github.com/x-govuk/get-teacher-training-adviser-service/)
+* [Manage children's vaccinations](https://github.com/nhsuk/manage-childrens-vaccinations)
 * [Claim for crown court defence](https://www.github.com/ministryofjustice/Claim-for-Crown-Court-Defence)
 * [Appeal to the tax tribunal](https://www.github.com/ministryofjustice/tax-tribunals-datacapture)
 * [Apply to court about child arrangements](https://www.github.com/ministryofjustice/c100-application)
