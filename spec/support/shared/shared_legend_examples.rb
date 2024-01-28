@@ -26,7 +26,7 @@ shared_examples 'a field that supports a fieldset with legend' do
 
     context 'when text is supplied with a custom tag' do
       let(:tag) { 'h4' }
-      subject { builder.send(*args, legend: { text: legend_text, tag: tag }) }
+      subject { builder.send(*args, legend: { text: legend_text, tag: }) }
 
       specify 'output fieldset should contain the specified tag' do
         expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
@@ -42,7 +42,7 @@ shared_examples 'a field that supports a fieldset with legend' do
         %w(s m l xl).each do |size|
           let(:size) { size }
           context %(when the legend size is #{size}) do
-            subject { builder.send(*args, legend: { text: legend_text, size: size }) }
+            subject { builder.send(*args, legend: { text: legend_text, size: }) }
 
             specify %(the legend size should be #{size}) do
               expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
@@ -57,7 +57,7 @@ shared_examples 'a field that supports a fieldset with legend' do
 
       context 'with an invalid size' do
         let(:size) { '3xl' }
-        subject { builder.send(*args, legend: { text: legend_text, size: size }) }
+        subject { builder.send(*args, legend: { text: legend_text, size: }) }
 
         specify 'should raise an error' do
           expect { subject }.to raise_error("invalid size '#{size}', must be xl, l, m or s")
@@ -113,7 +113,7 @@ shared_examples 'a field that supports a fieldset with legend' do
         end
       end
 
-      subject { builder.send(*args, legend: legend) }
+      subject { builder.send(*args, legend:) }
 
       specify 'output fieldset should contain the specified tag' do
         expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do

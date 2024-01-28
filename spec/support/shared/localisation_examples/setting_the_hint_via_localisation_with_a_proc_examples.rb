@@ -6,7 +6,7 @@ shared_examples 'a field that allows the hint to be localised via a proc' do
     subject { builder.send(*args) }
 
     specify 'hints should be present and correctly-localised' do
-      with_localisations({ locale => localisations }, locale: locale) do
+      with_localisations({ locale => localisations }, locale:) do
         colours.each do |c|
           expect(subject).to have_tag(
             'div',

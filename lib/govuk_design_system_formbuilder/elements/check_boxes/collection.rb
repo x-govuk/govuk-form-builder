@@ -64,7 +64,7 @@ module GOVUKDesignSystemFormBuilder
               @attribute_name,
               check_box,
               @hint_method,
-              link_errors: link_errors
+              link_errors:
             ).html.tap { link_errors = false }
           end
         end

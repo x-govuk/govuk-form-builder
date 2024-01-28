@@ -18,7 +18,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     specify 'output should contain a radio item group with a radio input' do
       expect(subject).to have_tag('div', with: { class: 'govuk-radios__item' }) do
-        with_tag('input', with: { type: 'radio', value: value })
+        with_tag('input', with: { type: 'radio', value: })
       end
     end
 

@@ -213,7 +213,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       specify 'the options should be grouped in the correct optgroup' do
         items.each do |group, colours|
           expect(subject).to have_tag('select > optgroup', with: { label: group }) do
-            colours.each { |name, value| with_tag('option', text: name, with: { value: value }) }
+            colours.each { |name, value| with_tag('option', text: name, with: { value: }) }
           end
         end
       end

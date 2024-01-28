@@ -46,7 +46,7 @@ describe GOVUKDesignSystemFormBuilder::BuilderHelper, type: :helper do
     describe %(given a person object's project attribute (multiple, identified by value)) do
       let(:attribute) { :projects }
       let(:value) { 123 }
-      subject { helper.govuk_field_id(*args, value: value) }
+      subject { helper.govuk_field_id(*args, value:) }
 
       specify "the id is built using the object name, attribute and value" do
         expect(subject).to eql(%(#{object_name}-#{attribute}-#{value}-field))
@@ -63,7 +63,7 @@ describe GOVUKDesignSystemFormBuilder::BuilderHelper, type: :helper do
         end
 
         context 'and link_errors is false' do
-          let(:kwargs) { { value: value, link_errors: false } }
+          let(:kwargs) { { value:, link_errors: false } }
           subject { helper.govuk_field_id(*args, **kwargs) }
 
           specify "does not include the error status in the generated id" do

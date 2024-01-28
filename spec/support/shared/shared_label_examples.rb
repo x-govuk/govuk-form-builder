@@ -64,7 +64,7 @@ shared_examples 'a field that supports labels' do
 
         context 'when an invalid size is supplied' do
           let(:size) { 'extra-medium' }
-          subject { builder.send(*args, label: { size: size }) }
+          subject { builder.send(*args, label: { size: }) }
           specify { expect { subject }.to raise_error("invalid size '#{size}', must be xl, l, m, s or nil") }
         end
       end
@@ -121,7 +121,7 @@ shared_examples 'a field that supports labels as procs' do
     end
   end
 
-  subject { builder.send(*args, label: label) }
+  subject { builder.send(*args, label:) }
 
   specify 'output fieldset should contain the specified tag' do
     expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do

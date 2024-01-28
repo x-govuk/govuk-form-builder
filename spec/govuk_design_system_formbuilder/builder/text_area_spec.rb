@@ -91,7 +91,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
   describe 'limits' do
     context 'max words' do
       let(:max_words) { 20 }
-      subject { builder.send(*args, max_words: max_words) }
+      subject { builder.send(*args, max_words:) }
 
       specify 'should wrap the form group inside a character count tag' do
         expect(subject).to have_tag(
@@ -125,7 +125,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     context 'max chars' do
       let(:max_chars) { 35 }
-      subject { builder.send(*args, max_chars: max_chars) }
+      subject { builder.send(*args, max_chars:) }
 
       specify 'should wrap the form group inside a character count tag' do
         expect(subject).to have_tag(
@@ -168,7 +168,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     context 'thresholds' do
       let(:threshold) { 60 }
       let(:max_chars) { 35 }
-      subject { builder.send(*args, max_chars: max_chars, threshold: threshold) }
+      subject { builder.send(*args, max_chars:, threshold:) }
 
       specify 'should wrap the form group inside a character count tag with a threshold' do
         expect(subject).to have_tag(
@@ -193,10 +193,10 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     context 'overriding' do
       let(:rows) { 8 }
-      subject { builder.send(method, attribute, rows: rows) }
+      subject { builder.send(method, attribute, rows:) }
 
       specify 'should have the overriden number of rows' do
-        expect(subject).to have_tag('textarea', with: { rows: rows })
+        expect(subject).to have_tag('textarea', with: { rows: })
       end
     end
   end

@@ -59,7 +59,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:caption_class) { "govuk-caption-#{caption_size}" }
 
       subject do
-        builder.send(*args, legend: legend, caption: caption, &example_block)
+        builder.send(*args, legend:, caption:, &example_block)
       end
 
       context 'with a legend' do
