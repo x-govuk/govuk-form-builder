@@ -25,6 +25,15 @@ shared_examples 'a field that accepts arbitrary blocks of HTML' do
         with_tag('p', text: block_p)
       end
     end
+
+    describe "deprecation warning message" do
+      before { allow(Rails).to receive_message_chain(:logger, :warn).with(any_args).and_return(true) }
+
+      specify 'logs a deprecation warning' do
+        subject
+        expect(Rails.logger).to have_received(:warn).with(/Supplemental content is deprecated/)
+      end
+    end
   end
 
   context 'when no block is supplied' do

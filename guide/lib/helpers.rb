@@ -1,9 +1,12 @@
 require 'pry'
+require 'rails'
 require 'action_view'
 require 'active_model'
 require 'active_support/core_ext/string'
 require 'htmlbeautifier'
 require 'slim/erb_converter'
+
+Rails.logger = Logger.new($stdout)
 
 Dir.glob(File.join('./lib', '**', '*.rb')).sort.each { |f| require f }
 
