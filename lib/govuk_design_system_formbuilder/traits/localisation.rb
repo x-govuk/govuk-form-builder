@@ -3,7 +3,7 @@ module GOVUKDesignSystemFormBuilder
     module Localisation
       # starts with an letter that is followed by other word characters or
       # spaces, zero or more times
-      BASE_NAME_REGEXP = %r{[[:alpha:]](?:[\w\s]*)}.freeze
+      BASE_NAME_REGEXP = %r{[[:alpha:]](?:[\w\s]*)}
 
     private
 

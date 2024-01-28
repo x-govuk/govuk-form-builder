@@ -16,7 +16,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         with_tag('input', with: {
           id: "person-stationery-#{value_with_dashes}-field",
           type: 'checkbox',
-          value: value
+          value:
         })
       end
     end

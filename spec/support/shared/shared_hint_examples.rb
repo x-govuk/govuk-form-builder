@@ -49,7 +49,7 @@ shared_examples 'a field that supports hints' do
       end
     end
 
-    subject { builder.send(*args, hint: hint) }
+    subject { builder.send(*args, hint:) }
 
     specify 'output should contain a hint' do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do

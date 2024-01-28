@@ -154,14 +154,14 @@ module Setup
 
     def form_data
       {
-        departments: departments,
-        departments_collection: departments_collection,
-        contact_types: contact_types,
-        lunch_options: lunch_options,
-        grouped_lunch_options: grouped_lunch_options,
-        primary_colours: primary_colours,
-        laptops: laptops,
-        custom_error_presenter: custom_error_presenter,
+        departments:,
+        departments_collection:,
+        contact_types:,
+        lunch_options:,
+        grouped_lunch_options:,
+        primary_colours:,
+        laptops:,
+        custom_error_presenter:,
       }
     end
   end

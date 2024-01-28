@@ -114,7 +114,7 @@ module GOVUKDesignSystemFormBuilder
           name: name(segment),
           type: 'text',
           inputmode: 'numeric',
-          value: value,
+          value:,
           autocomplete: date_of_birth_autocomplete_value(segment),
           maxlength: (width if maxlength_enabled?),
         )
@@ -134,7 +134,7 @@ module GOVUKDesignSystemFormBuilder
       # in the normal fashion
       def id(segment, link_errors)
         if has_errors? && link_errors
-          field_id(link_errors: link_errors)
+          field_id(link_errors:)
         else
           [@object_name, @attribute_name, SEGMENTS.fetch(segment)].join("_")
         end

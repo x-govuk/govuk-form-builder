@@ -269,7 +269,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
                     builder.safe_join(
                       [
                         builder.govuk_error_summary,
-                        builder.govuk_date_field(:born_on, omit_day: omit_day)
+                        builder.govuk_date_field(:born_on, omit_day:)
                       ]
                     )
                   end
@@ -397,7 +397,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       context 'when an override is specified' do
         let(:link_base_errors_to) { :name }
-        subject { builder.send(method, link_base_errors_to: link_base_errors_to) }
+        subject { builder.send(method, link_base_errors_to:) }
 
         specify 'the override field should be linked to' do
           expect(subject).to have_tag("a", text: error, with: { href: %(#person-#{link_base_errors_to}-field) })

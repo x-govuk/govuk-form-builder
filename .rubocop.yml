@@ -6,6 +6,7 @@ inherit_gem:
     - config/rails.yml
 
 AllCops:
+  TargetRubyVersion: 3.1
   Exclude:
     - govuk_design_system_formbuilder.gemspec
 Rails/Date:
@@ -37,8 +38,6 @@ Style/OptionalBooleanParameter:
 Style/CommentAnnotation:
   Enabled: false
 Style/EmptyCaseCondition:
-  Enabled: false
-Style/HashSyntax:
   Enabled: false
 Style/FormatString:
   EnforcedStyle: format

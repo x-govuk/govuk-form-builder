@@ -154,21 +154,21 @@ shared_examples 'a regular input' do |method_identifier, field_type|
     end
 
     context 'when a prefix is supplied' do
-      subject { builder.send(*args, prefix_text: prefix_text) }
+      subject { builder.send(*args, prefix_text:) }
 
       include_examples 'prefixes'
       include_examples 'no suffix'
     end
 
     context 'when a suffix is supplied' do
-      subject { builder.send(*args, suffix_text: suffix_text) }
+      subject { builder.send(*args, suffix_text:) }
 
       include_examples 'suffixes'
       include_examples 'no prefix'
     end
 
     context 'when both a prefix and suffix are supplied' do
-      subject { builder.send(*args, prefix_text: prefix_text, suffix_text: suffix_text) }
+      subject { builder.send(*args, prefix_text:, suffix_text:) }
 
       include_examples 'prefixes'
       include_examples 'suffixes'

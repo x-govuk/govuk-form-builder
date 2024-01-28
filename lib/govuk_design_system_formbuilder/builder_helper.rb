@@ -26,7 +26,7 @@ module GOVUKDesignSystemFormBuilder
     def govuk_field_id(object, attribute_name, object_name = nil, value: nil, link_errors: true)
       (object_name = retrieve_object_name(object)) if object_name.nil?
 
-      proxy_base(object, object_name, attribute_name, value: value).field_id(link_errors: link_errors)
+      proxy_base(object, object_name, attribute_name, value:).field_id(link_errors:)
     end
 
     # Renders an error summary
@@ -51,7 +51,7 @@ module GOVUKDesignSystemFormBuilder
   private
 
     def proxy_base(object, object_name, attribute_name, value: nil)
-      GOVUKDesignSystemFormBuilder::Proxy.new(object, object_name, attribute_name, value: value)
+      GOVUKDesignSystemFormBuilder::Proxy.new(object, object_name, attribute_name, value:)
     end
 
     def proxy_builder(object, object_name, template, options)

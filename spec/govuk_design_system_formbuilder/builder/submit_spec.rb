@@ -31,7 +31,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     end
 
     specify 'button should have the correct text' do
-      expect(subject).to have_tag('button', text: text)
+      expect(subject).to have_tag('button', text:)
     end
 
     specify 'button should have the govuk-button data-module' do
@@ -113,7 +113,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       specify 'should wrap the buttons and extra content in a button group' do
         expect(subject).to have_tag('div', with: { class: 'govuk-button-group' }) do
           with_tag('button', text: 'Continue')
-          with_tag('a', text: text, with: { href: target })
+          with_tag('a', text:, with: { href: target })
         end
       end
     end

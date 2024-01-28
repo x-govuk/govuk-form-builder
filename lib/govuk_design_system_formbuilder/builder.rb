@@ -53,7 +53,7 @@ module GOVUKDesignSystemFormBuilder
     #     label: -> { tag.h3('Call-sign') }
     #
     def govuk_text_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, extra_letter_spacing: false, form_group: {}, prefix_text: nil, suffix_text: nil, **kwargs, &block)
-      Elements::Inputs::Text.new(self, object_name, attribute_name, hint: hint, label: label, caption: caption, width: width, extra_letter_spacing: extra_letter_spacing, form_group: form_group, prefix_text: prefix_text, suffix_text: suffix_text, **kwargs, &block).html
+      Elements::Inputs::Text.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, **kwargs, &block).html
     end
 
     # Generates a input of type +tel+
@@ -107,7 +107,7 @@ module GOVUKDesignSystemFormBuilder
     #     label: -> { tag.h3('Work number') }
     #
     def govuk_phone_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, extra_letter_spacing: false, form_group: {}, prefix_text: nil, suffix_text: nil, **kwargs, &block)
-      Elements::Inputs::Phone.new(self, object_name, attribute_name, hint: hint, label: label, caption: caption, width: width, extra_letter_spacing: extra_letter_spacing, form_group: form_group, prefix_text: prefix_text, suffix_text: suffix_text, **kwargs, &block).html
+      Elements::Inputs::Phone.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, **kwargs, &block).html
     end
 
     # Generates a input of type +email+
@@ -159,7 +159,7 @@ module GOVUKDesignSystemFormBuilder
     #     label: -> { tag.h3('Personal email address') }
     #
     def govuk_email_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, extra_letter_spacing: false, form_group: {}, prefix_text: nil, suffix_text: nil, **kwargs, &block)
-      Elements::Inputs::Email.new(self, object_name, attribute_name, hint: hint, label: label, caption: caption, width: width, extra_letter_spacing: extra_letter_spacing, form_group: form_group, prefix_text: prefix_text, suffix_text: suffix_text, **kwargs, &block).html
+      Elements::Inputs::Email.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, **kwargs, &block).html
     end
 
     # Generates a input of type +password+
@@ -210,7 +210,7 @@ module GOVUKDesignSystemFormBuilder
     #     label: -> { tag.h3('What is your secret pass code?') }
     #
     def govuk_password_field(attribute_name, hint: {}, label: {}, width: nil, extra_letter_spacing: false, form_group: {}, caption: {}, prefix_text: nil, suffix_text: nil, **kwargs, &block)
-      Elements::Inputs::Password.new(self, object_name, attribute_name, hint: hint, label: label, caption: caption, width: width, extra_letter_spacing: extra_letter_spacing, form_group: form_group, prefix_text: prefix_text, suffix_text: suffix_text, **kwargs, &block).html
+      Elements::Inputs::Password.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, **kwargs, &block).html
     end
 
     # Generates a input of type +url+
@@ -262,7 +262,7 @@ module GOVUKDesignSystemFormBuilder
     #     label: -> { tag.h3("Enter your company's website") }
     #
     def govuk_url_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, extra_letter_spacing: false, form_group: {}, prefix_text: nil, suffix_text: nil, **kwargs, &block)
-      Elements::Inputs::URL.new(self, object_name, attribute_name, hint: hint, label: label, caption: caption, width: width, extra_letter_spacing: extra_letter_spacing, form_group: form_group, prefix_text: prefix_text, suffix_text: suffix_text, **kwargs, &block).html
+      Elements::Inputs::URL.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, **kwargs, &block).html
     end
 
     # Generates a input of type +number+
@@ -317,7 +317,7 @@ module GOVUKDesignSystemFormBuilder
     #     label: -> { tag.h3("How many seconds does it take you to run 100m?") }
     #
     def govuk_number_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, extra_letter_spacing: false, form_group: {}, prefix_text: nil, suffix_text: nil, **kwargs, &block)
-      Elements::Inputs::Number.new(self, object_name, attribute_name, hint: hint, label: label, caption: caption, width: width, extra_letter_spacing: extra_letter_spacing, form_group: form_group, prefix_text: prefix_text, suffix_text: suffix_text, **kwargs, &block).html
+      Elements::Inputs::Number.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, **kwargs, &block).html
     end
 
     # Generates a +textarea+ element with a label, optional hint. Also offers
@@ -373,7 +373,7 @@ module GOVUKDesignSystemFormBuilder
     #     label: -> { tag.h3("How do you set it up?") }
     #
     def govuk_text_area(attribute_name, hint: {}, label: {}, caption: {}, max_words: nil, max_chars: nil, rows: 5, threshold: nil, form_group: {}, **kwargs, &block)
-      Elements::TextArea.new(self, object_name, attribute_name, hint: hint, label: label, caption: caption, max_words: max_words, max_chars: max_chars, rows: rows, threshold: threshold, form_group: form_group, **kwargs, &block).html
+      Elements::TextArea.new(self, object_name, attribute_name, hint:, label:, caption:, max_words:, max_chars:, rows:, threshold:, form_group:, **kwargs, &block).html
     end
 
     # Generates a +select+ element containing +option+ for each member in the provided collection
@@ -422,13 +422,13 @@ module GOVUKDesignSystemFormBuilder
         object_name,
         attribute_name,
         collection,
-        value_method: value_method,
-        text_method: text_method,
-        hint: hint,
-        label: label,
-        caption: caption,
-        options: options,
-        form_group: form_group,
+        value_method:,
+        text_method:,
+        hint:,
+        label:,
+        caption:,
+        options:,
+        form_group:,
         **kwargs,
         &block
       ).html
@@ -466,7 +466,7 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_select :hat_colour, options_for_select(@colours)
     #
     def govuk_select(attribute_name, choices = nil, options: {}, label: {}, hint: {}, form_group: {}, caption: {}, **kwargs, &block)
-      Elements::Select.new(self, object_name, attribute_name, choices, options: options, label: label, hint: hint, form_group: form_group, caption: caption, **kwargs, &block).html
+      Elements::Select.new(self, object_name, attribute_name, choices, options:, label:, hint:, form_group:, caption:, **kwargs, &block).html
     end
 
     # Generates a radio button for each item in the supplied collection
@@ -546,17 +546,17 @@ module GOVUKDesignSystemFormBuilder
         object_name,
         attribute_name,
         collection,
-        value_method: value_method,
-        text_method: text_method,
-        hint_method: hint_method,
-        hint: hint,
-        legend: legend,
-        caption: caption,
-        inline: inline,
-        small: small,
-        bold_labels: bold_labels,
-        form_group: form_group,
-        include_hidden: include_hidden,
+        value_method:,
+        text_method:,
+        hint_method:,
+        hint:,
+        legend:,
+        caption:,
+        inline:,
+        small:,
+        bold_labels:,
+        form_group:,
+        include_hidden:,
         **kwargs,
         &block
       ).html
@@ -611,7 +611,7 @@ module GOVUKDesignSystemFormBuilder
     #      = f.govuk_radio_button :burger_id, :cheese, label: { text: 'Cheeseburger' }
     #
     def govuk_radio_buttons_fieldset(attribute_name, hint: {}, legend: {}, caption: {}, inline: false, small: false, form_group: {}, **kwargs, &block)
-      Containers::RadioButtonsFieldset.new(self, object_name, attribute_name, hint: hint, legend: legend, caption: caption, inline: inline, small: small, form_group: form_group, **kwargs, &block).html
+      Containers::RadioButtonsFieldset.new(self, object_name, attribute_name, hint:, legend:, caption:, inline:, small:, form_group:, **kwargs, &block).html
     end
 
     # Generates a radio button
@@ -643,7 +643,7 @@ module GOVUKDesignSystemFormBuilder
     #    = f.govuk_radio_button :favourite_colour, :red, label: { text: 'Red' }
     #
     def govuk_radio_button(attribute_name, value, hint: {}, label: {}, link_errors: false, **kwargs, &block)
-      Elements::Radios::FieldsetRadioButton.new(self, object_name, attribute_name, value, hint: hint, label: label, link_errors: link_errors, **kwargs, &block).html
+      Elements::Radios::FieldsetRadioButton.new(self, object_name, attribute_name, value, hint:, label:, link_errors:, **kwargs, &block).html
     end
 
     # Inserts a text divider into a list of radio buttons
@@ -725,15 +725,15 @@ module GOVUKDesignSystemFormBuilder
         object_name,
         attribute_name,
         collection,
-        value_method: value_method,
-        text_method: text_method,
-        hint_method: hint_method,
-        hint: hint,
-        legend: legend,
-        caption: caption,
-        small: small,
-        form_group: form_group,
-        include_hidden: include_hidden,
+        value_method:,
+        text_method:,
+        hint_method:,
+        hint:,
+        legend:,
+        caption:,
+        small:,
+        form_group:,
+        include_hidden:,
         **kwargs,
         &block
       ).html
@@ -782,12 +782,12 @@ module GOVUKDesignSystemFormBuilder
         self,
         object_name,
         attribute_name,
-        hint: hint,
-        legend: legend,
-        caption: caption,
-        small: small,
-        form_group: form_group,
-        multiple: multiple,
+        hint:,
+        legend:,
+        caption:,
+        small:,
+        form_group:,
+        multiple:,
         **kwargs,
         &block
       ).html
@@ -830,11 +830,11 @@ module GOVUKDesignSystemFormBuilder
         attribute_name,
         value,
         unchecked_value,
-        hint: hint,
-        label: label,
-        link_errors: link_errors,
-        multiple: multiple,
-        exclusive: exclusive,
+        hint:,
+        label:,
+        link_errors:,
+        multiple:,
+        exclusive:,
         **kwargs,
         &block
       ).html
@@ -883,7 +883,7 @@ module GOVUKDesignSystemFormBuilder
     #     = link_to 'Cancel', some_other_path, class: 'govuk-button__secondary'
     #
     def govuk_submit(text = config.default_submit_button_text, warning: false, secondary: false, inverse: false, prevent_double_click: true, validate: config.default_submit_validate, disabled: false, **kwargs, &block)
-      Elements::Submit.new(self, text, warning: warning, secondary: secondary, inverse: inverse, prevent_double_click: prevent_double_click, validate: validate, disabled: disabled, **kwargs, &block).html
+      Elements::Submit.new(self, text, warning:, secondary:, inverse:, prevent_double_click:, validate:, disabled:, **kwargs, &block).html
     end
 
     # Generates three inputs for the +day+, +month+ and +year+ components of a date
@@ -932,7 +932,7 @@ module GOVUKDesignSystemFormBuilder
     #  = f.govuk_date_field :finishes_on,
     #    legend: -> { tag.h3('Which category do you belong to?') }
     def govuk_date_field(attribute_name, hint: {}, legend: {}, caption: {}, date_of_birth: false, omit_day: false, maxlength_enabled: false, form_group: {}, **kwargs, &block)
-      Elements::Date.new(self, object_name, attribute_name, hint: hint, legend: legend, caption: caption, date_of_birth: date_of_birth, omit_day: omit_day, maxlength_enabled: maxlength_enabled, form_group: form_group, **kwargs, &block).html
+      Elements::Date.new(self, object_name, attribute_name, hint:, legend:, caption:, date_of_birth:, omit_day:, maxlength_enabled:, form_group:, **kwargs, &block).html
     end
 
     # Generates a summary of errors in the form, each linking to the corresponding
@@ -962,7 +962,7 @@ module GOVUKDesignSystemFormBuilder
     #
     # @see https://design-system.service.gov.uk/components/error-summary/ GOV.UK error summary
     def govuk_error_summary(title = config.default_error_summary_title, presenter: config.default_error_summary_presenter, link_base_errors_to: nil, order: nil, **kwargs, &block)
-      Elements::ErrorSummary.new(self, object_name, title, link_base_errors_to: link_base_errors_to, order: order, presenter: presenter, **kwargs, &block).html
+      Elements::ErrorSummary.new(self, object_name, title, link_base_errors_to:, order:, presenter:, **kwargs, &block).html
     end
 
     # Generates a fieldset containing the contents of the block
@@ -995,7 +995,7 @@ module GOVUKDesignSystemFormBuilder
     # @see https://design-system.service.gov.uk/styles/typography/#headings-with-captions Headings with captions
     # @return [ActiveSupport::SafeBuffer] HTML output
     def govuk_fieldset(legend: { text: 'Fieldset heading' }, caption: {}, described_by: nil, **kwargs, &block)
-      Containers::Fieldset.new(self, legend: legend, caption: caption, described_by: described_by, **kwargs, &block).html
+      Containers::Fieldset.new(self, legend:, caption:, described_by:, **kwargs, &block).html
     end
 
     # Generates an input of type +file+
@@ -1036,7 +1036,7 @@ module GOVUKDesignSystemFormBuilder
     #   uploads, {https://guides.rubyonrails.org/form_helpers.html#uploading-files see
     #   the Rails documentation} for more information
     def govuk_file_field(attribute_name, label: {}, caption: {}, hint: {}, form_group: {}, **kwargs, &block)
-      Elements::File.new(self, object_name, attribute_name, label: label, caption: caption, hint: hint, form_group: form_group, **kwargs, &block).html
+      Elements::File.new(self, object_name, attribute_name, label:, caption:, hint:, form_group:, **kwargs, &block).html
     end
   end
 end

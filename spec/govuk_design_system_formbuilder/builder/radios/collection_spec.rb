@@ -216,7 +216,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         let(:hint_method) { nil }
 
         subject do
-          builder.send(*args.push(hint_method), bold_labels: bold_labels)
+          builder.send(*args.push(hint_method), bold_labels:)
         end
 
         context 'when bold_labels: nil' do
