@@ -6,7 +6,10 @@ module Examples
           departments,
           :id,
           :name,
-          legend: { text: "Which department do you work in?" }
+          caption: nil,
+          legend: { text: "Which departments do you work in?" },
+          hint: { text: "Select all departments that apply" }
+
       SNIPPET
     end
 
@@ -17,7 +20,8 @@ module Examples
           :id,
           :name,
           :description,
-          legend: { text: "What is your preferred lunch option?" }
+          hint: { text: "Select all options you are happy to eat" },
+          legend: { text: "What are your preferred lunch options?" }
       SNIPPET
     end
 
