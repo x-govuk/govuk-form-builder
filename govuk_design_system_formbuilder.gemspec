@@ -50,4 +50,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency("slim", "~> 5.2.0")
   s.add_development_dependency("slim_lint", "~> 0.26.0")
   s.add_development_dependency("webrick", "~> 1.8.1")
+  s.add_development_dependency("redcarpet", "~> 3.6.0")
 end
