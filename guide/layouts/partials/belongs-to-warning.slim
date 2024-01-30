@@ -1,0 +1,20 @@
+.govuk-notification-banner[
+  role="region"
+  aria-labelledby="govuk-notification-banner-title"
+  data-module="govuk-notification-banner"
+]
+  .govuk-notification-banner__header
+    .govuk-notification-banner__title
+      | Important
+  .govuk-notification-banner__content
+    markdown:
+      Note that Rails now adds presence validation to associations
+      automatically but usually we set relationships by assigning values to the
+      foreign key column.
+
+      This results in errors being added to the object on attributes that don't
+      appear in the form, for example on `department` instead of
+      `department_id`.
+
+      You can suppress this behaviour by adding `optional: true` to the relationship
+      and manually adding the presence validation to the foreign key field yourself.
