@@ -41,3 +41,5 @@ Style/EmptyCaseCondition:
   Enabled: false
 Style/FormatString:
   EnforcedStyle: format
+Style/RedundantParentheses:
+  Enabled: false
