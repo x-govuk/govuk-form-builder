@@ -61,14 +61,14 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
 
         specify 'the error message list should contain the correct messages' do
-          object.errors.messages.each do |_attribute, message_list|
+          object.errors.messages.each_value do |message_list|
             expect(subject).to have_tag('li', text: message_list.first) do
             end
           end
         end
 
         specify 'the error message list should contain links to relevant errors' do
-          object.errors.messages.each do |attribute, _msg|
+          object.errors.messages.each_key do |attribute|
             expect(subject).to have_tag('a', with: {
               href: "#person-#{underscores_to_dashes(attribute)}-field-error",
               'data-turbo' => false
