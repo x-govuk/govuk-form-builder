@@ -162,57 +162,6 @@ module GOVUKDesignSystemFormBuilder
       Elements::Inputs::Email.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, **kwargs, &block).html
     end
 
-    # Generates a input of type +password+
-    #
-    # @param attribute_name [Symbol] The name of the attribute
-    # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
-    #   supplied the hint will be wrapped in a +div+ instead of a +span+
-    # @option hint text [String] the hint text
-    # @option hint kwargs [Hash] additional arguments are applied as attributes to the hint
-    # @param width [Integer,String] sets the width of the input, can be +2+, +3+ +4+, +5+, +10+ or +20+ characters
-    #   or +one-quarter+, +one-third+, +one-half+, +two-thirds+ or +full+ width of the container
-    # @param extra_letter_spacing [Boolean] when true adds space between characters to increase the readability of
-    #   sequences of letters and numbers. Defaults to +false+.
-    # @param label [Hash,Proc] configures or sets the associated label content
-    # @option label text [String] the label text
-    # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
-    # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
-    # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
-    # @option label kwargs [Hash] additional arguments are applied as attributes on the +label+ element
-    # @param caption [Hash] configures or sets the caption content which is inserted above the label
-    # @option caption text [String] the caption text
-    # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
-    # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
-    # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
-    # @param form_group [Hash] configures the form group
-    # @option form_group kwargs [Hash] additional attributes added to the form group
-    # @param prefix_text [String] the text placed before the input. No prefix will be added if left +nil+
-    # @param suffix_text [String] the text placed after the input. No suffix will be added if left +nil+
-    # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
-    # @return [ActiveSupport::SafeBuffer] HTML output
-    # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
-    # @see https://design-system.service.gov.uk/patterns/passwords/ GOV.UK Password patterns
-    # @see https://design-system.service.gov.uk/styles/typography/#headings-with-captions Headings with captions
-    #
-    # @example A password field
-    #   = f.govuk_password_field :password,
-    #     label: { text: 'Enter your password' }
-    #
-    # @example A password field with injected content
-    #   = f.govuk_password_field :password,
-    #     label: { text: 'Password' } do
-    #
-    #     p.govuk-inset-text
-    #       | Ensure your password is at least 16 characters long
-    #
-    # @example A password field with the label supplied as a proc
-    #   = f.govuk_password_field :passcode,
-    #     label: -> { tag.h3('What is your secret pass code?') }
-    #
-    def govuk_password_field(attribute_name, hint: {}, label: {}, width: nil, extra_letter_spacing: false, form_group: {}, caption: {}, prefix_text: nil, suffix_text: nil, **kwargs, &block)
-      Elements::Inputs::Password.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, **kwargs, &block).html
-    end
-
     # Generates a input of type +url+
     #
     # @param attribute_name [Symbol] The name of the attribute
