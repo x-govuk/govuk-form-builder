@@ -56,6 +56,11 @@ ul.govuk-list.govuk-list--bullet
       | Date inputs without a day field are not currently part of the GOV.UK Design System
 
 == render('/partials/example.*',
+  caption: 'Experimental date segment stuff',
+  code: date_field_with_segment_specific_error,
+  show_errors: :date_segments)
+
+== render('/partials/example.*',
   caption: 'Specifying client side length restrictions on date inputs with maxlength',
   code: maxlength_enabled_field) do
 

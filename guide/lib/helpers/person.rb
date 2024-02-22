@@ -67,7 +67,8 @@ class Person
   # date fields
   attr_accessor(
     :date_of_birth,
-    :graduation_month
+    :graduation_month,
+    :retirement_date
   )
 
   # labels, captions, hints and legends
@@ -100,11 +101,16 @@ class Person
   validates :welcome_lunch_choice, presence: { message: 'Select a lunch choice for your first day' }, on: :fields
 
   validate :telephone_number_or_email_address_exists, on: :base_errors
+  validate :retirement_date_year_must_be_in_the_future, on: :date_segments
 
   def telephone_number_or_email_address_exists
     if telephone_number.blank? && email_address.blank?
       errors.add(:base, "Enter a telephone number or email address")
     end
+  end
+
+  def retirement_date_year_must_be_in_the_future
+    errors.add(:retirement_date_year, "Year must be later than #{Date.today.year}")
   end
 
   # fieldset
@@ -124,4 +130,10 @@ class Person
     :favourite_kind_of_hat,
     :role
   )
+
+  def initialize(...)
+    self.retirement_date = Date.new(Date.today.year - 1, 5, 5)
+
+    super
+  end
 end

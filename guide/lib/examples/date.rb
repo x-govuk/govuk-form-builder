@@ -26,5 +26,12 @@ module Examples
           hint: { text: 'Use the format day, month, year, for example 27 3 2021' }
       SNIPPET
     end
+
+    def date_field_with_segment_specific_error
+      <<~SNIPPET
+        = f.govuk_date_field :retirement_date,
+          legend: { text: 'When do you expect to retire?' }
+      SNIPPET
+    end
   end
 end

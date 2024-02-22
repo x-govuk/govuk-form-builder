@@ -9,8 +9,8 @@ module GOVUKDesignSystemFormBuilder
 
     private
 
-      def error_element
-        @error_element ||= Elements::ErrorMessage.new(*bound)
+      def error_element(on_date_field: false)
+        @error_element ||= Elements::ErrorMessage.new(*bound, on_date_field:)
       end
 
       def set_message_safety(message)
