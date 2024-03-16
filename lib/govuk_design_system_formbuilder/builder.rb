@@ -655,7 +655,7 @@ module GOVUKDesignSystemFormBuilder
     # @example A custom divider
     #   = govuk_radio_divider 'Alternatively'
     def govuk_radio_divider(text = config.default_radio_divider_text)
-      tag.div(text, class: %w(govuk-radios__divider))
+      tag.div(text, class: %(#{config.brand}-radios__divider))
     end
 
     # Generate a list of check boxes from a collection
