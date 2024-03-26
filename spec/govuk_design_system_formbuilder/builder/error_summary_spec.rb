@@ -305,7 +305,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             specify "errors are displayed in the order they're defined in the model" do
               expect(object.name).to be_present
 
-              expect(actual_order).to eql(%w(favourite_colour projects cv))
+              expect(actual_order).to eql(%w(favourite_colour projects cv password))
             end
           end
 

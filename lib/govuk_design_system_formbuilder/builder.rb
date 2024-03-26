@@ -269,6 +269,70 @@ module GOVUKDesignSystemFormBuilder
       Elements::Inputs::Number.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, **kwargs, &block).html
     end
 
+    # Generates a password input
+    #
+    # @param attribute_name [Symbol] The name of the attribute
+    # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
+    #   supplied the hint will be wrapped in a +div+ instead of a +span+
+    # @option hint text [String] the hint text
+    # @option hint kwargs [Hash] additional arguments are applied as attributes to the hint
+    # @param label [Hash,Proc] configures or sets the associated label content
+    # @option label text [String] the label text
+    # @option label size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
+    # @option label tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
+    # @option label hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @option label kwargs [Hash] additional arguments are applied as attributes on the +label+ element
+    # @param caption [Hash] configures or sets the caption content which is inserted above the label
+    # @option caption text [String] the caption text
+    # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
+    # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
+    # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
+    # @param form_group [Hash] configures the form group
+    # @option form_group kwargs [Hash] additional attributes added to the form group
+    # @param show_password_text [String] button text when the password is hidden. Defaults to "Show"
+    # @param hide_password_text [String] button text when the password is shown. Defaults to "Hide"
+    # @param show_password_aria_label_text [String] button text exposed to assistive technologies, like screen readers, when the password is hidden. Defaults to "Show password"
+    # @param hide_password_aria_label_text [String] button text exposed to assistive technologies, like screen readers, when the password is visible. Defaults to "Hide password"
+    # @param password_shown_announcement_text [String] Announcement made to screen reader users when their password has become visible in plain text. Defaults to "Your password is visible"
+    # @param password_hidden_announcement_text [String] Announcement made to screen reader users when their password has been obscured and is not visible. Defaults to "Your password is hidden"
+    #
+    # @example A password field
+    #   = f.govuk_password_field :password
+    #
+    def govuk_password_field(
+      attribute_name,
+      hint: {},
+      label: {},
+      caption: {},
+      form_group: {},
+      show_password_text: config.default_show_password_text,
+      hide_password_text: config.default_hide_password_text,
+      show_password_aria_label_text: config.default_show_password_aria_label_text,
+      hide_password_aria_label_text: config.default_hide_password_aria_label_text,
+      password_shown_announcement_text: config.default_password_shown_announcement_text,
+      password_hidden_announcement_text: config.default_password_hidden_announcement_text,
+      **kwargs,
+      &block
+    )
+      Elements::Password.new(
+        self,
+        object_name,
+        attribute_name,
+        hint:,
+        label:,
+        caption:,
+        form_group:,
+        show_password_text:,
+        hide_password_text:,
+        show_password_aria_label_text:,
+        hide_password_aria_label_text:,
+        password_shown_announcement_text:,
+        password_hidden_announcement_text:,
+        **kwargs,
+        &block
+      ).html
+    end
+
     # Generates a +textarea+ element with a label, optional hint. Also offers
     # the ability to add the GOV.UK character and word counting components
     # automatically

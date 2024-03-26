@@ -1,7 +1,7 @@
 describe GOVUKDesignSystemFormBuilder::FormBuilder do
   include_context 'setup builder'
 
-  describe '#date_input_group' do
+  describe '#govuk_date_field' do
     let(:method) { :govuk_date_field }
     let(:attribute) { :born_on }
 
