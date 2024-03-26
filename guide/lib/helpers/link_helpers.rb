@@ -24,6 +24,7 @@ module Helpers
           "Checkboxes" => "/form-elements/checkboxes/",
           "Date input" => "/form-elements/date-input/",
           "File upload" => "/form-elements/file-upload/",
+          "Password fields" => "/form-elements/password/",
           "Radios" => "/form-elements/radios/",
           "Select" => "/form-elements/select/",
           "Submit button" => "/form-elements/submit/",
