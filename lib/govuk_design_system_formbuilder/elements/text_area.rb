@@ -13,6 +13,8 @@ module GOVUKDesignSystemFormBuilder
       def initialize(builder, object_name, attribute_name, hint:, label:, caption:, rows:, max_words:, max_chars:, threshold:, form_group:, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
 
+        fail ArgumentError, 'limit can be words or chars' if max_words && max_chars
+
         @label           = label
         @caption         = caption
         @hint            = hint
@@ -25,18 +27,12 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        Containers::CharacterCount.new(@builder, **character_count_options).html do
-          Containers::FormGroup.new(*bound, **@form_group).html do
-            safe_join([label_element, supplemental_content, hint_element, error_element, text_area, limit_description])
-          end
+        Containers::FormGroup.new(*bound, **@form_group.merge(limit_form_group_options)).html do
+          safe_join([label_element, supplemental_content, hint_element, error_element, text_area, limit_description])
         end
       end
 
     private
-
-      def character_count_options
-        { max_words: @max_words, max_chars: @max_chars, threshold: @threshold }
-      end
 
       def text_area
         @builder.text_area(@attribute_name, **attributes(@html_attributes))
@@ -91,6 +87,27 @@ module GOVUKDesignSystemFormBuilder
         return unless limit?
 
         limit_id
+      end
+
+      def limit_form_group_options
+        return {} unless limit?
+
+        {
+          class: %(#{brand}-character-count),
+          data: { module: %(#{brand}-character-count) }.merge(**limit_max_options, **limit_threshold_options).compact
+        }
+      end
+
+      def limit_max_options
+        if @max_words
+          { maxwords: @max_words }
+        elsif @max_chars
+          { maxlength: @max_chars }
+        end
+      end
+
+      def limit_threshold_options
+        { threshold: @threshold }
       end
     end
   end
