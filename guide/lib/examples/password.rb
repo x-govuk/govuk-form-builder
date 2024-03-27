@@ -2,29 +2,29 @@ module Examples
   module Password
     def default_password
       <<~PASSWORD
-        = f.govuk_password_field :password, label: { text: "Enter your password" }
+        = f.govuk_password_field :password_1, label: { text: "Password" }
       PASSWORD
     end
 
     def password_with_a_captioned_heading_label_and_hint
       <<~PASSWORD
-        = f.govuk_password_field(:pin,
-            label: { text: "Enter your PIN", tag: "h2", size: "l" },
+        = f.govuk_password_field(:password_2,
+            label: { text: "Password", tag: "h2", size: "l" },
             caption: { text: "Security", size: "m" },
-            hint: { text: "Your PIN was emailed to you when you registered for this service" })
+            hint: { text: "Don't tell anyone your password" })
       PASSWORD
     end
 
     def password_with_custom_text
       <<~PASSWORD
-        = f.govuk_password_field(:secret_code,
-            label: { text: "Enter your secret code" },
-            show_password_text: "Display",
-            hide_password_text: "Conceal",
-            show_password_aria_label_text: "Display the secret code",
-            hide_password_aria_label_text: "Conceal the secret code",
-            password_shown_announcement_text: "The secret code has been displayed",
-            password_hidden_announcement_text: "The secret code has been concealed")
+        = f.govuk_password_field(:password_3,
+            label: { text: "Password", tag: "h2", size: "l" },
+            show_password_text: "Mostra",
+            hide_password_text: "Nascondi",
+            show_password_aria_label_text: "Mostra la password",
+            hide_password_aria_label_text: "Nascondi la password",
+            password_shown_announcement_text: "La password è visibile",
+            password_hidden_announcement_text: "La password non è visibile")
       PASSWORD
     end
   end

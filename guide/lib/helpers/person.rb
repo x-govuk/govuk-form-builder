@@ -16,9 +16,9 @@ class Person
 
   # password examples
   attr_accessor(
-    :password,
-    :pin,
-    :secret_code
+    :password_1,
+    :password_2,
+    :password_3
   )
 
   # width examples
