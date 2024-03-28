@@ -93,7 +93,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:max_words) { 20 }
       subject { builder.send(*args, max_words:) }
 
-      specify 'should wrap the form group inside a character count tag' do
+      specify 'adds the character count class and data attributes to the form group' do
         expect(subject).to have_tag(
           'div',
           with: {
