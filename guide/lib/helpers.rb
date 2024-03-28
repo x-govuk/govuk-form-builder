@@ -35,6 +35,7 @@ use_helper Examples::File
 use_helper Examples::ErrorHandling
 use_helper Examples::InjectingContent
 use_helper Examples::Localisation
+use_helper Examples::Password
 
 use_helper Setup::FormBuilderObjects
 use_helper Setup::ExampleData

@@ -25,6 +25,7 @@ class Being
     :stationery_choice,
     :hairstyle,
     :favourite_shape,
+    :password
   )
 
   def initialize(_args = nil)
@@ -46,6 +47,9 @@ class Person < Being
   validate :photo_must_be_jpeg, if: -> { photo.present? }
 
   validates :hairstyle, presence: { message: 'Describe your <br/> hairstyle' }, on: :trust_error_messages
+
+  validates :password,
+            length: { minimum: 8, message: 'Password must be longer than 8 characters' }
 
   def self.valid_example
     new(

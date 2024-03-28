@@ -102,7 +102,12 @@ module GOVUKDesignSystemFormBuilder
     default_collection_radio_buttons_include_hidden: true,
     default_collection_radio_buttons_auto_bold_labels: true,
     default_submit_validate: false,
-
+    default_show_password_text: "Show",
+    default_hide_password_text: "Hide",
+    default_show_password_aria_label_text: "Show password",
+    default_hide_password_aria_label_text: "Hide password",
+    default_password_shown_announcement_text: "Your password is visible",
+    default_password_hidden_announcement_text: "Your password is hidden",
     localisation_schema_fallback: %i(helpers __context__),
     localisation_schema_label: nil,
     localisation_schema_hint: nil,

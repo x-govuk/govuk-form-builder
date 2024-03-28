@@ -88,5 +88,13 @@ module Helpers
         'MDN file upload documentation' => 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file'
       }
     end
+
+    def password_info
+      {
+        'Form builder documentation for password inputs' => 'https://www.rubydoc.info/gems/govuk_design_system_formbuilder/GOVUKDesignSystemFormBuilder/Builder#govuk_password_field-instance_method',
+        'GOV.UK design system radios component' => 'https://design-system.service.gov.uk/components/password-input/',
+        'MDN radio button documentation' => 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password'
+      }
+    end
   end
 end

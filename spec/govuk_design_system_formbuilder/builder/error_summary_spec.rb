@@ -82,7 +82,6 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           it_behaves_like 'an error summary linking directly to a form element', :govuk_phone_field
           it_behaves_like 'an error summary linking directly to a form element', :govuk_url_field
           it_behaves_like 'an error summary linking directly to a form element', :govuk_email_field
-          it_behaves_like 'an error summary linking directly to a form element', :govuk_password_field
           it_behaves_like 'an error summary linking directly to a form element', :govuk_file_field
           it_behaves_like 'an error summary linking directly to a form element', :govuk_text_area, 'textarea'
 
@@ -306,7 +305,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             specify "errors are displayed in the order they're defined in the model" do
               expect(object.name).to be_present
 
-              expect(actual_order).to eql(%w(favourite_colour projects cv))
+              expect(actual_order).to eql(%w(favourite_colour projects cv password))
             end
           end
 

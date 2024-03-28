@@ -14,6 +14,13 @@ class Person
     :national_insurance_number_without_spacing,
   )
 
+  # password examples
+  attr_accessor(
+    :password_1,
+    :password_2,
+    :password_3
+  )
+
   # width examples
   attr_accessor(
     :twenty,
