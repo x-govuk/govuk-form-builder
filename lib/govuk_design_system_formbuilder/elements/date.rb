@@ -8,7 +8,6 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Supplemental
       include Traits::HTMLClasses
 
-      SEGMENTS = { day: '3i', month: '2i', year: '1i' }.freeze
       MULTIPARAMETER_KEY = { day: 3, month: 2, year: 1 }.freeze
 
       def initialize(builder, object_name, attribute_name, legend:, caption:, hint:, omit_day:, maxlength_enabled:, form_group:, date_of_birth: false, **kwargs, &block)
@@ -33,6 +32,10 @@ module GOVUKDesignSystemFormBuilder
       end
 
     private
+
+      def segments
+        config.default_date_segments
+      end
 
       def fieldset_options
         { legend: @legend, caption: @caption, described_by: [error_id, hint_id, supplemental_id] }
@@ -136,7 +139,7 @@ module GOVUKDesignSystemFormBuilder
         if has_errors? && link_errors
           field_id(link_errors:)
         else
-          [@object_name, @attribute_name, SEGMENTS.fetch(segment)].join("_")
+          [@object_name, @attribute_name, segments.fetch(segment)].join("_")
         end
       end
 
@@ -145,7 +148,7 @@ module GOVUKDesignSystemFormBuilder
           "%<object_name>s[%<input_name>s(%<segment>s)]",
           object_name: @object_name,
           input_name: @attribute_name,
-          segment: SEGMENTS.fetch(segment)
+          segment: segments.fetch(segment)
         )
       end
 
