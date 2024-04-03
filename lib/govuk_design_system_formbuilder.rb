@@ -33,10 +33,6 @@ module GOVUKDesignSystemFormBuilder
   # * +:default_check_box_divider_text+ sets the text automatically added to the
   #   checkbox divider, defaults to 'or'
   #
-  # * +:default_submit_button_text+ sets the text used to divide the last radio
-  #   button in radio button fieldsets. As per the GOV.UK Design System spec,
-  #   it defaults to 'or'.
-  #
   # * +:default_collection_check_boxes_include_hidden+ controls whether or not
   #   a hidden field is added when rendering a collection of check boxes
   #
