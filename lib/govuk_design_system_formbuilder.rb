@@ -27,6 +27,11 @@ module GOVUKDesignSystemFormBuilder
   # * +:default_submit_button_text+ sets the value assigned to +govuk_submit+,
   #   defaults to 'Continue'.
   #
+  # * +:default_date_segments+ allows the date segments used by Rails'
+  #   multiparameter attributes to be configured. This is useful if you want to
+  #   override the standard behaviour where Rails tries to cast the values
+  #   into a +Date+. Defaults to +{ day: '3i', month: '2i', year: '1i' }+
+  #
   # * +:default_radio_divider_text+ sets the text automatically added to the
   #   radio button divider, defaults to 'or'
   #
@@ -88,6 +93,7 @@ module GOVUKDesignSystemFormBuilder
     default_legend_tag: nil,
     default_caption_size: 'm',
     default_submit_button_text: 'Continue',
+    default_date_segments: { day: '3i', month: '2i', year: '1i' },
     default_radio_divider_text: 'or',
     default_check_box_divider_text: 'or',
     default_error_summary_title: 'There is a problem',
