@@ -136,6 +136,22 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
+    context 'when segments are overridden' do
+      subject { builder.send(*args, segments: { day: "day", month: "month", year: "year" }) }
+
+      specify "sets the day field correctly" do
+        expect(subject).to have_tag('input', with: { id: "person_born_on_day", name: "person[born_on(day)]" })
+      end
+
+      specify "sets the month field correctly" do
+        expect(subject).to have_tag('input', with: { id: "person_born_on_month", name: "person[born_on(month)]" })
+      end
+
+      specify "sets the year field correctly" do
+        expect(subject).to have_tag('input', with: { id: "person_born_on_year", name: "person[born_on(year)]" })
+      end
+    end
+
     context 'showing only month and year inputs' do
       subject { builder.send(*args, omit_day: true) }
 
