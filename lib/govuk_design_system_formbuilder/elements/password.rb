@@ -85,6 +85,7 @@ module GOVUKDesignSystemFormBuilder
           data: { module: %(#{brand}-button) },
           aria: { label: "Show password", controls: field_id(link_errors: true) },
           type: 'button',
+          hidden: true,
           class: %w(button button--secondary password-input__toggle js-password-input-toggle).prefix(brand)
         }
       end
