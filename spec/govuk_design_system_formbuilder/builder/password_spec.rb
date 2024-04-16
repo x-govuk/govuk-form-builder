@@ -48,6 +48,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     specify 'the button has the right attributes' do
       expected_attributes = {
+        "hidden" => "hidden",
         "data-module" => "govuk-button",
         "aria-label" => "Show password",
         "aria-controls" => "person-password-field",
