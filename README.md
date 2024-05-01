@@ -118,8 +118,8 @@ Approximately [100 services use this library](https://github.com/x-govuk/govuk-f
 here are a few from the <abbr title="Department for Education">DfE</abbr>, <abbr title="Ministry of Justice">MoJ</abbr>, and
 <abbr title="Department for Business, Energy & Industrial Strategy">BEIS</abbr>.
 
-* [Apply for teacher training](https://www.github.com/x-govuk/apply-for-teacher-training)
-* [Teaching Vacancies](https://www.github.com/x-govuk/teaching-vacancies)
+* [Apply for teacher training](https://www.github.com/dfe-digital/apply-for-teacher-training)
+* [Teaching Vacancies](https://www.github.com/dfe-digital/teaching-vacancies)
 * [Manage children's vaccinations](https://github.com/nhsuk/manage-childrens-vaccinations)
 * [Claim for crown court defence](https://www.github.com/ministryofjustice/Claim-for-Crown-Court-Defence)
 * [Appeal to the tax tribunal](https://www.github.com/ministryofjustice/tax-tribunals-datacapture)
