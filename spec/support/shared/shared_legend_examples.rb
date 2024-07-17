@@ -41,6 +41,7 @@ shared_examples 'a field that supports a fieldset with legend' do
       context 'valid sizes' do
         %w(s m l xl).each do |size|
           let(:size) { size }
+
           context %(when the legend size is #{size}) do
             subject { builder.send(*args, legend: { text: legend_text, size: }) }
 
@@ -51,6 +52,17 @@ shared_examples 'a field that supports a fieldset with legend' do
                 end
               end
             end
+          end
+        end
+
+        context 'when the legend size is nil' do
+          subject { builder.send(*args, legend: { text: legend_text, size: nil }) }
+
+          specify 'the size class should be absent' do
+            expect(subject).to_not have_tag('legend', with: { class: 'govuk-fieldset__legend--s' })
+            expect(subject).to_not have_tag('legend', with: { class: 'govuk-fieldset__legend--m' })
+            expect(subject).to_not have_tag('legend', with: { class: 'govuk-fieldset__legend--l' })
+            expect(subject).to_not have_tag('legend', with: { class: 'govuk-fieldset__legend--xl' })
           end
         end
       end
