@@ -65,6 +65,8 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def size_class(size)
+        return nil if size.nil?
+
         fail "invalid size '#{size}', must be xl, l, m or s" unless size.in?(%w(xl l m s))
 
         %(fieldset__legend--#{size})
