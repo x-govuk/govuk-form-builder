@@ -10,8 +10,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: ['3.1.4', '3.2.3', '3.3.0']
-        rails: ['6.1.7', '7.0.7', '7.1.3']
+        ruby: ['3.1.6', '3.2.4', '3.3.4']
+        rails: ['6.1.7', '7.0.8', '7.1.3']
     runs-on: ubuntu-latest
     name: Testing with Ruby ${{ matrix.ruby }} and Rails ${{ matrix.rails }}
     steps:
@@ -43,11 +43,11 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1.4'
+          ruby-version: '3.1.6'
 
       - name: Install gems
         env:
-          RAILS_VERSION: '7.0.6'
+          RAILS_VERSION: '7.0.8'
         run: |
           gem install bundler
           bundle install --jobs 4 --retry 3
