@@ -20,6 +20,14 @@ module Examples
       SNIPPET
     end
 
+    def text_field_with_standalone_label
+      <<~SNIPPET
+        .two-columns
+          = f.govuk_label :crayons_or_felt_tips, text: "Do you prefer crayons or felt tip pens?"
+          = f.govuk_text_field :crayons_or_felt_tips, label: nil
+      SNIPPET
+    end
+
     def text_field_with_caption
       <<~SNIPPET
         = f.govuk_text_field :favourite_shade_of_grey,
