@@ -2,6 +2,20 @@ module GOVUKDesignSystemFormBuilder
   module Builder
     delegate :config, to: GOVUKDesignSystemFormBuilder
 
+    # Generates a form label without a form group or input
+    # @param text [String] the label text
+    # @param size [String] the size of the label font, can be +xl+, +l+, +m+, +s+ or nil
+    # @param tag [Symbol,String] the label's wrapper tag, intended to allow labels to act as page headings
+    # @param hidden [Boolean] control the visability of the label. Hidden labels will stil be read by screenreaders
+    # @param kwargs [Hash] additional arguments are applied as attributes on the +label+ element
+    #
+    # @example A standalone label for the name field
+    #   = f.govuk_label :name, text: 'Full name', size: 'l', caption: { text: 'It must match your driving licence' }
+    #
+    def govuk_label(attribute_name, text: nil, size: nil, hidden: false, tag: nil, caption: nil, **kwargs)
+      GOVUKDesignSystemFormBuilder::Elements::Label.new(self, object_name, attribute_name, text:, size:, hidden:, tag:, caption:, **kwargs).html
+    end
+
     # Generates a input of type +text+
     #
     # @param attribute_name [Symbol] The name of the attribute
