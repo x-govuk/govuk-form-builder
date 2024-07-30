@@ -8,8 +8,8 @@ module GOVUKDesignSystemFormBuilder
       include Traits::HTMLAttributes
       include Traits::HTMLClasses
 
-      def initialize(builder, object_name, attribute_name, text: nil, size: config.default_legend_size, hidden: false, tag: config.default_legend_tag, caption: nil, content: nil, **kwargs)
-        super(builder, object_name, attribute_name)
+      def initialize(builder, object_name, attribute_name, brand:, text: nil, size: config.default_legend_size, hidden: false, tag: config.default_legend_tag, caption: nil, content: nil, **kwargs)
+        super(builder, object_name, attribute_name, brand)
 
         if content
           @content = capture { content.call }

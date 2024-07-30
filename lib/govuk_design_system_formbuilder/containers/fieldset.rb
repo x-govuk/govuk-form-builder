@@ -3,8 +3,8 @@ module GOVUKDesignSystemFormBuilder
     class Fieldset < Base
       include Traits::HTMLAttributes
 
-      def initialize(builder, object_name = nil, attribute_name = nil, legend: {}, caption: {}, described_by: nil, **kwargs, &block)
-        super(builder, object_name, attribute_name, &block)
+      def initialize(builder, object_name = nil, attribute_name = nil, brand:, legend: {}, caption: {}, described_by: nil, **kwargs, &block)
+        super(builder, object_name, attribute_name, brand, &block)
 
         @legend          = legend
         @caption         = caption
@@ -36,7 +36,7 @@ module GOVUKDesignSystemFormBuilder
         @legend_element ||= if @legend.nil?
                               Elements::Null.new
                             else
-                              Elements::Legend.new(*bound, **legend_options)
+                              Elements::Legend.new(*bound, **brand_options, **legend_options)
                             end
       end
 

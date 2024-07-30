@@ -10,8 +10,8 @@ module GOVUKDesignSystemFormBuilder
 
       MULTIPARAMETER_KEY = { day: 3, month: 2, year: 1 }.freeze
 
-      def initialize(builder, object_name, attribute_name, legend:, caption:, hint:, omit_day:, maxlength_enabled:, segments:, form_group:, date_of_birth: false, **kwargs, &block)
-        super(builder, object_name, attribute_name, &block)
+      def initialize(builder, object_name, attribute_name, legend:, caption:, hint:, omit_day:, maxlength_enabled:, segments:, form_group:, brand:, date_of_birth: false, **kwargs, &block)
+        super(builder, object_name, attribute_name, brand, &block)
 
         @legend            = legend
         @caption           = caption
@@ -25,8 +25,8 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        Containers::FormGroup.new(*bound, **@form_group, **@html_attributes).html do
-          Containers::Fieldset.new(*bound, **fieldset_options).html do
+        Containers::FormGroup.new(*bound, **brand_options, **@form_group, **@html_attributes).html do
+          Containers::Fieldset.new(*bound, **brand_options, **fieldset_options).html do
             safe_join([supplemental_content, hint_element, error_element, date])
           end
         end
