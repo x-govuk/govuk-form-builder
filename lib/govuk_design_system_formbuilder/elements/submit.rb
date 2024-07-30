@@ -5,8 +5,8 @@ module GOVUKDesignSystemFormBuilder
       include Traits::HTMLClasses
       include Traits::HTMLAttributes
 
-      def initialize(builder, text, warning:, secondary:, inverse:, prevent_double_click:, validate:, disabled:, **kwargs, &block)
-        super(builder, nil, nil)
+      def initialize(builder, text, warning:, secondary:, inverse:, prevent_double_click:, validate:, disabled:, brand:, **kwargs, &block)
+        super(builder, nil, nil, brand)
 
         fail ArgumentError, 'buttons can be warning or secondary' if warning && secondary
 
@@ -39,7 +39,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def button_group
-        Containers::ButtonGroup.new(@builder, buttons).html
+        Containers::ButtonGroup.new(@builder, buttons, brand: @brand).html
       end
 
       def buttons

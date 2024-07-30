@@ -10,6 +10,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     include_examples 'HTML formatting checks'
 
     it_behaves_like 'a field that supports custom branding'
+    it_behaves_like 'a field that allows branding to be explicitly overriden'
 
     it_behaves_like 'a field that supports custom classes' do
       let(:element) { 'button' }

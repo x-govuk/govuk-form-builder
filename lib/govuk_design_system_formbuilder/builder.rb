@@ -881,6 +881,7 @@ module GOVUKDesignSystemFormBuilder
     # @param block [Block] When content is passed in via a block the submit element and the block content will
     #   be wrapped in a +<div class="govuk-button-group">+ which will space the buttons and links within
     #   evenly.
+    # @param brand [String] override the default brand prefix for this input
     # @raise [ArgumentError] raised if both +warning+ and +secondary+ are true
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @note Only the first additional button or link (passed in via a block) will be given the
@@ -895,8 +896,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_submit "Proceed", prevent_double_click: true do
     #     = link_to 'Cancel', some_other_path, class: 'govuk-button__secondary'
     #
-    def govuk_submit(text = config.default_submit_button_text, warning: false, secondary: false, inverse: false, prevent_double_click: true, validate: config.default_submit_validate, disabled: false, **kwargs, &block)
-      Elements::Submit.new(self, text, warning:, secondary:, inverse:, prevent_double_click:, validate:, disabled:, **kwargs, &block).html
+    def govuk_submit(text = config.default_submit_button_text, warning: false, secondary: false, inverse: false, prevent_double_click: true, validate: config.default_submit_validate, disabled: false, brand: nil, **kwargs, &block)
+      Elements::Submit.new(self, text, warning:, secondary:, inverse:, prevent_double_click:, validate:, disabled:, brand:, **kwargs, &block).html
     end
 
     # Generates three inputs for the +day+, +month+ and +year+ components of a date
@@ -924,6 +925,7 @@ module GOVUKDesignSystemFormBuilder
     # @param maxlength_enabled [Boolean] adds maxlength attribute to day, month and year inputs (2, 2, and 4, respectively)
     # @param segments [Hash] allows Rails' multiparameter attributes to be overridden on a field-by-field basis. Hash must
     #   contain +day:+, +month:+ and +year:+ keys. Defaults to the default value set in the +default_date_segments+ setting in {GOVUKDesignSystemFormBuilder.DEFAULTS}
+    # @param brand [String] override the default brand prefix for this input
     # @param form_group [Hash] configures the form group
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
@@ -946,8 +948,8 @@ module GOVUKDesignSystemFormBuilder
     # @example A date input with legend supplied as a proc
     #  = f.govuk_date_field :finishes_on,
     #    legend: -> { tag.h3('Which category do you belong to?') }
-    def govuk_date_field(attribute_name, hint: {}, legend: {}, caption: {}, date_of_birth: false, omit_day: false, maxlength_enabled: false, segments: config.default_date_segments, form_group: {}, **kwargs, &block)
-      Elements::Date.new(self, object_name, attribute_name, hint:, legend:, caption:, date_of_birth:, omit_day:, maxlength_enabled:, segments:, form_group:, **kwargs, &block).html
+    def govuk_date_field(attribute_name, hint: {}, legend: {}, caption: {}, date_of_birth: false, omit_day: false, maxlength_enabled: false, segments: config.default_date_segments, form_group: {}, brand: nil, **kwargs, &block)
+      Elements::Date.new(self, object_name, attribute_name, hint:, legend:, caption:, date_of_birth:, omit_day:, maxlength_enabled:, segments:, form_group:, brand:, **kwargs, &block).html
     end
 
     # Generates a summary of errors in the form, each linking to the corresponding

@@ -3,10 +3,13 @@ module GOVUKDesignSystemFormBuilder
     delegate :content_tag, :safe_join, :tag, :link_to, :capture, to: :@builder
     delegate :config, to: GOVUKDesignSystemFormBuilder
 
-    def initialize(builder, object_name, attribute_name, &block)
+    # FIXME remove the `= nil` from override_brand once the rest of the super calls
+    #       have been updated
+    def initialize(builder, object_name, attribute_name, override_brand = nil, &block)
       @builder        = builder
       @object_name    = object_name
       @attribute_name = attribute_name
+      @override_brand = override_brand
       @block_content  = capture { block.call } if block_given?
     end
 
@@ -47,8 +50,12 @@ module GOVUKDesignSystemFormBuilder
       [@builder, @object_name, @attribute_name]
     end
 
-    def brand(override = nil)
+    def brand(override = @override_brand)
       override || config.brand
+    end
+
+    def brand_options
+      { brand: @override_brand }
     end
 
     def has_errors?
