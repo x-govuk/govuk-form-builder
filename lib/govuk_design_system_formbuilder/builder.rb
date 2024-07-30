@@ -881,6 +881,7 @@ module GOVUKDesignSystemFormBuilder
     # @param block [Block] When content is passed in via a block the submit element and the block content will
     #   be wrapped in a +<div class="govuk-button-group">+ which will space the buttons and links within
     #   evenly.
+    # @param brand [String] override the default brand prefix for this input
     # @raise [ArgumentError] raised if both +warning+ and +secondary+ are true
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @note Only the first additional button or link (passed in via a block) will be given the
@@ -895,8 +896,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_submit "Proceed", prevent_double_click: true do
     #     = link_to 'Cancel', some_other_path, class: 'govuk-button__secondary'
     #
-    def govuk_submit(text = config.default_submit_button_text, warning: false, secondary: false, inverse: false, prevent_double_click: true, validate: config.default_submit_validate, disabled: false, **kwargs, &block)
-      Elements::Submit.new(self, text, warning:, secondary:, inverse:, prevent_double_click:, validate:, disabled:, **kwargs, &block).html
+    def govuk_submit(text = config.default_submit_button_text, warning: false, secondary: false, inverse: false, prevent_double_click: true, validate: config.default_submit_validate, disabled: false, brand: nil, **kwargs, &block)
+      Elements::Submit.new(self, text, warning:, secondary:, inverse:, prevent_double_click:, validate:, disabled:, brand:, **kwargs, &block).html
     end
 
     # Generates three inputs for the +day+, +month+ and +year+ components of a date
