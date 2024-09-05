@@ -86,7 +86,8 @@ class Person
     :favourite_shade_of_purple,
     :favourite_shade_of_grey,
     :favourite_primary_colour,
-    :least_favourite_colour
+    :least_favourite_colour,
+    :crayons_or_felt_tips
   )
 
   # errors

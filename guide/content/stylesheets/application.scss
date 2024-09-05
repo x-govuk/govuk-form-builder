@@ -65,6 +65,10 @@ $govuk-page-width: 1100px;
   }
 }
 
+.two-columns {
+  columns: 2;
+}
+
 .branded-background {
   background: govuk-colour(blue);
 }

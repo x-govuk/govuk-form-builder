@@ -76,6 +76,16 @@ dl.govuk-summary-list
         can enforce consistency between the label's <code>for</code> attribute
         and the associated form element.
 
+== render('/partials/example.*',
+  caption: 'Separate labels',
+  code: text_field_with_standalone_label,
+  start_headings_at_level: 3) do
+
+  markdown:
+    There are occasions where placing the label above an input won't work. We can
+    do this by suppressing the default label with `label: nil` and manually adding
+    the label elsewhere by calling the `govuk_label` helper directly.
+
 hr.govuk-section-break.govuk-section-break--xl.govuk-section-break--visible
 
 h2.govuk-heading-l Captions
