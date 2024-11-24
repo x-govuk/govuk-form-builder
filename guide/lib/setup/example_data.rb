@@ -2,44 +2,48 @@ module Setup
   module ExampleData
     def departments_data_raw
       <<~DATA
+        department = Struct.new(:id, :name, keyword_init: true)
         departments = [
-          OpenStruct.new(id: 1, name: 'Sales'),
-          OpenStruct.new(id: 2, name: 'Marketing'),
-          OpenStruct.new(id: 3, name: 'Finance')
+          department.new(id: 1, name: 'Sales'),
+          department.new(id: 2, name: 'Marketing'),
+          department.new(id: 3, name: 'Finance')
         ]
       DATA
     end
 
     def departments_value_data_raw
       <<~DATA
+        department = Struct.new(:id, keyword_init: true)
         departments = [
-          OpenStruct.new(id: :sales),
-          OpenStruct.new(id: :marketing),
-          OpenStruct.new(id: :finance),
-          OpenStruct.new(id: :digital)
+          department.new(id: :sales),
+          department.new(id: :marketing),
+          department.new(id: :finance),
+          department.new(id: :digital)
         ]
       DATA
     end
 
     def contact_types_data_raw
       <<~DATA
+        contact_type = Struct.new(:value, keyword_init: true)
         contact_types = [
-          OpenStruct.new(value: :email),
-          OpenStruct.new(value: :phone),
-          OpenStruct.new(value: :letter)
+          contact_type.new(value: :email),
+          contact_type.new(value: :phone),
+          contact_type.new(value: :letter)
         ]
       DATA
     end
 
     def lunch_options_raw
       <<~DATA
+        lunch_option = Struct.new(:id, :name, :description, keyword_init: true)
         lunch_options = [
-          OpenStruct.new(
+          lunch_option.new(
             id: 1,
             name: 'Salad',
             description: 'Lettuce, tomato and cucumber'
           ),
-          OpenStruct.new(
+          lunch_option.new(
             id: 2,
             name: 'Jacket potato',
             description: 'With cheese and baked beans'
@@ -59,18 +63,19 @@ module Setup
 
     def primary_colours_raw
       <<~DATA
+        colour = Struct.new(:id, :name, :description, keyword_init: true)
         primary_colours = [
-          OpenStruct.new(
+          colour.new(
             id: :cyan,
             name: 'Cyan',
             description: 'Greenish-blue'
           ),
-          OpenStruct.new(
+          colour.new(
             id: :magenta,
             name: 'Magenta',
             description: 'Purplish-red'
           ),
-          OpenStruct.new(
+          colour.new(
             id: :yellow,
             name: 'Yellow',
             description: 'Yellowy-yellow'
@@ -150,6 +155,7 @@ module Setup
     def custom_error_presenter
       eval(custom_error_presenter_raw)
     end
+
     # rubocop:enable Security/Eval
 
     def form_data
