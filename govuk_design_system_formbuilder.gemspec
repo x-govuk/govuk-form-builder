@@ -43,7 +43,7 @@ Gem::Specification.new do |s|
   # Required for the guide
   s.add_development_dependency("htmlbeautifier", "~> 1.4.1")
   s.add_development_dependency("nanoc", "~> 4.13.0")
-  s.add_development_dependency("rouge", "~> 4.4.0")
+  s.add_development_dependency("rouge", "~> 4.5.1")
   s.add_development_dependency("rubypants", "~> 0.7.0")
   s.add_development_dependency("sass")
   s.add_development_dependency("sassc", "~> 2.4.0")
