@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module GOVUKDesignSystemFormBuilder
   module Elements
     class ErrorSummary < Base
@@ -89,7 +91,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def same_page_link(target)
-        '#'.concat(target)
+        target.prepend('#')
       end
 
       def classes
