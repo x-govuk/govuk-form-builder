@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.add_dependency("html-attributes-utils", "~> 1")
 
   exact_rails_version = ENV.key?("RAILS_VERSION")
-  rails_version = ENV.fetch("RAILS_VERSION") { "6.1.7" }
+  rails_version = ENV.fetch("RAILS_VERSION") { "7.1.5" }
 
   %w(actionview activemodel activesupport).each do |lib|
     s.add_dependency(*VersionFormatter.new(lib, rails_version, exact_rails_version).to_a)
