@@ -1064,8 +1064,8 @@ module GOVUKDesignSystemFormBuilder
     # @note Remember to set +multipart: true+ when creating a form with file
     #   uploads, {https://guides.rubyonrails.org/form_helpers.html#uploading-files see
     #   the Rails documentation} for more information
-    def govuk_file_field(attribute_name, label: {}, caption: {}, hint: {}, form_group: {}, **kwargs, &block)
-      Elements::File.new(self, object_name, attribute_name, label:, caption:, hint:, form_group:, **kwargs, &block).html
+    def govuk_file_field(attribute_name, label: {}, caption: {}, hint: {}, form_group: {}, javascript: false, **kwargs, &block)
+      Elements::File.new(self, object_name, attribute_name, label:, caption:, hint:, form_group:, javascript:, **kwargs, &block).html
     end
   end
 end
