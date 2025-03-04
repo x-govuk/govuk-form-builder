@@ -1046,6 +1046,7 @@ module GOVUKDesignSystemFormBuilder
     # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     # @param form_group [Hash] configures the form group
     # @option form_group kwargs [Hash] additional attributes added to the form group
+    # @param javascript [Boolean] Configures whether to add HTML for the javascript-enhanced version of the component
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     #
     # @example A photo upload field with file type specifier and injected content
