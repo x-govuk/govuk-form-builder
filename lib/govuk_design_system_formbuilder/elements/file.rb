@@ -29,7 +29,7 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def file
-        @builder.file_field(@attribute_name, attributes(@html_attributes))
+        tag.div(@builder.file_field(@attribute_name, attributes(@html_attributes)), **drop_zone_options)
       end
 
       def options
@@ -42,6 +42,10 @@ module GOVUKDesignSystemFormBuilder
 
       def classes
         build_classes(%(file-upload), %(file-upload--error) => has_errors?).prefix(brand)
+      end
+
+      def drop_zone_options
+        { class: "#{brand}-drop-zone", data: { module: "#{brand}-file-upload" } }
       end
     end
   end

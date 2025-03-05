@@ -18,6 +18,14 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
+    specify 'the input is contained in a drop-zone' do
+      expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
+        with_tag('div', with: { class: 'govuk-drop-zone', 'data-module' => 'govuk-file-upload' }) do
+          with_tag('input')
+        end
+      end
+    end
+
     include_examples 'HTML formatting checks'
 
     it_behaves_like 'a field that supports labels'
