@@ -13,8 +13,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
     specify 'output should be a form group containing a file input and label' do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
-        expect(subject).to have_tag('input', with: { type: 'file' })
-        expect(subject).to have_tag('label')
+        with_tag('input', with: { type: 'file' })
+        with_tag('label')
       end
     end
 
