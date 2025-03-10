@@ -1046,6 +1046,7 @@ module GOVUKDesignSystemFormBuilder
     # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
     # @param form_group [Hash] configures the form group
     # @option form_group kwargs [Hash] additional attributes added to the form group
+    # @param javascript [Boolean] Configures whether to add HTML for the javascript-enhanced version of the component
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     #
     # @example A photo upload field with file type specifier and injected content
@@ -1064,8 +1065,8 @@ module GOVUKDesignSystemFormBuilder
     # @note Remember to set +multipart: true+ when creating a form with file
     #   uploads, {https://guides.rubyonrails.org/form_helpers.html#uploading-files see
     #   the Rails documentation} for more information
-    def govuk_file_field(attribute_name, label: {}, caption: {}, hint: {}, form_group: {}, **kwargs, &block)
-      Elements::File.new(self, object_name, attribute_name, label:, caption:, hint:, form_group:, **kwargs, &block).html
+    def govuk_file_field(attribute_name, label: {}, caption: {}, hint: {}, form_group: {}, javascript: false, **kwargs, &block)
+      Elements::File.new(self, object_name, attribute_name, label:, caption:, hint:, form_group:, javascript:, **kwargs, &block).html
     end
   end
 end

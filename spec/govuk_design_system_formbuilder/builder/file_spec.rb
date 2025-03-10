@@ -60,5 +60,15 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     it_behaves_like 'a field that accepts a plain ruby object' do
       let(:described_element) { ['input', { with: { type: 'file' } }] }
     end
+
+    context "when the javascript flag is enabled" do
+      subject { builder.send(*args, javascript: true) }
+
+      it "adds the JS enhancement markup" do
+        expect(subject).to have_tag('div', with: { class: 'govuk-drop-zone', "data-module": "govuk-file-upload" }) do
+          expect(subject).to have_tag('input', with: { type: 'file' })
+        end
+      end
+    end
   end
 end
