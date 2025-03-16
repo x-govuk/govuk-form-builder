@@ -10,7 +10,7 @@ module GOVUKDesignSystemFormBuilder
       include Traits::HTMLAttributes
       include Traits::HTMLClasses
 
-      def initialize(builder, object_name, attribute_name, hint:, label:, caption:, form_group:, **kwargs, &block)
+      def initialize(builder, object_name, attribute_name, hint:, label:, caption:, form_group:, javascript:, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
 
         @label           = label
@@ -18,18 +18,27 @@ module GOVUKDesignSystemFormBuilder
         @hint            = hint
         @html_attributes = kwargs
         @form_group      = form_group
+        @javascript      = javascript
       end
 
       def html
         Containers::FormGroup.new(*bound, **@form_group).html do
-          safe_join([label_element, supplemental_content, hint_element, error_element, file])
+          safe_join([label_element, supplemental_content, hint_element, error_element, file_html])
         end
       end
 
     private
 
+      def file_html
+        @javascript ? file_with_javascript_markup : file
+      end
+
       def file
         @builder.file_field(@attribute_name, attributes(@html_attributes))
+      end
+
+      def file_with_javascript_markup
+        tag.div(class: "#{brand}-drop-zone", data: { module: "#{brand}-file-upload" }) { file }
       end
 
       def options
