@@ -34,7 +34,7 @@ Gem::Specification.new do |s|
   end
 
   s.add_development_dependency('ostruct')
-  s.add_development_dependency("pry", "~> 0.14.1")
+  s.add_development_dependency("pry", "~> 0.15.2")
   s.add_development_dependency("pry-byebug", "~> 3.9", ">= 3.9.0")
   s.add_development_dependency("rspec-html-matchers", "~> 0")
   s.add_development_dependency("rspec-rails", "~> 6.0")
