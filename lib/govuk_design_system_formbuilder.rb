@@ -32,6 +32,10 @@ module GOVUKDesignSystemFormBuilder
   #   override the standard behaviour where Rails tries to cast the values
   #   into a +Date+. Defaults to +{ day: '3i', month: '2i', year: '1i' }+
   #
+  # * +:default_date_segment_names+ allows the individual date field labels to
+  #   have their default values set.
+  #   Defaults to +{ day: 'Day', month: 'Month', year: 'Year' }+
+  #
   # * +:default_radio_divider_text+ sets the text automatically added to the
   #   radio button divider, defaults to 'or'
   #
@@ -94,6 +98,7 @@ module GOVUKDesignSystemFormBuilder
     default_caption_size: 'm',
     default_submit_button_text: 'Continue',
     default_date_segments: { day: '3i', month: '2i', year: '1i' },
+    default_date_segment_names: { day: 'Day', month: 'Month', year: 'Year' },
     default_radio_divider_text: 'or',
     default_check_box_divider_text: 'or',
     default_error_summary_title: 'There is a problem',

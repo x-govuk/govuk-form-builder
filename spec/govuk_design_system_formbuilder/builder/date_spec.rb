@@ -152,6 +152,22 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
+    context 'when segment names are overridden' do
+      subject { builder.send(*args, segment_names: { day: "Tag", month: "Monat", year: "Jahr" }) }
+
+      specify "sets the day label correctly" do
+        expect(subject).to have_tag('label', text: "Tag", with: { for: day_identifier })
+      end
+
+      specify "sets the month label correctly" do
+        expect(subject).to have_tag('label', text: "Monat", with: { for: month_identifier })
+      end
+
+      specify "sets the year label correctly" do
+        expect(subject).to have_tag('label', text: "Jahr", with: { for: year_identifier })
+      end
+    end
+
     context 'showing only month and year inputs' do
       subject { builder.send(*args, omit_day: true) }
 
