@@ -10,7 +10,7 @@ module GOVUKDesignSystemFormBuilder
 
       MULTIPARAMETER_KEY = { day: 3, month: 2, year: 1 }.freeze
 
-      def initialize(builder, object_name, attribute_name, legend:, caption:, hint:, omit_day:, maxlength_enabled:, segments:, form_group:, date_of_birth: false, **kwargs, &block)
+      def initialize(builder, object_name, attribute_name, legend:, caption:, hint:, omit_day:, maxlength_enabled:, segments:, form_group:, segment_names:, date_of_birth: false, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
 
         @legend            = legend
@@ -20,6 +20,7 @@ module GOVUKDesignSystemFormBuilder
         @omit_day          = omit_day
         @maxlength_enabled = maxlength_enabled
         @segments          = segments
+        @segment_names     = segment_names
         @form_group        = form_group
         @html_attributes   = kwargs
       end
@@ -101,7 +102,7 @@ module GOVUKDesignSystemFormBuilder
 
       def label(segment, link_errors)
         tag.label(
-          segment.capitalize,
+          @segment_names.fetch(segment),
           class: label_classes,
           for: id(segment, link_errors)
         )
