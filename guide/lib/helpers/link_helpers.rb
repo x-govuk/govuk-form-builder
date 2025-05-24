@@ -87,7 +87,7 @@ module Helpers
     end
 
     def erb_link
-      'https://ruby-doc.org/stdlib-2.6.4/libdoc/erb/rdoc/ERB.html'
+      'https://docs.ruby-lang.org/en/master/ERB.html'
     end
 
     def haml_link
@@ -103,7 +103,7 @@ module Helpers
     end
 
     def ruby_proc_link
-      'https://ruby-doc.org/core-2.6.5/Proc.html'
+      'https://docs.ruby-lang.org/en/master/Proc.html'
     end
 
     def project_new_issue_link
