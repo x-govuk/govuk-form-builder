@@ -1,4 +1,3 @@
-require 'pry'
 require 'rails'
 require 'action_view'
 require 'active_model'
