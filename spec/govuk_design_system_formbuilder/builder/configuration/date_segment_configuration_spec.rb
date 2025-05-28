@@ -22,4 +22,24 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
   end
+
+  describe 'default date segment names' do
+    let(:overridden_segment_names) { { day: "Jour", month: "Mois", year: "Annee" } }
+
+    before do
+      GOVUKDesignSystemFormBuilder.configure do |conf|
+        conf.default_date_segment_names = overridden_segment_names
+      end
+    end
+
+    subject { builder.govuk_date_field(:govuk_date_field) }
+
+    specify 'uses the configured date segment names for labels' do
+      multiparamater_keys = { day: '3i', month: '2i', year: '1i' }
+
+      overridden_segment_names.each do |segment, value|
+        expect(subject).to have_tag("label", text: value, with: { for: "person_govuk_date_field_#{multiparamater_keys.fetch(segment)}" })
+      end
+    end
+  end
 end

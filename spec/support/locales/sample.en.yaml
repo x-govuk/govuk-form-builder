@@ -1,4 +1,6 @@
 helpers:
+  error:
+    message_prefix: "Oh dear"
   label:
     person:
       name: Who goes there?
@@ -23,6 +25,10 @@ helpers:
           one-something-street: "One Something Street"
           two-something-street: "Two Something Street"
         postcode: "Enter your postcode"
+      born_on:
+        day: Tag
+        month: Monat
+        year: Jahr
 
   caption:
     person:
