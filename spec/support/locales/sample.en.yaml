@@ -1,4 +1,6 @@
 helpers:
+  error:
+    message_prefix: "Oh dear"
   label:
     person:
       name: Who goes there?

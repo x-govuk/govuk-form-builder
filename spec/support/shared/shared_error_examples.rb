@@ -6,6 +6,20 @@ shared_examples 'a field that supports errors' do
       expect(subject).to have_tag('p', with: { class: 'govuk-error-message' }, text: error_message)
     end
 
+    specify %(error has a hidden 'Error:' prefix) do
+      expect(subject).to have_tag('span', with: { class: 'govuk-visually-hidden' }, text: 'Error: ')
+    end
+
+    context 'when the error message is localised' do
+      let(:localisations) { { en: YAML.load_file('spec/support/locales/sample.en.yaml') } }
+
+      specify %(error has a the overridden prefix) do
+        with_localisations(localisations) do
+          expect(subject).to have_tag('span', with: { class: 'govuk-visually-hidden' }, text: 'Oh dear: ')
+        end
+      end
+    end
+
     specify 'the form group should have the correct error classes' do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group--error' })
     end
