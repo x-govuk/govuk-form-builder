@@ -7,6 +7,7 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Hint
       include Traits::Supplemental
       include Traits::HTMLClasses
+      include Traits::Localisation
 
       MULTIPARAMETER_KEY = { day: 3, month: 2, year: 1 }.freeze
 
@@ -102,10 +103,14 @@ module GOVUKDesignSystemFormBuilder
 
       def label(segment, link_errors)
         tag.label(
-          @segment_names.fetch(segment),
+          segment_label_text(segment),
           class: label_classes,
           for: id(segment, link_errors)
         )
+      end
+
+      def segment_label_text(segment)
+        localised_text(:label, segment) || @segment_names.fetch(segment)
       end
 
       def input(segment, link_errors, width, value)
