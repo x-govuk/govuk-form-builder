@@ -66,6 +66,25 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     it_behaves_like 'a field that supports setting the legend caption via localisation'
     it_behaves_like 'a field that supports setting the hint via localisation'
 
+    describe 'localising the date, month and year labels' do
+      let(:localisations) { { en: YAML.load_file('spec/support/locales/sample.en.yaml') } }
+      let(:expected_day_label) { I18n.translate("helpers.label.person.#{attribute}.day") }
+      let(:expected_month_label) { I18n.translate("helpers.label.person.#{attribute}.month") }
+      let(:expected_year_label) { I18n.translate("helpers.label.person.#{attribute}.year") }
+
+      subject { builder.send(*args) }
+
+      specify 'the day, month and year labels are localised' do
+        with_localisations(localisations) do
+          aggregate_failures do
+            expect(subject).to have_tag('label', text: expected_day_label, with: { class: 'govuk-label' })
+            expect(subject).to have_tag('label', text: expected_month_label, with: { class: 'govuk-label' })
+            expect(subject).to have_tag('label', text: expected_year_label, with: { class: 'govuk-label' })
+          end
+        end
+      end
+    end
+
     it_behaves_like 'a field that supports custom branding'
     it_behaves_like 'a field that contains a customisable form group'
 

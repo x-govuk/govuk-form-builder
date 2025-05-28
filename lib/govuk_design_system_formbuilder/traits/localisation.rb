@@ -5,20 +5,22 @@ module GOVUKDesignSystemFormBuilder
       # spaces, zero or more times
       BASE_NAME_REGEXP = %r{[[:alpha:]](?:[\w\s]*)}
 
-    private
-
-      def localised_text(context)
+      def localised_text(context, segment = nil)
         return unless @object_name.present? && @attribute_name.present?
 
-        localise(context) || localise_html(context)
+        full_context = [schema(context), segment].compact.join('.')
+
+        localise(full_context) || localise_html(full_context)
       end
 
+    private
+
       def localise(context)
-        I18n.translate(schema(context), default: nil)
+        I18n.translate(context, default: nil)
       end
 
       def localise_html(context)
-        I18n.translate("#{schema(context)}_html", default: nil).try(:html_safe)
+        I18n.translate("#{context}_html", default: nil).try(:html_safe)
       end
 
       def schema(context)
