@@ -66,6 +66,25 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     it_behaves_like 'a field that supports setting the legend caption via localisation'
     it_behaves_like 'a field that supports setting the hint via localisation'
 
+    describe 'localising the date, month and year labels' do
+      let(:localisations) { { en: YAML.load_file('spec/support/locales/sample.en.yaml') } }
+      let(:expected_day_label) { I18n.translate("helpers.label.person.#{attribute}.day") }
+      let(:expected_month_label) { I18n.translate("helpers.label.person.#{attribute}.month") }
+      let(:expected_year_label) { I18n.translate("helpers.label.person.#{attribute}.year") }
+
+      subject { builder.send(*args) }
+
+      specify 'the day, month and year labels are localised' do
+        with_localisations(localisations) do
+          aggregate_failures do
+            expect(subject).to have_tag('label', text: expected_day_label, with: { class: 'govuk-label' })
+            expect(subject).to have_tag('label', text: expected_month_label, with: { class: 'govuk-label' })
+            expect(subject).to have_tag('label', text: expected_year_label, with: { class: 'govuk-label' })
+          end
+        end
+      end
+    end
+
     it_behaves_like 'a field that supports custom branding'
     it_behaves_like 'a field that contains a customisable form group'
 
@@ -149,6 +168,22 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
       specify "sets the year field correctly" do
         expect(subject).to have_tag('input', with: { id: "person_born_on_year", name: "person[born_on(year)]" })
+      end
+    end
+
+    context 'when segment names are overridden' do
+      subject { builder.send(*args, segment_names: { day: "Tag", month: "Monat", year: "Jahr" }) }
+
+      specify "sets the day label correctly" do
+        expect(subject).to have_tag('label', text: "Tag", with: { for: day_identifier })
+      end
+
+      specify "sets the month label correctly" do
+        expect(subject).to have_tag('label', text: "Monat", with: { for: month_identifier })
+      end
+
+      specify "sets the year label correctly" do
+        expect(subject).to have_tag('label', text: "Jahr", with: { for: year_identifier })
       end
     end
 

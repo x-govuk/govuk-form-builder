@@ -32,6 +32,10 @@ module GOVUKDesignSystemFormBuilder
   #   override the standard behaviour where Rails tries to cast the values
   #   into a +Date+. Defaults to +{ day: '3i', month: '2i', year: '1i' }+
   #
+  # * +:default_date_segment_names+ allows the individual date field labels to
+  #   have their default values set.
+  #   Defaults to +{ day: 'Day', month: 'Month', year: 'Year' }+
+  #
   # * +:default_radio_divider_text+ sets the text automatically added to the
   #   radio button divider, defaults to 'or'
   #
@@ -48,6 +52,9 @@ module GOVUKDesignSystemFormBuilder
   #   make labels on {#govuk_collection_radio_buttons} bold when a +:hint_method+
   #   is present. The default can be overridden using the +bold_labels:+ argument.
   #   The default value is 'true'.
+  #
+  # * +:default_error_message_prefix+ sets the prefix text inserted before inline
+  #   errors added to form inputs. It defaults to 'Error'.
   #
   # * +:default_error_summary_title+ sets the text used in error summary
   #   blocks. As per the GOV.UK Design System spec, it defaults to
@@ -94,8 +101,10 @@ module GOVUKDesignSystemFormBuilder
     default_caption_size: 'm',
     default_submit_button_text: 'Continue',
     default_date_segments: { day: '3i', month: '2i', year: '1i' },
+    default_date_segment_names: { day: 'Day', month: 'Month', year: 'Year' },
     default_radio_divider_text: 'or',
     default_check_box_divider_text: 'or',
+    default_error_message_prefix: 'Error',
     default_error_summary_title: 'There is a problem',
     default_error_summary_presenter: Presenters::ErrorSummaryPresenter,
     default_error_summary_error_order_method: nil,

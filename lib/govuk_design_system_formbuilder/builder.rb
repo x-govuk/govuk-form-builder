@@ -938,6 +938,8 @@ module GOVUKDesignSystemFormBuilder
     # @param maxlength_enabled [Boolean] adds maxlength attribute to day, month and year inputs (2, 2, and 4, respectively)
     # @param segments [Hash] allows Rails' multiparameter attributes to be overridden on a field-by-field basis. Hash must
     #   contain +day:+, +month:+ and +year:+ keys. Defaults to the default value set in the +default_date_segments+ setting in {GOVUKDesignSystemFormBuilder.DEFAULTS}
+    # @param segment_names [Hash] allows the day, month and year labels to be overridden. Hash must
+    #   contain +day:+, +month:+ and +year:+ keys. Defaults to the default value set in the +default_date_segment_names+ setting in {GOVUKDesignSystemFormBuilder.DEFAULTS}
     # @param form_group [Hash] configures the form group
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
@@ -960,8 +962,8 @@ module GOVUKDesignSystemFormBuilder
     # @example A date input with legend supplied as a proc
     #  = f.govuk_date_field :finishes_on,
     #    legend: -> { tag.h3('Which category do you belong to?') }
-    def govuk_date_field(attribute_name, hint: {}, legend: {}, caption: {}, date_of_birth: false, omit_day: false, maxlength_enabled: false, segments: config.default_date_segments, form_group: {}, **kwargs, &block)
-      Elements::Date.new(self, object_name, attribute_name, hint:, legend:, caption:, date_of_birth:, omit_day:, maxlength_enabled:, segments:, form_group:, **kwargs, &block).html
+    def govuk_date_field(attribute_name, hint: {}, legend: {}, caption: {}, date_of_birth: false, omit_day: false, maxlength_enabled: false, segments: config.default_date_segments, segment_names: config.default_date_segment_names, form_group: {}, **kwargs, &block)
+      Elements::Date.new(self, object_name, attribute_name, hint:, legend:, caption:, date_of_birth:, omit_day:, maxlength_enabled:, segments:, segment_names:, form_group:, **kwargs, &block).html
     end
 
     # Generates a summary of errors in the form, each linking to the corresponding

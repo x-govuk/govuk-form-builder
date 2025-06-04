@@ -16,7 +16,11 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def hidden_prefix
-        tag.span('Error: ', class: %(#{brand}-visually-hidden))
+        tag.span("#{prefix_text}: ", class: %(#{brand}-visually-hidden))
+      end
+
+      def prefix_text
+        I18n.translate("helpers.error.message_prefix", default: nil) || config.default_error_message_prefix
       end
 
       def message
