@@ -20,7 +20,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def prefix_text
-        I18n.translate("helpers.error.message_prefix", default: nil) || 'Error'
+        I18n.translate("helpers.error.message_prefix", default: nil) || config.default_error_message_prefix
       end
 
       def message
