@@ -20,6 +20,7 @@ use_helper Nanoc::Helpers::XMLSitemap
 use_helper Helpers::Formatters
 use_helper Helpers::LinkHelpers
 use_helper Helpers::RelatedInfo
+use_helper Helpers::ServiceNavigationHelpers
 use_helper Helpers::TitleAnchorHelpers
 use_helper Helpers::HeaderHelper
 
