@@ -2,93 +2,91 @@
 title: Text input
 ---
 
-p.govuk-body
-  | Text inputs allow users to enter text that’s no longer than a single line.
+markdown:
+  Text inputs allow users to enter text that’s no longer than a single line.
 
-p.govuk-body
-  | In addition to <code>#govuk_text_field</code>, the form builder supports
-    various other methods that take the same parameters and produce inputs for
-    particular data types:
+  In addition to `#govuk_text_field`, the form builder supports various other
+  methods that take the same parameters and produce inputs for particular data
+  types:
 
-  table.govuk-table
-    caption.govuk-table__caption Input types supported by the form builder
+table.govuk-table
+  caption.govuk-table__caption Input types supported by the form builder
 
-    thead.govuk-table__head
-      tr.govuk-table__row
-        th.govuk-table__header Method
-        th.govuk-table__header Input type
-        th.govuk-table__header Documentation
+  thead.govuk-table__head
+    tr.govuk-table__row
+      th.govuk-table__header Method
+      th.govuk-table__header Input type
+      th.govuk-table__header Documentation
 
-    tbody.govuk-table__body
+  tbody.govuk-table__body
 
-      tr.govuk-table__row
-        td.govuk-table__cell
-          code #govuk_number_field
-        td.govuk-table__cell
-          code number
-        td.govuk-table__cell
-          == link_to 'MDN', 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/number'
-          span.govuk-visually-hidden
-            ' documentation for number inputs
+    tr.govuk-table__row
+      td.govuk-table__cell
+        code #govuk_number_field
+      td.govuk-table__cell
+        code number
+      td.govuk-table__cell
+        == link_to 'MDN', 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/number'
+        span.govuk-visually-hidden
+          ' documentation for number inputs
 
-          ' ,
+        ' ,
 
-          == link_to 'WHATWG', 'https://html.spec.whatwg.org/multipage/input.html#number-state-(type=number)'
-          span.govuk-visually-hidden
-            ' standard document for number inputs
+        == link_to 'WHATWG', 'https://html.spec.whatwg.org/multipage/input.html#number-state-(type=number)'
+        span.govuk-visually-hidden
+          ' standard document for number inputs
 
-      tr.govuk-table__row
-        td.govuk-table__cell
-          code #govuk_phone_field
-        td.govuk-table__cell
-          code tel
-        td.govuk-table__cell
-          == link_to 'MDN', 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/tel'
-          span.govuk-visually-hidden
-            ' documentation for telephone inputs
+    tr.govuk-table__row
+      td.govuk-table__cell
+        code #govuk_phone_field
+      td.govuk-table__cell
+        code tel
+      td.govuk-table__cell
+        == link_to 'MDN', 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/tel'
+        span.govuk-visually-hidden
+          ' documentation for telephone inputs
 
-          ' ,
+        ' ,
 
-          == link_to 'WHATWG', 'https://html.spec.whatwg.org/multipage/input.html#telephone-state-(type=tel)'
-          span.govuk-visually-hidden
-            ' standard document for telephone inputs
+        == link_to 'WHATWG', 'https://html.spec.whatwg.org/multipage/input.html#telephone-state-(type=tel)'
+        span.govuk-visually-hidden
+          ' standard document for telephone inputs
 
-      tr.govuk-table__row
-        td.govuk-table__cell
-          code #govuk_email_field
-        td.govuk-table__cell
-          code email
-        td.govuk-table__cell
-          == link_to 'MDN', 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/email'
-          span.govuk-visually-hidden
-            ' documentation for email inputs
+    tr.govuk-table__row
+      td.govuk-table__cell
+        code #govuk_email_field
+      td.govuk-table__cell
+        code email
+      td.govuk-table__cell
+        == link_to 'MDN', 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/email'
+        span.govuk-visually-hidden
+          ' documentation for email inputs
 
-          ' ,
+        ' ,
 
-          == link_to 'WHATWG', 'https://html.spec.whatwg.org/multipage/input.html#e-mail-state-(type=email)'
-          span.govuk-visually-hidden
-            ' standard document for email inputs
+        == link_to 'WHATWG', 'https://html.spec.whatwg.org/multipage/input.html#e-mail-state-(type=email)'
+        span.govuk-visually-hidden
+          ' standard document for email inputs
 
-      tr.govuk-table__row
-        td.govuk-table__cell
-          code #govuk_url_field
-        td.govuk-table__cell
-          code url
-        td.govuk-table__cell
-          == link_to 'MDN', 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/url'
-          span.govuk-visually-hidden
-            ' documentation for URL inputs
+    tr.govuk-table__row
+      td.govuk-table__cell
+        code #govuk_url_field
+      td.govuk-table__cell
+        code url
+      td.govuk-table__cell
+        == link_to 'MDN', 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/url'
+        span.govuk-visually-hidden
+          ' documentation for URL inputs
 
-          ' ,
+        ' ,
 
-          == link_to 'WHATWG', 'https://html.spec.whatwg.org/multipage/input.html#url-state-(type=url)'
-          span.govuk-visually-hidden
-            ' standard document for URL inputs
+        == link_to 'WHATWG', 'https://html.spec.whatwg.org/multipage/input.html#url-state-(type=url)'
+        span.govuk-visually-hidden
+          ' standard document for URL inputs
 
-p.govuk-body
-  | When used, these fields will look and act the same on desktop but mobile
-    browsers will present a different keyboard depending on the
-    <code>type</code> attribute.
+markdown:
+  When used, these fields will look and act the same on desktop but mobile
+  browsers will present a different keyboard depending on the `type` attribute.
 
 == render('/partials/example.*',
   caption: 'Generating a text input with a custom label and hint',
@@ -98,44 +96,42 @@ p.govuk-body
   caption: 'Numeric text inputs',
   code: text_field_with_numeric_attributes) do
 
-  p.govuk-body
-    | All values passed into the form helper that aren’t among its named
-      parameters will be set as HTML attributes.
+  markdown:
+    All values passed into the form helper that aren’t among its named
+    parameters will be set as HTML attributes.
 
-  p.govuk-body
-    | This feature is useful when requesting non-quantity values like
-      account numbers, payment card numbers and sort codes. There are
-      more details on the reasoning behind this decision in #{link_to('the accompanying blog post', input_types_for_numbers_link).html_safe}.
+    This feature is useful when requesting non-quantity values like account
+    numbers, payment card numbers and sort codes. There are more details on the
+    reasoning behind this decision in #{link_to('the accompanying blog post', input_types_for_numbers_link).html_safe}.
 
 == render('/partials/example.*',
   caption: 'Inputs with prefixes and suffixes',
   code: text_field_with_prefix_and_suffix) do
 
-  p.govuk-body
-    | Prefixes and suffixes are useful when you use symbols and abbreviations
-      that are commonly known and understood. Symbols and abbreviations should
-      be explained in the label or hint.
+  markdown:
+    Prefixes and suffixes are useful when you use symbols and abbreviations
+    that are commonly known and understood. Symbols and abbreviations should
+    be explained in the label or hint.
 
 == render('/partials/example.*',
   caption: 'Generating text inputs with custom widths',
   code: text_field_with_custom_width) do
 
-  p.govuk-body
-    | By default, inputs will expand to fill their container. When no
-      <code>width</code> parameter is passed in no width class will be added.
+  markdown:
+    By default, inputs will expand to fill their container. When no `width`
+    parameter is passed in no width class will be added.
 
-  p.govuk-body
-    | Custom widths help users understand the length of the value they are
-      intended to enter. For example, a telephone number input needn’t be the
-      full width of the page when it might only be 11 digits long.
+    Custom widths help users understand the length of the value they are
+    intended to enter. For example, a telephone number input needn’t be the
+    full width of the page when it might only be 11 digits long.
 
 == render('/partials/example.*',
   caption: "Inputs with extra spacing between letters",
   code: text_field_with_extra_letter_spacing) do
 
-  p.govuk-body
-    | When asking for long codes, references or phone numbers we can make the
-      text in the field more readable by adding some extra spacing between
-      characters.
+  markdown:
+    When asking for long codes, references or phone numbers we can make the
+    text in the field more readable by adding some extra spacing between
+    characters.
 
 == render('/partials/related-navigation.*', links: text_field_info)

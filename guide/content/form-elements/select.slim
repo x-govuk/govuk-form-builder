@@ -2,18 +2,17 @@
 title: Select
 ---
 
-p.govuk-body
-  | The select and collection select components allow users to choose an option
-    from a long list.
+markdown:
+  The select and collection select components allow users to choose an option
+  from a long list.
 
 .govuk-inset-text
-  p.govuk-body
-    | Before using a select component try asking users questions which will
-      allow you to present them with fewer options.
+  markdown:
+    Before using a select component try asking users questions which will
+    allow you to present them with fewer options.
 
-  p.govuk-body
-    | Asking questions means you're less likely to need to use the select
-      component and can consider using a different solution, such as radios.
+    Asking questions means you're less likely to need to use the select
+    component and can consider using a different solution, such as radios.
 
 == render('/partials/belongs-to-warning.*')
 
@@ -27,21 +26,15 @@ p.govuk-body
   code: select_field_with_grouped_options,
   sample_data: grouped_lunch_options_raw) do
 
-  p.govuk-body
-    | The <code>#govuk_select</code> helper offers extra control over the
-      contents of a <code>select</code> element. Like its Rails counterpart,
-      <code>#select</code> the options can be set in a number of ways:
+  markdown:
+    The `#govuk_select` helper offers extra control over the contents of a
+    `select` element. Like its Rails counterpart, `#select` the options can be
+    set in a number of ways:
 
-    ul.govuk-list.govuk-list--bullet
-      li
-        | #{link_to('<code>options_for_select</code>', rails_option_for_select_link).html_safe}
-      li
-        | #{link_to('<code>grouped_options_for_select</code>', rails_grouped_option_for_select_link).html_safe}
-      li
-        | #{link_to('<code>options_from_collection_for_select</code>', rails_options_from_collection_for_select_link).html_safe}
-      li
-        | #{link_to('<code>option_groups_from_collection_for_select</code>', rails_option_groups_from_collection_for_select_link).html_safe}
-      li
-        | manually specifying the options using a block of HTML
+    * #{link_to('<code>options_for_select</code>', rails_option_for_select_link).html_safe}
+    * #{link_to('<code>grouped_options_for_select</code>', rails_grouped_option_for_select_link).html_safe}
+    * #{link_to('<code>options_from_collection_for_select</code>', rails_options_from_collection_for_select_link).html_safe}
+    * #{link_to('<code>option_groups_from_collection_for_select</code>', rails_option_groups_from_collection_for_select_link).html_safe}
+    * manually specifying the options using a block of HTML
 
 == render('/partials/related-navigation.*', links: select_info)

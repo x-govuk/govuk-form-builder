@@ -2,27 +2,24 @@
 title: Labels, captions, hints and legends
 ---
 
-*header(level: 2, classes: "govuk-heading-l")
-  | Labels
+markdown:
+  ## Labels
 
-p.govuk-body
-  | All form helpers that generate a single input element
-    automatically associate it with a corresponding <code>label</code>.
+  All form helpers that generate a single input element automatically associate
+  it with a corresponding `label`.
 
-p.govuk-body
-  | By default, the label text is set to the capitalised name of the
-    attribute. If the attribute contains underscores they will be left
-    in. This is intentional behaviour to prompt the developer to add
-    some more suitable text.
+  By default, the label text is set to the capitalised name of the attribute.
+  If the attribute contains underscores they will be left in. This is
+  intentional behaviour to prompt the developer to add some more suitable text.
 
 == render('/partials/example.*',
   caption: 'An unconfigured label',
   code: text_field_with_no_label,
   start_headings_at_level: 3)
 
-p.govuk-body
-  | Labels are customised by passing in a hash of options with the
-    following keys:
+  markdown:
+    Labels are customised by passing in a hash of options with the  following
+    keys:
 
 dl.govuk-summary-list
   .govuk-summary-list__row
@@ -69,12 +66,13 @@ dl.govuk-summary-list
   caption: 'Setting label content with a proc',
   code: text_field_with_label_proc,
   start_headings_at_level: 3) do
-    p.govuk-body
-      | Label content can be customised further using a
-        #{link_to('Ruby proc', ruby_proc_link).html_safe}. Note that the content
-        of the proc is rendered <em>inside the label</em> so the form builder
-        can enforce consistency between the label's <code>for</code> attribute
-        and the associated form element.
+
+  markdown:
+    Label content can be customised further using a
+    #{link_to('Ruby proc', ruby_proc_link).html_safe}. Note that the content of
+    the proc is rendered _inside the label_ so the form builder can enforce
+    consistency between the label's `for` attribute and the associated form
+    element.
 
 == render('/partials/example.*',
   caption: 'Separate labels',
@@ -82,20 +80,18 @@ dl.govuk-summary-list
   start_headings_at_level: 3) do
 
   markdown:
-    There are occasions where placing the label above an input won't work. We can
-    do this by suppressing the default label with `label: nil` and manually adding
-    the label elsewhere by calling the `govuk_label` helper directly.
+    There are occasions where placing the label above an input won’t work. We
+    can do this by suppressing the default label with `label: nil` and manually
+    adding the label elsewhere by calling the `govuk_label` helper directly.
 
-hr.govuk-section-break.govuk-section-break--xl.govuk-section-break--visible
+    ***
 
-h2.govuk-heading-l Captions
+    ## Captions
 
-p.govuk-body
-  | Sometimes you may need to make it clear that a heading is part of a
+    Sometimes you may need to make it clear that a heading is part of a
     larger section or group. To do this, you can use a heading with a caption.
 
-p.govuk-body
-  | Captions are supported by all helpers that have labels or legends and can
+    Captions are supported by all helpers that have labels or legends and can
     be configured with the following options:
 
 dl.govuk-summary-list
@@ -114,33 +110,28 @@ dl.govuk-summary-list
       | The caption size, either <code>xl</code>, <code>l</code> or <code>m</code>
 
 .govuk-inset-text
-  p.govuk-body
-    | If you want to place the caption <em>outside</em> of the label's tag you can
-      do this by #{link_to('setting the label content with a proc', '#setting-label-content-with-a-proc').html_safe}.
+  markdown:
+    If you want to place the caption _outside_ of the label's tag you can
+    do this by #{link_to('setting the label content with a proc', '#setting-label-content-with-a-proc').html_safe}.
 
 == render('/partials/example.*',
   caption: 'A label with a caption',
   code: text_field_with_caption,
   start_headings_at_level: 3)
 
-hr.govuk-section-break.govuk-section-break--xl.govuk-section-break--visible
+markdown:
+  ***
 
-h2.govuk-heading-l Hints
+  ## Hints
 
-p.govuk-body
-  | Hints are used to provide extra information that's relevant to the
-    majority of users, like how their information will be used, or where to
-    find it.
+  Hints are used to provide extra information that’s relevant to the majority
+  of users, like how their information will be used, or where to find it.
 
-p.govuk-body.important
-  | Hints contents be customised further by passing in a #{link_to('proc', ruby_proc_link).html_safe}
-    instead of a string.
+  Hints contents be customised further by passing in a #{link_to('proc', ruby_proc_link).html_safe} instead of a string.
 
-p.govuk-body
-  | To accomodate screenreaders and users of other assistive technology,
-    <strong>hints must be associated with inputs</strong> via the
-    <code>aria-describedby</code> attribute. The form builder does this
-    automatically.
+  To accomodate screenreaders and users of other assistive technology, **hints
+  must be associated with inputs** via the `aria-describedby` attribute. The
+  form builder does this automatically.
 
 == render('/partials/example.*',
   caption: 'A text field with hint',
@@ -152,22 +143,19 @@ p.govuk-body
   code: text_field_with_hint_proc,
   start_headings_at_level: 3)
 
-hr.govuk-section-break.govuk-section-break--xl.govuk-section-break--visible
+markdown:
+  ***
 
-h2.govuk-heading-l Legends
+  ## Legends
 
-p.govuk-body
-  | Legends look, act and work in a similar fashion to labels but they
-    describe a <em>group of inputs</em>.
+  Legends look, act and work in a similar fashion to labels but they describe a
+  _group of inputs_.
 
-p.govuk-body
-  | The GOV.UK Design System uses legends to describe radio button, check box
-    and date fields but any group of related fields can be wrapped in a
-    fieldset.
+  The GOV.UK Design System uses legends to describe radio button, check box and
+  date fields but any group of related fields can be wrapped in a fieldset.
 
-p.govuk-body
-  | Legends are customised by passing in a hash of options with the
-    following keys:
+  Legends are customised by passing in a hash of options with the following
+  keys:
 
 dl.govuk-summary-list
   .govuk-summary-list__row
@@ -213,14 +201,14 @@ dl.govuk-summary-list
   code: radios_with_legend_proc,
   start_headings_at_level: 3) do
 
-  p.govuk-body
-    | To take even more control of legends the content can be passed in using
-      a #{link_to('Ruby proc', ruby_proc_link).html_safe}. In this example
-      we're using Slim but could just as easily call a helper method or
-      render a partial, component or string of HTML.
+  markdown:
+    To take even more control of legends the content can be passed in using
+    a #{link_to('Ruby proc', ruby_proc_link).html_safe}. In this example
+    we’re using Slim but could just as easily call a helper method or
+    render a partial, component or string of HTML.
 
   .govuk-inset-text
-    p.govuk-body
-      | Procs allow for complete control of the legend's HTML, including the
-        legend element itself. This means that the legend element needs to be
-        added manually and it should wrap all of the fieldset's heading text.
+    markdown:
+      Procs allow for complete control of the legend’s HTML, including the
+      legend element itself. This means that the legend element needs to be
+      added manually and it should wrap all of the fieldset's heading text.
