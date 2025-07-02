@@ -91,7 +91,8 @@ figure.app-example
           | HTML
 
     .govuk-tabs__panel id=%(output-rendered-#{anchor_id(caption)}) class=("branded-background" if defined?(render_on_brand_background) && render_on_brand_background)
-      == format_slim(code, f: builder(display_errors), **form_data)
+      scoped-preview
+        == format_slim(code, f: builder(display_errors), **form_data)
 
     .govuk-tabs__panel id=%(output-html-#{anchor_id(caption)})
       pre

@@ -5,13 +5,15 @@ doc/*
 *.gem
 *.yardoc
 coverage/*
+crash.log
 
 guide/tmp
 guide/output
 guide/*.log
 guide/node_modules
+guide/content/assets/fonts
 guide/content/assets/images
-guide/content/javascripts/*.js
-guide/content/javascripts/*.map
-
-crash.log
+guide/content/assets/rebrand
+guide/content/assets/manifest.json
+guide/content/javascripts/*.min.js
+guide/content/javascripts/*.min.js.map
