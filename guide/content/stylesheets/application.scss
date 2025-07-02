@@ -1,75 +1,13 @@
-// GOV.UK Frontend options
-$govuk-global-styles: true;
-$govuk-new-organisation-colours: true;
-$govuk-new-typography-scale: true;
-$govuk-assets-path: "/assets/";
-$govuk-font-family: system-ui, sans-serif;
-$govuk-brand-colour: #2288aa;
-$govuk-link-colour: #006688;
-$govuk-link-hover-colour: #004466;
-$govuk-link-visited-colour: #333366;
-$govuk-page-width: 1100px;
+// GOV.UK Frontend
+@use "vendor/govuk-frontend";
 
-// Import GOV.UK Frontend
-@import "dist/govuk";
-
-// Import GOV.UK Prototype Components
-@import "x-govuk/components/masthead/masthead";
-@import "x-govuk/components/related-navigation/related-navigation";
-@import "x-govuk/components/sub-navigation/sub-navigation";
+// Forward GOV.UK Prototype Components
+@forward "pkg:@x-govuk/govuk-prototype-components/masthead";
+@forward "pkg:@x-govuk/govuk-prototype-components/related-navigation";
+@forward "pkg:@x-govuk/govuk-prototype-components/sub-navigation";
 
 // Application components
-@import "components/example";
-@import "components/highlight";
-@import "components/prose";
-
-// Classes used in examples
-.gradient-background {
-  background: linear-gradient(
-    90deg,
-    rgba(184, 255, 255, 1) 0%,
-    rgba(255, 152, 255, 1) 50%,
-    rgba(255, 255, 108, 1) 100%
-  );
-  display: inline-block;
-  padding: 2px govuk-spacing(1);
-}
-
-.purple-background {
-  background: govuk-tint(govuk-colour("purple"), 80);
-  display: inline-block;
-  padding: 2px govuk-spacing(1);
-}
-
-.orange-background {
-  background: govuk-tint(govuk-colour("orange"), 70);
-  display: inline-block;
-  padding: 2px govuk-spacing(1);
-}
-
-.final-decision-warning {
-  @include govuk-font($size: 16, $weight: "bold");
-  background: govuk-tint(govuk-colour("pink"), 80);
-  color: govuk-shade(govuk-colour("pink"), 40);
-  display: inline-block;
-  padding: govuk-spacing(2) govuk-spacing(3);
-}
-
-.big-purple-button {
-  background: govuk-colour("purple");
-  border-radius: 0.3em;
-  padding: 0.4em 2em;
-  font-weight: bold;
-
-  &:hover {
-    background: govuk-tint(govuk-colour("purple"), 10%);
-  }
-}
-
-.two-columns {
-  columns: 2;
-}
-
-.branded-background {
-  background: govuk-colour(blue);
-}
+@forward "components/example";
+@forward "components/highlight";
+@forward "components/link";
+@forward "components/prose-scope";
