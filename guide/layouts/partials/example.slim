@@ -2,10 +2,11 @@
   - custom_config
 
 - start_heading_level = defined?(start_headings_at_level) ? start_headings_at_level : 2
+- start_heading_size = start_heading_level == 2 ? "l" : "m"
 
-*header(level: start_heading_level, id: anchor_id(caption), classes: "govuk-heading-m govuk-!-font-size-27 govuk-!-margin-top-8")
+*header(level: start_heading_level, id: anchor_id(caption), classes: "govuk-heading-#{start_heading_size} govuk-!-margin-top-8")
 
-  == link_to caption, "#".concat(anchor_id(caption)), class: "header-anchor"
+  == link_to caption, "#".concat(anchor_id(caption)), class: "app-link--heading"
 
 - if block_given? && (content = yield)
   == content
@@ -90,7 +91,8 @@ figure.app-example
           | HTML
 
     .govuk-tabs__panel id=%(output-rendered-#{anchor_id(caption)}) class=("branded-background" if defined?(render_on_brand_background) && render_on_brand_background)
-      == format_slim(code, f: builder(display_errors), **form_data)
+      scoped-preview
+        == format_slim(code, f: builder(display_errors), **form_data)
 
     .govuk-tabs__panel id=%(output-html-#{anchor_id(caption)})
       pre

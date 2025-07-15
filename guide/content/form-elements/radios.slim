@@ -2,19 +2,15 @@
 title: Radios
 ---
 
-p.govuk-body
-  | Radios allow users to select a single option from a list.
+markdown:
+  Radios allow users to select a single option from a list.
 
-p.govuk-body
-  | Radios are grouped together in a <code>fieldset</code> with a
-    <code>legend</code> that describes them, as shown in the examples on this
-    page.
+  Radios are grouped together in a `fieldset` with a `legend` that describes
+  them, as shown in the examples on this page.
 
-p.govuk-body
-  | If you are asking just one question per page as recommended, you can set
-    the contents of the <code>legend</code> as the page heading. This is good
-    practice as it means that users of screen readers will only hear the
-    contents once.
+  If you are asking one question per page as recommended, you can set the
+  contents of the `legend` as the page heading. This is good practice as it
+  means that users of screen readers will only hear the contents once.
 
 == render('/partials/belongs-to-warning.*')
 
@@ -28,39 +24,36 @@ p.govuk-body
   code: radio_field_with_label_and_descriptions,
   sample_data: lunch_options_raw) do
 
-  p.govuk-body
-    | Often radios need a description to help the user pick the correct option.
-      In addition to Rails’ collection form helper taking arguments for the
-      identifier and label text for radio buttons, an extra argument can be
-      passed for the description.
+  markdown:
+    Often radios need a description to help the user pick the correct option.
+    In addition to Rails’ collection form helper taking arguments for the
+    identifier and label text for radio buttons, an extra argument can be
+    passed for the description.
 
-  p.govuk-body
-    | In this example, our source data has a <code>description</code> attribute
-      which we want to form the hint text. The attribute name will be called on
-      each option and if a description is present it will be displayed, if it is
-      null or empty no hint will be rendered.
+    In this example, our source data has a `description` attribute which we
+    want to form the hint text. The attribute name will be called on each
+    option and if a description is present it will be displayed, if it is
+    null or empty no hint will be rendered.
 
-  p.govuk-body
-    | When descriptions are enabled in a radio button collection the labels are made
-      <strong>bold</strong> by default. This makes the labels stand out from the hints.
-      The auto bolding behaviour can be disabled by changing the
-      <code>default_collection_radio_buttons_auto_bold_labels</code>
-      configuration flag to <code>false</code>.
+    When descriptions are enabled in a radio button collection the labels are
+    made **bold** by default. This makes the labels stand out from the hints.
+    The auto bolding behaviour can be disabled by changing the
+    `default_collection_radio_buttons_auto_bold_labels` configuration flag to
+    `false`.
 
 == render('/partials/example.*',
   caption: 'Small radios',
   code: small_radio_field,
   sample_data: lunch_options_raw) do
 
-  p.govuk-body
-    | Use standard-sized radios in nearly all cases. However, smaller versions
-      work well on pages where it’s helpful to make them less visually
-      prominent.
+  markdown:
+    Use standard-sized radios in nearly all cases. However, smaller versions
+    work well on pages where it’s helpful to make them less visually
+    prominent.
 
-  p.govuk-body
-    | For example, on a page of search results, the primary user need is to
-      see the results. Using smaller radios lets users see and change search
-      filters without distracting them from the main content.
+    For example, on a page of search results, the primary user need is to
+    see the results. Using smaller radios lets users see and change search
+    filters without distracting them from the main content.
 
 == render('/partials/example.*',
   caption: 'Inline radios',
@@ -68,9 +61,9 @@ p.govuk-body
   sample_data: lunch_options_raw,
   hide_data: true) do
 
-  p.govuk-body
-    | When there are only two options, you can either stack the radios or
-      display them inline.
+  markdown:
+    When there are only two options, you can either stack the radios or display
+    them inline.
 
 == render('/partials/example.*',
   caption: 'Radios fieldset with conditional content and a divider',
@@ -78,15 +71,13 @@ p.govuk-body
 
   == render('/partials/fieldset-warning.*', input_type: 'radio button')
 
-  p.govuk-body
-    | If your list of options is hard-coded or you want to add extra
-      customisation, like inserting a text divider, the
-      <code>#govuk_radio_buttons_fieldset</code> helper offers additional
-      flexibility.
+  markdown:
+    If your list of options is hard-coded or you want to add extra
+    customisation, like inserting a text divider, the
+    `#govuk_radio_buttons_fieldset` helper offers additional flexibility.
 
-  p.govuk-body
-    | Any content passed into <code>#govuk_radio_button</code> as a block will
-      be revealed when the radio button is selected.
+    Any content passed into `#govuk_radio_button` as a block will be revealed
+    when the radio button is selected.
 
 == render('/partials/example.*',
   caption: 'Populating values, labels and hints with procs',
@@ -95,15 +86,14 @@ p.govuk-body
   sample_data: laptops_data_raw,
   display_data: true) do
 
-  p.govuk-body
-    | It’s often convenient to hold label and hint text in locale or
-      configuration files. This approach allows content changes to be made in
-      the repository rather than modifying via data migrations.
+ markdown:
+    It’s often convenient to hold label and hint text in locale or
+    configuration files. This approach allows content changes to be made in
+    the repository rather than modifying via data migrations.
 
-  p.govuk-body
-    | To support this behaviour the form builder allows #{link_to('Ruby Procs', ruby_proc_link).html_safe}
-      to be supplied for the <code>:value_method</code>, <code>:text_method</code> and <code>:hint_method</code> parameters. They each take a single
-      argument, <code>item</code>, which is object representing the radio
-      button.
+    To support this behaviour the form builder allows #{link_to('Ruby Procs', ruby_proc_link).html_safe}
+    to be supplied for the `:value_method`, `:text_method` and `:hint_method`
+    parameters. They each take a single argument, `item`, which is object
+    representing the radio button.
 
 == render('/partials/related-navigation.*', links: radios_info)

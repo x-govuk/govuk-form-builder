@@ -2,30 +2,27 @@
 title: Date input
 ---
 
-p.govuk-body
-  | Date inputs allow the user to enter the day, month and year of an event.
+markdown:
+  Date inputs allow the user to enter the day, month and year of an event.
 
-p.govuk-body
-  | The date input’s parameters match those used by Rails’
-    <code>date_select</code> helper. To access the parameters in your controller
-    you should just need to permit the attribute, for example:
+  The date input’s parameters match those used by Rails’ `date_select` helper.
+  To access the parameters in your controller you should just need to permit
+  the attribute, for example:
 
-pre
-  code.highlight.language-ruby
-    | # in UsersController
+  ```language-ruby
+  # in UsersController
 
-      def user_params
-        params.require(:user).permit(:date_of_birth, ...)
-      end
+  def user_params
+    params.require(:user).permit(:date_of_birth, ...)
+  end
+  ```
 
-p.govuk-body
-  | Three inputs for day, month and year respectively are used to capture the
-    dates rather than a date picker. This is because:
+  Three inputs for day, month and year respectively are used to capture the
+  dates rather than a date picker. This is because:
 
-ul.govuk-list.govuk-list--bullet
-  li some users find date pickers difficult to use
-  li often users will be expected to enter a date they know rather than to pick
-     a date
+  * some users find date pickers difficult to use
+  * often users will be expected to enter a date they know rather than to pick
+    a date
 
 == render('/partials/example.*',
   caption: 'Exact date input with legend and hint and birth date autocompletion',
@@ -35,17 +32,15 @@ ul.govuk-list.govuk-list--bullet
   caption: 'Approximate dates – recording the closest month',
   code: month_field) do
 
-  p.govuk-body
-    | When asking for dates that the user might not know or could struggle to
-      remember, such as their graduation date, the exact date might not be
-      necessary. The day can be optionally omitted by providing the
-      <code>omit_day</code> parameter.
+  markdown:
+    When asking for dates that the user might not know or could struggle to
+    remember, such as their graduation date, the exact date might not be
+    necessary. The day can be optionally omitted by providing the `omit_day`
+    parameter.
 
-  p.govuk-body
-    | When mapped to a <code>Date</code> attribute, Ruby will automatically
-      set the <code>Day</code> to be <code>1</code> when none is provided. This
-      should be taken into account when displaying the data or using it for
-      analysis.
+    When mapped to a `Date` attribute, Ruby will automatically set the `Day` to
+    be `1` when none is provided. This should be taken into account when
+    displaying the data or using it for analysis.
 
   .govuk-warning-text
     span.govuk-warning-text__icon aria-hidden=true
@@ -59,10 +54,10 @@ ul.govuk-list.govuk-list--bullet
   caption: 'Specifying client side length restrictions on date inputs with maxlength',
   code: maxlength_enabled_field) do
 
-  p.govuk-body
-    | To enable client side restrictions on the number of characters each
-      input requires, you can use the <code>maxlength_enabled</code> parameter.
-      This will default the day and month inputs to 2 characters and the year
-      input to 4 characters.
+  markdown:
+    To enable client side restrictions on the number of characters each
+    input requires, you can use the `maxlength_enabled` parameter. This will
+    default the day and month inputs to 2 characters and the year input to 4
+    characters.
 
 == render('/partials/related-navigation.*', links: date_info)

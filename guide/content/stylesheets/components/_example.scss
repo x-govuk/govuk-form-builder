@@ -1,18 +1,17 @@
+@use "../vendor/govuk-frontend" as *;
+
 .app-example {
+  margin-left: 0;
+  margin-right: 0;
   @include govuk-font($size: 19);
   @include govuk-text-colour;
   @include govuk-responsive-margin(6, "top");
   @include govuk-responsive-margin(6, "bottom");
-  margin-left: 0;
-  margin-right: 0;
 
   .govuk-tabs__panel {
-    pre {
+    > *:last-child {
+      margin-bottom: govuk-spacing(-2);
       margin-top: govuk-spacing(-2);
-    }
-
-    pre:last-child {
-      margin-bottom: govuk-spacing(-2)
     }
   }
 }

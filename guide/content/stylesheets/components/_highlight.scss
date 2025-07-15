@@ -1,56 +1,34 @@
-// GOV.UK colours used as a starting point, some darkened
-// for additional contrast
-//
-// https://design-system.service.gov.uk/styles/colour/
-$orange: govuk-shade(govuk-colour('orange'), 30%);
-$blue: govuk-colour('blue');
-$dark-blue: govuk-colour('dark-blue');
-$pink: govuk-shade(govuk-colour('pink'), 10%);
-$green: govuk-colour('green');
-$light-grey: govuk-colour('light-grey');
-$light-pink: govuk-colour('light-pink');
-$red: govuk-colour('red');
-$turquoise: govuk-shade(govuk-colour('turquoise'), 30%);
-$bright-purple: govuk-colour('bright-purple');
+@use "../vendor/govuk-frontend" as *;
 
-$text: $govuk-text-colour;
+code {
+  color: $govuk-text-colour;
 
-.app-prose {
-  pre > code {
-    background-color: transparent;
+  .s, .s1, .s2, .vi, .sx {
+    color: govuk-shade(govuk-colour("pink"), 20%);
+  }
 
-    &.highlight {
-      color: $text;
-
-      .s,.s1,.s2,.vi,.sx {
-        color: $pink;
-      }
-
-      .nt,.nf,.nc {
-        color: $orange;
-        }
-
-      .n,.p,.k,.mi,.n,.o,.na,.ss {
-        color: $dark-blue;
-      }
-
-      .k {
-        font-weight: 600;
-      }
-
-      .no {
-        color: $green;
-      }
-
-      .kp {
-        color: $green;
-      }
-
-      // comments
-      .c1 {
-        color: $turquoise;
-        font-style: italic;
-      }
+  .nt, .nf, .nc {
+    color: govuk-shade(govuk-colour("orange"), 20%);
     }
+
+  .n, .p, .k, .mi, .n, .o, .na, .ss {
+    color: govuk-colour("dark-blue");
+  }
+
+  .k {
+    font-weight: 600;
+  }
+
+  .no {
+    color: govuk-shade(govuk-colour("turquoise"), 20%);
+  }
+
+  .kp {
+    color: govuk-colour("green");
+  }
+
+  .c, .c1 {
+    color: $govuk-secondary-text-colour;
+    font-style: italic;
   }
 }

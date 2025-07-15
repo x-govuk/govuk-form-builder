@@ -2,12 +2,11 @@
 title: Textarea
 ---
 
-p.govuk-body
-  | Textareas allow users to enter text that’s longer than a single line.
+markdown:
+  Textareas allow users to enter text that’s longer than a single line.
 
-p.govuk-body
-  | Users can find open-ended questions difficult to answer. It might be better
-    to break up one complex question into a series of simple ones.
+  Users can find open-ended questions difficult to answer. It might be better
+  to break up one complex question into a series of simple ones.
 
 == render('/partials/example.*',
   caption: 'Generating a textarea with a label, hint and nine rows',
@@ -17,23 +16,22 @@ p.govuk-body
   caption: 'Generating a textarea with a word limit',
   code: text_area_with_max_words) do
 
-  p.govuk-body
-    | If a limit on the number of words or characters a user can enter is
-      required, the <code>max_chars</code> and <code>max_words</code> parameters
-      can be used. They provide feedback on how close the user is to the limit
-      and automatically show an error if it is exceeeded.
+  markdown:
+    If a limit on the number of words or characters a user can enter is
+    required, the `max_chars` and `max_words` parameters can be used. They
+    provide feedback on how close the user is to the limit and automatically
+    show an error if it is exceeeded.
 
 == render('/partials/example.*',
   caption: 'Generating a textarea with a character limit and threshold',
   code: text_area_with_max_chars_and_threshold) do
 
-  p.govuk-body
-    | If the limit is much higher than most users are likely to reach, you can
-      choose to only display the message after a user has entered a certain
-      amount.
+  markdown:
+    If the limit is much higher than most users are likely to reach, you can
+    choose to only display the message after a user has entered a certain
+    amount.
 
-  p.govuk-body
-    | To do this, set the <code>threshold</code> parameter in conjunction with a
-      word or character limit.
+    To do this, set the `threshold` parameter in conjunction with a word or
+    character limit.
 
 == render('/partials/related-navigation.*', links: text_area_info)
