@@ -18,6 +18,10 @@ module Presenters
     # Converts +@error_messages+ into an array of argument arrays that will be
     # passed into {GOVUKDesignSystemFormBuilder::Elements::ErrorSummary#list_item}.
     #
+    # When arrays with 2 elements are returned the error summary will generate the link
+    # target automatically. To override it, override this method and return arrays with
+    # three element (with the third one being the link).
+    #
     # @return [Array<Array(Symbol, String)>] array of attribute and message arrays
     # @return [Array<Array(Symbol, String, String)>] array of attribute, message and URL arrays.
     #
