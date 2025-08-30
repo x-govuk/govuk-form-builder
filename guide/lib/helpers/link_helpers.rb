@@ -34,10 +34,6 @@ module Helpers
       }
     end
 
-    def code_climate_report_link
-      'https://codeclimate.com/github/x-govuk/govuk-form-builder'
-    end
-
     def documentation_link
       'https://www.rubydoc.info/gems/govuk_design_system_formbuilder/GOVUKDesignSystemFormBuilder/Builder'
     end
