@@ -3,8 +3,6 @@ shared_examples 'a field that accepts arbitrary blocks of HTML' do
   let(:block_h2) { 'Jumped over the' }
   let(:block_p) { 'Lazy dog.' }
 
-  let(:supplemental_id) { underscores_to_dashes([object_name, attribute, 'supplemental'].join('-')) }
-
   context 'when a block is supplied' do
     subject do
       builder.send(*args) do
@@ -14,37 +12,12 @@ shared_examples 'a field that accepts arbitrary blocks of HTML' do
       end
     end
 
-    specify 'should be associated with the containing element' do
-      expect(subject).to have_tag(described_element, with: { 'aria-describedby' => supplemental_id })
-    end
-
-    specify 'should include block content wrapped in a div with correct supplemental id' do
-      expect(subject).to have_tag('div', with: { id: supplemental_id }) do
+    specify 'should include block content wrapped in a div' do
+      expect(subject).to have_tag('div') do
         with_tag('h1', text: block_h1)
         with_tag('h2', text: block_h2)
         with_tag('p', text: block_p)
       end
-    end
-
-    describe "deprecation warning message" do
-      before { allow(Rails).to receive_message_chain(:logger, :warn).with(any_args).and_return(true) }
-
-      specify 'logs a deprecation warning' do
-        subject
-        expect(Rails.logger).to have_received(:warn).with(/Supplemental content is deprecated/)
-      end
-    end
-  end
-
-  context 'when no block is supplied' do
-    subject { builder.send(*args) }
-
-    specify 'should be no supplemental container' do
-      expect(subject).not_to have_tag('div', with: { id: supplemental_id })
-    end
-
-    specify 'should be no association with the supplemental container' do
-      expect(subject).not_to have_tag(described_element, with: { 'aria-describedby' => supplemental_id })
     end
   end
 end
