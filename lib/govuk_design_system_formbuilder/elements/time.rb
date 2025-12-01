@@ -9,8 +9,9 @@ module GOVUKDesignSystemFormBuilder
       include Traits::HTMLClasses
       include Traits::Localisation
       include Traits::DateInput
+      include Traits::ContentBeforeAndAfter
 
-      def initialize(builder, object_name, attribute_name, legend:, caption:, hint:, omit_second:, maxlength_enabled:, segments:, form_group:, segment_names:, **kwargs, &block)
+      def initialize(builder, object_name, attribute_name, legend:, caption:, hint:, omit_second:, maxlength_enabled:, segments:, form_group:, before_inputs:, after_inputs:, segment_names:, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
 
         @legend            = legend
@@ -22,6 +23,8 @@ module GOVUKDesignSystemFormBuilder
         @segment_names     = segment_names
         @form_group        = form_group
         @html_attributes   = kwargs
+        @before_input      = before_inputs
+        @after_input       = after_inputs
       end
 
     private

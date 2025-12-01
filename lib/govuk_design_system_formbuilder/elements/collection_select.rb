@@ -7,8 +7,9 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Supplemental
       include Traits::HTMLAttributes
       include Traits::Select
+      include Traits::ContentBeforeAndAfter
 
-      def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint:, label:, caption:, form_group:, options: {}, **kwargs, &block)
+      def initialize(builder, object_name, attribute_name, collection, value_method:, text_method:, hint:, label:, caption:, form_group:, before_input:, after_input:, options: {}, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
 
         @collection      = collection
@@ -20,6 +21,8 @@ module GOVUKDesignSystemFormBuilder
         @hint            = hint
         @form_group      = form_group
         @html_attributes = kwargs
+        @before_input    = before_input
+        @after_input     = after_input
 
         # FIXME remove this soon, worth informing people who miss the release notes that the
         #       args have changed though.
@@ -30,7 +33,7 @@ module GOVUKDesignSystemFormBuilder
 
       def html
         Containers::FormGroup.new(*bound, **@form_group).html do
-          safe_join([label_element, supplemental_content, hint_element, error_element, collection_select])
+          safe_join([label_element, supplemental_content, hint_element, error_element, before_input_content, collection_select, after_input_content])
         end
       end
 

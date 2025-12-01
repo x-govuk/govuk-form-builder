@@ -66,8 +66,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_text_field :callsign,
     #     label: -> { tag.h3('Call-sign') }
     #
-    def govuk_text_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, extra_letter_spacing: false, form_group: {}, prefix_text: nil, suffix_text: nil, **kwargs, &block)
-      Elements::Inputs::Text.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, **kwargs, &block).html
+    def govuk_text_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, extra_letter_spacing: false, form_group: {}, prefix_text: nil, suffix_text: nil, before_input: nil, after_input: nil, **kwargs, &block)
+      Elements::Inputs::Text.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, before_input:, after_input:, **kwargs, &block).html
     end
 
     # Generates a input of type +tel+
@@ -120,8 +120,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_phone_field :work_number,
     #     label: -> { tag.h3('Work number') }
     #
-    def govuk_phone_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, extra_letter_spacing: false, form_group: {}, prefix_text: nil, suffix_text: nil, **kwargs, &block)
-      Elements::Inputs::Phone.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, **kwargs, &block).html
+    def govuk_phone_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, extra_letter_spacing: false, form_group: {}, prefix_text: nil, suffix_text: nil, before_input: nil, after_input: nil, **kwargs, &block)
+      Elements::Inputs::Phone.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, before_input:, after_input:, **kwargs, &block).html
     end
 
     # Generates a input of type +email+
@@ -172,8 +172,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_email_field :personal_email,
     #     label: -> { tag.h3('Personal email address') }
     #
-    def govuk_email_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, extra_letter_spacing: false, form_group: {}, prefix_text: nil, suffix_text: nil, **kwargs, &block)
-      Elements::Inputs::Email.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, **kwargs, &block).html
+    def govuk_email_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, extra_letter_spacing: false, form_group: {}, prefix_text: nil, suffix_text: nil, before_input: nil, after_input: nil, **kwargs, &block)
+      Elements::Inputs::Email.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, before_input:, after_input:, **kwargs, &block).html
     end
 
     # Generates a input of type +url+
@@ -224,8 +224,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_url_field :work_website,
     #     label: -> { tag.h3("Enter your company's website") }
     #
-    def govuk_url_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, extra_letter_spacing: false, form_group: {}, prefix_text: nil, suffix_text: nil, **kwargs, &block)
-      Elements::Inputs::URL.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, **kwargs, &block).html
+    def govuk_url_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, extra_letter_spacing: false, form_group: {}, prefix_text: nil, suffix_text: nil, before_input: nil, after_input: nil, **kwargs, &block)
+      Elements::Inputs::URL.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, before_input:, after_input:, **kwargs, &block).html
     end
 
     # Generates a input of type +number+
@@ -279,8 +279,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_url_field :personal_best_over_100m,
     #     label: -> { tag.h3("How many seconds does it take you to run 100m?") }
     #
-    def govuk_number_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, extra_letter_spacing: false, form_group: {}, prefix_text: nil, suffix_text: nil, **kwargs, &block)
-      Elements::Inputs::Number.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, **kwargs, &block).html
+    def govuk_number_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, extra_letter_spacing: false, form_group: {}, prefix_text: nil, suffix_text: nil, before_input: nil, after_input: nil, **kwargs, &block)
+      Elements::Inputs::Number.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, before_input:, after_input:, **kwargs, &block).html
     end
 
     # Generates a password input
@@ -443,7 +443,7 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_collection_select(:team, @teams, :id, :name) do
     #     label: -> { tag.h3("Which team did you represent?") }
     #
-    def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, hint: {}, label: {}, caption: {}, form_group: {}, **kwargs, &block)
+    def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, hint: {}, label: {}, caption: {}, form_group: {}, before_input: nil, after_input: nil, **kwargs, &block)
       Elements::CollectionSelect.new(
         self,
         object_name,
@@ -456,6 +456,8 @@ module GOVUKDesignSystemFormBuilder
         caption:,
         options:,
         form_group:,
+        before_input:,
+        after_input:,
         **kwargs,
         &block
       ).html
@@ -492,8 +494,8 @@ module GOVUKDesignSystemFormBuilder
     #
     #   = f.govuk_select :hat_colour, options_for_select(@colours)
     #
-    def govuk_select(attribute_name, choices = nil, options: {}, label: {}, hint: {}, form_group: {}, caption: {}, **kwargs, &block)
-      Elements::Select.new(self, object_name, attribute_name, choices, options:, label:, hint:, form_group:, caption:, **kwargs, &block).html
+    def govuk_select(attribute_name, choices = nil, options: {}, label: {}, hint: {}, form_group: {}, caption: {}, before_input: nil, after_input: nil, **kwargs, &block)
+      Elements::Select.new(self, object_name, attribute_name, choices, options:, label:, hint:, form_group:, caption:, before_input:, after_input:, **kwargs, &block).html
     end
 
     # Generates a radio button for each item in the supplied collection
@@ -962,8 +964,8 @@ module GOVUKDesignSystemFormBuilder
     # @example A date input with legend supplied as a proc
     #  = f.govuk_date_field :finishes_on,
     #    legend: -> { tag.h3('Which category do you belong to?') }
-    def govuk_date_field(attribute_name, hint: {}, legend: {}, caption: {}, date_of_birth: false, omit_day: false, maxlength_enabled: false, segments: config.default_date_segments, segment_names: config.default_date_segment_names, form_group: {}, **kwargs, &block)
-      Elements::Date.new(self, object_name, attribute_name, hint:, legend:, caption:, date_of_birth:, omit_day:, maxlength_enabled:, segments:, segment_names:, form_group:, **kwargs, &block).html
+    def govuk_date_field(attribute_name, hint: {}, legend: {}, caption: {}, date_of_birth: false, omit_day: false, maxlength_enabled: false, segments: config.default_date_segments, segment_names: config.default_date_segment_names, before_inputs: nil, after_inputs: nil, form_group: {}, **kwargs, &block)
+      Elements::Date.new(self, object_name, attribute_name, hint:, legend:, caption:, date_of_birth:, omit_day:, maxlength_enabled:, segments:, segment_names:, form_group:, before_inputs:, after_inputs:, **kwargs, &block).html
     end
 
     # Generates three inputs for the +hour+, +minute+ and +second+ components of a time
@@ -1010,8 +1012,8 @@ module GOVUKDesignSystemFormBuilder
     # @example A time input with legend supplied as a proc
     #  = f.govuk_time_field :finishes_at,
     #    legend: -> { tag.h3('When does the event finish?') }
-    def govuk_time_field(attribute_name, hint: {}, legend: {}, caption: {}, omit_second: false, maxlength_enabled: false, segments: config.default_time_segments, segment_names: config.default_time_segment_names, form_group: {}, **kwargs, &block)
-      Elements::Time.new(self, object_name, attribute_name, hint:, legend:, caption:, omit_second:, maxlength_enabled:, segments:, segment_names:, form_group:, **kwargs, &block).html
+    def govuk_time_field(attribute_name, hint: {}, legend: {}, caption: {}, omit_second: false, maxlength_enabled: false, segments: config.default_time_segments, segment_names: config.default_time_segment_names, before_inputs: nil, after_inputs: nil, form_group: {}, **kwargs, &block)
+      Elements::Time.new(self, object_name, attribute_name, hint:, legend:, caption:, omit_second:, maxlength_enabled:, segments:, segment_names:, form_group:, before_inputs:, after_inputs:, **kwargs, &block).html
     end
 
     # Generates a summary of errors in the form, each linking to the corresponding
@@ -1115,8 +1117,8 @@ module GOVUKDesignSystemFormBuilder
     # @note Remember to set +multipart: true+ when creating a form with file
     #   uploads, {https://guides.rubyonrails.org/form_helpers.html#uploading-files see
     #   the Rails documentation} for more information
-    def govuk_file_field(attribute_name, label: {}, caption: {}, hint: {}, form_group: {}, javascript: false, **kwargs, &block)
-      Elements::File.new(self, object_name, attribute_name, label:, caption:, hint:, form_group:, javascript:, **kwargs, &block).html
+    def govuk_file_field(attribute_name, label: {}, caption: {}, hint: {}, form_group: {}, javascript: false, before_input: nil, after_input: nil, **kwargs, &block)
+      Elements::File.new(self, object_name, attribute_name, label:, caption:, hint:, form_group:, javascript:, before_input:, after_input:, **kwargs, &block).html
     end
   end
 end

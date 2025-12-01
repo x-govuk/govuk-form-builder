@@ -18,7 +18,7 @@ module GOVUKDesignSystemFormBuilder
 
       def date_input
         tag.div(class: %(#{brand}-date-input)) do
-          safe_join(parts)
+          safe_join([before_input_content, *parts, after_input_content])
         end
       end
 

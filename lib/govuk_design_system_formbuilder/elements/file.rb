@@ -9,8 +9,9 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Supplemental
       include Traits::HTMLAttributes
       include Traits::HTMLClasses
+      include Traits::ContentBeforeAndAfter
 
-      def initialize(builder, object_name, attribute_name, hint:, label:, caption:, form_group:, javascript:, **kwargs, &block)
+      def initialize(builder, object_name, attribute_name, hint:, label:, caption:, form_group:, javascript:, before_input:, after_input:, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
 
         @label           = label
@@ -19,11 +20,13 @@ module GOVUKDesignSystemFormBuilder
         @html_attributes = kwargs
         @form_group      = form_group
         @javascript      = javascript
+        @before_input    = before_input
+        @after_input     = after_input
       end
 
       def html
         Containers::FormGroup.new(*bound, **@form_group).html do
-          safe_join([label_element, supplemental_content, hint_element, error_element, file_html])
+          safe_join([label_element, supplemental_content, hint_element, error_element, before_input_content, file_html, after_input_content])
         end
       end
 
