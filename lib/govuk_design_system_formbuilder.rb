@@ -1,4 +1,4 @@
-require 'active_support/configurable'
+require 'active_support/ordered_options'
 require 'html_attributes_utils'
 
 [%w(presenters *.rb), %w(refinements *.rb), %w(traits *.rb), %w(*.rb), %w(elements ** *.rb), %w(containers ** *.rb)]
@@ -6,7 +6,16 @@ require 'html_attributes_utils'
   .each { |file| require file }
 
 module GOVUKDesignSystemFormBuilder
-  include ActiveSupport::Configurable
+  class << self
+    class_attribute :config,
+                    instance_predicate: false,
+                    default: ActiveSupport::OrderedOptions.new
+
+    def inherited(klass) # :nodoc:
+      klass.config = ActiveSupport::InheritableOptions.new(config)
+      super
+    end
+  end
 
   # @!group Defaults
 
@@ -133,7 +142,20 @@ module GOVUKDesignSystemFormBuilder
     enable_nested_localisation: true,
   }.freeze
 
-  DEFAULTS.each_key { |k| config_accessor(k) { DEFAULTS[k] } }
+  DEFAULTS.each do |key, value|
+    reader = "def #{key}; config.#{key}; end"
+    reader_line = __LINE__
+    writer = "def #{key}=(value); config.#{key} = value; end"
+    writer_line = __LINE__
+
+    singleton_class.class_eval reader, __FILE__, reader_line
+    singleton_class.class_eval writer, __FILE__, writer_line
+
+    class_eval reader, __FILE__, reader_line
+    class_eval writer, __FILE__, writer_line
+
+    send("#{key}=", value)
+  end
   # @!endgroup
 
   class << self
@@ -146,7 +168,7 @@ module GOVUKDesignSystemFormBuilder
     #     conf.default_error_summary_title = 'OMG'
     #   end
     def configure
-      yield(config)
+      yield config
     end
 
     # Resets each of the configurable values to its default
