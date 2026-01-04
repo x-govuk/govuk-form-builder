@@ -43,6 +43,8 @@ module GOVUKDesignSystemFormBuilder
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param prefix_text [String] the text placed before the input. No prefix will be added if left +nil+
     # @param suffix_text [String] the text placed after the input. No suffix will be added if left +nil+
+    # @param before_input [String,Proc] the content injected before the input. No content will be added if left +nil+
+    # @param after_input [String,Proc] the content injected after the input. No content will be added if left +nil+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -96,6 +98,8 @@ module GOVUKDesignSystemFormBuilder
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param prefix_text [String] the text placed before the input. No prefix will be added if left +nil+
     # @param suffix_text [String] the text placed after the input. No suffix will be added if left +nil+
+    # @param before_input [String,Proc] the content injected before the input. No content will be added if left +nil+
+    # @param after_input [String,Proc] the content injected after the input. No content will be added if left +nil+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -150,6 +154,8 @@ module GOVUKDesignSystemFormBuilder
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param prefix_text [String] the text placed before the input. No prefix will be added if left +nil+
     # @param suffix_text [String] the text placed after the input. No suffix will be added if left +nil+
+    # @param before_input [String,Proc] the content injected before the input. No content will be added if left +nil+
+    # @param after_input [String,Proc] the content injected after the input. No content will be added if left +nil+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -202,6 +208,8 @@ module GOVUKDesignSystemFormBuilder
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param prefix_text [String] the text placed before the input. No prefix will be added if left +nil+
     # @param suffix_text [String] the text placed after the input. No suffix will be added if left +nil+
+    # @param before_input [String,Proc] the content injected before the input. No content will be added if left +nil+
+    # @param after_input [String,Proc] the content injected after the input. No content will be added if left +nil+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -254,6 +262,8 @@ module GOVUKDesignSystemFormBuilder
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param prefix_text [String] the text placed before the input. No prefix will be added if left +nil+
     # @param suffix_text [String] the text placed after the input. No suffix will be added if left +nil+
+    # @param before_input [String,Proc] the content injected before the input. No content will be added if left +nil+
+    # @param after_input [String,Proc] the content injected after the input. No content will be added if left +nil+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -422,6 +432,8 @@ module GOVUKDesignSystemFormBuilder
     # @param options [Hash] Options hash passed through to Rails' +collection_select+ helper
     # @param form_group [Hash] configures the form group
     # @option form_group kwargs [Hash] additional attributes added to the form group
+    # @param before_input [String,Proc] the content injected before the input. No content will be added if left +nil+
+    # @param after_input [String,Proc] the content injected after the input. No content will be added if left +nil+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @see https://api.rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html#method-i-collection_select Rails collection_select (called by govuk_collection_select)
     # @return [ActiveSupport::SafeBuffer] HTML output
@@ -481,6 +493,8 @@ module GOVUKDesignSystemFormBuilder
     # @option label kwargs [Hash] additional arguments are applied as attributes on the +label+ element
     # @param form_group [Hash] configures the form group
     # @option form_group kwargs [Hash] additional attributes added to the form group
+    # @param before_input [String,Proc] the content injected before the input. No content will be added if left +nil+
+    # @param after_input [String,Proc] the content injected after the input. No content will be added if left +nil+
     # @param block [Block] build the contents of the select element manually for exact control
     # @see https://api.rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html#method-i-select Rails select (called by govuk_collection_select)
     # @return [ActiveSupport::SafeBuffer] HTML output
@@ -945,6 +959,8 @@ module GOVUKDesignSystemFormBuilder
     # @param form_group [Hash] configures the form group
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
+    # @param before_inputs [String,Proc] the content injected before the input. No content will be added if left +nil+
+    # @param after_inputs [String,Proc] the content injected after the input. No content will be added if left +nil+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input group
     # @param date_of_birth [Boolean] if +true+ {https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete#Values birth date auto completion attributes}
     #   will be added to the inputs
@@ -995,6 +1011,8 @@ module GOVUKDesignSystemFormBuilder
     # @param form_group [Hash] configures the form group
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
+    # @param before_inputs [String,Proc] the content injected before the input. No content will be added if left +nil+
+    # @param after_inputs [String,Proc] the content injected after the input. No content will be added if left +nil+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input group
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
@@ -1099,6 +1117,8 @@ module GOVUKDesignSystemFormBuilder
     # @param form_group [Hash] configures the form group
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param javascript [Boolean] Configures whether to add HTML for the javascript-enhanced version of the component
+    # @param before_input [String,Proc] the content injected before the input. No content will be added if left +nil+
+    # @param after_input [String,Proc] the content injected after the input. No content will be added if left +nil+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     #
     # @example A photo upload field with file type specifier and injected content
