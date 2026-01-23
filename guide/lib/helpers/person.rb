@@ -77,6 +77,12 @@ class Person
     :graduation_month
   )
 
+  # time fields
+  attr_accessor(
+    :time_of_birth,
+    :time_of_vaccination
+  )
+
   # labels, captions, hints and legends
   attr_accessor(
     :favourite_colour,

@@ -1,6 +1,7 @@
 helpers:
   error:
     message_prefix: "Oh dear"
+
   label:
     person:
       name: Who goes there?
@@ -29,6 +30,10 @@ helpers:
         day: Tag
         month: Monat
         year: Jahr
+      born_at:
+        hour: Hora
+        minute: Minuto
+        second: Segunda
 
   caption:
     person:
@@ -37,16 +42,20 @@ helpers:
       photo: Personal appearance
       cv: Background information
       born_on: Required data
+      born_at: Required data
       projects: Workplace data
       address:
         number_and_street: "Work address"
+
   legend:
     person:
       favourite_colour: To which colours are you most partial?
       born_on: What is your date of birth?
+      born_at: What is your time of birth?
       projects: What do you do all day at work?
       address:
         number_and_street: Building number and street name
+
   hint:
     person:
       name: Enter your full name including middle names, nicknames and aliases
@@ -55,6 +64,7 @@ helpers:
       cv: Where did you work? What did you do?
       photo: Make sure your face is clear and you are looking at the camera
       born_on: Check your birth certificate or passport
+      born_at: Check your birth certificate or passport
       projects: If you cannot remember check with your teammates or manager
       department_options:
         it: Computers and stuff

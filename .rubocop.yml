@@ -11,6 +11,8 @@ AllCops:
     - govuk_design_system_formbuilder.gemspec
 Rails/Date:
   Enabled: false
+Rails/TimeZone:
+  Enabled: false
 Rails/ActiveSupportAliases:
   Enabled: false
 Style/StringLiterals:

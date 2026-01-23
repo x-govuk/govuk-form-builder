@@ -66,7 +66,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     it_behaves_like 'a field that supports setting the legend caption via localisation'
     it_behaves_like 'a field that supports setting the hint via localisation'
 
-    describe 'localising the date, month and year labels' do
+    describe 'localising the day, month and year labels' do
       let(:localisations) { { en: YAML.load_file('spec/support/locales/sample.en.yaml') } }
       let(:expected_day_label) { I18n.translate("helpers.label.person.#{attribute}.day") }
       let(:expected_month_label) { I18n.translate("helpers.label.person.#{attribute}.month") }
