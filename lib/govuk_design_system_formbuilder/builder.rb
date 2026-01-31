@@ -957,13 +957,61 @@ module GOVUKDesignSystemFormBuilder
     #     hint: { text: 'Leave this field blank if you don't know exactly' } do
     #
     #       p.govuk-inset-text
-    #         | If you don't fill this in you won't be eligable for a refund
+    #         | If you don't fill this in you won't be eligible for a refund
     #
     # @example A date input with legend supplied as a proc
     #  = f.govuk_date_field :finishes_on,
     #    legend: -> { tag.h3('Which category do you belong to?') }
     def govuk_date_field(attribute_name, hint: {}, legend: {}, caption: {}, date_of_birth: false, omit_day: false, maxlength_enabled: false, segments: config.default_date_segments, segment_names: config.default_date_segment_names, form_group: {}, **kwargs, &block)
       Elements::Date.new(self, object_name, attribute_name, hint:, legend:, caption:, date_of_birth:, omit_day:, maxlength_enabled:, segments:, segment_names:, form_group:, **kwargs, &block).html
+    end
+
+    # Generates three inputs for the +hour+, +minute+ and +second+ components of a time
+    #
+    # @note When using this input values will be retrieved from the attribute if it is a Time object or a multiparam date hash
+    # @param attribute_name [Symbol] The name of the attribute
+    # @param hint [Hash,Proc] The content of the hint. No hint will be added if 'text' is left +nil+. When a +Proc+ is
+    #   supplied the hint will be wrapped in a +div+ instead of a +span+
+    # @option hint text [String] the hint text
+    # @option hint kwargs [Hash] additional arguments are applied as attributes to the hint
+    # @param legend [NilClass,Hash,Proc] options for configuring the legend. Legend will be omitted if +nil+.
+    # @option legend text [String] the fieldset legend's text content
+    # @option legend size [String] the size of the fieldset legend font, can be +xl+, +l+, +m+ or +s+
+    # @option legend tag [Symbol,String] the tag used for the fieldset's header, defaults to +h1+.
+    # @option legend hidden [Boolean] control the visibility of the legend. Hidden legends will still be read by screenreaders
+    # @option legend kwargs [Hash] additional arguments are applied as attributes on the +legend+ element
+    # @param caption [Hash] configures or sets the caption content which is inserted above the legend
+    # @option caption text [String] the caption text
+    # @option caption size [String] the size of the caption, can be +xl+, +l+ or +m+. Defaults to +m+
+    # @option caption kwargs [Hash] additional arguments are applied as attributes on the caption +span+ element
+    # @param omit_second [Boolean] do not render a second input, only capture hour and minute
+    # @param maxlength_enabled [Boolean] adds maxlength attribute to hour, minute and second inputs (2)
+    # @param segments [Hash] allows Rails' multiparameter attributes to be overridden on a field-by-field basis. Hash must
+    #   contain +hour:+, +minute:+ and +second:+ keys. Defaults to the default value set in the +default_time_segments+ setting in {GOVUKDesignSystemFormBuilder.DEFAULTS}
+    # @param segment_names [Hash] allows the day, month and year labels to be overridden. Hash must
+    #   contain +hour:+, +minute:+ and +second:+ keys. Defaults to the default value set in the +default_time_segment_names+ setting in {GOVUKDesignSystemFormBuilder.DEFAULTS}
+    # @param form_group [Hash] configures the form group
+    # @option form_group kwargs [Hash] additional attributes added to the form group
+    # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
+    # @param block [Block] arbitrary HTML that will be rendered between the hint and the input group
+    # @return [ActiveSupport::SafeBuffer] HTML output
+    #
+    # @see https://github.com/alphagov/govuk-frontend/issues/1449 GOV.UK date input element attributes, using text instead of number
+    # @see https://design-system.service.gov.uk/styles/typography/#headings-with-captions Headings with captions
+    #
+    # @example A regular time input with a legend, hint and injected content
+    #   = f.govuk_time_field :starts_at,
+    #     legend: { 'When does your event start?' },
+    #     hint: { text: 'Leave this field blank if you don't know exactly' } do
+    #
+    #       p.govuk-inset-text
+    #         | If you don't fill this, the event will be all day
+    #
+    # @example A time input with legend supplied as a proc
+    #  = f.govuk_time_field :finishes_at,
+    #    legend: -> { tag.h3('When does the event finish?') }
+    def govuk_time_field(attribute_name, hint: {}, legend: {}, caption: {}, omit_second: false, maxlength_enabled: false, segments: config.default_time_segments, segment_names: config.default_time_segment_names, form_group: {}, **kwargs, &block)
+      Elements::Time.new(self, object_name, attribute_name, hint:, legend:, caption:, omit_second:, maxlength_enabled:, segments:, segment_names:, form_group:, **kwargs, &block).html
     end
 
     # Generates a summary of errors in the form, each linking to the corresponding

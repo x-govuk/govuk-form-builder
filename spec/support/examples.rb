@@ -12,6 +12,7 @@ class Being
   attr_accessor(
     :name,
     :born_on,
+    :born_at,
     :gender,
     :over18,
     :favourite_colour,
@@ -44,6 +45,7 @@ class Person < Being
   validates :cv, length: { maximum: 30 }, presence: true
 
   validate :born_on_must_be_in_the_past, if: -> { born_on.present? }
+  validate :born_at_must_be_after_midday, if: ->  { born_at.present? }
   validate :photo_must_be_jpeg, if: -> { photo.present? }
 
   validates :hairstyle, presence: { message: 'Describe your <br/> hairstyle' }, on: :trust_error_messages
@@ -69,6 +71,11 @@ private
 
   def born_on_must_be_in_the_past
     errors.add(:born_on, 'Your date of birth must be in the past') unless born_on < Date.today
+  end
+
+  def born_at_must_be_after_midday
+    # This is not a realistic example, but it's used in the tests.
+    errors.add(:born_at, 'Your time of birth must be after midday') unless born_at.hour > 12
   end
 
   def photo_must_be_jpeg
@@ -108,6 +115,7 @@ class Department
 end
 
 WrongDate = Struct.new(:d, :m, :y)
+WrongTime = Struct.new(:h, :m, :s)
 
 class OrderedErrors
   include ActiveModel::Model

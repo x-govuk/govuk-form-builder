@@ -26,5 +26,22 @@ module Examples
           hint: { text: 'Use the format day, month, year, for example 27 3 2021' }
       SNIPPET
     end
+
+    def time_field
+      <<~SNIPPET
+        = f.govuk_time_field :time_of_birth,
+          legend: { text: 'Enter your time of birth' },
+          hint: { text: 'For example, 12 30 45' }
+      SNIPPET
+    end
+
+    def time_omit_second_field
+      <<~SNIPPET
+        = f.govuk_time_field :time_of_birth,
+          omit_second: true,
+          legend: { text: 'Enter your time of birth' },
+          hint: { text: 'For example, 12 30' }
+      SNIPPET
+    end
   end
 end

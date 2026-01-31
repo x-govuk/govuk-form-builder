@@ -65,4 +65,36 @@ ul.govuk-list.govuk-list--bullet
       This will default the day and month inputs to 2 characters and the year
       input to 4 characters.
 
+== render('/partials/example.*',
+  caption: 'Exact time input with legend and hint and birth date autocompletion',
+  code: time_field)
+
+  p.govuk-body
+    | When asking for a time, a variation of the date input can be used which
+      displays an input for the hour, minute and second. The time input’s
+      parameters match those used by Rails’ <code>time_select</code> helper.
+
+  .govuk-warning-text
+    span.govuk-warning-text__icon aria-hidden=true
+      | !
+    strong.govuk-warning-text__text
+      span.govuk-warning-text__assistive Warning
+
+      | Time inputs are not currently part of the GOV.UK Design System.
+
+== render('/partials/example.*',
+  caption: 'Approximate times – recording the minute',
+  code: time_omit_second_field) do
+
+  p.govuk-body
+    | When asking for times that are not required to be precise to the nearest
+      second, the second can be optionally omitted by providing the
+      <code>omit_second</code> parameter.
+
+  p.govuk-body
+    | When mapped to a <code>Time</code> attribute, Ruby will automatically
+      set the <code>Second</code> to be <code>0</code> when none is provided.
+      This should be taken into account when displaying the data or using it
+      for analysis.
+
 == render('/partials/related-navigation.*', links: date_info)

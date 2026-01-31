@@ -111,6 +111,8 @@ module GOVUKDesignSystemFormBuilder
     default_submit_button_text: 'Continue',
     default_date_segments: { day: '3i', month: '2i', year: '1i' },
     default_date_segment_names: { day: 'Day', month: 'Month', year: 'Year' },
+    default_time_segments: { hour: '4i', minute: '5i', second: '6i' },
+    default_time_segment_names: { hour: 'Hour', minute: 'Minute', second: 'Second' },
     default_radio_divider_text: 'or',
     default_check_box_divider_text: 'or',
     default_error_message_prefix: 'Error',
