@@ -192,5 +192,13 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         end
       end
     end
+
+    describe 'generating ids from negative values' do
+      let(:value) { -3 }
+
+      it 'substitutes the minus symbol dash for the word minus' do
+        expect(subject).to have_tag('input', with: { type: 'checkbox', id: %(person-stationery-minus-3-field) })
+      end
+    end
   end
 end
