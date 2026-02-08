@@ -8,6 +8,7 @@ module GOVUKDesignSystemFormBuilder
         include Traits::Label
         include Traits::Supplemental
         include Traits::HTMLAttributes
+        include Traits::ContentBeforeAndAfter
 
       private
 

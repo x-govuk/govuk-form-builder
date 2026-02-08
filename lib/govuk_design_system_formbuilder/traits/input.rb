@@ -1,7 +1,7 @@
 module GOVUKDesignSystemFormBuilder
   module Traits
     module Input
-      def initialize(builder, object_name, attribute_name, hint:, label:, caption:, prefix_text:, suffix_text:, width:, extra_letter_spacing:, form_group:, **kwargs, &block)
+      def initialize(builder, object_name, attribute_name, hint:, label:, caption:, prefix_text:, suffix_text:, width:, extra_letter_spacing:, form_group:, before_input:, after_input:, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
 
         @width                = width
@@ -13,6 +13,8 @@ module GOVUKDesignSystemFormBuilder
         @html_attributes      = kwargs
         @form_group           = form_group
         @extra_letter_spacing = extra_letter_spacing
+        @before_input         = before_input
+        @after_input          = after_input
       end
 
       def html
@@ -24,16 +26,20 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def content
-        if affixed?
-          affixed_input
-        else
-          input
-        end
+        safe_join([
+          before_input_content,
+          if affixed?
+            affixed_input
+          else
+            input
+          end,
+          after_input_content
+        ])
       end
 
       def affixed_input
         tag.div(class: %(#{brand}-input__wrapper)) do
-          safe_join([prefix, input, suffix])
+          safe_join([prefix, input, suffix].compact)
         end
       end
 

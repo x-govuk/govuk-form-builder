@@ -18,6 +18,8 @@ ul.govuk-list.govuk-list--bullet
   li
     code #govuk_collection_radio_buttons
   li
+    code #govuk_select
+  li
     code #govuk_collection_select
   li
     code #govuk_date_field
@@ -42,9 +44,44 @@ ul.govuk-list.govuk-list--bullet
 
 == render('/partials/example.*',
   caption: 'A radio button collection with a custom warning',
-  code: text_area_with_injected_content,
+  code: colleciton_radio_buttons_with_injected_content,
   sample_data: departments_data_raw) do
 
   p.govuk-body
     | All content supplied via a block is considered supplementary to the label
       and hint.
+
+== render('/partials/example.*',
+  caption: 'Adding custom content before and after form elements',
+  code: fields_with_content_injected_before_and_after) do
+
+  p.govuk-body
+    | Content can be added before and after some form components too, using the <code>before_input</code>
+      and <code>after_input</code> parameters.
+
+  p.govuk-body
+    | This works for the following components:
+
+  ul.govuk-list.govuk-list--bullet
+    li
+      code #govuk_text_field
+    li
+      code #govuk_number_field
+    li
+      code #govuk_email_field
+    li
+      code #govuk_phone_field
+    li
+      code #govuk_url_field
+    li
+      code #govuk_date_field
+      '< (with <code>before_inputs</code>)
+    li
+      code #govuk_time_field
+      '< (with <code>before_inputs</code>)
+    li
+      code #govuk_file_field
+    li
+      code #govuk_select
+    li
+      code #govuk_collection_select

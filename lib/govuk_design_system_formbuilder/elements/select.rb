@@ -6,8 +6,9 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Hint
       include Traits::HTMLAttributes
       include Traits::Select
+      include Traits::ContentBeforeAndAfter
 
-      def initialize(builder, object_name, attribute_name, choices, options:, form_group:, label:, hint:, caption:, **kwargs, &block)
+      def initialize(builder, object_name, attribute_name, choices, options:, form_group:, label:, hint:, caption:, before_input:, after_input:, **kwargs, &block)
         # assign the block to an variable rather than passing to super so
         # we can send it through to #select
         super(builder, object_name, attribute_name)
@@ -20,11 +21,13 @@ module GOVUKDesignSystemFormBuilder
         @choices         = choices
         @options         = options
         @html_attributes = kwargs
+        @before_input    = before_input
+        @after_input     = after_input
       end
 
       def html
         Containers::FormGroup.new(*bound, **@form_group).html do
-          safe_join([label_element, hint_element, error_element, select])
+          safe_join([label_element, hint_element, error_element, before_input_content, select, after_input_content])
         end
       end
 

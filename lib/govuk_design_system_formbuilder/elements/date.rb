@@ -9,8 +9,11 @@ module GOVUKDesignSystemFormBuilder
       include Traits::HTMLClasses
       include Traits::Localisation
       include Traits::DateInput
+      include Traits::ContentBeforeAndAfter
 
-      def initialize(builder, object_name, attribute_name, legend:, caption:, hint:, omit_day:, maxlength_enabled:, segments:, form_group:, segment_names:, date_of_birth: false, **kwargs, &block)
+      MULTIPARAMETER_KEY = { day: 3, month: 2, year: 1 }.freeze
+
+      def initialize(builder, object_name, attribute_name, legend:, caption:, hint:, omit_day:, maxlength_enabled:, segments:, form_group:, segment_names:, before_inputs:, after_inputs:, date_of_birth: false, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
 
         @legend            = legend
@@ -23,12 +26,18 @@ module GOVUKDesignSystemFormBuilder
         @segment_names     = segment_names
         @form_group        = form_group
         @html_attributes   = kwargs
+        @before_input      = before_inputs
+        @after_input       = after_inputs
       end
 
     private
 
       def parts
         [day, month, year]
+      end
+
+      def fieldset_options
+        { legend: @legend, caption: @caption, described_by: [error_id, hint_id] }
       end
 
       def omit_day?

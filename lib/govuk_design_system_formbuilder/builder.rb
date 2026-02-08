@@ -43,6 +43,8 @@ module GOVUKDesignSystemFormBuilder
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param prefix_text [String] the text placed before the input. No prefix will be added if left +nil+
     # @param suffix_text [String] the text placed after the input. No suffix will be added if left +nil+
+    # @param before_input [String,Proc] the content injected before the input. No content will be added if left +nil+
+    # @param after_input [String,Proc] the content injected after the input. No content will be added if left +nil+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -66,8 +68,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_text_field :callsign,
     #     label: -> { tag.h3('Call-sign') }
     #
-    def govuk_text_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, extra_letter_spacing: false, form_group: {}, prefix_text: nil, suffix_text: nil, **kwargs, &block)
-      Elements::Inputs::Text.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, **kwargs, &block).html
+    def govuk_text_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, extra_letter_spacing: false, form_group: {}, prefix_text: nil, suffix_text: nil, before_input: nil, after_input: nil, **kwargs, &block)
+      Elements::Inputs::Text.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, before_input:, after_input:, **kwargs, &block).html
     end
 
     # Generates a input of type +tel+
@@ -96,6 +98,8 @@ module GOVUKDesignSystemFormBuilder
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param prefix_text [String] the text placed before the input. No prefix will be added if left +nil+
     # @param suffix_text [String] the text placed after the input. No suffix will be added if left +nil+
+    # @param before_input [String,Proc] the content injected before the input. No content will be added if left +nil+
+    # @param after_input [String,Proc] the content injected after the input. No content will be added if left +nil+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -120,8 +124,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_phone_field :work_number,
     #     label: -> { tag.h3('Work number') }
     #
-    def govuk_phone_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, extra_letter_spacing: false, form_group: {}, prefix_text: nil, suffix_text: nil, **kwargs, &block)
-      Elements::Inputs::Phone.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, **kwargs, &block).html
+    def govuk_phone_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, extra_letter_spacing: false, form_group: {}, prefix_text: nil, suffix_text: nil, before_input: nil, after_input: nil, **kwargs, &block)
+      Elements::Inputs::Phone.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, before_input:, after_input:, **kwargs, &block).html
     end
 
     # Generates a input of type +email+
@@ -150,6 +154,8 @@ module GOVUKDesignSystemFormBuilder
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param prefix_text [String] the text placed before the input. No prefix will be added if left +nil+
     # @param suffix_text [String] the text placed after the input. No suffix will be added if left +nil+
+    # @param before_input [String,Proc] the content injected before the input. No content will be added if left +nil+
+    # @param after_input [String,Proc] the content injected after the input. No content will be added if left +nil+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -172,8 +178,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_email_field :personal_email,
     #     label: -> { tag.h3('Personal email address') }
     #
-    def govuk_email_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, extra_letter_spacing: false, form_group: {}, prefix_text: nil, suffix_text: nil, **kwargs, &block)
-      Elements::Inputs::Email.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, **kwargs, &block).html
+    def govuk_email_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, extra_letter_spacing: false, form_group: {}, prefix_text: nil, suffix_text: nil, before_input: nil, after_input: nil, **kwargs, &block)
+      Elements::Inputs::Email.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, before_input:, after_input:, **kwargs, &block).html
     end
 
     # Generates a input of type +url+
@@ -202,6 +208,8 @@ module GOVUKDesignSystemFormBuilder
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param prefix_text [String] the text placed before the input. No prefix will be added if left +nil+
     # @param suffix_text [String] the text placed after the input. No suffix will be added if left +nil+
+    # @param before_input [String,Proc] the content injected before the input. No content will be added if left +nil+
+    # @param after_input [String,Proc] the content injected after the input. No content will be added if left +nil+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -224,8 +232,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_url_field :work_website,
     #     label: -> { tag.h3("Enter your company's website") }
     #
-    def govuk_url_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, extra_letter_spacing: false, form_group: {}, prefix_text: nil, suffix_text: nil, **kwargs, &block)
-      Elements::Inputs::URL.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, **kwargs, &block).html
+    def govuk_url_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, extra_letter_spacing: false, form_group: {}, prefix_text: nil, suffix_text: nil, before_input: nil, after_input: nil, **kwargs, &block)
+      Elements::Inputs::URL.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, before_input:, after_input:, **kwargs, &block).html
     end
 
     # Generates a input of type +number+
@@ -254,6 +262,8 @@ module GOVUKDesignSystemFormBuilder
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param prefix_text [String] the text placed before the input. No prefix will be added if left +nil+
     # @param suffix_text [String] the text placed after the input. No suffix will be added if left +nil+
+    # @param before_input [String,Proc] the content injected before the input. No content will be added if left +nil+
+    # @param after_input [String,Proc] the content injected after the input. No content will be added if left +nil+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/text-input/ GOV.UK Text input
@@ -279,8 +289,8 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_url_field :personal_best_over_100m,
     #     label: -> { tag.h3("How many seconds does it take you to run 100m?") }
     #
-    def govuk_number_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, extra_letter_spacing: false, form_group: {}, prefix_text: nil, suffix_text: nil, **kwargs, &block)
-      Elements::Inputs::Number.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, **kwargs, &block).html
+    def govuk_number_field(attribute_name, hint: {}, label: {}, caption: {}, width: nil, extra_letter_spacing: false, form_group: {}, prefix_text: nil, suffix_text: nil, before_input: nil, after_input: nil, **kwargs, &block)
+      Elements::Inputs::Number.new(self, object_name, attribute_name, hint:, label:, caption:, width:, extra_letter_spacing:, form_group:, prefix_text:, suffix_text:, before_input:, after_input:, **kwargs, &block).html
     end
 
     # Generates a password input
@@ -422,6 +432,8 @@ module GOVUKDesignSystemFormBuilder
     # @param options [Hash] Options hash passed through to Rails' +collection_select+ helper
     # @param form_group [Hash] configures the form group
     # @option form_group kwargs [Hash] additional attributes added to the form group
+    # @param before_input [String,Proc] the content injected before the input. No content will be added if left +nil+
+    # @param after_input [String,Proc] the content injected after the input. No content will be added if left +nil+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     # @see https://api.rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html#method-i-collection_select Rails collection_select (called by govuk_collection_select)
     # @return [ActiveSupport::SafeBuffer] HTML output
@@ -443,7 +455,7 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_collection_select(:team, @teams, :id, :name) do
     #     label: -> { tag.h3("Which team did you represent?") }
     #
-    def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, hint: {}, label: {}, caption: {}, form_group: {}, **kwargs, &block)
+    def govuk_collection_select(attribute_name, collection, value_method, text_method, options: {}, hint: {}, label: {}, caption: {}, form_group: {}, before_input: nil, after_input: nil, **kwargs, &block)
       Elements::CollectionSelect.new(
         self,
         object_name,
@@ -456,6 +468,8 @@ module GOVUKDesignSystemFormBuilder
         caption:,
         options:,
         form_group:,
+        before_input:,
+        after_input:,
         **kwargs,
         &block
       ).html
@@ -479,6 +493,8 @@ module GOVUKDesignSystemFormBuilder
     # @option label kwargs [Hash] additional arguments are applied as attributes on the +label+ element
     # @param form_group [Hash] configures the form group
     # @option form_group kwargs [Hash] additional attributes added to the form group
+    # @param before_input [String,Proc] the content injected before the input. No content will be added if left +nil+
+    # @param after_input [String,Proc] the content injected after the input. No content will be added if left +nil+
     # @param block [Block] build the contents of the select element manually for exact control
     # @see https://api.rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html#method-i-select Rails select (called by govuk_collection_select)
     # @return [ActiveSupport::SafeBuffer] HTML output
@@ -492,8 +508,8 @@ module GOVUKDesignSystemFormBuilder
     #
     #   = f.govuk_select :hat_colour, options_for_select(@colours)
     #
-    def govuk_select(attribute_name, choices = nil, options: {}, label: {}, hint: {}, form_group: {}, caption: {}, **kwargs, &block)
-      Elements::Select.new(self, object_name, attribute_name, choices, options:, label:, hint:, form_group:, caption:, **kwargs, &block).html
+    def govuk_select(attribute_name, choices = nil, options: {}, label: {}, hint: {}, form_group: {}, caption: {}, before_input: nil, after_input: nil, **kwargs, &block)
+      Elements::Select.new(self, object_name, attribute_name, choices, options:, label:, hint:, form_group:, caption:, before_input:, after_input:, **kwargs, &block).html
     end
 
     # Generates a radio button for each item in the supplied collection
@@ -943,6 +959,8 @@ module GOVUKDesignSystemFormBuilder
     # @param form_group [Hash] configures the form group
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
+    # @param before_inputs [String,Proc] the content injected before the input. No content will be added if left +nil+
+    # @param after_inputs [String,Proc] the content injected after the input. No content will be added if left +nil+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input group
     # @param date_of_birth [Boolean] if +true+ {https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete#Values birth date auto completion attributes}
     #   will be added to the inputs
@@ -962,8 +980,8 @@ module GOVUKDesignSystemFormBuilder
     # @example A date input with legend supplied as a proc
     #  = f.govuk_date_field :finishes_on,
     #    legend: -> { tag.h3('Which category do you belong to?') }
-    def govuk_date_field(attribute_name, hint: {}, legend: {}, caption: {}, date_of_birth: false, omit_day: false, maxlength_enabled: false, segments: config.default_date_segments, segment_names: config.default_date_segment_names, form_group: {}, **kwargs, &block)
-      Elements::Date.new(self, object_name, attribute_name, hint:, legend:, caption:, date_of_birth:, omit_day:, maxlength_enabled:, segments:, segment_names:, form_group:, **kwargs, &block).html
+    def govuk_date_field(attribute_name, hint: {}, legend: {}, caption: {}, date_of_birth: false, omit_day: false, maxlength_enabled: false, segments: config.default_date_segments, segment_names: config.default_date_segment_names, before_inputs: nil, after_inputs: nil, form_group: {}, **kwargs, &block)
+      Elements::Date.new(self, object_name, attribute_name, hint:, legend:, caption:, date_of_birth:, omit_day:, maxlength_enabled:, segments:, segment_names:, form_group:, before_inputs:, after_inputs:, **kwargs, &block).html
     end
 
     # Generates three inputs for the +hour+, +minute+ and +second+ components of a time
@@ -993,6 +1011,8 @@ module GOVUKDesignSystemFormBuilder
     # @param form_group [Hash] configures the form group
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +input+ element
+    # @param before_inputs [String,Proc] the content injected before the input. No content will be added if left +nil+
+    # @param after_inputs [String,Proc] the content injected after the input. No content will be added if left +nil+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input group
     # @return [ActiveSupport::SafeBuffer] HTML output
     #
@@ -1010,8 +1030,8 @@ module GOVUKDesignSystemFormBuilder
     # @example A time input with legend supplied as a proc
     #  = f.govuk_time_field :finishes_at,
     #    legend: -> { tag.h3('When does the event finish?') }
-    def govuk_time_field(attribute_name, hint: {}, legend: {}, caption: {}, omit_second: false, maxlength_enabled: false, segments: config.default_time_segments, segment_names: config.default_time_segment_names, form_group: {}, **kwargs, &block)
-      Elements::Time.new(self, object_name, attribute_name, hint:, legend:, caption:, omit_second:, maxlength_enabled:, segments:, segment_names:, form_group:, **kwargs, &block).html
+    def govuk_time_field(attribute_name, hint: {}, legend: {}, caption: {}, omit_second: false, maxlength_enabled: false, segments: config.default_time_segments, segment_names: config.default_time_segment_names, before_inputs: nil, after_inputs: nil, form_group: {}, **kwargs, &block)
+      Elements::Time.new(self, object_name, attribute_name, hint:, legend:, caption:, omit_second:, maxlength_enabled:, segments:, segment_names:, form_group:, before_inputs:, after_inputs:, **kwargs, &block).html
     end
 
     # Generates a summary of errors in the form, each linking to the corresponding
@@ -1097,6 +1117,8 @@ module GOVUKDesignSystemFormBuilder
     # @param form_group [Hash] configures the form group
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @param javascript [Boolean] Configures whether to add HTML for the javascript-enhanced version of the component
+    # @param before_input [String,Proc] the content injected before the input. No content will be added if left +nil+
+    # @param after_input [String,Proc] the content injected after the input. No content will be added if left +nil+
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     #
     # @example A photo upload field with file type specifier and injected content
@@ -1115,8 +1137,8 @@ module GOVUKDesignSystemFormBuilder
     # @note Remember to set +multipart: true+ when creating a form with file
     #   uploads, {https://guides.rubyonrails.org/form_helpers.html#uploading-files see
     #   the Rails documentation} for more information
-    def govuk_file_field(attribute_name, label: {}, caption: {}, hint: {}, form_group: {}, javascript: false, **kwargs, &block)
-      Elements::File.new(self, object_name, attribute_name, label:, caption:, hint:, form_group:, javascript:, **kwargs, &block).html
+    def govuk_file_field(attribute_name, label: {}, caption: {}, hint: {}, form_group: {}, javascript: false, before_input: nil, after_input: nil, **kwargs, &block)
+      Elements::File.new(self, object_name, attribute_name, label:, caption:, hint:, form_group:, javascript:, before_input:, after_input:, **kwargs, &block).html
     end
   end
 end

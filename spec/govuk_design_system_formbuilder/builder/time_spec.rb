@@ -65,6 +65,9 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     it_behaves_like 'a field that supports setting the legend via localisation'
     it_behaves_like 'a field that supports setting the legend caption via localisation'
     it_behaves_like 'a field that supports setting the hint via localisation'
+    it_behaves_like 'a field that supports adding content before and after inputs' do
+      let(:multiple_inputs) { true }
+    end
 
     describe 'localising the hour, minute and second labels' do
       let(:localisations) { { en: YAML.load_file('spec/support/locales/sample.en.yaml') } }
