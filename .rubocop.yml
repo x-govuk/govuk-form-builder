@@ -45,3 +45,5 @@ Style/FormatString:
   EnforcedStyle: format
 Style/RedundantParentheses:
   Enabled: false
+Style/TernaryParentheses:
+  Enabled: false

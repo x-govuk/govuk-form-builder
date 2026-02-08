@@ -80,13 +80,22 @@ module GOVUKDesignSystemFormBuilder
       [
         @object_name,
         attribute,
-        value,
+        format_value(value),
         id_type
       ]
         .compact
         .join(delimiter)
         .parameterize
         .tr(replace, delimiter)
+    end
+
+    def format_value(value)
+      case value
+      when Integer, Float
+        (value.negative?) ? "minus-#{value.abs}" : value
+      else
+        value
+      end
     end
 
     def warn(message)
