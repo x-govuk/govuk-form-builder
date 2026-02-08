@@ -5,7 +5,7 @@
 [![Gem](https://img.shields.io/gem/dt/govuk_design_system_formbuilder?logo=rubygems)](https://rubygems.org/gems/govuk_design_system_formbuilder)
 ![GitHub license](https://img.shields.io/github/license/x-govuk/govuk-form-builder)
 [![GOV.UK Design System version](https://img.shields.io/badge/GOV.UK%20Design%20System-5.13.0-brightgreen)](https://design-system.service.gov.uk)
-[![Rails](https://img.shields.io/badge/Rails-7.1.5%20%E2%95%B1%207.2.2%20%E2%95%B1%208.0.1-E16D6D)](https://weblog.rubyonrails.org/releases/)
+[![Rails](https://img.shields.io/badge/Rails-7.2.3%20%E2%95%B1%208.0.1%20%E2%95%B1%208.1.2-E16D6D)](https://weblog.rubyonrails.org/releases/)
 [![Ruby](https://img.shields.io/badge/Ruby-3.2.10%20%20%E2%95%B1%203.4.8%20%20%E2%95%B1%204.0.1-E16D6D)](https://www.ruby-lang.org/en/downloads/)
 
 This library provides an easy-to-use form builder for the [GOV.UK Design System](https://design-system.service.gov.uk/).
