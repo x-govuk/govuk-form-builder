@@ -1,101 +1,70 @@
-$app-code-bg: govuk-tint(govuk-colour("light-grey"), 30%);
-$app-code-fg: govuk-shade(govuk-colour("pink"), 10%);
+@use "../vendor/govuk-frontend" as *;
+
+// Use same colour for inline code as that used on GOV.UK Design System site.
+// https://github.com/alphagov/govuk-design-system/blob/main/src/stylesheets/main.scss
+$_code-color: #d13118;
 
 .app-prose {
-  h2 {
-    max-width: 20em;
-  }
+  @include govuk-responsive-margin(8, "bottom");
 
-  h3 {
-    max-width: 30em;
-  }
-
-  h4,
-  h5,
-  h6,
   p,
-  ul:not(.govuk-tabs__list),
-  ol,
-  .app-table--constrained {
+  ul:not([class]),
+  ol{
     max-width: 38em;
   }
 
-  dl {
-    @include govuk-font($size: 19);
-    @include govuk-text-colour;
-    @include govuk-responsive-margin(4, "bottom");
-  }
-
-  dt {
-    font-weight: bold;
-  }
-
-  dd {
-    margin-left: 0;
-  }
-
-  dd + dt {
-    margin-top: govuk-spacing(2);
+  code,
+  pre {
+    font-family: ui-monospace, monospace;
+    -webkit-font-smoothing: auto;
   }
 
   code {
-    background-color: $app-code-bg;
-    color: $app-code-fg;
-    font-family: ui-monospace, monospace;
-    font-size: 1rem;
-  }
-
-  p > code {
+    background-color: govuk-colour("light-grey");
+    color: $_code-color;
+    font-size: 0.875em;
     padding: 2px govuk-spacing(1);
+
+    a & {
+      color: inherit;
+    }
+
+    // Ensure links within inline code blocks receive focus colour
+    a:focus & {
+      background: $govuk-focus-colour;
+    }
   }
 
   pre {
-    @include govuk-responsive-margin(4, "bottom");
-    @include govuk-font($size: 16);
-    background-color: $app-code-bg;
-    line-height: 1.4;
+    background-color: govuk-colour("light-grey");
     overflow: auto;
     padding: govuk-spacing(4);
-    -webkit-font-smoothing: antialiased;
+    scrollbar-color: $govuk-border-colour govuk-colour("light-grey");
+    @include govuk-font-size(16, $line-height: 1.4);
+    @include govuk-responsive-margin(4, "bottom");
+
+    code {
+      background: transparent;
+      font-size: inherit;
+      padding: 0;
+    }
 
     + .govuk-heading-l {
-      padding-top: govuk-spacing(4)
+      padding-top: govuk-spacing(4);
     }
 
     + .govuk-heading-m,
     + .govuk-heading-s {
-      padding-top: govuk-spacing(2)
-    }
-  }
-
-  .header-anchor {
-    color: $govuk-text-colour;
-    margin-left: -1.5ch;
-    padding-left: 1.5ch;
-    text-decoration: none;
-
-    &:visited {
-      color: $govuk-text-colour
+      padding-top: govuk-spacing(2);
     }
 
-    &:hover {
-      text-decoration: none !important
+    &::-webkit-scrollbar {
+      height: govuk-spacing(1);
+      width: govuk-spacing(1);
     }
 
-    &:hover::before,
-    &:focus::before {
-      content: "#";
-      color: govuk-colour("mid-grey");
-      float: left;
-      font-style: italic;
-      height: 0;
-      left: -1.5ch;
-      position: relative;
-      width: 0;
-    }
-
-    &:focus::before {
-      color: $govuk-focus-text-colour;
+    &::-webkit-scrollbar-thumb {
+      background: $govuk-border-colour;
     }
   }
 }
