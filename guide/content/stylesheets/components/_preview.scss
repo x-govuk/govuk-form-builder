@@ -1,0 +1,51 @@
+@use '../vendor/govuk-frontend' as *;
+
+.gradient-background {
+  background: linear-gradient(
+    90deg,
+    rgba(184, 255, 255, 1) 0%,
+    rgba(255, 152, 255, 1) 50%,
+    rgba(255, 255, 108, 1) 100%
+  );
+  display: inline-block;
+  padding: 2px govuk-spacing(1);
+}
+
+.purple-background {
+  background: govuk-colour("purple", $variant: "tint-25");
+  display: inline-block;
+  padding: 2px govuk-spacing(1);
+}
+
+.orange-background {
+  background: govuk-tint(govuk-colour("orange"), 70);
+  display: inline-block;
+  padding: 2px govuk-spacing(1);
+}
+
+.final-decision-warning {
+  @include govuk-font($size: 16, $weight: "bold");
+  background: govuk-tint(govuk-colour("pink"), 80);
+  color: govuk-shade(govuk-colour("pink"), 40);
+  display: inline-block;
+  padding: govuk-spacing(2) govuk-spacing(3);
+}
+
+.big-purple-button {
+  background: govuk-colour("purple");
+  border-radius: 0.3em;
+  padding: 0.4em 2em;
+  font-weight: bold;
+
+  &:hover {
+    background: govuk-colour("purple", $variant: "shade-25");
+  }
+}
+
+.two-columns {
+  columns: 2;
+}
+
+.branded-background {
+  background: govuk-colour(blue);
+}

@@ -1,3 +1,5 @@
+@use "../vendor/govuk-frontend" as *;
+
 .app-example {
   @include govuk-font($size: 19);
   @include govuk-text-colour;
