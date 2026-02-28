@@ -1,3 +1,3 @@
 module GOVUKDesignSystemFormBuilder
-  VERSION = '6.0.0b1'.freeze
+  VERSION = '6.0.0'.freeze
 end
