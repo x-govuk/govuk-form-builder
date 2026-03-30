@@ -18,4 +18,17 @@ p.govuk-body
   caption: 'Javascript-enhanced file upload with label and hint',
   code: file_upload_javascript)
 
+== render('/partials/example.*',
+  caption: 'Javascript-enhanced file upload with custom text',
+  code: file_upload_javascript_with_custom_text) do
+  markdown:
+    The component's text can be customised or localised by providing the following arguments:
+
+  ul.govuk-list.govuk-list--bullet
+    li <code>choose_files_button_text</code> sets the text of the button that opens the file picker
+    li <code>drop_instruction_text</code> sets the text informing users they can drop files
+    li <code>no_file_chosen_text</code> sets the text displayed when no file has been chosen by the user
+    li <code>multiple_files_chosen_text</code> sets the text displayed when multiple files have been chosen by the user
+    li <code>entered_drop_zone_text</code> and <code>left_drop_zone_text</code> set the text announced by assistive technology then the user drags files into or out of the drop zone
+
 == render('/partials/related-navigation.*', links: file_info)
