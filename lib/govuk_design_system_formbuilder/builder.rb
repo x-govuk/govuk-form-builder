@@ -1119,6 +1119,12 @@ module GOVUKDesignSystemFormBuilder
     # @param javascript [Boolean] Configures whether to add HTML for the javascript-enhanced version of the component
     # @param before_input [String,Proc] the content injected before the input. No content will be added if left +nil+
     # @param after_input [String,Proc] the content injected after the input. No content will be added if left +nil+
+    # @param choose_files_button_text [String] The text of the button that opens the file picker. Default is "Choose file". If javascript is not provided, this option will be ignored.
+    # @param drop_instruction_text [String] The text informing users they can drop files. Default is "or drop file". If javascript is not provided, this option will be ignored.
+    # @param multiple_files_chosen_text [Hash] The text displayed when multiple files have been chosen by the user. The component will replace the %{count} placeholder with the number of files selected. This uses the govuk-frontend pluralisation rules. If javascript is not provided, this option will be ignored.
+    # @param no_file_chosen_text [String] The text displayed when no file has been chosen by the user. Default is "No file chosen". If javascript is not provided, this option will be ignored.
+    # @param entered_drop_zone_text [String] The text announced by assistive technology when user drags files and enters the drop zone. Default is "Entered drop zone". If javascript is not provided, this option will be ignored.
+    # @param left_drop_zone_text [String] The text announced by assistive technology when user drags files and leaves the drop zone without dropping. Default is "Left drop zone". If javascript is not provided, this option will be ignored.
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
     #
     # @example A photo upload field with file type specifier and injected content
@@ -1137,8 +1143,44 @@ module GOVUKDesignSystemFormBuilder
     # @note Remember to set +multipart: true+ when creating a form with file
     #   uploads, {https://guides.rubyonrails.org/form_helpers.html#uploading-files see
     #   the Rails documentation} for more information
-    def govuk_file_field(attribute_name, label: {}, caption: {}, hint: {}, form_group: {}, javascript: false, before_input: nil, after_input: nil, **kwargs, &block)
-      Elements::File.new(self, object_name, attribute_name, label:, caption:, hint:, form_group:, javascript:, before_input:, after_input:, **kwargs, &block).html
+    def govuk_file_field(
+      attribute_name,
+      label: {},
+      caption: {},
+      hint: {},
+      form_group: {},
+      javascript: false,
+      before_input: nil,
+      after_input: nil,
+      choose_files_button_text: nil,
+      drop_instruction_text: nil,
+      multiple_files_chosen_text: nil,
+      no_file_chosen_text: nil,
+      entered_drop_zone_text: nil,
+      left_drop_zone_text: nil,
+      **kwargs,
+      &block
+    )
+      Elements::File.new(
+        self,
+        object_name,
+        attribute_name,
+        label:,
+        caption:,
+        hint:,
+        form_group:,
+        javascript:,
+        before_input:,
+        after_input:,
+        choose_files_button_text:,
+        drop_instruction_text:,
+        multiple_files_chosen_text:,
+        no_file_chosen_text:,
+        entered_drop_zone_text:,
+        left_drop_zone_text:,
+        **kwargs,
+        &block
+      ).html
     end
   end
 end

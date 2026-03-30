@@ -65,9 +65,102 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     context "when the javascript flag is enabled" do
       subject { builder.send(*args, javascript: true) }
 
-      it "adds the JS enhancement markup" do
+      specify "adds the JS enhancement markup" do
         expect(subject).to have_tag('div', with: { class: 'govuk-drop-zone', "data-module": "govuk-file-upload" }) do
           expect(subject).to have_tag('input', with: { type: 'file' })
+        end
+      end
+
+      describe 'customising the component text elements' do
+        let(:xpath_file_module_selector) { %(./div[@data-module="govuk-file-upload"]) }
+
+        context "when no text customisation options are provided" do
+          specify "the div has no i18n data attributes set" do
+            expect(parsed_subject.at_css("div.govuk-drop-zone").attributes.keys).not_to include(/data-i18n/)
+          end
+        end
+
+        context "when the choose files button text is customised" do
+          subject { builder.send(*args, javascript: true, choose_files_button_text: custom_choose_files_button_text) }
+
+          let(:choose_file_key) { "data-i18n.choose-files-button" }
+          let(:custom_choose_files_button_text) { "Select a file" }
+
+          specify "the div has the corresponding i18n data attribute set" do
+            choose_files_button_attr = parsed_subject.at_css("div.govuk-drop-zone").attributes.fetch(choose_file_key).value
+
+            expect(choose_files_button_attr).to eql(custom_choose_files_button_text)
+          end
+        end
+
+        context "when the drop instruction text is customised" do
+          subject { builder.send(*args, javascript: true, drop_instruction_text: custom_drop_instruction_text) }
+
+          let(:drop_instruction_key) { "data-i18n.drop-instruction" }
+          let(:custom_drop_instruction_text) { "or drop your file here" }
+
+          specify "the div has the corresponding i18n data attribute set" do
+            drop_instruction_attr = parsed_subject.at_css("div.govuk-drop-zone").attributes.fetch(drop_instruction_key).value
+
+            expect(drop_instruction_attr).to eql(custom_drop_instruction_text)
+          end
+        end
+
+        context "when the multiple files chosen text is customised" do
+          subject { builder.send(*args, javascript: true, multiple_files_chosen_text: custom_multiple_files_chosen_text) }
+
+          let(:multiple_files_chosen_key) { "data-i18n.multiple-files-chosen" }
+          let(:custom_multiple_files_chosen_text) do
+            {
+              one: "%{count} file selected",
+              other: "%{count} files selected"
+            }
+          end
+
+          specify "the div has the corresponding i18n data attribute set" do
+            attributes = parsed_subject.at_css("div.govuk-drop-zone").attributes
+            expect(attributes.fetch("#{multiple_files_chosen_key}.one").value).to eql(custom_multiple_files_chosen_text[:one])
+            expect(attributes.fetch("#{multiple_files_chosen_key}.other").value).to eql(custom_multiple_files_chosen_text[:other])
+          end
+        end
+
+        context "when the no file chosen text is customised" do
+          subject { builder.send(*args, javascript: true, no_file_chosen_text: custom_no_file_chosen_text) }
+
+          let(:no_file_chosen_key) { "data-i18n.no-file-chosen" }
+          let(:custom_no_file_chosen_text) { "No file selected" }
+
+          specify "the div has the corresponding i18n data attribute set" do
+            no_file_chosen_attr = parsed_subject.at_css("div.govuk-drop-zone").attributes.fetch(no_file_chosen_key).value
+
+            expect(no_file_chosen_attr).to eql(custom_no_file_chosen_text)
+          end
+        end
+
+        context "when the entered drop zone text is customised" do
+          subject { builder.send(*args, javascript: true, entered_drop_zone_text: custom_entered_drop_zone_text) }
+
+          let(:entered_drop_zone_key) { "data-i18n.entered-drop-zone" }
+          let(:custom_entered_drop_zone_text) { "You have entered the drop zone" }
+
+          specify "the div has the corresponding i18n data attribute set" do
+            entered_drop_zone_attr = parsed_subject.at_css("div.govuk-drop-zone").attributes.fetch(entered_drop_zone_key).value
+
+            expect(entered_drop_zone_attr).to eql(custom_entered_drop_zone_text)
+          end
+        end
+
+        context "when the left drop zone text is customised" do
+          subject { builder.send(*args, javascript: true, left_drop_zone_text: custom_left_drop_zone_text) }
+
+          let(:left_drop_zone_key) { "data-i18n.left-drop-zone" }
+          let(:custom_left_drop_zone_text) { "You have left the drop zone" }
+
+          specify "the div has the corresponding i18n data attribute set" do
+            left_drop_zone_attr = parsed_subject.at_css("div.govuk-drop-zone").attributes.fetch(left_drop_zone_key).value
+
+            expect(left_drop_zone_attr).to eql(custom_left_drop_zone_text)
+          end
         end
       end
     end
