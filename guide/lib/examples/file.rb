@@ -16,5 +16,19 @@ module Examples
           javascript: true
       SNIPPET
     end
+
+    def file_upload_javascript_with_custom_text
+      <<~SNIPPET
+        = f.govuk_file_field :profile_photo,
+          label: { text: "Llwythwch ffeil i fyny" },
+          javascript: true,
+          choose_files_button_text: "Dewiswch ffeil",
+          drop_instruction_text: "neu ollwng ffeil",
+          no_file_chosen_text: "Dim ffeil wedi'i dewis",
+          multipleFilesChosenText: { "other" => "%{count} ffeil wedi'u dewis", "one" => "%{count} ffeil wedi'i dewis"},
+          entered_drop_zone_text: "Wedi mynd i mewn i'r parth gollwng",
+          left_drop_zone_text: "Parth gollwng i'r chwith"
+      SNIPPET
+    end
   end
 end
