@@ -1037,7 +1037,7 @@ module GOVUKDesignSystemFormBuilder
     # Generates a summary of errors in the form, each linking to the corresponding
     # part of the form that contains the error
     #
-    # @param title [String] the error summary heading
+    # @param title [String,Proc] the error summary heading
     # @param link_base_errors_to [Symbol,String] set the field that errors on +:base+ are linked
     #   to, as there won't be a field representing the object base.
     # @param order [Array<Symbol>] the attribute order in which error messages are displayed. Ordered

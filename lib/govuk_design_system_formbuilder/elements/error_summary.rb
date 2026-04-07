@@ -9,7 +9,7 @@ module GOVUKDesignSystemFormBuilder
       def initialize(builder, object_name, title, link_base_errors_to:, order:, presenter:, **kwargs, &block)
         super(builder, object_name, nil, &block)
 
-        @title               = title
+        @title               = build_text(title)
         @link_base_errors_to = link_base_errors_to
         @html_attributes     = kwargs
         @order               = order
@@ -27,6 +27,17 @@ module GOVUKDesignSystemFormBuilder
       end
 
     private
+
+      def build_text(text)
+        case text
+        when String
+          text
+        when Proc
+          capture { text.call }
+        else
+          fail(ArgumentError, %(text must be a String or Proc))
+        end
+      end
 
       def title
         tag.h2(@title, class: summary_class('title'))
