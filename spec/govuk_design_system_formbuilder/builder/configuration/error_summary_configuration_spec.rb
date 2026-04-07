@@ -32,5 +32,16 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         expect(subject).to have_tag('h2', text: error_summary_title, with: { class: 'govuk-error-summary__title' })
       end
     end
+
+    context %(overriding with custom proc) do
+      let(:error_summary_title) { -> { %(I'm a proc!) } }
+      let(:args) { [method, error_summary_title] }
+
+      subject { builder.send(*args) }
+
+      specify 'should use supplied text when overridden' do
+        expect(subject).to have_tag('h2', text: error_summary_title.call, with: { class: 'govuk-error-summary__title' })
+      end
+    end
   end
 end

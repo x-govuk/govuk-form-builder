@@ -36,6 +36,15 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
             expect(subject).to have_tag('button', with: { type: 'submit' }, text: submit_button_text)
           end
         end
+
+        context 'overriding with proc text' do
+          let(:submit_button_text) { -> { %(I'm a proc!) } }
+          let(:args) { [method, submit_button_text] }
+
+          specify 'should use supplied value when overridden' do
+            expect(subject).to have_tag('button', with: { type: 'submit' }, text: submit_button_text.call)
+          end
+        end
       end
     end
 
