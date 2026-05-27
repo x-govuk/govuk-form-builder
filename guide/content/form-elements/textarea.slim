@@ -36,4 +36,28 @@ p.govuk-body
     | To do this, set the <code>threshold</code> parameter in conjunction with a
       word or character limit.
 
+== render('/partials/example.*',
+  caption: 'Customising the limit text',
+  code: text_area_with_custom_limit_text) do
+
+  markdown:
+    When localising the textarea you can configure the strings used by the component using
+    the parameters:
+
+  ul.govuk-list.govuk-list--bullet
+    li
+      code under_limit_other_text
+    li
+      code under_limit_one_text
+    li
+      code at_limit_text
+    li
+      code over_limit_other_text
+    li
+      code over_limit_one_text
+
+  markdown:
+    The `%{count}` placeholder will be replaced by the number of characters or
+    words away from the limit you are.
+
 == render('/partials/related-navigation.*', links: text_area_info)

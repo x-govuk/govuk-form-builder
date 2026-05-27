@@ -70,7 +70,8 @@ class Person
     :responsibilities,
     :job_description,
     :cv,
-    :education_history
+    :education_history,
+    :personal_statement
   )
 
   # date fields

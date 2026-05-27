@@ -182,6 +182,70 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
         )
       end
     end
+
+    describe 'GOV.UK frontend localisation' do
+      context 'when no i18n options are set' do
+        specify 'the div has no i18n data attributes set' do
+          expect(subject).not_to include(/data-i18n/)
+        end
+      end
+
+      context 'when i18n character options are set' do
+        let(:under_limit_other_text) { '%{count} caractères restants' }
+        let(:under_limit_one_text) { '%{count} caractère restant' }
+        let(:at_limit_text) { 'Plus aucun caractère restant' }
+        let(:over_limit_other_text) { '%{count} caractères de trop' }
+        let(:over_limit_one_text) { '%{count} caractère de trop' }
+
+        subject { builder.send(*args, max_chars: 20, at_limit_text:, under_limit_other_text:, under_limit_one_text:, over_limit_other_text:, over_limit_one_text:) }
+
+        let(:form_group) { parsed_subject.at_css('div.govuk-form-group') }
+
+        specify 'the i18n attributes are present on the form group div element' do
+          aggregate_failures do
+            expect(form_group.attributes['data-i18n.characters-under-limit.other'].text).to eql(under_limit_other_text)
+            expect(form_group.attributes['data-i18n.characters-under-limit.one'].text).to eql(under_limit_one_text)
+            expect(form_group.attributes['data-i18n.characters-at-limit'].text).to eql(at_limit_text)
+            expect(form_group.attributes['data-i18n.characters-over-limit.other'].text).to eql(over_limit_other_text)
+            expect(form_group.attributes['data-i18n.characters-over-limit.one'].text).to eql(over_limit_one_text)
+          end
+        end
+
+        specify 'all i18n attributes are characters (rather than words)' do
+          values = form_group.attributes.keys.select { |key| key.start_with?('data-i18n') }
+
+          expect(values).to all(match(/characters/))
+        end
+      end
+
+      context 'when i18n word options are set' do
+        let(:at_limit_text) { 'Plus aucun caractère restant' }
+        let(:under_limit_other_text) { '%{count} mots restants' }
+        let(:under_limit_one_text) { '%{count} mot restant' }
+        let(:over_limit_other_text) { '%{count} mots de trop' }
+        let(:over_limit_one_text) { '%{count} mot de trop' }
+
+        subject { builder.send(*args, max_words: 20, at_limit_text:, under_limit_other_text:, under_limit_one_text:, over_limit_other_text:, over_limit_one_text:) }
+
+        let(:form_group) { parsed_subject.at_css('div.govuk-form-group') }
+
+        specify 'the i18n attributes are present on the form group div element' do
+          aggregate_failures do
+            expect(form_group.attributes['data-i18n.words-under-limit.other'].text).to eql(under_limit_other_text)
+            expect(form_group.attributes['data-i18n.words-under-limit.one'].text).to eql(under_limit_one_text)
+            expect(form_group.attributes['data-i18n.words-at-limit'].text).to eql(at_limit_text)
+            expect(form_group.attributes['data-i18n.words-over-limit.other'].text).to eql(over_limit_other_text)
+            expect(form_group.attributes['data-i18n.words-over-limit.one'].text).to eql(over_limit_one_text)
+          end
+        end
+
+        specify 'all i18n attributes are words (rather than characters)' do
+          values = form_group.attributes.keys.select { |key| key.start_with?('data-i18n') }
+
+          expect(values).to all(match(/words/))
+        end
+      end
+    end
   end
 
   context 'rows' do
