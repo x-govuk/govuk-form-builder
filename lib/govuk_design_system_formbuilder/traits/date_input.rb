@@ -27,7 +27,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def fieldset_options
-        { legend: @legend, caption: @caption, described_by: [error_id, hint_id, supplemental_id] }
+        { legend: @legend, caption: @caption, described_by: [error_id, hint_id] }
       end
 
       def segment_label_text(segment)
