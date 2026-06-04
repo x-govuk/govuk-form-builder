@@ -43,7 +43,7 @@ module GOVUKDesignSystemFormBuilder
           {
             legend: @legend,
             caption: @caption,
-            described_by: [error_id, hint_id, supplemental_id]
+            described_by: [error_id, hint_id]
           }
         end
 
