@@ -385,6 +385,11 @@ module GOVUKDesignSystemFormBuilder
     # @option form_group kwargs [Hash] additional attributes added to the form group
     # @option kwargs [Hash] kwargs additional arguments are applied as attributes to the +textarea+ element
     # @param block [Block] arbitrary HTML that will be rendered between the hint and the input
+    # @param characters_under_limit_other_text [String] Text that informs the user they have X word/characters remaining. Default is "%{count} characters to go". If javascript is not provided, this option will be ignored.
+    # @param characters_under_limit_one_text [String] Text that informs the user they have 1 word/character remaining. Default is "%{count} character to go". If javascript is not provided, this option will be ignored.
+    # @param characters_at_limit_text [String] The text that informs the user they've reached the character limit. Default is "No characters left". If javascript is not provided, this option will be ignored.
+    # @param characters_over_limit_other_text [String] Text that informs the user they have added X words/characters too many. Default is "%{count} characters to go". If javascript is not provided, this option will be ignored.
+    # @param characters_over_limit_one_text [String] Text that informs the user they have added 1 word/character too many. Default is "%{count} character to go". If javascript is not provided, this option will be ignored.
     # @return [ActiveSupport::SafeBuffer] HTML output
     # @see https://design-system.service.gov.uk/components/textarea/ GOV.UK text area component
     # @see https://design-system.service.gov.uk/components/character-count GOV.UK character count component
@@ -409,8 +414,46 @@ module GOVUKDesignSystemFormBuilder
     #   = f.govuk_text_area :instructions,
     #     label: -> { tag.h3("How do you set it up?") }
     #
-    def govuk_text_area(attribute_name, hint: {}, label: {}, caption: {}, max_words: nil, max_chars: nil, rows: 5, threshold: nil, form_group: {}, **kwargs, &block)
-      Elements::TextArea.new(self, object_name, attribute_name, hint:, label:, caption:, max_words:, max_chars:, rows:, threshold:, form_group:, **kwargs, &block).html
+    def govuk_text_area(
+      attribute_name,
+      hint: {},
+      label: {},
+      caption: {},
+      max_words: nil,
+      max_chars: nil,
+      rows: 5,
+      threshold: nil,
+      form_group: {},
+      description_other_text: nil,
+      under_limit_other_text: nil,
+      under_limit_one_text: nil,
+      at_limit_text: nil,
+      over_limit_one_text: nil,
+      over_limit_other_text: nil,
+      **kwargs,
+      &block
+    )
+      Elements::TextArea.new(
+        self,
+        object_name,
+        attribute_name,
+        hint:,
+        label:,
+        caption:,
+        max_words:,
+        max_chars:,
+        rows:,
+        threshold:,
+        form_group:,
+        description_other_text:,
+        under_limit_other_text:,
+        under_limit_one_text:,
+        at_limit_text:,
+        over_limit_one_text:,
+        over_limit_other_text:,
+        **kwargs,
+        &block
+      ).html
     end
 
     # Generates a +select+ element containing +option+ for each member in the provided collection

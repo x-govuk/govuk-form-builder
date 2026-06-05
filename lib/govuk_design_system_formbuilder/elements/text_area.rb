@@ -10,7 +10,27 @@ module GOVUKDesignSystemFormBuilder
       include Traits::HTMLAttributes
       include Traits::HTMLClasses
 
-      def initialize(builder, object_name, attribute_name, hint:, label:, caption:, rows:, max_words:, max_chars:, threshold:, form_group:, **kwargs, &block)
+      def initialize(
+        builder,
+        object_name,
+        attribute_name,
+        hint:,
+        label:,
+        caption:,
+        rows:,
+        max_words:,
+        max_chars:,
+        threshold:,
+        form_group:,
+        description_other_text:,
+        under_limit_other_text:,
+        under_limit_one_text:,
+        at_limit_text:,
+        over_limit_other_text:,
+        over_limit_one_text:,
+        **kwargs,
+        &block
+      )
         super(builder, object_name, attribute_name, &block)
 
         fail ArgumentError, 'limit can be words or chars' if max_words && max_chars
@@ -24,10 +44,17 @@ module GOVUKDesignSystemFormBuilder
         @rows            = rows
         @form_group      = form_group
         @html_attributes = kwargs
+
+        @description_other_text = description_other_text
+        @under_limit_other_text = under_limit_other_text
+        @under_limit_one_text   = under_limit_one_text
+        @at_limit_text          = at_limit_text
+        @over_limit_other_text  = over_limit_other_text
+        @over_limit_one_text    = over_limit_one_text
       end
 
       def html
-        Containers::FormGroup.new(*bound, **@form_group.merge(limit_form_group_options)).html do
+        Containers::FormGroup.new(*bound, **@form_group.merge(limit_form_group_options), **i18n_data).html do
           safe_join([label_element, supplemental_content, hint_element, error_element, text_area, limit_description])
         end
       end
@@ -108,6 +135,28 @@ module GOVUKDesignSystemFormBuilder
 
       def limit_threshold_options
         { threshold: @threshold }
+      end
+
+      def i18n_data
+        # "data-i18n.textarea-description.other" => @textarea_description_other_text,
+        case limit_type
+        when 'characters'
+          {
+            'data-i18n.characters-at-limit' => @at_limit_text,
+            'data-i18n.characters-under-limit.other' => @under_limit_other_text,
+            'data-i18n.characters-under-limit.one' => @under_limit_one_text,
+            'data-i18n.characters-over-limit.other' => @over_limit_other_text,
+            'data-i18n.characters-over-limit.one' => @over_limit_one_text,
+          }.compact
+        when 'words'
+          {
+            'data-i18n.words-at-limit' => @at_limit_text,
+            'data-i18n.words-under-limit.other' => @under_limit_other_text,
+            'data-i18n.words-under-limit.one' => @under_limit_one_text,
+            'data-i18n.words-over-limit.other' => @over_limit_other_text,
+            'data-i18n.words-over-limit.one' => @over_limit_one_text,
+          }.compact
+        end
       end
     end
   end
