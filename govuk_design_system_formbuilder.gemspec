@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.add_dependency("html-attributes-utils", "~> 1")
 
   exact_rails_version = ENV.key?("RAILS_VERSION")
-  rails_version = ENV.fetch("RAILS_VERSION") { "6.1.7" }
+  rails_version = ENV.fetch("RAILS_VERSION") { "7.2.3" }
 
   %w(actionview activemodel activesupport).each do |lib|
     s.add_dependency(*VersionFormatter.new(lib, rails_version, exact_rails_version).to_a)
@@ -36,7 +36,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency("ostruct")
   s.add_development_dependency("debug")
   s.add_development_dependency("rspec-html-matchers", "~> 0")
-  s.add_development_dependency("rspec-rails", "~> 6.0")
+  s.add_development_dependency("rspec-rails", "~> 8.0")
   s.add_development_dependency("rubocop-govuk", "~> 5.2.0")
   s.add_development_dependency("simplecov", "~> 0.20")
 
