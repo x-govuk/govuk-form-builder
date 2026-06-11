@@ -2,6 +2,7 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     class Password < Base
       using PrefixableArray
+      using HTMLAttributesUtils
 
       include Traits::Error
       include Traits::Hint
@@ -60,7 +61,7 @@ module GOVUKDesignSystemFormBuilder
           **i18n_data,
           class: %(#{brand}-password-input),
           data: { module: %(#{brand}-password-input) },
-        }
+        }.deep_merge_html_attributes(@form_group)
       end
 
       def password_input
