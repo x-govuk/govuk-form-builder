@@ -24,6 +24,19 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group', "data-module" => "govuk-password-input" })
     end
 
+    specify 'merges custom form group attributes with the password input attributes' do
+      kwargs[:form_group] = { class: "example", data: { controller: "password" } }
+
+      expect(subject).to have_tag(
+        'div',
+        with: {
+          class: %w(govuk-form-group govuk-password-input example),
+          "data-module" => "govuk-password-input",
+          "data-controller" => "password",
+        }
+      )
+    end
+
     specify 'the password input has the right classes' do
       expect(subject).to have_tag('input', with: { class: %w(govuk-input govuk-password-input__input govuk-js-password-input-input) })
     end
