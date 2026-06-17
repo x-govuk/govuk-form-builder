@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.metadata    = METADATA
   s.files       = Dir["{app,lib}/**/*", "LICENSE", "README.md"]
 
+  s.required_ruby_version = ">= 3.3"
   s.add_dependency("html-attributes-utils", "~> 1")
 
   exact_rails_version = ENV.key?("RAILS_VERSION")
