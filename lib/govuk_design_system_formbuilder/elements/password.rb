@@ -31,7 +31,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        Containers::FormGroup.new(*bound, **form_group_options).html do
+        Containers::FormGroup.new(*bound, options: @form_group, **form_group_options).html do
           safe_join([label_element, hint_element, error_element, password_input_and_button])
         end
       end
@@ -57,7 +57,6 @@ module GOVUKDesignSystemFormBuilder
 
       def form_group_options
         {
-          **@form_group,
           **i18n_data,
           class: %(#{brand}-password-input),
           data: { module: %(#{brand}-password-input) },
