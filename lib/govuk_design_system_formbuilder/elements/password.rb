@@ -2,6 +2,7 @@ module GOVUKDesignSystemFormBuilder
   module Elements
     class Password < Base
       using PrefixableArray
+      using HTMLAttributesUtils
 
       include Traits::Error
       include Traits::Hint
@@ -31,7 +32,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def html
-        Containers::FormGroup.new(*bound, options: @form_group, **form_group_options).html do
+        Containers::FormGroup.new(*bound, **form_group_options).html do
           safe_join([label_element, hint_element, error_element, password_input_and_button])
         end
       end
@@ -60,7 +61,7 @@ module GOVUKDesignSystemFormBuilder
           **i18n_data,
           class: %(#{brand}-password-input),
           data: { module: %(#{brand}-password-input) },
-        }
+        }.deep_merge_html_attributes(@form_group)
       end
 
       def password_input
