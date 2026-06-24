@@ -25,7 +25,7 @@ module Examples
           choose_files_button_text: "Dewiswch ffeil",
           drop_instruction_text: "neu ollwng ffeil",
           no_file_chosen_text: "Dim ffeil wedi'i dewis",
-          multipleFilesChosenText: { "other" => "%{count} ffeil wedi'u dewis", "one" => "%{count} ffeil wedi'i dewis"},
+          multiple_files_chosen_text: { "other" => "%{count} ffeil wedi'u dewis", "one" => "%{count} ffeil wedi'i dewis"},
           entered_drop_zone_text: "Wedi mynd i mewn i'r parth gollwng",
           left_drop_zone_text: "Parth gollwng i'r chwith"
       SNIPPET
