@@ -329,12 +329,12 @@ module GOVUKDesignSystemFormBuilder
       label: {},
       caption: {},
       form_group: {},
-      show_password_text: config.default_show_password_text,
-      hide_password_text: config.default_hide_password_text,
-      show_password_aria_label_text: config.default_show_password_aria_label_text,
-      hide_password_aria_label_text: config.default_hide_password_aria_label_text,
-      password_shown_announcement_text: config.default_password_shown_announcement_text,
-      password_hidden_announcement_text: config.default_password_hidden_announcement_text,
+      show_password_text: nil,
+      hide_password_text: nil,
+      show_password_aria_label_text: nil,
+      hide_password_aria_label_text: nil,
+      password_shown_announcement_text: nil,
+      password_hidden_announcement_text: nil,
       **kwargs,
       &block
     )
@@ -1165,6 +1165,9 @@ module GOVUKDesignSystemFormBuilder
     # @param choose_files_button_text [String] The text of the button that opens the file picker. Default is "Choose file". If javascript is not provided, this option will be ignored.
     # @param drop_instruction_text [String] The text informing users they can drop files. Default is "or drop file". If javascript is not provided, this option will be ignored.
     # @param multiple_files_chosen_text [Hash] The text displayed when multiple files have been chosen by the user. The component will replace the %{count} placeholder with the number of files selected. This uses the govuk-frontend pluralisation rules. If javascript is not provided, this option will be ignored.
+    # @param multiple_files_chosen_one_text [String] The text displayed when JavaScript is enabled and one file has been chosen by the user. The component will replace the %{count} placeholder with the number of files selected. This can also be set by passing a hash with key +one:+ to +multiple_files_chosen_text+.
+    # @param multiple_files_chosen_other_text [String] The text displayed when JavaScript is enabled and multiple files have been chosen by the user. The component will replace the %{count} placeholder with the number of files selected. This can also be set by passing a hash with key +other:+ to +multiple_files_chosen_text+.
+
     # @param no_file_chosen_text [String] The text displayed when no file has been chosen by the user. Default is "No file chosen". If javascript is not provided, this option will be ignored.
     # @param entered_drop_zone_text [String] The text announced by assistive technology when user drags files and enters the drop zone. Default is "Entered drop zone". If javascript is not provided, this option will be ignored.
     # @param left_drop_zone_text [String] The text announced by assistive technology when user drags files and leaves the drop zone without dropping. Default is "Left drop zone". If javascript is not provided, this option will be ignored.
@@ -1198,6 +1201,8 @@ module GOVUKDesignSystemFormBuilder
       choose_files_button_text: nil,
       drop_instruction_text: nil,
       multiple_files_chosen_text: nil,
+      multiple_files_chosen_one_text: nil,
+      multiple_files_chosen_other_text: nil,
       no_file_chosen_text: nil,
       entered_drop_zone_text: nil,
       left_drop_zone_text: nil,
@@ -1218,6 +1223,8 @@ module GOVUKDesignSystemFormBuilder
         choose_files_button_text:,
         drop_instruction_text:,
         multiple_files_chosen_text:,
+        multiple_files_chosen_one_text:,
+        multiple_files_chosen_other_text:,
         no_file_chosen_text:,
         entered_drop_zone_text:,
         left_drop_zone_text:,

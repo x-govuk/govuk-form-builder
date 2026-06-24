@@ -10,8 +10,9 @@ module GOVUKDesignSystemFormBuilder
       include Traits::HTMLAttributes
       include Traits::HTMLClasses
       include Traits::ContentBeforeAndAfter
+      include Traits::DataAttributesI18n
 
-      def initialize(builder, object_name, attribute_name, hint:, label:, caption:, form_group:, javascript:, before_input:, after_input:, choose_files_button_text:, drop_instruction_text:, multiple_files_chosen_text:, no_file_chosen_text:, entered_drop_zone_text:, left_drop_zone_text:, **kwargs, &block)
+      def initialize(builder, object_name, attribute_name, hint:, label:, caption:, form_group:, javascript:, before_input:, after_input:, choose_files_button_text:, drop_instruction_text:, multiple_files_chosen_text:, multiple_files_chosen_one_text:, multiple_files_chosen_other_text:, no_file_chosen_text:, entered_drop_zone_text:, left_drop_zone_text:, **kwargs, &block)
         super(builder, object_name, attribute_name, &block)
 
         @label = label
@@ -26,6 +27,8 @@ module GOVUKDesignSystemFormBuilder
         @choose_files_button_text = choose_files_button_text
         @drop_instruction_text = drop_instruction_text
         @multiple_files_chosen_text = multiple_files_chosen_text
+        @multiple_files_chosen_one_text = multiple_files_chosen_one_text
+        @multiple_files_chosen_other_text = multiple_files_chosen_other_text
         @no_file_chosen_text = no_file_chosen_text
         @entered_drop_zone_text = entered_drop_zone_text
         @left_drop_zone_text = left_drop_zone_text
@@ -64,21 +67,28 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def i18n_data
-        data = {
-          "data-i18n.choose-files-button" => @choose_files_button_text,
-          "data-i18n.drop-instruction" => @drop_instruction_text,
-          "data-i18n.no-file-chosen" => @no_file_chosen_text,
-          "data-i18n.entered-drop-zone" => @entered_drop_zone_text,
-          "data-i18n.left-drop-zone" => @left_drop_zone_text,
-        }
+        attrs = [
+          I18nAttr.new("data-i18n.choose-files-button",         @choose_files_button_text,         :default_file_choose_files_button_text),
+          I18nAttr.new("data-i18n.drop-instruction",            @drop_instruction_text,            :default_file_drop_instruction_text),
+          I18nAttr.new("data-i18n.no-file-chosen",              @no_file_chosen_text,              :default_file_no_file_chosen_text),
+          I18nAttr.new("data-i18n.multiple-files-chosen.one",   @multiple_files_chosen_one_text,   :default_file_multiple_files_chosen_one_text),
+          I18nAttr.new("data-i18n.multiple-files-chosen.other", @multiple_files_chosen_other_text, :default_file_multiple_files_chosen_other_text),
+          I18nAttr.new("data-i18n.entered-drop-zone",           @entered_drop_zone_text,           :default_file_entered_drop_zone),
+          I18nAttr.new("data-i18n.left-drop-zone",              @left_drop_zone_text,              :default_file_left_drop_zone)
+        ]
 
+        # deal with the Nunjucks stlye hash format as an alternative
         if @multiple_files_chosen_text.is_a?(Hash)
-          @multiple_files_chosen_text.each do |key, value|
-            data["data-i18n.multiple-files-chosen.#{key}"] = value
+          if (text = @multiple_files_chosen_text.symbolize_keys[:other])
+            attrs << I18nAttr.new("data-i18n.multiple-files-chosen.other", text, :default_file_multiple_files_chosen_other_text)
+          end
+
+          if (text = @multiple_files_chosen_text.symbolize_keys[:one])
+            attrs << I18nAttr.new("data-i18n.multiple-files-chosen.one", text, :default_file_multiple_files_chosen_one_text)
           end
         end
 
-        data.compact
+        build_data_attr_hash(attrs)
       end
     end
   end
