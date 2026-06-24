@@ -17,6 +17,38 @@ module GOVUKDesignSystemFormBuilder
     end
   end
 
+  GOVUK_FRONTEND_DEFAULTS = {
+    # password field
+    default_show_password_text: 'Show',
+    default_hide_password_text: 'Hide',
+    default_show_password_aria_label_text: 'Show password',
+    default_hide_password_aria_label_text: 'Hide password',
+    default_password_shown_announcement_text: 'Your password is visible',
+    default_password_hidden_announcement_text: 'Your password is hidden',
+
+    # text area (character count)
+    default_text_area_description_text: nil,
+    default_text_area_words_under_limit_other_text: 'You have %{count} words remaining',
+    default_text_area_words_under_limit_one_text: 'You have %{count} word remaining',
+    default_text_area_words_at_limit_text: 'You have 0 words remaining',
+    default_text_area_words_over_limit_other_text: 'You have %{count} words too many',
+    default_text_area_words_over_limit_one_text: 'You have %{count} word too many',
+    default_text_area_characters_under_limit_other_text: 'You have %{count} characters remaining',
+    default_text_area_characters_under_limit_one_text: 'You have %{count} character remaining',
+    default_text_area_characters_at_limit_text: 'You have 0 characters remaining',
+    default_text_area_characters_over_limit_other_text: 'You have %{count} characters too many',
+    default_text_area_characters_over_limit_one_text: 'You have %{count} character too many',
+
+    # file upload
+    default_file_choose_files_button_text: 'Choose file',
+    default_file_drop_instruction_text: 'or drop file',
+    default_file_no_file_chosen_text: 'No file chosen',
+    default_file_multiple_files_chosen_one_text: 'One file chosen',
+    default_file_multiple_files_chosen_other_text: '%{count} files chosen',
+    default_file_entered_drop_zone: 'Entered drop zone',
+    default_file_left_drop_zone: 'Left drop zone',
+  }.freeze
+
   # @!group Defaults
 
   # Default form builder configuration
@@ -82,6 +114,86 @@ module GOVUKDesignSystemFormBuilder
   #   When nil, no data attribute will be added. Defaults to turbo since Rails 7,
   #   change to 'turbolinks' for Rails 6.1
   #
+  # * +:default_text_area_description_text+ sets the text that's displayed beneath
+  #   the text area when word counts are enabled. Defaults to nil
+  #
+  # * +:default_text_area_words_under_limit_other_text+ sets the text displayed when the
+  #   user is approaching the limit of words. Defaults to "You have %{count} words remaining"
+  #
+  # * +:default_text_area_words_under_limit_one_text+ sets the text that's displayed when the
+  #   user is 1 word below the limit. Defaults to "You have %{count} word remaining"
+  #
+  # * +:default_text_area_words_at_limit_text+ sets the text that's displayed when the user
+  #   has reached the limit. Defaults to "You have 0 words remaining"
+  #
+  # * +:default_text_area_words_over_limit_other_text+ sets the text displayed when the
+  #   user is more than 1 word above the limit. Defaults to "You have %{count}
+  #   words too many"
+  #
+  # * +:default_text_area_words_over_limit_one_text+ sets the text that's displayed when the
+  #   user is 1 word above the limit. Defaults to "You have %{count} word too many"
+  #
+  # * +:default_text_area_characters_under_limit_other_text+ sets the text displayed when the
+  #   user is approaching the limit of characters. Defaults to "You have %{count} characters
+  #   remaining"
+  #
+  # * +:default_text_area_characters_under_limit_one_text+ sets the text that's displayed when the
+  #   user is 1 character below the limit. Defaults to "You have %{count} character remaining"
+  #
+  # * +:default_text_area_characters_at_limit_text+ sets the text that's displayed when the user
+  #   has reached the limit. Defaults to "You have 0 characters remaining"
+  #
+  # * +:default_text_area_characters_over_limit_other_text+ sets the text displayed when the
+  #   user is more than 1 character above the limit. Defaults to "You have %{count}
+  #   characters too many"
+  #
+  # * +:default_text_area_characters_over_limit_one_text+ sets the text that's displayed when the
+  #   user is 1 character above the limit. Defaults to "You have %{count} character too many"
+  #
+  # * +:default_show_password_text+ Button text when the password is hidden. Defaults to 'Show'
+  #
+  # * +:default_hide_password_text+ Button text when the password is revealed. Defaults to 'Hide'
+  #
+  # * +:default_show_password_aria_label_text+ Button text exposed to assistive technologies like
+  #   screen readers, when the password is hidden. Defaults to "Show password"
+  #
+  # * +:default_hide_password_aria_label_text+ Button text exposed to assistive technologies like
+  #   screen readers, when the password is visible. Defaults to "Hide password".
+  #
+  # * +:default_password_shown_announcement_text+ Announcement made to screen reader users when
+  #   their password has become visible in plain text. Defaults to "Your password is visible"
+  #
+  # * +:default_password_hidden_announcement_text+ Announcement made to screen reader users when
+  #   their password has been obscured and is not visible. Defaults to "Your password is hidden"
+  #
+  # * +:default_file_choose_files_button_text+ The text of the button that opens the file picker.
+  #   Default is "Choose file". If javascript is not provided, this option will be ignored
+  #
+  # * +:default_file_drop_instruction_text+ The text informing users they can drop files.
+  #   Default is "or drop file". If javascript is not provided, this option will be ignore
+  #
+  # * +:default_file_no_file_chosen_text+ The text displayed when no file has been chosen by
+  #   the user. Default is "No file chosen". If javascript is not provided, this option will be
+  #   ignored
+  #
+  # * +:default_file_multiple_files_chosen_one_text+ The text displayed when multiple files are
+  #   enabled and one file has been chosen by the user. The component will replace the %{count}
+  #   placeholder with the number of files selected. If javascript is not provided, this option
+  #   will be ignored. Defaults to 'One file chosen'
+  #
+  # * +:default_file_multiple_files_chosen_other_text+ The text displayed when multiple files are
+  #   enabled and multiple files have been chosen by the user. The component will replace the %{count}
+  #   placeholder with the number of files selected. If javascript is not provided, this option
+  #   will be ignored. Defaults to '%{count} files chosen'
+  #
+  # * +:default_file_entered_drop_zone+ The text announced by assistive technology when user drags
+  #   files and enters the drop zone. Default is "Entered drop zone". If javascript is not provided,
+  #   this option will be ignored
+  #
+  # * +:default_file_left_drop_zone+ The text announced by assistive technology when user drags
+  #   files and leaves the drop zone without dropping. Default is "Left drop zone". If javascript
+  #   is not provided, this option will be ignored.
+  #
   # * +:localisation_schema_fallback+ sets the prefix elements for the array
   #   used to build the localisation string. The final two elements are always
   #   are the object name and attribute name. The _special_ value +__context__+,
@@ -124,12 +236,6 @@ module GOVUKDesignSystemFormBuilder
     default_collection_radio_buttons_include_hidden: true,
     default_collection_radio_buttons_auto_bold_labels: true,
     default_submit_validate: false,
-    default_show_password_text: "Show",
-    default_hide_password_text: "Hide",
-    default_show_password_aria_label_text: "Show password",
-    default_hide_password_aria_label_text: "Hide password",
-    default_password_shown_announcement_text: "Your password is visible",
-    default_password_hidden_announcement_text: "Your password is hidden",
     localisation_schema_fallback: %i(helpers __context__),
     localisation_schema_label: nil,
     localisation_schema_hint: nil,
@@ -142,6 +248,8 @@ module GOVUKDesignSystemFormBuilder
     # temporarily allow the new nested localisation functionality to be
     # disabled
     enable_nested_localisation: true,
+
+    **GOVUK_FRONTEND_DEFAULTS
   }.freeze
 
   DEFAULTS.each do |key, value|
