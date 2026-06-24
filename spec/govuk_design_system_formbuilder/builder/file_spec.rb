@@ -124,6 +124,32 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           end
         end
 
+        context "when the multiple files chosen 'one' text is customised" do
+          subject { builder.send(*args, javascript: true, multiple_files_chosen_one_text: custom_multiple_files_chosen_one_text) }
+
+          let(:drop_instruction_key) { "data-i18n.multiple-files-chosen.one" }
+          let(:custom_multiple_files_chosen_one_text) { "You've dropped one file" }
+
+          specify "the div has the corresponding i18n data attribute set" do
+            drop_instruction_attr = parsed_subject.at_css("div.govuk-drop-zone").attributes.fetch(drop_instruction_key).value
+
+            expect(drop_instruction_attr).to eql(custom_multiple_files_chosen_one_text)
+          end
+        end
+
+        context "when the multiple files chosen 'one' text is customised" do
+          subject { builder.send(*args, javascript: true, multiple_files_chosen_other_text: custom_multiple_files_chosen_other_text) }
+
+          let(:drop_instruction_key) { "data-i18n.multiple-files-chosen.other" }
+          let(:custom_multiple_files_chosen_other_text) { "You've dropped one file" }
+
+          specify "the div has the corresponding i18n data attribute set" do
+            drop_instruction_attr = parsed_subject.at_css("div.govuk-drop-zone").attributes.fetch(drop_instruction_key).value
+
+            expect(drop_instruction_attr).to eql(custom_multiple_files_chosen_other_text)
+          end
+        end
+
         context "when the no file chosen text is customised" do
           subject { builder.send(*args, javascript: true, no_file_chosen_text: custom_no_file_chosen_text) }
 
