@@ -9,6 +9,7 @@ module GOVUKDesignSystemFormBuilder
       include Traits::Supplemental
       include Traits::HTMLAttributes
       include Traits::HTMLClasses
+      include Traits::DataAttributesI18n
 
       def initialize(
         builder,
@@ -138,25 +139,28 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def i18n_data
-        # "data-i18n.textarea-description.other" => @textarea_description_other_text,
-        case limit_type
-        when 'characters'
-          {
-            'data-i18n.characters-at-limit' => @at_limit_text,
-            'data-i18n.characters-under-limit.other' => @under_limit_other_text,
-            'data-i18n.characters-under-limit.one' => @under_limit_one_text,
-            'data-i18n.characters-over-limit.other' => @over_limit_other_text,
-            'data-i18n.characters-over-limit.one' => @over_limit_one_text,
-          }.compact
-        when 'words'
-          {
-            'data-i18n.words-at-limit' => @at_limit_text,
-            'data-i18n.words-under-limit.other' => @under_limit_other_text,
-            'data-i18n.words-under-limit.one' => @under_limit_one_text,
-            'data-i18n.words-over-limit.other' => @over_limit_other_text,
-            'data-i18n.words-over-limit.one' => @over_limit_one_text,
-          }.compact
-        end
+        return {} unless limit_quantity
+
+        attrs = case limit_type
+                when 'characters'
+                  [
+                    I18nAttr.new('data-i18n.characters-under-limit.other', @under_limit_other_text, :default_text_area_characters_under_limit_other_text),
+                    I18nAttr.new('data-i18n.characters-under-limit.one',   @under_limit_one_text,   :default_text_area_characters_under_limit_one_text),
+                    I18nAttr.new('data-i18n.characters-at-limit',          @at_limit_text,          :default_text_area_characters_at_limit_text),
+                    I18nAttr.new('data-i18n.characters-over-limit.other',  @over_limit_other_text,  :default_text_area_characters_over_limit_other_text),
+                    I18nAttr.new('data-i18n.characters-over-limit.one',    @over_limit_one_text,    :default_text_area_characters_over_limit_one_text),
+                  ]
+                when 'words'
+                  [
+                    I18nAttr.new('data-i18n.words-under-limit.other', @under_limit_other_text, :default_text_area_words_under_limit_other_text),
+                    I18nAttr.new('data-i18n.words-under-limit.one',   @under_limit_one_text,   :default_text_area_words_under_limit_one_text),
+                    I18nAttr.new('data-i18n.words-at-limit',          @at_limit_text,          :default_text_area_words_at_limit_text),
+                    I18nAttr.new('data-i18n.words-over-limit.other',  @over_limit_other_text,  :default_text_area_words_over_limit_other_text),
+                    I18nAttr.new('data-i18n.words-over-limit.one',    @over_limit_one_text,    :default_text_area_words_over_limit_one_text),
+                  ]
+                end
+
+        build_data_attr_hash(attrs)
       end
     end
   end
