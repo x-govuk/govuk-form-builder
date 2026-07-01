@@ -66,7 +66,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       subject { builder.send(*args, javascript: true) }
 
       specify "adds the JS enhancement markup" do
-        expect(subject).to have_tag('div', with: { class: 'govuk-drop-zone', "data-module": "govuk-file-upload" }) do
+        expect(subject).to have_tag('div', with: { class: 'govuk-file-upload-wrapper', "data-module": "govuk-file-upload" }) do
           expect(subject).to have_tag('input', with: { type: 'file' })
         end
       end
@@ -76,7 +76,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
 
         context "when no text customisation options are provided" do
           specify "the div has no i18n data attributes set" do
-            expect(parsed_subject.at_css("div.govuk-drop-zone").attributes.keys).not_to include(/data-i18n/)
+            expect(parsed_subject.at_css("div.govuk-file-upload-wrapper").attributes.keys).not_to include(/data-i18n/)
           end
         end
 
@@ -87,7 +87,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           let(:custom_choose_files_button_text) { "Select a file" }
 
           specify "the div has the corresponding i18n data attribute set" do
-            choose_files_button_attr = parsed_subject.at_css("div.govuk-drop-zone").attributes.fetch(choose_file_key).value
+            choose_files_button_attr = parsed_subject.at_css("div.govuk-file-upload-wrapper").attributes.fetch(choose_file_key).value
 
             expect(choose_files_button_attr).to eql(custom_choose_files_button_text)
           end
@@ -100,7 +100,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           let(:custom_drop_instruction_text) { "or drop your file here" }
 
           specify "the div has the corresponding i18n data attribute set" do
-            drop_instruction_attr = parsed_subject.at_css("div.govuk-drop-zone").attributes.fetch(drop_instruction_key).value
+            drop_instruction_attr = parsed_subject.at_css("div.govuk-file-upload-wrapper").attributes.fetch(drop_instruction_key).value
 
             expect(drop_instruction_attr).to eql(custom_drop_instruction_text)
           end
@@ -118,7 +118,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           end
 
           specify "the div has the corresponding i18n data attribute set" do
-            attributes = parsed_subject.at_css("div.govuk-drop-zone").attributes
+            attributes = parsed_subject.at_css("div.govuk-file-upload-wrapper").attributes
             expect(attributes.fetch("#{multiple_files_chosen_key}.one").value).to eql(custom_multiple_files_chosen_text[:one])
             expect(attributes.fetch("#{multiple_files_chosen_key}.other").value).to eql(custom_multiple_files_chosen_text[:other])
           end
@@ -131,7 +131,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           let(:custom_multiple_files_chosen_one_text) { "You've dropped one file" }
 
           specify "the div has the corresponding i18n data attribute set" do
-            drop_instruction_attr = parsed_subject.at_css("div.govuk-drop-zone").attributes.fetch(drop_instruction_key).value
+            drop_instruction_attr = parsed_subject.at_css("div.govuk-file-upload-wrapper").attributes.fetch(drop_instruction_key).value
 
             expect(drop_instruction_attr).to eql(custom_multiple_files_chosen_one_text)
           end
@@ -144,7 +144,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           let(:custom_multiple_files_chosen_other_text) { "You've dropped one file" }
 
           specify "the div has the corresponding i18n data attribute set" do
-            drop_instruction_attr = parsed_subject.at_css("div.govuk-drop-zone").attributes.fetch(drop_instruction_key).value
+            drop_instruction_attr = parsed_subject.at_css("div.govuk-file-upload-wrapper").attributes.fetch(drop_instruction_key).value
 
             expect(drop_instruction_attr).to eql(custom_multiple_files_chosen_other_text)
           end
@@ -157,7 +157,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           let(:custom_no_file_chosen_text) { "No file selected" }
 
           specify "the div has the corresponding i18n data attribute set" do
-            no_file_chosen_attr = parsed_subject.at_css("div.govuk-drop-zone").attributes.fetch(no_file_chosen_key).value
+            no_file_chosen_attr = parsed_subject.at_css("div.govuk-file-upload-wrapper").attributes.fetch(no_file_chosen_key).value
 
             expect(no_file_chosen_attr).to eql(custom_no_file_chosen_text)
           end
@@ -170,7 +170,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           let(:custom_entered_drop_zone_text) { "You have entered the drop zone" }
 
           specify "the div has the corresponding i18n data attribute set" do
-            entered_drop_zone_attr = parsed_subject.at_css("div.govuk-drop-zone").attributes.fetch(entered_drop_zone_key).value
+            entered_drop_zone_attr = parsed_subject.at_css("div.govuk-file-upload-wrapper").attributes.fetch(entered_drop_zone_key).value
 
             expect(entered_drop_zone_attr).to eql(custom_entered_drop_zone_text)
           end
@@ -183,7 +183,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           let(:custom_left_drop_zone_text) { "You have left the drop zone" }
 
           specify "the div has the corresponding i18n data attribute set" do
-            left_drop_zone_attr = parsed_subject.at_css("div.govuk-drop-zone").attributes.fetch(left_drop_zone_key).value
+            left_drop_zone_attr = parsed_subject.at_css("div.govuk-file-upload-wrapper").attributes.fetch(left_drop_zone_key).value
 
             expect(left_drop_zone_attr).to eql(custom_left_drop_zone_text)
           end
