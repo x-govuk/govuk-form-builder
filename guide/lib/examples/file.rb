@@ -21,6 +21,7 @@ module Examples
       <<~SNIPPET
         = f.govuk_file_field :profile_photo,
           label: { text: "Llwythwch ffeil i fyny" },
+          multiple: true,
           javascript: true,
           choose_files_button_text: "Dewiswch ffeil",
           drop_instruction_text: "neu ollwng ffeil",

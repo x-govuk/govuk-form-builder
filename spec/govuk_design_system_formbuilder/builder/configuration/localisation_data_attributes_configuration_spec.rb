@@ -111,7 +111,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     let(:attribute) { :photo }
     let(:args) { [method, attribute] }
     let(:kwargs) { { javascript: true } }
-    let(:drop_zone) { parsed_subject.at_css('div.govuk-drop-zone') }
+    let(:drop_zone) { parsed_subject.at_css('div.govuk-file-upload-wrapper') }
 
     let(:default_file_choose_files_button_text) { 'Scegli file' }
     let(:default_file_drop_instruction_text) { 'o trascina il file' }
