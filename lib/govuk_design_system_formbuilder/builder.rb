@@ -329,7 +329,7 @@ module GOVUKDesignSystemFormBuilder
       label: {},
       caption: {},
       form_group: {},
-      show_password_text: nil,
+      show_password_text: config.default_show_password_text,
       hide_password_text: nil,
       show_password_aria_label_text: nil,
       hide_password_aria_label_text: nil,

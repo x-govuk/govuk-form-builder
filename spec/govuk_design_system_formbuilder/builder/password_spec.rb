@@ -11,11 +11,11 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
     let(:field_type) { 'input' }
     subject { builder.send(*args, **kwargs) }
 
-    specify 'renders a form group containing a wrapper around an input and button' do
+    specify "renders a form group containing a wrapper around an input and a 'Show' button" do
       expect(subject).to have_tag('div', with: { class: 'govuk-form-group' }) do
         with_tag('div', with: { class: %w(govuk-input__wrapper govuk-password-input__wrapper) }) do
           with_tag('input', with: { type: 'password' })
-          with_tag('button')
+          with_tag('button', text: "Show")
         end
       end
     end
