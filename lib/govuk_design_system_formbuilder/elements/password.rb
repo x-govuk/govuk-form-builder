@@ -68,7 +68,7 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def classes
-        build_classes('input', 'password-input__input', 'js-password-input-input', %(password-input--error) => has_errors?).prefix(brand)
+        build_classes('input', 'password-input__input', 'js-password-input-input', %(input--error) => has_errors?).prefix(brand)
       end
 
       def wrapper_classes
