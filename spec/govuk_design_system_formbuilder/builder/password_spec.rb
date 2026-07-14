@@ -220,7 +220,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       let(:aria_described_by_target) { 'input' }
 
       let(:error_message) { /Password must be longer than 8 characters/ }
-      let(:error_class) { 'govuk-password-input--error' }
+      let(:error_class) { 'govuk-input--error' }
       let(:error_identifier) { 'person-password-error' }
     end
   end
