@@ -39,7 +39,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency("rspec-html-matchers", "~> 0")
   s.add_development_dependency("rspec-rails", "~> 8.0")
   s.add_development_dependency("rubocop-govuk", "~> 5.2.0")
-  s.add_development_dependency("simplecov", "~> 0.20")
+  s.add_development_dependency("simplecov", "~> 1.0")
 
   # Required for the guide
   s.add_development_dependency("htmlbeautifier", "~> 1.4.1")
