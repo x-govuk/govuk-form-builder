@@ -236,6 +236,8 @@ module GOVUKDesignSystemFormBuilder
     default_collection_radio_buttons_include_hidden: true,
     default_collection_radio_buttons_auto_bold_labels: true,
     default_submit_validate: false,
+
+    default_localisation_options: { default: nil },
     localisation_schema_fallback: %i(helpers __context__),
     localisation_schema_label: nil,
     localisation_schema_hint: nil,

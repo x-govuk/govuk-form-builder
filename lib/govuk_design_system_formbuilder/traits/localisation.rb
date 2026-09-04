@@ -16,11 +16,11 @@ module GOVUKDesignSystemFormBuilder
     private
 
       def localise(context)
-        I18n.translate(context, default: nil)
+        I18n.translate(context, **config.default_localisation_options)
       end
 
       def localise_html(context)
-        I18n.translate("#{context}_html", default: nil).try(:html_safe)
+        I18n.translate("#{context}_html", **config.default_localisation_options).try(:html_safe)
       end
 
       def schema(context)
