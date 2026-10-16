@@ -21,6 +21,8 @@ module GOVUKDesignSystemFormBuilder
         rows:,
         max_words:,
         max_chars:,
+        max_length:,
+        count_type:,
         threshold:,
         form_group:,
         description_other_text:,
@@ -39,12 +41,26 @@ module GOVUKDesignSystemFormBuilder
         @label           = label
         @caption         = caption
         @hint            = hint
-        @max_words       = max_words
-        @max_chars       = max_chars
         @threshold       = threshold
         @rows            = rows
         @form_group      = form_group
         @html_attributes = kwargs
+
+        case
+        when max_length
+          @max_length = max_length
+          @count_type = count_type.to_sym
+        when max_words
+          @max_length = max_words
+          @count_type = :words
+        when max_chars
+          @max_length = max_chars
+          @count_type = :length
+        end
+
+        if @count_type && !@count_type.in?(%i(length words))
+          fail(ArgumentError, "count_type (#{@count_type}) must be :length or :words if present")
+        end
 
         @description_other_text = description_other_text
         @under_limit_other_text = under_limit_other_text
@@ -88,22 +104,18 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def limit?
-        limit_quantity.present?
-      end
-
-      def limit_quantity
-        @max_words || @max_chars
+        @max_length.present?
       end
 
       def limit_type
-        @max_words.present? ? 'words' : 'characters'
+        @count_type == :words ? 'words' : 'characters'
       end
 
       def limit_description
         return unless limit?
 
         tag.span(id: limit_id, class: limit_description_classes) do
-          "You can enter up to #{limit_quantity} #{limit_type}"
+          "You can enter up to #{@max_length} #{limit_type}"
         end
       end
 
@@ -127,11 +139,9 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def limit_max_options
-        if @max_words
-          { maxwords: @max_words }
-        elsif @max_chars
-          { maxlength: @max_chars }
-        end
+        return { maxlength: @max_length, 'count-type' => 'words' } if @count_type == :words
+
+        { maxlength: @max_length }
       end
 
       def limit_threshold_options
@@ -139,10 +149,10 @@ module GOVUKDesignSystemFormBuilder
       end
 
       def i18n_data
-        return {} unless limit_quantity
+        return {} unless @max_length
 
-        attrs = case limit_type
-                when 'characters'
+        attrs = case @count_type
+                when :length
                   [
                     I18nAttr.new('data-i18n.characters-under-limit.other', @under_limit_other_text, :default_text_area_characters_under_limit_other_text),
                     I18nAttr.new('data-i18n.characters-under-limit.one',   @under_limit_one_text,   :default_text_area_characters_under_limit_one_text),
@@ -150,7 +160,7 @@ module GOVUKDesignSystemFormBuilder
                     I18nAttr.new('data-i18n.characters-over-limit.other',  @over_limit_other_text,  :default_text_area_characters_over_limit_other_text),
                     I18nAttr.new('data-i18n.characters-over-limit.one',    @over_limit_one_text,    :default_text_area_characters_over_limit_one_text),
                   ]
-                when 'words'
+                when :words
                   [
                     I18nAttr.new('data-i18n.words-under-limit.other', @under_limit_other_text, :default_text_area_words_under_limit_other_text),
                     I18nAttr.new('data-i18n.words-under-limit.one',   @under_limit_one_text,   :default_text_area_words_under_limit_one_text),

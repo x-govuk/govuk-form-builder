@@ -65,7 +65,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       context 'for characters' do
-        let(:kwargs) { { max_chars: 20 } }
+        let(:kwargs) { { max_length: 20 } }
 
         specify 'the character data i18n attributes are localised in the markup' do
           aggregate_failures do
@@ -85,7 +85,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
 
       context 'for words' do
-        let(:kwargs) { { max_words: 20 } }
+        let(:kwargs) { { max_length: 20, count_type: :words } }
 
         specify 'the word data i18n attributes are localised in the markup' do
           aggregate_failures do

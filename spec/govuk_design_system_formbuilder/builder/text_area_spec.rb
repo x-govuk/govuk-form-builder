@@ -89,7 +89,85 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
   end
 
   describe 'limits' do
-    context 'max words' do
+    let(:character_count_element) { parsed_subject.at_css('.govuk-character-count').attributes.keys }
+    context 'max length' do
+      let(:max_length) { 20 }
+
+      context 'when count_type is not specified' do
+        subject { builder.send(*args, max_length:) }
+
+        specify 'defaults to length (omitted) when count_type is not specified' do
+          expect(subject).to have_tag(
+            'div',
+            with: {
+              class: 'govuk-character-count',
+              'data-module' => 'govuk-character-count',
+              'data-maxlength' => 20
+            }
+          )
+        end
+      end
+
+      context 'when count_type is :words' do
+        subject { builder.send(*args, max_length:, count_type: :words) }
+
+        specify 'data-count-type: "words"' do
+          expect(subject).to have_tag(
+            'div',
+            with: {
+              class: 'govuk-character-count',
+              'data-module' => 'govuk-character-count',
+              'data-count-type' => 'words',
+              'data-maxlength' => 20
+            }
+          )
+        end
+      end
+
+      context "when count_type is 'words'" do
+        subject { builder.send(*args, max_length:, count_type: 'words') }
+
+        specify 'data-count-type: "words"' do
+          expect(subject).to have_tag(
+            'div',
+            with: {
+              class: 'govuk-character-count',
+              'data-module' => 'govuk-character-count',
+              'data-count-type' => 'words',
+              'data-maxlength' => 20
+            }
+          )
+
+          expect(character_count_element).to include('data-count-type')
+        end
+      end
+
+      context "when count_type is :length" do
+        subject { builder.send(*args, max_length:, count_type: :length) }
+
+        specify 'set to "words" when count_type is omitted' do
+          expect(character_count_element).not_to include('data-count-type')
+        end
+      end
+
+      context "when count_type is 'length'" do
+        subject { builder.send(*args, max_length:, count_type: 'length') }
+
+        specify 'set to "words" when count_type is omitted' do
+          expect(character_count_element).not_to include('data-count-type')
+        end
+      end
+
+      context "when count_type is something other than :words, 'words', :length or 'length'" do
+        subject { builder.send(*args, max_length:, count_type: 'size') }
+
+        specify 'fails with an appropriate error message' do
+          expect { subject }.to raise_error(ArgumentError, /must be :length or :words if present/)
+        end
+      end
+    end
+
+    context 'max words (deprecated)' do
       let(:max_words) { 20 }
       subject { builder.send(*args, max_words:) }
 
@@ -99,7 +177,8 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
           with: {
             class: 'govuk-character-count',
             'data-module' => 'govuk-character-count',
-            'data-maxwords' => max_words
+            'data-count-type' => 'words',
+            'data-maxlength' => 20
           }
         )
       end
@@ -123,7 +202,7 @@ describe GOVUKDesignSystemFormBuilder::FormBuilder do
       end
     end
 
-    context 'max chars' do
+    context 'max chars (deprecated)' do
       let(:max_chars) { 35 }
       subject { builder.send(*args, max_chars:) }
 
