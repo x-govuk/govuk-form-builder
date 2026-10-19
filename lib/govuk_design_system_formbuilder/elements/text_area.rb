@@ -53,9 +53,13 @@ module GOVUKDesignSystemFormBuilder
         when max_words
           @max_length = max_words
           @count_type = :words
+
+          warn("max_words is deprecated, use { max_length: #{@max_length}, count_type: :#{@count_type} }")
         when max_chars
           @max_length = max_chars
           @count_type = :length
+
+          warn("max_chars is deprecated, use { max_length: #{@max_length} }")
         end
 
         if @count_type && !@count_type.in?(%i(length words))
