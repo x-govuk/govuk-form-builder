@@ -18,10 +18,13 @@ p.govuk-body
   code: text_area_with_max_words) do
 
   p.govuk-body
-    | If a limit on the number of words or characters a user can enter is
-      required, the <code>max_chars</code> and <code>max_words</code> parameters
-      can be used. They provide feedback on how close the user is to the limit
-      and automatically show an error if it is exceeeded.
+    markdown:
+      If a limit on the number of characters a user can enter is required, the
+      `max_length` parameter can be used. Feedback on how close the user is to
+      the limit will be shown benath the textarea. An error will be shown if
+      the limit is exceeeded.
+
+      To limit the number of words instead of characters also pass in `count_type: :words`
 
 == render('/partials/example.*',
   caption: 'Generating a textarea with a character limit and threshold',

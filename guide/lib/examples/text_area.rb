@@ -17,7 +17,8 @@ module Examples
       <<~SNIPPET
         = f.govuk_text_area :cv,
           label: { text: 'Curriculum vitae' },
-          max_words: 20
+          max_length: 20,
+          count_type: :words
       SNIPPET
     end
 
@@ -25,7 +26,7 @@ module Examples
       <<~SNIPPET
         = f.govuk_text_area :education_history,
           label: { text: 'Education history' },
-          max_chars: 10,
+          max_length: 10,
           threshold: 50
       SNIPPET
     end
@@ -34,7 +35,7 @@ module Examples
       <<~SNIPPET
         = f.govuk_text_area :personal_statement,
           label: { text: 'Déclaration personnelle' },
-          max_chars: 20,
+          max_length: 20,
           under_limit_other_text: '%{count} caractères restants' ,
           under_limit_one_text: '%{count} caractère restant',
           at_limit_text: 'Plus aucun caractère restant',
