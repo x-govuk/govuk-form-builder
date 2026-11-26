@@ -26,6 +26,8 @@ helpers:
           one-something-street: "One Something Street"
           two-something-street: "Two Something Street"
         postcode: "Enter your postcode"
+        country:
+          name: "Enter your country"
       born_on:
         day: Tag
         month: Monat
@@ -34,6 +36,11 @@ helpers:
         hour: Hora
         minute: Minuto
         second: Segunda
+    projects:
+      filter:
+        search: Search projects
+    projects/filter:
+      search: Search all projects
 
   caption:
     person:

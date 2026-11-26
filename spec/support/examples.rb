@@ -8,6 +8,13 @@ class Stationery
   attr_accessor(:id, :name, :description)
 end
 
+module Projects
+  class Filter
+    include ActiveModel::Model
+    attr_accessor(:search)
+  end
+end
+
 class Being
   attr_accessor(
     :name,
